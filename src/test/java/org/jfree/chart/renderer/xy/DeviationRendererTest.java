@@ -36,14 +36,12 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DeviationRenderer} class.
@@ -58,13 +56,13 @@ public class DeviationRendererTest {
         // default instances
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = new DeviationRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setAlpha(0.1f);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAlpha(0.1f);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -74,7 +72,7 @@ public class DeviationRendererTest {
     public void testHashcode() {
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = new DeviationRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -87,9 +85,9 @@ public class DeviationRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = (DeviationRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

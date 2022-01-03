@@ -36,15 +36,13 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.VerticalAlignment;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ColumnArrangement} class.
@@ -60,36 +58,36 @@ public class ColumnArrangementTest {
                 VerticalAlignment.TOP, 1.0, 2.0);
         ColumnArrangement c2 = new ColumnArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**

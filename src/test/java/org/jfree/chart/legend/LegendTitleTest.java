@@ -37,9 +37,6 @@
 package org.jfree.chart.legend;
 
 import org.jfree.chart.legend.LegendTitle;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -54,6 +51,8 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.SortOrder;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link LegendTitle} class.
@@ -72,35 +71,35 @@ public class LegendTitleTest {
 
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 
                 4.0f, Color.YELLOW));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 
                 4.0f, Color.YELLOW));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setLegendItemGraphicAnchor(RectangleAnchor.BOTTOM_LEFT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setLegendItemGraphicAnchor(RectangleAnchor.BOTTOM_LEFT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setLegendItemGraphicLocation(RectangleAnchor.TOP_LEFT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setLegendItemGraphicLocation(RectangleAnchor.TOP_LEFT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setItemFont(new Font("Dialog", Font.PLAIN, 19));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setItemFont(new Font("Dialog", Font.PLAIN, 19));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setSortOrder(SortOrder.DESCENDING);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setSortOrder(SortOrder.DESCENDING);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -111,7 +110,7 @@ public class LegendTitleTest {
         XYPlot<String> plot1 = new XYPlot<>();
         LegendTitle t1 = new LegendTitle(plot1);
         LegendTitle t2 = new LegendTitle(plot1);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -129,15 +128,15 @@ public class LegendTitleTest {
                 4.0f, Color.YELLOW));
         t1.setBounds(bounds1);
         LegendTitle t2 = CloneUtils.clone(t1);
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
 
         // check independence
         bounds1.setFrame(40.0, 30.0, 20.0, 10.0);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setBounds(new Rectangle2D.Double(40.0, 30.0, 20.0, 10.0));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -148,7 +147,7 @@ public class LegendTitleTest {
         XYPlot<String> plot = new XYPlot<>();
         LegendTitle t1 = new LegendTitle(plot);
         LegendTitle t2 = TestUtils.serialised(t1);
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.getSources()[0].equals(plot));
+        assertEquals(t1, t2);
+        assertEquals(t2.getSources()[0], plot);
     }
 }

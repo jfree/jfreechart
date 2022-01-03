@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -50,6 +46,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardXYZToolTipGenerator} class.
@@ -84,53 +82,53 @@ public class StandardXYZToolTipGeneratorTest {
 
         g1 = new StandardXYZToolTipGenerator(f1, xnf1, ynf1, znf1);
         g2 = new StandardXYZToolTipGenerator(f1, xnf1, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // format string...
         g1 = new StandardXYZToolTipGenerator(f2, xnf1, ynf1, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf1, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // x number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf1, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // y number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // z number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYZToolTipGenerator(f2, xdf1, ydf1, zdf1);
         g2 = new StandardXYZToolTipGenerator(f2, xdf1, ydf1, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // x date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf1, zdf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf1, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // y date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // z date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -143,8 +141,8 @@ public class StandardXYZToolTipGeneratorTest {
                 = new StandardXYZToolTipGenerator();
         StandardXYZToolTipGenerator g2
                 = new StandardXYZToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -153,10 +151,10 @@ public class StandardXYZToolTipGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYZToolTipGenerator g1 = new StandardXYZToolTipGenerator();
-        StandardXYZToolTipGenerator g2 = CloneUtils.clone(g1); 
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        StandardXYZToolTipGenerator g2 = CloneUtils.clone(g1);
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**

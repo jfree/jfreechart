@@ -47,9 +47,9 @@ import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for a pie chart.
@@ -78,7 +78,7 @@ public class PieChartTest  {
         this.pieChart.addChangeListener(l);
         PiePlot plot = (PiePlot) this.pieChart.getPlot();
         plot.setDataset(null);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         assertNull(plot.getDataset());
     }
 

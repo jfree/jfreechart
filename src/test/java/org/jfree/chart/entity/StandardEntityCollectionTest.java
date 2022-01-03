@@ -36,10 +36,6 @@
 
 package org.jfree.chart.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
@@ -47,6 +43,8 @@ import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardEntityCollection} class.
@@ -60,19 +58,19 @@ public class StandardEntityCollectionTest {
     public void testEquals() {
         StandardEntityCollection c1 = new StandardEntityCollection();
         StandardEntityCollection c2 = new StandardEntityCollection();
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         PieSectionEntity<String> e1 = new PieSectionEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
                 new DefaultPieDataset<String>(), 0, 1, "Key", "ToolTip", "URL");
         c1.add(e1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         PieSectionEntity<String> e2 = new PieSectionEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
                 new DefaultPieDataset<String>(), 0, 1, "Key",
                 "ToolTip", "URL");
         c2.add(e2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -86,15 +84,15 @@ public class StandardEntityCollectionTest {
         StandardEntityCollection c1 = new StandardEntityCollection();
         c1.add(e1);
         StandardEntityCollection c2 = CloneUtils.clone(c1);
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         c1.clear();
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.clear();
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**

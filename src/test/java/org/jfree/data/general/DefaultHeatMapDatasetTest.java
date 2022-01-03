@@ -38,12 +38,9 @@ package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.
@@ -100,54 +97,54 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 10, 1.0, 2.0, 3.0, 4.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 10, 1.0, 2.0, 3.0, 4.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 11, 1.0, 2.0, 3.0, 4.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 11, 1.0, 2.0, 3.0, 4.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 11, 2.0, 2.0, 3.0, 4.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 11, 2.0, 2.0, 3.0, 4.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 3.0, 4.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 3.0, 4.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 4.0, 4.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 4.0, 4.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 4.0, 5.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultHeatMapDataset(6, 11, 2.0, 3.0, 4.0, 5.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setZValue(1, 2, 3.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setZValue(1, 2, 3.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setZValue(0, 0, Double.NEGATIVE_INFINITY);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setZValue(0, 0, Double.NEGATIVE_INFINITY);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setZValue(0, 1, Double.POSITIVE_INFINITY);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setZValue(0, 1, Double.POSITIVE_INFINITY);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setZValue(0, 2, Double.NaN);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setZValue(0, 2, Double.NaN);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -162,15 +159,15 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
         DefaultHeatMapDataset d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // simple check for independence
         d1.setZValue(0, 0, 11.0);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setZValue(0, 0, 11.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

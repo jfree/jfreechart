@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -47,6 +43,8 @@ import java.awt.GradientPaint;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardDialFrame} class.
@@ -60,41 +58,41 @@ public class StandardDialFrameTest {
     public void testEquals() {
         StandardDialFrame f1 = new StandardDialFrame();
         StandardDialFrame f2 = new StandardDialFrame();
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         // radius
         f1.setRadius(0.2);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setRadius(0.2);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         // backgroundPaint
         f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.YELLOW));
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.YELLOW));
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         // foregroundPaint
         f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
                 4.0f, Color.GREEN));
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
                 4.0f, Color.GREEN));
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         // stroke
         f1.setStroke(new BasicStroke(2.4f));
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setStroke(new BasicStroke(2.4f));
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         // check an inherited attribute
         f1.setVisible(false);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setVisible(false);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
     }
 
     /**
@@ -104,7 +102,7 @@ public class StandardDialFrameTest {
     public void testHashCode() {
         StandardDialFrame f1 = new StandardDialFrame();
         StandardDialFrame f2 = new StandardDialFrame();
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
         int h1 = f1.hashCode();
         int h2 = f2.hashCode();
         assertEquals(h1, h2);
@@ -117,9 +115,9 @@ public class StandardDialFrameTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardDialFrame f1 = new StandardDialFrame();
         StandardDialFrame f2 = CloneUtils.clone(f1);
-        assertTrue(f1 != f2);
-        assertTrue(f1.getClass() == f2.getClass());
-        assertTrue(f1.equals(f2));
+        assertNotSame(f1, f2);
+        assertSame(f1.getClass(), f2.getClass());
+        assertEquals(f1, f2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();

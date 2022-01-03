@@ -188,7 +188,7 @@ public class CategoryToPieDatasetTest {
                 TableOrder.BY_COLUMN, 1);
         DefaultPieDataset d2 = new DefaultPieDataset();
         d2.setValue("R1", 2.2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

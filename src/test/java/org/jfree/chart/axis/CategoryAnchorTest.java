@@ -36,12 +36,10 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryAnchor} class.
@@ -56,8 +54,8 @@ public class CategoryAnchorTest {
         assertEquals(CategoryAnchor.START, CategoryAnchor.START);
         assertEquals(CategoryAnchor.MIDDLE, CategoryAnchor.MIDDLE);
         assertEquals(CategoryAnchor.END, CategoryAnchor.END);
-        assertFalse(CategoryAnchor.START.equals(CategoryAnchor.END));
-        assertFalse(CategoryAnchor.MIDDLE.equals(CategoryAnchor.END));
+        assertNotEquals(CategoryAnchor.START, CategoryAnchor.END);
+        assertNotEquals(CategoryAnchor.MIDDLE, CategoryAnchor.END);
     }
 
     /**
@@ -67,7 +65,7 @@ public class CategoryAnchorTest {
     public void testHashCode() {
         CategoryAnchor a1 = CategoryAnchor.START;
         CategoryAnchor a2 = CategoryAnchor.START;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -81,7 +79,7 @@ public class CategoryAnchorTest {
         CategoryAnchor a1 = CategoryAnchor.MIDDLE;
         CategoryAnchor a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
-        assertTrue(a1 == a2);
+        assertSame(a1, a2);
     }
 
 }

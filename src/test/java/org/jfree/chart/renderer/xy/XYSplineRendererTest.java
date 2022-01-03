@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
@@ -48,6 +44,8 @@ import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYSplineRenderer} class.
@@ -65,26 +63,26 @@ public class XYSplineRendererTest {
         assertEquals(r2, r1);
 
         r1.setPrecision(9);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPrecision(9);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setFillType(XYSplineRenderer.FillType.TO_ZERO);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setFillType(XYSplineRenderer.FillType.TO_ZERO);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setGradientPaintTransformer(null);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGradientPaintTransformer(null);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.HORIZONTAL));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.HORIZONTAL));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -94,7 +92,7 @@ public class XYSplineRendererTest {
     public void testHashcode() {
         XYSplineRenderer r1 = new XYSplineRenderer();
         XYSplineRenderer r2 = new XYSplineRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -109,9 +107,9 @@ public class XYSplineRendererTest {
         XYSplineRenderer r1 = new XYSplineRenderer();
         r1.setLegendLine(legendShape);
         XYSplineRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

@@ -36,14 +36,13 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.api.RectangleAnchor;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryLabelPositions} class.
@@ -76,14 +75,14 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(!p1.equals(p2));
+        assertFalse(p1.equals(p2));
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
@@ -91,7 +90,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(!p1.equals(p2));
+        assertFalse(p1.equals(p2));
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -99,7 +98,7 @@ public class CategoryLabelPositionsTest {
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
@@ -109,7 +108,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(!p1.equals(p2));
+        assertFalse(p1.equals(p2));
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -118,7 +117,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
@@ -129,7 +128,7 @@ public class CategoryLabelPositionsTest {
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER));
-        assertTrue(!p1.equals(p2));
+        assertFalse(p1.equals(p2));
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -139,7 +138,7 @@ public class CategoryLabelPositionsTest {
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -157,7 +156,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
         assertEquals(h1, h2);

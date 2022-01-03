@@ -36,15 +36,13 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SymbolAxis} class.
@@ -69,9 +67,9 @@ public class SymbolAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         SymbolAxis a1 = new SymbolAxis("Axis", new String[] {"A", "B"});
         SymbolAxis a2 = CloneUtils.clone(a1);
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -81,33 +79,33 @@ public class SymbolAxisTest {
     public void testEquals() {
         SymbolAxis a1 = new SymbolAxis("Axis", new String[] {"A", "B"});
         SymbolAxis a2 = new SymbolAxis("Axis", new String[] {"A", "B"});
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
+        assertEquals(a1, a2);
+        assertEquals(a2, a1);
 
         a1 = new SymbolAxis("Axis 2", new String[] {"A", "B"});
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new SymbolAxis("Axis 2", new String[] {"A", "B"});
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new SymbolAxis("Axis 2", new String[] {"C", "B"});
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new SymbolAxis("Axis 2", new String[] {"C", "B"});
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setGridBandsVisible(false);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setGridBandsVisible(false);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setGridBandPaint(Color.BLACK);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setGridBandPaint(Color.BLACK);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setGridBandAlternatePaint(Color.RED);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setGridBandAlternatePaint(Color.RED);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
 }

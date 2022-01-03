@@ -36,13 +36,10 @@
 
 package org.jfree.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Range} class.
@@ -79,11 +76,11 @@ public class RangeTest {
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.5, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.0, 2.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         // a Range object cannot be equal to a different object type
         assertFalse(r1.equals(0.0));
@@ -191,9 +188,10 @@ public class RangeTest {
             fail("Null value is accepted");
         }
         catch (Exception e) {
+            // expected
         }
 
-        // Lower > upper: mid point is used
+        // Lower > upper: mid-point is used
         r2 = Range.expand(r1, -0.8, -0.5);
         assertEquals(65.0, r2.getLowerBound(), 0.001);
         assertEquals(65.0, r2.getUpperBound(), 0.001);
@@ -241,8 +239,8 @@ public class RangeTest {
         try {
             Range.shift(null, 0.1);
             fail("Null value is accepted");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
+            // expected
         }
     }
 
@@ -268,15 +266,15 @@ public class RangeTest {
         try {
             Range.scale(null, 0.1);
             fail("Null value is accepted");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
+            // expected
         }
 
         try {
             Range.scale(r1, -0.5);
             fail("Negative factor accepted");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
+            // expected
         }
     }
 

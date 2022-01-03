@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -60,6 +55,8 @@ import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StackedXYAreaRenderer} class.
  */
@@ -77,16 +74,16 @@ public class StackedXYAreaRendererTest {
 
         r1.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.GREEN));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.GREEN));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         Stroke s = new BasicStroke(1.23f);
         r1.setShapeStroke(s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapeStroke(s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -96,7 +93,7 @@ public class StackedXYAreaRendererTest {
     public void testHashcode() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = new StackedXYAreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -109,9 +106,9 @@ public class StackedXYAreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

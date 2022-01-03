@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
@@ -49,6 +45,8 @@ import org.jfree.chart.util.GradientPaintTransformer;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link IntervalMarker} class.
@@ -75,25 +73,25 @@ public class IntervalMarkerTest implements MarkerChangeListener {
 
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
         IntervalMarker m2 = new IntervalMarker(45.0, 50.0);
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new IntervalMarker(44.0, 50.0);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new IntervalMarker(44.0, 50.0);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new IntervalMarker(44.0, 55.0);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new IntervalMarker(44.0, 55.0);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         GradientPaintTransformer t = new StandardGradientPaintTransformer(
                 GradientPaintTransformType.HORIZONTAL);
         m1.setGradientPaintTransformer(t);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setGradientPaintTransformer(t);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 
@@ -104,9 +102,9 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
         IntervalMarker m2 = CloneUtils.clone(m1);
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
     }
 
    /**

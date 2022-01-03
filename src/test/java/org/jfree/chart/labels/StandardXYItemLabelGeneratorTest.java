@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -50,6 +46,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardXYItemLabelGenerator} class.
@@ -72,23 +70,23 @@ public class StandardXYItemLabelGeneratorTest {
 
         StandardXYItemLabelGenerator g1 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
         StandardXYItemLabelGenerator g2 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardXYItemLabelGenerator(f2, xnf1, ynf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYItemLabelGenerator(f2, xnf1, ynf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYItemLabelGenerator(f2, xnf2, ynf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYItemLabelGenerator(f2, xnf2, ynf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYItemLabelGenerator(f2, xnf2, ynf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYItemLabelGenerator(f2, xnf2, ynf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         DateFormat xdf1 = new SimpleDateFormat("d-MMM");
         DateFormat xdf2 = new SimpleDateFormat("d-MMM-yyyy");
@@ -97,18 +95,18 @@ public class StandardXYItemLabelGeneratorTest {
 
         g1 = new StandardXYItemLabelGenerator(f1, xdf1, ydf1);
         g2 = new StandardXYItemLabelGenerator(f1, xdf1, ydf1);
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardXYItemLabelGenerator(f1, xdf2, ydf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYItemLabelGenerator(f1, xdf2, ydf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYItemLabelGenerator(f1, xdf2, ydf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYItemLabelGenerator(f1, xdf2, ydf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -121,8 +119,8 @@ public class StandardXYItemLabelGeneratorTest {
                 = new StandardXYItemLabelGenerator();
         StandardXYItemLabelGenerator g2
                 = new StandardXYItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -132,39 +130,39 @@ public class StandardXYItemLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardXYItemLabelGenerator g1 = new StandardXYItemLabelGenerator();
         StandardXYItemLabelGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         g1.getXFormat().setMinimumIntegerDigits(2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.getXFormat().setMinimumIntegerDigits(2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1.getYFormat().setMinimumIntegerDigits(2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.getYFormat().setMinimumIntegerDigits(2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // another test...
         g1 = new StandardXYItemLabelGenerator("{0} {1} {2}",
                 DateFormat.getInstance(), DateFormat.getInstance());
         g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         g1.getXDateFormat().setNumberFormat(new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.getXDateFormat().setNumberFormat(new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1.getYDateFormat().setNumberFormat(new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.getYDateFormat().setNumberFormat(new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 

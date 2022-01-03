@@ -37,12 +37,12 @@
 package org.jfree.chart.axis;
 
 import java.text.DecimalFormat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TickUnits} class.
@@ -68,9 +68,9 @@ public class TickUnitsTest {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = CloneUtils.clone(t1);
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -82,8 +82,8 @@ public class TickUnitsTest {
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = new TickUnits();
         t2.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.equals(t1));
+        assertEquals(t1, t2);
+        assertEquals(t2, t1);
     }
 
 }

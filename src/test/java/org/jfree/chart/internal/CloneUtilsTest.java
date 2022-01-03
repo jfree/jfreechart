@@ -40,9 +40,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CloneUtils} class.
@@ -56,7 +55,7 @@ public class CloneUtilsTest {
     public void testCopyString() throws CloneNotSupportedException {
         String s1 = "ABC";
         String s2 = CloneUtils.copy(s1);
-        assertTrue(s1 == s2);
+        assertSame(s1, s2);
     }
     
     /**

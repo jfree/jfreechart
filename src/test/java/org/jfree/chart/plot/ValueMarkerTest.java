@@ -36,11 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -58,6 +53,8 @@ import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link ValueMarker} class.
  */
@@ -73,81 +70,81 @@ public class ValueMarkerTest implements MarkerChangeListener {
 
         Marker m1 = new ValueMarker(45.0);
         Marker m2 = new ValueMarker(45.0);
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1.setPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         BasicStroke stroke = new BasicStroke(2.2f);
         m1.setStroke(stroke);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setStroke(stroke);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.YELLOW,
                 2.0f, 1.0f, Color.WHITE));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.YELLOW,
                 2.0f, 1.0f, Color.WHITE));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setOutlineStroke(stroke);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setOutlineStroke(stroke);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setAlpha(0.1f);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setAlpha(0.1f);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabel("New Label");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabel("New Label");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelFont(new Font("SansSerif", Font.PLAIN, 10));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelFont(new Font("SansSerif", Font.PLAIN, 10));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelAnchor(RectangleAnchor.TOP_RIGHT);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelAnchor(RectangleAnchor.TOP_RIGHT);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelTextAnchor(TextAnchor.BASELINE_RIGHT);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelTextAnchor(TextAnchor.BASELINE_RIGHT);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelOffset(new RectangleInsets(10.0, 10.0, 10.0, 10.0));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelOffset(new RectangleInsets(10.0, 10.0, 10.0, 10.0));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.setLabelOffsetType(LengthAdjustmentType.EXPAND);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setLabelOffsetType(LengthAdjustmentType.EXPAND);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new ValueMarker(12.3);
         m2 = new ValueMarker(45.6);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new ValueMarker(12.3);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 
@@ -158,9 +155,9 @@ public class ValueMarkerTest implements MarkerChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         ValueMarker m1 = new ValueMarker(25.0);
         ValueMarker m2 = CloneUtils.clone(m1);
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
     }
 
    /**

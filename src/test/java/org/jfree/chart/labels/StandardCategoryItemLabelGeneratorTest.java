@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -50,6 +46,8 @@ import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardCategoryItemLabelGenerator} class.
@@ -87,29 +85,29 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2
                 = new StandardCategoryItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardCategoryItemLabelGenerator("{0}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{0}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryItemLabelGenerator("{1}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{1}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryItemLabelGenerator("{2}",
                 new SimpleDateFormat("d-MMM"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{2}",
                 new SimpleDateFormat("d-MMM"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -122,8 +120,8 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2
                 = new StandardCategoryItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -134,9 +132,9 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -172,7 +170,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryToolTipGenerator g2
                 = new StandardCategoryToolTipGenerator("{0}",
                 new DecimalFormat("0.00"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
 }

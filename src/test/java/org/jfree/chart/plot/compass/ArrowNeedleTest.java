@@ -36,12 +36,11 @@
 
 package org.jfree.chart.plot.compass;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ArrowNeedle} class.
@@ -55,13 +54,13 @@ public class ArrowNeedleTest {
     public void testEquals() {
        ArrowNeedle n1 = new ArrowNeedle(false);
        ArrowNeedle n2 = new ArrowNeedle(false);
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
 
        n1 = new ArrowNeedle(true);
-       assertFalse(n1.equals(n2));
+        assertNotEquals(n1, n2);
        n2 = new ArrowNeedle(true);
-       assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
     /**
@@ -71,9 +70,9 @@ public class ArrowNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         ArrowNeedle n1 = new ArrowNeedle(false);
         ArrowNeedle n2 = CloneUtils.clone(n1);
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -83,7 +82,7 @@ public class ArrowNeedleTest {
     public void testSerialization() {
         ArrowNeedle n1 = new ArrowNeedle(false);
         ArrowNeedle n2 = TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
 }

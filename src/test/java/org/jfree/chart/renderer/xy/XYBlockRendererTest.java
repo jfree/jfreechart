@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
@@ -54,6 +49,8 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYBlockRenderer} class.
@@ -71,26 +68,26 @@ public class XYBlockRendererTest {
         // default instances
         XYBlockRenderer r1 = new XYBlockRenderer();
         XYBlockRenderer r2 = new XYBlockRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // blockHeight
         r1.setBlockHeight(2.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBlockHeight(2.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // blockWidth
         r1.setBlockWidth(2.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBlockWidth(2.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // paintScale
         r1.setPaintScale(new GrayPaintScale(0.0, 1.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPaintScale(new GrayPaintScale(0.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -101,7 +98,7 @@ public class XYBlockRendererTest {
     public void testHashcode() {
         XYBlockRenderer r1 = new XYBlockRenderer();
         XYBlockRenderer r2 = new XYBlockRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -118,16 +115,16 @@ public class XYBlockRendererTest {
         LookupPaintScale scale1 = new LookupPaintScale();
         r1.setPaintScale(scale1);
         XYBlockRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         scale1.add(0.5, Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         LookupPaintScale scale2 = (LookupPaintScale) r2.getPaintScale();
         scale2.add(0.5, Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -156,10 +153,10 @@ public class XYBlockRendererTest {
     public void testBug1766646A() {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findDomainBounds(null);
-        assertTrue(range == null);
+        assertNull(range);
         DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findDomainBounds(emptyDataset);
-        assertTrue(range == null);
+        assertNull(range);
     }
 
     /**
@@ -169,10 +166,10 @@ public class XYBlockRendererTest {
     public void testBug1766646B() {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findRangeBounds(null);
-        assertTrue(range == null);
+        assertNull(range);
         DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findRangeBounds(emptyDataset);
-        assertTrue(range == null);
+        assertNull(range);
     }
 
     /**

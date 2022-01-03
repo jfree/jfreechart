@@ -61,14 +61,9 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link JFreeChart} class.
@@ -106,7 +101,7 @@ public class JFreeChartTest implements ChartChangeListener {
         chart1.setRenderingHints(new RenderingHints(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setRenderingHints(new RenderingHints(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
@@ -114,38 +109,38 @@ public class JFreeChartTest implements ChartChangeListener {
 
         // borderVisible
         chart1.setBorderVisible(true);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderVisible(true);
         assertEquals(chart1, chart2);
 
         // borderStroke
         BasicStroke s = new BasicStroke(2.0f);
         chart1.setBorderStroke(s);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderStroke(s);
         assertEquals(chart1, chart2);
 
         // borderPaint
         chart1.setBorderPaint(Color.RED);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderPaint(Color.RED);
         assertEquals(chart1, chart2);
 
         // padding
         chart1.setPadding(new RectangleInsets(1, 2, 3, 4));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setPadding(new RectangleInsets(1, 2, 3, 4));
         assertEquals(chart1, chart2);
 
         // title
         chart1.setTitle("XYZ");
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setTitle("XYZ");
         assertEquals(chart1, chart2);
 
         // subtitles
         chart1.addSubtitle(new TextTitle("Subtitle"));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.addSubtitle(new TextTitle("Subtitle"));
         assertEquals(chart1, chart2);
 
@@ -154,7 +149,7 @@ public class JFreeChartTest implements ChartChangeListener {
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         chart2 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         assertEquals(chart1, chart2);
@@ -162,7 +157,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // backgroundPaint
         chart1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
         assertEquals(chart1, chart2);
@@ -175,13 +170,13 @@ public class JFreeChartTest implements ChartChangeListener {
 
         // backgroundImageAlignment
         chart1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
         assertEquals(chart1, chart2);
 
         // backgroundImageAlpha
         chart1.setBackgroundImageAlpha(0.1f);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundImageAlpha(0.1f);
         assertEquals(chart1, chart2);
     }
@@ -196,8 +191,8 @@ public class JFreeChartTest implements ChartChangeListener {
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
         JFreeChart chart2 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
-        assertFalse(chart1.equals(chart2));
-        assertFalse(chart2.equals(chart1));
+        assertNotEquals(chart1, chart2);
+        assertNotEquals(chart2, chart1);
     }
 
     /**

@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -48,6 +44,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ClusteredXYBarRenderer} class.
@@ -65,14 +63,14 @@ public class ClusteredXYBarRendererTest {
         assertEquals(r2, r1);
 
         r1 = new ClusteredXYBarRenderer(1.2, false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new ClusteredXYBarRenderer(1.2, false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new ClusteredXYBarRenderer(1.2, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new ClusteredXYBarRenderer(1.2, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -82,7 +80,7 @@ public class ClusteredXYBarRendererTest {
     public void testHashcode() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = new ClusteredXYBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -95,9 +93,9 @@ public class ClusteredXYBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -139,7 +137,7 @@ public class ClusteredXYBarRendererTest {
         assertEquals(13.0, r.getUpperBound(), EPSILON);
 
         // check that a null dataset returns null bounds
-        assertTrue(renderer.findDomainBounds(null) == null);
+        assertNull(renderer.findDomainBounds(null));
     }
 
     /**

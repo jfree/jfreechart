@@ -37,8 +37,6 @@
 package org.jfree.chart.labels;
 
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -47,6 +45,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CustomXYToolTipGenerator} class.
@@ -61,9 +61,9 @@ public class CustomXYItemLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         CustomXYToolTipGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**

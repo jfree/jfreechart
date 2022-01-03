@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.util.Arrays;
 import java.util.List;
 import org.jfree.chart.TestUtils;
@@ -50,6 +45,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultMultiValueCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ScatterRenderer} class.
@@ -66,34 +63,34 @@ public class ScatterRendererTest {
         assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setBaseShapesFilled(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBaseShapesFilled(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseFillPaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseFillPaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawOutlines(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawOutlines(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseSeriesOffset(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseSeriesOffset(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -103,7 +100,7 @@ public class ScatterRendererTest {
     public void testHashcode() {
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = new ScatterRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -117,9 +114,9 @@ public class ScatterRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         assertTrue(checkIndependence(r1, r2));
         TestUtils.checkIndependence(r1, r2);

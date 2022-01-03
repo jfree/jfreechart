@@ -36,11 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,6 +49,8 @@ import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Marker} class.
@@ -129,7 +126,7 @@ public class MarkerTest implements MarkerChangeListener {
 
         // check null argument...
         m.setOutlinePaint(null);
-        assertEquals(null, m.getOutlinePaint());
+        assertNull(m.getOutlinePaint());
     }
 
     /**
@@ -149,7 +146,7 @@ public class MarkerTest implements MarkerChangeListener {
 
         // check null argument...
         m.setOutlineStroke(null);
-        assertEquals(null, m.getOutlineStroke());
+        assertNull(m.getOutlineStroke());
     }
 
     private static final float EPSILON = 0.000000001f;
@@ -180,14 +177,14 @@ public class MarkerTest implements MarkerChangeListener {
         ValueMarker m = new ValueMarker(1.1);
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(null, m.getLabel());
+        assertNull(m.getLabel());
         m.setLabel("XYZ");
         assertEquals("XYZ", m.getLabel());
         assertEquals(m, this.lastEvent.getMarker());
 
         // check null argument...
         m.setLabel(null);
-        assertEquals(null, m.getLabel());
+        assertNull(m.getLabel());
     }
 
     /**

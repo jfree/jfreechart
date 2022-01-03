@@ -40,12 +40,10 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TimeSeriesDataItem} class.
@@ -61,7 +59,7 @@ public class TimeSeriesDataItemTest {
     public void testEqualsSelf() {
         TimeSeriesDataItem item = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);
-        assertTrue(item.equals(item));
+        assertEquals(item, item);
     }
 
     /**
@@ -73,13 +71,13 @@ public class TimeSeriesDataItemTest {
                 99.7);
         TimeSeriesDataItem item2 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
+        assertEquals(item2, item1);
 
         item1.setValue(5);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setValue(5);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
     }
 
     /**

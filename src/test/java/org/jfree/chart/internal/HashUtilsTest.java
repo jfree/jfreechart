@@ -38,8 +38,7 @@ package org.jfree.chart.internal;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HashUtils} class.
@@ -59,6 +58,6 @@ public class HashUtilsTest  {
 
         double[] a3 = new double[] {0.5, 1.0};
         int h3 = HashUtils.hashCodeForDoubleArray(a3);
-        assertFalse(h1 == h3);
+        assertNotEquals(h1, h3);
     }
 }

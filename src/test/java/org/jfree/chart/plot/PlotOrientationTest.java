@@ -37,11 +37,10 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PlotOrientation} class.
@@ -56,12 +55,8 @@ public class PlotOrientationTest {
     public void testEquals() {
         assertEquals(PlotOrientation.HORIZONTAL, PlotOrientation.HORIZONTAL);
         assertEquals(PlotOrientation.VERTICAL, PlotOrientation.VERTICAL);
-        assertFalse(
-            PlotOrientation.HORIZONTAL.equals(PlotOrientation.VERTICAL)
-        );
-        assertFalse(
-            PlotOrientation.VERTICAL.equals(PlotOrientation.HORIZONTAL)
-        );
+        assertNotEquals(PlotOrientation.HORIZONTAL, PlotOrientation.VERTICAL);
+        assertNotEquals(PlotOrientation.VERTICAL, PlotOrientation.HORIZONTAL);
     }
 
     /**
@@ -73,7 +68,7 @@ public class PlotOrientationTest {
         PlotOrientation orientation2 = TestUtils.serialised(orientation1);
         assertEquals(orientation1, orientation2);
         boolean same = orientation1 == orientation2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

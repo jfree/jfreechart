@@ -36,13 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -66,6 +59,8 @@ import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link BoxAndWhiskerRenderer} class.
  */
@@ -82,45 +77,45 @@ public class BoxAndWhiskerRendererTest {
 
         r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.BLUE));
         assertEquals(r1, r2);
 
         r1.setFillBox(!r1.getFillBox());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setFillBox(!r2.getFillBox());
         assertEquals(r1, r2);
 
         r1.setItemMargin(0.11);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setItemMargin(0.11);
         assertEquals(r1, r2);
 
         r1.setMaximumBarWidth(0.99);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMaximumBarWidth(0.99);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setMeanVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMeanVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setMedianVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMedianVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setMinOutlierVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMinOutlierVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setMaxOutlierVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMaxOutlierVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -130,7 +125,7 @@ public class BoxAndWhiskerRendererTest {
     public void testHashcode() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = new BoxAndWhiskerRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -145,9 +140,9 @@ public class BoxAndWhiskerRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
         TestUtils.checkIndependence(r1, r2);
     }
 

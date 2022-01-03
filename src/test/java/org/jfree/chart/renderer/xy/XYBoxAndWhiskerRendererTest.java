@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -56,6 +51,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYBoxAndWhiskerRenderer} class.
@@ -73,29 +70,29 @@ public class XYBoxAndWhiskerRendererTest {
 
         r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
         assertEquals(r1, r2);
 
         r1.setBoxWidth(0.55);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBoxWidth(0.55);
         assertEquals(r1, r2);
 
         r1.setFillBox(!r1.getFillBox());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setFillBox(!r2.getFillBox());
         assertEquals(r1, r2);
 
         r1.setBoxPaint(Color.YELLOW);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBoxPaint(Color.YELLOW);
         assertEquals(r1, r2);
 
         // check boxPaint null also
         r1.setBoxPaint(null);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBoxPaint(null);
         assertEquals(r1, r2);
     }
@@ -107,7 +104,7 @@ public class XYBoxAndWhiskerRendererTest {
     public void testHashcode() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -121,9 +118,9 @@ public class XYBoxAndWhiskerRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

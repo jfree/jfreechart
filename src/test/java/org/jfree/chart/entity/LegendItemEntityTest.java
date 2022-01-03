@@ -36,10 +36,6 @@
 
 package org.jfree.chart.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
@@ -47,6 +43,8 @@ import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LegendItemEntity} class.
@@ -62,32 +60,32 @@ public class LegendItemEntityTest {
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         LegendItemEntity<String> e2 = new LegendItemEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setToolTipText("New ToolTip");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setURLText("New URL");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setDataset(new DefaultCategoryDataset<String, String>());
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setDataset(new DefaultCategoryDataset<String, String>());
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setSeriesKey("A");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setSeriesKey("A");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
     }
 
@@ -99,9 +97,9 @@ public class LegendItemEntityTest {
         LegendItemEntity<String> e1 = new LegendItemEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         LegendItemEntity<String> e2 = CloneUtils.clone(e1);
-        assertTrue(e1 != e2);
-        assertTrue(e1.getClass() == e2.getClass());
-        assertTrue(e1.equals(e2));
+        assertNotSame(e1, e2);
+        assertSame(e1.getClass(), e2.getClass());
+        assertEquals(e1, e2);
     }
 
     /**

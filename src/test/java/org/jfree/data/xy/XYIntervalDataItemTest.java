@@ -36,13 +36,11 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYIntervalDataItem} class.
@@ -74,44 +72,44 @@ public class XYIntervalDataItemTest {
                 1.9, 2.1);
         XYIntervalDataItem item2 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
+        assertEquals(item2, item1);
 
         // x
         item1 = new XYIntervalDataItem(1.1, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // xLow
         item1 = new XYIntervalDataItem(1.1, 0.55, 1.5, 2.0, 1.9, 2.1);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.55, 1.5, 2.0, 1.9, 2.1);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // xHigh
         item1 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.0, 1.9, 2.1);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.0, 1.9, 2.1);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // y
         item1 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.9, 2.1);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.9, 2.1);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // yLow
         item1 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.99, 2.1);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.99, 2.1);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // yHigh
         item1 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.99, 2.11);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new XYIntervalDataItem(1.1, 0.55, 1.55, 2.2, 1.99, 2.11);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
     }
 
     /**
@@ -122,9 +120,9 @@ public class XYIntervalDataItemTest {
         XYIntervalDataItem item1 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
         XYIntervalDataItem item2 = CloneUtils.clone(item1);
-        assertTrue(item1 != item2);
-        assertTrue(item1.getClass() == item2.getClass());
-        assertTrue(item1.equals(item2));
+        assertNotSame(item1, item2);
+        assertSame(item1.getClass(), item2.getClass());
+        assertEquals(item1, item2);
     }
 
     /**

@@ -36,15 +36,13 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.VerticalAlignment;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link FlowArrangement} class.
@@ -60,36 +58,36 @@ public class FlowArrangementTest {
                 VerticalAlignment.TOP, 1.0, 2.0);
         FlowArrangement f2 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(f1.equals(f2));
-        assertTrue(f2.equals(f1));
+        assertEquals(f1, f2);
+        assertEquals(f2, f1);
 
         f1 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
     }
 

@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
@@ -50,6 +45,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYStepRenderer} class.
@@ -66,15 +63,15 @@ public class XYStepRendererTest {
         assertEquals(r1, r2);
 
         r1.setStepPoint(0.44);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setStepPoint(0.44);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // try something from the base class
         r1.setDefaultCreateEntities(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultCreateEntities(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -86,7 +83,7 @@ public class XYStepRendererTest {
         r1.setStepPoint(0.123);
         XYStepRenderer r2 = new XYStepRenderer();
         r2.setStepPoint(0.123);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -99,9 +96,9 @@ public class XYStepRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYStepRenderer r1 = new XYStepRenderer();
         XYStepRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

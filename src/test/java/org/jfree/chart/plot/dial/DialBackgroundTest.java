@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 
@@ -49,6 +45,8 @@ import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.CloneUtils;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DialBackground} class.
@@ -62,29 +60,29 @@ public class DialBackgroundTest {
     public void testEquals() {
         DialBackground b1 = new DialBackground();
         DialBackground b2 = new DialBackground();
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         // paint
         b1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         // gradient paint transformer
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         // check an inherited attribute
         b1.setVisible(false);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setVisible(false);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
     }
 
@@ -95,7 +93,7 @@ public class DialBackgroundTest {
     public void testHashCode() {
         DialBackground b1 = new DialBackground(Color.RED);
         DialBackground b2 = new DialBackground(Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
         int h1 = b1.hashCode();
         int h2 = b2.hashCode();
         assertEquals(h1, h2);
@@ -110,9 +108,9 @@ public class DialBackgroundTest {
         // test default instance
         DialBackground b1 = new DialBackground();
         DialBackground b2 = CloneUtils.clone(b1);
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
 
         // test a customised instance
         b1 = new DialBackground();
@@ -121,9 +119,9 @@ public class DialBackgroundTest {
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
         b2 = (DialBackground) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();

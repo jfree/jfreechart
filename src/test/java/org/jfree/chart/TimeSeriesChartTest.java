@@ -36,10 +36,6 @@
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -57,6 +53,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for a time series chart.
@@ -111,7 +109,7 @@ public class TimeSeriesChartTest {
         @SuppressWarnings("unchecked")
         XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
         assertTrue(range.getLowerBound() <= 10, 
@@ -131,7 +129,7 @@ public class TimeSeriesChartTest {
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         XYToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
-        assertTrue(tt2 == tt);
+        assertSame(tt2, tt);
     }
 
     /**

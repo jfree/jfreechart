@@ -36,16 +36,14 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardCategorySeriesLabelGenerator} class.
@@ -77,13 +75,13 @@ public class StandardCategorySeriesLabelGeneratorTest {
                 = new StandardCategorySeriesLabelGenerator();
         StandardCategorySeriesLabelGenerator g2
                 = new StandardCategorySeriesLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardCategorySeriesLabelGenerator("{1}");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategorySeriesLabelGenerator("{1}");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -95,8 +93,8 @@ public class StandardCategorySeriesLabelGeneratorTest {
                 = new StandardCategorySeriesLabelGenerator();
         StandardCategorySeriesLabelGenerator g2
                 = new StandardCategorySeriesLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -107,9 +105,9 @@ public class StandardCategorySeriesLabelGeneratorTest {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{1}");
         StandardCategorySeriesLabelGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**

@@ -38,10 +38,9 @@ package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link KeyToGroupMap} class.
@@ -206,13 +205,13 @@ public class KeyToGroupMapTest {
     public void testEquals() {
         KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
         KeyToGroupMap<String, String> m2 = new KeyToGroupMap<>("Default Group");
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1.mapKeyToGroup("K1", "G1");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.mapKeyToGroup("K1", "G1");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -223,15 +222,15 @@ public class KeyToGroupMapTest {
         KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Test");
         m1.mapKeyToGroup("K1", "G1");
         KeyToGroupMap<String, String> m2 = CloneUtils.clone(m1);
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
 
         // a small check for independence
         m1.mapKeyToGroup("K1", "G2");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.mapKeyToGroup("K1", "G2");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**

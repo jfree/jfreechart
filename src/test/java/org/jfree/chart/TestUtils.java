@@ -50,9 +50,8 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.renderer.AbstractRenderer;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some utility methods for use by the testing code.
@@ -119,7 +118,7 @@ public class TestUtils {
      * @param r2  renderer two ({@code null} not permitted).
      */
     public static void checkIndependence(AbstractRenderer r1, AbstractRenderer r2) {
-        assertTrue(r1 != r2);
+        assertNotSame(r1, r2);
         r1.setAutoPopulateSeriesFillPaint(!r1.getAutoPopulateSeriesFillPaint());
         assertNotEquals(r1, r2);
         r2.setAutoPopulateSeriesFillPaint(r1.getAutoPopulateSeriesFillPaint());

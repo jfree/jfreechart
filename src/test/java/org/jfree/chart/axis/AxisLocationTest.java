@@ -66,7 +66,7 @@ public class AxisLocationTest {
     public void testHashCode() {
         AxisLocation a1 = AxisLocation.TOP_OR_RIGHT;
         AxisLocation a2 = AxisLocation.TOP_OR_RIGHT;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -81,7 +81,7 @@ public class AxisLocationTest {
         AxisLocation location2 = TestUtils.serialised(location1);
         assertEquals(location1, location2);
         boolean same = location1 == location2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

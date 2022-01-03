@@ -36,11 +36,11 @@
 
 package org.jfree.chart.plot.compass;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link WindNeedle} class.
@@ -54,8 +54,8 @@ public class WindNeedleTest {
     public void testEquals() {
        WindNeedle n1 = new WindNeedle();
        WindNeedle n2 = new WindNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -65,9 +65,9 @@ public class WindNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         WindNeedle n1 = new WindNeedle();
         WindNeedle n2 = CloneUtils.clone(n1);
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -77,7 +77,7 @@ public class WindNeedleTest {
     public void testSerialization() {
         WindNeedle n1 = new WindNeedle();
         WindNeedle n2 = TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
 }

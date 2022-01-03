@@ -36,12 +36,6 @@
 
 package org.jfree.data.time.ohlc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 
@@ -50,6 +44,8 @@ import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.time.TimePeriodAnchor;
 import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link OHLCSeriesCollectionTests} class.
@@ -69,22 +65,22 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         OHLCSeries<String> s1 = new OHLCSeries<>("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         OHLCSeries<String> s2 = new OHLCSeries<>("Series");
         s2.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         // add an empty series
         c1.addSeries(new OHLCSeries<>("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new OHLCSeries<>("Empty Series"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setXPosition(TimePeriodAnchor.END);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setXPosition(TimePeriodAnchor.END);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
     }
 
@@ -98,13 +94,13 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
         OHLCSeriesCollection c2 = CloneUtils.clone(c1);
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         c1.setXPosition(TimePeriodAnchor.END);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**
@@ -136,7 +132,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 
@@ -153,7 +149,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         OHLCSeries<String> s2 = new OHLCSeries<>("S");
         s2.add(new Year(2009), 1.0, 4.0, 0.5, 2.0);
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
         int h1 = c1.hashCode();
         int h2 = c2.hashCode();
         assertEquals(h1, h2);
@@ -175,9 +171,9 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         c1.addSeries(s3);
         c1.addSeries(s4);
         c1.removeSeries(2);
-        assertTrue(c1.getSeries(2).equals(s4));
+        assertEquals(c1.getSeries(2), s4);
         c1.removeSeries(0);
-        assertTrue(c1.getSeries(0).equals(s2));
+        assertEquals(c1.getSeries(0), s2);
         assertEquals(2, c1.getSeriesCount());
     }
 
@@ -197,9 +193,9 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         c1.addSeries(s3);
         c1.addSeries(s4);
         c1.removeSeries(s3);
-        assertTrue(c1.getSeries(2).equals(s4));
+        assertEquals(c1.getSeries(2), s4);
         c1.removeSeries(s1);
-        assertTrue(c1.getSeries(0).equals(s2));
+        assertEquals(c1.getSeries(0), s2);
         assertEquals(2, c1.getSeriesCount());
     }
 

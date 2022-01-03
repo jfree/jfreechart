@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.util.Date;
@@ -54,6 +49,8 @@ import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HighLowRenderer} class.
@@ -71,33 +68,33 @@ public class HighLowRendererTest {
 
         // drawOpenTicks
         r1.setDrawOpenTicks(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawOpenTicks(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // drawCloseTicks
         r1.setDrawCloseTicks(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawCloseTicks(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // openTickPaint
         r1.setOpenTickPaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setOpenTickPaint(Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // closeTickPaint
         r1.setCloseTickPaint(Color.BLUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setCloseTickPaint(Color.BLUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // tickLength
         r1.setTickLength(99.9);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setTickLength(99.9);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -107,7 +104,7 @@ public class HighLowRendererTest {
     public void testHashcode() {
         HighLowRenderer r1 = new HighLowRenderer();
         HighLowRenderer r2 = new HighLowRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -121,9 +118,9 @@ public class HighLowRendererTest {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.GREEN);
         HighLowRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
         TestUtils.checkIndependence(r1, r2);
     }
 

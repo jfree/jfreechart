@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.ChartFactory;
@@ -63,6 +59,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link XYBarRenderer} class.
  */
@@ -77,82 +75,82 @@ public class XYBarRendererTest {
         // default instances
         XYBarRenderer r1 = new XYBarRenderer();
         XYBarRenderer r2 = new XYBarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // setBase()
         r1.setBase(1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBase(1.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // setUseYInterval
         r1.setUseYInterval(!r1.getUseYInterval());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseYInterval(!r2.getUseYInterval());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // setMargin()
         r1.setMargin(0.10);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMargin(0.10);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // setDrawBarOutline()
         r1.setDrawBarOutline(!r1.isDrawBarOutline());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawBarOutline(!r2.isDrawBarOutline());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // setGradientPaintTransformer()
         r1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // legendBar
         r1.setLegendBar(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendBar(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // positiveItemLabelFallbackPosition
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // negativeItemLabelFallbackPosition
         r1.setNegativeItemLabelPositionFallback(new ItemLabelPosition());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setNegativeItemLabelPositionFallback(new ItemLabelPosition());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // barPainter
         r1.setBarPainter(new GradientXYBarPainter(0.11, 0.22, 0.33));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBarPainter(new GradientXYBarPainter(0.11, 0.22, 0.33));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowsVisible
         r1.setShadowVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowXOffset
         r1.setShadowXOffset(3.3);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowXOffset(3.3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowYOffset
         r1.setShadowYOffset(3.3);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowYOffset(3.3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -163,7 +161,7 @@ public class XYBarRendererTest {
     public void testHashcode() {
         XYBarRenderer r1 = new XYBarRenderer();
         XYBarRenderer r2 = new XYBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -180,15 +178,15 @@ public class XYBarRendererTest {
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendBar(rect);
         XYBarRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         rect.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendBar(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**

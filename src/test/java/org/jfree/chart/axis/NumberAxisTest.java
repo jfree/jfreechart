@@ -36,10 +36,6 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
 
@@ -58,6 +54,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link NumberAxis} class.
  */
@@ -72,9 +70,9 @@ public class NumberAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = CloneUtils.clone(a1);
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -85,36 +83,36 @@ public class NumberAxisTest {
 
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = new NumberAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private boolean autoRangeIncludesZero;
         a1.setAutoRangeIncludesZero(false);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAutoRangeIncludesZero(false);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private boolean autoRangeStickyZero;
         a1.setAutoRangeStickyZero(false);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAutoRangeStickyZero(false);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private NumberTickUnit tickUnit;
         a1.setTickUnit(new NumberTickUnit(25.0));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickUnit(new NumberTickUnit(25.0));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private NumberFormat numberFormatOverride;
         a1.setNumberFormatOverride(new DecimalFormat("0.00"));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setNumberFormatOverride(new DecimalFormat("0.00"));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setRangeType(RangeType.POSITIVE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setRangeType(RangeType.POSITIVE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
     }
 
@@ -125,7 +123,7 @@ public class NumberAxisTest {
     public void testHashCode() {
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = new NumberAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);

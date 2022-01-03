@@ -39,11 +39,10 @@ package org.jfree.chart.title;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.VerticalAlignment;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the abstract {@link Title} class.
@@ -61,24 +60,24 @@ public class TitleTest {
         assertEquals(t1, t2);
 
         t1.setPosition(RectangleEdge.LEFT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setPosition(RectangleEdge.LEFT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setVisible(false);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setVisible(false);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -88,7 +87,7 @@ public class TitleTest {
     public void testHashcode() {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = new TextTitle();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);

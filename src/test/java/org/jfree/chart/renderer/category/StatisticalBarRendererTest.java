@@ -36,12 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 
@@ -56,6 +50,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StatisticalBarRenderer} class.
@@ -72,14 +68,14 @@ public class StatisticalBarRendererTest {
         assertEquals(r1, r2);
 
         r1.setErrorIndicatorPaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorIndicatorPaint(Color.RED);
-        assertTrue(r2.equals(r1));
+        assertEquals(r2, r1);
 
         r1.setErrorIndicatorStroke(new BasicStroke(1.5f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorIndicatorStroke(new BasicStroke(1.5f));
-        assertTrue(r2.equals(r1));
+        assertEquals(r2, r1);
     }
 
     /**
@@ -89,7 +85,7 @@ public class StatisticalBarRendererTest {
     public void testHashcode() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = new StatisticalBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -104,9 +100,9 @@ public class StatisticalBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
         TestUtils.checkIndependence(r1, r2);
     }
 

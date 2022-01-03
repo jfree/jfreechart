@@ -36,15 +36,13 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link VectorSeriesCollection} class.
@@ -64,14 +62,14 @@ public class VectorSeriesCollectionTest {
         s2.add(1.0, 1.1, 1.2, 1.3);
         VectorSeriesCollection<String> c2 = new VectorSeriesCollection<>();
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         c1.addSeries(new VectorSeries<String>("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
 
         c2.addSeries(new VectorSeries<String>("Empty Series"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -84,13 +82,13 @@ public class VectorSeriesCollectionTest {
         VectorSeriesCollection<String> c1 = new VectorSeriesCollection<>();
         c1.addSeries(s1);
         VectorSeriesCollection<String> c2 = CloneUtils.clone(c1);
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         s1.add(2.0, 2.2, 0.5, 0.7);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**

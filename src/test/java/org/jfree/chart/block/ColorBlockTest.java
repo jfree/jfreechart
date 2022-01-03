@@ -36,17 +36,14 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ColorBlock} class.
@@ -60,23 +57,23 @@ public class ColorBlockTest {
     public void testEquals() {
         ColorBlock b1 = new ColorBlock(Color.RED, 1.0, 2.0);
         ColorBlock b2 = new ColorBlock(Color.RED, 1.0, 2.0);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.0, 2.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.0, 2.0);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.1, 2.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.1, 2.0);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.1, 2.2);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.1, 2.2);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -97,15 +94,15 @@ public class ColorBlockTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
 
         // check independence
         bounds1.setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setBounds(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**

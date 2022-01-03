@@ -36,15 +36,13 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link DefaultIntervalXYDataset} class.
@@ -204,13 +202,13 @@ public class DefaultIntervalXYDatasetTest {
     public void testEquals() {
         DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
         DefaultIntervalXYDataset<String> d2 = new DefaultIntervalXYDataset<>();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1 = createSampleDataset1();
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = createSampleDataset1();
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -220,16 +218,16 @@ public class DefaultIntervalXYDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
         DefaultIntervalXYDataset<String> d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
         d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -248,13 +246,13 @@ public class DefaultIntervalXYDatasetTest {
                 y1End};
         d1.addSeries("S1", data1);
         DefaultIntervalXYDataset<String> d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check independence
         x1[0] = 111.1;
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**

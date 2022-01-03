@@ -36,10 +36,6 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
@@ -48,6 +44,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultOHLCDataset} class.
@@ -80,20 +78,20 @@ public class DefaultOHLCDatasetTest {
                 new OHLCDataItem[0]);
         DefaultOHLCDataset d2 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[0]);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[0]);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[] {
                 new OHLCDataItem(new Date(123L), 1.2, 3.4, 5.6, 7.8, 99.9)});
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[] {
                 new OHLCDataItem(new Date(123L), 1.2, 3.4, 5.6, 7.8, 99.9)});
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
     }
 
@@ -105,9 +103,9 @@ public class DefaultOHLCDatasetTest {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
         DefaultOHLCDataset d2 = (DefaultOHLCDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -123,12 +121,12 @@ public class DefaultOHLCDatasetTest {
         OHLCDataItem[] items = new OHLCDataItem[] {item2, item1};
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", items);
         DefaultOHLCDataset d2 = (DefaultOHLCDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         d1.sortDataByDate();
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**

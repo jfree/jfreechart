@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -50,6 +46,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link IntervalCategoryToolTipGenerator} class.
@@ -65,22 +63,22 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2
                 = new IntervalCategoryToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new SimpleDateFormat("d-MMM"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new SimpleDateFormat("d-MMM"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -94,7 +92,7 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new StandardCategoryToolTipGenerator(
                 IntervalCategoryToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT_STRING,
                 NumberFormat.getInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**
@@ -106,8 +104,8 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2
                 = new IntervalCategoryToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -118,9 +116,9 @@ public class IntervalCategoryToolTipGeneratorTest {
         IntervalCategoryToolTipGenerator g1
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**

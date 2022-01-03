@@ -36,15 +36,13 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryTextAnnotation} class.
@@ -60,25 +58,25 @@ public class CategoryTextAnnotationTest {
                 "Category", 1.0);
         CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // category
         a1.setCategory("Category 2");
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategory("Category 2");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryAnchor
         a1.setCategoryAnchor(CategoryAnchor.START);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategoryAnchor(CategoryAnchor.START);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // value
         a1.setValue(0.15);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setValue(0.15);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -90,7 +88,7 @@ public class CategoryTextAnnotationTest {
                 "Category", 1.0);
         CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -104,9 +102,9 @@ public class CategoryTextAnnotationTest {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation(
                 "Test", "Category", 1.0);
         CategoryTextAnnotation a2 = (CategoryTextAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**

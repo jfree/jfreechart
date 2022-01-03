@@ -36,9 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -58,6 +55,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CombinedDomainCategoryPlot} class.
@@ -90,7 +89,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
         List<CategoryPlot> plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertSame(plots.get(0), plot1);
         assertEquals(1, plots.size());
     }
 
@@ -101,7 +100,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     public void testEquals() {
         CombinedDomainCategoryPlot plot1 = createPlot();
         CombinedDomainCategoryPlot plot2 = createPlot();
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -110,10 +109,10 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedDomainCategoryPlot plot1 = createPlot();
-        CombinedDomainCategoryPlot plot2 = CloneUtils.clone(plot1); 
-        assertTrue(plot1 != plot2);
-        assertTrue(plot1.getClass() == plot2.getClass());
-        assertTrue(plot1.equals(plot2));
+        CombinedDomainCategoryPlot plot2 = CloneUtils.clone(plot1);
+        assertNotSame(plot1, plot2);
+        assertSame(plot1.getClass(), plot2.getClass());
+        assertEquals(plot1, plot2);
     }
 
     /**

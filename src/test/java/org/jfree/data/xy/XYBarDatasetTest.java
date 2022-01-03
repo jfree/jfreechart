@@ -36,15 +36,13 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link XYBarDataset} class.
@@ -69,8 +67,8 @@ public class XYBarDatasetTest {
 
         XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
         XYBarDataset<String> bd2 = new XYBarDataset<>(d2, 5.0);
-        assertTrue(bd1.equals(bd2));
-        assertTrue(bd2.equals(bd1));
+        assertEquals(bd1, bd2);
+        assertEquals(bd2, bd1);
     }
 
     /**
@@ -87,17 +85,17 @@ public class XYBarDatasetTest {
         d1.addSeries("S1", data1);
         XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
         XYBarDataset<String> bd2 = CloneUtils.clone(bd1);
-        assertTrue(bd1 != bd2);
-        assertTrue(bd1.getClass() == bd2.getClass());
-        assertTrue(bd1.equals(bd2));
+        assertNotSame(bd1, bd2);
+        assertSame(bd1.getClass(), bd2.getClass());
+        assertEquals(bd1, bd2);
 
         // check independence
         d1 = (DefaultXYDataset) bd1.getUnderlyingDataset();
         d1.addSeries("S2", new double[][] {{1.0}, {2.0}});
-        assertFalse(bd1.equals(bd2));
+        assertNotEquals(bd1, bd2);
         DefaultXYDataset<String> d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
         d2.addSeries("S2", new double[][] {{1.0}, {2.0}});
-        assertTrue(bd1.equals(bd2));
+        assertEquals(bd1, bd2);
     }
 
     /**

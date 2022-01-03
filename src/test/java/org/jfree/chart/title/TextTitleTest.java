@@ -36,10 +36,6 @@
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -49,6 +45,8 @@ import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.internal.CloneUtils;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TextTitle} class.
@@ -65,60 +63,60 @@ public class TextTitleTest {
         assertEquals(t1, t2);
 
         t1.setText("Test 1");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setText("Test 1");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         Font f = new Font("SansSerif", Font.PLAIN, 15);
         t1.setFont(f);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setFont(f);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setTextAlignment(HorizontalAlignment.RIGHT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setTextAlignment(HorizontalAlignment.RIGHT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // paint
         t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // backgroundPaint
         t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // maximumLinesToDisplay
         t1.setMaximumLinesToDisplay(3);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setMaximumLinesToDisplay(3);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // toolTipText
         t1.setToolTipText("TTT");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setToolTipText("TTT");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // urlText
         t1.setURLText(("URL"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setURLText(("URL"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // expandToFitSpace
         t1.setExpandToFitSpace(!t1.getExpandToFitSpace());
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setExpandToFitSpace(!t2.getExpandToFitSpace());
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
     }
 
@@ -129,7 +127,7 @@ public class TextTitleTest {
     public void testHashcode() {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = new TextTitle();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -142,9 +140,9 @@ public class TextTitleTest {
     public void testCloning() throws CloneNotSupportedException {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = CloneUtils.clone(t1);
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**

@@ -40,10 +40,9 @@ import java.util.Date;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TaskSeries} class.
@@ -61,13 +60,13 @@ public class TaskSeriesTest {
         TaskSeries<String> s2 = new TaskSeries<>("S");
         s2.add(new Task("T1", new Date(1), new Date(2)));
         s2.add(new Task("T2", new Date(11), new Date(22)));
-        assertTrue(s1.equals(s2));
-        assertTrue(s2.equals(s1));
+        assertEquals(s1, s2);
+        assertEquals(s2, s1);
 
         s1.add(new Task("T3", new Date(22), new Date(33)));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Task("T3", new Date(22), new Date(33)));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -79,15 +78,15 @@ public class TaskSeriesTest {
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
         TaskSeries<String> s2 = CloneUtils.clone(s1);
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
 
         // basic check for independence
         s1.add(new Task("T3", new Date(22), new Date(33)));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Task("T3", new Date(22), new Date(33)));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -111,11 +110,11 @@ public class TaskSeriesTest {
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
         Task t1 = s1.get("T1");
-        assertTrue(t1.equals(new Task("T1", new Date(1), new Date(2))));
+        assertEquals(t1, new Task("T1", new Date(1), new Date(2)));
         Task t2 = s1.get("T2");
-        assertTrue(t2.equals(new Task("T2", new Date(11), new Date(22))));
+        assertEquals(t2, new Task("T2", new Date(11), new Date(22)));
         Task t3 = s1.get("T3");
-        assertTrue(t3 == null);
+        assertNull(t3);
     }
 
 }

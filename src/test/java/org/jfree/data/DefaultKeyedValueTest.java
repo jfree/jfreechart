@@ -38,11 +38,9 @@ package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValue} class.
@@ -79,16 +77,16 @@ public class DefaultKeyedValueTest {
     public void testEquals() {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
         DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("Test", 45.5);
-        assertTrue(v1.equals(v2));
-        assertTrue(v2.equals(v1));
+        assertEquals(v1, v2);
+        assertEquals(v2, v1);
 
         v1 = new DefaultKeyedValue<>("Test 1", 45.5);
         v2 = new DefaultKeyedValue<>("Test 2", 45.5);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
 
         v1 = new DefaultKeyedValue<>("Test", 45.5);
         v2 = new DefaultKeyedValue<>("Test", 45.6);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
     }
 
     /**
@@ -98,10 +96,10 @@ public class DefaultKeyedValueTest {
     public void testEqualsForNullValues() {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("K1", null);
         DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("K1", null);
-        assertTrue(v1.equals(v2));
+        assertEquals(v1, v2);
         v1.setValue(1);
-        assertFalse(v1.equals(v2));
-        assertFalse(v2.equals(v1));
+        assertNotEquals(v1, v2);
+        assertNotEquals(v2, v1);
     }
 
     /**
@@ -112,13 +110,13 @@ public class DefaultKeyedValueTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
         DefaultKeyedValue<String> v2 = CloneUtils.clone(v1);
-        assertTrue(v1 != v2);
-        assertTrue(v1.getClass() == v2.getClass());
-        assertTrue(v1.equals(v2));
+        assertNotSame(v1, v2);
+        assertSame(v1.getClass(), v2.getClass());
+        assertEquals(v1, v2);
 
         // confirm that the clone is independent of the original
         v2.setValue(12.3);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
     }
 
     /**

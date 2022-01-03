@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
@@ -50,6 +45,8 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYStepAreaRenderer} class.
@@ -66,34 +63,34 @@ public class XYStepAreaRendererTest {
         assertEquals(r1, r2);
 
         r1.setOutline(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setOutline(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setShapesVisible(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapesVisible(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setShapesFilled(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapesFilled(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setPlotArea(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPlotArea(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setRangeBase(-1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRangeBase(-1.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setStepPoint(0.33);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setStepPoint(0.33);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -104,7 +101,7 @@ public class XYStepAreaRendererTest {
     public void testHashcode() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = new XYStepAreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -119,9 +116,9 @@ public class XYStepAreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = CloneUtils.clone(r1);
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

@@ -36,11 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -63,6 +58,8 @@ import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link SpiderWebPlot} class.
  */
@@ -75,154 +72,154 @@ public class SpiderWebPlotTest {
     public void testEquals() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         // dataExtractOrder
         p1.setDataExtractOrder(TableOrder.BY_COLUMN);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDataExtractOrder(TableOrder.BY_COLUMN);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // headPercent
         p1.setHeadPercent(0.321);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setHeadPercent(0.321);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // interiorGap
         p1.setInteriorGap(0.123);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setInteriorGap(0.123);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // startAngle
         p1.setStartAngle(0.456);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setStartAngle(0.456);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // direction
         p1.setDirection(Rotation.ANTICLOCKWISE);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDirection(Rotation.ANTICLOCKWISE);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // maxValue
         p1.setMaxValue(123.4);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setMaxValue(123.4);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // legendItemShape
         p1.setLegendItemShape(new Rectangle(1, 2, 3, 4));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLegendItemShape(new Rectangle(1, 2, 3, 4));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // seriesPaintList
         p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.WHITE));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.WHITE));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // defaultSeriesPaint
         p1.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // seriesOutlinePaintList
         p1.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.GREEN));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.GREEN));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // defaultSeriesOutlinePaint
         p1.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         BasicStroke s = new BasicStroke(1.23f);
 
         // seriesOutlineStrokeList
         p1.setSeriesOutlineStroke(1, s);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesOutlineStroke(1, s);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // defaultSeriesOutlineStroke
         p1.setDefaultSeriesOutlineStroke(s);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultSeriesOutlineStroke(s);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // webFilled
         p1.setWebFilled(false);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setWebFilled(false);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // axisLabelGap
         p1.setAxisLabelGap(0.11);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setAxisLabelGap(0.11);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // labelFont
         p1.setLabelFont(new Font("Serif", Font.PLAIN, 9));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLabelFont(new Font("Serif", Font.PLAIN, 9));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // labelPaint
         p1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // labelGenerator
         p1.setLabelGenerator(new StandardCategoryItemLabelGenerator("XYZ: {0}",
                 new DecimalFormat("0.000")));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLabelGenerator(new StandardCategoryItemLabelGenerator("XYZ: {0}",
                 new DecimalFormat("0.000")));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // toolTipGenerator
         p1.setToolTipGenerator(new StandardCategoryToolTipGenerator());
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // urlGenerator
         p1.setURLGenerator(new StandardCategoryURLGenerator());
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setURLGenerator(new StandardCategoryURLGenerator());
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // axisLinePaint
         p1.setAxisLinePaint(Color.RED);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setAxisLinePaint(Color.RED);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // axisLineStroke
         p1.setAxisLineStroke(new BasicStroke(1.1f));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setAxisLineStroke(new BasicStroke(1.1f));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -236,33 +233,33 @@ public class SpiderWebPlotTest {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(legendShape);
         SpiderWebPlot p2 = CloneUtils.clone(p1);
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
 
         // change the legendItemShape
         legendShape.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLegendItemShape(legendShape);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // change a series paint
         p1.setSeriesPaint(1, Color.BLACK);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesPaint(1, Color.BLACK);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // change a series outline paint
         p1.setSeriesOutlinePaint(0, Color.RED);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesOutlinePaint(0, Color.RED);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // change a series outline stroke
         p1.setSeriesOutlineStroke(0, new BasicStroke(1.1f));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setSeriesOutlineStroke(0, new BasicStroke(1.1f));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
     }
 

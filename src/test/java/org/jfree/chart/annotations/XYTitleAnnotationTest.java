@@ -36,11 +36,6 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
@@ -51,6 +46,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYTitleAnnotation} class.
@@ -65,23 +62,23 @@ public class XYTitleAnnotationTest {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
         XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         
         a1 = new XYTitleAnnotation(1.1, 2.0, t);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYTitleAnnotation(1.1, 2.0, t);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new XYTitleAnnotation(1.1, 2.2, t);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYTitleAnnotation(1.1, 2.2, t);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         
         TextTitle t2 = new TextTitle("Title 2");
         a1 = new XYTitleAnnotation(1.1, 2.2, t2);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYTitleAnnotation(1.1, 2.2, t2);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -92,7 +89,7 @@ public class XYTitleAnnotationTest {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
         XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -106,9 +103,9 @@ public class XYTitleAnnotationTest {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
         XYTitleAnnotation a2 = CloneUtils.clone(a1);
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**

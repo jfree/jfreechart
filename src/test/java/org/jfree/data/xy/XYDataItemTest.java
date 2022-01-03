@@ -36,13 +36,11 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYDataItem} class.
@@ -56,14 +54,14 @@ public class XYDataItemTest {
     public void testEquals() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
         XYDataItem i2 = new XYDataItem(1.0, 1.1);
-        assertTrue(i1.equals(i2));
-        assertTrue(i2.equals(i1));
+        assertEquals(i1, i2);
+        assertEquals(i2, i1);
 
         i1.setY(9.9);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
 
         i2.setY(9.9);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -73,9 +71,9 @@ public class XYDataItemTest {
     public void testCloning() throws CloneNotSupportedException {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
         XYDataItem i2 = CloneUtils.clone(i1);
-        assertTrue(i1 != i2);
-        assertTrue(i1.getClass() == i2.getClass());
-        assertTrue(i1.equals(i2));
+        assertNotSame(i1, i2);
+        assertSame(i1.getClass(), i2.getClass());
+        assertEquals(i1, i2);
     }
 
     /**

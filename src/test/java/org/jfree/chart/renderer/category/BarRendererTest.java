@@ -37,11 +37,6 @@
 package org.jfree.chart.renderer.category;
 
 import java.awt.BasicStroke;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
@@ -63,6 +58,8 @@ import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link BarRenderer} class.
  */
@@ -75,91 +72,91 @@ public class BarRendererTest {
     public void testEquals() {
         BarRenderer r1 = new BarRenderer();
         BarRenderer r2 = new BarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // base value
         r1.setBase(0.123);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBase(0.123);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // itemMargin
         r1.setItemMargin(0.22);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setItemMargin(0.22);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // drawBarOutline
         r1.setDrawBarOutline(!r1.isDrawBarOutline());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawBarOutline(!r2.isDrawBarOutline());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // maximumBarWidth
         r1.setMaximumBarWidth(0.11);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMaximumBarWidth(0.11);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // minimumBarLength
         r1.setMinimumBarLength(0.04);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMinimumBarLength(0.04);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // gradientPaintTransformer
         r1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // positiveItemLabelPositionFallback
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPositiveItemLabelPositionFallback(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // negativeItemLabelPositionFallback
         r1.setNegativeItemLabelPositionFallback(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setNegativeItemLabelPositionFallback(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // barPainter
         r1.setBarPainter(new GradientBarPainter(0.1, 0.2, 0.3));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBarPainter(new GradientBarPainter(0.1, 0.2, 0.3));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowsVisible
         r1.setShadowVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setShadowPaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowPaint(Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowXOffset
         r1.setShadowXOffset(3.3);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowXOffset(3.3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shadowYOffset
         r1.setShadowYOffset(3.3);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShadowYOffset(3.3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -170,7 +167,7 @@ public class BarRendererTest {
     public void testHashcode() {
         BarRenderer r1 = new BarRenderer();
         BarRenderer r2 = new BarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -185,9 +182,9 @@ public class BarRendererTest {
         r1.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         r1.setBarPainter(new GradientBarPainter(0.11, 0.22, 0.33));
         BarRenderer r2 = (BarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
         TestUtils.checkIndependence(r1, r2);
     }
 
@@ -210,7 +207,7 @@ public class BarRendererTest {
         r1.setDefaultOutlineStroke(new BasicStroke(4.5f));
         BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
-        assertTrue(r1 != r2);        
+        assertNotSame(r1, r2);
         TestUtils.checkIndependence(r1, r2);
     }
 

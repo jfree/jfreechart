@@ -36,10 +36,6 @@
 
 package org.jfree.chart.urls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +44,8 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CustomPieURLGenerator} class.
@@ -61,14 +59,14 @@ public class CustomPieURLGeneratorTest {
     public void testEquals() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         CustomPieURLGenerator g2 = new CustomPieURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.addURLs(m1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -82,15 +80,15 @@ public class CustomPieURLGeneratorTest {
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = CloneUtils.clone(g1);
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         Map<String, String> m2 = new HashMap<>();
         m2.put("B", "XYZ");
         g1.addURLs(m2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**

@@ -36,10 +36,6 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -48,6 +44,8 @@ import org.jfree.chart.api.RectangleEdge;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BorderArrangement} class.
@@ -63,33 +61,33 @@ public class BorderArrangementTest {
     public void testEquals() {
         BorderArrangement b1 = new BorderArrangement();
         BorderArrangement b2 = new BorderArrangement();
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b1));
+        assertEquals(b1, b2);
+        assertEquals(b2, b1);
 
         b1.add(new EmptyBlock(99.0, 99.0), null);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.add(new EmptyBlock(99.0, 99.0), null);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.add(new EmptyBlock(1.0, 1.0), RectangleEdge.LEFT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.add(new EmptyBlock(1.0, 1.0), RectangleEdge.LEFT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.add(new EmptyBlock(2.0, 2.0), RectangleEdge.RIGHT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.add(new EmptyBlock(2.0, 2.0), RectangleEdge.RIGHT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.add(new EmptyBlock(3.0, 3.0), RectangleEdge.TOP);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.add(new EmptyBlock(3.0, 3.0), RectangleEdge.TOP);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.add(new EmptyBlock(4.0, 4.0), RectangleEdge.BOTTOM);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.add(new EmptyBlock(4.0, 4.0), RectangleEdge.BOTTOM);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**

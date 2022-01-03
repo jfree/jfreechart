@@ -40,10 +40,9 @@ import java.util.Date;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYTaskDataset} class.
@@ -69,22 +68,22 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection<String, String> u2 = new TaskSeriesCollection<>();
         u2.add(s2);
         XYTaskDataset d2 = new XYTaskDataset(u2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setSeriesWidth(0.123);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setSeriesWidth(0.123);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setTransposed(true);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setTransposed(true);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -98,17 +97,17 @@ public class XYTaskDatasetTest {
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
         XYTaskDataset d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         TaskSeriesCollection<String, String> u2 = d2.getTasks();
         TaskSeries<String> s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -126,11 +125,11 @@ public class XYTaskDatasetTest {
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         TaskSeriesCollection<String, String> u2 = d2.getTasks();
         TaskSeries<String> s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
 }

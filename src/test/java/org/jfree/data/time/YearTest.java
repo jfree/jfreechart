@@ -36,11 +36,6 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,6 +46,8 @@ import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Year} class.
@@ -65,7 +62,7 @@ public class YearTest {
     @Test
     public void testEqualsSelf() {
         Year year = new Year();
-        assertTrue(year.equals(year));
+        assertEquals(year, year);
     }
 
     /**
@@ -75,12 +72,12 @@ public class YearTest {
     public void testEquals() {
         Year year1 = new Year(2002);
         Year year2 = new Year(2002);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
 
         year1 = new Year(1999);
-        assertFalse(year1.equals(year2));
+        assertNotEquals(year1, year2);
         year2 = new Year(1999);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
     }
 
     /**
@@ -306,7 +303,7 @@ public class YearTest {
     public void testHashcode() {
         Year y1 = new Year(1988);
         Year y2 = new Year(1988);
-        assertTrue(y1.equals(y2));
+        assertEquals(y1, y2);
         int h1 = y1.hashCode();
         int h2 = y2.hashCode();
         assertEquals(h1, h2);

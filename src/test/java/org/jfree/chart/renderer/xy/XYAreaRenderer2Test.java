@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.Rectangle;
 
 import org.jfree.chart.JFreeChart;
@@ -53,6 +48,8 @@ import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYAreaRenderer2} class.
@@ -69,14 +66,14 @@ public class XYAreaRenderer2Test {
         assertEquals(r1, r2);
 
         r1.setOutline(!r1.isOutline());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setOutline(r1.isOutline());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendArea(new Rectangle(1, 2, 3, 4));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendArea(new Rectangle(1, 2, 3, 4));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -86,7 +83,7 @@ public class XYAreaRenderer2Test {
     public void testHashcode() {
         XYAreaRenderer2 r1 = new XYAreaRenderer2();
         XYAreaRenderer2 r2 = new XYAreaRenderer2();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -101,13 +98,13 @@ public class XYAreaRenderer2Test {
         Rectangle rect = new Rectangle(1, 2, 3, 4);
         r1.setLegendArea(rect);
         XYAreaRenderer2 r2 = (XYAreaRenderer2) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         rect.setBounds(99, 99, 99, 99);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
     }
 
     /**

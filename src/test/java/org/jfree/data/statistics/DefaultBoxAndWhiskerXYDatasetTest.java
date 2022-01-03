@@ -36,10 +36,6 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,6 +44,8 @@ import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultBoxAndWhiskerXYDataset} class.
@@ -63,14 +61,14 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
                 = new DefaultBoxAndWhiskerXYDataset<>("Series");
         DefaultBoxAndWhiskerXYDataset<String> d2 
                 = new DefaultBoxAndWhiskerXYDataset<>("Series");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -88,7 +86,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -102,14 +100,14 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
         DefaultBoxAndWhiskerXYDataset<String> d2 = CloneUtils.clone(d1);
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     private static final double EPSILON = 0.0000000001;

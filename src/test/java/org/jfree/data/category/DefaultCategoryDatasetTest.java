@@ -41,11 +41,9 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.UnknownKeyException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultCategoryDataset} class.
@@ -137,20 +135,20 @@ public class DefaultCategoryDatasetTest {
     @Test
     public void testGetRowCount() {
         DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
-        assertTrue(d.getRowCount() == 0);
+        assertEquals(0, d.getRowCount());
 
         d.addValue(1.0, "R1", "C1");
-        assertTrue(d.getRowCount() == 1);
+        assertEquals(1, d.getRowCount());
 
         d.addValue(1.0, "R2", "C1");
-        assertTrue(d.getRowCount() == 2);
+        assertEquals(2, d.getRowCount());
 
         d.addValue(2.0, "R2", "C1");
-        assertTrue(d.getRowCount() == 2);
+        assertEquals(2, d.getRowCount());
 
         // a row of all null values is still counted...
         d.setValue(null, "R2", "C1");
-        assertTrue(d.getRowCount() == 2);
+        assertEquals(2, d.getRowCount());
     }
 
     /**
@@ -159,20 +157,20 @@ public class DefaultCategoryDatasetTest {
     @Test
     public void testGetColumnCount() {
         DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
-        assertTrue(d.getColumnCount() == 0);
+        assertEquals(0, d.getColumnCount());
 
         d.addValue(1.0, "R1", "C1");
-        assertTrue(d.getColumnCount() == 1);
+        assertEquals(1, d.getColumnCount());
 
         d.addValue(1.0, "R1", "C2");
-        assertTrue(d.getColumnCount() == 2);
+        assertEquals(2, d.getColumnCount());
 
         d.addValue(2.0, "R1", "C2");
-        assertTrue(d.getColumnCount() == 2);
+        assertEquals(2, d.getColumnCount());
 
         // a column of all null values is still counted...
         d.setValue(null, "R1", "C2");
-        assertTrue(d.getColumnCount() == 2);
+        assertEquals(2, d.getColumnCount());
     }
 
     /**
@@ -184,18 +182,18 @@ public class DefaultCategoryDatasetTest {
         d1.setValue(23.4, "R1", "C1");
         DefaultCategoryDataset<String,String> d2 = new DefaultCategoryDataset<>();
         d2.setValue(23.4, "R1", "C1");
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.setValue(36.5, "R1", "C2");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setValue(36.5, "R1", "C2");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setValue(null, "R1", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setValue(null, "R1", "C1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -275,24 +273,24 @@ public class DefaultCategoryDatasetTest {
         DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
         DefaultCategoryDataset<String,String> d2 = CloneUtils.clone(d1);
 
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1.addValue(1.0, "R1", "C1");
         d1.addValue(2.0, "R1", "C2");
         d2 = CloneUtils.clone(d1);
 
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         d1.addValue(3.0, "R1", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addValue(3.0, "R1", "C1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
