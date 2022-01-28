@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XIntervalSeriesTest.java
  * ------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,17 +36,13 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XIntervalSeries} class.
@@ -72,43 +68,43 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
     public void testEquals() {
         XIntervalSeries s1 = new XIntervalSeries("s1");
         XIntervalSeries s2 = new XIntervalSeries("s1");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // seriesKey
         s1 = new XIntervalSeries("s2");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XIntervalSeries("s2");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // autoSort
         s1 = new XIntervalSeries("s2", false, true);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XIntervalSeries("s2", false, true);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // allowDuplicateValues
         s1 = new XIntervalSeries("s2", false, false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XIntervalSeries("s2", false, false);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // add a value
         s1.add(1.0, 0.5, 1.5, 2.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(1.0, 0.5, 1.5, 2.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // add another value
         s1.add(2.0, 0.5, 1.5, 2.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(2.0, 0.5, 1.5, 2.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // remove a value
         s1.remove(1.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.remove(1.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
     }
 
     /**
@@ -121,9 +117,9 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
         XIntervalSeries s1 = new XIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
         XIntervalSeries s2 = (XIntervalSeries) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
     }
 
     /**
@@ -133,7 +129,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
     public void testSerialization()  {
         XIntervalSeries s1 = new XIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        XIntervalSeries s2 = (XIntervalSeries) TestUtils.serialised(s1);
+        XIntervalSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

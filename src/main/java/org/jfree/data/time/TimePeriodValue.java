@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * TimePeriodValue.java
  * --------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,6 +37,8 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -125,18 +127,13 @@ public class TimePeriodValue implements Cloneable, Serializable {
         if (!(obj instanceof TimePeriodValue)) {
             return false;
         }
-
         TimePeriodValue timePeriodValue = (TimePeriodValue) obj;
-
-        if (this.period != null ? !this.period.equals(timePeriodValue.period)
-                : timePeriodValue.period != null) {
+        if (!Objects.equals(this.period, timePeriodValue.period)) {
             return false;
         }
-        if (this.value != null ? !this.value.equals(timePeriodValue.value)
-                : timePeriodValue.value != null) {
+        if (!Objects.equals(this.value, timePeriodValue.value)) {
             return false;
         }
-
         return true;
     }
 
@@ -163,7 +160,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      */
     @Override
     public Object clone() {
-        Object clone = null;
+        Object clone;
         try {
             clone = super.clone();
         }

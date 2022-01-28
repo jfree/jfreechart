@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SeriesDataset.java
  * ------------------
- * (C) Copyright 2000-2021, by David Gilbert.
+ * (C) Copyright 2000-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -58,7 +58,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The series count.
      */
-    public int getSeriesCount();
+    int getSeriesCount();
 
     /**
      * Returns the key for a series.
@@ -68,7 +68,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The key for the series.
      */
-    public Comparable getSeriesKey(int series);
+    Comparable getSeriesKey(int series);
 
     /**
      * Returns the index of the series with the specified key, or -1 if there
@@ -78,6 +78,6 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The index, or -1.
      */
-    public int indexOf(Comparable seriesKey);
+    int indexOf(Comparable seriesKey);
 
 }

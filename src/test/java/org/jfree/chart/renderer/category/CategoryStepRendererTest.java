@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * CategoryStepRendererTest.java
  * -----------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -49,6 +45,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryStepRenderer} class.
@@ -65,9 +63,9 @@ public class CategoryStepRendererTest {
         assertEquals(r1, r2);
 
         r1 = new CategoryStepRenderer(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new CategoryStepRenderer(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -77,9 +75,9 @@ public class CategoryStepRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
         CategoryStepRenderer r2 = (CategoryStepRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -97,8 +95,7 @@ public class CategoryStepRendererTest {
     @Test
     public void testSerialization() {
         CategoryStepRenderer r1 = new CategoryStepRenderer();
-        CategoryStepRenderer r2 = (CategoryStepRenderer) 
-                TestUtils.serialised(r1);
+        CategoryStepRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

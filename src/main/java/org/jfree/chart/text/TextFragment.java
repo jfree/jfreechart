@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -39,8 +39,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -235,27 +238,30 @@ public class TextFragment implements Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;   
-        }
-        if (obj == this) {
-            return true;   
-        }
-        if (obj instanceof TextFragment) {
-            TextFragment tf = (TextFragment) obj;
-            if (!this.text.equals(tf.text)) {
-                return false;   
-            }
-            if (!this.font.equals(tf.font)) {
-                return false;   
-            }
-            if (!this.paint.equals(tf.paint)) {
-                return false;   
-            }
+        if (obj == this)
+        {
             return true;
         }
-        return false;
+        if (!(obj instanceof TextFragment)) {
+            return false;
+        }
+        TextFragment tf = (TextFragment) obj;
+        if (!Objects.equals(this.text, tf.text)) {
+            return false;
+        }
+        if (!Objects.equals(this.font, tf.font)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.paint, tf.paint)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.baselineOffset) != 
+            Float.floatToIntBits(tf.baselineOffset)) {
+            return false;
+        }
+        return true;
     }
+
 
     /**
      * Returns a hash code for this object.
@@ -264,11 +270,12 @@ public class TextFragment implements Serializable {
      */
     @Override
     public int hashCode() {
-        int result;
-        result = (this.text != null ? this.text.hashCode() : 0);
-        result = 29 * result + (this.font != null ? this.font.hashCode() : 0);
-        result = 29 * result + (this.paint != null ? this.paint.hashCode() : 0);
-        return result;
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.text);
+        hash = 83 * hash + Objects.hashCode(this.font);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 83 * hash + Float.floatToIntBits(this.baselineOffset);
+        return hash;
     }
 
     /**

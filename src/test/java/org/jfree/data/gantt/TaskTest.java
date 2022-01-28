@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,43 @@
  * -------------
  * TaskTest.java
  * -------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.time.SimpleTimePeriod;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Task} class.
  */
 public class TaskTest {
 
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Task.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(Task.class, 
+                                  new Task("T1", new Date(1), new Date(2)),
+                                  new Task("T2", new Date(3), new Date(4)))
+                .verify();
+    }
+    
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -58,28 +71,28 @@ public class TaskTest {
     public void testEquals() {
         Task t1 = new Task("T", new Date(1), new Date(2));
         Task t2 = new Task("T", new Date(1), new Date(2));
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.equals(t1));
+        assertEquals(t1, t2);
+        assertEquals(t2, t1);
 
         t1.setDescription("X");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setDescription("X");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setDuration(new SimpleTimePeriod(new Date(2), new Date(3)));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setDuration(new SimpleTimePeriod(new Date(2), new Date(3)));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setPercentComplete(0.5);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setPercentComplete(0.5);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.addSubtask(new Task("T", new Date(22), new Date(33)));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.addSubtask(new Task("T", new Date(22), new Date(33)));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
 
     }
@@ -91,9 +104,9 @@ public class TaskTest {
     public void testCloning() throws CloneNotSupportedException {
         Task t1 = new Task("T", new Date(1), new Date(2));
         Task t2 = (Task) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -102,7 +115,7 @@ public class TaskTest {
     @Test
     public void testSerialization() {
         Task t1 = new Task("T", new Date(1), new Date(2));
-        Task t2 = (Task) TestUtils.serialised(t1);
+        Task t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

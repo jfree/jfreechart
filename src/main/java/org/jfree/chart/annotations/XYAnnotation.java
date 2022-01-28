@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * XYAnnotation.java
  * -----------------
- * (C) Copyright 2002-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2002-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -63,8 +63,8 @@ public interface XYAnnotation extends Annotation {
      * @param info  an optional info object that will be populated with
      *              entity information.
      */
-    public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
-                     ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex, PlotRenderingInfo info);
+    void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
+              ValueAxis domainAxis, ValueAxis rangeAxis,
+              int rendererIndex, PlotRenderingInfo info);
 
 }

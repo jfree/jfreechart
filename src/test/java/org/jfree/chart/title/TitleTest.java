@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,54 @@
  * --------------
  * TitleTest.java
  * --------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.title;
 
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.VerticalAlignment;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the abstract {@link Title} class.
  */
 public class TitleTest {
-
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Title.class)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .withRedefinedSubclass(CompositeTitle.class)
+                .withRedefinedSubclass(DateTitle.class)
+                .withRedefinedSubclass(ShortTextTitle.class)
+                .withRedefinedSubclass(TextTitle.class)
+                .withRedefinedSubclass(LegendTitle.class)
+                .withRedefinedSubclass(PaintScaleLegend.class)
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .verify();
+    }
+	
     /**
      * Some checks for the equals() method.
      */
@@ -61,24 +86,24 @@ public class TitleTest {
         assertEquals(t1, t2);
 
         t1.setPosition(RectangleEdge.LEFT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setPosition(RectangleEdge.LEFT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setVisible(false);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setVisible(false);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -88,7 +113,7 @@ public class TitleTest {
     public void testHashcode() {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = new TextTitle();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);

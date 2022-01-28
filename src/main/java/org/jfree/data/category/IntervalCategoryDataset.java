@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * IntervalCategoryDataset.java
  * ----------------------------
- * (C) Copyright 2002-2020, by Eduard Martinescu and Contributors.
+ * (C) Copyright 2002-2022, by Eduard Martinescu and Contributors.
  *
  * Original Author:  Eduard Martinescu;
  * Contributor(s):   David Gilbert;
@@ -52,7 +52,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getEndValue(int, int)
      */
-    public Number getStartValue(int series, int category);
+    Number getStartValue(int series, int category);
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -64,7 +64,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-    public Number getStartValue(Comparable series, Comparable category);
+    Number getStartValue(Comparable series, Comparable category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -76,7 +76,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getStartValue(int, int)
      */
-    public Number getEndValue(int series, int category);
+    Number getEndValue(int series, int category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -88,6 +88,6 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-    public Number getEndValue(Comparable series, Comparable category);
+    Number getEndValue(Comparable series, Comparable category);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * DefaultKeyedValues2D.java
  * -------------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andreas Schroeder;
@@ -65,7 +65,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     private List rows;
 
     /** If the row keys should be sorted by their comparable order. */
-    private boolean sortRowKeys;
+    private final boolean sortRowKeys;
 
     /**
      * Creates a new instance (initially empty).

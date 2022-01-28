@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * -------------------
  * CompositeTitle.java
  * -------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Eric Penfold (patch 2006826);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -43,6 +44,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
@@ -194,13 +197,38 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
             return false;
         }
         CompositeTitle that = (CompositeTitle) obj;
-        if (!this.container.equals(that.container)) {
+        if (!Objects.equals(this.container, that.container)) {
             return false;
         }
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CompositeTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 53 * hash + Objects.hashCode(this.container);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        return hash;
     }
 
     /**

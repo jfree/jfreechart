@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ---------------
  * ImageTitle.java
  * ---------------
- * (C) Copyright 2000-2021, by David Berry and Contributors;
+ * (C) Copyright 2000-2022, by David Berry and Contributors;
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -123,7 +124,6 @@ public class ImageTitle extends Title {
         this.image = image;
         setHeight(height);
         setWidth(width);
-
     }
 
     /**
@@ -340,7 +340,30 @@ public class ImageTitle extends Title {
         if (!Objects.equals(this.image, that.image)) {
             return false;
         }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof ImageTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 17 * hash + Objects.hashCode(this.image);
+        return hash;
+    }
 }

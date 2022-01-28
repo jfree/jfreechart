@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,17 @@
  * --------------------------
  * CategoryLabelPosition.java
  * --------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.TextAnchor;
@@ -53,25 +54,25 @@ public class CategoryLabelPosition implements Serializable {
     private static final long serialVersionUID = 5168681143844183864L;
 
     /** The category anchor point. */
-    private RectangleAnchor categoryAnchor;
+    private final RectangleAnchor categoryAnchor;
 
     /** The text block anchor. */
-    private TextBlockAnchor labelAnchor;
+    private final TextBlockAnchor labelAnchor;
 
     /** The rotation anchor. */
-    private TextAnchor rotationAnchor;
+    private final TextAnchor rotationAnchor;
 
     /** The rotation angle (in radians). */
-    private double angle;
+    private final double angle;
 
     /** The width calculation type. */
-    private CategoryLabelWidthType widthType;
+    private final CategoryLabelWidthType widthType;
 
     /**
      * The maximum label width as a percentage of the category space or the
      * range space.
      */
-    private float widthRatio;
+    private final float widthRatio;
 
     /**
      * Creates a new position record with default settings.
@@ -217,22 +218,24 @@ public class CategoryLabelPosition implements Serializable {
             return false;
         }
         CategoryLabelPosition that = (CategoryLabelPosition) obj;
-        if (!this.categoryAnchor.equals(that.categoryAnchor)) {
+        if (Double.doubleToLongBits(this.angle) !=
+            Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (!this.labelAnchor.equals(that.labelAnchor)) {
+        if (Float.floatToIntBits(this.widthRatio) !=
+            Float.floatToIntBits(that.widthRatio)) {
             return false;
         }
-        if (!this.rotationAnchor.equals(that.rotationAnchor)) {
+        if (!Objects.equals(this.categoryAnchor,that.categoryAnchor)) {
             return false;
         }
-        if (this.angle != that.angle) {
+        if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
             return false;
         }
-        if (this.widthType != that.widthType) {
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-        if (this.widthRatio != that.widthRatio) {
+        if (!Objects.equals(this.widthType, that.widthType)) {
             return false;
         }
         return true;
@@ -246,9 +249,13 @@ public class CategoryLabelPosition implements Serializable {
     @Override
     public int hashCode() {
         int result = 19;
-        result = 37 * result + this.categoryAnchor.hashCode();
-        result = 37 * result + this.labelAnchor.hashCode();
-        result = 37 * result + this.rotationAnchor.hashCode();
+        result = 61 * result + Objects.hashCode(this.categoryAnchor);
+        result = 61 * result + Objects.hashCode(this.labelAnchor);
+        result = 61 * result + Objects.hashCode(this.rotationAnchor);
+        result = 61 * result + (int) (Double.doubleToLongBits(this.angle) ^
+                                     (Double.doubleToLongBits(this.angle) >>> 32));
+        result = 61 * result + Objects.hashCode(this.widthType);
+        result = 61 * result + Float.floatToIntBits(this.widthRatio);
         return result;
     }
 

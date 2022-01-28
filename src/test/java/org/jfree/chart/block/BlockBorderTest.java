@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,19 @@
  * --------------------
  * BlockBorderTest.java
  * --------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
@@ -49,10 +47,25 @@ import org.jfree.chart.util.UnitType;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link BlockBorder} class.
  */
 public class BlockBorderTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(BlockBorder.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -63,24 +76,24 @@ public class BlockBorderTest {
                 4.0), Color.RED);
         BlockBorder b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         // insets
         b1 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         // paint
         b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.BLUE);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.BLUE);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -100,7 +113,7 @@ public class BlockBorderTest {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        BlockBorder b2 = (BlockBorder) TestUtils.serialised(b1);
+        BlockBorder b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

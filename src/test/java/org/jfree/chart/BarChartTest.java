@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * BarChartTest.java
  * -----------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart;
-
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -59,6 +55,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for a bar chart.
@@ -111,7 +109,7 @@ public class BarChartTest {
         this.chart.addChangeListener(l);
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
         assertTrue(range.getLowerBound() <= -30, 
@@ -135,7 +133,7 @@ public class BarChartTest {
                 = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
-        assertTrue(tt2 == tt);
+        assertSame(tt2, tt);
     }
 
     /**
@@ -150,7 +148,7 @@ public class BarChartTest {
                 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
-        assertTrue(url2 == url1);
+        assertSame(url2, url1);
     }
 
     /**

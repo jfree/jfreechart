@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * HashUtilsTest.java
  * ------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,8 +38,7 @@ package org.jfree.chart;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HashUtils} class.
@@ -59,6 +58,6 @@ public class HashUtilsTest  {
 
         double[] a3 = new double[] {0.5, 1.0};
         int h3 = HashUtils.hashCodeForDoubleArray(a3);
-        assertFalse(h1 == h3);
+        assertNotEquals(h1, h3);
     }
 }

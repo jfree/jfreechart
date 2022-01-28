@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,33 +27,54 @@
  * ------------------
  * TextTitleTest.java
  * ------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.util.PaintUtils;
 
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TextTitle} class.
  */
 public class TextTitleTest {
-
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TextTitle.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
     /**
      * Check that the equals() method distinguishes all fields.
      */
@@ -64,60 +85,60 @@ public class TextTitleTest {
         assertEquals(t1, t2);
 
         t1.setText("Test 1");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setText("Test 1");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         Font f = new Font("SansSerif", Font.PLAIN, 15);
         t1.setFont(f);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setFont(f);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setTextAlignment(HorizontalAlignment.RIGHT);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setTextAlignment(HorizontalAlignment.RIGHT);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // paint
         t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
         t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
 
         // backgroundPaint
         t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
         t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
 
         // maximumLinesToDisplay
         t1.setMaximumLinesToDisplay(3);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setMaximumLinesToDisplay(3);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // toolTipText
         t1.setToolTipText("TTT");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setToolTipText("TTT");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // urlText
         t1.setURLText(("URL"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setURLText(("URL"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // expandToFitSpace
         t1.setExpandToFitSpace(!t1.getExpandToFitSpace());
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setExpandToFitSpace(!t2.getExpandToFitSpace());
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
     }
 
@@ -128,7 +149,7 @@ public class TextTitleTest {
     public void testHashcode() {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = new TextTitle();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -141,9 +162,9 @@ public class TextTitleTest {
     public void testCloning() throws CloneNotSupportedException {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = (TextTitle) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -152,7 +173,7 @@ public class TextTitleTest {
     @Test
     public void testSerialization() {
         TextTitle t1 = new TextTitle("Test");
-        TextTitle t2 = (TextTitle) TestUtils.serialised(t1);
+        TextTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

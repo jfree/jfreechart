@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * PowerFunction2DTest.java
  * ------------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,9 +38,8 @@ package org.jfree.data.function;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PowerFunction2D} class.
@@ -66,11 +65,11 @@ public class PowerFunction2DTest {
     public void testEquals() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
         PowerFunction2D f2 = new PowerFunction2D(1.0, 2.0);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
         f1 = new PowerFunction2D(2.0, 3.0);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new PowerFunction2D(2.0, 3.0);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
     }
 
     /**
@@ -79,7 +78,7 @@ public class PowerFunction2DTest {
     @Test
     public void testSerialization() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
-        PowerFunction2D f2 = (PowerFunction2D) TestUtils.serialised(f1);
+        PowerFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

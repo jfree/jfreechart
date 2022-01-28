@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------
  * Month.java
  * ----------
- * (C) Copyright 2001-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2001-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Chris Boek;
@@ -448,7 +448,7 @@ public class Month extends RegularTimePeriod implements Serializable {
         }
         else {
             s1 = s.substring(0, i).trim();
-            s2 = s.substring(i + 1, s.length()).trim();
+            s2 = s.substring(i + 1).trim();
             // now it is trickier to determine if the month or year is first
             Year y1 = Month.evaluateAsYear(s1);
             if (y1 == null) {

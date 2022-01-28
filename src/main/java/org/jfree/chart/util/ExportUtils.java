@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ExportUtils.java
  * ----------------
- * (C) Copyright 2014-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2014-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -162,8 +162,8 @@ public class ExportUtils {
      * @param h  the chart height.
      * @param file  the output file ({@code null} not permitted).
      */
-    public static final void writeAsPDF(Drawable drawable, 
-            int w, int h, File file) {
+    public static void writeAsPDF(Drawable drawable,
+                                  int w, int h, File file) {
         if (!ExportUtils.isOrsonPDFAvailable()) {
             throw new IllegalStateException("Neither OrsonPDF nor JFreePDF is present on the classpath.");
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * PieChart3DTest.java
  * -------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -45,10 +45,10 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for a pie chart with a 3D effect.
@@ -82,7 +82,7 @@ public class PieChart3DTest  {
         this.pieChart.addChangeListener(l);
         PiePlot plot = (PiePlot) this.pieChart.getPlot();
         plot.setDataset(null);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         assertNull(plot.getDataset());
     }
 

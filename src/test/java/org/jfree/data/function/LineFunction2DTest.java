@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * LineFunction2DTest.java
  * -----------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -80,7 +80,7 @@ public class LineFunction2DTest {
     @Test
     public void testSerialization() {
         LineFunction2D f1 = new LineFunction2D(1.0, 2.0);
-        LineFunction2D f2 = (LineFunction2D) TestUtils.serialised(f1);
+        LineFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

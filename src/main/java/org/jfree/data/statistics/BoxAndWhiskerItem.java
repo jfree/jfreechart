@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * BoxAndWhiskerItem.java
  * ----------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -51,31 +51,31 @@ public class BoxAndWhiskerItem implements Serializable {
     private static final long serialVersionUID = 7329649623148167423L;
 
     /** The mean. */
-    private Number mean;
+    private final Number mean;
 
     /** The median. */
-    private Number median;
+    private final Number median;
 
     /** The first quarter. */
-    private Number q1;
+    private final Number q1;
 
     /** The third quarter. */
-    private Number q3;
+    private final Number q3;
 
     /** The minimum regular value. */
-    private Number minRegularValue;
+    private final Number minRegularValue;
 
     /** The maximum regular value. */
-    private Number maxRegularValue;
+    private final Number maxRegularValue;
 
     /** The minimum outlier. */
-    private Number minOutlier;
+    private final Number minOutlier;
 
     /** The maximum outlier. */
-    private Number maxOutlier;
+    private final Number maxOutlier;
 
     /** The outliers. */
-    private List outliers;
+    private final List<? extends Number> outliers;
 
     /**
      * Creates a new box-and-whisker item.
@@ -94,7 +94,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(Number mean, Number median, Number q1, Number q3,
             Number minRegularValue, Number maxRegularValue, Number minOutlier,
-            Number maxOutlier, List outliers) {
+            Number maxOutlier, List<? extends Number> outliers) {
 
         this.mean = mean;
         this.median = median;
@@ -123,7 +123,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(double mean, double median, double q1, double q3,
             double minRegularValue, double maxRegularValue, double minOutlier,
-            double maxOutlier, List outliers) {
+            double maxOutlier, List<? extends Number> outliers) {
 
         // pass values to other constructor
         this(Double.valueOf(mean), Double.valueOf(median), Double.valueOf(q1),
@@ -210,7 +210,7 @@ public class BoxAndWhiskerItem implements Serializable {
      *
      * @return A list of outliers (possibly {@code null}).
      */
-    public List getOutliers() {
+    public List<Number> getOutliers() {
         if (this.outliers == null) {
             return null;
         }

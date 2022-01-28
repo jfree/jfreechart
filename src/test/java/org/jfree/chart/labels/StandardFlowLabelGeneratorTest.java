@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * StandardFlowLabelGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2021, by David Gilbert.
+ * (C) Copyright 2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,7 +38,7 @@ package org.jfree.chart.labels;
 
 import org.jfree.chart.TestUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -53,8 +53,8 @@ public class StandardFlowLabelGeneratorTest {
     public void testEquals() {
         StandardFlowLabelGenerator g1 = new StandardFlowLabelGenerator();
         StandardFlowLabelGenerator g2 = new StandardFlowLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ---------------
  * LineBorder.java
  * ---------------
- * (C) Copyright 2007-2021, by Christo Zietsman and Contributors.
+ * (C) Copyright 2007-2022, by Christo Zietsman and Contributors.
  *
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -49,6 +50,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -194,10 +196,19 @@ public class LineBorder implements BlockFrame, Serializable {
         if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
-        if (!this.insets.equals(that.insets)) {
+        if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 47 * hash + Objects.hashCode(this.stroke);
+        hash = 47 * hash + Objects.hashCode(this.insets);
+        return hash;
     }
 
     /**

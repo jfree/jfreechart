@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -47,7 +47,7 @@ public enum Layer {
      *
      * @param name  the name.
      */
-    private Layer(final String name) {
+    Layer(final String name) {
         this.name = name;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * XYBarPainter.java
  * -----------------
- * (C) Copyright 2008-2021, by David Gilbert.
+ * (C) Copyright 2008-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -65,8 +65,8 @@ public interface XYBarPainter {
      * @param bar  the bounds for the bar.
      * @param base  the base of the bar.
      */
-    public void paintBar(Graphics2D g2, XYBarRenderer renderer,
-            int row, int column, RectangularShape bar, RectangleEdge base);
+    void paintBar(Graphics2D g2, XYBarRenderer renderer,
+                  int row, int column, RectangularShape bar, RectangleEdge base);
 
     /**
      * Paints the shadow for a single bar on behalf of a renderer.
@@ -79,8 +79,8 @@ public interface XYBarPainter {
      * @param base  the base of the bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
-    public void paintBarShadow(Graphics2D g2, XYBarRenderer renderer,
-            int row, int column, RectangularShape bar, RectangleEdge base,
-            boolean pegShadow);
+    void paintBarShadow(Graphics2D g2, XYBarRenderer renderer,
+                        int row, int column, RectangularShape bar, RectangleEdge base,
+                        boolean pegShadow);
 
 }

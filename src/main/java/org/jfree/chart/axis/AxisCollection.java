@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * AxisCollection.java
  * -------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -48,16 +48,16 @@ import org.jfree.chart.util.Args;
 public class AxisCollection {
 
     /** The axes that need to be drawn at the top of the plot area. */
-    private List axesAtTop;
+    private final List axesAtTop;
 
     /** The axes that need to be drawn at the bottom of the plot area. */
-    private List axesAtBottom;
+    private final List axesAtBottom;
 
     /** The axes that need to be drawn at the left of the plot area. */
-    private List axesAtLeft;
+    private final List axesAtLeft;
 
     /** The axes that need to be drawn at the right of the plot area. */
-    private List axesAtRight;
+    private final List axesAtRight;
 
     /**
      * Creates a new empty collection.

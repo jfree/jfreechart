@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * TimeSeriesURLGeneratorTest.java
  * -------------------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,10 +36,6 @@
 
 package org.jfree.chart.urls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
@@ -47,6 +43,8 @@ import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TimeSeriesURLGenerator} class.
@@ -73,42 +71,42 @@ public class TimeSeriesURLGeneratorTest {
     public void testEquals() {
         TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
         TimeSeriesURLGenerator g2 = new TimeSeriesURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix",
                 "series", "item");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix",
                 "series", "item");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix",
                 "series", "item");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix",
                 "series", "item");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series", "item");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series", "item");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item1");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item1");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -117,8 +115,7 @@ public class TimeSeriesURLGeneratorTest {
     @Test
     public void testSerialization() {
         TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
-        TimeSeriesURLGenerator g2 = (TimeSeriesURLGenerator) 
-                TestUtils.serialised(g1);
+        TimeSeriesURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

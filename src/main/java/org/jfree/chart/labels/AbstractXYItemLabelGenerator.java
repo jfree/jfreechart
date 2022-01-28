@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
     private static final long serialVersionUID = 5869744396278660636L;
 
     /** The item label format string. */
-    private String formatString;
+    private final String formatString;
 
     /** A number formatter for the x value. */
     private NumberFormat xFormat;
@@ -71,7 +71,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
     private DateFormat yDateFormat;
 
     /** The string used to represent 'null' for the y-value. */
-    private String nullYString = "null";
+    private final String nullYString = "null";
 
     /**
      * Creates an item label generator using default number formatters.

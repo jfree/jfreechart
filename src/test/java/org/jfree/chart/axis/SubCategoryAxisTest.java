@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * SubCategoryAxisTest.java
  * ------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.axis;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -54,6 +49,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link SubCategoryAxis} class.
  */
@@ -66,26 +63,26 @@ public class SubCategoryAxisTest {
     public void testEquals() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         SubCategoryAxis a2 = new SubCategoryAxis("Test");
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
+        assertEquals(a1, a2);
+        assertEquals(a2, a1);
 
         // subcategories
         a1.addSubCategory("Sub 1");
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.addSubCategory("Sub 1");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // subLabelFont
         a1.setSubLabelFont(new Font("Serif", Font.BOLD, 15));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setSubLabelFont(new Font("Serif", Font.BOLD, 15));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // subLabelPaint
         a1.setSubLabelPaint(Color.RED);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setSubLabelPaint(Color.RED);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -95,7 +92,7 @@ public class SubCategoryAxisTest {
     public void testHashCode() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         SubCategoryAxis a2 = new SubCategoryAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -109,9 +106,9 @@ public class SubCategoryAxisTest {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         a1.addSubCategory("SubCategoryA");
         SubCategoryAxis a2 = (SubCategoryAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -121,7 +118,7 @@ public class SubCategoryAxisTest {
     public void testSerialization() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test Axis");
         a1.addSubCategory("SubCategoryA");
-        SubCategoryAxis a2 = (SubCategoryAxis) TestUtils.serialised(a1);
+        SubCategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

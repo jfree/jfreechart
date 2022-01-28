@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------------------
  * DynamicDriveToolTipTagFragmentGeneratorTest.java
  * ------------------------------------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ public class DynamicDriveToolTipTagFragmentGeneratorTest {
                 g.generateToolTipFragment("abc"));
         assertEquals(" onMouseOver=\"return overlib("
                 + "'It\\'s \\\"A\\\", 100.0');\" onMouseOut=\"return nd();\"",
-                g.generateToolTipFragment("It\'s \"A\", 100.0"));
+                g.generateToolTipFragment("It's \"A\", 100.0"));
     }
 
 }

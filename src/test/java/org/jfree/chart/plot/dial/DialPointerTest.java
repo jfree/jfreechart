@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * DialPointerTest.java
  * --------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,13 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DialPointer} class.
@@ -58,19 +56,19 @@ public class DialPointerTest {
     public void testEquals() {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = new DialPointer.Pin(1);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // dataset index
         i1 = new DialPointer.Pin(2);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new DialPointer.Pin(2);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // check an inherited attribute
         i1.setVisible(false);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setVisible(false);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -83,15 +81,15 @@ public class DialPointerTest {
         assertEquals(p1, p2);
 
         p1.setPaint(Color.GREEN);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setPaint(Color.GREEN);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         BasicStroke s = new BasicStroke(4.4f);
         p1.setStroke(s);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setStroke(s);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -104,14 +102,14 @@ public class DialPointerTest {
         assertEquals(p1, p2);
 
         p1.setFillPaint(Color.GREEN);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setFillPaint(Color.GREEN);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setOutlinePaint(Color.GREEN);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setOutlinePaint(Color.GREEN);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -121,7 +119,7 @@ public class DialPointerTest {
     public void testHashCode() {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = new DialPointer.Pin(1);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
         int h1 = i1.hashCode();
         int h2 = i2.hashCode();
         assertEquals(h1, h2);
@@ -134,9 +132,9 @@ public class DialPointerTest {
     public void testCloning() throws CloneNotSupportedException {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = (DialPointer) i1.clone();
-        assertTrue(i1 != i2);
-        assertTrue(i1.getClass() == i2.getClass());
-        assertTrue(i1.equals(i2));
+        assertNotSame(i1, i2);
+        assertSame(i1.getClass(), i2.getClass());
+        assertEquals(i1, i2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
@@ -152,7 +150,7 @@ public class DialPointerTest {
     public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -162,7 +160,7 @@ public class DialPointerTest {
     @Test
     public void testSerialization2() {
         DialPointer i1 = new DialPointer.Pointer(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 }

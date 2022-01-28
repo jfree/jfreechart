@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -------------------------
  * LegendItemCollection.java
  * -------------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -39,6 +39,7 @@ package org.jfree.chart;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 
 /**
@@ -123,10 +124,17 @@ public class LegendItemCollection implements Cloneable, Serializable {
             return false;
         }
         LegendItemCollection that = (LegendItemCollection) obj;
-        if (!this.items.equals(that.items)) {
+        if (!Objects.equals(this.items, that.items)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.items);
+        return hash;
     }
 
     /**

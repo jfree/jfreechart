@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * WindItemRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,13 +36,12 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link WindItemRenderer} class.
@@ -66,7 +65,7 @@ public class WindItemRendererTest {
     public void testHashcode() {
         WindItemRenderer r1 = new WindItemRenderer();
         WindItemRenderer r2 = new WindItemRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -79,9 +78,9 @@ public class WindItemRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         WindItemRenderer r1 = new WindItemRenderer();
         WindItemRenderer r2 = (WindItemRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -99,7 +98,7 @@ public class WindItemRendererTest {
     @Test
     public void testSerialization() {
         WindItemRenderer r1 = new WindItemRenderer();
-        WindItemRenderer r2 = (WindItemRenderer) TestUtils.serialised(r1);
+        WindItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

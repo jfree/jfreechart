@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -55,7 +55,7 @@ public enum Rotation {
      * @param name  the name.
      * @param factor  the rotation factor.
      */
-    private Rotation(String name, double factor) {
+    Rotation(String name, double factor) {
         this.name = name;
         this.factor = factor;
     }

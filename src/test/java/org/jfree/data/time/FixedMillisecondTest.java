@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * FixedMillisecondTest.java
  * -------------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,7 +36,6 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -56,7 +55,7 @@ public class FixedMillisecondTest {
     @Test
     public void testSerialization() {
         FixedMillisecond m1 = new FixedMillisecond();
-        FixedMillisecond m2 = (FixedMillisecond) TestUtils.serialised(m1);
+        FixedMillisecond m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -67,7 +66,7 @@ public class FixedMillisecondTest {
     public void testHashcode() {
         FixedMillisecond m1 = new FixedMillisecond(500000L);
         FixedMillisecond m2 = new FixedMillisecond(500000L);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int h1 = m1.hashCode();
         int h2 = m2.hashCode();
         assertEquals(h1, h2);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * AxisTest.java
  * -------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -264,7 +264,7 @@ public class AxisTest  {
         label.addAttribute(TextAttribute.SUPERSCRIPT, 
                 TextAttribute.SUPERSCRIPT_SUB, 1, 4);
         a1.setAttributedLabel(label);
-        Axis a2 = (Axis) TestUtils.serialised(a1);
+        Axis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

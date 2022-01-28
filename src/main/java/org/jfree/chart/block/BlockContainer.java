@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -------------------
  * BlockContainer.java
  * -------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -61,7 +62,7 @@ public class BlockContainer extends AbstractBlock
     private static final long serialVersionUID = 8199508075695195293L;
 
     /** The blocks within the container. */
-    private List blocks;
+    private final List blocks;
 
     /** The object responsible for laying out the blocks. */
     private Arrangement arrangement;
@@ -242,17 +243,42 @@ public class BlockContainer extends AbstractBlock
         if (!(obj instanceof BlockContainer)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         BlockContainer that = (BlockContainer) obj;
-        if (!this.arrangement.equals(that.arrangement)) {
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
             return false;
         }
-        if (!this.blocks.equals(that.blocks)) {
+        // compare fields in this class
+        if (!Objects.equals(this.arrangement, that.arrangement)) {
             return false;
         }
-        return true;
+        if (!Objects.equals(this.blocks, that.blocks)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof BlockContainer);
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 79 * hash + Objects.hashCode(this.blocks);
+        hash = 79 * hash + Objects.hashCode(this.arrangement);
+        return hash;
     }
 
     /**

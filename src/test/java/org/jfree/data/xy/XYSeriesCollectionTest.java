@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYSeriesCollectionTest.java
  * ---------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,20 +36,14 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
+import org.jfree.data.DatasetChangeConfirmation;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYSeriesCollection} class.
@@ -86,22 +80,22 @@ public class XYSeriesCollectionTest {
         assertEquals(c2, c1);
 
         c1.addSeries(new XYSeries("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new XYSeries("Empty Series"));
         assertEquals(c1, c2);
 
         c1.setIntervalWidth(5.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setIntervalWidth(5.0);
         assertEquals(c1, c2);
 
         c1.setIntervalPositionFactor(0.75);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setIntervalPositionFactor(0.75);
         assertEquals(c1, c2);
 
         c1.setAutoWidth(true);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setAutoWidth(true);
         assertEquals(c1, c2);
 
@@ -123,7 +117,7 @@ public class XYSeriesCollectionTest {
 
         // check independence
         s1.setDescription("XYZ");
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**
@@ -144,9 +138,21 @@ public class XYSeriesCollectionTest {
         s1.add(1.0, 1.1);
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
-        XYSeriesCollection c2 = (XYSeriesCollection) 
-                TestUtils.serialised(c1);
+        XYSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
+
+        // check independence
+        s1.add(2.0, 2.2);
+        assertNotEquals(c1, c2);
+        XYSeries s2 = c2.getSeries(0);
+        s2.add(2.0, 2.2);
+        assertEquals(c1, c2);
+
+        // check that c2 gets notifications when s2 is changed
+        DatasetChangeConfirmation listener = new DatasetChangeConfirmation();
+        c2.addChangeListener(listener);
+        s2.add(3.0, 3.3);
+        assertNotNull(listener.event);
     }
 
     /**
@@ -164,7 +170,7 @@ public class XYSeriesCollectionTest {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 

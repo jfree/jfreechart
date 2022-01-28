@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultPieDataset.java
  * ----------------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Sam (oldman);
@@ -75,7 +75,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @param source  the data ({@code null} not permitted).
      */
     public DefaultPieDataset(KeyedValues<K> source) {
-        Args.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(source, "source");
         this.data = new DefaultKeyedValues<>();
         for (int i = 0; i < source.getItemCount(); i++) {
             this.data.addValue(source.getKey(i), source.getValue(i));

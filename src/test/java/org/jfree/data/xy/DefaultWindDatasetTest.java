@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultWindDatasetTest.java
  * ---------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,16 +36,14 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link DefaultWindDataset}.
@@ -59,13 +57,13 @@ public class DefaultWindDatasetTest {
     public void testEquals() {
         DefaultWindDataset d1 = new DefaultWindDataset();
         DefaultWindDataset d2 = new DefaultWindDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1 = createSampleDataset1();
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = createSampleDataset1();
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -76,16 +74,16 @@ public class DefaultWindDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultWindDataset d1 = new DefaultWindDataset();
         DefaultWindDataset d2 = (DefaultWindDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
         d2 = (DefaultWindDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -103,12 +101,12 @@ public class DefaultWindDatasetTest {
     @Test
     public void testSerialization() {
         DefaultWindDataset d1 = new DefaultWindDataset();
-        DefaultWindDataset d2 = (DefaultWindDataset) TestUtils.serialised(d1);
+        DefaultWindDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultWindDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

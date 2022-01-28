@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DefaultTitleEditor.java
  * -----------------------
- * (C) Copyright 2005-2021, by David Gilbert.
+ * (C) Copyright 2005-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Arnaud Lelievre;
@@ -267,7 +267,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      * If we are not supposed to show the title, the controls are disabled.
      */
     private void enableOrDisableControls() {
-        boolean enabled = (this.showTitle == true);
+        boolean enabled = this.showTitle;
         this.titleField.setEnabled(enabled);
         this.selectFontButton.setEnabled(enabled);
         this.selectPaintButton.setEnabled(enabled);

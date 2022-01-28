@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DateTickUnitTest.java
  * ---------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,7 +37,6 @@
 package org.jfree.chart.axis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ public class DateTickUnitTest {
     public void testEquals() {
         DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
         DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -64,7 +63,7 @@ public class DateTickUnitTest {
     public void testHashCode() {
         DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
         DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -76,7 +75,7 @@ public class DateTickUnitTest {
     @Test
     public void testSerialization() {
         DateTickUnit a1 = new DateTickUnit(DateTickUnitType.DAY, 7);
-        DateTickUnit a2 = (DateTickUnit) TestUtils.serialised(a1);
+        DateTickUnit a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

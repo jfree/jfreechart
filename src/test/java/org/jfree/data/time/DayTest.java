@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * DayTest.java
  * ------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -70,7 +70,7 @@ public class DayTest {
     @Test
     public void testEqualsSelf() {
         Day day = new Day();
-        assertTrue(day.equals(day));
+        assertEquals(day, day);
     }
 
     /**
@@ -80,7 +80,7 @@ public class DayTest {
     public void testEquals() {
         Day day1 = new Day(29, MonthConstants.MARCH, 2002);
         Day day2 = new Day(29, MonthConstants.MARCH, 2002);
-        assertTrue(day1.equals(day2));
+        assertEquals(day1, day2);
     }
 
     /**
@@ -315,7 +315,7 @@ public class DayTest {
     @Test
     public void testSerialization() {
         Day d1 = new Day(15, 4, 2000);
-        Day d2 = (Day) TestUtils.serialised(d1);
+        Day d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -326,7 +326,7 @@ public class DayTest {
     public void testHashcode() {
         Day d1 = new Day(1, 2, 2003);
         Day d2 = new Day(1, 2, 2003);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
         int h1 = d1.hashCode();
         int h2 = d2.hashCode();
         assertEquals(h1, h2);

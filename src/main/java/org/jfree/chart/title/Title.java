@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2021, by David Berry and Contributors.
+ * (C) Copyright 2000-2022, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert;
  *                   Nicolas Brodu;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -43,6 +44,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -54,7 +56,6 @@ import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 /**
@@ -374,13 +375,13 @@ public abstract class Title extends AbstractBlock
         if (this.visible != that.visible) {
             return false;
         }
-        if (this.position != that.position) {
+        if (!Objects.equals(this.position, that.position)) {
             return false;
         }
-        if (this.horizontalAlignment != that.horizontalAlignment) {
+        if (!Objects.equals(this.horizontalAlignment, that.horizontalAlignment)) {
             return false;
         }
-        if (this.verticalAlignment != that.verticalAlignment) {
+        if (!Objects.equals(this.verticalAlignment, that.verticalAlignment)) {
             return false;
         }
         if (this.notify != that.notify) {
@@ -390,18 +391,33 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof Title);
+    }
+
+    /**
      * Returns a hashcode for the title.
      *
      * @return The hashcode.
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.position);
-        result = 37 * result
-                + ObjectUtils.hashCode(this.horizontalAlignment);
-        result = 37 * result + ObjectUtils.hashCode(this.verticalAlignment);
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 97 * hash + (this.visible ? 1 : 0);
+        hash = 97 * hash + Objects.hashCode(this.position);
+        hash = 97 * hash + Objects.hashCode(this.horizontalAlignment);
+        hash = 97 * hash + Objects.hashCode(this.verticalAlignment);
+        hash = 97 * hash + (this.notify ? 1 : 0);
+        return hash;
     }
 
     /**

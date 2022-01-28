@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * StatisticalLineAndShapeRendererTest.java
  * ----------------------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,12 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 
@@ -53,6 +47,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StatisticalLineAndShapeRenderer} class.
@@ -68,13 +64,13 @@ public class StatisticalLineAndShapeRendererTest {
             = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2
             = new StatisticalLineAndShapeRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setErrorIndicatorPaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorIndicatorPaint(Color.RED);
-        assertTrue(r2.equals(r1));
+        assertEquals(r2, r1);
     }
 
     /**
@@ -86,7 +82,7 @@ public class StatisticalLineAndShapeRendererTest {
             = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2
             = new StatisticalLineAndShapeRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -101,9 +97,9 @@ public class StatisticalLineAndShapeRendererTest {
                 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
                 r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -123,8 +119,7 @@ public class StatisticalLineAndShapeRendererTest {
     public void testSerialization() {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

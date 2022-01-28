@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * GradientXYBarPainterTest.java
  * -----------------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link GradientXYBarPainter} class.
@@ -60,19 +58,19 @@ public class GradientXYBarPainterTest {
         assertEquals(p1, p2);
 
         p1 = new GradientXYBarPainter(0.11, 0.2, 0.3);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientXYBarPainter(0.11, 0.2, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new GradientXYBarPainter(0.11, 0.22, 0.3);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientXYBarPainter(0.11, 0.22, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new GradientXYBarPainter(0.11, 0.22, 0.33);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientXYBarPainter(0.11, 0.22, 0.33);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -82,7 +80,7 @@ public class GradientXYBarPainterTest {
     public void testHashcode() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         GradientXYBarPainter p2 = new GradientXYBarPainter(0.1, 0.2, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
         assertEquals(h1, h2);
@@ -105,8 +103,7 @@ public class GradientXYBarPainterTest {
     @Test
     public void testSerialization() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
-        GradientXYBarPainter p2 = (GradientXYBarPainter) 
-                TestUtils.serialised(p1);
+        GradientXYBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

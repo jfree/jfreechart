@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007-2021, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007-2022, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
@@ -73,7 +73,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     /**
      * An enumeration of the fill types for the renderer.
      */
-    public static enum FillType {
+    public enum FillType {
        
         /** No fill. */
         NONE,
@@ -108,7 +108,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         public XYSplineState(PlotRenderingInfo info) {
             super(info);
             this.fillArea = new GeneralPath();
-            this.points = new ArrayList<Point2D>();
+            this.points = new ArrayList<>();
         }
     }
     
@@ -437,7 +437,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                 drawFirstPassShape(g2, pass, series, item, s.seriesPath);
             }
             // reset points vector
-            s.points = new ArrayList<Point2D>();
+            s.points = new ArrayList<>();
         }
     }
     

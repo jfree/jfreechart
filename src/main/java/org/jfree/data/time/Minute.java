@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -460,9 +460,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hmstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
-            );
+            String hmstr = s.substring(Math.min(daystr.length() + 1, s.length()));
             hmstr = hmstr.trim();
 
             String hourstr = hmstr.substring(0, Math.min(2, hmstr.length()));
@@ -470,9 +468,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
             if ((hour >= 0) && (hour <= 23)) {
                 String minstr = hmstr.substring(
-                    Math.min(hourstr.length() + 1, hmstr.length()),
-                    hmstr.length()
-                );
+                    Math.min(hourstr.length() + 1, hmstr.length()));
                 int minute = Integer.parseInt(minstr);
                 if ((minute >= 0) && (minute <= 59)) {
                     result = new Minute(minute, new Hour(hour, day));

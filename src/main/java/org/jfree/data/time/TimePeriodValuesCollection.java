@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * TimePeriodValuesCollection.java
  * -------------------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -390,8 +390,8 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
                                 series.getMaxMiddleIndex());
                         long s2 = maxMiddle.getStart().getTime();
                         long e2 = maxMiddle.getEnd().getTime();
-                        temp = new Range(s1 + (e1 - s1) / 2,
-                                s2 + (e2 - s2) / 2);
+                        temp = new Range(s1 + (e1 - s1) / 2.0,
+                                s2 + (e2 - s2) / 2.0);
                     }
                     else if (this.xPosition == TimePeriodAnchor.END) {
                         TimePeriod minEnd = series.getTimePeriod(

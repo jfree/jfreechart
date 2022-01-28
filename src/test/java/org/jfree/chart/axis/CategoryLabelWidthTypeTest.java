@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * CategoryLabelWidthTypeTest.java
  * -------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,11 +36,10 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryLabelWidthType} class.
@@ -65,7 +64,7 @@ public class CategoryLabelWidthTypeTest {
     public void testHashCode() {
         CategoryLabelWidthType a1 = CategoryLabelWidthType.CATEGORY;
         CategoryLabelWidthType a2 = CategoryLabelWidthType.CATEGORY;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -77,9 +76,9 @@ public class CategoryLabelWidthTypeTest {
     @Test
     public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
-        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtils.serialised(w1);
+        CategoryLabelWidthType w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
-        assertTrue(w1 == w2);
+        assertSame(w1, w2);
     }
 
 }

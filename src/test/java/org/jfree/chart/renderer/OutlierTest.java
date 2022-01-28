@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * OutlierTest.java
  * ----------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,13 +36,11 @@
 
 package org.jfree.chart.renderer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Point2D;
 import java.io.Serializable;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Outlier} class.
@@ -69,23 +67,23 @@ public class OutlierTest {
     public void testEquals() {
         Outlier out1 = new Outlier(1.0, 2.0, 3.0);
         Outlier out2 = new Outlier(1.0, 2.0, 3.0);
-        assertTrue(out1.equals(out2));
-        assertTrue(out2.equals(out1));
+        assertEquals(out1, out2);
+        assertEquals(out2, out1);
 
         out1.setPoint(new Point2D.Double(2.0, 2.0));
-        assertFalse(out1.equals(out2));
+        assertNotEquals(out1, out2);
         out2.setPoint(new Point2D.Double(2.0, 2.0));
-        assertTrue(out1.equals(out2));
+        assertEquals(out1, out2);
 
         out1.setPoint(new Point2D.Double(2.0, 3.0));
-        assertFalse(out1.equals(out2));
+        assertNotEquals(out1, out2);
         out2.setPoint(new Point2D.Double(2.0, 3.0));
-        assertTrue(out1.equals(out2));
+        assertEquals(out1, out2);
 
         out1.setRadius(4.0);
-        assertFalse(out1.equals(out2));
+        assertNotEquals(out1, out2);
         out2.setRadius(4.0);
-        assertTrue(out1.equals(out2));
+        assertEquals(out1, out2);
     }
 
     /**

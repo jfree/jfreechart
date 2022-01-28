@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYIntervalTest.java
  * -------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYInterval} class.
@@ -58,29 +56,29 @@ public class XYIntervalTest {
         assertEquals(i1, i2);
 
         i1 = new XYInterval(1.1, 2.0, 3.0, 2.5, 3.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new XYInterval(1.1, 2.0, 3.0, 2.5, 3.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new XYInterval(1.1, 2.2, 3.0, 2.5, 3.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new XYInterval(1.1, 2.2, 3.0, 2.5, 3.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new XYInterval(1.1, 2.2, 3.3, 2.5, 3.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new XYInterval(1.1, 2.2, 3.3, 2.5, 3.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new XYInterval(1.1, 2.2, 3.3, 2.6, 3.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new XYInterval(1.1, 2.2, 3.3, 2.6, 3.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new XYInterval(1.1, 2.2, 3.3, 2.6, 3.6);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new XYInterval(1.1, 2.2, 3.3, 2.6, 3.6);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -98,7 +96,7 @@ public class XYIntervalTest {
     @Test
     public void testSerialization() {
         XYInterval i1 = new XYInterval(1.0, 2.0, 3.0, 2.5, 3.5);
-        XYInterval i2 = (XYInterval) TestUtils.serialised(i1);
+        XYInterval i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

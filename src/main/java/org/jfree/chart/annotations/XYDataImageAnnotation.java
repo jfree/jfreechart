@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * --------------------------
  * XYDataImageAnnotation.java
  * --------------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -281,24 +282,20 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYDataImageAnnotation)) {
             return false;
         }
         XYDataImageAnnotation that = (XYDataImageAnnotation) obj;
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
-        if (this.w != that.w) {
+        if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(that.w)) {
             return false;
         }
-        if (this.h != that.h) {
+        if (Double.doubleToLongBits(this.h) != Double.doubleToLongBits(that.h)) {
             return false;
         }
         if (this.includeInDataBounds != that.includeInDataBounds) {
@@ -307,8 +304,27 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         if (!Objects.equals(this.image, that.image)) {
             return false;
         }
-        // seems to be the same...
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYDataImageAnnotation);
     }
 
     /**
@@ -318,7 +334,18 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        return this.image.hashCode();
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 89 * hash + Objects.hashCode(this.image);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.w) ^ 
+                                 (Double.doubleToLongBits(this.w) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.h) ^ 
+                                 (Double.doubleToLongBits(this.h) >>> 32));
+        hash = 89 * hash + (this.includeInDataBounds ? 1 : 0);
+        return hash;
     }
 
     /**

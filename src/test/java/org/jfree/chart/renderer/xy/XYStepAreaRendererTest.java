@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYStepAreaRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Matthias Rose;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -49,6 +44,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYStepAreaRenderer} class.
@@ -65,34 +62,34 @@ public class XYStepAreaRendererTest {
         assertEquals(r1, r2);
 
         r1.setOutline(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setOutline(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setShapesVisible(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapesVisible(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setShapesFilled(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapesFilled(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setPlotArea(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPlotArea(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setRangeBase(-1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRangeBase(-1.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setStepPoint(0.33);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setStepPoint(0.33);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -103,7 +100,7 @@ public class XYStepAreaRendererTest {
     public void testHashcode() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = new XYStepAreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -116,9 +113,9 @@ public class XYStepAreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = (XYStepAreaRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -136,8 +133,7 @@ public class XYStepAreaRendererTest {
     @Test
     public void testSerialization() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
-        XYStepAreaRenderer r2 = (XYStepAreaRenderer) 
-                TestUtils.serialised(r1);
+        XYStepAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

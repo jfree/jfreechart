@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * --------------------
  * GridArrangement.java
  * --------------------
- * (C) Copyright 2005-2021, by David Gilbert.
+ * (C) Copyright 2005-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (define hashCode);
  *
  */
 
@@ -441,6 +441,14 @@ public class GridArrangement implements Arrangement, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.rows;
+        hash = 29 * hash + this.columns;
+        return hash;
     }
 
 }

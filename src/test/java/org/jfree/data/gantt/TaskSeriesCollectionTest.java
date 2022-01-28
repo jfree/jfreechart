@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,48 @@
  * -----------------------------
  * TaskSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
-
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
+import org.jfree.data.general.SeriesChangeEvent;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TaskSeriesCollection} class.
  */
 public class TaskSeriesCollectionTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TaskSeriesCollection.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Task.class,
+                                  new Task("T1", new Date(1), new Date(2)),
+                                  new Task("T2", new Date(3), new Date(4)))
+                .withRedefinedSuperclass()
+                .verify();
+    }
 
     /**
      * Creates a sample collection for testing purposes.
@@ -208,9 +227,9 @@ public class TaskSeriesCollectionTest {
 
         assertEquals(1L, c.getValue(0, 0));
         assertEquals(3L, c.getValue(0, 1));
-        assertEquals(null, c.getValue(0, 2));
-        assertEquals(null, c.getValue(1, 0));
-        assertEquals(null, c.getValue(1, 1));
+        assertNull(c.getValue(0, 2));
+        assertNull(c.getValue(1, 0));
+        assertNull(c.getValue(1, 1));
         assertEquals(5L, c.getValue(1, 2));
     }
 
@@ -226,16 +245,16 @@ public class TaskSeriesCollectionTest {
 
         assertEquals(1L, c.getStartValue(0, 0));
         assertEquals(3L, c.getStartValue(0, 1));
-        assertEquals(null, c.getStartValue(0, 2));
-        assertEquals(null, c.getStartValue(1, 0));
-        assertEquals(null, c.getStartValue(1, 1));
+        assertNull(c.getStartValue(0, 2));
+        assertNull(c.getStartValue(1, 0));
+        assertNull(c.getStartValue(1, 1));
         assertEquals(5L, c.getStartValue(1, 2));
 
         // test collection 3, which doesn't define all tasks in all series
         TaskSeriesCollection c3 = createCollection3();
         assertEquals(100L, c3.getStartValue(0, 0));
         assertEquals(220L, c3.getStartValue(0, 1));
-        assertTrue(c3.getStartValue(1, 0) == null);
+        assertNull(c3.getStartValue(1, 0));
         assertEquals(2220L, c3.getStartValue(1, 1));
     }
 
@@ -263,7 +282,7 @@ public class TaskSeriesCollectionTest {
         assertEquals(11L, c3.getStartValue(0, 0, 0));
         assertEquals(22L, c3.getStartValue(0, 1, 0));
         assertEquals(33L, c3.getStartValue(0, 1, 1));
-        assertTrue(c3.getStartValue(1, 0, 0) == null);
+        assertNull(c3.getStartValue(1, 0, 0));
         assertEquals(44L, c3.getStartValue(1, 1, 0));
         assertEquals(55L, c3.getStartValue(1, 1, 1));
         assertEquals(66L, c3.getStartValue(1, 1, 2));
@@ -279,7 +298,7 @@ public class TaskSeriesCollectionTest {
         s.add(new Task("Task with null duration", null));
         c.add(s);
         Number millis = c.getStartValue("Series 1", "Task with null duration");
-        assertTrue(millis == null);
+        assertNull(millis);
     }
 
     /**
@@ -294,16 +313,16 @@ public class TaskSeriesCollectionTest {
 
         assertEquals(2L, c.getEndValue(0, 0));
         assertEquals(4L, c.getEndValue(0, 1));
-        assertEquals(null, c.getEndValue(0, 2));
-        assertEquals(null, c.getEndValue(1, 0));
-        assertEquals(null, c.getEndValue(1, 1));
+        assertNull(c.getEndValue(0, 2));
+        assertNull(c.getEndValue(1, 0));
+        assertNull(c.getEndValue(1, 1));
         assertEquals(6L, c.getEndValue(1, 2));
 
         // test collection 3, which doesn't define all tasks in all series
         TaskSeriesCollection c3 = createCollection3();
         assertEquals(200L, c3.getEndValue(0, 0));
         assertEquals(350L, c3.getEndValue(0, 1));
-        assertTrue(c3.getEndValue(1, 0) == null);
+        assertNull(c3.getEndValue(1, 0));
         assertEquals(3350L, c3.getEndValue(1, 1));
     }
 
@@ -331,7 +350,7 @@ public class TaskSeriesCollectionTest {
         assertEquals(111L, c3.getEndValue(0, 0, 0));
         assertEquals(222L, c3.getEndValue(0, 1, 0));
         assertEquals(333L, c3.getEndValue(0, 1, 1));
-        assertTrue(c3.getEndValue(1, 0, 0) == null);
+        assertNull(c3.getEndValue(1, 0, 0));
         assertEquals(444L, c3.getEndValue(1, 1, 0));
         assertEquals(555L, c3.getEndValue(1, 1, 1));
         assertEquals(666L, c3.getEndValue(1, 1, 2));
@@ -347,7 +366,7 @@ public class TaskSeriesCollectionTest {
         s.add(new Task("Task with null duration", null));
         c.add(s);
         Number millis = c.getEndValue("Series 1", "Task with null duration");
-        assertTrue(millis == null);
+        assertNull(millis);
     }
 
     /**
@@ -362,16 +381,16 @@ public class TaskSeriesCollectionTest {
 
         assertEquals(0.10, c.getPercentComplete(0, 0));
         assertEquals(0.20, c.getPercentComplete(0, 1));
-        assertEquals(null, c.getPercentComplete(0, 2));
-        assertEquals(null, c.getPercentComplete(1, 0));
-        assertEquals(null, c.getPercentComplete(1, 1));
+        assertNull(c.getPercentComplete(0, 2));
+        assertNull(c.getPercentComplete(1, 0));
+        assertNull(c.getPercentComplete(1, 1));
         assertEquals(0.30, c.getPercentComplete(1, 2));
 
         // test collection 3, which doesn't define all tasks in all series
         TaskSeriesCollection c3 = createCollection3();
         assertEquals(0.1, c3.getPercentComplete(0, 0));
         assertEquals(0.2, c3.getPercentComplete(0, 1));
-        assertTrue(c3.getPercentComplete(1, 0) == null);
+        assertNull(c3.getPercentComplete(1, 0));
         assertEquals(0.3, c3.getPercentComplete(1, 1));
 
         assertEquals(0.111, c3.getPercentComplete(0, 0, 0));
@@ -441,8 +460,8 @@ public class TaskSeriesCollectionTest {
         c2.add(s1b);
         c2.add(s2b);
 
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
     }
 
@@ -455,24 +474,32 @@ public class TaskSeriesCollectionTest {
         TaskSeries s1 = new TaskSeries("S1");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
+
         TaskSeries s2 = new TaskSeries("S2");
         s2.add(new Task("T1", new Date(33), new Date(44)));
         s2.add(new Task("T2", new Date(55), new Date(66)));
+
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
 
         TaskSeriesCollection c2 = (TaskSeriesCollection) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // basic check for independence
         s1.add(new Task("T3", new Date(21), new Date(33)));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
+
         TaskSeries series = c2.getSeries("S1");
         series.add(new Task("T3", new Date(21), new Date(33)));
-        assertTrue(c1.equals(c2));
+
+        // equals checks the keys - make sure they get updated
+        c1.seriesChanged(new SeriesChangeEvent(this));
+        c2.seriesChanged(new SeriesChangeEvent(this));
+
+        assertEquals(c1, c2);
 
     }
 
@@ -490,8 +517,7 @@ public class TaskSeriesCollectionTest {
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
-        TaskSeriesCollection c2 = (TaskSeriesCollection) 
-                TestUtils.serialised(c1);
+        TaskSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -549,21 +575,21 @@ public class TaskSeriesCollectionTest {
         // column is too high...
         try {
             /* Number start = */ tsc.getStartValue(0, 3);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
         }
         try {
             /* Number end = */ tsc.getEndValue(0, 3);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
         }
         try {
             /* int count = */ tsc.getSubIntervalCount(0, 3);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
@@ -598,7 +624,7 @@ public class TaskSeriesCollectionTest {
 
         assertEquals(c.getSeries(0), s1);
         assertEquals(c.getSeries("S1"), s1);
-        assertEquals(c.getSeries("XX"), null);
+        assertNull(c.getSeries("XX"));
 
         c.add(s2);
         assertEquals(c.getSeries(1), s2);

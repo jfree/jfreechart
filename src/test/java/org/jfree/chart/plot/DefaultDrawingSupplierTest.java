@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * DefaultDrawingSupplierTest.java
  * -------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -49,6 +45,8 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultDrawingSupplier} class.
@@ -62,8 +60,8 @@ public class DefaultDrawingSupplierTest {
     public void testEquals() {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
         DefaultDrawingSupplier r2 = new DefaultDrawingSupplier();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // set up some objects...
         Paint[] ps1A = new Paint[] {Color.RED, Color.BLUE};
@@ -103,63 +101,63 @@ public class DefaultDrawingSupplierTest {
 
         r1 = new DefaultDrawingSupplier(ps1A, ops1A, ss1A, oss1A, shapes1A);
         r2 = new DefaultDrawingSupplier(ps1B, ops1B, ss1B, oss1B, shapes1B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // paint sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops1A, ss1A, oss1A, shapes1A);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DefaultDrawingSupplier(ps2B, ops1B, ss1B, oss1B, shapes1B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         // outline paint sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops2A, ss1A, oss1A, shapes1A);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DefaultDrawingSupplier(ps2B, ops2B, ss1B, oss1B, shapes1B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         // stroke sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops2A, ss2A, oss1A, shapes1A);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DefaultDrawingSupplier(ps2B, ops2B, ss2B, oss1B, shapes1B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         // outline stroke sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops2A, ss2A, oss2A, shapes1A);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DefaultDrawingSupplier(ps2B, ops2B, ss2B, oss2B, shapes1B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         // shape sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops2A, ss2A, oss2A, shapes2A);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DefaultDrawingSupplier(ps2B, ops2B, ss2B, oss2B, shapes2B);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // paint index
         r1.getNextPaint();
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.getNextPaint();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // outline paint index
         r1.getNextOutlinePaint();
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.getNextOutlinePaint();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // stroke index
         r1.getNextStroke();
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.getNextStroke();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // outline stroke index
         r1.getNextOutlineStroke();
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.getNextOutlineStroke();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shape index
         r1.getNextShape();
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.getNextShape();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -169,9 +167,9 @@ public class DefaultDrawingSupplierTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
         DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -180,8 +178,7 @@ public class DefaultDrawingSupplierTest {
     @Test
     public void testSerialization() {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) 
-                TestUtils.serialised(r1);
+        DefaultDrawingSupplier r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -----------------
  * PaintMapTest.java
  * -----------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -41,9 +41,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link PaintMap} class.
@@ -56,11 +54,11 @@ public class PaintMapTest  {
     @Test
     public void testGetPaint() {
         PaintMap m1 = new PaintMap();
-        assertEquals(null, m1.getPaint("A"));
+        assertNull(m1.getPaint("A"));
         m1.put("A", Color.RED);
         assertEquals(Color.RED, m1.getPaint("A"));
         m1.put("A", null);
-        assertEquals(null, m1.getPaint("A"));
+        assertNull(m1.getPaint("A"));
 
         // a null key should throw an IllegalArgumentException
         try {
@@ -101,23 +99,23 @@ public class PaintMapTest  {
         PaintMap m2 = new PaintMap();
         assertEquals(m1, m1);
         assertEquals(m1, m2);
-        assertFalse(m1.equals(null));
-        assertFalse(m1.equals("ABC"));
+        assertNotEquals(null, m1);
+        assertNotEquals("ABC", m1);
 
         m1.put("K1", Color.RED);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K1", Color.RED);
         assertEquals(m1, m2);
 
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertEquals(m1, m2);
 
         m1.put("K2", null);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", null);
         assertEquals(m1, m2);
     }
@@ -146,7 +144,7 @@ public class PaintMapTest  {
     @Test
     public void testSerialization1() {
         PaintMap m1 = new PaintMap();
-        PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
+        PaintMap m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -159,7 +157,7 @@ public class PaintMapTest  {
         m1.put("K1", Color.RED);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
-        PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
+        PaintMap m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

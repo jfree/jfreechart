@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,14 @@
  * ----------
  * Range.java
  * ----------
- * (C) Copyright 2002-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2002-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Chuanhao Chiu;
  *                   Bill Kelemen;
  *                   Nicolas Brodu;
  *                   Sergei Ivanov;
+ *                   Tracy Hiltbrand (equals complies with EqualsVerifier);
  * 
  */
 
@@ -407,10 +408,12 @@ public strictfp class Range implements Serializable {
             return false;
         }
         Range range = (Range) obj;
-        if (!(this.lower == range.lower)) {
+        if (Double.doubleToLongBits(this.lower) !=
+            Double.doubleToLongBits(range.lower)) {
             return false;
         }
-        if (!(this.upper == range.upper)) {
+        if (Double.doubleToLongBits(this.upper) !=
+            Double.doubleToLongBits(range.upper)) {
             return false;
         }
         return true;

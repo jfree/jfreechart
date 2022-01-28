@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * HistogramDatasetTest.java
  * -------------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,16 +36,13 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HistogramDataset} class.
@@ -80,13 +77,13 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         HistogramDataset d2 = new HistogramDataset();
         d2.addSeries("Series 1", values, 5);
 
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -98,15 +95,15 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         HistogramDataset d1 = new HistogramDataset();
         d1.addSeries("Series 1", values, 5);
         HistogramDataset d2 = (HistogramDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // simple check for independence
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -117,14 +114,14 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
         d1.addSeries("Series 1", values, 5);
-        HistogramDataset d2 = (HistogramDataset) TestUtils.serialised(d1);
+        HistogramDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // simple check for independence
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * MultiplePiePlotTest.java
  * ------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -55,6 +50,8 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link MultiplePiePlot} class.
@@ -97,42 +94,42 @@ public class MultiplePiePlotTest implements PlotChangeListener {
     public void testEquals() {
         MultiplePiePlot p1 = new MultiplePiePlot();
         MultiplePiePlot p2 = new MultiplePiePlot();
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1.setDataExtractOrder(TableOrder.BY_ROW);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDataExtractOrder(TableOrder.BY_ROW);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setLimit(1.23);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLimit(1.23);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setAggregatedItemsKey("Aggregated Items");
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setAggregatedItemsKey("Aggregated Items");
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
                 true));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
                 true));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setLegendItemShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setLegendItemShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -144,13 +141,13 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(rect);
         MultiplePiePlot p2 = (MultiplePiePlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
 
         // check independence
         rect.setRect(2.0, 3.0, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
     }
 
     /**
@@ -161,7 +158,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
         p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED));
-        MultiplePiePlot p2 = (MultiplePiePlot) TestUtils.serialised(p1);
+        MultiplePiePlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

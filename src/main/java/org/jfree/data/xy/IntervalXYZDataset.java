@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * IntervalXYZDataset.java
  * -----------------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The starting X value for the specified series and item.
      */
-    public Number getStartXValue(int series, int item);
+    Number getStartXValue(int series, int item);
 
     /**
      * Returns the ending X value for the specified series and item.
@@ -60,7 +60,7 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The ending X value for the specified series and item.
      */
-    public Number getEndXValue(int series, int item);
+    Number getEndXValue(int series, int item);
 
     /**
      * Returns the starting Y value for the specified series and item.
@@ -70,7 +70,7 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The starting Y value for the specified series and item.
      */
-    public Number getStartYValue(int series, int item);
+    Number getStartYValue(int series, int item);
 
     /**
      * Returns the ending Y value for the specified series and item.
@@ -80,7 +80,7 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The ending Y value for the specified series and item.
      */
-    public Number getEndYValue(int series, int item);
+    Number getEndYValue(int series, int item);
 
     /**
      * Returns the starting Z value for the specified series and item.
@@ -90,7 +90,7 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The starting Z value for the specified series and item.
      */
-    public Number getStartZValue(int series, int item);
+    Number getStartZValue(int series, int item);
 
     /**
      * Returns the ending Z value for the specified series and item.
@@ -100,6 +100,6 @@ public interface IntervalXYZDataset extends XYZDataset {
      *
      * @return The ending Z value for the specified series and item.
      */
-    public Number getEndZValue(int series, int item);
+    Number getEndZValue(int series, int item);
 
 }

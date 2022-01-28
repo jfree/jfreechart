@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -43,7 +43,7 @@ public interface TextMeasurer {
      *
      * @return The width of the string in Java2D units.
      */
-    public float getStringWidth(String text, int start, int end);
+    float getStringWidth(String text, int start, int end);
     
 }
 

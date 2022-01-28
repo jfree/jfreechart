@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * SimpleDialRangeTest.java
  * ------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,13 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardDialRange} class.
@@ -58,33 +56,33 @@ public class StandardDialRangeTest {
     public void testEquals() {
         StandardDialRange r1 = new StandardDialRange();
         StandardDialRange r2 = new StandardDialRange();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // lowerBound
         r1.setLowerBound(1.1);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLowerBound(1.1);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // upperBound
         r1.setUpperBound(11.1);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUpperBound(11.1);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // paint
         r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // check an inherited attribute
         r1.setVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -94,7 +92,7 @@ public class StandardDialRangeTest {
     public void testHashCode() {
         StandardDialRange r1 = new StandardDialRange();
         StandardDialRange r2 = new StandardDialRange();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -107,9 +105,9 @@ public class StandardDialRangeTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardDialRange r1 = new StandardDialRange();
         StandardDialRange r2 = (StandardDialRange) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
@@ -124,7 +122,7 @@ public class StandardDialRangeTest {
     @Test
     public void testSerialization() {
         StandardDialRange r1 = new StandardDialRange();
-        StandardDialRange r2 = (StandardDialRange) TestUtils.serialised(r1);
+        StandardDialRange r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

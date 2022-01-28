@@ -1,7 +1,7 @@
 /* 
  * JFreeChart
  * ----------
- * Copyright (C) 2014-2021 by David Gilbert.
+ * Copyright (C) 2014-2021, by David Gilbert.
  */
 
 "use strict";

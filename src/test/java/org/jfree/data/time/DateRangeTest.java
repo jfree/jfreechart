@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * DateRangeTest.java
  * ------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link DateRange} class.
@@ -57,18 +55,18 @@ public class DateRangeTest {
     public void testEquals() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
         DateRange r2 = new DateRange(new Date(1000L), new Date(2000L));
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1 = new DateRange(new Date(1111L), new Date(2000L));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DateRange(new Date(1111L), new Date(2000L));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new DateRange(new Date(1111L), new Date(2222L));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new DateRange(new Date(1111L), new Date(2222L));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -77,7 +75,7 @@ public class DateRangeTest {
     @Test
     public void testSerialization() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
-        DateRange r2 = (DateRange) TestUtils.serialised(r1);
+        DateRange r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

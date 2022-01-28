@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,53 @@
  * -----------------------
  * CompositeTitleTest.java
  * -----------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CompositeTitle} class.
  */
 public class CompositeTitleTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CompositeTitle.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .verify();
+    }
 
     /**
      * Some checks for the constructor.
@@ -78,34 +96,36 @@ public class CompositeTitleTest {
 
         // margin
         t1.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // frame
         t1.setFrame(new BlockBorder(Color.RED));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setFrame(new BlockBorder(Color.RED));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // padding
         t1.setPadding(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setPadding(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         // contained titles
         t1.getContainer().add(new TextTitle("T1"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.getContainer().add(new TextTitle("T1"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(),
+                                     t2.getBackgroundPaint()));
         t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(),
+                                    t2.getBackgroundPaint()));
 
     }
 
@@ -118,7 +138,7 @@ public class CompositeTitleTest {
         t1.getContainer().add(new TextTitle("T1"));
         CompositeTitle t2 = new CompositeTitle(new BlockContainer());
         t2.getContainer().add(new TextTitle("T1"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -140,9 +160,9 @@ public class CompositeTitleTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -154,7 +174,7 @@ public class CompositeTitleTest {
         t1.getContainer().add(new TextTitle("T1"));
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        CompositeTitle t2 = (CompositeTitle) TestUtils.serialised(t1);
+        CompositeTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

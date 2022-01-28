@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * GrayPaintScaleTest.java
  * -----------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.chart.renderer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link GrayPaintScale} class.
@@ -70,16 +68,16 @@ public class GrayPaintScaleTest {
     public void testGetPaint() {
         GrayPaintScale gps = new GrayPaintScale();
         Color c = (Color) gps.getPaint(0.0);
-        assertTrue(c.equals(Color.BLACK));
+        assertEquals(c, Color.BLACK);
         c = (Color) gps.getPaint(1.0);
-        assertTrue(c.equals(Color.WHITE));
+        assertEquals(c, Color.WHITE);
 
         // check lookup values that are outside the bounds - see bug report
         // 1767315
         c = (Color) gps.getPaint(-0.5);
-        assertTrue(c.equals(Color.BLACK));
+        assertEquals(c, Color.BLACK);
         c = (Color) gps.getPaint(1.5);
-        assertTrue(c.equals(Color.WHITE));
+        assertEquals(c, Color.WHITE);
     }
 
     /**
@@ -89,26 +87,26 @@ public class GrayPaintScaleTest {
     public void testEquals() {
         GrayPaintScale g1 = new GrayPaintScale();
         GrayPaintScale g2 = new GrayPaintScale();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new GrayPaintScale(0.0, 1.0);
         g2 = new GrayPaintScale(0.0, 1.0);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
         g1 = new GrayPaintScale(0.1, 1.0);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new GrayPaintScale(0.1, 1.0);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new GrayPaintScale(0.1, 0.9);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new GrayPaintScale(0.1, 0.9);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new GrayPaintScale(0.1, 0.9, 128);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new GrayPaintScale(0.1, 0.9, 128);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -118,9 +116,9 @@ public class GrayPaintScaleTest {
     public void testCloning() throws CloneNotSupportedException {
         GrayPaintScale g1 = new GrayPaintScale();
         GrayPaintScale g2 = (GrayPaintScale) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -129,7 +127,7 @@ public class GrayPaintScaleTest {
     @Test
     public void testSerialization() {
         GrayPaintScale g1 = new GrayPaintScale();
-        GrayPaintScale g2 = (GrayPaintScale) TestUtils.serialised(g1);
+        GrayPaintScale g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

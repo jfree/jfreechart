@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,18 @@
  * ----------------------
  * ItemLabelPosition.java
  * ----------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Yuri Blankenstein;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.chart.labels;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.Args;
 
@@ -218,22 +220,32 @@ public class ItemLabelPosition implements Serializable {
             return false;
         }
         ItemLabelPosition that = (ItemLabelPosition) obj;
-        if (!this.itemLabelAnchor.equals(that.itemLabelAnchor)) {
+        if (!Objects.equals(this.itemLabelAnchor, that.itemLabelAnchor)) {
             return false;
         }
-        if (!this.textAnchor.equals(that.textAnchor)) {
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
             return false;
         }
-        if (!this.rotationAnchor.equals(that.rotationAnchor)) {
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-        if (this.angle != that.angle) {
+        if (Double.doubleToLongBits(this.angle) != Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (!this.itemLabelClip.equals(that.itemLabelClip)) {
+        if (!Objects.equals(this.itemLabelClip, that.itemLabelClip)) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.itemLabelAnchor);
+        hash = 97 * hash + Objects.hashCode(this.textAnchor);
+        hash = 97 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.angle) ^ (Double.doubleToLongBits(this.angle) >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.itemLabelClip);
+		return hash;
+    }
 }

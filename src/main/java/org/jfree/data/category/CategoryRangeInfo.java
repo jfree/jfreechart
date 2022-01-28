@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * CategoryRangeInfo.java
  * ----------------------
- * (C) Copyright 2009-2021, by David Gilbert.
+ * (C) Copyright 2009-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -55,7 +55,7 @@ public interface CategoryRangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(List visibleSeriesKeys,
-            boolean includeInterval);
+    Range getRangeBounds(List visibleSeriesKeys,
+                         boolean includeInterval);
 
 }

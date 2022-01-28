@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * VectorTests.java
  * ----------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Vector} class.
@@ -56,18 +54,18 @@ public class VectorTest {
         // default instances
         Vector v1 = new Vector(1.0, 2.0);
         Vector v2 = new Vector(1.0, 2.0);
-        assertTrue(v1.equals(v2));
-        assertTrue(v2.equals(v1));
+        assertEquals(v1, v2);
+        assertEquals(v2, v1);
 
         v1 = new Vector(1.1, 2.0);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
         v2 = new Vector(1.1, 2.0);
-        assertTrue(v1.equals(v2));
+        assertEquals(v1, v2);
 
         v1 = new Vector(1.1, 2.2);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
         v2 = new Vector(1.1, 2.2);
-        assertTrue(v1.equals(v2));
+        assertEquals(v1, v2);
     }
 
     /**
@@ -77,7 +75,7 @@ public class VectorTest {
     public void testHashcode() {
         Vector v1 = new Vector(1.0, 2.0);
         Vector v2 = new Vector(1.0, 2.0);
-        assertTrue(v1.equals(v2));
+        assertEquals(v1, v2);
         int h1 = v1.hashCode();
         int h2 = v2.hashCode();
         assertEquals(h1, h2);
@@ -98,7 +96,7 @@ public class VectorTest {
     @Test
     public void testSerialization() {
         Vector v1 = new Vector(1.0, 2.0);
-        Vector v2 = (Vector) TestUtils.serialised(v1);
+        Vector v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

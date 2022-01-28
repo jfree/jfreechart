@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimePeriod.java
  * ---------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface TimePeriod extends Comparable {
      *
      * @return The start date/time (never {@code null}).
      */
-    public Date getStart();
+    Date getStart();
 
     /**
      * Returns the end date/time.  This will always be on or after the
@@ -58,6 +58,6 @@ public interface TimePeriod extends Comparable {
      *
      * @return The end date/time (never {@code null}).
      */
-    public Date getEnd();
+    Date getEnd();
 
 }

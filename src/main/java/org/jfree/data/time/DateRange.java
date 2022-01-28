@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DateRange.java
  * --------------
- * (C) Copyright 2002-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2002-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Bill Kelemen;
@@ -52,10 +52,10 @@ public class DateRange extends Range implements Serializable {
     private static final long serialVersionUID = -4705682568375418157L;
 
     /** The lower bound for the range. */
-    private long lowerDate;
+    private final long lowerDate;
 
     /** The upper bound for the range. */
-    private long upperDate;
+    private final long upperDate;
 
     /**
      * Default constructor.

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * FlowPlotTest.java
  * -----------------
- * (C) Copyright 2021, by David Gilbert.
+ * (C) Copyright 2021-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -46,11 +46,9 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.labels.StandardFlowLabelGenerator;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.data.flow.NodeKey;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link FlowPlot} class.
@@ -166,8 +164,8 @@ public class FlowPlotTest implements PlotChangeListener {
     public void testEquals() {
         FlowPlot p1 = new FlowPlot(null);
         FlowPlot p2 = new FlowPlot(null);
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         // test fields one by one - the independence checker does this
         testIndependence(p1, p2);
@@ -183,9 +181,9 @@ public class FlowPlotTest implements PlotChangeListener {
         FlowPlot p1 = new FlowPlot(null);
         p1.setNodeFillColor(new NodeKey<>(0, "A"), Color.BLUE);
         FlowPlot p2 = (FlowPlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
         
         testIndependence(p1, p2);
     }
@@ -199,71 +197,71 @@ public class FlowPlotTest implements PlotChangeListener {
     private void testIndependence(FlowPlot p1, FlowPlot p2) {
         // test fields one by one 
         p1.setFlowMargin(0.01);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setFlowMargin(0.01);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setDefaultNodeColor(Color.GREEN);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultNodeColor(Color.GREEN);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setDefaultNodeLabelFont(new Font(Font.DIALOG, Font.PLAIN, 22));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultNodeLabelFont(new Font(Font.DIALOG, Font.PLAIN, 22));
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setDefaultNodeLabelPaint(Color.WHITE);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDefaultNodeLabelPaint(Color.WHITE);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setNodeMargin(0.05);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeMargin(0.05);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setNodeLabelOffsetX(99.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeLabelOffsetX(99.0);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setNodeLabelOffsetY(88.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeLabelOffsetY(88.0);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
 
         p1.setNodeWidth(9.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeWidth(9.0);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setNodeLabelAlignment(VerticalAlignment.BOTTOM);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeLabelAlignment(VerticalAlignment.BOTTOM);
-        assertTrue(p1.equals(p1));
+        assertEquals(p1, p1);
         
         p1.setToolTipGenerator(null);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setToolTipGenerator(null);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         
         p1.setToolTipGenerator(new StandardFlowLabelGenerator("%4$,.0f"));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setToolTipGenerator(new StandardFlowLabelGenerator("%4$,.0f"));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         
         p1.setNodeFillColor(new NodeKey<>(0, "A"), Color.RED);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setNodeFillColor(new NodeKey<>(0, "A"), Color.RED);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         
         List<Color> colors1 = Arrays.asList(Color.RED, Color.GREEN, Color.BLUE);
         p1.setNodeColorSwatch(colors1);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         List<Color> colors2 = Arrays.asList(Color.RED, Color.GREEN, Color.BLUE);
         p2.setNodeColorSwatch(colors2);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**

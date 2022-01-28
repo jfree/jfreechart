@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,24 @@
  * ----------------------
  * LegendGraphicTest.java
  * ----------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
@@ -54,10 +53,28 @@ import org.jfree.chart.ui.StandardGradientPaintTransformer;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link LegendGraphic} class.
  */
 public class LegendGraphicTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LegendGraphic.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
 
     /**
      * Check that the equals() method distinguishes all fields.
@@ -73,89 +90,89 @@ public class LegendGraphicTest {
 
         // shapeVisible
         g1.setShapeVisible(!g1.isShapeVisible());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShapeVisible(!g2.isShapeVisible());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // shape
         g1.setShape(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShape(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // shapeFilled
         g1.setShapeFilled(!g1.isShapeFilled());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShapeFilled(!g2.isShapeFilled());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // fillPaint
         g1.setFillPaint(Color.GREEN);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setFillPaint(Color.GREEN);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // shapeOutlineVisible
         g1.setShapeOutlineVisible(!g1.isShapeOutlineVisible());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShapeOutlineVisible(!g2.isShapeOutlineVisible());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // outlinePaint
         g1.setOutlinePaint(Color.GREEN);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setOutlinePaint(Color.GREEN);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // outlineStroke
         g1.setOutlineStroke(new BasicStroke(1.23f));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setOutlineStroke(new BasicStroke(1.23f));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // shapeAnchor
         g1.setShapeAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShapeAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // shapeLocation
         g1.setShapeLocation(RectangleAnchor.BOTTOM_RIGHT);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setShapeLocation(RectangleAnchor.BOTTOM_RIGHT);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // lineVisible
         g1.setLineVisible(!g1.isLineVisible());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setLineVisible(!g2.isLineVisible());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // line
         g1.setLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // linePaint
         g1.setLinePaint(Color.GREEN);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setLinePaint(Color.GREEN);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // lineStroke
         g1.setLineStroke(new BasicStroke(1.23f));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setLineStroke(new BasicStroke(1.23f));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // fillPaintTransformer
         g1.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -168,7 +185,7 @@ public class LegendGraphicTest {
                 3.0, 4.0), Color.BLACK);
         LegendGraphic g2 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), Color.BLACK);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
         int h1 = g1.hashCode();
         int h2 = g2.hashCode();
         assertEquals(h1, h2);
@@ -182,17 +199,18 @@ public class LegendGraphicTest {
         Rectangle r = new Rectangle(1, 2, 3, 4);
         LegendGraphic g1 = new LegendGraphic(r, Color.BLACK);
         LegendGraphic g2 = (LegendGraphic) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         r.setBounds(4, 3, 2, 1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**
      * A test for cloning - checks that the line shape is cloned correctly.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -201,13 +219,13 @@ public class LegendGraphicTest {
         Line2D l = new Line2D.Double(1.0, 2.0, 3.0, 4.0);
         g1.setLine(l);
         LegendGraphic g2 = (LegendGraphic) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         l.setLine(4.0, 3.0, 2.0, 1.0);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
 
     }
 
@@ -220,8 +238,8 @@ public class LegendGraphicTest {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), Color.BLACK);
         g1.setOutlineStroke(s);
-        LegendGraphic g2 = (LegendGraphic) TestUtils.serialised(g1);
-        assertTrue(g1.equals(g2));
+        LegendGraphic g2 = TestUtils.serialised(g1);
+        assertEquals(g1, g2);
     }
 
 }

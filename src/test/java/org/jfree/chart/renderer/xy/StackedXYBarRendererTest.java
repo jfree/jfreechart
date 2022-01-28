@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * StackedXYBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -54,6 +50,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StackedXYBarRenderer} class.
  */
@@ -66,13 +64,13 @@ public class StackedXYBarRendererTest {
     public void testEquals() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setRenderAsPercentages(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRenderAsPercentages(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -82,7 +80,7 @@ public class StackedXYBarRendererTest {
     public void testHashcode() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -90,7 +88,7 @@ public class StackedXYBarRendererTest {
         r1.setRenderAsPercentages(true);
         h1 = r1.hashCode();
         h2 = r2.hashCode();
-        assertFalse(h1 == h2);
+        assertNotEquals(h1, h2);
     }
 
     /**
@@ -100,9 +98,9 @@ public class StackedXYBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = (StackedXYBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -122,8 +120,7 @@ public class StackedXYBarRendererTest {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.YELLOW));
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) 
-                TestUtils.serialised(r1);
+        StackedXYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

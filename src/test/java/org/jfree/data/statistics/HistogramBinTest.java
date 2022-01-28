@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * HistogramBinTest.java
  * ---------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,11 +36,10 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HistogramBin} class.
@@ -68,9 +67,9 @@ public class HistogramBinTest {
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
         HistogramBin b2 = (HistogramBin) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
     }
 
     /**
@@ -81,7 +80,7 @@ public class HistogramBinTest {
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
-        HistogramBin b2 = (HistogramBin) TestUtils.serialised(b1);
+        HistogramBin b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

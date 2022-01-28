@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * Arrangement.java
  * ----------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -54,7 +54,7 @@ public interface Arrangement {
      * @param block  the block.
      * @param key  the key ({@code null} permitted).
      */
-    public void add(Block block, Object key);
+    void add(Block block, Object key);
 
     /**
      * Arranges the blocks within the specified container, subject to the given
@@ -66,13 +66,13 @@ public interface Arrangement {
      *
      * @return The container size after the arrangement.
      */
-    public Size2D arrange(BlockContainer container,
-                          Graphics2D g2,
-                          RectangleConstraint constraint);
+    Size2D arrange(BlockContainer container,
+                   Graphics2D g2,
+                   RectangleConstraint constraint);
 
     /**
      * Clears any cached layout information retained by the arrangement.
      */
-    public void clear();
+    void clear();
 
 }

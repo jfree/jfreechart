@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * TickUnitSource.java
  * -------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface TickUnitSource {
      *
      * @return A tick unit that is larger than the supplied unit.
      */
-    public TickUnit getLargerTickUnit(TickUnit unit);
+    TickUnit getLargerTickUnit(TickUnit unit);
 
     /**
      * Returns the tick unit in the collection that is greater than or equal
@@ -60,7 +60,7 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection.
      */
-    public TickUnit getCeilingTickUnit(TickUnit unit);
+    TickUnit getCeilingTickUnit(TickUnit unit);
 
     /**
      * Returns the smallest tick unit available in the source that is greater 
@@ -71,6 +71,6 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection (never {@code null}).
      */
-    public TickUnit getCeilingTickUnit(double size);
+    TickUnit getCeilingTickUnit(double size);
 
 }

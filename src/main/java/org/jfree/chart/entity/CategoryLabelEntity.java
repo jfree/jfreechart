@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ------------------------
  * CategoryLabelEntity.java
  * ------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,12 +48,12 @@ import org.jfree.chart.axis.CategoryAxis;
 public class CategoryLabelEntity extends TickLabelEntity {
 
     /** The category key. */
-    private Comparable key;
+    private final Comparable key;
 
     /**
      * Creates a new entity.
      *
-     * @param key  the category key.
+     * @param key  the category key ({@code null} not permitted).
      * @param area  the hotspot.
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
@@ -61,6 +61,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
     public CategoryLabelEntity(Comparable key, Shape area,
             String toolTipText, String urlText) {
         super(area, toolTipText, urlText);
+        Objects.requireNonNull(key);
         this.key = key;
     }
 
@@ -89,10 +90,29 @@ public class CategoryLabelEntity extends TickLabelEntity {
             return false;
         }
         CategoryLabelEntity that = (CategoryLabelEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
         if (!Objects.equals(this.key, that.key)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof CategoryLabelEntity);
     }
 
     /**
@@ -102,7 +122,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
         result = HashUtils.hashCode(result, this.key);
         return result;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,24 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
 package org.jfree.data.general;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
-import java.io.Serializable;
-import java.util.Objects;
+import org.jfree.chart.util.Args;
 
 import javax.swing.event.EventListenerList;
-
-import org.jfree.chart.util.Args;
+import java.beans.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Base class representing a data series.  Subclasses are left to implement the
@@ -70,15 +68,15 @@ public abstract class Series implements Cloneable, Serializable {
     private String description;
 
     /** Storage for registered change listeners. */
-    private EventListenerList listeners;
+    private transient EventListenerList listeners;
 
     /** Object to support property change notification. */
-    private PropertyChangeSupport propertyChangeSupport;
+    private transient PropertyChangeSupport propertyChangeSupport;
 
     /** Object to support property change notification. */
-    private VetoableChangeSupport vetoableChangeSupport;
+    private transient VetoableChangeSupport vetoableChangeSupport;
 
-    /** A flag that controls whether or not changes are notified. */
+    /** A flag that controls whether changes are notified. */
     private boolean notify;
 
     /**
@@ -124,10 +122,16 @@ public abstract class Series implements Cloneable, Serializable {
      * {@code PropertyChangeEvent}.  If the key change is vetoed this 
      * method will throw an IllegalArgumentException.
      *
+     * This implementation is not very robust when cloning or deserialising
+     * series collections, so you should not rely upon it for that purpose.
+     * In future releases, the series key will be made immutable.
+     *
      * @param key  the key ({@code null} not permitted).
      *
      * @see #getKey()
+     * @deprecated In future releases the series key will be immutable.
      */
+    @Deprecated
     public void setKey(Comparable key) {
         Args.nullNotPermitted(key, "key");
         Comparable old = this.key;
@@ -257,13 +261,29 @@ public abstract class Series implements Cloneable, Serializable {
             return false;
         }
         Series that = (Series) obj;
-        if (!getKey().equals(that.getKey())) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
-        if (!Objects.equals(getDescription(), that.getDescription())) {
+        if (!Objects.equals(this.description, that.description)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof Series);
     }
 
     /**
@@ -273,11 +293,10 @@ public abstract class Series implements Cloneable, Serializable {
      */
     @Override
     public int hashCode() {
-        int result;
-        result = this.key.hashCode();
-        result = 29 * result + (this.description != null
-                ? this.description.hashCode() : 0);
-        return result;
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.key);
+        hash = 53 * hash + Objects.hashCode(this.description);
+        return hash;
     }
 
     /**
@@ -393,6 +412,32 @@ public abstract class Series implements Cloneable, Serializable {
             Object newValue) throws PropertyVetoException {
         this.vetoableChangeSupport.fireVetoableChange(property, oldValue,
                 newValue);
+    }
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream ({@code null} not permitted).
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream ({@code null} not permitted).
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.listeners = new EventListenerList();
+        this.propertyChangeSupport = new PropertyChangeSupport(this);
+        this.vetoableChangeSupport = new VetoableChangeSupport(this);
     }
 
 }

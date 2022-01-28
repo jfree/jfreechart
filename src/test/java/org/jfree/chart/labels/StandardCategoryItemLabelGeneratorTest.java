@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,20 @@
  * -------------------------------------------
  * StandardCategoryItemLabelGeneratorTest.java
  * -------------------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -50,10 +48,26 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StandardCategoryItemLabelGenerator} class.
  */
 public class StandardCategoryItemLabelGeneratorTest {
+
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(StandardCategoryItemLabelGenerator.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .verify();
+    }
 
     /**
      * Some checks for the generalLabel() method.
@@ -86,29 +100,29 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2
                 = new StandardCategoryItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardCategoryItemLabelGenerator("{0}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{0}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryItemLabelGenerator("{1}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{1}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryItemLabelGenerator("{2}",
                 new SimpleDateFormat("d-MMM"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryItemLabelGenerator("{2}",
                 new SimpleDateFormat("d-MMM"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -121,12 +135,13 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2
                 = new StandardCategoryItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -134,9 +149,9 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2 
                 = (StandardCategoryItemLabelGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -157,8 +172,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryItemLabelGenerator g2 = (StandardCategoryItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategoryItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
@@ -173,7 +187,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryToolTipGenerator g2
                 = new StandardCategoryToolTipGenerator("{0}",
                 new DecimalFormat("0.00"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
 }

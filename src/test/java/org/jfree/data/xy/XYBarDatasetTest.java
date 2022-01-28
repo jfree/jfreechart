@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYBarDatasetTest.java
  * ---------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link XYBarDataset} class.
@@ -68,8 +66,8 @@ public class XYBarDatasetTest {
 
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
         XYBarDataset bd2 = new XYBarDataset(d2, 5.0);
-        assertTrue(bd1.equals(bd2));
-        assertTrue(bd2.equals(bd1));
+        assertEquals(bd1, bd2);
+        assertEquals(bd2, bd1);
     }
 
     /**
@@ -84,17 +82,17 @@ public class XYBarDatasetTest {
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
         XYBarDataset bd2 = (XYBarDataset) bd1.clone();
-        assertTrue(bd1 != bd2);
-        assertTrue(bd1.getClass() == bd2.getClass());
-        assertTrue(bd1.equals(bd2));
+        assertNotSame(bd1, bd2);
+        assertSame(bd1.getClass(), bd2.getClass());
+        assertEquals(bd1, bd2);
 
         // check independence
         d1 = (DefaultXYDataset) bd1.getUnderlyingDataset();
         d1.addSeries("S2", new double[][] {{1.0}, {2.0}});
-        assertFalse(bd1.equals(bd2));
+        assertNotEquals(bd1, bd2);
         DefaultXYDataset d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
         d2.addSeries("S2", new double[][] {{1.0}, {2.0}});
-        assertTrue(bd1.equals(bd2));
+        assertEquals(bd1, bd2);
     }
 
     /**
@@ -122,7 +120,7 @@ public class XYBarDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) TestUtils.serialised(bd1);
+        XYBarDataset bd2 = TestUtils.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * Pannable.java
  * -------------
  *
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  Ulrich Voigt - patch 2686040;
  * Contributor(s):   David Gilbert;
@@ -52,21 +52,21 @@ public interface Pannable {
      *
      * @return The orientation (never {@code null}).
      */
-    public PlotOrientation getOrientation();
+    PlotOrientation getOrientation();
 
     /**
      * Evaluates if the domain axis can be panned.
      *
      * @return {@code true} if the domain axis is pannable.
      */
-    public boolean isDomainPannable();
+    boolean isDomainPannable();
 
     /**
      * Evaluates if the range axis can be panned.
      *
      * @return {@code true} if the range axis is pannable.
      */
-    public boolean isRangePannable();
+    boolean isRangePannable();
 
     /**
      * Pans the domain axes by the specified percentage.
@@ -75,8 +75,8 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panDomainAxes(double percent, PlotRenderingInfo info,
-            Point2D source);
+    void panDomainAxes(double percent, PlotRenderingInfo info,
+                       Point2D source);
 
     /**
      * Pans the range axes by the specified percentage.
@@ -85,7 +85,7 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panRangeAxes(double percent, PlotRenderingInfo info,
-            Point2D source);
+    void panRangeAxes(double percent, PlotRenderingInfo info,
+                      Point2D source);
 
 }

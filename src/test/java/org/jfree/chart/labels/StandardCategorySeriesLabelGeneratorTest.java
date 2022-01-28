@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,17 @@
  * ---------------------------------------------
  * StandardCategorySeriesLabelGeneratorTest.java
  * ---------------------------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -46,11 +45,25 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StandardCategorySeriesLabelGenerator} class.
  */
 public class StandardCategorySeriesLabelGeneratorTest {
 
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(StandardCategorySeriesLabelGenerator.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
     /**
      * Some checks for the generalLabel() method.
      */
@@ -76,13 +89,13 @@ public class StandardCategorySeriesLabelGeneratorTest {
                 = new StandardCategorySeriesLabelGenerator();
         StandardCategorySeriesLabelGenerator g2
                 = new StandardCategorySeriesLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardCategorySeriesLabelGenerator("{1}");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategorySeriesLabelGenerator("{1}");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -94,12 +107,13 @@ public class StandardCategorySeriesLabelGeneratorTest {
                 = new StandardCategorySeriesLabelGenerator();
         StandardCategorySeriesLabelGenerator g2
                 = new StandardCategorySeriesLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -107,9 +121,9 @@ public class StandardCategorySeriesLabelGeneratorTest {
                 = new StandardCategorySeriesLabelGenerator("{1}");
         StandardCategorySeriesLabelGenerator g2 
                 = (StandardCategorySeriesLabelGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -129,8 +143,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testSerialization() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{2}");
-        StandardCategorySeriesLabelGenerator g2 = (StandardCategorySeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategorySeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

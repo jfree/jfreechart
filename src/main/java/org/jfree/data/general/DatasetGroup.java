@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,17 @@
  * -----------------
  * DatasetGroup.java
  * -----------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.data.general;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 /**
@@ -106,10 +107,17 @@ public class DatasetGroup implements Cloneable, Serializable {
             return false;
         }
         DatasetGroup that = (DatasetGroup) obj;
-        if (!this.id.equals(that.id)) {
+        if (!Objects.equals(this.id, that.id)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
 }

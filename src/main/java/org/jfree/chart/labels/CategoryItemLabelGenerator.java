@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * CategoryItemLabelGenerator.java
  * -------------------------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -57,7 +57,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    public String generateRowLabel(CategoryDataset dataset, int row);
+    String generateRowLabel(CategoryDataset dataset, int row);
 
     /**
      * Generates a label for the specified row.
@@ -67,7 +67,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    public String generateColumnLabel(CategoryDataset dataset, int column);
+    String generateColumnLabel(CategoryDataset dataset, int column);
 
     /**
      * Generates a label for the specified item. The label is typically a
@@ -79,6 +79,6 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateLabel(CategoryDataset dataset, int row, int column);
+    String generateLabel(CategoryDataset dataset, int row, int column);
 
 }

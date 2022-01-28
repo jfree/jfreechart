@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StandardTickUnitSourceTest.java
  * -------------------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,7 +37,6 @@
 package org.jfree.chart.axis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ public class StandardTickUnitSourceTest {
     public void testEquals() {
         StandardTickUnitSource t1 = new StandardTickUnitSource();
         StandardTickUnitSource t2 = new StandardTickUnitSource();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -63,7 +62,7 @@ public class StandardTickUnitSourceTest {
     @Test
     public void testSerialization() {
         StandardTickUnitSource t1 = new StandardTickUnitSource();
-        StandardTickUnitSource t2 = (StandardTickUnitSource) TestUtils.serialised(t1);
+        StandardTickUnitSource t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

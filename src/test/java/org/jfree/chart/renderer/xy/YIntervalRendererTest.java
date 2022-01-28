@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * YIntervalRendererTest.java
  * --------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -57,6 +53,8 @@ import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link YIntervalRenderer} class.
  */
@@ -73,66 +71,66 @@ public class YIntervalRendererTest {
 
         // the following fields are inherited from the AbstractXYItemRenderer
         r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultItemLabelGenerator(new StandardXYItemLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultItemLabelGenerator(new StandardXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setURLGenerator(new StandardXYURLGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setURLGenerator(new StandardXYURLGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.FOREGROUND);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.FOREGROUND);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.BACKGROUND);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.BACKGROUND);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultEntityRadius(99);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultEntityRadius(99);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendItemLabelGenerator(new StandardXYSeriesLabelGenerator(
                 "{0} {1}"));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendItemLabelGenerator(new StandardXYSeriesLabelGenerator(
                 "{0} {1}"));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendItemToolTipGenerator(new StandardXYSeriesLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendItemToolTipGenerator(new StandardXYSeriesLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendItemURLGenerator(new StandardXYSeriesLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendItemURLGenerator(new StandardXYSeriesLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setAdditionalItemLabelGenerator(new IntervalXYItemLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAdditionalItemLabelGenerator(new IntervalXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -143,7 +141,7 @@ public class YIntervalRendererTest {
     public void testHashcode() {
         YIntervalRenderer r1 = new YIntervalRenderer();
         YIntervalRenderer r2 = new YIntervalRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -156,34 +154,34 @@ public class YIntervalRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         YIntervalRenderer r1 = new YIntervalRenderer();
         YIntervalRenderer r2 = (YIntervalRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.FOREGROUND);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.FOREGROUND);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.BACKGROUND);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.BACKGROUND);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -202,7 +200,7 @@ public class YIntervalRendererTest {
     @Test
     public void testSerialization() {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = (YIntervalRenderer) TestUtils.serialised(r1);
+        YIntervalRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultFlowDatasetTest.java
  * ---------------------------
- * (C) Copyright 2021, by David Gilbert and Contributors.
+ * (C) Copyright 2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -39,10 +39,9 @@ package org.jfree.data.flow;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultFlowDataset} class.
@@ -111,9 +110,9 @@ public class DefaultFlowDatasetTest {
         d1.setFlow(0, "A", "Z", 1.0);
         DefaultFlowDataset<String> d2 = (DefaultFlowDataset<String>) d1.clone();
 
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         d1.setFlow(0, "A", "Y", 8.0);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,44 @@
  * ------------------------------------
  * SlidingGanttCategoryDatasetTest.java
  * ------------------------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.data.general.SeriesChangeEvent;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SlidingGanttCategoryDataset} class.
  */
 public class SlidingGanttCategoryDatasetTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(SlidingGanttCategoryDataset.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withRedefinedSuperclass()
+                .verify();
+    }
 
     /**
      * Some checks for the equals() method.
@@ -70,22 +87,22 @@ public class SlidingGanttCategoryDatasetTest {
         u2.add(s2);
         SlidingGanttCategoryDataset d2 = new SlidingGanttCategoryDataset(
                 u2, 0, 5);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setFirstCategoryIndex(1);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setFirstCategoryIndex(1);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setMaximumCategoryCount(99);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setMaximumCategoryCount(99);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -101,18 +118,23 @@ public class SlidingGanttCategoryDatasetTest {
                 u1, 0, 5);
         SlidingGanttCategoryDataset d2 = (SlidingGanttCategoryDataset) 
                 d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         TaskSeriesCollection u2
                 = (TaskSeriesCollection) d2.getUnderlyingDataset();
         TaskSeries s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+
+        // equals checks the keys - make sure they get updated
+        u1.seriesChanged(new SeriesChangeEvent(this));
+        u2.seriesChanged(new SeriesChangeEvent(this));
+
+        assertEquals(d1, d2);
     }
 
     /**
@@ -122,22 +144,21 @@ public class SlidingGanttCategoryDatasetTest {
     public void testSerialization() {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
-        TaskSeriesCollection u1 = new TaskSeriesCollection();
-        u1.add(s1);
+        TaskSeriesCollection c1 = new TaskSeriesCollection();
+        c1.add(s1);
         SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
-                u1, 0, 5);
-        SlidingGanttCategoryDataset d2 = (SlidingGanttCategoryDataset) 
-                TestUtils.serialised(d1);
+                c1, 0, 5);
+        SlidingGanttCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
-        TaskSeriesCollection u2
+        assertNotEquals(d1, d2);
+        TaskSeriesCollection c2
                 = (TaskSeriesCollection) d2.getUnderlyingDataset();
-        TaskSeries s2 = u2.getSeries("Series");
+        TaskSeries s2 = c2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
 }

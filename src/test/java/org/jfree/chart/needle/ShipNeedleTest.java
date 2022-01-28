@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ShipNeedleTest.java
  * -------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,10 +36,10 @@
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ShipNeedle} class.
@@ -53,8 +53,8 @@ public class ShipNeedleTest {
     public void testEquals() {
        ShipNeedle n1 = new ShipNeedle();
        ShipNeedle n2 = new ShipNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -64,9 +64,9 @@ public class ShipNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         ShipNeedle n1 = new ShipNeedle();
         ShipNeedle n2 = (ShipNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -75,8 +75,8 @@ public class ShipNeedleTest {
     @Test
     public void testSerialization() {
         ShipNeedle n1 = new ShipNeedle();
-        ShipNeedle n2 = (ShipNeedle) TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        ShipNeedle n2 = TestUtils.serialised(n1);
+        assertEquals(n1, n2);
     }
 
 }

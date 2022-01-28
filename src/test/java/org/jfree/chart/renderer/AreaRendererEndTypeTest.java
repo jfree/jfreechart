@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * AreaRendererEndTypeTest.java
  * ----------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
 package org.jfree.chart.renderer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -64,10 +65,10 @@ public class AreaRendererEndTypeTest {
     @Test
     public void testSerialization() {
         AreaRendererEndType t1 = AreaRendererEndType.TAPER;
-        AreaRendererEndType t2 = (AreaRendererEndType) TestUtils.serialised(t1);
+        AreaRendererEndType t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
         boolean same = t1 == t2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

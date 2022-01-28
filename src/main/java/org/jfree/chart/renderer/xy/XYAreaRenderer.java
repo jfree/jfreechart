@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYAreaRenderer.java
  * -------------------
- * (C) Copyright 2002-2021, by Hari and Contributors.
+ * (C) Copyright 2002-2022, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert;
@@ -610,7 +610,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             Area dataAreaHotspot = new Area(hotspot);
             dataAreaHotspot.intersect(new Area(dataArea));
 
-            if (dataAreaHotspot.isEmpty() == false) {
+            if (!dataAreaHotspot.isEmpty()) {
                 addEntity(entities, dataAreaHotspot, dataset, series, item, 
                         0.0, 0.0);
             }

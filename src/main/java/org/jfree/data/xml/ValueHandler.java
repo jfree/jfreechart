@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ValueHandler.java
  * -----------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Luke Quinane;
@@ -107,10 +107,10 @@ public class ValueHandler extends DefaultHandler implements DatasetTags {
                            String qName) throws SAXException {
 
         if (qName.equals(VALUE_TAG)) {
-            Number value;
+            Double value;
             try {
                 value = Double.valueOf(this.currentText.toString());
-                if (((Double) value).isNaN()) {
+                if (value.isNaN()) {
                     value = null;
                 }
             }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * FlowKeyTest.java
  * ----------------
- * (C) Copyright 2021, by David Gilbert.
+ * (C) Copyright 2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,10 +38,9 @@ package org.jfree.data.flow;
 
 import org.jfree.chart.TestUtils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link FlowKey} class.
@@ -55,18 +54,18 @@ public class FlowKeyTest {
     public void testEquals() {
         FlowKey<String> k1 = new FlowKey<>(0, "A", "B");
         FlowKey<String> k2 = new FlowKey<>(0, "A", "B");
-        assertTrue(k1.equals(k2));
-        assertTrue(k2.equals(k1));
+        assertEquals(k1, k2);
+        assertEquals(k2, k1);
 
         k1 = new FlowKey<>(1, "A", "B");
-        assertFalse(k1.equals(k2));
+        assertNotEquals(k1, k2);
         k2 = new FlowKey<>(1, "A", "B");
-        assertTrue(k1.equals(k2));
+        assertEquals(k1, k2);
   
         k1 = new FlowKey<>(1, "C", "B");
-        assertFalse(k1.equals(k2));
+        assertNotEquals(k1, k2);
         k2 = new FlowKey<>(1, "C", "B");
-        assertTrue(k1.equals(k2));
+        assertEquals(k1, k2);
     }
 
     /**
@@ -76,9 +75,9 @@ public class FlowKeyTest {
     public void testCloning() throws CloneNotSupportedException {
         FlowKey<String> k1 = new FlowKey<>(0, "A", "B");
         FlowKey<String> k2 = (FlowKey<String>) k1.clone();
-        assertTrue(k1 != k2);
-        assertTrue(k1.getClass() == k2.getClass());
-        assertTrue(k1.equals(k2));
+        assertNotSame(k1, k2);
+        assertSame(k1.getClass(), k2.getClass());
+        assertEquals(k1, k2);
     }
 
     /**

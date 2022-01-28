@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * LayeredBarRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -48,6 +44,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LayeredBarRenderer} class.
@@ -71,7 +69,7 @@ public class LayeredBarRendererTest {
     public void testHashcode() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
         LayeredBarRenderer r2 = new LayeredBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -84,9 +82,9 @@ public class LayeredBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
         LayeredBarRenderer r2 = (LayeredBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -104,7 +102,7 @@ public class LayeredBarRendererTest {
     @Test
     public void testSerialization() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
-        LayeredBarRenderer r2 = (LayeredBarRenderer) TestUtils.serialised(r1);
+        LayeredBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

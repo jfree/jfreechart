@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * GroupedStackedBarRendererTest.java
  * ----------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,12 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -52,6 +46,8 @@ import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link GroupedStackedBarRenderer} class.
@@ -65,18 +61,18 @@ public class GroupedStackedBarRendererTest {
     public void testEquals() {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
         GroupedStackedBarRenderer r2 = new GroupedStackedBarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // map
         KeyToGroupMap m1 = new KeyToGroupMap("G1");
         m1.mapKeyToGroup("S1", "G2");
         r1.setSeriesToGroupMap(m1);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         KeyToGroupMap m2 = new KeyToGroupMap("G1");
         m2.mapKeyToGroup("S1", "G2");
         r2.setSeriesToGroupMap(m2);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -86,9 +82,9 @@ public class GroupedStackedBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
         GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -106,8 +102,7 @@ public class GroupedStackedBarRendererTest {
     @Test
     public void testSerialization() {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
-        GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) 
-                TestUtils.serialised(r1);
+        GroupedStackedBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

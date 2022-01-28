@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * DynamicTimeSeriesCollection.java
  * --------------------------------
- * (C) Copyright 2002-2020, by I. H. Thomae and Contributors.
+ * (C) Copyright 2002-2022, by I. H. Thomae and Contributors.
  *
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
  * Contributor(s):   David Gilbert;
@@ -528,9 +528,9 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         RegularTimePeriod nextInstant = this.pointsInTime[this.newestAt].next();
         this.newestAt = this.oldestAt;  // newestAt takes value previously held
                                         // by oldestAT
-        /***
-         * The next 10 lines or so should be expanded if data can be negative
-         ***/
+
+        // The next 10 lines or so should be expanded if data can be negative
+
         // if the oldest data contained a maximum Y-value, invalidate the stored
         //   Y-max and Y-range data:
         boolean extremaChanged = false;
@@ -545,7 +545,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             if (extremaChanged) {
                 break;
             }
-        }  /*** If data can be < 0, add code here to check the minimum    **/
+        }  // If data can be < 0, add code here to check the minimum
         if (extremaChanged) {
             invalidateRangeInfo();
         }
@@ -599,7 +599,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         return max;
     }
 
-    /** End, positive-data-only code  **/
+    // End, positive-data-only code
 
     /**
      * Returns the index of the oldest data item.

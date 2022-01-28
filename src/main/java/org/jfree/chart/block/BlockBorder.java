@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ----------------
  * BlockBorder.java
  * ----------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -44,6 +44,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -62,7 +64,7 @@ public class BlockBorder implements BlockFrame, Serializable {
             RectangleInsets.ZERO_INSETS, Color.WHITE);
 
     /** The space reserved for the border. */
-    private RectangleInsets insets;
+    private final RectangleInsets insets;
 
     /** The border color. */
     private transient Paint paint;
@@ -195,13 +197,21 @@ public class BlockBorder implements BlockFrame, Serializable {
             return false;
         }
         BlockBorder that = (BlockBorder) obj;
-        if (!this.insets.equals(that.insets)) {
+        if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.insets);
+        hash = 37 * hash + HashUtils.hashCodeForPaint(this.paint);
+        return hash;
     }
 
     /**

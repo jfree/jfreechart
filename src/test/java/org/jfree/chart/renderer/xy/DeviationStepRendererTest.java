@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * DeviationStepRendererTest.java
  * ------------------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,10 +38,9 @@ package org.jfree.chart.renderer.xy;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DeviationStepRenderer} class.
@@ -56,13 +55,13 @@ public class DeviationStepRendererTest {
         // default instances
         DeviationStepRenderer r1 = new DeviationStepRenderer();
         DeviationStepRenderer r2 = new DeviationStepRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setAlpha(0.1f);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAlpha(0.1f);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -72,7 +71,7 @@ public class DeviationStepRendererTest {
     public void testHashcode() {
         DeviationStepRenderer r1 = new DeviationStepRenderer();
         DeviationStepRenderer r2 = new DeviationStepRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -85,9 +84,9 @@ public class DeviationStepRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         DeviationStepRenderer r1 = new DeviationStepRenderer();
         DeviationStepRenderer r2 = (DeviationStepRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -105,7 +104,7 @@ public class DeviationStepRendererTest {
     @Test
     public void testSerialization() {
         DeviationStepRenderer r1 = new DeviationStepRenderer();
-        DeviationStepRenderer r2 = (DeviationStepRenderer) TestUtils.serialised(r1);
+        DeviationStepRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

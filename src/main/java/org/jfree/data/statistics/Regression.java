@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Regression.java
  * ---------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2795746);
@@ -277,9 +277,7 @@ public abstract class Regression {
         double[][] subMatrix = calculateSubMatrix(matrix);
         for (int eq = 1; eq < equations; eq++) {
             matrix[eq][0] = 0;
-            for (int coe = 1; coe < coefficients; coe++) {
-                matrix[eq][coe] = subMatrix[eq - 1][coe - 1];
-            }
+            if (coefficients - 1 >= 0) System.arraycopy(subMatrix[eq - 1], 0, matrix[eq], 1, coefficients - 1);
         }
         for (int eq = equations - 1; eq > -1; eq--) {
             double value = matrix[eq][coefficients - 1];
@@ -349,9 +347,7 @@ public abstract class Regression {
         double[][] subMatrix = calculateSubMatrix(result);
         for (int eq = 1; eq < equations -  1; eq++) {
             result[eq][0] = 0;
-            for (int coe = 1; coe < coefficients - 1; coe++) {
-                result[eq][coe] = subMatrix[eq - 1][coe - 1];
-            }
+            if (coefficients - 1 - 1 >= 0) System.arraycopy(subMatrix[eq - 1], 0, result[eq], 1, coefficients - 1 - 1);
         }
         return result;
     }

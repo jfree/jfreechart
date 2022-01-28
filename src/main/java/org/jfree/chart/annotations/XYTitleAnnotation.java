@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrew Mickish;
  *                   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -42,8 +43,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Objects;
-
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
@@ -332,28 +331,48 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             return false;
         }
         XYTitleAnnotation that = (XYTitleAnnotation) obj;
-        if (this.coordinateType != that.coordinateType) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.maxWidth) != Double.doubleToLongBits(that.maxWidth)) {
             return false;
         }
-        if (this.maxWidth != that.maxWidth) {
+        if (Double.doubleToLongBits(this.maxHeight) != Double.doubleToLongBits(that.maxHeight)) {
             return false;
         }
-        if (this.maxHeight != that.maxHeight) {
+        if (!Objects.equals(this.coordinateType, that.coordinateType)) {
             return false;
         }
         if (!Objects.equals(this.title, that.title)) {
             return false;
         }
-        if (!this.anchor.equals(that.anchor)) {
+        if (!Objects.equals(this.anchor, that.anchor)){
             return false;
         }
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYTitleAnnotation);
     }
 
     /**
@@ -363,14 +382,18 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = HashUtils.hashCode(result, this.anchor);
-        result = HashUtils.hashCode(result, this.coordinateType);
-        result = HashUtils.hashCode(result, this.x);
-        result = HashUtils.hashCode(result, this.y);
-        result = HashUtils.hashCode(result, this.maxWidth);
-        result = HashUtils.hashCode(result, this.maxHeight);
-        result = HashUtils.hashCode(result, this.title);
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 67 * result + Objects.hashCode(this.coordinateType);
+        result = 67 * result + (int) (Double.doubleToLongBits(this.x) ^ 
+                                     (Double.doubleToLongBits(this.x) >>> 32));
+        result = 67 * result + (int) (Double.doubleToLongBits(this.y) ^ 
+                                     (Double.doubleToLongBits(this.y) >>> 32));
+        result = 67 * result + (int) (Double.doubleToLongBits(this.maxWidth) ^ 
+                                     (Double.doubleToLongBits(this.maxWidth) >>> 32));
+        result = 67 * result + (int) (Double.doubleToLongBits(this.maxHeight) ^ 
+                                     (Double.doubleToLongBits(this.maxHeight) >>> 32));
+        result = 67 * result + Objects.hashCode(this.title);
+        result = 67 * result + Objects.hashCode(this.anchor);
         return result;
     }
 

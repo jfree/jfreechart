@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * HeatMapDataset.java
  * -------------------
- * (C) Copyright 2009-2021, by David Gilbert.
+ * (C) Copyright 2009-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface HeatMapDataset {
      * 
      * @return The number of x-values (always &gt; 0).
      */
-    public int getXSampleCount();
+    int getXSampleCount();
 
     /**
      * Returns the number of y values (or samples) for the dataset.  The
@@ -59,7 +59,7 @@ public interface HeatMapDataset {
      *
      * @return The number of y-values (always &gt; 0).
      */
-    public int getYSampleCount();
+    int getYSampleCount();
 
     /**
      * Returns the lowest x-value represented in this dataset.  A requirement
@@ -68,7 +68,7 @@ public interface HeatMapDataset {
      *
      * @return The lowest x-value represented in this dataset.
      */
-    public double getMinimumXValue();
+    double getMinimumXValue();
 
     /**
      * Returns the highest x-value represented in this dataset.  A requirement
@@ -77,7 +77,7 @@ public interface HeatMapDataset {
      *
      * @return The highest x-value represented in this dataset.
      */
-    public double getMaximumXValue();
+    double getMaximumXValue();
 
     /**
      * Returns the lowest y-value represented in this dataset.  A requirement
@@ -86,7 +86,7 @@ public interface HeatMapDataset {
      *
      * @return The lowest y-value represented in this dataset.
      */
-    public double getMinimumYValue();
+    double getMinimumYValue();
 
     /**
      * Returns the highest y-value represented in this dataset.  A requirement
@@ -95,7 +95,7 @@ public interface HeatMapDataset {
      *
      * @return The highest y-value represented in this dataset.
      */
-    public double getMaximumYValue();
+    double getMaximumYValue();
 
     /**
      * A convenience method that returns the x-value for the given index.
@@ -104,7 +104,7 @@ public interface HeatMapDataset {
      * 
      * @return The x-value.
      */
-    public double getXValue(int xIndex);
+    double getXValue(int xIndex);
 
     /**
      * A convenience method that returns the y-value for the given index.
@@ -113,7 +113,7 @@ public interface HeatMapDataset {
      * 
      * @return The y-value.
      */
-    public double getYValue(int yIndex);
+    double getYValue(int yIndex);
 
     /**
      * Returns the z-value at the specified sample position in the dataset.
@@ -124,7 +124,7 @@ public interface HeatMapDataset {
      *
      * @return The z-value.
      */
-    public double getZValue(int xIndex, int yIndex);
+    double getZValue(int xIndex, int yIndex);
 
     /**
      * Returns the z-value at the specified sample position in the dataset.
@@ -143,6 +143,6 @@ public interface HeatMapDataset {
      *
      * @return The z-value (possibly {@code null}).
      */
-    public Number getZ(int xIndex, int yIndex);
+    Number getZ(int xIndex, int yIndex);
 
 }

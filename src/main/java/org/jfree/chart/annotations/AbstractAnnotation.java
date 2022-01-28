@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -----------------------
  * AbstractAnnotation.java
  * -----------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  Peter Kolb (see patch 2809117);
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (added equals/canEqual/hashCode);
  *
  */
 
@@ -216,4 +216,43 @@ public abstract class AbstractAnnotation implements Annotation, Cloneable,
         this.listenerList = new EventListenerList();
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + (this.notify ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AbstractAnnotation)) {
+            return false;
+        }
+        AbstractAnnotation that = (AbstractAnnotation) obj;
+        if (this.notify != that.notify) {
+            return false;
+        }
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractAnnotation);
+    }
 }

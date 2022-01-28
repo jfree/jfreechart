@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * ClusteredXYBarRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Paolo Cova and Contributors.
+ * (C) Copyright 2003-2022, by Paolo Cova and Contributors.
  *
  * Original Author:  Paolo Cova;
  * Contributor(s):   David Gilbert;
@@ -80,7 +80,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
     private static final long serialVersionUID = 5864462149177133147L;
 
     /** Determines whether bar center should be interval start. */
-    private boolean centerBarAtStartValue;
+    private final boolean centerBarAtStartValue;
 
     /**
      * Default constructor. Bar margin is set to 0.0.
@@ -246,7 +246,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
 
-        List<Integer> visibleSeries = new ArrayList<Integer>();
+        List<Integer> visibleSeries = new ArrayList<>();
         for (int i = 0; i < dataset.getSeriesCount(); i++) {
             if (isSeriesVisible(i)) {
                 visibleSeries.add(i);

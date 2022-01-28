@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * DateTitleTest.java
  * ------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,14 @@
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DateTitle} class.
@@ -61,25 +60,25 @@ public class DateTitleTest {
         assertEquals(t1, t2);
 
         t1.setText("Test 1");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setText("Test 1");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         Font f = new Font("SansSerif", Font.PLAIN, 15);
         t1.setFont(f);
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setFont(f);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1.setPaint(Color.BLUE);
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
         t2.setPaint(Color.BLUE);
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
 
         t1.setBackgroundPaint(Color.BLUE);
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
         t2.setBackgroundPaint(Color.BLUE);
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
 
     }
 
@@ -90,7 +89,7 @@ public class DateTitleTest {
     public void testHashcode() {
         DateTitle t1 = new DateTitle();
         DateTitle t2 = new DateTitle();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -103,9 +102,9 @@ public class DateTitleTest {
     public void testCloning() throws CloneNotSupportedException {
         DateTitle t1 = new DateTitle();
         DateTitle t2 = (DateTitle) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -114,7 +113,7 @@ public class DateTitleTest {
     @Test
     public void testSerialization() {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = (DateTitle) TestUtils.serialised(t1);
+        DateTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

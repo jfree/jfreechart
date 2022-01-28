@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYDatasetTableModel.java
  * ------------------------
- * (C)opyright 2003-2008, by Bryan Scott and Contributors.
+ * (C)opyright 2003-2022, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott;
  * Contributor(s):   David Gilbert;

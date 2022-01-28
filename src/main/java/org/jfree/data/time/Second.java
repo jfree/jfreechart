@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -427,8 +427,7 @@ public class Second extends RegularTimePeriod implements Serializable {
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hmsstr = s.substring(Math.min(daystr.length() + 1,
-                    s.length()), s.length());
+            String hmsstr = s.substring(Math.min(daystr.length() + 1, s.length()));
             hmsstr = hmsstr.trim();
 
             int l = hmsstr.length();

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ImageFormat.java
  * ----------------
- * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2022, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -42,12 +42,12 @@ package org.jfree.chart.encoders;
 public interface ImageFormat {
 
     /** Portable Network Graphics - lossless */
-    public static String PNG = "png";
+    String PNG = "png";
 
     /** Joint Photographic Experts Group format - lossy */
-    public static String JPEG = "jpeg";
+    String JPEG = "jpeg";
 
     /** Graphics Interchange Format - lossless, but 256 colour restriction */
-    public static String GIF = "gif";
+    String GIF = "gif";
 
 }

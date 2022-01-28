@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * --------------
  * TextTitle.java
  * --------------
- * (C) Copyright 2000-2021, by David Berry and Contributors.
+ * (C) Copyright 2000-2022, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert;
  *                   Nicolas Brodu;
  *                   Peter Kolb - patch 2603321;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,6 +49,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.block.BlockResult;
 import org.jfree.chart.block.EntityBlockParams;
@@ -783,7 +785,7 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
-        if (this.textAlignment != that.textAlignment) {
+        if (!Objects.equals(this.textAlignment, that.textAlignment)) {
             return false;
         }
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
@@ -801,7 +803,27 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
+        if (!Objects.equals(this.content, that.content)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TextTitle);
     }
 
     /**
@@ -811,13 +833,18 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 29 * result + (this.text != null ? this.text.hashCode() : 0);
-        result = 29 * result + (this.font != null ? this.font.hashCode() : 0);
-        result = 29 * result + (this.paint != null ? this.paint.hashCode() : 0);
-        result = 29 * result + (this.backgroundPaint != null
-                ? this.backgroundPaint.hashCode() : 0);
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 83 * hash + Objects.hashCode(this.text);
+        hash = 83 * hash + Objects.hashCode(this.font);
+        hash = 83 * hash + Objects.hashCode(this.textAlignment);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        hash = 83 * hash + Objects.hashCode(this.toolTipText);
+        hash = 83 * hash + Objects.hashCode(this.urlText);
+        hash = 83 * hash + Objects.hashCode(this.content);
+        hash = 83 * hash + (this.expandToFitSpace ? 1 : 0);
+        hash = 83 * hash + this.maximumLinesToDisplay;
+        return hash;
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * ---------------
  * MarkerTest.java
  * ---------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Arrays;
 import java.util.EventListener;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -55,12 +52,41 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link Marker} class.
  */
 public class MarkerTest implements MarkerChangeListener {
 
     MarkerChangeEvent lastEvent;
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Marker.class)
+                .withRedefinedSubclass(IntervalMarker.class) // subclass also defines equals/hashCode
+                .withRedefinedSubclass(CategoryMarker.class)
+                .withRedefinedSubclass(ValueMarker.class)
+                .withPrefabValues(Font.class,
+                        new Font("SansSerif", Font.PLAIN, 10),
+                        new Font("Tahoma", Font.BOLD, 12))
+                .withPrefabValues(Marker.class,
+                        new ValueMarker(44.5),
+                        new ValueMarker(33.3))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                //  .suppress(Warning.STRICT_INHERITANCE) // no need for this because we already told it not to worry about inheritance
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Some checks for the getPaint() and setPaint() methods.
@@ -129,7 +155,7 @@ public class MarkerTest implements MarkerChangeListener {
 
         // check null argument...
         m.setOutlinePaint(null);
-        assertEquals(null, m.getOutlinePaint());
+        assertNull(m.getOutlinePaint());
     }
 
     /**
@@ -149,7 +175,7 @@ public class MarkerTest implements MarkerChangeListener {
 
         // check null argument...
         m.setOutlineStroke(null);
-        assertEquals(null, m.getOutlineStroke());
+        assertNull(m.getOutlineStroke());
     }
 
     private static final float EPSILON = 0.000000001f;
@@ -180,14 +206,14 @@ public class MarkerTest implements MarkerChangeListener {
         ValueMarker m = new ValueMarker(1.1);
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(null, m.getLabel());
+        assertNull(m.getLabel());
         m.setLabel("XYZ");
         assertEquals("XYZ", m.getLabel());
         assertEquals(m, this.lastEvent.getMarker());
 
         // check null argument...
         m.setLabel(null);
-        assertEquals(null, m.getLabel());
+        assertNull(m.getLabel());
     }
 
     /**

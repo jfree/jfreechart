@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * VectorXYDataset.java
  * --------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The x-component of the vector.
      */
-    public double getVectorXValue(int series, int item);
+    double getVectorXValue(int series, int item);
 
     /**
      * Returns the y-component of the vector for an item in a series.
@@ -60,7 +60,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The y-component of the vector.
      */
-    public double getVectorYValue(int series, int item);
+    double getVectorYValue(int series, int item);
 
     /**
      * Returns the vector for an item in a series.  Depending on the particular
@@ -74,6 +74,6 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The vector (possibly {@code null}).
      */
-    public Vector getVector(int series, int item);
+    Vector getVector(int series, int item);
 
 }

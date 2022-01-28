@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,13 @@
  * ------------------
  * MeterPlotTest.java
  * ------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -49,6 +45,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MeterPlot} class.
@@ -63,131 +61,131 @@ public class MeterPlotTest {
     public void testEquals() {
         MeterPlot plot1 = new MeterPlot();
         MeterPlot plot2 = new MeterPlot();
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // units
         plot1.setUnits("mph");
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setUnits("mph");
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // range
         plot1.setRange(new Range(50.0, 70.0));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setRange(new Range(50.0, 70.0));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // interval
         plot1.addInterval(new MeterInterval("Normal", new Range(55.0, 60.0)));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.addInterval(new MeterInterval("Normal", new Range(55.0, 60.0)));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // dial outline paint
         plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // dial shape
         plot1.setDialShape(DialShape.CHORD);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDialShape(DialShape.CHORD);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // dial background paint
         plot1.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
                 7.0f, 6.0f, Color.BLUE));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
                 7.0f, 6.0f, Color.BLUE));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // dial outline paint
         plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // needle paint
         plot1.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.RED,
                 7.0f, 6.0f, Color.BLUE));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.RED,
                 7.0f, 6.0f, Color.BLUE));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // value visible
         plot1.setValueVisible(false);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setValueVisible(false);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // value font
         plot1.setValueFont(new Font("Serif", Font.PLAIN, 6));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setValueFont(new Font("Serif", Font.PLAIN, 6));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // value paint
         plot1.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.BLACK,
                 3.0f, 4.0f, Color.WHITE));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.BLACK,
                 3.0f, 4.0f, Color.WHITE));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick labels visible
         plot1.setTickLabelsVisible(false);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickLabelsVisible(false);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick label font
         plot1.setTickLabelFont(new Font("Serif", Font.PLAIN, 6));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickLabelFont(new Font("Serif", Font.PLAIN, 6));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick label paint
         plot1.setTickLabelPaint(Color.RED);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickLabelPaint(Color.RED);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick label format
         plot1.setTickLabelFormat(new DecimalFormat("0"));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickLabelFormat(new DecimalFormat("0"));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick paint
         plot1.setTickPaint(Color.GREEN);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickPaint(Color.GREEN);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // tick size
         plot1.setTickSize(1.23);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setTickSize(1.23);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // draw border
         plot1.setDrawBorder(!plot1.getDrawBorder());
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDrawBorder(plot1.getDrawBorder());
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // meter angle
         plot1.setMeterAngle(22);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setMeterAngle(22);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
     }
 
@@ -198,24 +196,24 @@ public class MeterPlotTest {
     public void testCloning() throws CloneNotSupportedException {
         MeterPlot p1 = new MeterPlot();
         MeterPlot p2 = (MeterPlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
 
         // the clone and the original share a reference to the SAME dataset
-        assertTrue(p1.getDataset() == p2.getDataset());
+        assertSame(p1.getDataset(), p2.getDataset());
 
         // try a few checks to ensure that the clone is independent of the
         // original
         p1.getTickLabelFormat().setMinimumIntegerDigits(99);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.getTickLabelFormat().setMinimumIntegerDigits(99);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.addInterval(new MeterInterval("Test", new Range(1.234, 5.678)));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.addInterval(new MeterInterval("Test", new Range(1.234, 5.678)));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
     }
 
@@ -235,7 +233,7 @@ public class MeterPlotTest {
                 3.0f, 4.0f, Color.BLUE));
         p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -245,7 +243,7 @@ public class MeterPlotTest {
     @Test
     public void testSerialization2() {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
     }

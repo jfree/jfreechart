@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * EntityCollection.java
  * ---------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -48,21 +48,21 @@ public interface EntityCollection {
     /**
      * Clears all entities.
      */
-    public void clear();
+    void clear();
 
     /**
      * Adds an entity to the collection.
      *
      * @param entity  the entity ({@code null} not permitted).
      */
-    public void add(ChartEntity entity);
+    void add(ChartEntity entity);
 
     /**
      * Adds the entities from another collection to this collection.
      *
      * @param collection  the other collection.
      */
-    public void addAll(EntityCollection collection);
+    void addAll(EntityCollection collection);
 
     /**
      * Returns an entity whose area contains the specified point.
@@ -72,7 +72,7 @@ public interface EntityCollection {
      *
      * @return The entity.
      */
-    public ChartEntity getEntity(double x, double y);
+    ChartEntity getEntity(double x, double y);
 
     /**
      * Returns an entity from the collection.
@@ -81,27 +81,27 @@ public interface EntityCollection {
      *
      * @return An entity.
      */
-    public ChartEntity getEntity(int index);
+    ChartEntity getEntity(int index);
 
     /**
      * Returns the entity count.
      *
      * @return The entity count.
      */
-    public int getEntityCount();
+    int getEntityCount();
 
     /**
      * Returns the entities in an unmodifiable collection.
      *
      * @return The entities.
      */
-    public Collection getEntities();
+    Collection getEntities();
 
     /**
      * Returns an iterator for the entities in the collection.
      *
      * @return An iterator.
      */
-    public Iterator iterator();
+    Iterator iterator();
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ---------------------
  * PaintScaleLegend.java
  * ---------------------
- * (C) Copyright 2007-2021, by David Gilbert.
+ * (C) Copyright 2007-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb - see patch 2686872;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -45,6 +46,8 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.AxisSpace;
@@ -641,33 +644,38 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
         if (!(obj instanceof PaintScaleLegend)) {
             return false;
         }
         PaintScaleLegend that = (PaintScaleLegend) obj;
-        if (!this.scale.equals(that.scale)) {
+        if (!Objects.equals(this.scale, that.scale)) {
             return false;
         }
-        if (!this.axis.equals(that.axis)) {
+        if (!Objects.equals(this.axis, that.axis)) {
             return false;
         }
-        if (!this.axisLocation.equals(that.axisLocation)) {
+        if (!Objects.equals(this.axisLocation, that.axisLocation)) {
             return false;
         }
-        if (this.axisOffset != that.axisOffset) {
+        if (Double.doubleToLongBits(this.axisOffset) !=
+            Double.doubleToLongBits(that.axisOffset)) {
             return false;
         }
-        if (this.stripWidth != that.stripWidth) {
+        if (Double.doubleToLongBits(this.stripWidth) != 
+            Double.doubleToLongBits(that.stripWidth)) {
             return false;
         }
         if (this.stripOutlineVisible != that.stripOutlineVisible) {
             return false;
         }
         if (!PaintUtils.equal(this.stripOutlinePaint,
-                that.stripOutlinePaint)) {
+                              that.stripOutlinePaint)) {
             return false;
         }
-        if (!this.stripOutlineStroke.equals(that.stripOutlineStroke)) {
+        if (!Objects.equals(this.stripOutlineStroke, that.stripOutlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
@@ -676,7 +684,42 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
         if (this.subdivisions != that.subdivisions) {
             return false;
         }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof PaintScaleLegend);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 53 * hash + Objects.hashCode(this.scale);
+        hash = 53 * hash + Objects.hashCode(this.axis);
+        hash = 53 * hash + Objects.hashCode(this.axisLocation);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.axisOffset) ^
+                      (Double.doubleToLongBits(this.axisOffset) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.stripWidth) ^
+                      (Double.doubleToLongBits(this.stripWidth) >>> 32));
+        hash = 53 * hash + (this.stripOutlineVisible ? 1 : 0);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.stripOutlinePaint);
+        hash = 53 * hash + Objects.hashCode(this.stripOutlineStroke);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        hash = 53 * hash + this.subdivisions;
+        return hash;
     }
 
     /**
