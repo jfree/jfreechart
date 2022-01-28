@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * AbstractXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +45,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link AbstractXYItemRenderer} class.
@@ -86,7 +84,7 @@ public class AbstractXYItemRendererTest {
         assertEquals(3.0, r.getUpperBound(), EPSILON);
 
         // check that a null dataset returns null bounds
-        assertTrue(renderer.findDomainBounds(null) == null);
+        assertNull(renderer.findDomainBounds(null));
     }
 
     /**
@@ -96,7 +94,7 @@ public class AbstractXYItemRendererTest {
     public void testFindRangeBounds() {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
         // check that a null dataset returns null bounds
-        assertTrue(renderer.findRangeBounds(null) == null);
+        assertNull(renderer.findRangeBounds(null));
     }
 
     /**
@@ -109,13 +107,12 @@ public class AbstractXYItemRendererTest {
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemLabelGenerator(generator);
         XYBarRenderer r2 = (XYBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemLabelGenerator()
-                != r2.getLegendItemLabelGenerator());
+        assertNotSame(r1.getLegendItemLabelGenerator(), r2.getLegendItemLabelGenerator());
     }
 
     /**
@@ -130,13 +127,12 @@ public class AbstractXYItemRendererTest {
         r1.setLegendItemToolTipGenerator(generator);
         XYBarRenderer r2 = (XYBarRenderer) r1.clone();
 
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemToolTipGenerator()
-                != r2.getLegendItemToolTipGenerator());
+        assertNotSame(r1.getLegendItemToolTipGenerator(), r2.getLegendItemToolTipGenerator());
     }
 
     /**
@@ -150,13 +146,12 @@ public class AbstractXYItemRendererTest {
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemURLGenerator(generator);
         XYBarRenderer r2 = (XYBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemURLGenerator()
-                != r2.getLegendItemURLGenerator());
+        assertNotSame(r1.getLegendItemURLGenerator(), r2.getLegendItemURLGenerator());
     }
     
     @Test

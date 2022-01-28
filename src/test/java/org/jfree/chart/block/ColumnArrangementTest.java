@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,17 @@
  * --------------------------
  * ColumnArrangementTest.java
  * --------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
@@ -46,10 +45,25 @@ import org.jfree.chart.ui.VerticalAlignment;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link ColumnArrangement} class.
  */
 public class ColumnArrangementTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ColumnArrangement.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -60,36 +74,36 @@ public class ColumnArrangementTest {
                 VerticalAlignment.TOP, 1.0, 2.0);
         ColumnArrangement c2 = new ColumnArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
                 VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -108,7 +122,7 @@ public class ColumnArrangementTest {
     public void testSerialization() {
         FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        FlowArrangement f2 = (FlowArrangement) TestUtils.serialised(f1);
+        FlowArrangement f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

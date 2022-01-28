@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * LineAndShapeRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -51,6 +46,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LineAndShapeRenderer} class.
@@ -68,49 +65,49 @@ public class LineAndShapeRendererTest {
         assertEquals(r1, r2);
 
         r1.setDefaultLinesVisible(!r1.getDefaultLinesVisible());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLinesVisible(r1.getDefaultLinesVisible());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesLinesVisible(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesLinesVisible(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultShapesVisible(!r1.getDefaultShapesVisible());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShapesVisible(r1.getDefaultShapesVisible());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesVisible(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesVisible(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultShapesFilled(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShapesFilled(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseSeriesOffset(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseSeriesOffset(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setItemMargin(0.14);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setItemMargin(0.14);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -121,7 +118,7 @@ public class LineAndShapeRendererTest {
     public void testHashcode() {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         LineAndShapeRenderer r2 = new LineAndShapeRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -134,9 +131,9 @@ public class LineAndShapeRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
         assertTrue(checkIndependence(r1, r2));
     }
 
@@ -231,8 +228,7 @@ public class LineAndShapeRendererTest {
     @Test
     public void testSerialization() {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        LineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

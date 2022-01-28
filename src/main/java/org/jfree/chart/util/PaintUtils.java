@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PaintUtils.java
  * ---------------
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributors:     -;
@@ -149,7 +149,7 @@ public class PaintUtils {
 
         // no defined constant color, so this must be a user defined color
         final String color = Integer.toHexString(c.getRGB() & 0x00ffffff);
-        final StringBuffer retval = new StringBuffer(7);
+        final StringBuilder retval = new StringBuilder(7);
         retval.append("#");
 
         final int fillUp = 6 - color.length();

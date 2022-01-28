@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * TickUnitsTest.java
  * ------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,11 +37,11 @@
 package org.jfree.chart.axis;
 
 import java.text.DecimalFormat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TickUnits} class.
@@ -55,7 +55,7 @@ public class TickUnitsTest {
     public void testSerialization() {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        TickUnits t2 = (TickUnits) TestUtils.serialised(t1);
+        TickUnits t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 
@@ -67,9 +67,9 @@ public class TickUnitsTest {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = (TickUnits) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -81,8 +81,8 @@ public class TickUnitsTest {
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = new TickUnits();
         t2.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.equals(t1));
+        assertEquals(t1, t2);
+        assertEquals(t2, t1);
     }
 
 }

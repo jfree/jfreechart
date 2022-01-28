@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * YIntervalDataItemTest.java
  * --------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,11 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link YIntervalDataItem} class.
@@ -68,32 +67,32 @@ public class YIntervalDataItemTest {
     public void testEquals() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
         YIntervalDataItem item2 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
+        assertEquals(item2, item1);
 
         // x
         item1 = new YIntervalDataItem(1.1, 2.0, 1.5, 2.5);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new YIntervalDataItem(1.1, 2.0, 1.5, 2.5);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // y
         item1 = new YIntervalDataItem(1.1, 2.2, 1.5, 2.5);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new YIntervalDataItem(1.1, 2.2, 1.5, 2.5);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // yLow
         item1 = new YIntervalDataItem(1.1, 2.2, 1.55, 2.5);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new YIntervalDataItem(1.1, 2.2, 1.55, 2.5);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // yHigh
         item1 = new YIntervalDataItem(1.1, 2.2, 1.55, 2.55);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new YIntervalDataItem(1.1, 2.2, 1.55, 2.55);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
     }
 
     /**
@@ -105,9 +104,9 @@ public class YIntervalDataItemTest {
     public void testCloning() throws CloneNotSupportedException {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
         YIntervalDataItem item2 = (YIntervalDataItem) item1.clone();
-        assertTrue(item1 != item2);
-        assertTrue(item1.getClass() == item2.getClass());
-        assertTrue(item1.equals(item2));
+        assertNotSame(item1, item2);
+        assertSame(item1.getClass(), item2.getClass());
+        assertEquals(item1, item2);
     }
 
     /**
@@ -116,8 +115,7 @@ public class YIntervalDataItemTest {
     @Test
     public void testSerialization() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        YIntervalDataItem item2 = (YIntervalDataItem) 
-                TestUtils.serialised(item1);
+        YIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

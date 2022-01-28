@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (see patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -278,24 +280,24 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYBoxAnnotation)) {
             return false;
         }
         XYBoxAnnotation that = (XYBoxAnnotation) obj;
-        if (!(this.x0 == that.x0)) {
+        if (Double.doubleToLongBits(this.x0) !=
+            Double.doubleToLongBits(that.x0)) {
             return false;
         }
-        if (!(this.y0 == that.y0)) {
+        if (Double.doubleToLongBits(this.y0) != 
+            Double.doubleToLongBits(that.y0)) {
             return false;
         }
-        if (!(this.x1 == that.x1)) {
+        if (Double.doubleToLongBits(this.x1) !=
+            Double.doubleToLongBits(that.x1)) {
             return false;
         }
-        if (!(this.y1 == that.y1)) {
+        if (Double.doubleToLongBits(this.y1) !=
+            Double.doubleToLongBits(that.y1)) {
             return false;
         }
         if (!Objects.equals(this.stroke, that.stroke)) {
@@ -307,9 +309,27 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        return true;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYBoxAnnotation);
+    }
+    
     /**
      * Returns a hash code.
      *
@@ -317,17 +337,19 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x0);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.x1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y0);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.x0) ^
+                                 (Double.doubleToLongBits(this.x0) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.y0) ^
+                                 (Double.doubleToLongBits(this.y0) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.x1) ^
+                                 (Double.doubleToLongBits(this.x1) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.y1) ^
+                                (Double.doubleToLongBits(this.y1) >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.stroke);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.fillPaint);
+        return hash;
     }
 
     /**

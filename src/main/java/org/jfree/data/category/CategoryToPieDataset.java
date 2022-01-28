@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CategoryToPieDataset.java
  * -------------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -57,13 +57,13 @@ public class CategoryToPieDataset extends AbstractDataset
     static final long serialVersionUID = 5516396319762189617L;
 
     /** The source. */
-    private CategoryDataset source;
+    private final CategoryDataset source;
 
     /** The extract type. */
-    private TableOrder extract;
+    private final TableOrder extract;
 
     /** The row or column index. */
-    private int index;
+    private final int index;
 
     /**
      * An adaptor class that converts any {@link CategoryDataset} into a

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * MatrixSeriesCollectionTest.java
  * -------------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MatrixSeriesCollection} class.
@@ -63,14 +61,14 @@ public class MatrixSeriesCollectionTest {
         s2.update(0, 0, 1.1);
         MatrixSeriesCollection c2 = new MatrixSeriesCollection();
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         c1.addSeries(new MatrixSeries("Empty Series", 1, 1));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
 
         c2.addSeries(new MatrixSeries("Empty Series", 1, 1));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -84,13 +82,13 @@ public class MatrixSeriesCollectionTest {
         c1.addSeries(s1);
         MatrixSeriesCollection c2 = (MatrixSeriesCollection) c1.clone();
 
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         s1.setDescription("XYZ");
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**
@@ -111,8 +109,7 @@ public class MatrixSeriesCollectionTest {
         s1.update(0, 0, 1.1);
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
-                TestUtils.serialised(c1);
+        MatrixSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

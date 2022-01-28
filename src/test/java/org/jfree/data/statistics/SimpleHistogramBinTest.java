@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SimpleHistogramBinTest.java
  * ---------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SimpleHistogramBin} class.
@@ -101,33 +99,33 @@ public class SimpleHistogramBinTest {
     public void testEquals() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0);
         SimpleHistogramBin b2 = new SimpleHistogramBin(1.0, 2.0);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b1));
+        assertEquals(b1, b2);
+        assertEquals(b2, b1);
 
         b1 = new SimpleHistogramBin(1.1, 2.0, true, true);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new SimpleHistogramBin(1.1, 2.0, true, true);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new SimpleHistogramBin(1.1, 2.2, true, true);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new SimpleHistogramBin(1.1, 2.2, true, true);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new SimpleHistogramBin(1.1, 2.2, false, true);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new SimpleHistogramBin(1.1, 2.2, false, true);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new SimpleHistogramBin(1.1, 2.2, false, false);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new SimpleHistogramBin(1.1, 2.2, false, false);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setItemCount(99);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setItemCount(99);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -138,13 +136,13 @@ public class SimpleHistogramBinTest {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.1, 2.2, false, true);
         b1.setItemCount(99);
         SimpleHistogramBin b2 = (SimpleHistogramBin) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
 
         // check that clone is independent of the original
         b2.setItemCount(111);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
     }
 
     /**
@@ -154,7 +152,7 @@ public class SimpleHistogramBinTest {
     public void testSerialization() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0, false, true);
         b1.setItemCount(123);
-        SimpleHistogramBin b2 = (SimpleHistogramBin) TestUtils.serialised(b1);
+        SimpleHistogramBin b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

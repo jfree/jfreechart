@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Week.java
  * ---------
- * (C) Copyright 2001-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2001-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Aimin Han;
@@ -532,7 +532,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             int i = Week.findSeparator(s);
             if (i != -1) {
                 String s1 = s.substring(0, i).trim();
-                String s2 = s.substring(i + 1, s.length()).trim();
+                String s2 = s.substring(i + 1).trim();
 
                 Year y = Week.evaluateAsYear(s1);
                 int w;

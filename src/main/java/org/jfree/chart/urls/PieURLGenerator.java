@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PieURLGenerator.java
  * --------------------
- * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2022, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert;
@@ -64,6 +64,6 @@ public interface PieURLGenerator {
      *
      * @return A string containing the URL.
      */
-    public String generateURL(PieDataset dataset, Comparable key, int pieIndex);
+    String generateURL(PieDataset dataset, Comparable key, int pieIndex);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * DomainInfo.java
  * ---------------
- * (C) Copyright 2000-2021, by David Gilbert.
+ * (C) Copyright 2000-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ public interface DomainInfo {
      * @return The minimum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainLowerBound(boolean includeInterval);
+    double getDomainLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum x-value in the dataset.
@@ -64,7 +64,7 @@ public interface DomainInfo {
      * @return The maximum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainUpperBound(boolean includeInterval);
+    double getDomainUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's domain.
@@ -75,6 +75,6 @@ public interface DomainInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getDomainBounds(boolean includeInterval);
+    Range getDomainBounds(boolean includeInterval);
 
 }

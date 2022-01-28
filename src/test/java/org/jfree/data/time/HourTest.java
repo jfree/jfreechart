@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * HourTest.java
  * -------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -67,7 +67,7 @@ public class HourTest {
     @Test
     public void testEqualsSelf() {
         Hour hour = new Hour();
-        assertTrue(hour.equals(hour));
+        assertEquals(hour, hour);
     }
 
     /**
@@ -77,7 +77,7 @@ public class HourTest {
     public void testEquals() {
         Hour hour1 = new Hour(15, new Day(29, MonthConstants.MARCH, 2002));
         Hour hour2 = new Hour(15, new Day(29, MonthConstants.MARCH, 2002));
-        assertTrue(hour1.equals(hour2));
+        assertEquals(hour1, hour2);
     }
 
     /**
@@ -261,7 +261,7 @@ public class HourTest {
     @Test
     public void testSerialization() {
         Hour h1 = new Hour();
-        Hour h2 = (Hour) TestUtils.serialised(h1);
+        Hour h2 = TestUtils.serialised(h1);
         assertEquals(h1, h2);
     }
 
@@ -272,7 +272,7 @@ public class HourTest {
     public void testHashcode() {
         Hour h1 = new Hour(7, 9, 10, 1999);
         Hour h2 = new Hour(7, 9, 10, 1999);
-        assertTrue(h1.equals(h2));
+        assertEquals(h1, h2);
         int hash1 = h1.hashCode();
         int hash2 = h2.hashCode();
         assertEquals(hash1, hash2);

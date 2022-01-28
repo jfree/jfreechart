@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pierre-Marie Le Biot;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
@@ -45,6 +46,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -604,39 +608,86 @@ public class LegendTitle extends Title
         if (!(obj instanceof LegendTitle)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         LegendTitle that = (LegendTitle) obj;
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (this.legendItemGraphicEdge != that.legendItemGraphicEdge) {
+        if (!PaintUtils.equal(this.itemPaint, that.itemPaint)) {
             return false;
         }
-        if (this.legendItemGraphicAnchor != that.legendItemGraphicAnchor) {
+        if (!Arrays.deepEquals(this.sources, that.sources)) {
             return false;
         }
-        if (this.legendItemGraphicLocation != that.legendItemGraphicLocation) {
+        if (!Objects.equals(this.legendItemGraphicEdge, that.legendItemGraphicEdge)) {
             return false;
         }
-        if (!this.itemFont.equals(that.itemFont)) {
+        if (!Objects.equals(this.legendItemGraphicAnchor, that.legendItemGraphicAnchor)) {
             return false;
         }
-        if (!this.itemPaint.equals(that.itemPaint)) {
+        if (!Objects.equals(this.legendItemGraphicLocation, that.legendItemGraphicLocation)) {
             return false;
         }
-        if (!this.hLayout.equals(that.hLayout)) {
+        if (!Objects.equals(this.legendItemGraphicPadding, that.legendItemGraphicPadding)) {
             return false;
         }
-        if (!this.vLayout.equals(that.vLayout)) {
+        if (!Objects.equals(this.itemFont, that.itemFont)) {
             return false;
         }
-        if (!this.sortOrder.equals(that.sortOrder)) {
+        if (!Objects.equals(this.itemLabelPadding, that.itemLabelPadding)) {
             return false;
         }
-        return true;
+        if (!Objects.equals(this.items, that.items)) {
+            return false;
+        }
+        if (!Objects.equals(this.hLayout, that.hLayout)) {
+            return false;
+        }
+        if (!Objects.equals(this.vLayout, that.vLayout)) {
+            return false;
+        }
+        if (!Objects.equals(this.wrapper, that.wrapper)) {
+            return false;
+        }
+        if (!Objects.equals(this.sortOrder, that.sortOrder)) {
+            return false;
+        }
+        return super.equals(obj);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 67 * hash + Arrays.deepHashCode(this.sources);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        hash = 67 * hash + Objects.hashCode(this.legendItemGraphicEdge);
+        hash = 67 * hash + Objects.hashCode(this.legendItemGraphicAnchor);
+        hash = 67 * hash + Objects.hashCode(this.legendItemGraphicLocation);
+        hash = 67 * hash + Objects.hashCode(this.legendItemGraphicPadding);
+        hash = 67 * hash + Objects.hashCode(this.itemFont);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.itemPaint);
+        hash = 67 * hash + Objects.hashCode(this.itemLabelPadding);
+        hash = 67 * hash + Objects.hashCode(this.items);
+        hash = 67 * hash + Objects.hashCode(this.hLayout);
+        hash = 67 * hash + Objects.hashCode(this.vLayout);
+        hash = 67 * hash + Objects.hashCode(this.wrapper);
+        hash = 67 * hash + Objects.hashCode(this.sortOrder);
+        return hash;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof LegendTitle);
+    }
+
 
     /**
      * Provides serialization support.

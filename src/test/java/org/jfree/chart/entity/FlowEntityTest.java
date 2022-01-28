@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * FlowEntityTest.java
  * -------------------
- * (C) Copyright 2021, by David Gilbert.
+ * (C) Copyright 2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,18 +37,33 @@
 package org.jfree.chart.entity;
 
 import java.awt.Rectangle;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.jfree.data.flow.FlowKey;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the {@link FlowEntity} class.
  */
 public class FlowEntityTest {
-    
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(FlowEntity.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -56,42 +71,42 @@ public class FlowEntityTest {
     public void testEquals() {
         FlowEntity f1 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
         FlowEntity f2 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        assertTrue(f1.equals(f2));
-        assertTrue(f2.equals(f1));
+        assertEquals(f1, f2);
+        assertEquals(f2, f1);
 
         f1 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "tt", "uu");
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "tt", "uu");
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
   
         f1 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "TT", "uu");
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "TT", "uu");
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "TT", "UU");
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new FlowEntity(new FlowKey<>(0, "A", "C"), new Rectangle(4, 1, 2, 3), "TT", "UU");
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
     }
 
     /**
      * Confirm that cloning works.
      * 
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException  if cloning is not supported.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         FlowEntity f1 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
         FlowEntity f2 = (FlowEntity) f1.clone();
-        assertTrue(f1 != f2);
-        assertTrue(f1.getClass() == f2.getClass());
-        assertTrue(f1.equals(f2));
+        assertNotSame(f1, f2);
+        assertSame(f1.getClass(), f2.getClass());
+        assertEquals(f1, f2);
     }
 
     /**
@@ -100,7 +115,7 @@ public class FlowEntityTest {
     @Test
     public void testSerialization() {
         FlowEntity f1 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        FlowEntity f2 = (FlowEntity) TestUtils.serialised(f1);
+        FlowEntity f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
  

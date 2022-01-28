@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PinNeedle.java
  * --------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2022, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -84,7 +84,7 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
         pointer.closePath();
 
         lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2.0,
                 plotArea.getMaxY() - lenX, lenX, lenX);
 
         shape = new Area(circle);

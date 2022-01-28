@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,47 @@
  * ----------------------
  * XYTaskDatasetTest.java
  * ----------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.jfree.data.general.SeriesChangeEvent;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYTaskDataset} class.
  */
 public class XYTaskDatasetTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYTaskDataset.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Task.class,
+                        new Task("T1", new Date(1), new Date(2)),
+                        new Task("T2", new Date(3), new Date(4)))
+                .verify();
+    }
 
     /**
      * Some checks for the equals() method.
@@ -68,22 +88,22 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u2 = new TaskSeriesCollection();
         u2.add(s2);
         XYTaskDataset d2 = new XYTaskDataset(u2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setSeriesWidth(0.123);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setSeriesWidth(0.123);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setTransposed(true);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setTransposed(true);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -97,17 +117,22 @@ public class XYTaskDatasetTest {
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
         XYTaskDataset d2 = (XYTaskDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         TaskSeriesCollection u2 = d2.getTasks();
         TaskSeries s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+
+        // equals checks the keys - make sure they get updated
+        u1.seriesChanged(new SeriesChangeEvent(this));
+        u2.seriesChanged(new SeriesChangeEvent(this));
+
+        assertEquals(d1, d2);
     }
 
     /**
@@ -120,16 +145,16 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = (XYTaskDataset) TestUtils.serialised(d1);
+        XYTaskDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         TaskSeriesCollection u2 = d2.getTasks();
         TaskSeries s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
 }

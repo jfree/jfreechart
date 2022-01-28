@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * Quarter.java
  * ------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -466,7 +466,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
         String qstr = s.substring(i + 1, i + 2);
         int quarter = Integer.parseInt(qstr);
-        String remaining = s.substring(0, i) + s.substring(i + 2, s.length());
+        String remaining = s.substring(0, i) + s.substring(i + 2);
 
         // replace any / , or - with a space
         remaining = remaining.replace('/', ' ');

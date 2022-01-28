@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * StandardXYZToolTipGeneratorTest.java
  * ------------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.labels;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -49,6 +45,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardXYZToolTipGenerator} class.
@@ -83,53 +81,53 @@ public class StandardXYZToolTipGeneratorTest {
 
         g1 = new StandardXYZToolTipGenerator(f1, xnf1, ynf1, znf1);
         g2 = new StandardXYZToolTipGenerator(f1, xnf1, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // format string...
         g1 = new StandardXYZToolTipGenerator(f2, xnf1, ynf1, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf1, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // x number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf1, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf1, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // y number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // z number format
         g1 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xnf2, ynf2, znf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYZToolTipGenerator(f2, xdf1, ydf1, zdf1);
         g2 = new StandardXYZToolTipGenerator(f2, xdf1, ydf1, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // x date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf1, zdf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf1, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // y date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // z date format
         g1 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYZToolTipGenerator(f2, xdf2, ydf2, zdf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -142,8 +140,8 @@ public class StandardXYZToolTipGeneratorTest {
                 = new StandardXYZToolTipGenerator();
         StandardXYZToolTipGenerator g2
                 = new StandardXYZToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -154,9 +152,9 @@ public class StandardXYZToolTipGeneratorTest {
         StandardXYZToolTipGenerator g1 = new StandardXYZToolTipGenerator();
         StandardXYZToolTipGenerator g2 = (StandardXYZToolTipGenerator) 
                 g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -174,8 +172,7 @@ public class StandardXYZToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYZToolTipGenerator g1 = new StandardXYZToolTipGenerator();
-        StandardXYZToolTipGenerator g2 = (StandardXYZToolTipGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYZToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MonthTest.java
  * --------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -92,7 +92,7 @@ public class MonthTest {
     @Test
     public void testEqualsSelf() {
         Month month = new Month();
-        assertTrue(month.equals(month));
+        assertEquals(month, month);
     }
 
     /**
@@ -102,7 +102,7 @@ public class MonthTest {
     public void testEquals() {
         Month m1 = new Month(MonthConstants.MAY, 2002);
         Month m2 = new Month(MonthConstants.MAY, 2002);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -346,7 +346,7 @@ public class MonthTest {
     @Test
     public void testSerialization() {
         Month m1 = new Month(12, 1999);
-        Month m2 = (Month) TestUtils.serialised(m1);
+        Month m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -357,7 +357,7 @@ public class MonthTest {
     public void testHashcode() {
         Month m1 = new Month(2, 2003);
         Month m2 = new Month(2, 2003);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int h1 = m1.hashCode();
         int h2 = m2.hashCode();
         assertEquals(h1, h2);

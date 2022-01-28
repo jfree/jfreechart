@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * ChartChangeEventType.java
  * -------------------------
- * (C) Copyright 2005-2021, by David Gilbert.
+ * (C) Copyright 2005-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -60,7 +60,7 @@ public final class ChartChangeEventType implements Serializable {
             = new ChartChangeEventType("ChartChangeEventType.DATASET_UPDATED");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * KeyedObjectTest.java
  * --------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -42,10 +42,9 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link KeyedObject} class.
@@ -60,16 +59,16 @@ public class KeyedObjectTest {
 
         KeyedObject ko1 = new KeyedObject("Test", "Object");
         KeyedObject ko2 = new KeyedObject("Test", "Object");
-        assertTrue(ko1.equals(ko2));
-        assertTrue(ko2.equals(ko1));
+        assertEquals(ko1, ko2);
+        assertEquals(ko2, ko1);
 
         ko1 = new KeyedObject("Test 1", "Object");
         ko2 = new KeyedObject("Test 2", "Object");
-        assertFalse(ko1.equals(ko2));
+        assertNotEquals(ko1, ko2);
 
         ko1 = new KeyedObject("Test", "Object 1");
         ko2 = new KeyedObject("Test", "Object 2");
-        assertFalse(ko1.equals(ko2));
+        assertNotEquals(ko1, ko2);
 
     }
 
@@ -80,9 +79,9 @@ public class KeyedObjectTest {
     public void testCloning() throws CloneNotSupportedException {
         KeyedObject ko1 = new KeyedObject("Test", "Object");
         KeyedObject ko2 = (KeyedObject) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
     }
 
     /**
@@ -94,23 +93,23 @@ public class KeyedObjectTest {
         Object obj1 = new ArrayList();
         KeyedObject ko1 = new KeyedObject("Test", obj1);
         KeyedObject ko2 = (KeyedObject) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
 
         // the clone contains a reference to the original object
-        assertTrue(ko2.getObject() == obj1);
+        assertSame(ko2.getObject(), obj1);
 
         // CASE 2 - object is mutable AND PublicCloneable
         obj1 = new DefaultPieDataset();
         ko1 = new KeyedObject("Test", obj1);
         ko2 = (KeyedObject) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
 
         // the clone contains a reference to a CLONE of the original object
-        assertTrue(ko2.getObject() != obj1);
+        assertNotSame(ko2.getObject(), obj1);
     }
 
     /**
@@ -119,7 +118,7 @@ public class KeyedObjectTest {
     @Test
     public void testSerialization() {
         KeyedObject ko1 = new KeyedObject("Test", "Object");
-        KeyedObject ko2 = (KeyedObject) TestUtils.serialised(ko1);
+        KeyedObject ko2 = TestUtils.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 

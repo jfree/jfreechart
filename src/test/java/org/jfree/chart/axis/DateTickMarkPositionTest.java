@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * DateTickMarkPositionTest.java
  * -----------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DateTickMarkPosition} class.
@@ -56,11 +54,9 @@ public class DateTickMarkPositionTest {
         assertEquals(DateTickMarkPosition.START, DateTickMarkPosition.START);
         assertEquals(DateTickMarkPosition.MIDDLE, DateTickMarkPosition.MIDDLE);
         assertEquals(DateTickMarkPosition.END, DateTickMarkPosition.END);
-        assertFalse(DateTickMarkPosition.START.equals(null));
-        assertFalse(DateTickMarkPosition.START.equals(
-                DateTickMarkPosition.END));
-        assertFalse(DateTickMarkPosition.MIDDLE.equals(
-                DateTickMarkPosition.END));
+        assertNotEquals(null, DateTickMarkPosition.START);
+        assertNotEquals(DateTickMarkPosition.START, DateTickMarkPosition.END);
+        assertNotEquals(DateTickMarkPosition.MIDDLE, DateTickMarkPosition.END);
     }
 
     /**
@@ -70,7 +66,7 @@ public class DateTickMarkPositionTest {
     public void testHashCode() {
         DateTickMarkPosition a1 = DateTickMarkPosition.END;
         DateTickMarkPosition a2 = DateTickMarkPosition.END;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -82,9 +78,9 @@ public class DateTickMarkPositionTest {
     @Test
     public void testSerialization() {
         DateTickMarkPosition p1 = DateTickMarkPosition.MIDDLE;
-        DateTickMarkPosition p2 = (DateTickMarkPosition) TestUtils.serialised(p1);
+        DateTickMarkPosition p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
-        assertTrue(p1 == p2);
+        assertSame(p1, p2);
     }
 
 }

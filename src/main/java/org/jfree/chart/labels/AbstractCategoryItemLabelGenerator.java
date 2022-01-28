@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ---------------------------------------
  * AbstractCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2005-2021, by David Gilbert.
+ * (C) Copyright 2005-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -64,10 +64,10 @@ public abstract class AbstractCategoryItemLabelGenerator
      * combine the standard items:  {0} = series name, {1} = category,
      * {2} = value, {3} = value as a percentage of the column total.
      */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** The string used to represent a null value. */
-    private String nullValueString;
+    private final String nullValueString;
 
     /**
      * A number formatter used to preformat the value before it is passed to
@@ -85,7 +85,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * A number formatter used to preformat the percentage value before it is
      * passed to the MessageFormat object.
      */
-    private NumberFormat percentFormat;
+    private final NumberFormat percentFormat;
 
     /**
      * Creates a label generator with the specified number formatter.
@@ -262,16 +262,30 @@ public abstract class AbstractCategoryItemLabelGenerator
 
         AbstractCategoryItemLabelGenerator that
             = (AbstractCategoryItemLabelGenerator) obj;
-        if (!this.labelFormat.equals(that.labelFormat)) {
+        if (!Objects.equals(this.labelFormat, that.labelFormat)) {
             return false;
         }
         if (!Objects.equals(this.dateFormat, that.dateFormat)) {
             return false;
         }
+        if (!Objects.equals(this.nullValueString, that.nullValueString)) {
+            return false;
+        }
         if (!Objects.equals(this.numberFormat, that.numberFormat)) {
             return false;
         }
+        if (!Objects.equals(this.percentFormat, that.percentFormat)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return true;
+    }
+
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractCategoryItemLabelGenerator);
     }
 
     /**

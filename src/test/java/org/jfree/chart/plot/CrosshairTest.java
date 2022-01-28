@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * CrosshairTest.java
  * ------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,6 +49,8 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.PublicCloneable;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link Crosshair} class.
  */
@@ -65,85 +63,85 @@ public class CrosshairTest {
     public void testEquals() {
         Crosshair c1 = new Crosshair(1.0, Color.BLUE, new BasicStroke(1.0f));
         Crosshair c2 = new Crosshair(1.0, Color.BLUE, new BasicStroke(1.0f));
-        assertTrue(c1.equals(c1));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c1);
+        assertEquals(c2, c1);
 
         c1.setVisible(false);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setVisible(false);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setValue(2.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setValue(2.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setPaint(Color.RED);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setPaint(Color.RED);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setStroke(new BasicStroke(1.1f));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setStroke(new BasicStroke(1.1f));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelVisible(true);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelVisible(true);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelAnchor(RectangleAnchor.TOP_LEFT);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelAnchor(RectangleAnchor.TOP_LEFT);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelGenerator(new StandardCrosshairLabelGenerator("Value = {0}",
                 NumberFormat.getNumberInstance()));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelGenerator(new StandardCrosshairLabelGenerator("Value = {0}",
                 NumberFormat.getNumberInstance()));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelXOffset(11);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelXOffset(11);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelYOffset(22);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelYOffset(22);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelFont(new Font("Dialog", Font.PLAIN, 8));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelFont(new Font("Dialog", Font.PLAIN, 8));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelPaint(Color.RED);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelPaint(Color.RED);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelBackgroundPaint(Color.YELLOW);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelBackgroundPaint(Color.YELLOW);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelOutlineVisible(false);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelOutlineVisible(false);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelOutlineStroke(new BasicStroke(2.0f));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelOutlineStroke(new BasicStroke(2.0f));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setLabelOutlinePaint(Color.darkGray);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setLabelOutlinePaint(Color.darkGray);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
     }
 
@@ -154,8 +152,8 @@ public class CrosshairTest {
     public void testHashCode() {
         Crosshair c1 = new Crosshair(1.0);
         Crosshair c2 = new Crosshair(1.0);
-        assertTrue(c1.equals(c2));
-        assertTrue(c1.hashCode() == c2.hashCode());
+        assertEquals(c1, c2);
+        assertEquals(c1.hashCode(), c2.hashCode());
     }
 
     /**
@@ -166,9 +164,9 @@ public class CrosshairTest {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
         Crosshair c2 = (Crosshair) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
     }
 
     /**
@@ -187,7 +185,7 @@ public class CrosshairTest {
     public void testSerialization() {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
-        Crosshair c2 = (Crosshair) TestUtils.serialised(c1);
+        Crosshair c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

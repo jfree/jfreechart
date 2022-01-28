@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,14 @@
  * --------------------------
  * PlotRenderingInfoTest.java
  * --------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
@@ -46,6 +42,8 @@ import java.awt.geom.Rectangle2D;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PlotRenderingInfo} class.
@@ -59,52 +57,53 @@ public class PlotRenderingInfoTest {
     public void testEquals() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         PlotRenderingInfo p2 = new PlotRenderingInfo(new ChartRenderingInfo());
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1.setPlotArea(new Rectangle(2, 3, 4, 5));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setPlotArea(new Rectangle(2, 3, 4, 5));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setDataArea(new Rectangle(2, 4, 6, 8));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDataArea(new Rectangle(2, 4, 6, 8));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.addSubplotInfo(new PlotRenderingInfo(null));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.addSubplotInfo(new PlotRenderingInfo(null));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.getSubplotInfo(0).setDataArea(new Rectangle(1, 2, 3, 4));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.getSubplotInfo(0).setDataArea(new Rectangle(1, 2, 3, 4));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         p1.setPlotArea(new Rectangle2D.Double());
         PlotRenderingInfo p2 = (PlotRenderingInfo) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
 
         // check independence
         p1.getPlotArea().setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.getPlotArea().setRect(1.0, 2.0, 3.0, 4.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.getDataArea().setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.getDataArea().setRect(4.0, 3.0, 2.0, 1.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -113,7 +112,7 @@ public class PlotRenderingInfoTest {
     @Test
     public void testSerialization() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
-        PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtils.serialised(p1);
+        PlotRenderingInfo p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

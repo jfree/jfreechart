@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DialScale.java
  * --------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -52,7 +52,7 @@ public interface DialScale extends DialLayer {
      *
      * @see #angleToValue(double)
      */
-    public double valueToAngle(double value);
+    double valueToAngle(double value);
 
     /**
      * Converts an angle (in degrees) to a data value.
@@ -63,6 +63,6 @@ public interface DialScale extends DialLayer {
      *
      * @see #valueToAngle(double)
      */
-    public double angleToValue(double angle);
+    double angleToValue(double angle);
 
 }

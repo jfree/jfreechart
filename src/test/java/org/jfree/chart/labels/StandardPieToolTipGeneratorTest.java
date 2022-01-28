@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * StandardPieToolTipGeneratorTest.java
  * ------------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -47,6 +43,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardPieToolTipGenerator} class.
@@ -60,40 +58,40 @@ public class StandardPieToolTipGeneratorTest {
     public void testEquals() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = new StandardPieToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardPieToolTipGenerator("{0}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieToolTipGenerator("{0}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), new DecimalFormat("0.000%"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieToolTipGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), new DecimalFormat("0.000%"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -105,8 +103,8 @@ public class StandardPieToolTipGeneratorTest {
                 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2
                 = new StandardPieToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -117,11 +115,11 @@ public class StandardPieToolTipGeneratorTest {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator) 
                 g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.getNumberFormat() != g2.getNumberFormat());
-        assertTrue(g1.getPercentFormat() != g2.getPercentFormat());
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
+        assertNotSame(g1.getNumberFormat(), g2.getNumberFormat());
+        assertNotSame(g1.getPercentFormat(), g2.getPercentFormat());
     }
 
     /**
@@ -139,8 +137,7 @@ public class StandardPieToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
-        StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator)
-                TestUtils.serialised(g1);
+        StandardPieToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

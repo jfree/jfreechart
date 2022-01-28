@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * MinMaxCategoryRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,6 +48,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MinMaxCategoryRenderer} class.
@@ -69,21 +66,21 @@ public class MinMaxCategoryRendererTest {
         assertEquals(r1, r2);
 
         r1.setDrawLines(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawLines(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGroupStroke(new BasicStroke(1.2f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGroupStroke(new BasicStroke(1.2f));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -93,7 +90,7 @@ public class MinMaxCategoryRendererTest {
     public void testHashcode() {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
         MinMaxCategoryRenderer r2 = new MinMaxCategoryRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -106,9 +103,9 @@ public class MinMaxCategoryRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
         MinMaxCategoryRenderer r2 = (MinMaxCategoryRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -126,8 +123,7 @@ public class MinMaxCategoryRendererTest {
     @Test
     public void testSerialization() {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
-        MinMaxCategoryRenderer r2 = (MinMaxCategoryRenderer) 
-                TestUtils.serialised(r1);
+        MinMaxCategoryRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

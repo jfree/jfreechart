@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * YisSymbolic.java
  * ----------------
- * (C) Copyright 2006-2008, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2006-2022, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert;
@@ -47,7 +47,7 @@ public interface YisSymbolic {
      *
      * @return The symbolic values.
      */
-    public String[] getYSymbolicValues();
+    String[] getYSymbolicValues();
 
     /**
      * Returns the symbolic value of the data set specified by
@@ -58,7 +58,7 @@ public interface YisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getYSymbolicValue(int series, int item);
+    String getYSymbolicValue(int series, int item);
 
     /**
      * Returns the symbolic value linked with the specified {@code Integer}.
@@ -67,6 +67,6 @@ public interface YisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getYSymbolicValue(Integer val);
+    String getYSymbolicValue(Integer val);
 
 }

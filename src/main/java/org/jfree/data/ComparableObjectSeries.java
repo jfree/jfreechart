@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * ComparableObjectSeries.java
  * ---------------------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 import org.jfree.chart.util.Args;
 
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
@@ -331,8 +332,8 @@ public class ComparableObjectSeries extends Series
      * @param end  the end index (zero-based).
      */
     protected void delete(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            this.data.remove(start);
+        if (end >= start) {
+            this.data.subList(start, end + 1).clear();
         }
         fireSeriesChanged();
     }
@@ -438,6 +439,21 @@ public class ComparableObjectSeries extends Series
         result = 29 * result + (this.autoSort ? 1 : 0);
         result = 29 * result + (this.allowDuplicateXValues ? 1 : 0);
         return result;
+    }
+
+    /**
+     * Returns a clone of the series.
+     *
+     * @return A clone of the series.
+     *
+     * @throws CloneNotSupportedException if there is a cloning problem.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object clone() throws CloneNotSupportedException {
+        ComparableObjectSeries clone = (ComparableObjectSeries) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
+        return clone;
     }
 
 }

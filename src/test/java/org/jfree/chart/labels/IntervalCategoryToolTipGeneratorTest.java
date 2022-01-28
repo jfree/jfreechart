@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------------
  * IntervalCategoryToolTipGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.labels;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -49,6 +45,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link IntervalCategoryToolTipGenerator} class.
@@ -64,22 +62,22 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2
                 = new IntervalCategoryToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new DecimalFormat("0.000"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new DecimalFormat("0.000"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new SimpleDateFormat("d-MMM"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 new SimpleDateFormat("d-MMM"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -93,7 +91,7 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new StandardCategoryToolTipGenerator(
                 IntervalCategoryToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT_STRING,
                 NumberFormat.getInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**
@@ -105,8 +103,8 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2
                 = new IntervalCategoryToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -118,9 +116,9 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator();
         IntervalCategoryToolTipGenerator g2 
                 = (IntervalCategoryToolTipGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -141,8 +139,7 @@ public class IntervalCategoryToolTipGeneratorTest {
         IntervalCategoryToolTipGenerator g1
                 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 DateFormat.getInstance());
-        IntervalCategoryToolTipGenerator g2 = (IntervalCategoryToolTipGenerator)
-                TestUtils.serialised(g1);
+        IntervalCategoryToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

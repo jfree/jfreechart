@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ChartPanelTest.java
  * -------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,9 +36,6 @@
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -54,12 +51,14 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link ChartPanel} class.
  */
 public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
-    private List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
+    private final List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
 
     /**
      * Receives a chart change event and stores it in a list for later
@@ -78,7 +77,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @Test
     public void testConstructor1() {
         ChartPanel panel = new ChartPanel(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**
@@ -89,7 +88,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         JFreeChart chart = new JFreeChart(new XYPlot());
         ChartPanel panel = new ChartPanel(chart);
         panel.setChart(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**

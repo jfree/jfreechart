@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYPointerAnnotationTest.java
  * ----------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,23 +36,46 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
 
 /**
  * Tests for the {@link XYPointerAnnotation} class.
  */
 public class XYPointerAnnotationTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYPointerAnnotation.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .withPrefabValues(Font.class, createFont(true), createFont(false))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -63,71 +86,71 @@ public class XYPointerAnnotationTest {
                 Math.PI);
         XYPointerAnnotation a2 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new XYPointerAnnotation("Label2", 10.0, 20.0, Math.PI);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYPointerAnnotation("Label2", 10.0, 20.0, Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setX(11.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setX(11.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setY(22.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setY(22.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double angle;
         a1.setAngle(Math.PI / 4.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAngle(Math.PI / 4.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double tipRadius;
         a1.setTipRadius(20.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTipRadius(20.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double baseRadius;
         a1.setBaseRadius(5.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setBaseRadius(5.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double arrowLength;
         a1.setArrowLength(33.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowLength(33.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double arrowWidth;
         a1.setArrowWidth(9.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowWidth(9.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private Stroke arrowStroke;
         Stroke stroke = new BasicStroke(1.5f);
         a1.setArrowStroke(stroke);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowStroke(stroke);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private Paint arrowPaint;
         a1.setArrowPaint(Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowPaint(Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double labelOffset;
         a1.setLabelOffset(10.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setLabelOffset(10.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -139,7 +162,7 @@ public class XYPointerAnnotationTest {
                 Math.PI);
         XYPointerAnnotation a2 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -147,15 +170,16 @@ public class XYPointerAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException if there is an issue cloning
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        XYPointerAnnotation a2 = a2 = (XYPointerAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        XYPointerAnnotation a2 = (XYPointerAnnotation) a1.clone();
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -175,7 +199,7 @@ public class XYPointerAnnotationTest {
     public void testSerialization() {
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        XYPointerAnnotation a2 = (XYPointerAnnotation) TestUtils.serialised(a1);
+        XYPointerAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

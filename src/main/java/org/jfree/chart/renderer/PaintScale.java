@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PaintScale.java
  * ---------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -58,7 +58,7 @@ public interface PaintScale {
      *
      * @see #getUpperBound()
      */
-    public double getLowerBound();
+    double getLowerBound();
 
     /**
      * Returns the upper bound for the scale.
@@ -67,7 +67,7 @@ public interface PaintScale {
      *
      * @see #getLowerBound()
      */
-    public double getUpperBound();
+    double getUpperBound();
 
     /**
      * Returns a {@code Paint} instance for the specified value.
@@ -76,6 +76,6 @@ public interface PaintScale {
      *
      * @return A {@code Paint} instance (never {@code null}).
      */
-    public Paint getPaint(double value);
+    Paint getPaint(double value);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * QuarterTest.java
  * ----------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -89,7 +89,7 @@ public class QuarterTest {
     @Test
     public void testEqualsSelf() {
         Quarter quarter = new Quarter();
-        assertTrue(quarter.equals(quarter));
+        assertEquals(quarter, quarter);
     }
 
     /**
@@ -99,7 +99,7 @@ public class QuarterTest {
     public void testEquals() {
         Quarter q1 = new Quarter(2, 2002);
         Quarter q2 = new Quarter(2, 2002);
-        assertTrue(q1.equals(q2));
+        assertEquals(q1, q2);
     }
 
     /**
@@ -343,7 +343,7 @@ public class QuarterTest {
     @Test
     public void testSerialization() {
         Quarter q1 = new Quarter(4, 1999);
-        Quarter q2 = (Quarter) TestUtils.serialised(q1);
+        Quarter q2 = TestUtils.serialised(q1);
         assertEquals(q1, q2);
     }
 
@@ -354,7 +354,7 @@ public class QuarterTest {
     public void testHashcode() {
         Quarter q1 = new Quarter(2, 2003);
         Quarter q2 = new Quarter(2, 2003);
-        assertTrue(q1.equals(q2));
+        assertEquals(q1, q2);
         int h1 = q1.hashCode();
         int h2 = q2.hashCode();
         assertEquals(h1, h2);

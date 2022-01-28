@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * -----------------
  * XYItemEntity.java
  * -----------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -141,20 +142,48 @@ public class XYItemEntity extends ChartEntity {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
+        if (this == obj) {
             return true;
         }
-        if (obj instanceof XYItemEntity && super.equals(obj)) {
-            XYItemEntity ie = (XYItemEntity) obj;
-            if (this.series != ie.series) {
-                return false;
-            }
-            if (this.item != ie.item) {
-                return false;
-            }
-            return true;
+        if (!(obj instanceof XYItemEntity)) {
+            return false;
         }
-        return false;
+        XYItemEntity that = (XYItemEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        // compare fields in this class
+        if (this.series != that.series) {
+            return false;
+        }
+        if (this.item != that.item) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof XYItemEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 37 * hash + this.series;
+        hash = 37 * hash + this.item;
+        return hash;
     }
 
     /**

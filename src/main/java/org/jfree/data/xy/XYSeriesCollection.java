@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2001-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Aaron Metzger;
@@ -36,26 +36,24 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.data.*;
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.Series;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.DomainInfo;
-import org.jfree.data.DomainOrder;
-import org.jfree.data.Range;
-import org.jfree.data.RangeInfo;
-import org.jfree.data.UnknownKeyException;
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.Series;
 
 /**
  * Represents a collection of {@link XYSeries} objects that can be used as a
@@ -175,10 +173,10 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (int i = 0; i < this.data.size(); i++) {
-          XYSeries series = (XYSeries) this.data.get(i);
-          series.removeChangeListener(this);
-          series.removeVetoableChangeListener(this);
+        for (Object item : this.data) {
+            XYSeries series = (XYSeries) item;
+            series.removeChangeListener(this);
+            series.removeVetoableChangeListener(this);
         }
 
         // Remove all the series from the collection and notify listeners.
@@ -247,9 +245,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      */
     public XYSeries getSeries(Comparable key) {
         Args.nullNotPermitted(key, "key");
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            XYSeries series = (XYSeries) iterator.next();
+        for (Object item : this.data) {
+            XYSeries series = (XYSeries) item;
             if (key.equals(series.getKey())) {
                 return series;
             }
@@ -444,7 +441,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -474,7 +471,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -506,7 +503,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no
@@ -641,7 +638,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -668,7 +665,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -720,6 +717,34 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         Comparable key = (Comparable) e.getNewValue();
         if (getSeriesIndex(key) >= 0) {
             throw new PropertyVetoException("Duplicate key2", e);
+        }
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        for (Object item : this.data) {
+            XYSeries series = (XYSeries) item;
+            series.addChangeListener(this);
         }
     }
 

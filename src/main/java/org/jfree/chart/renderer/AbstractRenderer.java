@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2002-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
@@ -349,20 +349,18 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.defaultItemLabelsVisible = false;
         this.itemLabelInsets = DEFAULT_ITEM_LABEL_INSETS;
 
-        this.itemLabelFontMap = new HashMap<Integer, Font>();
+        this.itemLabelFontMap = new HashMap<>();
         this.defaultItemLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
         this.itemLabelPaintList = new PaintList();
         this.defaultItemLabelPaint = Color.BLACK;
         this.computeItemLabelContrastColor = false;
 
-        this.positiveItemLabelPositionMap 
-                = new HashMap<Integer, ItemLabelPosition>();
+        this.positiveItemLabelPositionMap = new HashMap<>();
         this.defaultPositiveItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER);
 
-        this.negativeItemLabelPositionMap 
-                = new HashMap<Integer, ItemLabelPosition>();
+        this.negativeItemLabelPositionMap = new HashMap<>();
         this.defaultNegativeItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER);
 
@@ -376,7 +374,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         this.treatLegendShapeAsLine = false;
 
-        this.legendTextFontMap = new HashMap<Integer, Font>();
+        this.legendTextFontMap = new HashMap<>();
         this.defaultLegendTextFont = null;
 
         this.legendTextPaint = new PaintList();
@@ -3024,8 +3022,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         // 'itemLabelFont' : immutable, no need to clone reference
         if (this.itemLabelFontMap != null) {
-            clone.itemLabelFontMap 
-                    = new HashMap<Integer, Font>(this.itemLabelFontMap);
+            clone.itemLabelFontMap = new HashMap<>(this.itemLabelFontMap);
         }
         // 'baseItemLabelFont' : immutable, no need to clone reference
 
@@ -3038,14 +3035,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         if (this.positiveItemLabelPositionMap != null) {
             clone.positiveItemLabelPositionMap 
-                    = new HashMap<Integer, ItemLabelPosition>(
-                    this.positiveItemLabelPositionMap);
+                    = new HashMap<>(this.positiveItemLabelPositionMap);
         }
 
         if (this.negativeItemLabelPositionMap != null) {
             clone.negativeItemLabelPositionMap 
-                    = new HashMap<Integer, ItemLabelPosition>(
-                    this.negativeItemLabelPositionMap);
+                    = new HashMap<>(this.negativeItemLabelPositionMap);
         }
 
         if (this.createEntitiesList != null) {
@@ -3058,8 +3053,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
         if (this.legendTextFontMap != null) {
             // Font objects are immutable so just shallow copy the map
-            clone.legendTextFontMap = new HashMap<Integer, Font>(
-                    this.legendTextFontMap);
+            clone.legendTextFontMap = new HashMap<>(this.legendTextFontMap);
         }
         if (this.legendTextPaint != null) {
             clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();

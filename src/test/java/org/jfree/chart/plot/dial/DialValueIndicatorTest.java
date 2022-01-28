@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DialValueIndicatorTest.java
  * ---------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.plot.dial;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,6 +48,8 @@ import org.jfree.chart.ui.TextAnchor;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link DialValueIndicator} class.
  */
@@ -64,97 +62,97 @@ public class DialValueIndicatorTest {
     public void testEquals() {
         DialValueIndicator i1 = new DialValueIndicator(0);
         DialValueIndicator i2 = new DialValueIndicator(0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // dataset index
         i1.setDatasetIndex(99);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setDatasetIndex(99);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // angle
         i1.setAngle(43);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setAngle(43);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // radius
         i1.setRadius(0.77);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setRadius(0.77);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // frameAnchor
         i1.setFrameAnchor(RectangleAnchor.TOP_LEFT);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setFrameAnchor(RectangleAnchor.TOP_LEFT);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // templateValue
         i1.setTemplateValue(1.23);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setTemplateValue(1.23);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // font
         i1.setFont(new Font("Dialog", Font.PLAIN, 7));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setFont(new Font("Dialog", Font.PLAIN, 7));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // paint
         i1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // backgroundPaint
         i1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.GREEN));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.GREEN));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // outlineStroke
         i1.setOutlineStroke(new BasicStroke(1.1f));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setOutlineStroke(new BasicStroke(1.1f));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // outlinePaint
         i1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // insets
         i1.setInsets(new RectangleInsets(1, 2, 3, 4));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setInsets(new RectangleInsets(1, 2, 3, 4));
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // valueAnchor
         i1.setValueAnchor(RectangleAnchor.BOTTOM_LEFT);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setValueAnchor(RectangleAnchor.BOTTOM_LEFT);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // textAnchor
         i1.setTextAnchor(TextAnchor.TOP_LEFT);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setTextAnchor(TextAnchor.TOP_LEFT);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         // check an inherited attribute
         i1.setVisible(false);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setVisible(false);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -164,7 +162,7 @@ public class DialValueIndicatorTest {
     public void testHashCode() {
         DialValueIndicator i1 = new DialValueIndicator(0);
         DialValueIndicator i2 = new DialValueIndicator(0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
         int h1 = i1.hashCode();
         int h2 = i2.hashCode();
         assertEquals(h1, h2);
@@ -180,9 +178,9 @@ public class DialValueIndicatorTest {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
         DialValueIndicator i2 = (DialValueIndicator) i1.clone();
-        assertTrue(i1 != i2);
-        assertTrue(i1.getClass() == i2.getClass());
-        assertTrue(i1.equals(i2));
+        assertNotSame(i1, i2);
+        assertSame(i1.getClass(), i2.getClass());
+        assertEquals(i1, i2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
@@ -198,8 +196,7 @@ public class DialValueIndicatorTest {
     @Test
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtils.serialised(i1);
+        DialValueIndicator i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

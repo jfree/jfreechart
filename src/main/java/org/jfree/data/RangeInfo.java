@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * RangeInfo.java
  * --------------
- * (C) Copyright 2000-2021, by David Gilbert.
+ * (C) Copyright 2000-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ public interface RangeInfo {
      *
      * @return The minimum value.
      */
-    public double getRangeLowerBound(boolean includeInterval);
+    double getRangeLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum y-value in the dataset.
@@ -60,7 +60,7 @@ public interface RangeInfo {
      *
      * @return The maximum value.
      */
-    public double getRangeUpperBound(boolean includeInterval);
+    double getRangeUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's range.
@@ -71,6 +71,6 @@ public interface RangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(boolean includeInterval);
+    Range getRangeBounds(boolean includeInterval);
 
 }

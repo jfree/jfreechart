@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * CategorySeriesHandler.java
  * --------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;;
@@ -50,13 +50,13 @@ public class CategorySeriesHandler extends DefaultHandler
         implements DatasetTags {
 
     /** The root handler. */
-    private RootHandler root;
+    private final RootHandler root;
 
     /** The series key. */
     private Comparable seriesKey;
 
     /** The values. */
-    private DefaultKeyedValues values;
+    private final DefaultKeyedValues values;
 
     /**
      * Creates a new item handler.

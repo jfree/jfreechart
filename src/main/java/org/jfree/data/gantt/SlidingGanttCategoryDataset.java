@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * --------------------------------
  * SlidingGanttCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2008-2021, by David Gilbert.
+ * (C) Copyright 2008-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -38,6 +38,7 @@ package org.jfree.data.gantt;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.UnknownKeyException;
@@ -597,10 +598,36 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
         if (this.maximumCategoryCount != that.maximumCategoryCount) {
             return false;
         }
-        if (!this.underlying.equals(that.underlying)) {
+        if (!Objects.equals(this.underlying, that.underlying)) {
             return false;
         }
-        return true;
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof SlidingGanttCategoryDataset);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 23 * hash + Objects.hashCode(this.underlying);
+        hash = 23 * hash + this.firstCategoryIndex;
+        hash = 23 * hash + this.maximumCategoryCount;
+        return hash;
     }
 
     /**

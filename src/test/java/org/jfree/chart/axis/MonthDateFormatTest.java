@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * MonthDateFormatTest.java
  * ------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,16 +36,14 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link MonthDateFormat} class.
@@ -59,8 +57,8 @@ public class MonthDateFormatTest {
     public void testEquals() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = new MonthDateFormat();
-        assertTrue(mf1.equals(mf2));
-        assertTrue(mf2.equals(mf1));
+        assertEquals(mf1, mf2);
+        assertEquals(mf2, mf1);
 
         boolean[] showYear1 = new boolean [12];
         showYear1[0] = true;
@@ -70,42 +68,42 @@ public class MonthDateFormatTest {
         // time zone
         mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.US, 1,
             showYear1, new SimpleDateFormat("yy"));
-        assertFalse(mf1.equals(mf2));
+        assertNotEquals(mf1, mf2);
         mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.US, 1,
             showYear1, new SimpleDateFormat("yy"));
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
 
         // locale
         mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 1,
             showYear1, new SimpleDateFormat("yy"));
-        assertFalse(mf1.equals(mf2));
+        assertNotEquals(mf1, mf2);
         mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 1,
             showYear1, new SimpleDateFormat("yy"));
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
 
         // chars
         mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear1, new SimpleDateFormat("yy"));
-        assertFalse(mf1.equals(mf2));
+        assertNotEquals(mf1, mf2);
         mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear1, new SimpleDateFormat("yy"));
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
 
         // showYear[]
         mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yy"));
-        assertFalse(mf1.equals(mf2));
+        assertNotEquals(mf1, mf2);
         mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yy"));
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
 
         // yearFormatter
         mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yyyy"));
-        assertFalse(mf1.equals(mf2));
+        assertNotEquals(mf1, mf2);
         mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yyyy"));
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
 
     }
 
@@ -116,7 +114,7 @@ public class MonthDateFormatTest {
     public void testHashCode() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = new MonthDateFormat();
-        assertTrue(mf1.equals(mf2));
+        assertEquals(mf1, mf2);
         int h1 = mf1.hashCode();
         int h2 = mf2.hashCode();
         assertEquals(h1, h2);
@@ -130,9 +128,9 @@ public class MonthDateFormatTest {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = null;
         mf2 = (MonthDateFormat) mf1.clone();
-        assertTrue(mf1 != mf2);
-        assertTrue(mf1.getClass() == mf2.getClass());
-        assertTrue(mf1.equals(mf2));
+        assertNotSame(mf1, mf2);
+        assertSame(mf1.getClass(), mf2.getClass());
+        assertEquals(mf1, mf2);
     }
 
     /**
@@ -141,8 +139,8 @@ public class MonthDateFormatTest {
     @Test
     public void testSerialization() {
         MonthDateFormat mf1 = new MonthDateFormat();
-        MonthDateFormat mf2 = (MonthDateFormat) TestUtils.serialised(mf1);
-        assertTrue(mf1.equals(mf2));
+        MonthDateFormat mf2 = TestUtils.serialised(mf1);
+        assertEquals(mf1, mf2);
     }
 
 }

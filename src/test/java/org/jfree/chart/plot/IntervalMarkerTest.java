@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,18 @@
  * -----------------------
  * IntervalMarkerTest.java
  * -----------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.awt.Font;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -48,6 +48,10 @@ import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link IntervalMarker} class.
@@ -67,6 +71,27 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     }
 
     /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(IntervalMarker.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(Font.class,
+                        new Font("SansSerif", Font.PLAIN, 10),
+                        new Font("Tahoma", Font.BOLD, 12))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+
+                .verify();
+    }
+
+    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     @Test
@@ -74,38 +99,39 @@ public class IntervalMarkerTest implements MarkerChangeListener {
 
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
         IntervalMarker m2 = new IntervalMarker(45.0, 50.0);
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new IntervalMarker(44.0, 50.0);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new IntervalMarker(44.0, 50.0);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new IntervalMarker(44.0, 55.0);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new IntervalMarker(44.0, 55.0);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         GradientPaintTransformer t = new StandardGradientPaintTransformer(
                 GradientPaintTransformType.HORIZONTAL);
         m1.setGradientPaintTransformer(t);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.setGradientPaintTransformer(t);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException if there is a cloning issue
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
         IntervalMarker m2 = (IntervalMarker) m1.clone();
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
     }
 
    /**
@@ -114,7 +140,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = (IntervalMarker) TestUtils.serialised(m1);
+        IntervalMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

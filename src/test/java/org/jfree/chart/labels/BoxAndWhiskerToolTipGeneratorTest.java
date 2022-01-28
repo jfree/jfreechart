@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------------
  * BoxAndWhiskerToolTipGeneratorTest.java
  * --------------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,16 +36,14 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BoxAndWhiskerToolTipGenerator} class.
@@ -61,25 +59,25 @@ public class BoxAndWhiskerToolTipGeneratorTest {
         // standard test
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = new BoxAndWhiskerToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         // tooltip format
         g1 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}",
                 new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerToolTipGenerator("{1} {2}",
                 new DecimalFormat("0.0"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}",
                 new DecimalFormat("0.0"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // Y format
         g1 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}",
                 new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}",
                 new DecimalFormat("0.00"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**
@@ -89,8 +87,8 @@ public class BoxAndWhiskerToolTipGeneratorTest {
     public void testHashCode() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = new BoxAndWhiskerToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -100,9 +98,9 @@ public class BoxAndWhiskerToolTipGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = (BoxAndWhiskerToolTipGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -120,8 +118,7 @@ public class BoxAndWhiskerToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
-        BoxAndWhiskerToolTipGenerator g2 = (BoxAndWhiskerToolTipGenerator) 
-                TestUtils.serialised(g1);
+        BoxAndWhiskerToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

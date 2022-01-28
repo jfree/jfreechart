@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * JFreeChart.java
  * ---------------
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
@@ -37,6 +37,7 @@
  *                   Klaus Rheinwald;
  *                   Nicolas Brodu;
  *                   Peter Kolb (patch 2603321);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  * NOTE: The above list of contributors lists only the people that have
  * contributed to this source file (JFreeChart.java) - for a list of ALL
@@ -1510,10 +1511,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             return false;
         }
         JFreeChart that = (JFreeChart) obj;
-        if (!this.renderingHints.equals(that.renderingHints)) {
+        if (!Objects.equals(this.renderingHints, that.renderingHints)) {
             return false;
         }
         if (this.borderVisible != that.borderVisible) {
+            return false;
+        }
+        if (this.elementHinting != that.elementHinting) {
             return false;
         }
         if (!Objects.equals(this.borderStroke, that.borderStroke)) {
@@ -1522,7 +1526,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
             return false;
         }
-        if (!this.padding.equals(that.padding)) {
+        if (!Objects.equals(this.padding, that.padding)) {
             return false;
         }
         if (!Objects.equals(this.title, that.title)) {
@@ -1534,9 +1538,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!Objects.equals(this.plot, that.plot)) {
             return false;
         }
-        if (!PaintUtils.equal(
-            this.backgroundPaint, that.backgroundPaint
-        )) {
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
         if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
@@ -1545,13 +1547,38 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
             return false;
         }
-        if (this.backgroundImageAlpha != that.backgroundImageAlpha) {
+        if (Float.floatToIntBits(this.backgroundImageAlpha) !=
+            Float.floatToIntBits(that.backgroundImageAlpha)) {
             return false;
         }
         if (this.notify != that.notify) {
             return false;
         }
+        if (!Objects.equals(this.id, that.id)) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.renderingHints);
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + (this.borderVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.borderStroke);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.borderPaint);
+        hash = 43 * hash + Objects.hashCode(this.padding);
+        hash = 43 * hash + Objects.hashCode(this.title);
+        hash = 43 * hash + Objects.hashCode(this.subtitles);
+        hash = 43 * hash + Objects.hashCode(this.plot);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        hash = 43 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 43 * hash + this.backgroundImageAlignment;
+        hash = 43 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 43 * hash + (this.notify ? 1 : 0);
+        hash = 43 * hash + (this.elementHinting ? 1 : 0);
+        return hash;
     }
 
     /**
@@ -1623,7 +1650,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             chart.title.addChangeListener(chart);
         }
 
-        chart.subtitles = new ArrayList();
+        chart.subtitles = new ArrayList<>();
         for (int i = 0; i < getSubtitleCount(); i++) {
             Title subtitle = (Title) getSubtitle(i).clone();
             chart.subtitles.add(subtitle);

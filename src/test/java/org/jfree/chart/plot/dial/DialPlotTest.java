@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DialPlotTest.java
  * -----------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,12 +35,6 @@
  */
 
 package org.jfree.chart.plot.dial;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -50,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DialPlot} class.
@@ -76,57 +72,57 @@ public class DialPlotTest implements PlotChangeListener {
     public void testEquals() {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = new DialPlot();
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // background
         p1.setBackground(new DialBackground(Color.GREEN));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setBackground(new DialBackground(Color.GREEN));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setBackground(null);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setBackground(null);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // dial cap
         DialCap cap1 = new DialCap();
         cap1.setFillPaint(Color.RED);
         p1.setCap(cap1);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         DialCap cap2 = new DialCap();
         cap2.setFillPaint(Color.RED);
         p2.setCap(cap2);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setCap(null);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setCap(null);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // frame
         StandardDialFrame f1 = new StandardDialFrame();
         f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.WHITE));
         p1.setDialFrame(f1);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         StandardDialFrame f2 = new StandardDialFrame();
         f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.WHITE));
         p2.setDialFrame(f2);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // view
         p1.setView(0.2, 0.0, 0.8, 1.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setView(0.2, 0.0, 0.8, 1.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         // layer
         p1.addLayer(new StandardDialScale());
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.addLayer(new StandardDialScale());
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -136,7 +132,7 @@ public class DialPlotTest implements PlotChangeListener {
     public void testHashCode() {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = new DialPlot();
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
         assertEquals(h1, h2);
@@ -149,9 +145,9 @@ public class DialPlotTest implements PlotChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = (DialPlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
     }
 
 
@@ -161,7 +157,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testSerialization() {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) TestUtils.serialised(p1);
+        DialPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

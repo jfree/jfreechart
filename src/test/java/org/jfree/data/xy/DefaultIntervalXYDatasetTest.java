@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * DefaultIntervalXYDatasetTest.java
  * ---------------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link DefaultIntervalXYDataset} class.
@@ -203,13 +201,13 @@ public class DefaultIntervalXYDatasetTest {
     public void testEquals() {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
         DefaultIntervalXYDataset d2 = new DefaultIntervalXYDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1 = createSampleDataset1();
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2 = createSampleDataset1();
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -219,16 +217,16 @@ public class DefaultIntervalXYDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
         DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
         d2 = (DefaultIntervalXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -247,13 +245,13 @@ public class DefaultIntervalXYDatasetTest {
                 y1End};
         d1.addSeries("S1", data1);
         DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check independence
         x1[0] = 111.1;
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -271,13 +269,12 @@ public class DefaultIntervalXYDatasetTest {
     @Test
     public void testSerialization() {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultIntervalXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultIntervalXYDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

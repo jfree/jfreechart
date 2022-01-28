@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------------
  * DefaultStatisticalCategoryDatasetTest.java
  * ------------------------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,17 +35,14 @@
  */
 
 package org.jfree.data.statistics;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
@@ -102,8 +99,8 @@ public class DefaultStatisticalCategoryDatasetTest {
                 = new DefaultStatisticalCategoryDataset();
         DefaultStatisticalCategoryDataset d2
                 = new DefaultStatisticalCategoryDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
     }
 
@@ -125,13 +122,13 @@ public class DefaultStatisticalCategoryDatasetTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check independence
         d1.add(1.1, 2.2, "R3", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -145,8 +142,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, 5.5, "R1", "C3");
         d1.add(6.6, null, "R2", "C3");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -158,8 +154,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         DefaultStatisticalCategoryDataset d1
             = new DefaultStatisticalCategoryDataset();
         d1.add(1.2, 3.4, "Row 1", "Column 1");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

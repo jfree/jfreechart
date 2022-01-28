@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * ToolTipTagFragmentGenerator.java
  * --------------------------------
- * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2022, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  *
@@ -55,6 +55,6 @@ public interface ToolTipTagFragmentGenerator {
      *
      * @return The formatted HTML area tag attribute(s).
      */
-    public String generateToolTipFragment(String toolTipText);
+    String generateToolTipFragment(String toolTipText);
 
 }

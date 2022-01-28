@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -233,35 +233,54 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (obj == this) { // simple case
             return true;
         }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYDrawableAnnotation)) {
             return false;
         }
         XYDrawableAnnotation that = (XYDrawableAnnotation) obj;
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
-        if (this.displayWidth != that.displayWidth) {
+        if (Double.doubleToLongBits(this.displayWidth) != 
+            Double.doubleToLongBits(that.displayWidth)) {
             return false;
         }
-        if (this.displayHeight != that.displayHeight) {
+        if (Double.doubleToLongBits(this.displayHeight) != 
+            Double.doubleToLongBits(that.displayHeight)) {
             return false;
         }
-        if (this.drawScaleFactor != that.drawScaleFactor) {
+        if (Double.doubleToLongBits(this.drawScaleFactor) != 
+            Double.doubleToLongBits(that.drawScaleFactor)) {
             return false;
         }
         if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYDrawableAnnotation);
+    }
+    
     /**
      * Returns a hash code.
      *
@@ -269,17 +288,19 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayWidth);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayHeight);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.drawScaleFactor) ^ 
+                                 (Double.doubleToLongBits(this.drawScaleFactor) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.displayWidth) ^ 
+                                 (Double.doubleToLongBits(this.displayWidth) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.displayHeight) ^ 
+                                 (Double.doubleToLongBits(this.displayHeight) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.drawable);
+        return hash;
     }
 
     /**

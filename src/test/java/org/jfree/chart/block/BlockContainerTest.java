@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,45 @@
  * -----------------------
  * BlockContainerTest.java
  * -----------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BlockContainer} class.
  */
 public class BlockContainerTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(BlockContainer.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Rectangle2D.class,
+                              TestUtils.createR2D(true),
+                              TestUtils.createR2D(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -55,31 +74,32 @@ public class BlockContainerTest {
     public void testEquals() {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         BlockContainer c2 = new BlockContainer(new FlowArrangement());
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c2));
+        assertEquals(c1, c2);
+        assertEquals(c2, c2);
 
         c1.setArrangement(new ColumnArrangement());
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setArrangement(new ColumnArrangement());
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.add(new EmptyBlock(1.2, 3.4));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.add(new EmptyBlock(1.2, 3.4));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         c1.add(new EmptyBlock(1.2, 3.4));
         BlockContainer c2 = (BlockContainer) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
     }
 
     /**
@@ -89,7 +109,7 @@ public class BlockContainerTest {
     public void testSerialization() {
         BlockContainer c1 = new BlockContainer();
         c1.add(new EmptyBlock(1.2, 3.4));
-        BlockContainer c2 = (BlockContainer) TestUtils.serialised(c1);
+        BlockContainer c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

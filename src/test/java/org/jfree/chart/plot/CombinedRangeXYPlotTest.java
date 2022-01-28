@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * CombinedRangeXYPlotTest.java
  * ----------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,9 +35,6 @@
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -58,6 +55,8 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CombinedRangeXYPlot} class.
@@ -84,8 +83,8 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     public void testEquals() {
         CombinedRangeXYPlot plot1 = createPlot();
         CombinedRangeXYPlot plot2 = createPlot();
-        assertTrue(plot1.equals(plot2));
-        assertTrue(plot2.equals(plot1));
+        assertEquals(plot1, plot2);
+        assertEquals(plot2, plot1);
     }
 
     /**
@@ -101,7 +100,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
         List plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertSame(plots.get(0), plot1);
     }
 
     /**
@@ -111,9 +110,9 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         CombinedRangeXYPlot plot1 = createPlot();
         CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) plot1.clone();
-        assertTrue(plot1 != plot2);
-        assertTrue(plot1.getClass() == plot2.getClass());
-        assertTrue(plot1.equals(plot2));
+        assertNotSame(plot1, plot2);
+        assertSame(plot1.getClass(), plot2.getClass());
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -122,8 +121,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeXYPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -136,7 +134,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         CombinedRangeXYPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = (XYPlot) plot.getSubplots().get(0);
+        XYPlot subplot1 = plot.getSubplots().get(0);
         NumberAxis xAxis = (NumberAxis) subplot1.getDomainAxis();
         xAxis.setAutoRangeIncludesZero(!xAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());

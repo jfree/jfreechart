@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ------------------------------
  * CategoryPointerAnnotation.java
  * ------------------------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -60,6 +61,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -435,35 +437,56 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         if (!(obj instanceof CategoryPointerAnnotation)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         CategoryPointerAnnotation that = (CategoryPointerAnnotation) obj;
-        if (this.angle != that.angle) {
+        if (Double.doubleToLongBits(this.angle) != 
+            Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (this.tipRadius != that.tipRadius) {
+        if (Double.doubleToLongBits(this.tipRadius) != 
+            Double.doubleToLongBits(that.tipRadius)) {
             return false;
         }
-        if (this.baseRadius != that.baseRadius) {
+        if (Double.doubleToLongBits(this.baseRadius) != 
+            Double.doubleToLongBits(that.baseRadius)) {
             return false;
         }
-        if (this.arrowLength != that.arrowLength) {
+        if (Double.doubleToLongBits(this.arrowLength) != 
+            Double.doubleToLongBits(that.arrowLength)) {
             return false;
         }
-        if (this.arrowWidth != that.arrowWidth) {
+        if (Double.doubleToLongBits(this.arrowWidth) != 
+            Double.doubleToLongBits(that.arrowWidth)) {
             return false;
         }
-        if (!this.arrowPaint.equals(that.arrowPaint)) {
+        if (!PaintUtils.equal(this.arrowPaint, that.arrowPaint)) {
             return false;
         }
         if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
             return false;
         }
-        if (this.labelOffset != that.labelOffset) {
+        if (Double.doubleToLongBits(this.labelOffset) != 
+            Double.doubleToLongBits(that.labelOffset)) {
             return false;
         }
-        return true;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryPointerAnnotation);
     }
 
     /**
@@ -473,7 +496,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
         long temp = Double.doubleToLongBits(this.angle);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.tipRadius);
@@ -485,7 +508,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         result = 37 * result + HashUtils.hashCodeForPaint(this.arrowPaint);
-        result = 37 * result + this.arrowStroke.hashCode();
+        result = 37 * result + Objects.hashCode(this.arrowStroke);
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * StandardPieURLGeneratorTest.java
  * --------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,13 @@
 
 package org.jfree.chart.urls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardPieURLGenerator} class.
@@ -58,32 +56,32 @@ public class StandardPieURLGeneratorTest {
     public void testEquals() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator();
         StandardPieURLGenerator g2 = new StandardPieURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieURLGenerator("prefix", "category", "index");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieURLGenerator("prefix", "category", "index");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieURLGenerator("prefix2", "category", "index");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieURLGenerator("prefix2", "category", "index");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieURLGenerator("prefix2", "category2", "index");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieURLGenerator("prefix2", "category2", "index");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieURLGenerator("prefix2", "category2", "index2");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieURLGenerator("prefix2", "category2", "index2");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieURLGenerator("prefix2", "category2", null);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieURLGenerator("prefix2", "category2", null);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -104,8 +102,7 @@ public class StandardPieURLGeneratorTest {
     public void testSerialization() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "index.html?", "cat");
-        StandardPieURLGenerator g2 = (StandardPieURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

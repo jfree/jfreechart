@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -----------------------------------------
  * StandardCategorySeriesLabelGenerator.java
  * -----------------------------------------
- * (C) Copyright 2005-2021, by David Gilbert.
+ * (C) Copyright 2005-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -38,8 +38,8 @@ package org.jfree.chart.labels;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
@@ -138,7 +138,7 @@ public class StandardCategorySeriesLabelGenerator implements
         }
         StandardCategorySeriesLabelGenerator that
                 = (StandardCategorySeriesLabelGenerator) obj;
-        if (!this.formatPattern.equals(that.formatPattern)) {
+        if (!Objects.equals(this.formatPattern, that.formatPattern)) {
             return false;
         }
         return true;
@@ -151,9 +151,9 @@ public class StandardCategorySeriesLabelGenerator implements
      */
     @Override
     public int hashCode() {
-        int result = 127;
-        result = HashUtils.hashCode(result, this.formatPattern);
-        return result;
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.formatPattern);
+        return hash;
     }
 
 }

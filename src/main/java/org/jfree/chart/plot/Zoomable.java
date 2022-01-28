@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * Zoomable.java
  * -------------
  *
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Rune Fauske;
@@ -55,7 +55,7 @@ public interface Zoomable {
      *
      * @see #isRangeZoomable()
      */
-    public boolean isDomainZoomable();
+    boolean isDomainZoomable();
 
     /**
      * Returns {@code true} if the plot's range is zoomable, and {@code false} 
@@ -65,14 +65,14 @@ public interface Zoomable {
      *
      * @see #isDomainZoomable()
      */
-    public boolean isRangeZoomable();
+    boolean isRangeZoomable();
 
     /**
      * Returns the orientation of the plot.
      *
      * @return The orientation (never {@code null}).
      */
-    public PlotOrientation getOrientation();
+    PlotOrientation getOrientation();
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
@@ -86,8 +86,8 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
-    public void zoomDomainAxes(double factor, PlotRenderingInfo state,
-            Point2D source);
+    void zoomDomainAxes(double factor, PlotRenderingInfo state,
+                        Point2D source);
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
@@ -102,8 +102,8 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
      */
-    public void zoomDomainAxes(double factor, PlotRenderingInfo state,
-            Point2D source, boolean useAnchor);
+    void zoomDomainAxes(double factor, PlotRenderingInfo state,
+                        Point2D source, boolean useAnchor);
 
     /**
      * Zooms in on the domain axes.  The {@code source} point can be used
@@ -116,8 +116,8 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)
      */
-    public void zoomDomainAxes(double lowerPercent, double upperPercent,
-            PlotRenderingInfo state, Point2D source);
+    void zoomDomainAxes(double lowerPercent, double upperPercent,
+                        PlotRenderingInfo state, Point2D source);
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
@@ -131,8 +131,8 @@ public interface Zoomable {
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
      */
-    public void zoomRangeAxes(double factor, PlotRenderingInfo state,
-            Point2D source);
+    void zoomRangeAxes(double factor, PlotRenderingInfo state,
+                       Point2D source);
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
@@ -147,8 +147,8 @@ public interface Zoomable {
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
      */
-    public void zoomRangeAxes(double factor, PlotRenderingInfo state,
-            Point2D source, boolean useAnchor);
+    void zoomRangeAxes(double factor, PlotRenderingInfo state,
+                       Point2D source, boolean useAnchor);
 
     /**
      * Zooms in on the range axes.  The {@code source} point can be used
@@ -161,7 +161,7 @@ public interface Zoomable {
      *
      * @see #zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)
      */
-    public void zoomRangeAxes(double lowerPercent, double upperPercent,
-            PlotRenderingInfo state, Point2D source);
+    void zoomRangeAxes(double lowerPercent, double upperPercent,
+                       PlotRenderingInfo state, Point2D source);
 
 }

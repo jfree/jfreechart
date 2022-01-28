@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * MatrixSeriesTest.java
  * ---------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -60,28 +58,28 @@ public class MatrixSeriesTest {
         MatrixSeries m2 = new MatrixSeries("Test", 8, 3);
         m2.update(0, 0, 11.0);
         m2.update(7, 2, 22.0);
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new MatrixSeries("Test 2", 8, 3);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MatrixSeries("Test 2", 8, 3);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new MatrixSeries("Test 2", 10, 3);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MatrixSeries("Test 2", 10, 3);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new MatrixSeries("Test 2", 10, 5);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MatrixSeries("Test 2", 10, 5);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.update(0, 0, 99);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.update(0, 0, 99);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -93,9 +91,9 @@ public class MatrixSeriesTest {
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
         MatrixSeries m2 = (MatrixSeries) m1.clone();
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
     }
 
     /**
@@ -106,7 +104,7 @@ public class MatrixSeriesTest {
         MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = (MatrixSeries) TestUtils.serialised(m1);
+        MatrixSeries m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

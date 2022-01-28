@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * KeyedValues2D.java
  * ------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
-    public Comparable getRowKey(int row);
+    Comparable getRowKey(int row);
 
     /**
      * Returns the row index for a given key.
@@ -62,14 +62,14 @@ public interface KeyedValues2D extends Values2D {
      *
      * @return The row index, or {@code -1} if the key is unrecognised.
      */
-    public int getRowIndex(Comparable key);
+    int getRowIndex(Comparable key);
 
     /**
      * Returns the row keys.
      *
      * @return The keys.
      */
-    public List getRowKeys();
+    List getRowKeys();
 
     /**
      * Returns the column key for a given index.
@@ -80,7 +80,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
-    public Comparable getColumnKey(int column);
+    Comparable getColumnKey(int column);
 
     /**
      * Returns the column index for a given key.
@@ -89,14 +89,14 @@ public interface KeyedValues2D extends Values2D {
      *
      * @return The column index, or {@code -1} if the key is unrecognised.
      */
-    public int getColumnIndex(Comparable key);
+    int getColumnIndex(Comparable key);
 
     /**
      * Returns the column keys.
      *
      * @return The keys.
      */
-    public List getColumnKeys();
+    List getColumnKeys();
 
     /**
      * Returns the value associated with the specified keys.
@@ -108,6 +108,6 @@ public interface KeyedValues2D extends Values2D {
      *
      * @throws UnknownKeyException if either key is not recognised.
      */
-    public Number getValue(Comparable rowKey, Comparable columnKey);
+    Number getValue(Comparable rowKey, Comparable columnKey);
 
 }

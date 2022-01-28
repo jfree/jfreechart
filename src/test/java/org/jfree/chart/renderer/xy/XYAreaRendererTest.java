@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYAreaRendererTest.java
  * -----------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.geom.Rectangle2D;
 
@@ -56,6 +51,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link XYAreaRenderer} class.
  */
@@ -71,51 +68,51 @@ public class XYAreaRendererTest {
         assertEquals(r1, r2);
 
         r1 = new XYAreaRenderer(XYAreaRenderer.AREA_AND_SHAPES);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYAreaRenderer(XYAreaRenderer.AREA_AND_SHAPES);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new XYAreaRenderer(XYAreaRenderer.AREA);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYAreaRenderer(XYAreaRenderer.AREA);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new XYAreaRenderer(XYAreaRenderer.LINES);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYAreaRenderer(XYAreaRenderer.LINES);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new XYAreaRenderer(XYAreaRenderer.SHAPES);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYAreaRenderer(XYAreaRenderer.SHAPES);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1 = new XYAreaRenderer(XYAreaRenderer.SHAPES_AND_LINES);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYAreaRenderer(XYAreaRenderer.SHAPES_AND_LINES);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setOutline(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setOutline(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseFillPaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseFillPaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGradientTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGradientTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -125,13 +122,13 @@ public class XYAreaRendererTest {
     public void testHashcode() {
         XYAreaRenderer r1 = new XYAreaRenderer();
         XYAreaRenderer r2 = new XYAreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
 
         r2.setUseFillPaint(true);
-        assertFalse(r1.hashCode() == r2.hashCode());
+        assertNotEquals(r1.hashCode(), r2.hashCode());
     }
 
     /**
@@ -143,15 +140,15 @@ public class XYAreaRendererTest {
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendArea(rect1);
         XYAreaRenderer r2 = (XYAreaRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         rect1.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -169,7 +166,7 @@ public class XYAreaRendererTest {
     @Test
     public void testSerialization() {
         XYAreaRenderer r1 = new XYAreaRenderer();
-        XYAreaRenderer r2 = (XYAreaRenderer) TestUtils.serialised(r1);
+        XYAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

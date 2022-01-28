@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * KeyedValues.java
  * ----------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
@@ -62,7 +62,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
-    public K getKey(int index);
+    K getKey(int index);
 
     /**
      * Returns the index for a given key.
@@ -73,7 +73,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @throws IllegalArgumentException if {@code key} is {@code null}.
      */
-    public int getIndex(K key);
+    int getIndex(K key);
 
     /**
      * Returns the keys for the values in the collection.  Note that you can
@@ -83,7 +83,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @return The keys (never {@code null}).
      */
-    public List<K> getKeys();
+    List<K> getKeys();
 
     /**
      * Returns the value for a given key.
@@ -94,6 +94,6 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
-    public Number getValue(K key);
+    Number getValue(K key);
 
 }

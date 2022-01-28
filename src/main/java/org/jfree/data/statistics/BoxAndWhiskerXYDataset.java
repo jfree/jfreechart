@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * BoxAndWhiskerXYDataset.java
  * ---------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2022, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -58,7 +58,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The mean for the specified series and item.
      */
-    public Number getMeanValue(int series, int item);
+    Number getMeanValue(int series, int item);
 
     /**
      * Returns the median-value for the specified series and item.
@@ -68,7 +68,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The median-value for the specified series and item.
      */
-    public Number getMedianValue(int series, int item);
+    Number getMedianValue(int series, int item);
 
     /**
      * Returns the Q1 median-value for the specified series and item.
@@ -78,7 +78,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The Q1 median-value for the specified series and item.
      */
-    public Number getQ1Value(int series, int item);
+    Number getQ1Value(int series, int item);
 
     /**
      * Returns the Q3 median-value for the specified series and item.
@@ -88,7 +88,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The Q3 median-value for the specified series and item.
      */
-    public Number getQ3Value(int series, int item);
+    Number getQ3Value(int series, int item);
 
     /**
      * Returns the min-value for the specified series and item.
@@ -98,7 +98,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The min-value for the specified series and item.
      */
-    public Number getMinRegularValue(int series, int item);
+    Number getMinRegularValue(int series, int item);
 
     /**
      * Returns the max-value for the specified series and item.
@@ -108,7 +108,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return The max-value for the specified series and item.
      */
-    public Number getMaxRegularValue(int series, int item);
+    Number getMaxRegularValue(int series, int item);
 
     /**
      * Returns the minimum value which is not a farout.
@@ -117,7 +117,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return A {@code Number} representing the maximum non-farout value.
      */
-    public Number getMinOutlier(int series, int item);
+    Number getMinOutlier(int series, int item);
 
     /**
      * Returns the maximum value which is not a farout, ie Q3 + (interquartile
@@ -128,7 +128,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      *
      * @return A {@code Number} representing the maximum non-farout value.
      */
-    public Number getMaxOutlier(int series, int item);
+    Number getMaxOutlier(int series, int item);
 
     /**
      * Returns a list of outliers for the specified series and item.
@@ -139,7 +139,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @return The list of outliers for the specified series and item
      *         (possibly {@code null}).
      */
-    public List getOutliers(int series, int item);
+    List getOutliers(int series, int item);
 
     /**
      * Returns the value used as the outlier coefficient. The outlier
@@ -151,7 +151,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @return A {@code double} representing the value used to calculate
      *         outliers
      */
-    public double getOutlierCoefficient();
+    double getOutlierCoefficient();
 
     /**
      * Returns the value used as the farout coefficient. The farout coefficient
@@ -160,6 +160,6 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @return A {@code double} representing the value used to calculate
      *         farouts
      */
-    public double getFaroutCoefficient();
+    double getFaroutCoefficient();
 
 }

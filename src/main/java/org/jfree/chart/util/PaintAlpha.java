@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PaintAlpha.java
  * ---------------
- * (C) Copyright 2011-2021 by DaveLaw and Contributors.
+ * (C) Copyright 2011-2022, by DaveLaw and Contributors.
  *
  * Original Author:  DaveLaw (dave ATT davelaw D0TT de);
  * Contributor(s):   David Gilbert;
@@ -109,7 +109,7 @@ public class PaintAlpha {
         if (paint instanceof Color) {
             return darker((Color) paint);
         }
-        if (legacyAlpha == true) {
+        if (legacyAlpha) {
             /*
              * Legacy? Just return the original Paint.
              * (this corresponds EXACTLY to how Paints used to be darkened)

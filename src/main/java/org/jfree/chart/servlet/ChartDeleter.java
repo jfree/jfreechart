@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartDeleter.java
  * -----------------
-  * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+  * (C) Copyright 2002-2022, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -51,7 +51,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 public class ChartDeleter implements HttpSessionBindingListener, Serializable {
 
     /** The chart names. */
-    private List chartNames = new java.util.ArrayList();
+    private final List chartNames = new java.util.ArrayList();
 
     /**
      * Blank constructor.

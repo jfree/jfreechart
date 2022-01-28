@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StandardXYURLGeneratorTest.java
  * -------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -55,8 +55,7 @@ public class StandardXYURLGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
-        StandardXYURLGenerator g2 = (StandardXYURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

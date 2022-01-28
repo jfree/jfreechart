@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,17 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008-2021, by David Gilbert.
+ * (C) Copyright 2008-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
@@ -443,16 +444,44 @@ public class XYTaskDataset extends AbstractXYDataset
             return false;
         }
         XYTaskDataset that = (XYTaskDataset) obj;
-        if (this.seriesWidth != that.seriesWidth) {
+        if (Double.doubleToLongBits(this.seriesWidth) !=
+            Double.doubleToLongBits(that.seriesWidth)) {
             return false;
         }
         if (this.transposed != that.transposed) {
             return false;
         }
-        if (!this.underlying.equals(that.underlying)) {
+        if (!Objects.equals(this.underlying, that.underlying)) {
             return false;
         }
-        return true;
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYTaskDataset);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 97 * hash + Objects.hashCode(this.underlying);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.seriesWidth) ^
+                                  (Double.doubleToLongBits(this.seriesWidth) >>> 32));
+        hash = 97 * hash + (this.transposed ? 1 : 0);
+        return hash;
     }
 
     /**

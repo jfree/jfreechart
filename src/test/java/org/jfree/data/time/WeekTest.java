@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * WeekTest.java
  * -------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,11 +36,6 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,12 +43,12 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Week} class.
@@ -88,21 +83,13 @@ public class WeekTest {
      */
     @Test
     public void testConstructorArgumentChecks() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Week(0, 2020);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Week(0, 2020));
         assertTrue(exception.getMessage().contains("week"));
-        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
-             new Week(54, 2020);
-        });
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> new Week(54, 2020));
         assertTrue(exception2.getMessage().contains("week"));
-        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> {
-            new Week(0, new Year(2020));
-        });
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> new Week(0, new Year(2020)));
         assertTrue(exception3.getMessage().contains("week"));
-        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> {
-             new Week(54, new Year(2020));
-        });
+        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> new Week(54, new Year(2020)));
         assertTrue(exception2.getMessage().contains("week"));
     }
     
@@ -113,18 +100,18 @@ public class WeekTest {
     public void testEquals() {
         Week w1 = new Week(1, 2002);
         Week w2 = new Week(1, 2002);
-        assertTrue(w1.equals(w2));
-        assertTrue(w2.equals(w1));
+        assertEquals(w1, w2);
+        assertEquals(w2, w1);
 
         w1 = new Week(2, 2002);
-        assertFalse(w1.equals(w2));
+        assertNotEquals(w1, w2);
         w2 = new Week(2, 2002);
-        assertTrue(w1.equals(w2));
+        assertEquals(w1, w2);
 
         w1 = new Week(2, 2003);
-        assertFalse(w1.equals(w2));
+        assertNotEquals(w1, w2);
         w2 = new Week(2, 2003);
-        assertTrue(w1.equals(w2));
+        assertEquals(w1, w2);
     }
 
     /**
@@ -169,7 +156,7 @@ public class WeekTest {
     @Test
     public void testSerialization() {
         Week w1 = new Week(24, 1999);
-        Week w2 = (Week) TestUtils.serialised(w1);
+        Week w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
     }
 
@@ -180,7 +167,7 @@ public class WeekTest {
     public void testHashcode() {
         Week w1 = new Week(2, 2003);
         Week w2 = new Week(2, 2003);
-        assertTrue(w1.equals(w2));
+        assertEquals(w1, w2);
         int h1 = w1.hashCode();
         int h2 = w2.hashCode();
         assertEquals(h1, h2);
@@ -279,7 +266,7 @@ public class WeekTest {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
         try {
-            Week w = new Week(new Date(1136109830000l),
+            Week w = new Week(new Date(1136109830000L),
                     TimeZone.getTimeZone("GMT"), Locale.UK);
             assertEquals(2005, w.getYearValue());
             assertEquals(52, w.getWeek());

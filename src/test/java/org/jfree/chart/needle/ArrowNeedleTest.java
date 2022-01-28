@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ArrowNeedleTest.java
  * --------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,11 +36,10 @@
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ArrowNeedle} class.
@@ -54,13 +53,13 @@ public class ArrowNeedleTest {
     public void testEquals() {
        ArrowNeedle n1 = new ArrowNeedle(false);
        ArrowNeedle n2 = new ArrowNeedle(false);
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
 
        n1 = new ArrowNeedle(true);
-       assertFalse(n1.equals(n2));
+        assertNotEquals(n1, n2);
        n2 = new ArrowNeedle(true);
-       assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
     /**
@@ -70,9 +69,9 @@ public class ArrowNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         ArrowNeedle n1 = new ArrowNeedle(false);
         ArrowNeedle n2 = (ArrowNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -81,8 +80,8 @@ public class ArrowNeedleTest {
     @Test
     public void testSerialization() {
         ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = (ArrowNeedle) TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        ArrowNeedle n2 = TestUtils.serialised(n1);
+        assertEquals(n1, n2);
     }
 
 }

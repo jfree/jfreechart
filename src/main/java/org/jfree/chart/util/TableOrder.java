@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TableOrder.java
  * ---------------
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributors:     -;
@@ -54,7 +54,7 @@ public enum TableOrder {
      *
      * @param name  the name.
      */
-    private TableOrder(String name) {
+    TableOrder(String name) {
         this.name = name;
     }
 

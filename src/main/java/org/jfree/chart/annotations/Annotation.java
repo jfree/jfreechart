@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Annotation.java
  * ---------------
- * (C) Copyright 2009-2021, by Peter Kolb and Contributors.
+ * (C) Copyright 2009-2022, by Peter Kolb and Contributors.
  *
  * Original Author:  Peter Kolb (see patch 2809117);
  * Contributor(s):   ;
@@ -51,13 +51,13 @@ public interface Annotation {
      *
      * @param listener  the object to register.
      */
-    public void addChangeListener(AnnotationChangeListener listener);
+    void addChangeListener(AnnotationChangeListener listener);
 
     /**
      * Deregisters an object for notification of changes to the annotation.
      *
      * @param listener  the object to deregister.
      */
-    public void removeChangeListener(AnnotationChangeListener listener);
+    void removeChangeListener(AnnotationChangeListener listener);
 
 }

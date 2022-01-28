@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ---------------------
  * LegendItemEntity.java
  * ---------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -60,9 +60,6 @@ public class LegendItemEntity extends ChartEntity
      * The series key.
      */
     private Comparable seriesKey;
-
-    /** The series index. */
-    private int seriesIndex;
 
     /**
      * Creates a legend item entity.
@@ -132,16 +129,40 @@ public class LegendItemEntity extends ChartEntity
             return false;
         }
         LegendItemEntity that = (LegendItemEntity) obj;
-        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
             return false;
         }
-        if (this.seriesIndex != that.seriesIndex) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof LegendItemEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 97 * hash + Objects.hashCode(this.dataset);
+        hash = 97 * hash + Objects.hashCode(this.seriesKey);
+        return hash;
     }
 
     /**

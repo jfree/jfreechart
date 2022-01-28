@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * AreaRenderer.java
  * -----------------
- * (C) Copyright 2002-2020, by Jon Iles and Contributors.
+ * (C) Copyright 2002-2022, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
  * Contributor(s):   David Gilbert;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,11 @@
  * ---------
  * Tick.java
  * ---------
- * (C) Copyright 2000-2021, by David Gilbert.
+ * (C) Copyright 2000-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
- *
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  */
 
 package org.jfree.chart.axis;
@@ -129,23 +129,51 @@ public abstract class Tick implements Serializable, Cloneable {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof Tick) {
-            Tick t = (Tick) obj;
-            if (!Objects.equals(this.text, t.text)) {
-                return false;
-            }
-            if (!Objects.equals(this.textAnchor, t.textAnchor)) {
-                return false;
-            }
-            if (!Objects.equals(this.rotationAnchor, t.rotationAnchor)) {
-                return false;
-            }
-            if (!(this.angle == t.angle)) {
-                return false;
-            }
-            return true;
+        if (!(obj instanceof Tick)) {
+            return false;
         }
-        return false;
+        Tick that = (Tick) obj;
+        if (Double.doubleToLongBits(this.angle) !=
+            Double.doubleToLongBits(that.angle)) {
+            return false;
+        }
+        if (!Objects.equals(this.text, that.text)) {
+            return false;
+        }
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
+            return false;
+        }
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof Tick);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.text);
+        hash = 79 * hash + Objects.hashCode(this.textAnchor);
+        hash = 79 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.angle) ^
+                                 (Double.doubleToLongBits(this.angle) >>> 32));
+        return hash;
     }
 
     /**

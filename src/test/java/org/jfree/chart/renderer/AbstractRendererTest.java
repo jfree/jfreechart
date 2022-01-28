@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * AbstractRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,27 +35,6 @@
  */
 
 package org.jfree.chart.renderer;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.Test;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
@@ -70,6 +49,14 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.TextAnchor;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
@@ -79,252 +66,253 @@ public class AbstractRendererTest {
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @SuppressWarnings("deprecation")
     @Test
     public void testEquals() {
         // have to use a concrete subclass...
         BarRenderer r1 = new BarRenderer();
         BarRenderer r2 = new BarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // seriesVisibleList
         r1.setSeriesVisible(2, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesVisible(2, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultSeriesVisible
         r1.setDefaultSeriesVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultSeriesVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // seriesVisibleInLegendList
         r1.setSeriesVisibleInLegend(1, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesVisibleInLegend(1, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultSeriesVisibleInLegend
         r1.setDefaultSeriesVisibleInLegend(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultSeriesVisibleInLegend(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // paintList
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultPaint
         r1.setDefaultPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // fillPaintList
         r1.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultFillPaint
         r1.setDefaultFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // outlinePaintList
         r1.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultOutlinePaint
         r1.setDefaultOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // stroke
         Stroke s = new BasicStroke(3.21f);
 
         // strokeList
         r1.setSeriesStroke(1, s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesStroke(1, s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultStroke
         r1.setDefaultStroke(s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultStroke(s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // outlineStrokeList
         r1.setSeriesOutlineStroke(0, s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesOutlineStroke(0, s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultOutlineStroke
         r1.setDefaultOutlineStroke(s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultOutlineStroke(s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shapeList
         r1.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultShape
         r1.setDefaultShape(new Ellipse2D.Double(1, 2, 3, 4));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShape(new Ellipse2D.Double(1, 2, 3, 4));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // itemLabelsVisibleList
         r1.setSeriesItemLabelsVisible(1, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelsVisible(1, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // baseItemLabelsVisible
         r1.setDefaultItemLabelsVisible(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultItemLabelsVisible(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // itemLabelFontList
         r1.setSeriesItemLabelFont(1, new Font("Serif", Font.BOLD, 9));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelFont(1, new Font("Serif", Font.BOLD, 9));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultItemLabelFont
         r1.setDefaultItemLabelFont(new Font("Serif", Font.PLAIN, 10));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultItemLabelFont(new Font("Serif", Font.PLAIN, 10));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // itemLabelPaintList
         r1.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GRAY));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GRAY));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultItemLabelPaint
         r1.setDefaultItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GRAY));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GRAY));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // positiveItemLabelPositionList;
         r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultPositiveItemLabelPosition;
         r1.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // negativeItemLabelPositionList;
         r1.setSeriesNegativeItemLabelPosition(1, new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesNegativeItemLabelPosition(1, new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultNegativeItemLabelPosition;
         r1.setDefaultNegativeItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultNegativeItemLabelPosition(new ItemLabelPosition(
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // itemLabelAnchorOffset
         r1.setItemLabelAnchorOffset(3.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setItemLabelAnchorOffset(3.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // createEntitiesList;
         r1.setSeriesCreateEntities(0, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesCreateEntities(0, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // baseCreateEntities;
         r1.setDefaultCreateEntities(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultCreateEntities(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // legendShape
         r1.setLegendShape(0, new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendShape(0, new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // baseLegendShape
         r1.setDefaultLegendShape(new Ellipse2D.Double(5.0, 6.0, 7.0, 8.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendShape(new Ellipse2D.Double(5.0, 6.0, 7.0, 8.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // legendTextFont
         r1.setLegendTextFont(0, new Font("Dialog", Font.PLAIN, 7));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendTextFont(0, new Font("Dialog", Font.PLAIN, 7));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultLegendTextFont
         r1.setDefaultLegendTextFont(new Font("Dialog", Font.PLAIN, 7));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendTextFont(new Font("Dialog", Font.PLAIN, 7));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // legendTextPaint
         r1.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // defaultOutlinePaint
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     @Test
@@ -392,11 +380,11 @@ public class AbstractRendererTest {
     public void testEquals2() {
         TestRenderer r1 = new TestRenderer();
         TestRenderer r2 = new TestRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         r1.setTreatLegendShapeAsLine(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setTreatLegendShapeAsLine(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -419,109 +407,109 @@ public class AbstractRendererTest {
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         r1.setSeriesVisible(0, Boolean.FALSE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesVisible(0, Boolean.FALSE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesVisibleInLegend(0, Boolean.FALSE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesVisibleInLegend(0, Boolean.FALSE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesPaint(0, Color.BLACK);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesPaint(0, Color.BLACK);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesFillPaint(0, Color.YELLOW);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFillPaint(0, Color.YELLOW);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesOutlinePaint(0, Color.YELLOW);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesOutlinePaint(0, Color.YELLOW);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesStroke(0, new BasicStroke(2.2f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesStroke(0, new BasicStroke(2.2f));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesOutlineStroke(0, new BasicStroke(2.2f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesOutlineStroke(0, new BasicStroke(2.2f));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         baseShape.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShape(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShape(0, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShape(0, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesItemLabelsVisible(0, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelsVisible(0, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesItemLabelPaint(0, Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesItemLabelPaint(0, Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         
         r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesCreateEntities(0, Boolean.FALSE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesCreateEntities(0, Boolean.FALSE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendShape(0, new Rectangle(9, 7, 3, 4));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendShape(0, new Rectangle(9, 7, 3, 4));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultLegendShape(new Rectangle(3, 4, 1, 5));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendShape(new Rectangle(3, 4, 1, 5));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendTextFont(1, new Font("Dialog", Font.PLAIN, 33));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendTextFont(1, new Font("Dialog", Font.PLAIN, 33));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultLegendTextFont(new Font("Dialog", Font.PLAIN, 11));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendTextFont(new Font("Dialog", Font.PLAIN, 11));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendTextPaint(3, Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendTextPaint(3, Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultLegendTextPaint(Color.GREEN);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLegendTextPaint(Color.GREEN);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -554,14 +542,14 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         MyRendererChangeListener listener = new MyRendererChangeListener();
         r2.addChangeListener(listener);
         r2.setDefaultPaint(Color.RED);
-        assertTrue(listener.lastEvent.getRenderer() == r2);
+        assertSame(listener.lastEvent.getRenderer(), r2);
         assertFalse(r1.hasListener(listener));
     }
 
@@ -684,7 +672,7 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GREEN));
         r1.setDefaultLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
+        BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));
@@ -700,12 +688,12 @@ public class AbstractRendererTest {
     @Test
     public void testAutoPopulateFlagDefaults() {
         BarRenderer r = new BarRenderer();
-        assertEquals(true, r.getAutoPopulateSeriesPaint());
-        assertEquals(false, r.getAutoPopulateSeriesFillPaint());
-        assertEquals(false, r.getAutoPopulateSeriesOutlinePaint());
-        assertEquals(true, r.getAutoPopulateSeriesStroke());
-        assertEquals(false, r.getAutoPopulateSeriesOutlineStroke());
-        assertEquals(true, r.getAutoPopulateSeriesShape());
+        assertTrue(r.getAutoPopulateSeriesPaint());
+        assertFalse(r.getAutoPopulateSeriesFillPaint());
+        assertFalse(r.getAutoPopulateSeriesOutlinePaint());
+        assertTrue(r.getAutoPopulateSeriesStroke());
+        assertFalse(r.getAutoPopulateSeriesOutlineStroke());
+        assertTrue(r.getAutoPopulateSeriesShape());
     }
 
     /**

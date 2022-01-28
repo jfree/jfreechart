@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * XYSeriesTest.java
  * -----------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.SeriesException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYSeries} class.
@@ -60,18 +57,18 @@ public class XYSeriesTest {
         s1.add(1.0, 1.1);
         XYSeries s2 = new XYSeries("Series");
         s2.add(1.0, 1.1);
-        assertTrue(s1.equals(s2));
-        assertTrue(s2.equals(s1));
+        assertEquals(s1, s2);
+        assertEquals(s2, s1);
 
         s1.setKey("Series X");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setKey("Series X");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         s1.add(2.0, 2.2);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(2.0, 2.2);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -107,21 +104,23 @@ public class XYSeriesTest {
 
     /**
      * Confirm that cloning works.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = (XYSeries) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
     }
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -130,30 +129,31 @@ public class XYSeriesTest {
         s1.add(2.0, null);
         s1.add(3.0, 200.0);
         XYSeries s2 = (XYSeries) s1.clone();
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // check independence
         s2.add(4.0, 300.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s1.add(4.0, 300.0);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException  if there is a problem cloning.
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
         XYSeries s1 = new XYSeries("S1");
         XYSeries s2 = (XYSeries) s1.clone();
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // check independence
         s2.add(4.0, 300.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s1.add(4.0, 300.0);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -163,7 +163,13 @@ public class XYSeriesTest {
     public void testSerialization() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = (XYSeries) TestUtils.serialised(s1);
+        XYSeries s2 = TestUtils.serialised(s1);
+        assertEquals(s1, s2);
+
+        // check independence (and also serialization mechanism for change listeners)
+        s2.setKey("New Series Key");
+        assertNotEquals(s1, s2);
+        s1.setKey("New Series Key");
         assertEquals(s1, s2);
     }
 
@@ -287,7 +293,7 @@ public class XYSeriesTest {
         assertEquals(3, series.getY(0));
         try {
             series.update(2, 99);
-            assertTrue(false);
+            fail();
         }
         catch (SeriesException e) {
             // got the required exception
@@ -314,12 +320,12 @@ public class XYSeriesTest {
     public void testAddOrUpdate() {
         XYSeries series = new XYSeries("S1", true, false);
         XYDataItem old = series.addOrUpdate(Long.valueOf(1), Long.valueOf(2));
-        assertTrue(old == null);
+        assertNull(old);
         assertEquals(1, series.getItemCount());
         assertEquals(2L, series.getY(0));
 
         old = series.addOrUpdate(Long.valueOf(2), Long.valueOf(3));
-        assertTrue(old == null);
+        assertNull(old);
         assertEquals(2, series.getItemCount());
         assertEquals(3L, series.getY(1));
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -----------------
  * CategoryTick.java
  * -----------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,13 +47,13 @@ import org.jfree.chart.ui.TextAnchor;
 public class CategoryTick extends Tick {
 
     /** The category. */
-    private Comparable category;
+    private final Comparable category;
 
     /** The label. */
-    private TextBlock label;
+    private final TextBlock label;
 
     /** The label anchor. */
-    private TextBlockAnchor labelAnchor;
+    private final TextBlockAnchor labelAnchor;
 
     /**
      * Creates a new tick.
@@ -116,20 +116,37 @@ public class CategoryTick extends Tick {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof CategoryTick && super.equals(obj)) {
-            CategoryTick that = (CategoryTick) obj;
-            if (!Objects.equals(this.category, that.category)) {
-                return false;
-            }
-            if (!Objects.equals(this.label, that.label)) {
-                return false;
-            }
-            if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
-                return false;
-           }
-            return true;
+        if (!(obj instanceof CategoryTick)) {
+            return false;
         }
-        return false;
+        CategoryTick that = (CategoryTick) obj;
+        if (!Objects.equals(this.category, that.category)) {
+            return false;
+        }
+        if (!Objects.equals(this.label, that.label)) {
+            return false;
+        }
+        if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryTick);
     }
 
     /**
@@ -139,10 +156,10 @@ public class CategoryTick extends Tick {
      */
     @Override
     public int hashCode() {
-        int result = 41;
-        result = 37 * result + this.category.hashCode();
-        result = 37 * result + this.label.hashCode();
-        result = 37 * result + this.labelAnchor.hashCode();
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 89 * hash + Objects.hashCode(this.category);
+        hash = 89 * hash + Objects.hashCode(this.label);
+        hash = 89 * hash + Objects.hashCode(this.labelAnchor);
+        return hash;
     }
 }

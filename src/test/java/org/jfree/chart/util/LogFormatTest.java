@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LogFormatTest.java
  * ------------------
- * (C) Copyright 2008-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2008-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -40,9 +40,8 @@ import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LogFormat} class.
@@ -59,24 +58,24 @@ public class LogFormatTest {
         assertEquals(f1, f2);
 
         f1 = new LogFormat(11.0, "10", true);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new LogFormat(11.0, "10", true);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new LogFormat(11.0, "11", true);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new LogFormat(11.0, "11", true);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1 = new LogFormat(11.0, "11", false);
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new LogFormat(11.0, "11", false);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
 
         f1.setExponentFormat(new DecimalFormat("0.000"));
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2.setExponentFormat(new DecimalFormat("0.000"));
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
     }
 
     /**
@@ -86,7 +85,7 @@ public class LogFormatTest {
     public void testHashcode() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = new LogFormat(10.0, "10", true);
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
         int h1 = f1.hashCode();
         int h2 = f2.hashCode();
         assertEquals(h1, h2);
@@ -99,9 +98,9 @@ public class LogFormatTest {
     public void testCloning() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = (LogFormat) f1.clone();
-        assertTrue(f1 != f2);
-        assertTrue(f1.getClass() == f2.getClass());
-        assertTrue(f1.equals(f2));
+        assertNotSame(f1, f2);
+        assertSame(f1.getClass(), f2.getClass());
+        assertEquals(f1, f2);
     }
 
     /**
@@ -110,7 +109,7 @@ public class LogFormatTest {
     @Test
     public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) TestUtils.serialised(f1);
+        LogFormat f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

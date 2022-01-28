@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ModuloAxisTest.java
  * -------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ModuloAxis} class.
@@ -57,9 +55,9 @@ public class ModuloAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
         ModuloAxis a2 = (ModuloAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -69,12 +67,12 @@ public class ModuloAxisTest {
     public void testEquals() {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
         ModuloAxis a2 = new ModuloAxis("Test", new Range(0.0, 1.0));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setDisplayRange(0.1, 1.1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setDisplayRange(0.1, 1.1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -84,7 +82,7 @@ public class ModuloAxisTest {
     public void testHashCode() {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
         ModuloAxis a2 = new ModuloAxis("Test", new Range(0.0, 1.0));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -96,7 +94,7 @@ public class ModuloAxisTest {
     @Test
     public void testSerialization() {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
-        ModuloAxis a2 = (ModuloAxis) TestUtils.serialised(a1);
+        ModuloAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

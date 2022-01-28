@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -54,7 +54,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     private static final long serialVersionUID = 7347703325267846275L;
 
     /** The label format string. */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** A number formatter for the value. */
     private NumberFormat numberFormat;

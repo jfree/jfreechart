@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,17 @@
  * ---------------------
  * DatasetGroupTest.java
  * ---------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.general;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,13 +47,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class DatasetGroupTest {
 
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(DatasetGroup.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
     public void testSerialization() {
         DatasetGroup g1 = new DatasetGroup();
-        DatasetGroup g2 = (DatasetGroup) TestUtils.serialised(g1);
+        DatasetGroup g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

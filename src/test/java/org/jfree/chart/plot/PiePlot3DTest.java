@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * Pie3DPlotTest.java
  * ------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,10 +35,6 @@
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -48,6 +44,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PiePlot3D} class.
@@ -61,18 +59,18 @@ public class PiePlot3DTest {
     public void testEquals() {
         PiePlot3D p1 = new PiePlot3D();
         PiePlot3D p2 = new PiePlot3D();
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1.setDepthFactor(1.23);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDepthFactor(1.23);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setDarkerSides(true);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDarkerSides(true);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**

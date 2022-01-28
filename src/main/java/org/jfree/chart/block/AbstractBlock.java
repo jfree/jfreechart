@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ------------------
  * AbstractBlock.java
  * ------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -550,25 +550,62 @@ public class AbstractBlock implements Cloneable, Serializable {
         if (!Objects.equals(this.id, that.id)) {
             return false;
         }
-        if (!this.frame.equals(that.frame)) {
+        if (!Objects.equals(this.frame, that.frame)) {
             return false;
         }
-        if (!this.bounds.equals(that.bounds)) {
+        if (!Objects.equals(this.bounds, that.bounds)) {
             return false;
         }
-        if (!this.margin.equals(that.margin)) {
+        if (!Objects.equals(this.margin, that.margin)) {
             return false;
         }
-        if (!this.padding.equals(that.padding)) {
+        if (!Objects.equals(this.padding, that.padding)) {
             return false;
         }
-        if (this.height != that.height) {
+        if (Double.doubleToLongBits(this.height) !=
+            Double.doubleToLongBits(that.height)) {
             return false;
         }
-        if (this.width != that.width) {
+        if (Double.doubleToLongBits(this.width) !=
+            Double.doubleToLongBits(that.width)) {
+            return false;
+        }
+        
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractBlock);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.margin);
+        hash = 89 * hash + Objects.hashCode(this.frame);
+        hash = 89 * hash + Objects.hashCode(this.padding);
+        hash = 89 * hash + Objects.hashCode(this.bounds);
+        hash = 89 * hash +
+               (int) (Double.doubleToLongBits(this.width) ^
+                     (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 89 * hash +
+               (int) (Double.doubleToLongBits(this.height) ^
+                     (Double.doubleToLongBits(this.height) >>> 32));
+        return hash;
     }
 
     /**

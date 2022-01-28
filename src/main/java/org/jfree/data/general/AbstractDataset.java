@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * --------------------
  * AbstractDataset.java
  * --------------------
- * (C)opyright 2000-2021, by David Gilbert.
+ * (C)opyright 2000-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
+                     Tracy Hiltbrand (added equals/canEqual/hashCode);
  *
  */
 
@@ -46,6 +47,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 import org.jfree.chart.util.Args;
@@ -71,6 +73,49 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * notifications.
      */
     private boolean notify;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.group);
+        hash = 29 * hash + (this.notify ? 1 : 0);
+        return hash;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractDataset);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AbstractDataset)) {
+            return false;
+        }
+        
+        AbstractDataset that = (AbstractDataset) obj;
+        if (this.notify != that.notify) {
+            return false;
+        }
+        if (!Objects.equals(this.group, that.group)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Constructs a dataset. By default, the dataset is assigned to its own

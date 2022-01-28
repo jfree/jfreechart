@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * DatasetTags.java
  * ----------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -42,21 +42,21 @@ package org.jfree.data.xml;
 public interface DatasetTags {
 
     /** The 'PieDataset' element name. */
-    public static final String PIEDATASET_TAG = "PieDataset";
+    String PIEDATASET_TAG = "PieDataset";
 
     /** The 'CategoryDataset' element name. */
-    public static final String CATEGORYDATASET_TAG = "CategoryDataset";
+    String CATEGORYDATASET_TAG = "CategoryDataset";
 
     /** The 'Series' element name. */
-    public static final String SERIES_TAG = "Series";
+    String SERIES_TAG = "Series";
 
     /** The 'Item' element name. */
-    public static final String ITEM_TAG = "Item";
+    String ITEM_TAG = "Item";
 
     /** The 'Key' element name. */
-    public static final String KEY_TAG = "Key";
+    String KEY_TAG = "Key";
 
     /** The 'Value' element name. */
-    public static final String VALUE_TAG = "Value";
+    String VALUE_TAG = "Value";
 
 }

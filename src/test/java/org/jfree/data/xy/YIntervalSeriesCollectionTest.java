@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * YIntervalSeriesCollectionTest.java
  * ----------------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link YIntervalSeriesCollection} class.
@@ -63,17 +61,17 @@ public class YIntervalSeriesCollectionTest {
         YIntervalSeries s1 = new YIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         YIntervalSeries s2 = new YIntervalSeries("Series");
         s2.add(1.0, 1.1, 1.2, 1.3);
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         // add an empty series
         c1.addSeries(new YIntervalSeries("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new YIntervalSeries("Empty Series"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -86,13 +84,13 @@ public class YIntervalSeriesCollectionTest {
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
         YIntervalSeriesCollection c2 = (YIntervalSeriesCollection) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         s1.setDescription("XYZ");
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**
@@ -112,8 +110,7 @@ public class YIntervalSeriesCollectionTest {
         YIntervalSeriesCollection c1 = new YIntervalSeriesCollection();
         YIntervalSeries s1 = new YIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        YIntervalSeriesCollection c2 = (YIntervalSeriesCollection) 
-                TestUtils.serialised(c1);
+        YIntervalSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -164,7 +161,7 @@ public class YIntervalSeriesCollectionTest {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 

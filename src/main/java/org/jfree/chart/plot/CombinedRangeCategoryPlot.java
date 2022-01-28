@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ------------------------------
  * CombinedRangeCategoryPlot.java
  * ------------------------------
- * (C) Copyright 2003-2021, by David Gilbert.
+ * (C) Copyright 2003-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -402,23 +403,23 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * only the range axis is shared between subplots, the JFreeChart code
      * will only call this method for the range values (although this is not
      * checked/enforced).
-      *
-      * @param axis  the axis.
-      *
-      * @return The range.
-      */
+     *
+     * @param axis the axis.
+     *
+     * @return The range.
+     */
     @Override
-     public Range getDataRange(ValueAxis axis) {
-         Range result = null;
-         if (this.subplots != null) {
-             Iterator iterator = this.subplots.iterator();
-             while (iterator.hasNext()) {
-                 CategoryPlot subplot = (CategoryPlot) iterator.next();
-                 result = Range.combine(result, subplot.getDataRange(axis));
-             }
-         }
-         return result;
-     }
+    public Range getDataRange(ValueAxis axis) {
+        Range result = null;
+        if (this.subplots != null) {
+            Iterator iterator = this.subplots.iterator();
+            while (iterator.hasNext()) {
+                CategoryPlot subplot = (CategoryPlot) iterator.next();
+                result = Range.combine(result, subplot.getDataRange(axis));
+            }
+        }
+        return result;
+    }
 
     /**
      * Returns a collection of legend items for the plot.
@@ -503,13 +504,39 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             return false;
         }
         CombinedRangeCategoryPlot that = (CombinedRangeCategoryPlot) obj;
-        if (this.gap != that.gap) {
+        if (!that.canEqual(this)){
+            return false;
+        }
+        if (Double.compare(this.gap, that.gap) != 0) {
             return false;
         }
         if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof CombinedRangeCategoryPlot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 61 * hash + Objects.hashCode(this.subplots);
+        hash = 61 * hash + (int) (Double.doubleToLongBits(this.gap) ^ 
+                                 (Double.doubleToLongBits(this.gap) >>> 32));
+        return hash;
     }
 
     /**

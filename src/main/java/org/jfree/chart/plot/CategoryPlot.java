@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jeremy Bowman;
@@ -35,6 +35,7 @@
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patch 2686040;
  *                   Peter Kolb - patches 2603321 and 2809117;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -2202,14 +2203,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         Args.nullNotPermitted(layer, "layer");
         Collection markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundDomainMarkers.get(index);
+            markers = this.foregroundDomainMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.foregroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundDomainMarkers.get(index);
+            markers = this.backgroundDomainMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.backgroundDomainMarkers.put(index, markers);
@@ -2295,8 +2296,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public void clearDomainMarkers(int index) {
         Integer key = index;
         if (this.backgroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundDomainMarkers.get(key);
+            Collection markers = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2307,8 +2307,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
         }
         if (this.foregroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundDomainMarkers.get(key);
+            Collection markers = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2458,14 +2457,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             boolean notify) {
         Collection markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundRangeMarkers.get(index);
+            markers = this.foregroundRangeMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.foregroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundRangeMarkers.get(index);
+            markers = this.backgroundRangeMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.backgroundRangeMarkers.put(index, markers);
@@ -2552,8 +2551,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public void clearRangeMarkers(int index) {
         Integer key = index;
         if (this.backgroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundRangeMarkers.get(key);
+            Collection markers = this.backgroundRangeMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2564,8 +2562,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
         }
         if (this.foregroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundRangeMarkers.get(key);
+            Collection markers = this.foregroundRangeMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -3068,8 +3065,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void clearAnnotations() {
         for (int i = 0; i < this.annotations.size(); i++) {
-            CategoryAnnotation annotation
-                    = (CategoryAnnotation) this.annotations.get(i);
+            CategoryAnnotation annotation = this.annotations.get(i);
             annotation.removeChangeListener(this);
         }
         this.annotations.clear();
@@ -3483,7 +3479,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A list of indices.
      */
     private List<Integer> getRendererIndices(DatasetRenderingOrder order) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (Map.Entry<Integer, CategoryItemRenderer> entry: 
                 this.renderers.entrySet()) {
             if (entry.getValue() != null) {
@@ -4022,8 +4018,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 continue;
             }
             Integer datasetIndex = entry.getKey();
-            List mappedAxes = (List) this.datasetToDomainAxesMap.get(
-                    datasetIndex);
+            List mappedAxes = this.datasetToDomainAxesMap.get(datasetIndex);
             if (mappedAxes == null) {
                 if (axisIndex == 0) {
                     result.add(dataset);
@@ -4046,12 +4041,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The list (possibly empty, but never {@code null}).
      */
     private List<CategoryDataset> datasetsMappedToRangeAxis(int axisIndex) {
-        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> result = new ArrayList<>();
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             Integer datasetIndex = entry.getKey();
             CategoryDataset dataset = entry.getValue();
-            List mappedAxes = (List) this.datasetToRangeAxesMap.get(
-                    datasetIndex);
+            List mappedAxes = this.datasetToRangeAxesMap.get(datasetIndex);
             if (mappedAxes == null) {
                 if (axisIndex == 0) {
                     result.add(dataset);
@@ -4503,100 +4497,119 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             return false;
         }
         CategoryPlot that = (CategoryPlot) obj;
-        if (this.orientation != that.orientation) {
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        if (!Objects.equals(this.orientation, that.orientation)) {
+            return false;
+        }
+        if (!Objects.equals(this.datasets, that.datasets)) {
             return false;
         }
         if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
-        if (!this.domainAxes.equals(that.domainAxes)) {
+        if (!Objects.equals(this.domainAxes, that.domainAxes)) {
             return false;
         }
-        if (!this.domainAxisLocations.equals(that.domainAxisLocations)) {
+        if (!Objects.equals(this.domainAxisLocations, 
+                            that.domainAxisLocations)) {
             return false;
         }
         if (this.drawSharedDomainAxis != that.drawSharedDomainAxis) {
             return false;
         }
-        if (!this.rangeAxes.equals(that.rangeAxes)) {
+        if (!Objects.equals(this.rangeAxes, that.rangeAxes)) {
             return false;
         }
-        if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
+        if (!Objects.equals(this.rangeAxisLocations, that.rangeAxisLocations)) {
             return false;
         }
         if (!Objects.equals(this.datasetToDomainAxesMap,
-                that.datasetToDomainAxesMap)) {
+                            that.datasetToDomainAxesMap)) {
             return false;
         }
         if (!Objects.equals(this.datasetToRangeAxesMap,
-                that.datasetToRangeAxesMap)) {
+                            that.datasetToRangeAxesMap)) {
             return false;
         }
         if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
-        if (this.renderingOrder != that.renderingOrder) {
+        if (!Objects.equals(this.renderingOrder, that.renderingOrder)) {
             return false;
         }
-        if (this.columnRenderingOrder != that.columnRenderingOrder) {
+        if (!Objects.equals(this.columnRenderingOrder, 
+                            that.columnRenderingOrder)) {
             return false;
         }
-        if (this.rowRenderingOrder != that.rowRenderingOrder) {
+        if (!Objects.equals(this.rowRenderingOrder, that.rowRenderingOrder)) {
             return false;
         }
         if (this.domainGridlinesVisible != that.domainGridlinesVisible) {
             return false;
         }
-        if (this.domainGridlinePosition != that.domainGridlinePosition) {
+        if (this.rangePannable != that.rangePannable) {
             return false;
         }
-        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlinePosition, 
+                            that.domainGridlinePosition)) {
+            return false;
+        }
+        if (!Objects.equals(this.domainGridlineStroke, 
+                            that.domainGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
-                that.domainGridlinePaint)) {
+                              that.domainGridlinePaint)) {
             return false;
         }
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
             return false;
         }
         if (!Objects.equals(this.rangeGridlineStroke,
-                that.rangeGridlineStroke)) {
+                            that.rangeGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeGridlinePaint,
-                that.rangeGridlinePaint)) {
+                              that.rangeGridlinePaint)) {
             return false;
         }
-        if (this.anchorValue != that.anchorValue) {
+        if (Double.compare(this.anchorValue, that.anchorValue) != 0) {
             return false;
         }
         if (this.rangeCrosshairVisible != that.rangeCrosshairVisible) {
             return false;
         }
-        if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
+        if (Double.doubleToLongBits(this.rangeCrosshairValue) != 
+            Double.doubleToLongBits(that.rangeCrosshairValue)) {
             return false;
         }
-        if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
+		if (!Objects.equals(this.rangeCrosshairStroke,
+                            that.rangeCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeCrosshairPaint,
-                that.rangeCrosshairPaint)) {
+                              that.rangeCrosshairPaint)) {
             return false;
         }
         if (this.rangeCrosshairLockedOnData != that.rangeCrosshairLockedOnData) {
             return false;
         }
-        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers,
+                            that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers,
+                            that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers,
+                            that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers,
+                            that.backgroundRangeMarkers)) {
             return false;
         }
         if (!Objects.equals(this.annotations, that.annotations)) {
@@ -4605,15 +4618,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.weight != that.weight) {
             return false;
         }
-        if (!Objects.equals(this.fixedDomainAxisSpace, that.fixedDomainAxisSpace)) {
+        if (!Objects.equals(this.fixedDomainAxisSpace, 
+                            that.fixedDomainAxisSpace)) {
             return false;
         }
         if (!Objects.equals(this.fixedRangeAxisSpace,
-                that.fixedRangeAxisSpace)) {
+                            that.fixedRangeAxisSpace)) {
             return false;
         }
-        if (!Objects.equals(this.fixedLegendItems,
-                that.fixedLegendItems)) {
+        if (!Objects.equals(this.fixedLegendItems, that.fixedLegendItems)) {
             return false;
         }
         if (this.domainCrosshairVisible != that.domainCrosshairVisible) {
@@ -4622,41 +4635,120 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
             return false;
         }
-        if (!Objects.equals(this.domainCrosshairColumnKey, that.domainCrosshairColumnKey)) {
+        if (!Objects.equals(this.domainCrosshairColumnKey, 
+                            that.domainCrosshairColumnKey)) {
             return false;
         }
-        if (!Objects.equals(this.domainCrosshairRowKey, that.domainCrosshairRowKey)) {
+        if (!Objects.equals(this.domainCrosshairRowKey, 
+                            that.domainCrosshairRowKey)) {
             return false;
         }
-        if (!PaintUtils.equal(this.domainCrosshairPaint, that.domainCrosshairPaint)) {
+        if (!PaintUtils.equal(this.domainCrosshairPaint,
+                              that.domainCrosshairPaint)) {
             return false;
         }
-        if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
+        if (!Objects.equals(this.domainCrosshairStroke, 
+                            that.domainCrosshairStroke)) {
             return false;
         }
         if (this.rangeMinorGridlinesVisible != that.rangeMinorGridlinesVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeMinorGridlinePaint, that.rangeMinorGridlinePaint)) {
+        if (!PaintUtils.equal(this.rangeMinorGridlinePaint, 
+                              that.rangeMinorGridlinePaint)) {
             return false;
         }
         if (!Objects.equals(this.rangeMinorGridlineStroke,
-                that.rangeMinorGridlineStroke)) {
+                            that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (this.rangeZeroBaselineVisible != that.rangeZeroBaselineVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeZeroBaselinePaint, that.rangeZeroBaselinePaint)) {
+        if (!PaintUtils.equal(this.rangeZeroBaselinePaint, 
+                              that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!Objects.equals(this.rangeZeroBaselineStroke, that.rangeZeroBaselineStroke)) {
+        if (!Objects.equals(this.rangeZeroBaselineStroke,
+                            that.rangeZeroBaselineStroke)) {
             return false;
         }
         if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof CategoryPlot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 71 * hash + Objects.hashCode(this.orientation);
+        hash = 71 * hash + Objects.hashCode(this.axisOffset);
+        hash = 71 * hash + Objects.hashCode(this.domainAxes);
+        hash = 71 * hash + Objects.hashCode(this.domainAxisLocations);
+        hash = 71 * hash + (this.drawSharedDomainAxis ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeAxes);
+        hash = 71 * hash + Objects.hashCode(this.rangeAxisLocations);
+        hash = 71 * hash + Objects.hashCode(this.datasets);
+        hash = 71 * hash + Objects.hashCode(this.datasetToDomainAxesMap);
+        hash = 71 * hash + Objects.hashCode(this.datasetToRangeAxesMap);
+        hash = 71 * hash + Objects.hashCode(this.renderers);
+        hash = 71 * hash + Objects.hashCode(this.renderingOrder);
+        hash = 71 * hash + Objects.hashCode(this.columnRenderingOrder);
+        hash = 71 * hash + Objects.hashCode(this.rowRenderingOrder);
+        hash = 71 * hash + (this.domainGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePosition);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 71 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeZeroBaselineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeZeroBaselinePaint);
+        hash = 71 * hash + (this.rangeGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 71 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeMinorGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeMinorGridlinePaint);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.anchorValue) ^ 
+                                 (Double.doubleToLongBits(this.anchorValue) >>> 32));
+        hash = 71 * hash + this.crosshairDatasetIndex;
+        hash = 71 * hash + (this.domainCrosshairVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairRowKey);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairColumnKey);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairStroke);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairPaint);
+        hash = 71 * hash + (this.rangeCrosshairVisible ? 1 : 0);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
+                                 (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.rangeCrosshairStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeCrosshairPaint);
+        hash = 71 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.foregroundDomainMarkers);
+        hash = 71 * hash + Objects.hashCode(this.backgroundDomainMarkers);
+        hash = 71 * hash + Objects.hashCode(this.foregroundRangeMarkers);
+        hash = 71 * hash + Objects.hashCode(this.backgroundRangeMarkers);
+        hash = 71 * hash + Objects.hashCode(this.annotations);
+        hash = 71 * hash + this.weight;
+        hash = 71 * hash + Objects.hashCode(this.fixedDomainAxisSpace);
+        hash = 71 * hash + Objects.hashCode(this.fixedRangeAxisSpace);
+        hash = 71 * hash + Objects.hashCode(this.fixedLegendItems);
+        hash = 71 * hash + (this.rangePannable ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.shadowGenerator);
+        return hash;
     }
 
     /**

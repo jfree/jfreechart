@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * ----------------
  * ChartEntity.java
  * ----------------
- * (C) Copyright 2002-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2002-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Xavier Poinsard;
  *                   Robert Fuller;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  */
 
 package org.jfree.chart.entity;
@@ -311,10 +312,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ChartEntity: ");
-        sb.append("tooltip = ");
-        sb.append(this.toolTipText);
-        return sb.toString();
+        return "ChartEntity: tooltip = " + this.toolTipText;
     }
 
     /**
@@ -333,7 +331,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         ChartEntity that = (ChartEntity) obj;
-        if (!this.area.equals(that.area)) {
+        if (!Objects.equals(this.area, that.area)) {
             return false;
         }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
@@ -342,7 +340,25 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof ChartEntity);
     }
 
     /**
@@ -355,6 +371,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         int result = 37;
         result = HashUtils.hashCode(result, this.toolTipText);
         result = HashUtils.hashCode(result, this.urlText);
+        result = HashUtils.hashCode(result, this.area);
         return result;
     }
 

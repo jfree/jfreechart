@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ---------------
  * LabelBlock.java
  * ---------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pierre-Marie Le Biot;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -353,14 +355,20 @@ public class LabelBlock extends AbstractBlock
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
         if (!(obj instanceof LabelBlock)) {
             return false;
         }
         LabelBlock that = (LabelBlock) obj;
-        if (!this.text.equals(that.text)) {
+        if (!Objects.equals(this.text, that.text)) {
             return false;
         }
-        if (!this.font.equals(that.font)) {
+        if (!Objects.equals(this.label, that.label)) {
+            return false;
+        }
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -372,13 +380,44 @@ public class LabelBlock extends AbstractBlock
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
-        if (!this.contentAlignmentPoint.equals(that.contentAlignmentPoint)) {
+        if (!Objects.equals(this.contentAlignmentPoint, that.contentAlignmentPoint)) {
             return false;
         }
-        if (!this.textAnchor.equals(that.textAnchor)) {
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof LabelBlock);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 71 * hash + Objects.hashCode(this.text);
+        hash = 71 * hash + Objects.hashCode(this.label);
+        hash = 71 * hash + Objects.hashCode(this.font);
+        hash = 71 * hash + Objects.hashCode(this.toolTipText);
+        hash = 71 * hash + Objects.hashCode(this.urlText);
+        hash = 71 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 71 * hash + Objects.hashCode(this.contentAlignmentPoint);
+        hash = 71 * hash + Objects.hashCode(this.textAnchor);
+        return hash;
     }
 
     /**

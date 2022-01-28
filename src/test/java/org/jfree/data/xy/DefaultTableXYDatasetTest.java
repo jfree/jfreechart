@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * DefaultTableXYDatasetTest.java
  * ------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultTableXYDataset} class.
@@ -67,14 +65,14 @@ public class DefaultTableXYDatasetTest {
         s2.add(2.0, 2.2);
         d2.addSeries(s2);
 
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         s1.add(3.0, 3.3);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
 
         s2.add(3.0, 3.3);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -90,12 +88,12 @@ public class DefaultTableXYDatasetTest {
 
         DefaultTableXYDataset d2 = (DefaultTableXYDataset) d1.clone();
 
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         s1.add(3.0, 3.3);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -118,8 +116,7 @@ public class DefaultTableXYDatasetTest {
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
 
-        DefaultTableXYDataset d2 = (DefaultTableXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultTableXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

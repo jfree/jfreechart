@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * YWithXIntervalTest.java
  * -----------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link YWithXInterval} class.
@@ -58,19 +56,19 @@ public class YWithXIntervalTest {
         assertEquals(i1, i2);
 
         i1 = new YWithXInterval(1.1, 0.5, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YWithXInterval(1.1, 0.5, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YWithXInterval(1.1, 0.55, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YWithXInterval(1.1, 0.55, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YWithXInterval(1.1, 0.55, 1.55);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YWithXInterval(1.1, 0.55, 1.55);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -88,7 +86,7 @@ public class YWithXIntervalTest {
     @Test
     public void testSerialization() {
         YWithXInterval i1 = new YWithXInterval(1.0, 0.5, 1.5);
-        YWithXInterval i2 = (YWithXInterval) TestUtils.serialised(i1);
+        YWithXInterval i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

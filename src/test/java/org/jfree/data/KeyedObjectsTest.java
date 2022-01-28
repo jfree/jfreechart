@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * KeyedObjectsTest.java
  * ---------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,15 +36,14 @@
 
 package org.jfree.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.ArrayList;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link KeyedObjects} class.
@@ -63,9 +62,9 @@ public class KeyedObjectsTest {
         ko1.addObject("V2", null);
         ko1.addObject("V3", 3);
         KeyedObjects ko2 = (KeyedObjects) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
     }
 
     /**
@@ -80,24 +79,24 @@ public class KeyedObjectsTest {
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("K1", obj1);
         KeyedObjects ko2 = (KeyedObjects) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
 
         // the clone contains a reference to the original object
-        assertTrue(ko2.getObject("K1") == obj1);
+        assertSame(ko2.getObject("K1"), obj1);
 
         // CASE 2 - object is mutable AND PublicCloneable
         obj1 = new DefaultPieDataset();
         ko1 = new KeyedObjects();
         ko1.addObject("K1", obj1);
         ko2 = (KeyedObjects) ko1.clone();
-        assertTrue(ko1 != ko2);
-        assertTrue(ko1.getClass() == ko2.getClass());
-        assertTrue(ko1.equals(ko2));
+        assertNotSame(ko1, ko2);
+        assertSame(ko1.getClass(), ko2.getClass());
+        assertEquals(ko1, ko2);
 
         // the clone contains a reference to a CLONE of the original object
-        assertTrue(ko2.getObject("K1") != obj1);
+        assertNotSame(ko2.getObject("K1"), obj1);
     }
 
     /**
@@ -122,7 +121,7 @@ public class KeyedObjectsTest {
         assertEquals(data.getObject("A"), 1.0);
         assertEquals(data.getObject("B"), 2.0);
         assertEquals(data.getObject("C"), 3.0);
-        assertEquals(data.getObject("D"), null);
+        assertNull(data.getObject("D"));
 
         boolean pass = false;
         try {
@@ -137,7 +136,7 @@ public class KeyedObjectsTest {
         assertEquals(data.getObject(0), 1.0);
         assertEquals(data.getObject(1), 2.0);
         assertEquals(data.getObject(2), 3.0);
-        assertEquals(data.getObject(3), null);
+        assertNull(data.getObject(3));
 
     }
 
@@ -150,7 +149,7 @@ public class KeyedObjectsTest {
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
-        KeyedObjects ko2 = (KeyedObjects) TestUtils.serialised(ko1);
+        KeyedObjects ko2 = TestUtils.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 
@@ -259,7 +258,7 @@ public class KeyedObjectsTest {
         ko1.setObject("Key 3", "Object 2");
 
         assertEquals("Object 1", ko1.getObject("Key 1"));
-        assertEquals(null, ko1.getObject("Key 2"));
+        assertNull(ko1.getObject("Key 2"));
         assertEquals("Object 2", ko1.getObject("Key 3"));
 
         // replace an existing value

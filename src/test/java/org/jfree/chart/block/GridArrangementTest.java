@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * GridArrangementTest.java
  * ------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,9 +36,10 @@
 
 package org.jfree.chart.block;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.Size2D;
@@ -52,24 +53,16 @@ import org.junit.jupiter.api.Test;
 public class GridArrangementTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        GridArrangement f1 = new GridArrangement(11, 22);
-        GridArrangement f2 = new GridArrangement(11, 22);
-        assertTrue(f1.equals(f2));
-        assertTrue(f2.equals(f1));
-
-        f1 = new GridArrangement(33, 22);
-        assertFalse(f1.equals(f2));
-        f2 = new GridArrangement(33, 22);
-        assertTrue(f1.equals(f2));
-
-        f1 = new GridArrangement(33, 44);
-        assertFalse(f1.equals(f2));
-        f2 = new GridArrangement(33, 44);
-        assertTrue(f1.equals(f2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(GridArrangement.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**
@@ -87,7 +80,7 @@ public class GridArrangementTest {
     @Test
     public void testSerialization() {
         GridArrangement f1 = new GridArrangement(33, 44);
-        GridArrangement f2 = (GridArrangement) TestUtils.serialised(f1);
+        GridArrangement f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

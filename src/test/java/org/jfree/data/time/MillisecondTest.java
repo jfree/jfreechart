@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * MillisecondTest.java
  * --------------------
- * (C) Copyright 2002-2021, by David Gilbert.
+ * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -67,7 +67,7 @@ public class MillisecondTest {
     @Test
     public void testEqualsSelf() {
         Millisecond millisecond = new Millisecond();
-        assertTrue(millisecond.equals(millisecond));
+        assertEquals(millisecond, millisecond);
     }
 
     /**
@@ -85,7 +85,7 @@ public class MillisecondTest {
         Minute minute2 = new Minute(15, hour2);
         Second second2 = new Second(34, minute2);
         Millisecond milli2 = new Millisecond(999, second2);
-        assertTrue(milli1.equals(milli2));
+        assertEquals(milli1, milli2);
     }
 
     /**
@@ -224,7 +224,7 @@ public class MillisecondTest {
     @Test
     public void testSerialization() {
         Millisecond m1 = new Millisecond();
-        Millisecond m2 = (Millisecond) TestUtils.serialised(m1);
+        Millisecond m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -235,7 +235,7 @@ public class MillisecondTest {
     public void testHashcode() {
         Millisecond m1 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
         Millisecond m2 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int hash1 = m1.hashCode();
         int hash2 = m2.hashCode();
         assertEquals(hash1, hash2);

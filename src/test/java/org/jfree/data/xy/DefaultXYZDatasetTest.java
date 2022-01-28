@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * DefaultXYZDatasetTest.java
  * --------------------------
- * (C) Copyright 2006-2021, by David Gilbert.
+ * (C) Copyright 2006-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link DefaultXYZDataset}.
@@ -58,8 +56,8 @@ public class DefaultXYZDatasetTest {
 
         DefaultXYZDataset d1 = new DefaultXYZDataset();
         DefaultXYZDataset d2 = new DefaultXYZDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
@@ -70,9 +68,9 @@ public class DefaultXYZDatasetTest {
         double[] z2 = new double[] {7.0, 8.0, 9.0};
         double[][] data2 = new double[][] {x2, y2, z2};
         d1.addSeries("S1", data1);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("S1", data2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -82,9 +80,9 @@ public class DefaultXYZDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
         DefaultXYZDataset d2 = (DefaultXYZDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         double[] x1 = new double[] {1.0, 2.0, 3.0};
@@ -93,15 +91,15 @@ public class DefaultXYZDatasetTest {
         double[][] data1 = new double[][] {x1, y1, z1};
         d1.addSeries("S1", data1);
         d2 = (DefaultXYZDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         x1[1] = 2.2;
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         x1[1] = 2.0;
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -119,7 +117,7 @@ public class DefaultXYZDatasetTest {
     @Test
     public void testSerialization() {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
-        DefaultXYZDataset d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        DefaultXYZDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
@@ -128,7 +126,7 @@ public class DefaultXYZDatasetTest {
         double[] z1 = new double[] {7.0, 8.0, 9.0};
         double[][] data1 = new double[][] {x1, y1, z1};
         d1.addSeries("S1", data1);
-        d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

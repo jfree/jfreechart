@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * YearTest.java
  * -------------
- * (C) Copyright 2001-2021, by David Gilbert.
+ * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.data.time;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.ZoneOffset;
 import java.util.Calendar;
@@ -51,6 +46,8 @@ import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Year} class.
@@ -65,7 +62,7 @@ public class YearTest {
     @Test
     public void testEqualsSelf() {
         Year year = new Year();
-        assertTrue(year.equals(year));
+        assertEquals(year, year);
     }
 
     /**
@@ -75,12 +72,12 @@ public class YearTest {
     public void testEquals() {
         Year year1 = new Year(2002);
         Year year2 = new Year(2002);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
 
         year1 = new Year(1999);
-        assertFalse(year1.equals(year2));
+        assertNotEquals(year1, year2);
         year2 = new Year(1999);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
     }
 
     /**
@@ -286,7 +283,7 @@ public class YearTest {
     @Test
     public void testSerialization() {
         Year y1 = new Year(1999);
-        Year y2 = (Year) TestUtils.serialised(y1);
+        Year y2 = TestUtils.serialised(y1);
         assertEquals(y1, y2);
     }
 
@@ -306,7 +303,7 @@ public class YearTest {
     public void testHashcode() {
         Year y1 = new Year(1988);
         Year y2 = new Year(1988);
-        assertTrue(y1.equals(y2));
+        assertEquals(y1, y2);
         int h1 = y1.hashCode();
         int h2 = y2.hashCode();
         assertEquals(h1, h2);

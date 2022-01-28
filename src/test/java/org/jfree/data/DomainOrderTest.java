@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * DomainOrderTest.java
  * --------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -38,10 +38,8 @@ package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertSame;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DomainOrder} class.
@@ -56,15 +54,15 @@ public class DomainOrderTest {
         assertEquals(DomainOrder.NONE, DomainOrder.NONE);
         assertEquals(DomainOrder.ASCENDING, DomainOrder.ASCENDING);
         assertEquals(DomainOrder.DESCENDING, DomainOrder.DESCENDING);
-        assertFalse(DomainOrder.NONE.equals(DomainOrder.ASCENDING));
-        assertFalse(DomainOrder.NONE.equals(DomainOrder.DESCENDING));
-        assertFalse(DomainOrder.NONE.equals(null));
-        assertFalse(DomainOrder.ASCENDING.equals(DomainOrder.NONE));
-        assertFalse(DomainOrder.ASCENDING.equals(DomainOrder.DESCENDING));
-        assertFalse(DomainOrder.ASCENDING.equals(null));
-        assertFalse(DomainOrder.DESCENDING.equals(DomainOrder.NONE));
-        assertFalse(DomainOrder.DESCENDING.equals(DomainOrder.ASCENDING));
-        assertFalse(DomainOrder.DESCENDING.equals(null));
+        assertNotEquals(DomainOrder.NONE, DomainOrder.ASCENDING);
+        assertNotEquals(DomainOrder.NONE, DomainOrder.DESCENDING);
+        assertNotEquals(null, DomainOrder.NONE);
+        assertNotEquals(DomainOrder.ASCENDING, DomainOrder.NONE);
+        assertNotEquals(DomainOrder.ASCENDING, DomainOrder.DESCENDING);
+        assertNotEquals(null, DomainOrder.ASCENDING);
+        assertNotEquals(DomainOrder.DESCENDING, DomainOrder.NONE);
+        assertNotEquals(DomainOrder.DESCENDING, DomainOrder.ASCENDING);
+        assertNotEquals(null, DomainOrder.DESCENDING);
     }
 
     /**
@@ -74,7 +72,7 @@ public class DomainOrderTest {
     public void testHashCode() {
         DomainOrder d1 = DomainOrder.ASCENDING;
         DomainOrder d2 = DomainOrder.ASCENDING;
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
         int h1 = d1.hashCode();
         int h2 = d2.hashCode();
         assertEquals(h1, h2);
@@ -86,7 +84,7 @@ public class DomainOrderTest {
     @Test
     public void testSerialization() {
         DomainOrder d1 = DomainOrder.ASCENDING;
-        DomainOrder d2 = (DomainOrder) TestUtils.serialised(d1);
+        DomainOrder d2 = TestUtils.serialised(d1);
         assertSame(d1, d2);
     }
 

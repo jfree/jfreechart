@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * NormalDistributionFunction2DTest.java
  * -------------------------------------
- * (C) Copyright 2009-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2009-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -82,8 +82,7 @@ public class NormalDistributionFunction2DTest {
     public void testSerialization() {
         NormalDistributionFunction2D f1 = new NormalDistributionFunction2D(1.0,
                 2.0);
-        NormalDistributionFunction2D f2 = (NormalDistributionFunction2D) 
-                TestUtils.serialised(f1);
+        NormalDistributionFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

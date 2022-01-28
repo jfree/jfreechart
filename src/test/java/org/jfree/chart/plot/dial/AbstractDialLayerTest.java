@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * AbstractDialLayerTest.java
  * --------------------------
- * (C) Copyright 2007-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2007-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,12 +36,10 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link AbstractDialLayer} class.
@@ -55,13 +53,13 @@ public class AbstractDialLayerTest {
     public void testEquals() {
         DialCap c1 = new DialCap();
         DialCap c2 = new DialCap();
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         // visible
         c1.setVisible(false);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setVisible(false);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -72,9 +70,9 @@ public class AbstractDialLayerTest {
         // test a default instance
         DialCap c1 = new DialCap();
         DialCap c2 = (DialCap) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
@@ -90,7 +88,7 @@ public class AbstractDialLayerTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check that the listener lists are independent

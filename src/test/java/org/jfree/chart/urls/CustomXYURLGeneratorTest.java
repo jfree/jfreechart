@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * CustomXYURLGeneratorTest.java
  * -----------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,9 +37,6 @@
 package org.jfree.chart.urls;
 
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
@@ -47,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CustomXYURLGenerator} class.
@@ -60,19 +59,19 @@ public class CustomXYURLGeneratorTest {
     public void testEquals() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         CustomXYURLGenerator g2 = new CustomXYURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
         List<String> u1 = new ArrayList<>();
         u1.add("URL A1");
         u1.add("URL A2");
         u1.add("URL A3");
         g1.addURLSeries(u1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         List<String> u2 = new ArrayList<>();
         u2.add("URL A1");
         u2.add("URL A2");
         u2.add("URL A3");
         g2.addURLSeries(u2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -88,17 +87,17 @@ public class CustomXYURLGeneratorTest {
         u1.add("URL A3");
         g1.addURLSeries(u1);
         CustomXYURLGenerator g2 = (CustomXYURLGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         List<String> u2 = new ArrayList<>();
         u2.add("URL XXX");
         g1.addURLSeries(u2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.addURLSeries(new ArrayList<>(u2));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -128,8 +127,7 @@ public class CustomXYURLGeneratorTest {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        CustomXYURLGenerator g2 = (CustomXYURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

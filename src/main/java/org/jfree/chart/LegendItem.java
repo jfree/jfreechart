@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,14 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
  *                   David Li;
  *                   Wolfgang Irler;
  *                   Luke Quinane;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -935,42 +936,58 @@ public class LegendItem implements Cloneable, Serializable {
             return false;
         }
         LegendItem that = (LegendItem) obj;
+
+        if (!Objects.equals(this.dataset, that.dataset)) {
+            return false;
+        }
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
+            return false;
+        }
         if (this.datasetIndex != that.datasetIndex) {
             return false;
         }
         if (this.series != that.series) {
             return false;
         }
-        if (!this.label.equals(that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!AttributedStringUtils.equal(this.attributedLabel,
-                that.attributedLabel)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!Objects.equals(this.description, that.description)) {
             return false;
         }
-        if (this.shapeVisible != that.shapeVisible) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ShapeUtils.equal(this.shape, that.shape)) {
+        if (!Objects.equals(this.urlText, that.urlText)) {
+            return false;
+        }
+        if (this.shapeVisible != that.shapeVisible) {
             return false;
         }
         if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
+        if (!Objects.equals(this.fillPaintTransformer,
+                            that.fillPaintTransformer)) {
+            return false;
+        }
+        if (!ShapeUtils.equal(this.shape, that.shape)) {
+            return false;
+        }
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!Objects.equals(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (!AttributedStringUtils.equal(this.attributedLabel,
+                                         that.attributedLabel)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
             return false;
         }
-        if (!this.outlineStroke.equals(that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
@@ -982,7 +999,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.line, that.line)) {
             return false;
         }
-        if (!this.lineStroke.equals(that.lineStroke)) {
+        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
@@ -995,6 +1012,35 @@ public class LegendItem implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.dataset);
+        hash = 83 * hash + Objects.hashCode(this.seriesKey);
+        hash = 83 * hash + this.datasetIndex;
+        hash = 83 * hash + this.series;
+        hash = 83 * hash + Objects.hashCode(this.label);
+        hash = 83 * hash + Objects.hashCode(this.labelFont);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.labelPaint);
+        hash = 83 * hash + Objects.hashCode(this.attributedLabel);
+        hash = 83 * hash + Objects.hashCode(this.description);
+        hash = 83 * hash + Objects.hashCode(this.toolTipText);
+        hash = 83 * hash + Objects.hashCode(this.urlText);
+        hash = 83 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.shape);
+        hash = 83 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.fillPaint);
+        hash = 83 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 83 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 83 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 83 * hash + (this.lineVisible ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.line);
+        hash = 83 * hash + Objects.hashCode(this.lineStroke);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.linePaint);
+        return hash;
     }
 
     /**

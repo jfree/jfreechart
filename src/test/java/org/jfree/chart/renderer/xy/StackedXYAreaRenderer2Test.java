@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StackedXYAreaRenderer2Test.java
  * -------------------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -56,6 +51,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StackedXYAreaRenderer2} class.
@@ -99,9 +96,9 @@ public class StackedXYAreaRenderer2Test {
         assertEquals(r2, r1);
 
         r1.setRoundXCoordinates(!r1.getRoundXCoordinates());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRoundXCoordinates(r1.getRoundXCoordinates());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -111,7 +108,7 @@ public class StackedXYAreaRenderer2Test {
     public void testHashcode() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = new StackedXYAreaRenderer2();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -124,9 +121,9 @@ public class StackedXYAreaRenderer2Test {
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -144,8 +141,7 @@ public class StackedXYAreaRenderer2Test {
     @Test
     public void testSerialization() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) 
-                TestUtils.serialised(r1);
+        StackedXYAreaRenderer2 r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

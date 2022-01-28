@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * XYLineAndShapeRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2004-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -206,8 +206,7 @@ public class XYLineAndShapeRendererTest {
     @Test
     public void testSerialization() {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
-        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        XYLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

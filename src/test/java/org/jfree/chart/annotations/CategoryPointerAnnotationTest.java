@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,57 @@
  * ----------------------------------
  * CategoryPointerAnnotationTest.java
  * ----------------------------------
- * (C) Copyright 2006-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2006-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.jfree.chart.TestUtils.createR2D;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
 
 /**
  * Tests for the {@link CategoryPointerAnnotation} class.
  */
 public class CategoryPointerAnnotationTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryPointerAnnotation.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .withPrefabValues(Rectangle2D.class, createR2D(true), createR2D(false))
+                .withPrefabValues(Font.class, createFont(true), createFont(false))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -63,71 +88,71 @@ public class CategoryPointerAnnotationTest {
                 "Key 1", 20.0, Math.PI);
         CategoryPointerAnnotation a2 = new CategoryPointerAnnotation("Label",
                 "Key 1", 20.0, Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new CategoryPointerAnnotation("Label2", "Key 1", 20.0, Math.PI);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new CategoryPointerAnnotation("Label2", "Key 1", 20.0, Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setCategory("Key 2");
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategory("Key 2");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setValue(22.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setValue(22.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double angle;
         a1.setAngle(Math.PI / 4.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAngle(Math.PI / 4.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double tipRadius;
         a1.setTipRadius(20.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTipRadius(20.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double baseRadius;
         a1.setBaseRadius(5.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setBaseRadius(5.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double arrowLength;
         a1.setArrowLength(33.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowLength(33.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double arrowWidth;
         a1.setArrowWidth(9.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowWidth(9.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private Stroke arrowStroke;
         Stroke stroke = new BasicStroke(1.5f);
         a1.setArrowStroke(stroke);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowStroke(stroke);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private Paint arrowPaint;
         a1.setArrowPaint(Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setArrowPaint(Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private double labelOffset;
         a1.setLabelOffset(10.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setLabelOffset(10.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -139,7 +164,7 @@ public class CategoryPointerAnnotationTest {
                 "A", 20.0, Math.PI);
         CategoryPointerAnnotation a2 = new CategoryPointerAnnotation("Label",
                 "A", 20.0, Math.PI);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -147,15 +172,16 @@ public class CategoryPointerAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException if there is a cloning issue.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryPointerAnnotation a1 = new CategoryPointerAnnotation("Label",
                 "A", 20.0, Math.PI);
         CategoryPointerAnnotation a2 = (CategoryPointerAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -175,8 +201,7 @@ public class CategoryPointerAnnotationTest {
     public void testSerialization() {
         CategoryPointerAnnotation a1 = new CategoryPointerAnnotation("Label",
                 "A", 20.0, Math.PI);
-        CategoryPointerAnnotation a2 = (CategoryPointerAnnotation) 
-                TestUtils.serialised(a1);
+        CategoryPointerAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

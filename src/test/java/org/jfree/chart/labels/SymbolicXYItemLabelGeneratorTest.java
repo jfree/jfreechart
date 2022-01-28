@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * SymbolicXYItemLabelGeneratorTest.java
  * -------------------------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,13 +36,12 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SymbolicXYItemLabelGenerator} class.
@@ -56,8 +55,8 @@ public class SymbolicXYItemLabelGeneratorTest {
     public void testEquals() {
         SymbolicXYItemLabelGenerator g1 = new SymbolicXYItemLabelGenerator();
         SymbolicXYItemLabelGenerator g2 = new SymbolicXYItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
     }
 
     /**
@@ -69,8 +68,8 @@ public class SymbolicXYItemLabelGeneratorTest {
                 = new SymbolicXYItemLabelGenerator();
         SymbolicXYItemLabelGenerator g2
                 = new SymbolicXYItemLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -81,9 +80,9 @@ public class SymbolicXYItemLabelGeneratorTest {
         SymbolicXYItemLabelGenerator g1 = new SymbolicXYItemLabelGenerator();
         SymbolicXYItemLabelGenerator g2 = (SymbolicXYItemLabelGenerator) 
                 g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -101,8 +100,7 @@ public class SymbolicXYItemLabelGeneratorTest {
     @Test
     public void testSerialization() {
         SymbolicXYItemLabelGenerator g1 = new SymbolicXYItemLabelGenerator();
-        SymbolicXYItemLabelGenerator g2 = (SymbolicXYItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        SymbolicXYItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
