@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the {@link AbstractBlock} class.
  */
-public class AbstractBlockTest{
+public class AbstractBlockTest {
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
