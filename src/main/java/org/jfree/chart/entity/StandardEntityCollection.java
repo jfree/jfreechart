@@ -30,7 +30,7 @@
  * (C) Copyright 2001-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   T. Hiltbrand;
  *
  */
 
@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Vector;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -137,6 +138,28 @@ public class StandardEntityCollection implements EntityCollection,
             }
         }
         return null;
+    }
+
+    /**
+     * Returns a collection of entities whose area contain the specified point
+     *
+     * @param x the x coordinate.
+     * @param y the y coordinate.
+     *
+     * @return A Vector of ChartEntity objects, possibly empty, never null
+     */
+    @Override
+    public Vector<ChartEntity> getEntities(double x, double y){
+        Vector<ChartEntity> filtered = new Vector<>();
+
+        int entityCount = this.entities.size();
+        for (int i = entityCount - 1; i >= 0; i--) {
+            ChartEntity entity = (ChartEntity) this.entities.get(i);
+            if (entity.getArea().contains(x, y)) {
+                filtered.add(entity);
+            }
+        }
+        return filtered;
     }
 
     /**

@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2022, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   T. Hiltbrand;
  *
  */
 
@@ -38,6 +38,7 @@ package org.jfree.chart.entity;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * This interface defines the methods used to access an ordered list of
@@ -73,6 +74,16 @@ public interface EntityCollection {
      * @return The entity.
      */
     ChartEntity getEntity(double x, double y);
+
+    /**
+     * Returns a collection of entities whose area contain the specified point
+     *
+     * @param x the x coordinate.
+     * @param y the y coordinate.
+     *
+     * @return A Vector of ChartEntity objects, possibly empty, never null
+     */
+    Vector<ChartEntity> getEntities(double x, double y);
 
     /**
      * Returns an entity from the collection.
