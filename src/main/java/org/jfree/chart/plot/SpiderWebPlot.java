@@ -220,6 +220,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** controls if the web polygons are filled or not */
     private boolean webFilled = true;
 
+    /** The alpha value of the fill portion of a polygon. */
+    private float webFillAlpha = 0.1F;
+
     /** A tooltip generator for the plot ({@code null} permitted). */
     private CategoryToolTipGenerator toolTipGenerator;
 
@@ -358,6 +361,34 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     public void setWebFilled(boolean flag) {
         this.webFilled = flag;
         fireChangeEvent();
+    }
+
+
+    /**
+     * Method to set the alpha value for the fill of a plot polygon.
+     *
+     * @param alpha the new alpha value. If it is outsite [0,1] it will be corrected to fit the range.
+     * @see #getWebFillAlpha()
+     */
+    public void setWebFillAlpha(float alpha) {
+        this.webFillAlpha = alpha;
+        if (webFillAlpha < 0f) {
+            webFillAlpha = 0f;
+        } else if (webFillAlpha > 1f) {
+            webFillAlpha = 1f;
+        }
+        fireChangeEvent();
+    }
+
+    /**
+     * Method to return the alpha value for filling a graph.
+     *
+     * @return The alpha value for filling a spider plot polygon.
+     *
+     * @see #setWebFillAlpha(float)
+     */
+    public float getWebFillAlpha() {
+        return webFillAlpha;
     }
 
     /**
@@ -616,8 +647,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the paint for ALL series in the plot.  If this is set to 
-     * {@code null}, then a list of paints is used instead (to allow different 
+     * Sets the paint for ALL series in the plot.  If this is set to
+     * {@code null}, then a list of paints is used instead (to allow different
      * colors to be used for each series of the radar group).
      *
      * @param paint the paint ({@code null} permitted).
@@ -1311,7 +1342,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
         if (this.webFilled) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-                    0.1f));
+                    webFillAlpha));
             g2.fill(polygon);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                     getForegroundAlpha()));
