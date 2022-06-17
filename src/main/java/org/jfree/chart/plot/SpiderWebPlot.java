@@ -363,11 +363,22 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         fireChangeEvent();
     }
 
+    /**
+     * Returns the alpha value for filling a graph (in the range 0.0 to 1.0).
+     *
+     * @return The alpha value for filling a spider plot polygon.
+     *
+     * @see #setWebFillAlpha(float)
+     */
+    public float getWebFillAlpha() {
+        return webFillAlpha;
+    }
 
     /**
-     * Method to set the alpha value for the fill of a plot polygon.
+     * Sets the alpha value for the fill of a plot polygon and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
      *
-     * @param alpha the new alpha value. If it is outsite [0,1] it will be corrected to fit the range.
+     * @param alpha the new alpha value. If it is outside [0,1] it will be corrected to fit the range.
      * @see #getWebFillAlpha()
      */
     public void setWebFillAlpha(float alpha) {
@@ -378,17 +389,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             webFillAlpha = 1f;
         }
         fireChangeEvent();
-    }
-
-    /**
-     * Method to return the alpha value for filling a graph.
-     *
-     * @return The alpha value for filling a spider plot polygon.
-     *
-     * @see #setWebFillAlpha(float)
-     */
-    public float getWebFillAlpha() {
-        return webFillAlpha;
     }
 
     /**
@@ -1495,6 +1495,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             return false;
         }
         if (this.webFilled != that.webFilled) {
+            return false;
+        }
+        if (this.webFillAlpha != that.webFillAlpha) {
             return false;
         }
         if (this.axisLabelGap != that.axisLabelGap) {
