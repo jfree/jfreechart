@@ -17,14 +17,28 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 11 or later (check the 1.5.x branch for Java 8 support).  
-If JavaFX support is required, you need to also include the JFreeChart-FX extensions:
-
-https://github.com/jfree/jfreechart-fx
+JFreeChart requires JDK 11 or later (check the `1.5.x` branch for Java 8 support).
 
 The library is licensed under the terms of the GNU Lesser General Public 
 License (LGPL) version 2.1 or later.
 
+
+JavaFX
+------
+JFreeChart can be used with JavaFX via the `JFreeChart-FX` extensions:
+
+https://github.com/jfree/jfreechart-fx
+
+Demos
+-----
+A small set of demo applications can be found in the following projects here
+at GitHub:
+
+* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
+* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
+
+A more comprehensive set of demos, plus the JFreeChart Developer Guide, is a reward at most
+tiers of the [JFree sponsorship](https://github.com/sponsors/jfree) program.  Thanks for supporting the JFree projects!
 
 Using JFreeChart
 ----------------
@@ -58,15 +72,6 @@ When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the
 * the `org.jfree.chart.utils.ParamChecks` class has been renamed `org.jfree.chart.utils.Args`.
 
 Please refer to [Issue 66](https://github.com/jfree/jfreechart/issues/66) for additional info.
-
-
-Demos
------
-A small set of demo applications can be found in the following projects here
-at GitHub:
-
-* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
-* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
 
 
 History
