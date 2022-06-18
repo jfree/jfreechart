@@ -53,6 +53,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.release.level>11</project.release.level>
         <project.source.level>11</project.source.level>
         <project.target.level>11</project.target.level>
     </properties>
@@ -93,6 +94,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
+                    <release>${project.release.level}</release>
                     <source>${project.source.level}</source>
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>                
