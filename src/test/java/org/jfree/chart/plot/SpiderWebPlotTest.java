@@ -189,6 +189,11 @@ public class SpiderWebPlotTest {
         p2.setWebFilled(false);
         assertEquals(p1, p2);
 
+        p1.setWebFillAlpha(0.5f);
+        assertNotEquals(p1, p2);
+        p2.setWebFillAlpha(0.5f);
+        assertEquals(p1, p2);
+
         // axisLabelGap
         p1.setAxisLabelGap(0.11);
         assertNotEquals(p1, p2);

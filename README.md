@@ -64,6 +64,7 @@ History
 - add new panel for background rendering of charts (PR [#233](https://github.com/jfree/jfreechart/pull/233))
 - fix tick label font for `LogAxis` with number format override ([#98](https://github.com/jfree/jfreechart/issues/98));
 - added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
+- added `get/setWebFillAlpha()` methods to SpiderWebPlot ([#279](https://github.com/jfree/jfreechart/pull/279))
 - add argument checks for annotations ([#223](https://github.com/jfree/jfreechart/issues/223));
 - removed `JFreeChartResources.java` file ([#239](https://github.com/jfree/jfreechart/issues/239))
 
