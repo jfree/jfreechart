@@ -36,11 +36,6 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,6 +48,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Minute} class.
@@ -82,6 +79,13 @@ public class MinuteTest {
         Hour hour2 = new Hour(15, day2);
         Minute minute2 = new Minute(15, hour2);
         assertEquals(minute1, minute2);
+    }
+
+    @Test
+    public void comparison() {
+        Minute m1 = new Minute(30, 6, 10, 8, 2021);
+        Minute m2 = new Minute(30, 6, 11, 8, 2021);
+        assertNotEquals(m1, m2);
     }
 
     /**

@@ -59,13 +59,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
     public static final int LAST_MINUTE_IN_HOUR = 59;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour in which the minute falls. */
-    private byte hour;
+    private final byte hour;
 
     /** The minute. */
-    private byte minute;
+    private final byte minute;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -381,7 +381,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
         if (this.hour != that.hour) {
             return false;
         }
-        return true;
+        return this.day.equals(that.day);
     }
 
     /**
