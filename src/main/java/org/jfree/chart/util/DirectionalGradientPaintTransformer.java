@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DirectionalGradientPaintTransformer.java
  * ----------------------------------------
- * (C) Copyright 2013-2022, by Peter Kolb and Contributors.
+ * (C) Copyright 2013-present, by Peter Kolb and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert;

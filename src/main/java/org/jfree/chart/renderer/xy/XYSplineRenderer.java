@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007-2022, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007-present, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,

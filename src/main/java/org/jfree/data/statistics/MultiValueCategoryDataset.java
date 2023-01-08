@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * MultiValueCategoryDataset.java
  * ------------------------------
- * (C) Copyright 2007-2022, by David Forslund and Contributors.
+ * (C) Copyright 2007-present, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * ResourceBundleWrapper.java
  * --------------------------
- * (C)opyright 2008-2022, by Jess Thrysoee and Contributors.
+ * (C)opyright 2008-present, by Jess Thrysoee and Contributors.
  *
  * Original Author:  Jess Thrysoee;
  * Contributor(s):   David Gilbert;

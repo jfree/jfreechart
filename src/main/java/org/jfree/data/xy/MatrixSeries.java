@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * MatrixSeries.java
  * -----------------
- * (C) Copyright 2003-2022, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-present, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert;

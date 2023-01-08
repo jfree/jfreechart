@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * DefaultBoxAndWhiskerXYDataset.java
  * ----------------------------------
- * (C) Copyright 2003-2022, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);

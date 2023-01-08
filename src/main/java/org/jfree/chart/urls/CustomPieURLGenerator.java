@@ -2,7 +2,7 @@
  * JFreeChart : a free Java chart library
  * ======================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * CustomPieURLGenerator.java
  * --------------------------
- * (C) Copyright 2004-2022, by David Basten and Contributors.
+ * (C) Copyright 2004-present, by David Basten and Contributors.
  *
  * Original Author:  David Basten;
  * Contributors:     -;
