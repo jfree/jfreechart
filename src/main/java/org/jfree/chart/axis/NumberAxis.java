@@ -46,6 +46,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -980,9 +981,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     protected List refreshTicksVertical(Graphics2D g2,
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = new java.util.ArrayList();
-        result.clear();
-
+        List<Tick> result = new ArrayList<>();
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
         if (isAutoTickUnitSelection()) {
