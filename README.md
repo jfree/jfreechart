@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.3, 21 February 2021.
+Version 1.5.4, 8 January 2023.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.3</version>
+        <version>1.5.4</version>
     </dependency>
 
 
@@ -57,7 +57,7 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.4 (not-yet-released)
+##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
 - add option to truncate item labels and compute contrast colors (PR [#225](https://github.com/jfree/jfreechart/pull/225))
 - add new annotations (PR [#226](https://github.com/jfree/jfreechart/pull/226))
@@ -1449,6 +1449,6 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 
 It is possible that I have missed someone on this list, if that applies to you, please e-mail me.
 
-Dave Gilbert (david.gilbert@object-refinery.com)
+Dave Gilbert (dave@jfree.org)
 
 JFreeChart Project Leader
