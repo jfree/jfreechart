@@ -86,6 +86,9 @@ public class MinuteTest {
         Minute m1 = new Minute(30, 6, 10, 8, 2021);
         Minute m2 = new Minute(30, 6, 11, 8, 2021);
         assertNotEquals(m1, m2);
+        assertEquals(-1, m1.compareTo(m2));
+        assertEquals(1, m2.compareTo(m1));
+        assertEquals(0, m1.compareTo(m1));
     }
 
     /**

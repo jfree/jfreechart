@@ -420,9 +420,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
         // -------------------------------------------
         if (o1 instanceof Minute) {
             Minute m = (Minute) o1;
-            result = getHour().compareTo(m.getHour());
+            result = this.day.compareTo(m.day);
             if (result == 0) {
-                result = this.minute - m.getMinute();
+                result = this.hour - m.hour;
+                if (result == 0) {
+                    result = this.minute - m.getMinute();
+                }
             }
         }
 
