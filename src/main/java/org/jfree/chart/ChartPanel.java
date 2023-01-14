@@ -849,7 +849,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not zooming is enabled for the
+     * Sets the flag that controls whether zooming is enabled for the
      * domain axis.  A check is made to ensure that the current plot supports
      * zooming for the domain values.
      *
@@ -860,10 +860,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Plot plot = this.chart.getPlot();
             if (plot instanceof Zoomable) {
                 Zoomable z = (Zoomable) plot;
-                this.domainZoomable = flag && (z.isDomainZoomable());
+                this.domainZoomable = z.isDomainZoomable();
             }
-        }
-        else {
+        } else {
             this.domainZoomable = false;
         }
     }
@@ -888,10 +887,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Plot plot = this.chart.getPlot();
             if (plot instanceof Zoomable) {
                 Zoomable z = (Zoomable) plot;
-                this.rangeZoomable = flag && (z.isRangeZoomable());
+                this.rangeZoomable = z.isRangeZoomable();
             }
-        }
-        else {
+        } else {
             this.rangeZoomable = false;
         }
     }
@@ -1928,6 +1926,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.chart == null) {
             return;
         }
+        this.chart.setNotify(true);
+
         // new entity code...
         Object[] listeners = this.chartMouseListeners.getListeners(
                 ChartMouseListener.class);
@@ -2631,15 +2631,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         try {
             Method m = g2.getClass().getMethod("getSVGElement");
             svg = (String) m.invoke(g2);
-        } catch (NoSuchMethodException e) {
-            // null will be returned
-        } catch (SecurityException e) {
-            // null will be returned
-        } catch (IllegalAccessException e) {
-            // null will be returned
-        } catch (IllegalArgumentException e) {
-            // null will be returned
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException e) {
             // null will be returned
         }
         return svg;
@@ -2650,19 +2643,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
             Constructor ctor = svgGraphics2d.getConstructor(int.class, int.class);
             return (Graphics2D) ctor.newInstance(w, h);
-        } catch (ClassNotFoundException ex) {
-            return null;
-        } catch (NoSuchMethodException ex) {
-            return null;
-        } catch (SecurityException ex) {
-            return null;
-        } catch (InstantiationException ex) {
-            return null;
-        } catch (IllegalAccessException ex) {
-            return null;
-        } catch (IllegalArgumentException ex) {
-            return null;
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException |
+                 IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             return null;
         }
     }
@@ -2759,19 +2741,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.chart.draw(g2, drawArea);
             Method m3 = pdfDocClass.getMethod("writeToFile", File.class);
             m3.invoke(pdfDoc, file);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 SecurityException | IllegalArgumentException | InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
