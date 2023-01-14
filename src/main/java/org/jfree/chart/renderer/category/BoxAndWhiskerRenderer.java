@@ -1113,6 +1113,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (this.medianVisible != that.medianVisible) {
             return false;
         }
+        if (this.outlierVisible != that.outlierVisible) {
+            return false;
+        }
         if (this.minOutlierVisible != that.minOutlierVisible) {
             return false;
         }
