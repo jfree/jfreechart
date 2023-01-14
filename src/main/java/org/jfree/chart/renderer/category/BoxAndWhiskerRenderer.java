@@ -187,10 +187,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getArtifactPaint()
      */
-    public void setArtifactPaint(Paint paint) {
+    public BoxAndWhiskerRenderer setArtifactPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -212,9 +213,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getFillBox()
      */
-    public void setFillBox(boolean flag) {
+    public BoxAndWhiskerRenderer setFillBox(boolean flag) {
         this.fillBox = flag;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -237,9 +239,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getItemMargin()
      */
-    public void setItemMargin(double margin) {
+    public BoxAndWhiskerRenderer setItemMargin(double margin) {
         this.itemMargin = margin;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -264,9 +267,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getMaximumBarWidth()
      */
-    public void setMaximumBarWidth(double percent) {
+    public BoxAndWhiskerRenderer setMaximumBarWidth(double percent) {
         this.maximumBarWidth = percent;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -290,12 +294,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #isMeanVisible()
      */
-    public void setMeanVisible(boolean visible) {
-        if (this.meanVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMeanVisible(boolean visible) {
+        if (this.meanVisible != visible) {
+            this.meanVisible = visible;
+            fireChangeEvent();
         }
-        this.meanVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -319,12 +323,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #isMedianVisible()
      */
-    public void setMedianVisible(boolean visible) {
-        if (this.medianVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMedianVisible(boolean visible) {
+        if (this.medianVisible != visible) {
+            this.medianVisible = visible;
+            fireChangeEvent();
         }
-        this.medianVisible = visible;
-        fireChangeEvent();
+        return this;
+
     }
 
     /**
@@ -352,12 +357,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.5.2
      */
-    public void setOutlierVisible(boolean visible) {
-        if (this.outlierVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setOutlierVisible(boolean visible) {
+        if (this.outlierVisible != visible) {
+            this.outlierVisible = visible;
+            fireChangeEvent();
         }
-        this.outlierVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -385,12 +390,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.5.2
      */
-    public void setMinOutlierVisible(boolean visible) {
-        if (this.minOutlierVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMinOutlierVisible(boolean visible) {
+        if (this.minOutlierVisible != visible) {
+            this.minOutlierVisible = visible;
+            fireChangeEvent();
         }
-        this.minOutlierVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -418,12 +423,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.5.2
      */
-    public void setMaxOutlierVisible(boolean visible) {
-        if (this.maxOutlierVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMaxOutlierVisible(boolean visible) {
+        if (this.maxOutlierVisible != visible) {
+            this.maxOutlierVisible = visible;
+            fireChangeEvent();
         }
-        this.maxOutlierVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -443,12 +448,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @param flag  the new flag value.
      */
-    public void setUseOutlinePaintForWhiskers(boolean flag) {
-        if (this.useOutlinePaintForWhiskers == flag) {
-            return;
+    public BoxAndWhiskerRenderer setUseOutlinePaintForWhiskers(boolean flag) {
+        if (this.useOutlinePaintForWhiskers != flag) {
+            this.useOutlinePaintForWhiskers = flag;
+            fireChangeEvent();
         }
-        this.useOutlinePaintForWhiskers = flag;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -471,16 +476,16 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @see #getWhiskerWidth()
      * @see CategoryItemRendererState#getBarWidth()
      */
-    public void setWhiskerWidth(double width) {
+    public BoxAndWhiskerRenderer setWhiskerWidth(double width) {
         if (width < 0 || width > 1) {
             throw new IllegalArgumentException(
                     "Value for whisker width out of range");
         }
-        if (width == this.whiskerWidth) {
-            return;
+        if (width != this.whiskerWidth) {
+            this.whiskerWidth = width;
+            fireChangeEvent();
         }
-        this.whiskerWidth = width;
-        fireChangeEvent();
+        return this;
     }
 
     /**
