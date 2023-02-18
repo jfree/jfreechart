@@ -1,6 +1,27 @@
 package org.jfree.chart.charts;
 
-public class ScatterPlot {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.data.xy.XYDataset;
+
+public class ScatterPlot extends JFreeChart {
+
+    public ScatterPlot(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates a scatter plot with default settings. The chart object
@@ -68,10 +89,8 @@ public class ScatterPlot {
         plot.setRenderer(renderer);
         plot.setOrientation(orientation);
 
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new ScatterPlot(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 

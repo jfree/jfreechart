@@ -1,6 +1,21 @@
 package org.jfree.chart.charts;
 
-public class CandleStickChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.CandlestickRenderer;
+import org.jfree.data.xy.OHLCDataset;
+
+public class CandleStickChart extends JFreeChart {
+
+    public CandleStickChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+    }
 
     /**
      * Creates and returns a default instance of a candlesticks chart.
@@ -23,9 +38,8 @@ public class CandleStickChart {
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, null);
         plot.setRenderer(new CandlestickRenderer());
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        JFreeChart chart = new CandleStickChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
         return chart;
 
     }

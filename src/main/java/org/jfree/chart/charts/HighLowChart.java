@@ -1,6 +1,22 @@
 package org.jfree.chart.charts;
 
-public class HighLowChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.HighLowItemLabelGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.HighLowRenderer;
+import org.jfree.data.xy.OHLCDataset;
+
+public class HighLowChart extends JFreeChart {
+    public HighLowChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+    }
+
     /**
      * Creates and returns a default instance of a high-low-open-close chart.
      *
@@ -23,10 +39,9 @@ public class HighLowChart {
         HighLowRenderer renderer = new HighLowRenderer();
         renderer.setDefaultToolTipGenerator(new HighLowItemLabelGenerator());
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+
+        return new HighLowChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 

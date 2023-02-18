@@ -1,6 +1,21 @@
 package org.jfree.chart.charts;
 
-public class WaferMapChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.WaferMapPlot;
+import org.jfree.chart.renderer.WaferMapRenderer;
+import org.jfree.data.general.WaferMapDataset;
+
+public class WaferMapChart extends JFreeChart {
+
+    public WaferMapChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates a wafer map chart.
@@ -24,9 +39,8 @@ public class WaferMapChart {
         WaferMapRenderer renderer = new WaferMapRenderer();
         plot.setRenderer(renderer);
 
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new WaferMapChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
+
     }
 }

@@ -1,6 +1,25 @@
 package org.jfree.chart.charts;
 
-public class Histogram {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYBarRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.data.xy.IntervalXYDataset;
+
+public class Histogram extends JFreeChart {
+
+    public Histogram(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+    }
 
     /**
      * Creates a histogram chart. This chart is constructed with an
@@ -59,10 +78,8 @@ public class Histogram {
         plot.setOrientation(orientation);
         plot.setDomainZeroBaselineVisible(true);
         plot.setRangeZeroBaselineVisible(true);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new Histogram(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }

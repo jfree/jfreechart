@@ -1,6 +1,24 @@
 package org.jfree.chart.charts;
 
-public class WindPlot {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.WindItemRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.data.xy.WindDataset;
+
+public class WindPlot extends JFreeChart {
+    public WindPlot(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Creates a wind plot with default settings.
      *
@@ -31,10 +49,8 @@ public class WindPlot {
             renderer.setURLGenerator(new StandardXYURLGenerator());
         }
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new WindPlot(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }

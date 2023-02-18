@@ -1,6 +1,28 @@
 package org.jfree.chart.charts;
 
-public class XYAreaChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
+import org.jfree.chart.renderer.xy.XYAreaRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.data.xy.TableXYDataset;
+import org.jfree.data.xy.XYDataset;
+
+public class XYAreaChart extends JFreeChart {
+
+    public XYAreaChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates an area chart using an {@link XYDataset}.
@@ -73,10 +95,9 @@ public class XYAreaChart {
 
         plot.setRenderer(new XYAreaRenderer(XYAreaRenderer.AREA, tipGenerator,
                 urlGenerator));
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+
+        return new XYAreaChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 
@@ -145,10 +166,8 @@ public class XYAreaChart {
 
         plot.setRangeAxis(yAxis); // forces recalculation of the axis range
 
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new XYAreaChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }

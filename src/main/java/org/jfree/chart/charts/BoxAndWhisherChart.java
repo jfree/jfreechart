@@ -1,67 +1,85 @@
 package org.jfree.chart.charts;
 
-public class BoxAndWhisherChart {
+import java.awt.Font;
 
-    /**
-     * Creates and returns a default instance of a box and whisker chart
-     * based on data from a {@link BoxAndWhiskerCategoryDataset}.
-     *
-     * @param title             the chart title ({@code null} permitted).
-     * @param categoryAxisLabel a label for the category axis
-     *                          ({@code null} permitted).
-     * @param valueAxisLabel    a label for the value axis ({@code null}
-     *                          permitted).
-     * @param dataset           the dataset for the chart ({@code null} permitted).
-     * @param legend            a flag specifying whether or not a legend is
-     *                          required.
-     *
-     * @return A box and whisker chart.
-     */
-    public static JFreeChart createBoxAndWhiskerChart(String title,
-            String categoryAxisLabel, String valueAxisLabel,
-            BoxAndWhiskerCategoryDataset dataset, boolean legend) {
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
+import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
 
-        CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
-        NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
-        valueAxis.setAutoRangeIncludesZero(false);
+public class BoxAndWhisherChart extends JFreeChart {
 
-        BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
-        renderer.setDefaultToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        public BoxAndWhisherChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+                super(title, titleFont, plot, createLegend);
+        }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
-                renderer);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
-                plot, legend);
-        currentTheme.apply(chart);
-        return chart;
-    }
+        /**
+         * Creates and returns a default instance of a box and whisker chart
+         * based on data from a {@link BoxAndWhiskerCategoryDataset}.
+         *
+         * @param title             the chart title ({@code null} permitted).
+         * @param categoryAxisLabel a label for the category axis
+         *                          ({@code null} permitted).
+         * @param valueAxisLabel    a label for the value axis ({@code null}
+         *                          permitted).
+         * @param dataset           the dataset for the chart ({@code null} permitted).
+         * @param legend            a flag specifying whether or not a legend is
+         *                          required.
+         *
+         * @return A box and whisker chart.
+         */
+        public static JFreeChart createBoxAndWhiskerChart(String title,
+                        String categoryAxisLabel, String valueAxisLabel,
+                        BoxAndWhiskerCategoryDataset dataset, boolean legend) {
 
-    /**
-     * Creates and returns a default instance of a box and whisker chart.
-     *
-     * @param title          the chart title ({@code null} permitted).
-     * @param timeAxisLabel  a label for the time axis ({@code null}
-     *                       permitted).
-     * @param valueAxisLabel a label for the value axis ({@code null}
-     *                       permitted).
-     * @param dataset        the dataset for the chart ({@code null} permitted).
-     * @param legend         a flag specifying whether or not a legend is required.
-     *
-     * @return A box and whisker chart.
-     */
-    public static JFreeChart createBoxAndWhiskerChart(String title,
-            String timeAxisLabel, String valueAxisLabel,
-            BoxAndWhiskerXYDataset dataset, boolean legend) {
+                CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
+                NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
+                valueAxis.setAutoRangeIncludesZero(false);
 
-        ValueAxis timeAxis = new DateAxis(timeAxisLabel);
-        NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
-        valueAxis.setAutoRangeIncludesZero(false);
-        XYBoxAndWhiskerRenderer renderer = new XYBoxAndWhiskerRenderer(10.0);
-        XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
-                plot, legend);
-        currentTheme.apply(chart);
-        return chart;
+                BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
+                renderer.setDefaultToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
 
-    }
+                CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
+                                renderer);
+                JFreeChart chart = new BoxAndWhisherChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                                plot, legend);
+                return chart;
+        }
+
+        /**
+         * Creates and returns a default instance of a box and whisker chart.
+         *
+         * @param title          the chart title ({@code null} permitted).
+         * @param timeAxisLabel  a label for the time axis ({@code null}
+         *                       permitted).
+         * @param valueAxisLabel a label for the value axis ({@code null}
+         *                       permitted).
+         * @param dataset        the dataset for the chart ({@code null} permitted).
+         * @param legend         a flag specifying whether or not a legend is required.
+         *
+         * @return A box and whisker chart.
+         */
+        public static JFreeChart createBoxAndWhiskerChart(String title,
+                        String timeAxisLabel, String valueAxisLabel,
+                        BoxAndWhiskerXYDataset dataset, boolean legend) {
+
+                ValueAxis timeAxis = new DateAxis(timeAxisLabel);
+                NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
+                valueAxis.setAutoRangeIncludesZero(false);
+                XYBoxAndWhiskerRenderer renderer = new XYBoxAndWhiskerRenderer(10.0);
+                XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
+                JFreeChart chart = new BoxAndWhisherChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                                plot, legend);
+                return chart;
+
+        }
 }

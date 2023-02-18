@@ -1,6 +1,23 @@
 package org.jfree.chart.charts;
 
-public class RingChart {
+import java.awt.Font;
+import java.util.Locale;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.RingPlot;
+import org.jfree.chart.urls.StandardPieURLGenerator;
+import org.jfree.data.general.PieDataset;
+
+public class RingChart extends JFreeChart {
+    public RingChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Creates a ring chart with default settings.
      * <P>
@@ -24,10 +41,9 @@ public class RingChart {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new RingChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
+
     }
 
     /**
@@ -56,10 +72,8 @@ public class RingChart {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new RingChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }

@@ -1,6 +1,27 @@
 package org.jfree.chart.charts;
 
-public class XYBarChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYBarRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.data.xy.IntervalXYDataset;
+
+public class XYBarChart extends JFreeChart {
+    public XYBarChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Creates and returns a default instance of an XY bar chart.
      * <P>
@@ -77,10 +98,8 @@ public class XYBarChart {
         XYPlot plot = new XYPlot(dataset, domainAxis, valueAxis, renderer);
         plot.setOrientation(orientation);
 
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new XYBarChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 

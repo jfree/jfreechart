@@ -1,6 +1,26 @@
 package org.jfree.chart.charts;
 
-public class TimeSeriesChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.data.xy.XYDataset;
+
+public class TimeSeriesChart extends JFreeChart {
+
+    public TimeSeriesChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates and returns a time series chart. A time series chart is an
@@ -74,10 +94,8 @@ public class TimeSeriesChart {
         renderer.setURLGenerator(urlGenerator);
         plot.setRenderer(renderer);
 
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        return new TimeSeriesChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }

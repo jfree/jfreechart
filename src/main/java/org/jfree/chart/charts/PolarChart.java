@@ -1,6 +1,21 @@
 package org.jfree.chart.charts;
 
-public class PolarChart {
+import java.awt.Font;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PolarPlot;
+import org.jfree.chart.renderer.DefaultPolarItemRenderer;
+import org.jfree.data.xy.XYDataset;
+
+public class PolarChart extends JFreeChart {
+
+    public PolarChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
 
     /**
      * Creates a polar plot for the specified dataset (x-values interpreted as
@@ -27,10 +42,9 @@ public class PolarChart {
         rangeAxis.setTickLabelInsets(new RectangleInsets(0.0, 0.0, 0.0, 0.0));
         plot.setAxis(rangeAxis);
         plot.setRenderer(new DefaultPolarItemRenderer());
-        JFreeChart chart = new JFreeChart(
+
+        return new PolarChart(
                 title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
-        currentTheme.apply(chart);
-        return chart;
 
     }
 }
