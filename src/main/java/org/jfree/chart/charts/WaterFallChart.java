@@ -1,6 +1,34 @@
 package org.jfree.chart.charts;
 
-public class WaterFallChart {
+import java.awt.Font;
+
+import javax.swing.text.AttributeSet.ColorAttribute;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.Marker;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.renderer.category.WaterfallBarRenderer;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.urls.StandardCategoryURLGenerator;
+import org.jfree.data.category.CategoryDataset;
+
+public class WaterFallChart extends JFreeChart {
+    public WaterFallChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        super(title, titleFont, plot, createLegend);
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Creates a waterfall chart. The chart object returned by this method
      * uses a {@link CategoryPlot} instance as the plot, with a
@@ -60,12 +88,11 @@ public class WaterFallChart {
                 renderer);
         plot.clearRangeMarkers();
         Marker baseline = new ValueMarker(0.0);
-        baseline.setPaint(Color.BLACK);
+        baseline.setPaint(ColorAttribute.BLACK);
         plot.addRangeMarker(baseline, Layer.FOREGROUND);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-        currentTheme.apply(chart);
         return chart;
 
     }
