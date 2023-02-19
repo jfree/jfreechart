@@ -10,7 +10,9 @@ import org.jfree.chart.labels.StandardPieToolTipGenerator;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.urls.StandardPieURLGenerator;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYDataset;
 
 public class RingChart extends JFreeChart {
     public RingChart(String title, Font titleFont, Plot plot, boolean createLegend) {
@@ -75,5 +77,25 @@ public class RingChart extends JFreeChart {
         return new RingChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JFreeChart createChart(String title, CategoryDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

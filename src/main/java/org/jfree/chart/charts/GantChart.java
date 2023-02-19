@@ -13,7 +13,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.GanttRenderer;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
+import org.jfree.data.xy.XYDataset;
 
 public class GantChart extends JFreeChart {
         public GantChart(String title, Font titleFont, Plot plot, boolean createLegend) {
@@ -89,5 +91,25 @@ public class GantChart extends JFreeChart {
                                 plot, legend);
                 return chart;
 
+        }
+
+        @Override
+        public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+                        CategoryDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, CategoryDataset dataset, boolean legend, boolean tooltips,
+                        boolean urls) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
         }
 }

@@ -23,6 +23,7 @@ import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYDataset;
 
 public class PieChart extends JFreeChart {
 
@@ -33,6 +34,10 @@ public class PieChart extends JFreeChart {
 
     public PieChart(PiePlot piePlot) {
         super(null, null, piePlot, true);
+    }
+
+    public PieChart() {
+        super();
     }
 
     /**
@@ -386,6 +391,25 @@ public class PieChart extends JFreeChart {
                 plot, legend);
         return chart;
 
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
+        return createPieChart(title, dataset);
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

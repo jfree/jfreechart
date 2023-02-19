@@ -12,6 +12,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
 public class BubbleChart extends JFreeChart {
@@ -84,5 +86,25 @@ public class BubbleChart extends JFreeChart {
                 plot, legend);
         return chart;
 
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JFreeChart createChart(String title, CategoryDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
