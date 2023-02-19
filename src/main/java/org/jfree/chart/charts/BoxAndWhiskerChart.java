@@ -13,12 +13,15 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
+import org.jfree.data.xy.XYDataset;
 
-public class BoxAndWhisherChart extends JFreeChart {
+public class BoxAndWhiskerChart extends JFreeChart {
 
-        public BoxAndWhisherChart(String title, Font titleFont, Plot plot, boolean createLegend) {
+        public BoxAndWhiskerChart(String title, Font titleFont, Plot plot, boolean createLegend) {
                 super(title, titleFont, plot, createLegend);
         }
 
@@ -50,7 +53,7 @@ public class BoxAndWhisherChart extends JFreeChart {
 
                 CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                                 renderer);
-                JFreeChart chart = new BoxAndWhisherChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                JFreeChart chart = new BoxAndWhiskerChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                                 plot, legend);
                 return chart;
         }
@@ -77,9 +80,30 @@ public class BoxAndWhisherChart extends JFreeChart {
                 valueAxis.setAutoRangeIncludesZero(false);
                 XYBoxAndWhiskerRenderer renderer = new XYBoxAndWhiskerRenderer(10.0);
                 XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
-                JFreeChart chart = new BoxAndWhisherChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                JFreeChart chart = new BoxAndWhiskerChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                                 plot, legend);
                 return chart;
 
         }
+
+        @Override
+        public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+                        CategoryDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+                        boolean urls) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
 }

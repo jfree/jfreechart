@@ -44,21 +44,44 @@
 
 package org.jfree.chart;
 
-import java.awt.Font;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.jfree.chart.charts.AreaChart;
 import org.jfree.chart.charts.BarChart;
-import org.jfree.chart.charts.PieChart;
-import org.jfree.chart.charts.TimeSeriesChart;
-import org.jfree.chart.plot.Plot;
+import org.jfree.chart.charts.BoxAndWhiskerChart;
+import org.jfree.chart.charts.BubbleChart;
+import org.jfree.chart.charts.CandleStickChart;
+import org.jfree.chart.charts.GantChart;
+import org.jfree.chart.charts.HighLowChart;
+import org.jfree.chart.charts.Histogram;
+import org.jfree.chart.charts.LineChart;
+import org.jfree.chart.charts.PolarChart;
+import org.jfree.chart.charts.RingChart;
+import org.jfree.chart.charts.ScatterPlot;
+import org.jfree.chart.charts.WaferMapChart;
+import org.jfree.chart.charts.WaterFallChart;
+import org.jfree.chart.charts.WindPlot;
+import org.jfree.chart.charts.XYAreaChart;
+import org.jfree.chart.charts.XYBarChart;
+import org.jfree.chart.charts.XYLineChart;
+import org.jfree.chart.charts.XYStepAreaChart;
+import org.jfree.chart.charts.XYStepChart;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.data.general.WaferMapDataset;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.OHLCDataset;
+import org.jfree.data.xy.WindDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYZDataset;
 
 /**
  * A collection of utility methods for creating some standard charts with
@@ -123,7 +146,76 @@ public abstract class ChartFactory {
      * @throws InstantiationException
      */
 
-    public JFreeChart getChart(String chartType)
+    public static JFreeChart getChartRegular(String chartType, String title, String category, String value,
+            CategoryDataset dataset) {
+        switch (chartType) {
+            case "BarChart":
+                return BarChart.createBarChart(title, category, value, dataset);
+
+            case "AreaChart":
+                return AreaChart.createAreaChart(title, category, value, dataset);
+
+            case "BubbleChart":
+                return BubbleChart.createBubbleChart(title, category, value, (XYZDataset) dataset);
+
+            case "CandleStickChart":
+                return CandleStickChart.createCandlestickChart(title, value, chartType, (OHLCDataset) dataset,
+                        false);
+
+            case "GantChart":
+                return GantChart.createGanttChart(title, category, value, (IntervalCategoryDataset) dataset);
+
+            case "HighLowChart":
+                return HighLowChart.createHighLowChart(title, category, value, (OHLCDataset) dataset, false);
+
+            case "Histogram":
+                return Histogram.createHistogram(title, category, value, (IntervalXYDataset) dataset);
+
+            case "LineChart":
+                return LineChart.createLineChart(title, category, value, dataset);
+
+            case "PolarChart":
+                return PolarChart.createPolarChart(title, (XYDataset) dataset, false, false, false);
+
+            case "RingChart":
+                return RingChart.createRingChart(title, (PieDataset) dataset, false, false, null);
+
+            case "ScatterPlot":
+                return ScatterPlot.createScatterPlot(title, category, value, (XYDataset) dataset);
+
+            case "WaferMapChart":
+                return WaferMapChart.createWaferMapChart(title, (WaferMapDataset) dataset, null, false, false,
+                        false);
+
+            case "WaterFallChart":
+                return WaterFallChart.createWaterfallChart(title, category, value, dataset, null, false, false,
+                        false);
+
+            case "WindPlot":
+                return WindPlot.createWindPlot(title, category, value, (WindDataset) dataset, false, false,
+                        false);
+
+            case "XYAreaChart":
+                return XYAreaChart.createXYAreaChart(title, category, value, (XYDataset) dataset);
+
+            case "XYBarChart":
+                return XYBarChart.createXYBarChart(title, category, false, value, (IntervalXYDataset) dataset);
+
+            case "XYLineChart":
+                return XYLineChart.createXYLineChart(title, category, value, (XYDataset) dataset);
+
+            case "XYStepAreaChart":
+                return XYStepAreaChart.createXYStepAreaChart(title, category, value, (XYDataset) dataset);
+
+            case "XYStepChart":
+                return XYStepChart.createXYStepChart(title, category, value, (XYDataset) dataset);
+
+            default:
+                return null;
+        }
+    }
+
+    public JFreeChart getChartReflection(String chartType)
             throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> classObj = Class.forName(chartType);

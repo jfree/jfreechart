@@ -85,25 +85,25 @@ public class NumberAxisTest {
         NumberAxis a2 = new NumberAxis("Test");
         assertEquals(a1, a2);
 
-        //private boolean autoRangeIncludesZero;
+        // private boolean autoRangeIncludesZero;
         a1.setAutoRangeIncludesZero(false);
         assertNotEquals(a1, a2);
         a2.setAutoRangeIncludesZero(false);
         assertEquals(a1, a2);
 
-        //private boolean autoRangeStickyZero;
+        // private boolean autoRangeStickyZero;
         a1.setAutoRangeStickyZero(false);
         assertNotEquals(a1, a2);
         a2.setAutoRangeStickyZero(false);
         assertEquals(a1, a2);
 
-        //private NumberTickUnit tickUnit;
+        // private NumberTickUnit tickUnit;
         a1.setTickUnit(new NumberTickUnit(25.0));
         assertNotEquals(a1, a2);
         a2.setTickUnit(new NumberTickUnit(25.0));
         assertEquals(a1, a2);
 
-        //private NumberFormat numberFormatOverride;
+        // private NumberFormat numberFormatOverride;
         a1.setNumberFormatOverride(new DecimalFormat("0.00"));
         assertNotEquals(a1, a2);
         a2.setNumberFormatOverride(new DecimalFormat("0.00"));
@@ -187,12 +187,12 @@ public class NumberAxisTest {
 
     /**
      * A simple test for the auto-range calculation looking at a
-     * NumberAxis used as the range axis for a CategoryPlot.  In this
+     * NumberAxis used as the range axis for a CategoryPlot. In this
      * case, the 'autoRangeIncludesZero' flag is set to false.
      */
     @Test
     public void testAutoRange2() {
-        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -207,13 +207,13 @@ public class NumberAxisTest {
 
     /**
      * A simple test for the auto-range calculation looking at a
-     * NumberAxis used as the range axis for a CategoryPlot.  In this
+     * NumberAxis used as the range axis for a CategoryPlot. In this
      * case, the 'autoRangeIncludesZero' flag is set to false AND the
      * original dataset is replaced with a new dataset.
      */
     @Test
     public void testAutoRange3() {
-        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -227,7 +227,7 @@ public class NumberAxisTest {
         assertEquals(axis.getUpperBound(), 205.0, EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset<String,String> dataset2 = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);
@@ -241,14 +241,14 @@ public class NumberAxisTest {
      */
     @Test
     public void testAutoRange4() {
-        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
         @SuppressWarnings("unchecked")
-        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot(); 
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         BarRenderer br = (BarRenderer) plot.getRenderer();
@@ -269,7 +269,7 @@ public class NumberAxisTest {
         assertEquals(210.0, axis.getUpperBound(), EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset<String,String> dataset2 = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);
@@ -327,49 +327,49 @@ public class NumberAxisTest {
         assertEquals(3.1, axis.getUpperBound(), EPSILON);
     }
 
-//    /**
-//     * Some checks for the setRangeType() method.
-//     */
-//    public void testSetRangeType() {
-//
-//        NumberAxis axis = new NumberAxis("X");
-//        axis.setRangeType(RangeType.POSITIVE);
-//        assertEquals(RangeType.POSITIVE, axis.getRangeType());
-//
-//        // test a change to RangeType.POSITIVE
-//        axis.setRangeType(RangeType.FULL);
-//        axis.setRange(-5.0, 5.0);
-//        axis.setRangeType(RangeType.POSITIVE);
-//        assertEquals(new Range(0.0, 5.0), axis.getRange());
-//
-//        axis.setRangeType(RangeType.FULL);
-//        axis.setRange(-10.0, -5.0);
-//        axis.setRangeType(RangeType.POSITIVE);
-//        assertEquals(new Range(0.0, axis.getAutoRangeMinimumSize()),
-//                axis.getRange());
-//
-//        // test a change to RangeType.NEGATIVE
-//        axis.setRangeType(RangeType.FULL);
-//        axis.setRange(-5.0, 5.0);
-//        axis.setRangeType(RangeType.NEGATIVE);
-//        assertEquals(new Range(-5.0, 0.0), axis.getRange());
-//
-//        axis.setRangeType(RangeType.FULL);
-//        axis.setRange(5.0, 10.0);
-//        axis.setRangeType(RangeType.NEGATIVE);
-//        assertEquals(new Range(-axis.getAutoRangeMinimumSize(), 0.0),
-//                axis.getRange());
-//
-//        // try null
-//        boolean pass = false;
-//        try {
-//            axis.setRangeType(null);
-//        }
-//        catch (IllegalArgumentException e) {
-//            pass = true;
-//        }
-//        assertTrue(pass);
-//    }
+    // /**
+    // * Some checks for the setRangeType() method.
+    // */
+    // public void testSetRangeType() {
+    //
+    // NumberAxis axis = new NumberAxis("X");
+    // axis.setRangeType(RangeType.POSITIVE);
+    // assertEquals(RangeType.POSITIVE, axis.getRangeType());
+    //
+    // // test a change to RangeType.POSITIVE
+    // axis.setRangeType(RangeType.FULL);
+    // axis.setRange(-5.0, 5.0);
+    // axis.setRangeType(RangeType.POSITIVE);
+    // assertEquals(new Range(0.0, 5.0), axis.getRange());
+    //
+    // axis.setRangeType(RangeType.FULL);
+    // axis.setRange(-10.0, -5.0);
+    // axis.setRangeType(RangeType.POSITIVE);
+    // assertEquals(new Range(0.0, axis.getAutoRangeMinimumSize()),
+    // axis.getRange());
+    //
+    // // test a change to RangeType.NEGATIVE
+    // axis.setRangeType(RangeType.FULL);
+    // axis.setRange(-5.0, 5.0);
+    // axis.setRangeType(RangeType.NEGATIVE);
+    // assertEquals(new Range(-5.0, 0.0), axis.getRange());
+    //
+    // axis.setRangeType(RangeType.FULL);
+    // axis.setRange(5.0, 10.0);
+    // axis.setRangeType(RangeType.NEGATIVE);
+    // assertEquals(new Range(-axis.getAutoRangeMinimumSize(), 0.0),
+    // axis.getRange());
+    //
+    // // try null
+    // boolean pass = false;
+    // try {
+    // axis.setRangeType(null);
+    // }
+    // catch (IllegalArgumentException e) {
+    // pass = true;
+    // }
+    // assertTrue(pass);
+    // }
 
     /**
      * Some checks for the setLowerBound() method.
@@ -384,9 +384,9 @@ public class NumberAxisTest {
         assertEquals(10.0, axis.getLowerBound(), EPSILON);
         assertEquals(11.0, axis.getUpperBound(), EPSILON);
 
-        //axis.setRangeType(RangeType.POSITIVE);
-        //axis.setLowerBound(-5.0);
-        //assertEquals(0.0, axis.getLowerBound(), EPSILON);
+        // axis.setRangeType(RangeType.POSITIVE);
+        // axis.setLowerBound(-5.0);
+        // assertEquals(0.0, axis.getLowerBound(), EPSILON);
     }
 
 }
