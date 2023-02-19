@@ -407,7 +407,7 @@ public class PieChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }

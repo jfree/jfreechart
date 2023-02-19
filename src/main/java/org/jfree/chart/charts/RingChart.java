@@ -87,15 +87,15 @@ public class RingChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, CategoryDataset dataset, boolean legend, boolean tooltips,
-            boolean urls) {
+    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public JFreeChart createChart(String title, String valueAxisLabel, XYDataset dataset) {
+    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }
+
 }

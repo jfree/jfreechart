@@ -127,7 +127,7 @@ public abstract class ChartFactory {
             throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> classObj = Class.forName(chartType);
-        Constructor<?> chartConstructor = classObj.getConstructor(String.class, Font.class, Plot.class, boolean.class);
+        Constructor<?> chartConstructor = classObj.getConstructor();
 
         String chart = classObj.getSimpleName();
 
@@ -140,10 +140,10 @@ public abstract class ChartFactory {
 
     }
 
-    public JFreeChart getChartObject(String className, Class<?> classObj, Object chartObj)
+    public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
-        switch (className) {
+        switch (simpleClassName) {
             case "BarChart":
                 return handleBarChart(chartObj, classObj);
             case "PieChart":
