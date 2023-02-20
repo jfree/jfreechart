@@ -160,7 +160,7 @@ public abstract class ChartFactory {
                 return AreaChart.createStackedAreaChart(title, category, value, (CategoryDataset) dataset);
 
             case "PieChart":
-                return PieChart.createPieChart(title, null, true, true, true);
+                return PieChart.createPieChart(title, (PieDataset) dataset, true, true, true);
 
             case "BarChart":
                 return BarChart.createBarChart(title, category, value, (CategoryDataset) dataset);
@@ -277,7 +277,7 @@ public abstract class ChartFactory {
         dataset.addValue(21022, "Batik", "Test");
 
         Method createMethod = classObj.getMethod("createChart", String.class, String.class, String.class,
-                DefaultCategoryDataset.class);
+                CategoryDataset.class);
         return (JFreeChart) createMethod.invoke(chartObj, title, valueAxisLabel, valueAxisLabel, dataset);
 
     }
@@ -292,9 +292,9 @@ public abstract class ChartFactory {
         dataset.setValue("Nokia", new Double(16.8));
         dataset.setValue("Apple", new Double(17.1));
 
-        Method createMethod = classObj.getMethod("createChart", String.class, DefaultPieDataset.class, boolean.class,
+        Method createMethod = classObj.getMethod("createChart", String.class, PieDataset.class, boolean.class,
                 boolean.class, boolean.class);
-        return (JFreeChart) createMethod.invoke(chartObj, title, dataset, false, false, false);
+        return (JFreeChart) createMethod.invoke(chartObj, title, dataset, true, true, true);
 
     }
 
@@ -348,7 +348,8 @@ public abstract class ChartFactory {
         dataset.addSeries(s1);
         dataset.addSeries(s2);
 
-        Method createMethod = classObj.getMethod("createChart", String.class, TimeSeriesCollection.class, String.class);
+        Method createMethod = classObj.getMethod("createChart", String.class, String.class, String.class,
+                TimeSeriesCollection.class);
         return (JFreeChart) createMethod.invoke(chartObj, title, valueAxisLabel, dataset);
     }
 

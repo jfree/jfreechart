@@ -12,6 +12,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.HighLowRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
 
@@ -62,7 +63,8 @@ public class HighLowChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
+            TimeSeriesCollection dataset) {
         // TODO Auto-generated method stub
         return null;
     }

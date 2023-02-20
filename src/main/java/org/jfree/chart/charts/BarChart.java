@@ -19,6 +19,7 @@ import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 public class BarChart extends JFreeChart {
@@ -210,7 +211,8 @@ public class BarChart extends JFreeChart {
         }
 
         @Override
-        public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+        public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
+                        TimeSeriesCollection dataset) {
                 // TODO Auto-generated method stub
                 return null;
         }

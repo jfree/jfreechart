@@ -15,6 +15,7 @@ import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 public class TimeSeriesChart extends JFreeChart {
@@ -113,7 +114,8 @@ public class TimeSeriesChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
+            TimeSeriesCollection dataset) {
         return createTimeSeriesChart(title, timeAxisLabel, valueAxisLabel, dataset);
     }
 

@@ -106,6 +106,7 @@ import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -1662,6 +1663,6 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
             boolean urls);
 
     public abstract JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
-            XYDataset dataset);
+            TimeSeriesCollection dataset);
 
 }
