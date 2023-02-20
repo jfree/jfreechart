@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.charts.PieChart;
@@ -21,6 +24,8 @@ public class ChartFactoryTest {
     private JFreeChart barChart;
     private JFreeChart pieChart;
     private JFreeChart timeSeriesChart;
+
+    private Map<String, List<Object>> params;
 
     /**
      * Common test setup.
@@ -43,6 +48,14 @@ public class ChartFactoryTest {
         dataset.addValue(24448, "Batik", "Warm-up");
         dataset.addValue(4297, "JFreeSVG", "Test");
         dataset.addValue(21022, "Batik", "Test");
+
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add("Performance: JFreeSVG vs Batik");
+        parameters.add("Miliseconds");
+        parameters.add("Miliseconds");
+        parameters.add(dataset);
+
+        this.params.put("BarChart", parameters);
         this.barChart = ChartFactory.getChartRegular("BarChart", "Performance: JFreeSVG vs Batik", "Miliseconds",
                 "Miliseconds",
                 dataset);
@@ -55,6 +68,15 @@ public class ChartFactoryTest {
         dataset.setValue("Others", new Double(55.3));
         dataset.setValue("Nokia", new Double(16.8));
         dataset.setValue("Apple", new Double(17.1));
+
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(title);
+        parameters.add(null);
+        parameters.add(null);
+        parameters.add(dataset);
+
+        this.params.put("PieChart", parameters);
+
         this.pieChart = ChartFactory.getChartRegular("PieChart", title, null, null, dataset);
     }
 
@@ -107,6 +129,14 @@ public class ChartFactoryTest {
         dataset.addSeries(s1);
         dataset.addSeries(s2);
 
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(title);
+        parameters.add(timeAxisLabel);
+        parameters.add(valueAxisLabel);
+        parameters.add(dataset);
+
+        this.params.put("TimeSeriesChart", parameters);
+
         this.timeSeriesChart = ChartFactory.getChartRegular("TimeSeriesChart", title, timeAxisLabel, valueAxisLabel,
                 dataset);
     }
@@ -116,7 +146,7 @@ public class ChartFactoryTest {
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.BarChart");
+        var chart = factory.getChartReflection("org.jfree.chart.charts.BarChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof BarChart);
@@ -128,7 +158,7 @@ public class ChartFactoryTest {
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.PieChart");
+        var chart = factory.getChartReflection("org.jfree.chart.charts.PieChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof PieChart);
@@ -140,7 +170,7 @@ public class ChartFactoryTest {
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart");
+        var chart = factory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof TimeSeriesChart);

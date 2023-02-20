@@ -47,6 +47,8 @@ package org.jfree.chart;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.jfree.chart.charts.AreaChart;
@@ -234,7 +236,7 @@ public abstract class ChartFactory {
         }
     }
 
-    public JFreeChart getChartReflection(String chartType)
+    public JFreeChart getChartReflection(String chartType, Map<String, List<Object>> params)
             throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> classObj = Class.forName(chartType);
@@ -247,23 +249,55 @@ public abstract class ChartFactory {
         }
 
         Object chartObj = chartConstructor.newInstance();
-        return getChartObject(chart, classObj, chartObj);
+        return getChartObject(chart, classObj, chartObj, params.get(chart));
 
     }
 
-    public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj)
+    public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj, List<Object> params)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
-        switch (simpleClassName) {
-            case "BarChart":
-                return handleBarChart(chartObj, classObj);
-            case "PieChart":
-                return handlePieChart(chartObj, classObj);
-            case "TimeSeriesChart":
-                return handleTimeSeriesChart(chartObj, classObj);
-            default:
-                return null;
+        Method createMethod;
+        Class<?>[] parameterTypes = new Class<?>[params.size()];
+
+        for (int i = 0; i < parameterTypes.length; i++) {
+            var objectType = params.get(i).getClass();
+            parameterTypes[i] = objectType;
         }
+
+        createMethod = classObj.getMethod("createChart", parameterTypes);
+
+        // switch (simpleClassName) {
+        // case "BarChart":
+        // createMethod = classObj.getMethod("createChart", String.class, String.class,
+        // String.class,
+        // CategoryDataset.class);
+        // break;
+        // case "PieChart":
+        // createMethod = classObj.getMethod("createChart", String.class,
+        // PieDataset.class, boolean.class,
+        // boolean.class, boolean.class);
+        // break;
+        // case "TimeSeriesChart":
+        // createMethod = classObj.getMethod("createChart", String.class, String.class,
+        // String.class,
+        // TimeSeriesCollection.class);
+        // break;
+        // default:
+        // return null;
+        // }
+
+        return (JFreeChart) createMethod.invoke(chartObj, params);
+
+        // switch (simpleClassName) {
+        // case "BarChart":
+        // return handleBarChart(chartObj, classObj);
+        // case "PieChart":
+        // return handlePieChart(chartObj, classObj);
+        // case "TimeSeriesChart":
+        // return handleTimeSeriesChart(chartObj, classObj);
+        // default:
+        // return null;
+        // }
     }
 
     public JFreeChart handleBarChart(Object chartObj, Class<?> classObj) throws NoSuchMethodException,
