@@ -62,6 +62,7 @@ import org.jfree.chart.charts.PieChart;
 import org.jfree.chart.charts.PolarChart;
 import org.jfree.chart.charts.RingChart;
 import org.jfree.chart.charts.ScatterPlot;
+import org.jfree.chart.charts.TimeSeriesChart;
 import org.jfree.chart.charts.WaferMapChart;
 import org.jfree.chart.charts.WaterFallChart;
 import org.jfree.chart.charts.WindPlot;
@@ -153,6 +154,9 @@ public abstract class ChartFactory {
     public static JFreeChart getChartRegular(String chartType, String title, String category, String value,
             Dataset dataset) {
         switch (chartType) {
+            case "TimeSeriesChart":
+                return TimeSeriesChart.createTimeSeriesChart(title, category, value, (XYDataset) dataset);
+
             case "StackedBarChart":
                 return BarChart.createStackedBarChart(title, category, value, (CategoryDataset) dataset);
 
@@ -350,7 +354,7 @@ public abstract class ChartFactory {
 
         Method createMethod = classObj.getMethod("createChart", String.class, String.class, String.class,
                 TimeSeriesCollection.class);
-        return (JFreeChart) createMethod.invoke(chartObj, title, valueAxisLabel, dataset);
+        return (JFreeChart) createMethod.invoke(chartObj, title, timeAxisLabel, valueAxisLabel, dataset);
     }
 
 }

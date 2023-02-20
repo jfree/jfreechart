@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.jfree.chart.charts.BarChart;
+import org.jfree.chart.charts.PieChart;
+import org.jfree.chart.charts.TimeSeriesChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.Month;
@@ -115,6 +118,8 @@ public class ChartFactoryTest {
         ChartFactory factory = new ChartFactoryReflection();
         var chart = factory.getChartReflection("org.jfree.chart.charts.BarChart");
 
+        assertTrue(chart instanceof JFreeChart);
+        assertTrue(chart instanceof BarChart);
         assertEquals(this.barChart, chart);
     }
 
@@ -125,6 +130,8 @@ public class ChartFactoryTest {
         ChartFactory factory = new ChartFactoryReflection();
         var chart = factory.getChartReflection("org.jfree.chart.charts.PieChart");
 
+        assertTrue(chart instanceof JFreeChart);
+        assertTrue(chart instanceof PieChart);
         assertEquals(this.pieChart, chart);
     }
 
@@ -135,6 +142,8 @@ public class ChartFactoryTest {
         ChartFactory factory = new ChartFactoryReflection();
         var chart = factory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart");
 
+        assertTrue(chart instanceof JFreeChart);
+        assertTrue(chart instanceof TimeSeriesChart);
         assertEquals(this.timeSeriesChart, chart);
     }
 }

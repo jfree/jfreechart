@@ -404,7 +404,7 @@ public class PieChart extends JFreeChart {
     @Override
     public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
             boolean urls) {
-        return createPieChart(title, dataset);
+        return createPieChart(title, dataset, legend, tooltips, urls);
     }
 
     @Override
