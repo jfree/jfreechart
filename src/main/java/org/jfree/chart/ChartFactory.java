@@ -44,16 +44,10 @@
 
 package org.jfree.chart;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.jfree.chart.charts.AreaChart;
 import org.jfree.chart.charts.BarChart;
-import org.jfree.chart.charts.BoxAndWhiskerChart;
 import org.jfree.chart.charts.BubbleChart;
 import org.jfree.chart.charts.CandleStickChart;
 import org.jfree.chart.charts.GantChart;
@@ -75,15 +69,10 @@ import org.jfree.chart.charts.XYStepAreaChart;
 import org.jfree.chart.charts.XYStepChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.Dataset;
-import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.general.WaferMapDataset;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.WindDataset;
@@ -234,161 +223,6 @@ public abstract class ChartFactory {
             default:
                 return null;
         }
-    }
-
-    public JFreeChart getChartReflection(String chartType, Map<String, List<Object>> params)
-            throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
-            IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Class<?> classObj = Class.forName(chartType);
-        Constructor<?> chartConstructor = classObj.getConstructor();
-
-        String chart = classObj.getSimpleName();
-
-        if (chart == null || chart == "") {
-            return null;
-        }
-
-        Object chartObj = chartConstructor.newInstance();
-        return getChartObject(chart, classObj, chartObj, params.get(chart));
-
-    }
-
-    public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj, List<Object> params)
-            throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
-            InvocationTargetException {
-        Method createMethod;
-        Class<?>[] parameterTypes = new Class<?>[params.size()];
-
-        for (int i = 0; i < parameterTypes.length; i++) {
-            var objectType = params.get(i).getClass();
-            parameterTypes[i] = objectType;
-        }
-
-        createMethod = classObj.getMethod("createChart", parameterTypes);
-
-        // switch (simpleClassName) {
-        // case "BarChart":
-        // createMethod = classObj.getMethod("createChart", String.class, String.class,
-        // String.class,
-        // CategoryDataset.class);
-        // break;
-        // case "PieChart":
-        // createMethod = classObj.getMethod("createChart", String.class,
-        // PieDataset.class, boolean.class,
-        // boolean.class, boolean.class);
-        // break;
-        // case "TimeSeriesChart":
-        // createMethod = classObj.getMethod("createChart", String.class, String.class,
-        // String.class,
-        // TimeSeriesCollection.class);
-        // break;
-        // default:
-        // return null;
-        // }
-
-        return (JFreeChart) createMethod.invoke(chartObj, params);
-
-        // switch (simpleClassName) {
-        // case "BarChart":
-        // return handleBarChart(chartObj, classObj);
-        // case "PieChart":
-        // return handlePieChart(chartObj, classObj);
-        // case "TimeSeriesChart":
-        // return handleTimeSeriesChart(chartObj, classObj);
-        // default:
-        // return null;
-        // }
-    }
-
-    public JFreeChart handleBarChart(Object chartObj, Class<?> classObj) throws NoSuchMethodException,
-            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        String title = "Performance: JFreeSVG vs Batik";
-        String valueAxisLabel = "Miliseconds";
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(7445, "JFreeSVG", "Warm-up");
-        dataset.addValue(24448, "Batik", "Warm-up");
-        dataset.addValue(4297, "JFreeSVG", "Test");
-        dataset.addValue(21022, "Batik", "Test");
-        dataset.addValue(7445, "JFreeSVG", "Warm-up");
-        dataset.addValue(24448, "Batik", "Warm-up");
-        dataset.addValue(4297, "JFreeSVG", "Test");
-        dataset.addValue(21022, "Batik", "Test");
-
-        Method createMethod = classObj.getMethod("createChart", String.class, String.class, String.class,
-                CategoryDataset.class);
-        return (JFreeChart) createMethod.invoke(chartObj, title, valueAxisLabel, valueAxisLabel, dataset);
-
-    }
-
-    public JFreeChart handlePieChart(Object chartObj, Class<?> classObj) throws NoSuchMethodException,
-            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        String title = "Smart Phones Manufactured / Q3 2011";
-
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Samsung", new Double(27.8));
-        dataset.setValue("Others", new Double(55.3));
-        dataset.setValue("Nokia", new Double(16.8));
-        dataset.setValue("Apple", new Double(17.1));
-
-        Method createMethod = classObj.getMethod("createChart", String.class, PieDataset.class, boolean.class,
-                boolean.class, boolean.class);
-        return (JFreeChart) createMethod.invoke(chartObj, title, dataset, true, true, true);
-
-    }
-
-    public JFreeChart handleTimeSeriesChart(Object chartObj, Class<?> classObj) throws NoSuchMethodException,
-            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        String title = "Legal & General Unit Trust Prices";
-        String timeAxisLabel = "Date";
-        String valueAxisLabel = "Price per Unit";
-
-        TimeSeries s1 = new TimeSeries("L&G European Index Trust");
-        s1.add(new Month(2, 2001), 181.8);
-        s1.add(new Month(3, 2001), 167.3);
-        s1.add(new Month(4, 2001), 153.8);
-        s1.add(new Month(5, 2001), 167.6);
-        s1.add(new Month(6, 2001), 158.8);
-        s1.add(new Month(7, 2001), 148.3);
-        s1.add(new Month(8, 2001), 153.9);
-        s1.add(new Month(9, 2001), 142.7);
-        s1.add(new Month(10, 2001), 123.2);
-        s1.add(new Month(11, 2001), 131.8);
-        s1.add(new Month(12, 2001), 139.6);
-        s1.add(new Month(1, 2002), 142.9);
-        s1.add(new Month(2, 2002), 138.7);
-        s1.add(new Month(3, 2002), 137.3);
-        s1.add(new Month(4, 2002), 143.9);
-        s1.add(new Month(5, 2002), 139.8);
-        s1.add(new Month(6, 2002), 137.0);
-        s1.add(new Month(7, 2002), 132.8);
-
-        TimeSeries s2 = new TimeSeries("L&G UK Index Trust");
-        s2.add(new Month(2, 2001), 129.6);
-        s2.add(new Month(3, 2001), 123.2);
-        s2.add(new Month(4, 2001), 117.2);
-        s2.add(new Month(5, 2001), 124.1);
-        s2.add(new Month(6, 2001), 122.6);
-        s2.add(new Month(7, 2001), 119.2);
-        s2.add(new Month(8, 2001), 116.5);
-        s2.add(new Month(9, 2001), 112.7);
-        s2.add(new Month(10, 2001), 101.5);
-        s2.add(new Month(11, 2001), 106.1);
-        s2.add(new Month(12, 2001), 110.3);
-        s2.add(new Month(1, 2002), 111.7);
-        s2.add(new Month(2, 2002), 111.0);
-        s2.add(new Month(3, 2002), 109.6);
-        s2.add(new Month(4, 2002), 113.2);
-        s2.add(new Month(5, 2002), 111.6);
-        s2.add(new Month(6, 2002), 108.8);
-        s2.add(new Month(7, 2002), 101.6);
-
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(s1);
-        dataset.addSeries(s2);
-
-        Method createMethod = classObj.getMethod("createChart", String.class, String.class, String.class,
-                TimeSeriesCollection.class);
-        return (JFreeChart) createMethod.invoke(chartObj, title, timeAxisLabel, valueAxisLabel, dataset);
     }
 
 }

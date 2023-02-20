@@ -24,8 +24,8 @@ public class ChartFactoryTest {
     private JFreeChart barChart;
     private JFreeChart pieChart;
     private JFreeChart timeSeriesChart;
-
     private Map<String, List<Object>> params;
+    private ChartFactoryReflection reflectionFactory;
 
     /**
      * Common test setup.
@@ -35,6 +35,7 @@ public class ChartFactoryTest {
         setUpBarChart();
         setUpPieChart();
         setUpTimeSeriesChart();
+        this.reflectionFactory = new ChartFactoryReflection();
 
     }
 
@@ -145,8 +146,8 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfBarChartIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.BarChart", this.params);
+
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.BarChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof BarChart);
@@ -157,8 +158,8 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfPieCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.PieChart", this.params);
+
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.PieChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof PieChart);
@@ -169,8 +170,8 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfTimeSeriesCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ChartFactory factory = new ChartFactoryReflection();
-        var chart = factory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", this.params);
+
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof TimeSeriesChart);
