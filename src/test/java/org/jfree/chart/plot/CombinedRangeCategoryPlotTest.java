@@ -46,6 +46,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
@@ -69,7 +70,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     /**
      * Receives a chart change event.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void chartChanged(ChartChangeEvent event) {
@@ -132,7 +133,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testNotification() {
         CombinedRangeCategoryPlot plot = createPlot();
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         chart.addChangeListener(this);
         CategoryPlot<?, ?> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
@@ -155,8 +156,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      */
     public CategoryDataset<String, String> createDataset1() {
 
-        DefaultCategoryDataset<String, String> result 
-                = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> result = new DefaultCategoryDataset<>();
 
         // row keys...
         String series1 = "First";

@@ -63,7 +63,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Some tests for a Gantt chart.
  */
-public class GanttChartTest  {
+public class GanttChartTest {
 
     /** A chart. */
     private JFreeChart chart;
@@ -83,14 +83,13 @@ public class GanttChartTest  {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            BufferedImage image = new BufferedImage(200 , 100,
+            BufferedImage image = new BufferedImage(200, 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             fail("There should be no exception.");
         }
     }
@@ -104,8 +103,8 @@ public class GanttChartTest  {
         JFreeChart chart = createGanttChart();
         CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setDataset(createDataset());
-        /* BufferedImage img =*/ chart.createBufferedImage(300, 200, null);
-        //FIXME we should really assert a value
+        /* BufferedImage img = */ chart.createBufferedImage(300, 200, null);
+        // FIXME we should really assert a value
     }
 
     /**
@@ -128,8 +127,7 @@ public class GanttChartTest  {
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryToolTipGenerator tt
-                = new StandardCategoryToolTipGenerator();
+        StandardCategoryToolTipGenerator tt = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
         assertSame(tt2, tt);
@@ -143,8 +141,7 @@ public class GanttChartTest  {
     public void testSetSeriesURLGenerator() {
         CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryURLGenerator url1
-                = new StandardCategoryURLGenerator();
+        StandardCategoryURLGenerator url1 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
         assertSame(url2, url1);
@@ -156,8 +153,8 @@ public class GanttChartTest  {
      * @return The chart.
      */
     private static JFreeChart createGanttChart() {
-        return ChartFactory.createGanttChart("Gantt Chart", "Domain", "Range",
-               null, true, true, true);
+        return ChartFactory.getChartRegular("GantChart", "Gant Chart", "Domain", "Range", null);
+
     }
 
     /**
@@ -168,79 +165,79 @@ public class GanttChartTest  {
     private static IntervalCategoryDataset<String, String> createDataset() {
         TaskSeries<String> s1 = new TaskSeries<>("Scheduled");
         s1.add(new Task("Write Proposal",
-               new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
-                                    date(5, Calendar.APRIL, 2001))));
+                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
+                        date(5, Calendar.APRIL, 2001))));
         s1.add(new Task("Obtain Approval",
-               new SimpleTimePeriod(date(9, Calendar.APRIL, 2001),
-                                    date(9, Calendar.APRIL, 2001))));
+                new SimpleTimePeriod(date(9, Calendar.APRIL, 2001),
+                        date(9, Calendar.APRIL, 2001))));
         s1.add(new Task("Requirements Analysis",
-               new SimpleTimePeriod(date(10, Calendar.APRIL, 2001),
-                                    date(5, Calendar.MAY, 2001))));
+                new SimpleTimePeriod(date(10, Calendar.APRIL, 2001),
+                        date(5, Calendar.MAY, 2001))));
         s1.add(new Task("Design Phase",
-               new SimpleTimePeriod(date(6, Calendar.MAY, 2001),
-                                    date(30, Calendar.MAY, 2001))));
+                new SimpleTimePeriod(date(6, Calendar.MAY, 2001),
+                        date(30, Calendar.MAY, 2001))));
         s1.add(new Task("Design Signoff",
-               new SimpleTimePeriod(date(2, Calendar.JUNE, 2001),
-                                    date(2, Calendar.JUNE, 2001))));
+                new SimpleTimePeriod(date(2, Calendar.JUNE, 2001),
+                        date(2, Calendar.JUNE, 2001))));
         s1.add(new Task("Alpha Implementation",
-               new SimpleTimePeriod(date(3, Calendar.JUNE, 2001),
-                                    date(31, Calendar.JULY, 2001))));
+                new SimpleTimePeriod(date(3, Calendar.JUNE, 2001),
+                        date(31, Calendar.JULY, 2001))));
         s1.add(new Task("Design Review",
-               new SimpleTimePeriod(date(1, Calendar.AUGUST, 2001),
-                                    date(8, Calendar.AUGUST, 2001))));
+                new SimpleTimePeriod(date(1, Calendar.AUGUST, 2001),
+                        date(8, Calendar.AUGUST, 2001))));
         s1.add(new Task("Revised Design Signoff",
-               new SimpleTimePeriod(date(10, Calendar.AUGUST, 2001),
-                                    date(10, Calendar.AUGUST, 2001))));
+                new SimpleTimePeriod(date(10, Calendar.AUGUST, 2001),
+                        date(10, Calendar.AUGUST, 2001))));
         s1.add(new Task("Beta Implementation",
-               new SimpleTimePeriod(date(12, Calendar.AUGUST, 2001),
-                                    date(12, Calendar.SEPTEMBER, 2001))));
+                new SimpleTimePeriod(date(12, Calendar.AUGUST, 2001),
+                        date(12, Calendar.SEPTEMBER, 2001))));
         s1.add(new Task("Testing",
-               new SimpleTimePeriod(date(13, Calendar.SEPTEMBER, 2001),
-                                    date(31, Calendar.OCTOBER, 2001))));
+                new SimpleTimePeriod(date(13, Calendar.SEPTEMBER, 2001),
+                        date(31, Calendar.OCTOBER, 2001))));
         s1.add(new Task("Final Implementation",
-               new SimpleTimePeriod(date(1, Calendar.NOVEMBER, 2001),
-                                    date(15, Calendar.NOVEMBER, 2001))));
+                new SimpleTimePeriod(date(1, Calendar.NOVEMBER, 2001),
+                        date(15, Calendar.NOVEMBER, 2001))));
         s1.add(new Task("Signoff",
-               new SimpleTimePeriod(date(28, Calendar.NOVEMBER, 2001),
-                                    date(30, Calendar.NOVEMBER, 2001))));
+                new SimpleTimePeriod(date(28, Calendar.NOVEMBER, 2001),
+                        date(30, Calendar.NOVEMBER, 2001))));
 
         TaskSeries<String> s2 = new TaskSeries<>("Actual");
         s2.add(new Task("Write Proposal",
-               new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
-                                    date(5, Calendar.APRIL, 2001))));
+                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
+                        date(5, Calendar.APRIL, 2001))));
         s2.add(new Task("Obtain Approval",
-               new SimpleTimePeriod(date(9, Calendar.APRIL, 2001),
-                                    date(9, Calendar.APRIL, 2001))));
+                new SimpleTimePeriod(date(9, Calendar.APRIL, 2001),
+                        date(9, Calendar.APRIL, 2001))));
         s2.add(new Task("Requirements Analysis",
-               new SimpleTimePeriod(date(10, Calendar.APRIL, 2001),
-                                    date(15, Calendar.MAY, 2001))));
+                new SimpleTimePeriod(date(10, Calendar.APRIL, 2001),
+                        date(15, Calendar.MAY, 2001))));
         s2.add(new Task("Design Phase",
-               new SimpleTimePeriod(date(15, Calendar.MAY, 2001),
-                                    date(17, Calendar.JUNE, 2001))));
+                new SimpleTimePeriod(date(15, Calendar.MAY, 2001),
+                        date(17, Calendar.JUNE, 2001))));
         s2.add(new Task("Design Signoff",
-               new SimpleTimePeriod(date(30, Calendar.JUNE, 2001),
-                                    date(30, Calendar.JUNE, 2001))));
+                new SimpleTimePeriod(date(30, Calendar.JUNE, 2001),
+                        date(30, Calendar.JUNE, 2001))));
         s2.add(new Task("Alpha Implementation",
-               new SimpleTimePeriod(date(1, Calendar.JULY, 2001),
-                                    date(12, Calendar.SEPTEMBER, 2001))));
+                new SimpleTimePeriod(date(1, Calendar.JULY, 2001),
+                        date(12, Calendar.SEPTEMBER, 2001))));
         s2.add(new Task("Design Review",
-               new SimpleTimePeriod(date(12, Calendar.SEPTEMBER, 2001),
-                                    date(22, Calendar.SEPTEMBER, 2001))));
+                new SimpleTimePeriod(date(12, Calendar.SEPTEMBER, 2001),
+                        date(22, Calendar.SEPTEMBER, 2001))));
         s2.add(new Task("Revised Design Signoff",
-               new SimpleTimePeriod(date(25, Calendar.SEPTEMBER, 2001),
-                                    date(27, Calendar.SEPTEMBER, 2001))));
+                new SimpleTimePeriod(date(25, Calendar.SEPTEMBER, 2001),
+                        date(27, Calendar.SEPTEMBER, 2001))));
         s2.add(new Task("Beta Implementation",
-               new SimpleTimePeriod(date(27, Calendar.SEPTEMBER, 2001),
-                                    date(30, Calendar.OCTOBER, 2001))));
+                new SimpleTimePeriod(date(27, Calendar.SEPTEMBER, 2001),
+                        date(30, Calendar.OCTOBER, 2001))));
         s2.add(new Task("Testing",
-               new SimpleTimePeriod(date(31, Calendar.OCTOBER, 2001),
-                                    date(17, Calendar.NOVEMBER, 2001))));
+                new SimpleTimePeriod(date(31, Calendar.OCTOBER, 2001),
+                        date(17, Calendar.NOVEMBER, 2001))));
         s2.add(new Task("Final Implementation",
-               new SimpleTimePeriod(date(18, Calendar.NOVEMBER, 2001),
-                                    date(5, Calendar.DECEMBER, 2001))));
+                new SimpleTimePeriod(date(18, Calendar.NOVEMBER, 2001),
+                        date(5, Calendar.DECEMBER, 2001))));
         s2.add(new Task("Signoff",
-               new SimpleTimePeriod(date(10, Calendar.DECEMBER, 2001),
-                                    date(11, Calendar.DECEMBER, 2001))));
+                new SimpleTimePeriod(date(10, Calendar.DECEMBER, 2001),
+                        date(11, Calendar.DECEMBER, 2001))));
 
         TaskSeriesCollection<String, String> collection = new TaskSeriesCollection<>();
         collection.add(s1);
@@ -252,8 +249,8 @@ public class GanttChartTest  {
     /**
      * Utility method for creating {@code Date} objects.
      *
-     * @param day  the date.
-     * @param month  the month.
+     * @param day   the date.
+     * @param month the month.
      * @param year  the year.
      *
      * @return a date.
@@ -263,7 +260,7 @@ public class GanttChartTest  {
         calendar.set(year, month, day);
         Date result = calendar.getTime();
         return result;
-    }    
+    }
 
     /**
      * A chart change listener.
@@ -277,7 +274,7 @@ public class GanttChartTest  {
         /**
          * Event handler.
          *
-         * @param event  the event.
+         * @param event the event.
          */
         @Override
         public void chartChanged(ChartChangeEvent event) {

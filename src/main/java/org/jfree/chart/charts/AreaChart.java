@@ -7,6 +7,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
@@ -15,6 +16,8 @@ import org.jfree.chart.renderer.category.AreaRenderer;
 import org.jfree.chart.renderer.category.StackedAreaRenderer;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYDataset;
 
 public class AreaChart extends JFreeChart {
 
@@ -153,7 +156,7 @@ public class AreaChart extends JFreeChart {
                 StackedAreaRenderer renderer = new StackedAreaRenderer();
                 if (tooltips) {
                         renderer.setDefaultToolTipGenerator(
-                                        new StandardCategoryToolTipGenerator());
+                                        (IntervalCategoryToolTipGenerator) new StandardCategoryToolTipGenerator());
                 }
                 if (urls) {
                         renderer.setDefaultItemURLGenerator(
@@ -163,9 +166,29 @@ public class AreaChart extends JFreeChart {
                 CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                                 renderer);
                 plot.setOrientation(orientation);
-                JFreeChart chart = new AreaChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                return new AreaChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                                 plot, legend);
-                return chart;
 
         }
+
+        @Override
+        public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+                        CategoryDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+                        boolean urls) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
 }

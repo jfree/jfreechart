@@ -45,6 +45,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -191,7 +192,7 @@ public class XYDifferenceRendererTest {
         XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

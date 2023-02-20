@@ -42,6 +42,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -61,10 +62,8 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void testEquals() {
-        StatisticalLineAndShapeRenderer r1
-            = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2
-            = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r2 = new StatisticalLineAndShapeRenderer();
         assertEquals(r1, r2);
         assertEquals(r2, r1);
 
@@ -79,10 +78,8 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void testHashcode() {
-        StatisticalLineAndShapeRenderer r1
-            = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2
-            = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r2 = new StatisticalLineAndShapeRenderer();
         assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
@@ -109,8 +106,7 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void testPublicCloneable() {
-        StatisticalLineAndShapeRenderer r1
-                = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
         assertTrue(r1 instanceof PublicCloneable);
     }
 
@@ -119,8 +115,7 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void testSerialization() {
-        StatisticalLineAndShapeRenderer r1
-                = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
         TestUtils.checkIndependence(r1, r2);
@@ -133,18 +128,16 @@ public class StatisticalLineAndShapeRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalLineAndShapeRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -154,8 +147,7 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void test1562759() {
-        StatisticalLineAndShapeRenderer r
-            = new StatisticalLineAndShapeRenderer(true, false);
+        StatisticalLineAndShapeRenderer r = new StatisticalLineAndShapeRenderer(true, false);
         assertTrue(r.getDefaultLinesVisible());
         assertFalse(r.getDefaultShapesVisible());
 
@@ -169,13 +161,11 @@ public class StatisticalLineAndShapeRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        StatisticalLineAndShapeRenderer r
-                = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r = new StatisticalLineAndShapeRenderer();
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultStatisticalCategoryDataset<String, String> dataset
-                = new DefaultStatisticalCategoryDataset<>();
+        DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.add(1.0, 0.5, "R1", "C1");

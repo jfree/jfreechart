@@ -85,9 +85,8 @@ public class ScatterPlotTest {
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-        }
-        catch (Exception e) {
-          fail("No exception should be thrown.");
+        } catch (Exception e) {
+            fail("No exception should be thrown.");
         }
     }
 
@@ -106,16 +105,16 @@ public class ScatterPlotTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        
+
         @SuppressWarnings("unchecked")
         XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue(range.getLowerBound() <= 10, 
+        assertTrue(range.getLowerBound() <= 10,
                 "Expecting the lower bound of the range to be around 10: " + range.getLowerBound());
-        assertTrue(range.getUpperBound() >= 30, 
+        assertTrue(range.getUpperBound() >= 30,
                 "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
@@ -144,8 +143,8 @@ public class ScatterPlotTest {
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
         XYDataset<String> dataset = new XYSeriesCollection<>(series1);
-        return ChartFactory.createScatterPlot("Scatter Plot", "Domain",
-                "Range", dataset);
+        return ChartFactory.getChartRegular("ScatterPlot", "Scatter Plot", "Domain", "Range", (XYDataset) dataset);
+
     }
 
     /**
@@ -160,7 +159,7 @@ public class ScatterPlotTest {
         /**
          * Event handler.
          *
-         * @param event  the event.
+         * @param event the event.
          */
         @Override
         public void chartChanged(ChartChangeEvent event) {

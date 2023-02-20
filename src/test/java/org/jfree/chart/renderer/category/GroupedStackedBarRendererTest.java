@@ -40,6 +40,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.KeyToGroupMap;
@@ -126,16 +127,14 @@ public class GroupedStackedBarRendererTest {
             dataset.addValue(2.0, "S1", "C2");
             dataset.addValue(3.0, "S2", "C1");
             dataset.addValue(4.0, "S2", "C2");
-            GroupedStackedBarRenderer renderer
-                    = new GroupedStackedBarRenderer();
+            GroupedStackedBarRenderer renderer = new GroupedStackedBarRenderer();
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }

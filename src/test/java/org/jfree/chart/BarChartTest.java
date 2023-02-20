@@ -81,14 +81,13 @@ public class BarChartTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            BufferedImage image = new BufferedImage(200 , 100,
+            BufferedImage image = new BufferedImage(200, 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             fail("There should be no exception.");
         }
     }
@@ -100,10 +99,9 @@ public class BarChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
+        Number[][] data = new Integer[][] { { -30, -20 }, { -10, 10 }, { 20, 30 } };
 
-        CategoryDataset<String, String> newData 
-                = DatasetUtils.createCategoryDataset("S", "C", data);
+        CategoryDataset<String, String> newData = DatasetUtils.createCategoryDataset("S", "C", data);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -115,7 +113,7 @@ public class BarChartTest {
         Range range = axis.getRange();
         assertTrue(range.getLowerBound() <= -30,
                 "Expecting the lower bound of the range to be around -30: " + range.getLowerBound());
-        assertTrue(range.getUpperBound() >= 30, 
+        assertTrue(range.getUpperBound() >= 30,
                 "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
@@ -127,8 +125,7 @@ public class BarChartTest {
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryToolTipGenerator tt
-                = new StandardCategoryToolTipGenerator();
+        StandardCategoryToolTipGenerator tt = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
         assertSame(tt2, tt);
@@ -142,8 +139,7 @@ public class BarChartTest {
     public void testSetSeriesURLGenerator() {
         CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryURLGenerator url1
-                = new StandardCategoryURLGenerator();
+        StandardCategoryURLGenerator url1 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
         assertSame(url2, url1);
@@ -155,11 +151,10 @@ public class BarChartTest {
      * @return The chart.
      */
     private static JFreeChart createBarChart() {
-        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-        CategoryDataset<String, String> dataset 
-                = DatasetUtils.createCategoryDataset("S", "C", data);
-        return ChartFactory.createBarChart("Bar Chart", "Domain", "Range", 
-                dataset, PlotOrientation.HORIZONTAL, true, true, true);
+        Number[][] data = new Integer[][] { { -3, -2 }, { -1, 1 }, { 2, 3 } };
+        CategoryDataset<String, String> dataset = DatasetUtils.createCategoryDataset("S", "C", data);
+        return ChartFactory.getChartRegular("BarChart", "Bar Chart", "Domain", "Range", dataset);
+
     }
 
     /**
@@ -173,7 +168,7 @@ public class BarChartTest {
         /**
          * Event handler.
          *
-         * @param event  the event.
+         * @param event the event.
          */
         @Override
         public void chartChanged(ChartChangeEvent event) {

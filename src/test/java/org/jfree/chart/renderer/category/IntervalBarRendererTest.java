@@ -40,6 +40,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -123,20 +124,18 @@ public class IntervalBarRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            double[][] starts = new double[][] {{0.1, 0.2, 0.3},
-                    {0.3, 0.4, 0.5}};
-            double[][] ends = new double[][] {{0.5, 0.6, 0.7}, {0.7, 0.8, 0.9}};
-            DefaultIntervalCategoryDataset dataset
-                    = new DefaultIntervalCategoryDataset(starts, ends);
+            double[][] starts = new double[][] { { 0.1, 0.2, 0.3 },
+                    { 0.3, 0.4, 0.5 } };
+            double[][] ends = new double[][] { { 0.5, 0.6, 0.7 }, { 0.7, 0.8, 0.9 } };
+            DefaultIntervalCategoryDataset dataset = new DefaultIntervalCategoryDataset(starts, ends);
             IntervalBarRenderer renderer = new IntervalBarRenderer();
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -150,13 +149,12 @@ public class IntervalBarRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultIntervalCategoryDataset dataset
-                = new DefaultIntervalCategoryDataset(new double[0][0],
+        DefaultIntervalCategoryDataset dataset = new DefaultIntervalCategoryDataset(new double[0][0],
                 new double[0][0]);
         assertNull(r.findRangeBounds(dataset));
 
-        double[][] starts = new double[][] {{0.1, 0.2, 0.3}, {0.3, 0.4, 0.5}};
-        double[][] ends = new double[][] {{0.5, 0.6, 0.7}, {0.7, 0.8, 0.9}};
+        double[][] starts = new double[][] { { 0.1, 0.2, 0.3 }, { 0.3, 0.4, 0.5 } };
+        double[][] ends = new double[][] { { 0.5, 0.6, 0.7 }, { 0.7, 0.8, 0.9 } };
         dataset = new DefaultIntervalCategoryDataset(starts, ends);
         assertEquals(new Range(0.0, 0.9), r.findRangeBounds(dataset));
         r.setIncludeBaseInRange(false);

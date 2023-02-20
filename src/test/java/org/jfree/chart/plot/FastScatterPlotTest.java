@@ -45,6 +45,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
@@ -166,6 +167,7 @@ public class FastScatterPlotTest {
 
     /**
      * Confirm that cloning works.
+     * 
      * @throws java.lang.CloneNotSupportedException
      */
     @Test
@@ -203,11 +205,10 @@ public class FastScatterPlotTest {
             ValueAxis rangeAxis = new NumberAxis("Y");
             FastScatterPlot plot = new FastScatterPlot(data, domainAxis,
                     rangeAxis);
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }

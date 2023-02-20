@@ -55,15 +55,18 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
 /**
- * A category item renderer that draws area charts.  You can use this renderer
- * with the {@link CategoryPlot} class.  The example shown here is generated
+ * A category item renderer that draws area charts. You can use this renderer
+ * with the {@link CategoryPlot} class. The example shown here is generated
  * by the {@code AreaChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
- * <br><br>
+ * <br>
+ * <br>
  * <img src="doc-files/AreaRendererSample.png" alt="AreaRendererSample.png">
  */
 public class AreaRenderer extends AbstractCategoryItemRenderer
@@ -100,7 +103,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * Sets a token that controls how the renderer draws the end points, and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param type  the end type ({@code null} not permitted).
+     * @param type the end type ({@code null} not permitted).
      *
      * @see #getEndType()
      */
@@ -113,8 +116,8 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
     /**
      * Returns a legend item for a series.
      *
-     * @param datasetIndex  the dataset index (zero-based).
-     * @param series  the series index (zero-based).
+     * @param datasetIndex the dataset index (zero-based).
+     * @param series       the series index (zero-based).
      *
      * @return The legend item.
      */
@@ -169,16 +172,16 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
     /**
      * Draw a single data item.
      *
-     * @param g2  the graphics device.
-     * @param state  the renderer state.
-     * @param dataArea  the data plot area.
-     * @param plot  the plot.
-     * @param domainAxis  the domain axis.
+     * @param g2         the graphics device.
+     * @param state      the renderer state.
+     * @param dataArea   the data plot area.
+     * @param plot       the plot.
+     * @param domainAxis the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
-     * @param row  the row index (zero-based).
-     * @param column  the column index (zero-based).
-     * @param pass  the pass index.
+     * @param dataset    the dataset.
+     * @param row        the row index (zero-based).
+     * @param column     the column index (zero-based).
+     * @param pass       the pass index.
      */
     @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
@@ -211,8 +214,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
         if (this.endType == AreaRendererEndType.TRUNCATE) {
             if (column == 0) {
                 x0 = x1;
-            }
-            else if (column == getColumnCount() - 1) {
+            } else if (column == getColumnCount() - 1) {
                 x2 = x1;
             }
         }
@@ -236,8 +238,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             if (n2 != null) {
                 yy2 = (n2.doubleValue() + yy1) / 2.0;
             }
-        }
-        else if (this.endType == AreaRendererEndType.LEVEL) {
+        } else if (this.endType == AreaRendererEndType.LEVEL) {
             yy2 = yy1;
         }
 
@@ -259,8 +260,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             area.lineTo(x1, y1);
             area.lineTo(x2, y2);
             area.lineTo(x2, yz);
-        }
-        else if (orientation == PlotOrientation.HORIZONTAL) {
+        } else if (orientation == PlotOrientation.HORIZONTAL) {
             area.moveTo(yz, x0);
             area.lineTo(y0, x0);
             area.lineTo(y1, x1);
@@ -283,7 +283,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
 
         // submit the current data point as a crosshair candidate
         int datasetIndex = plot.indexOf(dataset);
-        updateCrosshairValues(state.getCrosshairState(), 
+        updateCrosshairValues(state.getCrosshairState(),
                 dataset.getRowKey(row), dataset.getColumnKey(column), yy1,
                 datasetIndex, x1, y1, orientation);
 
@@ -298,7 +298,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object to test ({@code null} permitted).
+     * @param obj the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -322,11 +322,16 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException  should not happen.
+     * @throws CloneNotSupportedException should not happen.
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public void setDefaultToolTipGenerator(IntervalCategoryToolTipGenerator intervalCategoryToolTipGenerator) {
+
     }
 
 }

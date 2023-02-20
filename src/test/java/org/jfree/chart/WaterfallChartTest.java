@@ -77,14 +77,13 @@ public class WaterfallChartTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            BufferedImage image = new BufferedImage(200 , 100,
+            BufferedImage image = new BufferedImage(200, 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             fail("There should be no exception.");
         }
     }
@@ -97,8 +96,7 @@ public class WaterfallChartTest {
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryToolTipGenerator tt
-                = new StandardCategoryToolTipGenerator();
+        StandardCategoryToolTipGenerator tt = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
         assertSame(tt2, tt);
@@ -112,8 +110,7 @@ public class WaterfallChartTest {
     public void testSetSeriesURLGenerator() {
         CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryURLGenerator url1
-                = new StandardCategoryURLGenerator();
+        StandardCategoryURLGenerator url1 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
         assertSame(url2, url1);
@@ -125,13 +122,10 @@ public class WaterfallChartTest {
      * @return The chart.
      */
     private static JFreeChart createWaterfallChart() {
-        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-        CategoryDataset<String, String> dataset 
-                = DatasetUtils.createCategoryDataset("S", "C", data);
-        return ChartFactory.createWaterfallChart("Waterfall Chart",
-            "Domain", "Range", dataset, PlotOrientation.HORIZONTAL,
-            true,     // include legend
-            true, true);
+        Number[][] data = new Integer[][] { { -3, -2 }, { -1, 1 }, { 2, 3 } };
+        CategoryDataset<String, String> dataset = DatasetUtils.createCategoryDataset("S", "C", data);
+        return ChartFactory.getChartRegular("WaterFallChart", "Waterfall Chart", "Domain", "Range", dataset);
+
     }
 
 }

@@ -42,6 +42,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.GradientPaintTransformType;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
@@ -196,11 +197,10 @@ public class XYAreaRendererTest {
             XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYAreaRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -234,7 +234,7 @@ public class XYAreaRendererTest {
         XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

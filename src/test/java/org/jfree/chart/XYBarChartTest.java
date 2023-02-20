@@ -81,15 +81,14 @@ public class XYBarChartTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            BufferedImage image = new BufferedImage(200 , 100,
+            BufferedImage image = new BufferedImage(200, 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-        }
-        catch (Exception e) {
-          fail("No exception should be triggered.");
+        } catch (Exception e) {
+            fail("No exception should be triggered.");
         }
     }
 
@@ -115,9 +114,9 @@ public class XYBarChartTest {
         assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue(range.getLowerBound() <= 10, 
+        assertTrue(range.getLowerBound() <= 10,
                 "Expecting the lower bound of the range to be around 10: " + range.getLowerBound());
-        assertTrue(range.getUpperBound() >= 30, 
+        assertTrue(range.getUpperBound() >= 30,
                 "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
@@ -147,8 +146,7 @@ public class XYBarChartTest {
         series1.add(3.0, 3.0);
         IntervalXYDataset<String> dataset = new XYBarDataset<>(
                 new XYSeriesCollection<>(series1), 1.0);
-        return ChartFactory.createXYBarChart("XY Bar Chart", "Domain", false,
-                "Range", dataset);
+        return ChartFactory.getChartRegular("XYBarChart", "XY Bar Chart", "Domain", "Range", dataset);
 
     }
 
@@ -164,7 +162,7 @@ public class XYBarChartTest {
         /**
          * Event handler.
          *
-         * @param event  the event.
+         * @param event the event.
          */
         @Override
         public void chartChanged(ChartChangeEvent event) {

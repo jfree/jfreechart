@@ -41,6 +41,7 @@ import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -151,8 +152,8 @@ public class LineAndShapeRendererTest {
     /**
      * Checks that the two renderers are equal but independent of one another.
      *
-     * @param r1  renderer 1.
-     * @param r2  renderer 2.
+     * @param r1 renderer 1.
+     * @param r2 renderer 2.
      *
      * @return A boolean.
      */
@@ -247,7 +248,7 @@ public class LineAndShapeRendererTest {
         CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

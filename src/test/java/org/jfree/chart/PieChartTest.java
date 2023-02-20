@@ -44,6 +44,7 @@ package org.jfree.chart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.pie.PiePlot;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for a pie chart.
  */
-public class PieChartTest  {
+public class PieChartTest {
 
     /** A chart. */
     private JFreeChart pieChart;
@@ -68,7 +69,7 @@ public class PieChartTest  {
     }
 
     /**
-     * Using a regular pie chart, we replace the dataset with null.  Expect to
+     * Using a regular pie chart, we replace the dataset with null. Expect to
      * receive notification of a chart change event, and (of course) the
      * dataset should be null.
      */
@@ -92,7 +93,7 @@ public class PieChartTest  {
         data.setValue("Java", 43.2);
         data.setValue("Visual Basic", 0.0);
         data.setValue("C/C++", 17.5);
-        return ChartFactory.createPieChart("Pie Chart", data);
+        return ChartFactory.getChartRegular("PieChart", "Pie Chart", null, null, (CategoryDataset) data);
     }
 
     /**
@@ -106,7 +107,7 @@ public class PieChartTest  {
         /**
          * Event handler.
          *
-         * @param event  the event.
+         * @param event the event.
          */
         @Override
         public void chartChanged(ChartChangeEvent event) {

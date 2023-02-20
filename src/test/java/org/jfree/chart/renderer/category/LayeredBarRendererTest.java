@@ -42,6 +42,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -54,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests for the {@link LayeredBarRenderer} class.
  */
 public class LayeredBarRendererTest {
-    
+
     /**
      * Check that the equals() method distinguishes all fields.
      */
@@ -63,17 +64,17 @@ public class LayeredBarRendererTest {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
         LayeredBarRenderer r2 = new LayeredBarRenderer();
         assertEquals(r1, r2);
-        
+
         r1.setSeriesBarWidth(1, 10.0);
         assertNotEquals(r1, r2);
         r2.setSeriesBarWidth(1, 10.0);
         assertEquals(r1, r2);
-        
-        // try an inherited attribute 
+
+        // try an inherited attribute
         r1.setBase(3.0);
         assertNotEquals(r1, r2);
         r2.setBase(3.0);
-        assertEquals(r1, r2);        
+        assertEquals(r1, r2);
     }
 
     /**
@@ -138,11 +139,10 @@ public class LayeredBarRendererTest {
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new LayeredBarRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }

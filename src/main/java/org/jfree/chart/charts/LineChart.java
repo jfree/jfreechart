@@ -14,6 +14,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYDataset;
 
 public class LineChart extends JFreeChart {
 
@@ -91,4 +93,25 @@ public class LineChart extends JFreeChart {
                 return chart;
 
         }
+
+        @Override
+        public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
+                        CategoryDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+                        boolean urls) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        @Override
+        public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
 }

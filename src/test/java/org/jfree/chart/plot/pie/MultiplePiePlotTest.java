@@ -49,6 +49,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
@@ -63,10 +64,10 @@ public class MultiplePiePlotTest implements PlotChangeListener {
     PlotChangeEvent lastEvent;
 
     /**
-     * Receives a plot change event and records it.  Some tests will use this
+     * Receives a plot change event and records it. Some tests will use this
      * to check that events have been generated (or not) when required.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void plotChanged(PlotChangeEvent event) {
@@ -83,7 +84,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
 
         // the following checks that the plot registers itself as a listener
         // with the dataset passed to the constructor - see patch 1943021
-        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         plot = new MultiplePiePlot(dataset);
         assertTrue(dataset.hasListener(plot));
     }
@@ -120,11 +121,10 @@ public class MultiplePiePlotTest implements PlotChangeListener {
                 3.0f, 4.0f, Color.YELLOW));
         assertEquals(p1, p2);
 
-        p1.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
-                true));
+        p1.setPieChart(ChartFactory.getChartRegular("PieChart", "Title", null, null, null));
+
         assertNotEquals(p1, p2);
-        p2.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
-                true));
+        p2.setPieChart(ChartFactory.getChartRegular("PieChart", "Title", null, null, null));
         assertEquals(p1, p2);
 
         p1.setLegendItemShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
@@ -168,13 +168,13 @@ public class MultiplePiePlotTest implements PlotChangeListener {
      */
     @Test
     public void testGetLegendItems() {
-        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S2", "C1");
         dataset.addValue(15.0, "S2", "C2");
         MultiplePiePlot plot = new MultiplePiePlot(dataset);
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         LegendItemCollection legendItems = plot.getLegendItems();
         assertEquals(2, legendItems.getItemCount());
         LegendItem item1 = legendItems.get(0);
