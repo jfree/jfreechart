@@ -63,7 +63,7 @@ public class XYTitleAnnotationTest {
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
         XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
         assertEquals(a1, a2);
-
+        
         a1 = new XYTitleAnnotation(1.1, 2.0, t);
         assertNotEquals(a1, a2);
         a2 = new XYTitleAnnotation(1.1, 2.0, t);
@@ -73,7 +73,7 @@ public class XYTitleAnnotationTest {
         assertNotEquals(a1, a2);
         a2 = new XYTitleAnnotation(1.1, 2.2, t);
         assertEquals(a1, a2);
-
+        
         TextTitle t2 = new TextTitle("Title 2");
         a1 = new XYTitleAnnotation(1.1, 2.2, t2);
         assertNotEquals(a1, a2);
@@ -82,7 +82,7 @@ public class XYTitleAnnotationTest {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode.
+     * Two objects that are equal are required to return the same hashCode. 
      */
     @Test
     public void testHashCode() {
@@ -94,7 +94,7 @@ public class XYTitleAnnotationTest {
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
     }
-
+    
     /**
      * Confirm that cloning works.
      */
@@ -118,40 +118,40 @@ public class XYTitleAnnotationTest {
         XYTitleAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
-
+    
     /**
-     * Draws the chart with a {@code null} info object to make sure that
+     * Draws the chart with a {@code null} info object to make sure that 
      * no exceptions are thrown.
      */
-    // @Test
-    // public void testDrawWithNullInfo() {
-    // try {
-    // DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
-
-    // XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
-    // s1.add(5.0, 5.0);
-    // s1.add(10.0, 15.5);
-    // s1.add(15.0, 9.5);
-    // s1.add(20.0, 7.5);
-    // dataset.addSeries(s1);
-
-    // XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
-    // s2.add(5.0, 5.0);
-    // s2.add(10.0, 15.5);
-    // s2.add(15.0, 9.5);
-    // s2.add(20.0, 3.5);
-    // dataset.addSeries(s2);
-    // XYPlot<String> plot = new XYPlot<>(dataset,
-    // new NumberAxis("X"), new NumberAxis("Y"),
-    // new XYLineAndShapeRenderer());
-    // plot.addAnnotation(new XYTitleAnnotation(5.0, 6.0,
-    // new TextTitle("Hello World!")));
-    // JFreeChart chart = new JFreeChart(plot);
-    // /* BufferedImage image = */ chart.createBufferedImage(300, 200, null);
-    // }
-    // catch (NullPointerException e) {
-    // fail("There should be no exception.");
-    // }
-    // }
+    @Test
+    public void testDrawWithNullInfo() {
+        try {
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
+        
+            XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
+            s1.add(5.0, 5.0);
+            s1.add(10.0, 15.5);
+            s1.add(15.0, 9.5);
+            s1.add(20.0, 7.5);
+            dataset.addSeries(s1);
+        
+            XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
+            s2.add(5.0, 5.0);
+            s2.add(10.0, 15.5);
+            s2.add(15.0, 9.5);
+            s2.add(20.0, 3.5);
+            dataset.addSeries(s2);
+            XYPlot<String> plot = new XYPlot<>(dataset, 
+                    new NumberAxis("X"), new NumberAxis("Y"), 
+                    new XYLineAndShapeRenderer());
+            plot.addAnnotation(new XYTitleAnnotation(5.0, 6.0, 
+                    new TextTitle("Hello World!")));
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, null);
+        }
+        catch (NullPointerException e) {
+            fail("There should be no exception.");
+        }
+    }
 
 }

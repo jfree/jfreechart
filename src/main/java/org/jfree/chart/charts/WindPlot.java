@@ -11,10 +11,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.WindItemRenderer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.WindDataset;
-import org.jfree.data.xy.XYDataset;
 
 public class WindPlot extends JFreeChart {
     public WindPlot(String title, Font titleFont, Plot plot, boolean createLegend) {
@@ -55,24 +52,5 @@ public class WindPlot extends JFreeChart {
         return new WindPlot(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

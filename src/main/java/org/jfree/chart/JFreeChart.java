@@ -104,9 +104,6 @@ import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.data.xy.XYDataset;
 
 /**
  * A chart class implemented using the Java 2D APIs. The current version
@@ -250,9 +247,6 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
         this(null, null, plot, true);
         this.theme.apply(this);
 
-    }
-
-    public JFreeChart() {
     }
 
     /**
@@ -1653,15 +1647,5 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
         chart.changeListeners = new EventListenerList();
         return chart;
     }
-
-    public abstract JFreeChart createChart(String title,
-            String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset);
-
-    public abstract JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
-            boolean urls);
-
-    public abstract JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
-            XYDataset dataset);
 
 }

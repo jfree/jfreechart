@@ -4,7 +4,6 @@ import java.awt.Font;
 
 import javax.swing.text.AttributeSet.ColorAttribute;
 
-import org.jfree.chart.ChartColor;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.api.Layer;
 import org.jfree.chart.axis.CategoryAxis;
@@ -23,8 +22,6 @@ import org.jfree.chart.renderer.category.WaterfallBarRenderer;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.data.xy.XYDataset;
 
 public class WaterFallChart extends JFreeChart {
     public WaterFallChart(String title, Font titleFont, Plot plot, boolean createLegend) {
@@ -91,31 +88,13 @@ public class WaterFallChart extends JFreeChart {
                 renderer);
         plot.clearRangeMarkers();
         Marker baseline = new ValueMarker(0.0);
-        baseline.setPaint(ChartColor.BLACK);
+        baseline.setPaint(ColorAttribute.BLACK);
         plot.addRangeMarker(baseline, Layer.FOREGROUND);
         plot.setOrientation(orientation);
-        return new WaterFallChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        return chart;
 
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

@@ -77,19 +77,17 @@ import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 
 /**
- * A box-and-whisker renderer. This renderer requires a
+ * A box-and-whisker renderer.  This renderer requires a
  * {@link BoxAndWhiskerCategoryDataset} and is for use with the
- * {@link CategoryPlot} class. The example shown here is generated
+ * {@link CategoryPlot} class.  The example shown here is generated
  * by the {@code BoxAndWhiskerChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
- * <br>
- * <br>
+ * <br><br>
  * <img src="doc-files/BoxAndWhiskerRendererSample.png"
  * alt="BoxAndWhiskerRendererSample.png">
  */
@@ -136,7 +134,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * A flag that, if {@code true}, causes the whiskers to be drawn
-     * using the outline paint for the series. The default value is
+     * using the outline paint for the series.  The default value is
      * {@code false} and in that case the regular series paint is used.
      */
     private boolean useOutlinePaintForWhiskers;
@@ -167,7 +165,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Returns the paint used to color the median and average markers.
      *
      * @return The paint used to draw the median and average markers (never
-     *         {@code null}).
+     *     {@code null}).
      *
      * @see #setArtifactPaint(Paint)
      */
@@ -179,7 +177,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Sets the paint used to color the median and average markers and sends
      * a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint the paint ({@code null} not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getArtifactPaint()
      */
@@ -204,7 +202,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Sets the flag that controls whether or not the box is filled and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param flag the flag.
+     * @param flag  the flag.
      *
      * @see #getFillBox()
      */
@@ -214,7 +212,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the item margin. This is a percentage of the available space
+     * Returns the item margin.  This is a percentage of the available space
      * that is allocated to the space between items in the chart.
      *
      * @return The margin.
@@ -229,7 +227,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Sets the item margin and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param margin the margin (a percentage).
+     * @param margin  the margin (a percentage).
      *
      * @see #getItemMargin()
      */
@@ -240,7 +238,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Returns the maximum bar width as a percentage of the available drawing
-     * space. Take care with the encoding, for example 0.10 is ten percent.
+     * space.  Take care with the encoding, for example 0.10 is ten percent.
      *
      * @return The maximum bar width.
      *
@@ -255,8 +253,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * available space for all bars, and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param percent the maximum bar width (a percentage, where 0.10 is ten
-     *                percent).
+     * @param percent  the maximum bar width (a percentage, where 0.10 is ten
+     *     percent).
      *
      * @see #getMaximumBarWidth()
      */
@@ -282,7 +280,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param visible the new flag value.
+     * @param visible  the new flag value.
      *
      * @see #isMeanVisible()
      */
@@ -311,7 +309,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param visible the new flag value.
+     * @param visible  the new flag value.
      *
      * @see #isMedianVisible()
      */
@@ -342,7 +340,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param visible the new flag value.
+     * @param visible  the new flag value.
      *
      * @see #isMinOutlierVisible()
      *
@@ -375,7 +373,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param visible the new flag value.
+     * @param visible  the new flag value.
      *
      * @see #isMaxOutlierVisible()
      *
@@ -404,7 +402,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * be drawn using the series outline paint, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param flag the new flag value.
+     * @param flag  the new flag value.
      */
     public void setUseOutlinePaintForWhiskers(boolean flag) {
         if (this.useOutlinePaintForWhiskers == flag) {
@@ -429,8 +427,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Sets the width of the whiskers as a fraction of the bar width and sends
      * a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param width a value between 0 and 1 indicating how wide the
-     *              whisker is supposed to be compared to the bar.
+     * @param width  a value between 0 and 1 indicating how wide the
+     *     whisker is supposed to be compared to the bar.
      * @see #getWhiskerWidth()
      * @see CategoryItemRendererState#getBarWidth()
      */
@@ -449,8 +447,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Returns a legend item for a series.
      *
-     * @param datasetIndex the dataset index (zero-based).
-     * @param series       the series index (zero-based).
+     * @param datasetIndex  the dataset index (zero-based).
+     * @param series  the series index (zero-based).
      *
      * @return The legend item (possibly {@code null}).
      */
@@ -504,7 +502,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Returns the range of values from the specified dataset that the
      * renderer will require to display all the data.
      *
-     * @param dataset the dataset.
+     * @param dataset  the dataset.
      *
      * @return The range.
      */
@@ -514,20 +512,19 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Initialises the renderer. This method gets called once at the start of
+     * Initialises the renderer.  This method gets called once at the start of
      * the process of drawing a chart.
      *
-     * @param g2            the graphics device.
-     * @param dataArea      the area in which the data is to be plotted.
-     * @param plot          the plot.
-     * @param rendererIndex the renderer index.
-     * @param info          collects chart rendering information for return to
-     *                      caller.
+     * @param g2  the graphics device.
+     * @param dataArea  the area in which the data is to be plotted.
+     * @param plot  the plot.
+     * @param rendererIndex  the renderer index.
+     * @param info  collects chart rendering information for return to caller.
      *
      * @return The renderer state.
      */
     @Override
-    public CategoryItemRendererState initialise(Graphics2D g2,
+    public CategoryItemRendererState initialise(Graphics2D g2, 
             Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
             PlotRenderingInfo info) {
 
@@ -543,7 +540,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
                 space = dataArea.getHeight();
-            } else if (orientation == PlotOrientation.VERTICAL) {
+            }
+            else if (orientation == PlotOrientation.VERTICAL) {
                 space = dataArea.getWidth();
             }
             double maxWidth = space * getMaximumBarWidth();
@@ -556,8 +554,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                 currentItemMargin = getItemMargin();
             }
             double used = space * (1 - domainAxis.getLowerMargin()
-                    - domainAxis.getUpperMargin()
-                    - categoryMargin - currentItemMargin);
+                                     - domainAxis.getUpperMargin()
+                                     - categoryMargin - currentItemMargin);
             if ((rows * columns) > 0) {
                 state.setBarWidth(Math.min(used / (dataset.getColumnCount()
                         * dataset.getRowCount()), maxWidth));
@@ -572,23 +570,23 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Draw a single data item.
      *
-     * @param g2         the graphics device.
-     * @param state      the renderer state.
-     * @param dataArea   the area in which the data is drawn.
-     * @param plot       the plot.
-     * @param domainAxis the domain axis.
+     * @param g2  the graphics device.
+     * @param state  the renderer state.
+     * @param dataArea  the area in which the data is drawn.
+     * @param plot  the plot.
+     * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset    the data (must be an instance of
-     *                   {@link BoxAndWhiskerCategoryDataset}).
-     * @param row        the row index (zero-based).
-     * @param column     the column index (zero-based).
-     * @param pass       the pass index.
+     * @param dataset  the data (must be an instance of
+     *                 {@link BoxAndWhiskerCategoryDataset}).
+     * @param row  the row index (zero-based).
+     * @param column  the column index (zero-based).
+     * @param pass  the pass index.
      */
     @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
-            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
-            ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
-            int pass) {
+        Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+        ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+        int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(row, column)) {
@@ -598,7 +596,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (!(dataset instanceof BoxAndWhiskerCategoryDataset)) {
             throw new IllegalArgumentException(
                     "BoxAndWhiskerRenderer.drawItem() : the data should be "
-                            + "of type BoxAndWhiskerCategoryDataset only.");
+                    + "of type BoxAndWhiskerCategoryDataset only.");
         }
 
         PlotOrientation orientation = plot.getOrientation();
@@ -617,24 +615,25 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Draws the visual representation of a single data item when the plot has
      * a horizontal orientation.
      *
-     * @param g2         the graphics device.
-     * @param state      the renderer state.
-     * @param dataArea   the area within which the plot is being drawn.
-     * @param plot       the plot (can be used to obtain standard color
-     *                   information etc).
-     * @param domainAxis the domain axis.
+     * @param g2  the graphics device.
+     * @param state  the renderer state.
+     * @param dataArea  the area within which the plot is being drawn.
+     * @param plot  the plot (can be used to obtain standard color
+     *              information etc).
+     * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset    the dataset (must be an instance of
-     *                   {@link BoxAndWhiskerCategoryDataset}).
-     * @param row        the row index (zero-based).
-     * @param column     the column index (zero-based).
+     * @param dataset  the dataset (must be an instance of
+     *                 {@link BoxAndWhiskerCategoryDataset}).
+     * @param row  the row index (zero-based).
+     * @param column  the column index (zero-based).
      */
-    public void drawHorizontalItem(Graphics2D g2,
+    public void drawHorizontalItem(Graphics2D g2, 
             CategoryItemRendererState state, Rectangle2D dataArea,
             CategoryPlot plot, CategoryAxis domainAxis, ValueAxis rangeAxis,
             CategoryDataset dataset, int row, int column) {
 
-        BoxAndWhiskerCategoryDataset bawDataset = (BoxAndWhiskerCategoryDataset) dataset;
+        BoxAndWhiskerCategoryDataset bawDataset
+                = (BoxAndWhiskerCategoryDataset) dataset;
 
         double categoryEnd = domainAxis.getCategoryEnd(column,
                 getColumnCount(), dataArea, plot.getDomainAxisEdge());
@@ -648,9 +647,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
         if (seriesCount > 1) {
             double seriesGap = dataArea.getHeight() * getItemMargin()
-                    / (categoryCount * (seriesCount - 1));
+                               / (categoryCount * (seriesCount - 1));
             double usedWidth = (state.getBarWidth() * seriesCount)
-                    + (seriesGap * (seriesCount - 1));
+                               + (seriesGap * (seriesCount - 1));
             // offset the start of the boxes if the total width used is smaller
             // than the category width
             double offset = (categoryWidth - usedWidth) / 2;
@@ -715,7 +714,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
         // draw mean - SPECIAL AIMS REQUIREMENT...
         g2.setPaint(this.artifactPaint);
-        double aRadius; // average radius
+        double aRadius;                 // average radius
         if (this.meanVisible) {
             Number xMean = bawDataset.getMeanValue(row, column);
             if (xMean != null) {
@@ -759,23 +758,24 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Draws the visual representation of a single data item when the plot has
      * a vertical orientation.
      *
-     * @param g2         the graphics device.
-     * @param state      the renderer state.
-     * @param dataArea   the area within which the plot is being drawn.
-     * @param plot       the plot (can be used to obtain standard color information
-     *                   etc).
-     * @param domainAxis the domain axis.
+     * @param g2  the graphics device.
+     * @param state  the renderer state.
+     * @param dataArea  the area within which the plot is being drawn.
+     * @param plot  the plot (can be used to obtain standard color information
+     *              etc).
+     * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset    the dataset (must be an instance of
-     *                   {@link BoxAndWhiskerCategoryDataset}).
-     * @param row        the row index (zero-based).
-     * @param column     the column index (zero-based).
+     * @param dataset  the dataset (must be an instance of
+     *                 {@link BoxAndWhiskerCategoryDataset}).
+     * @param row  the row index (zero-based).
+     * @param column  the column index (zero-based).
      */
     public void drawVerticalItem(Graphics2D g2, CategoryItemRendererState state,
-            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
-            ValueAxis rangeAxis, CategoryDataset dataset, int row, int column) {
+        Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+        ValueAxis rangeAxis, CategoryDataset dataset, int row, int column) {
 
-        BoxAndWhiskerCategoryDataset bawDataset = (BoxAndWhiskerCategoryDataset) dataset;
+        BoxAndWhiskerCategoryDataset bawDataset
+                = (BoxAndWhiskerCategoryDataset) dataset;
 
         double categoryEnd = domainAxis.getCategoryEnd(column,
                 getColumnCount(), dataArea, plot.getDomainAxisEdge());
@@ -789,14 +789,15 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
         if (seriesCount > 1) {
             double seriesGap = dataArea.getWidth() * getItemMargin()
-                    / (categoryCount * (seriesCount - 1));
+                               / (categoryCount * (seriesCount - 1));
             double usedWidth = (state.getBarWidth() * seriesCount)
-                    + (seriesGap * (seriesCount - 1));
+                               + (seriesGap * (seriesCount - 1));
             // offset the start of the boxes if the total width used is smaller
             // than the category width
             double offset = (categoryWidth - usedWidth) / 2;
             xx = xx + offset + (row * (state.getBarWidth() + seriesGap));
-        } else {
+        }
+        else {
             // offset the start of the box if the box width is smaller than the
             // category width
             double offset = (categoryWidth - state.getBarWidth()) / 2;
@@ -811,7 +812,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         Stroke s = getItemStroke(row, column);
         g2.setStroke(s);
 
-        double aRadius = 0; // average radius
+        double aRadius = 0;                 // average radius
 
         RectangleEdge location = plot.getRangeAxisEdge();
 
@@ -885,7 +886,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             if (yMedian != null) {
                 double yyMedian = rangeAxis.valueToJava2D(
                         yMedian.doubleValue(), dataArea, location);
-                g2.draw(new Line2D.Double(xx, yyMedian,
+                g2.draw(new Line2D.Double(xx, yyMedian, 
                         xx + state.getBarWidth(), yyMedian));
             }
         }
@@ -899,9 +900,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         g2.setPaint(itemPaint);
 
         // draw outliers
-        double oRadius = state.getBarWidth() / 3; // outlier radius
+        double oRadius = state.getBarWidth() / 3;    // outlier radius
         List<Outlier> outliers = new ArrayList<>();
-        OutlierListCollection outlierListCollection = new OutlierListCollection();
+        OutlierListCollection outlierListCollection
+                = new OutlierListCollection();
 
         // From outlier array sort out which are outliers and put these into a
         // list If there are any farouts, set the flag on the
@@ -938,7 +940,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                 outlierListCollection.add(outlier);
             }
 
-            for (Iterator iterator = outlierListCollection.iterator(); iterator.hasNext();) {
+            for (Iterator iterator = outlierListCollection.iterator();
+                     iterator.hasNext();) {
                 OutlierList list = (OutlierList) iterator.next();
                 Outlier outlier = list.getAveragedOutlier();
                 Point2D point = outlier.getPoint();
@@ -975,9 +978,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Draws a dot to represent an outlier.
      *
-     * @param point   the location.
-     * @param oRadius the radius.
-     * @param g2      the graphics device.
+     * @param point  the location.
+     * @param oRadius  the radius.
+     * @param g2  the graphics device.
      */
     private void drawEllipse(Point2D point, double oRadius, Graphics2D g2) {
         Ellipse2D dot = new Ellipse2D.Double(point.getX() + oRadius / 2,
@@ -988,13 +991,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Draws two dots to represent the average value of more than one outlier.
      *
-     * @param point    the location
-     * @param boxWidth the box width.
+     * @param point  the location
+     * @param boxWidth  the box width.
      * @param oRadius  the radius.
-     * @param g2       the graphics device.
+     * @param g2  the graphics device.
      */
     private void drawMultipleEllipse(Point2D point, double boxWidth,
-            double oRadius, Graphics2D g2) {
+                                     double oRadius, Graphics2D g2)  {
 
         Ellipse2D dot1 = new Ellipse2D.Double(point.getX() - (boxWidth / 2)
                 + oRadius, point.getY(), oRadius, oRadius);
@@ -1007,13 +1010,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Draws a triangle to indicate the presence of far-out values.
      *
-     * @param aRadius the radius.
-     * @param g2      the graphics device.
-     * @param xx      the x coordinate.
-     * @param m       the y coordinate.
+     * @param aRadius  the radius.
+     * @param g2  the graphics device.
+     * @param xx  the x coordinate.
+     * @param m  the y coordinate.
      */
     private void drawHighFarOut(double aRadius, Graphics2D g2, double xx,
-            double m) {
+                                double m) {
         double side = aRadius * 2;
         g2.draw(new Line2D.Double(xx - side, m + side, xx + side, m + side));
         g2.draw(new Line2D.Double(xx - side, m + side, xx, m));
@@ -1023,13 +1026,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Draws a triangle to indicate the presence of far-out values.
      *
-     * @param aRadius the radius.
-     * @param g2      the graphics device.
-     * @param xx      the x coordinate.
-     * @param m       the y coordinate.
+     * @param aRadius  the radius.
+     * @param g2  the graphics device.
+     * @param xx  the x coordinate.
+     * @param m  the y coordinate.
      */
     private void drawLowFarOut(double aRadius, Graphics2D g2, double xx,
-            double m) {
+                               double m) {
         double side = aRadius * 2;
         g2.draw(new Line2D.Double(xx - side, m - side, xx + side, m - side));
         g2.draw(new Line2D.Double(xx - side, m - side, xx, m));
@@ -1039,7 +1042,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj the object ({@code null} permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return {@code true} or {@code false}.
      */
@@ -1073,7 +1076,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (this.maxOutlierVisible != that.maxOutlierVisible) {
             return false;
         }
-        if (this.useOutlinePaintForWhiskers != that.useOutlinePaintForWhiskers) {
+        if (this.useOutlinePaintForWhiskers
+                != that.useOutlinePaintForWhiskers) {
             return false;
         }
         if (this.whiskerWidth != that.whiskerWidth) {
@@ -1088,9 +1092,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Provides serialization support.
      *
-     * @param stream the output stream.
+     * @param stream  the output stream.
      *
-     * @throws IOException if there is an I/O error.
+     * @throws IOException  if there is an I/O error.
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
@@ -1100,21 +1104,15 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Provides serialization support.
      *
-     * @param stream the input stream.
+     * @param stream  the input stream.
      *
-     * @throws IOException            if there is an I/O error.
-     * @throws ClassNotFoundException if there is a classpath problem.
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
      */
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.artifactPaint = SerialUtils.readPaint(stream);
-    }
-
-    @Override
-    public void setDefaultToolTipGenerator(IntervalCategoryToolTipGenerator intervalCategoryToolTipGenerator) {
-        // TODO Auto-generated method stub
-
     }
 
 }

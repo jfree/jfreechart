@@ -13,8 +13,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.XYDataset;
 
 public class TimeSeriesChart extends JFreeChart {
@@ -22,10 +20,6 @@ public class TimeSeriesChart extends JFreeChart {
     public TimeSeriesChart(String title, Font titleFont, Plot plot, boolean createLegend) {
         super(title, titleFont, plot, createLegend);
         // TODO Auto-generated constructor stub
-    }
-
-    public TimeSeriesChart() {
-        super();
     }
 
     /**
@@ -103,23 +97,5 @@ public class TimeSeriesChart extends JFreeChart {
         return new TimeSeriesChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
-        return createTimeSeriesChart(title, timeAxisLabel, valueAxisLabel, dataset);
-    }
-
-    @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
-        // TODO Auto-generated method stub
-        return null;
     }
 }
