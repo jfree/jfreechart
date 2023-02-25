@@ -12,6 +12,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.category.CategoryDataset;
@@ -92,7 +93,7 @@ public class XYStepAreaChart extends JFreeChart {
 
     @Override
     public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
+            DefaultCategoryDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }

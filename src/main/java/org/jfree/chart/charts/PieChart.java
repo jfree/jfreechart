@@ -21,6 +21,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -396,7 +397,7 @@ public class PieChart extends JFreeChart {
 
     @Override
     public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
+            DefaultCategoryDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }

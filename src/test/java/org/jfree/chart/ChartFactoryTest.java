@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,20 +25,16 @@ public class ChartFactoryTest {
     private JFreeChart barChart;
     private JFreeChart pieChart;
     private JFreeChart timeSeriesChart;
-    private Map<String, List<Object>> params;
+    private Map<String, List<Object>> params = new HashMap<String, List<Object>>();
     private ChartFactoryReflection reflectionFactory;
 
     /**
      * Common test setup.
      */
-    @BeforeEach
-    public void setUp() {
-        setUpBarChart();
-        setUpPieChart();
-        setUpTimeSeriesChart();
-        this.reflectionFactory = new ChartFactoryReflection();
+    // @BeforeEach
+    // public void setUp() {
 
-    }
+    // }
 
     public void setUpBarChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -146,7 +143,8 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfBarChartIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-
+        setUpBarChart();
+        this.reflectionFactory = new ChartFactoryReflection();
         var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.BarChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
@@ -158,7 +156,8 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfPieCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-
+        setUpPieChart();
+        this.reflectionFactory = new ChartFactoryReflection();
         var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.PieChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
@@ -170,11 +169,22 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfTimeSeriesCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-
+        setUpTimeSeriesChart();
+        this.reflectionFactory = new ChartFactoryReflection();
         var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", this.params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof TimeSeriesChart);
         assertEquals(this.timeSeriesChart, chart);
+    }
+
+    @Test
+    public void testDynamicLoadingOfBarChartFailsWithInvalidStringInput()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(ClassNotFoundException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Bar", this.params);
+        });
     }
 }

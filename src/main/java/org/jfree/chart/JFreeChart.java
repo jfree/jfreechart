@@ -105,6 +105,7 @@ import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -1657,7 +1658,7 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
 
     public abstract JFreeChart createChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset);
+            DefaultCategoryDataset dataset);
 
     public abstract JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
             boolean urls);

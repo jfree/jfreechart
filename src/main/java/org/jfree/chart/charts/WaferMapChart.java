@@ -10,6 +10,7 @@ import org.jfree.chart.plot.WaferMapPlot;
 import org.jfree.chart.renderer.WaferMapRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.WaferMapDataset;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -50,7 +51,7 @@ public class WaferMapChart extends JFreeChart {
 
     @Override
     public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
+            DefaultCategoryDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -16,6 +16,7 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.ValueMarker;
@@ -102,7 +103,7 @@ public class WaterFallChart extends JFreeChart {
 
     @Override
     public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-            CategoryDataset dataset) {
+            DefaultCategoryDataset dataset) {
         // TODO Auto-generated method stub
         return null;
     }

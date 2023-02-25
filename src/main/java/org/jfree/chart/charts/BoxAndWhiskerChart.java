@@ -13,6 +13,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
@@ -89,7 +90,7 @@ public class BoxAndWhiskerChart extends JFreeChart {
 
         @Override
         public JFreeChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-                        CategoryDataset dataset) {
+                        DefaultCategoryDataset dataset) {
                 // TODO Auto-generated method stub
                 return null;
         }

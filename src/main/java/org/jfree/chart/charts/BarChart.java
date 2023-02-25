@@ -18,6 +18,7 @@ import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -199,7 +200,7 @@ public class BarChart extends JFreeChart {
 
         @Override
         public BarChart createChart(String title, String categoryAxisLabel, String valueAxisLabel,
-                        CategoryDataset dataset) {
+                        DefaultCategoryDataset dataset) {
                 return (BarChart) createBarChart(title, categoryAxisLabel, valueAxisLabel, dataset);
         }
 

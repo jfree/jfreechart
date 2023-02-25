@@ -69,6 +69,7 @@ import org.jfree.chart.charts.XYStepAreaChart;
 import org.jfree.chart.charts.XYStepChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.PieDataset;
@@ -158,7 +159,7 @@ public abstract class ChartFactory {
                 return PieChart.createPieChart(title, (PieDataset) dataset, true, true, true);
 
             case "BarChart":
-                return BarChart.createBarChart(title, category, value, (CategoryDataset) dataset);
+                return BarChart.createBarChart(title, category, value, (DefaultCategoryDataset) dataset);
 
             case "AreaChart":
                 return AreaChart.createAreaChart(title, category, value, (CategoryDataset) dataset);
