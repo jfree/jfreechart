@@ -2,16 +2,11 @@ package org.jfree.chart;
 
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.BeforeEach;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.charts.PieChart;
 import org.jfree.chart.charts.TimeSeriesChart;
@@ -26,14 +21,6 @@ public class ChartFactoryTest {
     private JFreeChart pieChart;
     private JFreeChart timeSeriesChart;
     private ChartFactoryReflection reflectionFactory;
-
-    /**
-     * Common test setup.
-     */
-    // @BeforeEach
-    // public void setUp() {
-
-    // }
 
     public List<Object> setUpBarChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -187,6 +174,61 @@ public class ChartFactoryTest {
         this.reflectionFactory = new ChartFactoryReflection();
         assertThrows(ClassNotFoundException.class, () -> {
             this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Bar", params);
+        });
+    }
+
+    @Test
+    public void testDynamicLoadingOfBarChartFailsWithMissingParameters()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = new ArrayList<>();
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(NoSuchMethodException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.BarChart", params);
+        });
+    }
+
+    @Test
+    public void testDynamicLoadingOfPieChartFailsWithInvalidStringInput()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = setUpPieChart();
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(ClassNotFoundException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Pie", params);
+        });
+    }
+
+    @Test
+    public void testDynamicLoadingOfPieChartFailsWithMissingParameters()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = new ArrayList<>();
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(NoSuchMethodException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.PieChart", params);
+        });
+    }
+
+    @Test
+    public void testDynamicLoadingOfTimeSeriesChartFailsWithInvalidStringInput()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = setUpTimeSeriesChart();
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(ClassNotFoundException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Time", params);
+        });
+    }
+
+    @Test
+    public void testDynamicLoadingOfTimeSeriesChartFailsWithMissingParameters()
+            throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = new ArrayList<>();
+        this.reflectionFactory = new ChartFactoryReflection();
+        assertThrows(NoSuchMethodException.class, () -> {
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", params);
         });
     }
 }

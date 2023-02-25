@@ -18,10 +18,6 @@ public class ChartFactoryReflection extends ChartFactory {
 
         String chart = classObj.getSimpleName();
 
-        if (chart == null || chart == "") {
-            return null;
-        }
-
         Object chartObj = chartConstructor.newInstance();
 
         return getChartObject(chart, classObj, chartObj, params);
