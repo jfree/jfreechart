@@ -16,15 +16,13 @@ public class ChartFactoryReflection extends ChartFactory {
         Class<?> classObj = Class.forName(chartType);
         Constructor<?> chartConstructor = classObj.getConstructor();
 
-        String chart = classObj.getSimpleName();
-
         Object chartObj = chartConstructor.newInstance();
 
-        return getChartObject(chart, classObj, chartObj, params);
+        return getChartObject(classObj, chartObj, params);
 
     }
 
-    public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj, List<Object> params)
+    public JFreeChart getChartObject(Class<?> classObj, Object chartObj, List<Object> params)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
         Method createMethod;
