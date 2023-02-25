@@ -1663,8 +1663,8 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
             DefaultCategoryDataset dataset);
 
     // PieChart
-    public abstract JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
-            boolean urls);
+    public abstract JFreeChart createChart(String title, DefaultPieDataset dataset, Boolean legend, Boolean tooltips,
+            Boolean urls);
 
     public abstract JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,
             TimeSeriesCollection dataset);

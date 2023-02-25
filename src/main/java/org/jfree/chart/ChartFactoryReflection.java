@@ -31,8 +31,6 @@ public class ChartFactoryReflection extends ChartFactory {
     public JFreeChart getChartObject(String simpleClassName, Class<?> classObj, Object chartObj, List<Object> params)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
-        System.out.println("Called getChartObject with parameters: \n" + simpleClassName + "\n" + classObj.getName()
-                + "\n" + chartObj.getClass().getName() + "\n" + params);
         Method createMethod;
         Class<?>[] parameterTypes = new Class<?>[params.size()];
 
@@ -53,7 +51,19 @@ public class ChartFactoryReflection extends ChartFactory {
             inputParams[i] = params.get(i);
         }
 
-        createMethod = classObj.getDeclaredMethod("createChart", parameterTypes);
+        var methods = classObj.getMethods();
+
+        for (var method : methods) {
+            if (method.getName().equalsIgnoreCase("createChart") && method.getParameterCount() == 5) {
+                System.out.println("Method name: " + method.getName() + "\nParameter Count: "
+                        + method.getParameterCount() + "\nParameterTypes: \n");
+                for (var paramType : method.getParameterTypes()) {
+                    System.out.println(paramType);
+                }
+            }
+
+        }
+        createMethod = classObj.getMethod("createChart", parameterTypes);
         return (JFreeChart) createMethod.invoke(chartObj, inputParams);
 
     }

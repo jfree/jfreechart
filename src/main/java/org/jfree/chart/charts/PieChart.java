@@ -101,7 +101,7 @@ public class PieChart extends JFreeChart {
      * @return A pie chart.
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset,
-            boolean legend, boolean tooltips, boolean urls) {
+            Boolean legend, Boolean tooltips, Boolean urls) {
 
         PiePlot plot = new PiePlot(dataset);
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
@@ -403,8 +403,8 @@ public class PieChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
-            boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, Boolean legend, Boolean tooltips,
+            Boolean urls) {
         return createPieChart(title, dataset, legend, tooltips, urls);
     }
 

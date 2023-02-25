@@ -122,8 +122,8 @@ public class TimeSeriesChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
-            boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, Boolean legend, Boolean tooltips,
+            Boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }
