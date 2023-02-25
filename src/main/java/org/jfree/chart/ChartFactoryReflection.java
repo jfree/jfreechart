@@ -39,30 +39,12 @@ public class ChartFactoryReflection extends ChartFactory {
             parameterTypes[i] = objectType;
         }
 
-        System.out.println("Parameters in parameterTypes are: \n");
-
-        for (var param : parameterTypes) {
-            System.out.println(param);
-        }
-
         Object[] inputParams = new Object[params.size()];
 
         for (int i = 0; i < params.size(); i++) {
             inputParams[i] = params.get(i);
         }
 
-        var methods = classObj.getMethods();
-
-        for (var method : methods) {
-            if (method.getName().equalsIgnoreCase("createChart") && method.getParameterCount() == 5) {
-                System.out.println("Method name: " + method.getName() + "\nParameter Count: "
-                        + method.getParameterCount() + "\nParameterTypes: \n");
-                for (var paramType : method.getParameterTypes()) {
-                    System.out.println(paramType);
-                }
-            }
-
-        }
         createMethod = classObj.getMethod("createChart", parameterTypes);
         return (JFreeChart) createMethod.invoke(chartObj, inputParams);
 
