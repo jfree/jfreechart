@@ -10,6 +10,7 @@ import org.jfree.chart.api.Layer;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
@@ -109,7 +110,8 @@ public class WaterFallChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }

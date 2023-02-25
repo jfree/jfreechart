@@ -3,17 +3,14 @@ package org.jfree.chart;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class ChartFactoryReflection extends ChartFactory {
     ChartFactoryReflection() {
 
     }
 
-    public JFreeChart getChartReflection(String chartType, Map<String, List<Object>> params)
+    public JFreeChart getChartReflection(String chartType, List<Object> params)
             throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> classObj = Class.forName(chartType);
@@ -27,7 +24,7 @@ public class ChartFactoryReflection extends ChartFactory {
 
         Object chartObj = chartConstructor.newInstance();
 
-        return getChartObject(chart, classObj, chartObj, params.get(chart));
+        return getChartObject(chart, classObj, chartObj, params);
 
     }
 

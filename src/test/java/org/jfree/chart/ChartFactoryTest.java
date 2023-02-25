@@ -25,7 +25,6 @@ public class ChartFactoryTest {
     private JFreeChart barChart;
     private JFreeChart pieChart;
     private JFreeChart timeSeriesChart;
-    private Map<String, List<Object>> params = new HashMap<String, List<Object>>();
     private ChartFactoryReflection reflectionFactory;
 
     /**
@@ -36,7 +35,7 @@ public class ChartFactoryTest {
 
     // }
 
-    public void setUpBarChart() {
+    public List<Object> setUpBarChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(7445, "JFreeSVG", "Warm-up");
         dataset.addValue(24448, "Batik", "Warm-up");
@@ -53,13 +52,13 @@ public class ChartFactoryTest {
         parameters.add("Miliseconds");
         parameters.add(dataset);
 
-        this.params.put("BarChart", parameters);
         this.barChart = ChartFactory.getChartRegular("BarChart", "Performance: JFreeSVG vs Batik", "Miliseconds",
                 "Miliseconds",
                 dataset);
+        return parameters;
     }
 
-    public void setUpPieChart() {
+    public List<Object> setUpPieChart() {
         String title = "Smart Phones Manufactured / Q3 2011";
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Samsung", new Double(27.8));
@@ -69,16 +68,17 @@ public class ChartFactoryTest {
 
         List<Object> parameters = new ArrayList<Object>();
         parameters.add(title);
-        parameters.add(null);
-        parameters.add(null);
         parameters.add(dataset);
-
-        this.params.put("PieChart", parameters);
+        parameters.add(true);
+        parameters.add(true);
+        parameters.add(true);
 
         this.pieChart = ChartFactory.getChartRegular("PieChart", title, null, null, dataset);
+
+        return parameters;
     }
 
-    public void setUpTimeSeriesChart() {
+    public List<Object> setUpTimeSeriesChart() {
         String title = "Legal & General Unit Trust Prices";
         String timeAxisLabel = "Date";
         String valueAxisLabel = "Price per Unit";
@@ -133,19 +133,19 @@ public class ChartFactoryTest {
         parameters.add(valueAxisLabel);
         parameters.add(dataset);
 
-        this.params.put("TimeSeriesChart", parameters);
-
         this.timeSeriesChart = ChartFactory.getChartRegular("TimeSeriesChart", title, timeAxisLabel, valueAxisLabel,
                 dataset);
+        return parameters;
     }
 
     @Test
     public void testDynamicLoadingOfBarChartIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        setUpBarChart();
+        List<Object> params = setUpBarChart();
         this.reflectionFactory = new ChartFactoryReflection();
-        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.BarChart", this.params);
+
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.BarChart", params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof BarChart);
@@ -156,9 +156,10 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfPieCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        setUpPieChart();
+        List<Object> params = setUpPieChart();
         this.reflectionFactory = new ChartFactoryReflection();
-        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.PieChart", this.params);
+
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.PieChart", params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof PieChart);
@@ -169,9 +170,9 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfTimeSeriesCharttIsCorrect()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        setUpTimeSeriesChart();
+        List<Object> params = setUpTimeSeriesChart();
         this.reflectionFactory = new ChartFactoryReflection();
-        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", this.params);
+        var chart = this.reflectionFactory.getChartReflection("org.jfree.chart.charts.TimeSeriesChart", params);
 
         assertTrue(chart instanceof JFreeChart);
         assertTrue(chart instanceof TimeSeriesChart);
@@ -182,9 +183,10 @@ public class ChartFactoryTest {
     public void testDynamicLoadingOfBarChartFailsWithInvalidStringInput()
             throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<Object> params = setUpBarChart();
         this.reflectionFactory = new ChartFactoryReflection();
         assertThrows(ClassNotFoundException.class, () -> {
-            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Bar", this.params);
+            this.reflectionFactory.getChartReflection("org.jfree.chart.charts.Bar", params);
         });
     }
 }

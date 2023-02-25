@@ -10,6 +10,7 @@ import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
@@ -106,7 +107,8 @@ public class ScatterPlot extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }

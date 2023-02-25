@@ -15,6 +15,7 @@ import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -99,7 +100,8 @@ public class XYStepAreaChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }

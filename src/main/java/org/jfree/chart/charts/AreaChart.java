@@ -18,6 +18,7 @@ import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
@@ -181,7 +182,7 @@ public class AreaChart extends JFreeChart {
         }
 
         @Override
-        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+        public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
                         boolean urls) {
                 // TODO Auto-generated method stub
                 return null;

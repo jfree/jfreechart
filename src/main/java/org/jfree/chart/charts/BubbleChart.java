@@ -11,6 +11,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -99,7 +100,8 @@ public class BubbleChart extends JFreeChart {
     }
 
     @Override
-    public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips, boolean urls) {
+    public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
         // TODO Auto-generated method stub
         return null;
     }

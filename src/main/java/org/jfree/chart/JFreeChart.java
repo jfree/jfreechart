@@ -106,6 +106,7 @@ import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -1656,11 +1657,13 @@ public abstract class JFreeChart implements Drawable, TitleChangeListener,
         return chart;
     }
 
+    // Barchart
     public abstract JFreeChart createChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
             DefaultCategoryDataset dataset);
 
-    public abstract JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+    // PieChart
+    public abstract JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
             boolean urls);
 
     public abstract JFreeChart createChart(String title, String timeAxisLabel, String valueAxisLabel,

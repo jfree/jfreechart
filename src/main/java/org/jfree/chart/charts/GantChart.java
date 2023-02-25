@@ -12,6 +12,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.GanttRenderer;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -104,7 +105,7 @@ public class GantChart extends JFreeChart {
         }
 
         @Override
-        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+        public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
                         boolean urls) {
                 // TODO Auto-generated method stub
                 return null;

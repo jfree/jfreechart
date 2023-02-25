@@ -10,6 +10,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
@@ -96,7 +97,7 @@ public class BoxAndWhiskerChart extends JFreeChart {
         }
 
         @Override
-        public JFreeChart createChart(String title, PieDataset dataset, boolean legend, boolean tooltips,
+        public JFreeChart createChart(String title, DefaultPieDataset dataset, boolean legend, boolean tooltips,
                         boolean urls) {
                 // TODO Auto-generated method stub
                 return null;
