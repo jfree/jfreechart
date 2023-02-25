@@ -3,11 +3,10 @@ package org.jfree.chart;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
-
-import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ChartFactoryReflection extends ChartFactory {
     ChartFactoryReflection() {
@@ -51,12 +50,14 @@ public class ChartFactoryReflection extends ChartFactory {
             System.out.println(param);
         }
 
-        createMethod = classObj.getMethod("createChart", parameterTypes);
+        Object[] inputParams = new Object[params.size()];
 
-        System.out.println("Create method found is: " + createMethod.getName() + " with parammeters: "
-                + createMethod.getParameterCount());
+        for (int i = 0; i < params.size(); i++) {
+            inputParams[i] = params.get(i);
+        }
 
-        return (JFreeChart) createMethod.invoke(chartObj, params.get(0), params.get(1), params.get(2), params.get(3));
+        createMethod = classObj.getDeclaredMethod("createChart", parameterTypes);
+        return (JFreeChart) createMethod.invoke(chartObj, inputParams);
 
     }
 }
