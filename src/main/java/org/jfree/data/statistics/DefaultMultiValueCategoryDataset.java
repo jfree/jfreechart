@@ -47,7 +47,6 @@ import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
-import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A category dataset that defines multiple values for each item.
@@ -87,8 +86,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
 
     /**
      * Adds a list of values to the dataset ({@code null} and Double.NaN
-     * items are automatically removed) and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * items are automatically removed) and calls {@link #fireDatasetChanged()}.
      *
      * @param values  a list of values ({@code null} not permitted).
      * @param rowKey  the row key ({@code null} not permitted).

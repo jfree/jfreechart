@@ -51,7 +51,6 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
@@ -171,11 +170,11 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     }
 
     /**
-     * Sets the dataset used by the plot and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
-     *
-     * @param dataset  the dataset ({@code null} permitted).
-     */
+	 * Sets the dataset used by the plot and calls
+	 * {@link #datasetChanged(DatasetChangeEvent)}
+	 *
+	 * @param dataset the dataset ({@code null} permitted).
+	 */
     public void setDataset(WaferMapDataset dataset) {
         // if there is an existing dataset, remove the plot from the list of
         // change listeners...

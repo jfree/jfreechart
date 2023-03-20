@@ -36,9 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.font.TextAttribute;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.NumberFormat;
@@ -168,26 +165,7 @@ public class StandardPieSectionLabelGenerator
     }
 
     /**
-     * Generates an attributed label for the specified series, or
-     * {@code null} if no attributed label is available (in which case,
-     * the string returned by
-     * {@link #generateSectionLabel(PieDataset, Comparable)} will
-     * provide the fallback).  Only certain attributes are recognised by the
-     * code that ultimately displays the labels:
-     * <ul>
-     * <li>{@link TextAttribute#FONT}: will set the font;</li>
-     * <li>{@link TextAttribute#POSTURE}: a value of
-     *     {@link TextAttribute#POSTURE_OBLIQUE} will add {@link Font#ITALIC} to
-     *     the current font;</li>
-     * <li>{@link TextAttribute#WEIGHT}: a value of
-     *     {@link TextAttribute#WEIGHT_BOLD} will add {@link Font#BOLD} to the
-     *     current font;</li>
-     * <li>{@link TextAttribute#FOREGROUND}: this will set the {@link Paint}
-     *     for the current</li>
-     * <li>{@link TextAttribute#SUPERSCRIPT}: the values
-     *     {@link TextAttribute#SUPERSCRIPT_SUB} and
-     *     {@link TextAttribute#SUPERSCRIPT_SUPER} are recognised.</li>
-     * </ul>
+     * Calls {@link #getAttributedLabel(int)} with the index of the key within the dataset
      *
      * @param dataset  the dataset ({@code null} not permitted).
      * @param key  the key.

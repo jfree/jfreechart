@@ -59,7 +59,6 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
@@ -156,8 +155,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the dataset used by the plot and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the dataset used by the plot and calls {@link #fireChangeEvent()}.
      *
      * @param dataset  the dataset ({@code null} permitted).
      */
@@ -220,11 +218,11 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the data extract order (by row or by column) and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param order  the order ({@code null} not permitted).
-     */
+	 * Sets the data extract order (by row or by column) and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param order the order ({@code null} not permitted).
+	 */
     public void setDataExtractOrder(TableOrder order) {
         Args.nullNotPermitted(order, "order");
         this.dataExtractOrder = order;
@@ -286,7 +284,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the paint used to draw the pie section representing the aggregated
-     * items and sends a {@link PlotChangeEvent} to all registered listeners.
+     * items and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      */
@@ -319,8 +317,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the shape used for legend items and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the shape used for legend items and calls {@link #fireChangeEvent()}.
      *
      * @param shape  the shape ({@code null} not permitted).
      *

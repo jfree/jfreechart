@@ -40,7 +40,6 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.XYItemLabelGenerator;
@@ -121,8 +120,8 @@ public class StackedXYBarRenderer extends XYBarRenderer {
 
     /**
      * Sets the flag that controls whether the renderer displays each item
-     * value as a percentage (so that the stacked bars add to 100%), and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
+     * value as a percentage (so that the stacked bars add to 100%), and calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param asPercentages  the flag.
      *

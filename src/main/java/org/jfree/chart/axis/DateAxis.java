@@ -60,7 +60,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
@@ -295,8 +294,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the time zone for the axis and sends an {@link AxisChangeEvent} to
-     * all registered listeners.
+     * Sets the time zone for the axis and calls {@link #fireChangeEvent()}.
      *
      * @param zone  the time zone ({@code null} not permitted).
      *
@@ -343,7 +341,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * Sets the underlying timeline to use for this axis.  If the timeline is 
-     * changed, an {@link AxisChangeEvent} is sent to all registered listeners.
+     * changed, it calls {@link #fireChangeEvent()}.
      *
      * @param timeline  the timeline.
      */
@@ -386,8 +384,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the tick unit attribute and, if requested, sends an 
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the tick unit attribute and, if requested, calls {@link #fireChangeEvent()}.
      *
      * @param unit  the new tick unit.
      * @param notify  notify registered listeners?
@@ -419,9 +416,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the date format override and sends an {@link AxisChangeEvent} to 
-     * all registered listeners.  If this is non-null, then it will be
-     * used to format the dates on the axis.
+     * Sets the date format override and calls {@link #fireChangeEvent()}. If
+     * this is non-null, then it will be used to format the dates on the axis.
      *
      * @param formatter  the date formatter ({@code null} permitted).
      */
@@ -431,9 +427,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the upper and lower bounds for the axis and sends an
-     * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
-     * the auto-range flag is set to false.
+     * Sets the upper and lower bounds for the axis by calling
+     * {@link #setRange(org.jfree.data.Range, boolean, boolean)}.
      *
      * @param range  the new range ({@code null} not permitted).
      */
@@ -443,9 +438,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the range for the axis, if requested, sends an
-     * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
-     * the auto-range flag is set to {@code false} (optional).
+     * Sets the range for the axis by calling
+     * {@link #setRange(org.jfree.data.Range, boolean, boolean)}..
      *
      * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
@@ -466,8 +460,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the axis range and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * Sets the axis range by calling {@link #setRange(org.jfree.data.Range)}.
      *
      * @param lower  the lower bound for the axis.
      * @param upper  the upper bound for the axis.
@@ -480,8 +473,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the axis range and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * Sets the axis range by calling {@link #setRange(org.jfree.data.Range)}.
      *
      * @param lower  the lower bound for the axis.
      * @param upper  the upper bound for the axis.
@@ -516,11 +508,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the minimum date visible on the axis and sends an
-     * {@link AxisChangeEvent} to all registered listeners.  If
-     * {@code date} is on or after the current maximum date for
-     * the axis, the maximum date will be shifted to preserve the current
-     * length of the axis.
+     * Sets the minimum date visible on the axis calls
+     * {@link #fireChangeEvent()}. If {@code date} is on or after the current
+     * maximum date for the axis, the maximum date will be shifted to preserve
+     * the current length of the axis.
      *
      * @param date  the date ({@code null} not permitted).
      *
@@ -564,11 +555,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the maximum date visible on the axis and sends an
-     * {@link AxisChangeEvent} to all registered listeners.  If
-     * {@code maximumDate} is on or before the current minimum date for
-     * the axis, the minimum date will be shifted to preserve the current
-     * length of the axis.
+     * Sets the maximum date visible on the axis and calls
+     * {@link #fireChangeEvent()}. If {@code maximumDate} is on or before the
+     * current minimum date for the axis, the minimum date will be shifted to
+     * preserve the current length of the axis.
      *
      * @param maximumDate  the date ({@code null} not permitted).
      *
@@ -601,7 +591,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * Sets the tick mark position (start, middle or end of the time period)
-     * and sends an {@link AxisChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param position  the position ({@code null} not permitted).
      */

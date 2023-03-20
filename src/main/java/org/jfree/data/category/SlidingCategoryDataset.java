@@ -42,7 +42,6 @@ import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractDataset;
-import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A {@link CategoryDataset} implementation that presents a subset of the
@@ -100,8 +99,7 @@ public class SlidingCategoryDataset extends AbstractDataset
 
     /**
      * Sets the index of the first category that should be used from the
-     * underlying dataset, and sends a {@link DatasetChangeEvent} to all
-     * registered listeners.
+     * underlying dataset, and calls {@link #fireDatasetChanged()}.
      *
      * @param first  the index.
      *
@@ -127,8 +125,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Sets the maximum category count and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Sets the maximum category count and calls {@link #fireDatasetChanged()}.
      *
      * @param max  the maximum.
      *

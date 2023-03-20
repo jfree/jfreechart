@@ -49,7 +49,6 @@ import java.io.Serializable;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PublicCloneable;
@@ -107,8 +106,8 @@ public class StackedAreaRenderer extends AreaRenderer
 
     /**
      * Sets the flag that controls whether the renderer displays each item
-     * value as a percentage (so that the stacked areas add to 100%), and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
+     * value as a percentage (so that the stacked areas add to 100%), and
+     * calls {@link #fireChangeEvent()}.
      *
      * @param asPercentages  the flag.
      */

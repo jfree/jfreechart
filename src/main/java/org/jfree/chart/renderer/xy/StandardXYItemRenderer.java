@@ -60,7 +60,6 @@ import java.io.Serializable;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.Plot;
@@ -283,8 +282,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag.
@@ -308,8 +306,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the base 'shapes filled' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the base 'shapes filled' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -332,8 +329,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not a line is plotted between
-     * each data point and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * each data point and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -358,8 +354,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the gap threshold type and sends a {@link RendererChangeEvent} to
-     * all registered listeners.
+     * Sets the gap threshold type and calls {@link #fireChangeEvent()}.
      *
      * @param thresholdType  the type ({@code null} not permitted).
      *
@@ -383,8 +378,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the gap threshold for discontinuous lines and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the gap threshold for discontinuous lines and calls {@link #fireChangeEvent()}.
      *
      * @param t  the threshold.
      *
@@ -408,8 +402,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not an image is drawn at each
-     * data point and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * data point and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -434,8 +427,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not the renderer shows
-     * discontinuous lines, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * discontinuous lines, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the new flag value.
      */
@@ -482,8 +474,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used as a line in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as a line in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param line  the line ({@code null} not permitted).
      *

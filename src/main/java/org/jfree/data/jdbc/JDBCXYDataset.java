@@ -49,7 +49,6 @@ import java.util.Date;
 
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
-import org.jfree.data.general.Dataset;
 import org.jfree.data.xy.AbstractXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -438,9 +437,6 @@ public class JDBCXYDataset extends AbstractXYDataset
      * Returns the number of series in the dataset.
      *
      * @return The seriesCount value
-     *
-     * @see XYDataset
-     * @see Dataset
      */
     @Override
     public int getSeriesCount() {
@@ -453,9 +449,6 @@ public class JDBCXYDataset extends AbstractXYDataset
      * @param seriesIndex  the series (zero-based index).
      *
      * @return The seriesName value
-     *
-     * @see XYDataset
-     * @see Dataset
      */
     @Override
     public Comparable getSeriesKey(int seriesIndex) {

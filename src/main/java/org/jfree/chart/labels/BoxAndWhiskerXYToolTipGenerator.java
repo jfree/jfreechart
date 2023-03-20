@@ -38,7 +38,6 @@ package org.jfree.chart.labels;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
@@ -101,7 +100,7 @@ public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
 
     /**
      * Creates the array of items that can be passed to the
-     * {@link MessageFormat} class for creating labels.
+     * {@link java.text.MessageFormat} class for creating labels.
      *
      * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).

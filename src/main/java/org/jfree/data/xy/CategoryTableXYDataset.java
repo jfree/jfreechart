@@ -40,7 +40,6 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
 
 /**
@@ -78,8 +77,8 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a data item to this dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Adds a data item to this dataset by calling
+     * {@link #add(java.lang.Number, java.lang.Number, java.lang.String, boolean)}.
      *
      * @param x  the x value.
      * @param y  the y value.
@@ -90,8 +89,8 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a data item to this dataset and, if requested, sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Adds a data item to this dataset and, if requested, calls
+     * {@link #fireDatasetChanged()}.
      *
      * @param x  the x value.
      * @param y  the y value.
@@ -130,8 +129,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Clears all data from the dataset and calls {@link #fireDatasetChanged()}.
      */
     public void clear() {
         this.values.clear();
@@ -338,8 +336,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the interval width to a fixed value, and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Sets the interval width to a fixed value, and calls {@link #fireDatasetChanged()}.
      *
      * @param d  the new interval width (must be &gt; 0).
      */

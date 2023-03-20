@@ -48,7 +48,6 @@ import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.SeriesChangeEvent;
 
@@ -111,8 +110,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.  The series should be configured to NOT
+     * Adds a series to the collection and calls {@link #fireDatasetChanged()}.  The series should be configured to NOT
      * allow duplicate x-values.
      *
      * @param series  the series ({@code null} not permitted).
@@ -328,8 +326,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes all the series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes all the series from the collection and calls {@link #fireDatasetChanged()}.
      */
     public void removeAllSeries() {
 
@@ -347,8 +344,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls {@link #fireDatasetChanged()}.
      *
      * @param series  the series ({@code null} not permitted).
      */
@@ -365,8 +361,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls {@link #fireDatasetChanged()}.
      *
      * @param series  the series (zero based index).
      */
@@ -444,7 +439,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     /**
      * This method receives notification when a series belonging to the dataset
      * changes.  It responds by updating the x-points for the entire dataset
-     * and sending a {@link DatasetChangeEvent} to all registered listeners.
+     * and calls {@link #fireDatasetChanged()}.
      *
      * @param event  information about the change.
      */
@@ -607,8 +602,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the interval width to a fixed value, and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Sets the interval width to a fixed value, and calls {@link #fireDatasetChanged()}.
      *
      * @param d  the new interval width (must be &gt; 0).
      */

@@ -41,7 +41,6 @@ import java.util.List;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
-import org.jfree.data.UnknownKeyException;
 import org.jfree.data.category.IntervalCategoryDataset;
 /**
  * A test implementation of the {@link IntervalCategoryDataset} interface.
@@ -196,7 +195,8 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @return The value (possibly {@code null}).
      *
-     * @throws UnknownKeyException if either key is not defined in the dataset.
+     * @throws org.jfree.data.UnknownKeyException if either key is not defined
+     *                                            in the dataset.
      */
     @Override
     public Number getValue(Comparable rowKey, Comparable columnKey) {
@@ -293,16 +293,16 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
-     *
-     * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @see #removeRow(Comparable)
-     *
-     * @throws UnknownKeyException if {@code columnKey} is not defined
-     *         in the dataset.
-     */
+	 * Removes a column from the dataset and sends a {@link DatasetChangeEvent} to
+	 * all registered listeners.
+	 *
+	 * @param columnKey the column key ({@code null} not permitted).
+	 *
+	 * @see #removeRow(Comparable)
+	 *
+	 * @throws org.jfree.data.UnknownKeyException if {@code columnKey} is not
+	 *                                            defined in the dataset.
+	 */
     public void removeColumn(Comparable columnKey) {
         this.data.removeColumn(columnKey);
         fireDatasetChanged();

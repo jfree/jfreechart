@@ -54,7 +54,6 @@ import java.util.Objects;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -165,8 +164,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the angle of the arrow and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the angle of the arrow and calls {@link #fireAnnotationChanged}.
      *
      * @param angle  the angle (in radians).
      *
@@ -189,8 +187,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the tip radius and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the tip radius and calls {@link #fireAnnotationChanged}.
      *
      * @param radius  the radius (in Java2D units).
      *
@@ -213,8 +210,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the base radius and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the base radius and calls {@link #fireAnnotationChanged}.
      *
      * @param radius  the radius (in Java2D units).
      *
@@ -238,8 +234,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
 
     /**
      * Sets the label offset (from the arrow base, continuing in a straight
-     * line, in Java2D units) and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * line, in Java2D units) and calls {@link #fireAnnotationChanged}.
      *
      * @param offset  the offset (in Java2D units).
      *
@@ -262,8 +257,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the arrow length and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the arrow length and calls {@link #fireAnnotationChanged}.
      *
      * @param length  the length.
      *
@@ -286,8 +280,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the arrow width and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the arrow width and calls {@link #fireAnnotationChanged}.
      *
      * @param width  the width (in Java2D units).
      *
@@ -310,8 +303,8 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the stroke used to draw the arrow line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the stroke used to draw the arrow line and calls 
+     * {@link #fireAnnotationChanged}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
@@ -335,8 +328,8 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     }
 
     /**
-     * Sets the paint used for the arrow and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the paint used for the arrow and calls 
+     * {@link #fireAnnotationChanged}.
      *
      * @param paint  the arrow paint ({@code null} not permitted).
      *

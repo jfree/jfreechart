@@ -42,7 +42,6 @@ package org.jfree.chart.plot;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
@@ -224,8 +223,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the dial shape and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the dial shape and calls {@link #fireChangeEvent()}.
      *
      * @param shape  the shape ({@code null} not permitted).
      *
@@ -250,13 +248,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the angle (in degrees) for the whole range of the dial and sends
-     * a {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param angle  the angle (in degrees, in the range 1-360).
-     *
-     * @see #getMeterAngle()
-     */
+	 * Sets the angle (in degrees) for the whole range of the dial and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param angle the angle (in degrees, in the range 1-360).
+	 *
+	 * @see #getMeterAngle()
+	 */
     public void setMeterAngle(int angle) {
         if (angle < 1 || angle > 360) {
             throw new IllegalArgumentException("Invalid 'angle' (" + angle
@@ -278,8 +276,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the range for the dial and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the range for the dial and calls {@link #fireChangeEvent()}.
      *
      * @param range  the range ({@code null} not permitted and zero-length
      *               ranges not permitted).
@@ -308,8 +305,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the tick size and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the tick size and calls {@link #fireChangeEvent()}.
      *
      * @param size  the tick size (must be &gt; 0).
      *
@@ -336,13 +332,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the paint used to draw the tick labels around the dial and sends
-     * a {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     *
-     * @see #getTickPaint()
-     */
+	 * Sets the paint used to draw the tick labels around the dial and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param paint the paint ({@code null} not permitted).
+	 *
+	 * @see #getTickPaint()
+	 */
     public void setTickPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         this.tickPaint = paint;
@@ -361,8 +357,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the units for the dial and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the units for the dial and calls {@link #fireChangeEvent()}.
      *
      * @param units  the units ({@code null} permitted).
      *
@@ -385,8 +380,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the paint used to display the needle and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the paint used to display the needle and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -411,7 +405,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /**
      * Sets the flag that controls whether or not the tick labels are visible
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      *
@@ -436,8 +430,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the tick label font and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the tick label font and calls {@link #fireChangeEvent()}.
      *
      * @param font  the font ({@code null} not permitted).
      *
@@ -463,8 +456,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the tick label paint and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the tick label paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -517,8 +509,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the format for the tick labels and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the format for the tick labels and calls {@link #fireChangeEvent()}.
      *
      * @param format  the format ({@code null} not permitted).
      *
@@ -542,8 +533,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the font used to display the value label and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the font used to display the value label and calls {@link #fireChangeEvent()}.
      *
      * @param font  the font ({@code null} not permitted).
      *
@@ -567,8 +557,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the paint used to display the value label and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the paint used to display the value label and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -618,8 +607,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /**
      * Sets the flag that controls whether or not a rectangular border is drawn
-     * around the plot area and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * around the plot area and calls {@link #fireChangeEvent()}.
      *
      * @param draw  the flag.
      *
@@ -643,8 +631,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the dial outline paint and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the dial outline paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint.
      *
@@ -668,7 +655,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /**
      * Sets the dataset for the plot, replacing the existing dataset if there
-     * is one, and triggers a {@link PlotChangeEvent}.
+     * is one, and calls {@link #datasetChanged(DatasetChangeEvent)}.
      *
      * @param dataset  the dataset ({@code null} permitted).
      *
@@ -708,8 +695,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Adds an interval and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * Adds an interval and calls {@link #fireChangeEvent()}.
      *
      * @param interval  the interval ({@code null} not permitted).
      *
@@ -723,8 +709,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Clears the intervals for the plot and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Clears the intervals for the plot and calls {@link #fireChangeEvent()}.
      *
      * @see #addInterval(MeterInterval)
      */

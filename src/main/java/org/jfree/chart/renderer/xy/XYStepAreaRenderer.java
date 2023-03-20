@@ -47,7 +47,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -171,8 +170,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not outlines of the areas are
-     * drawn, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * drawn, and calls {@link #fireChangeEvent()}.
      *
      * @param show  the flag.
      *
@@ -196,8 +194,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not shapes are displayed for each
-     * data item, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * data item, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -220,8 +217,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' for ALL series and calls {@link #fireChangeEvent()}.
      *
      * @param filled  the flag.
      *
@@ -245,8 +241,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not areas are drawn for each data
-     * item and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * item and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -272,8 +267,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the value on the range axis which defines the default border of the
-     * area, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.  E.g. setRangeBase(Double.NEGATIVE_INFINITY) lets areas always
+     * area, and calls {@link #fireChangeEvent()}.
+     * E.g. setRangeBase(Double.NEGATIVE_INFINITY) lets areas always
      * reach the lower border of the plotArea.
      *
      * @param val  the value on the range axis which defines the default border
@@ -302,8 +297,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
      
     /**
-     * Sets the step point and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the step point and calls {@link #fireChangeEvent()}.
      *
      * @param stepPoint  the step point (in the range 0.0 to 1.0)
      *

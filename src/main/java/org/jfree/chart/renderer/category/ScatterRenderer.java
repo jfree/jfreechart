@@ -53,7 +53,6 @@ import java.util.Objects;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
@@ -143,7 +142,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     /**
      * Sets the flag that controls whether or not the x-position for each
      * data item is offset within its category according to the series, and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      *
@@ -171,8 +170,8 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the item margin, which is the gap between items within a category
-     * (expressed as a percentage of the overall category width), and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
+     * (expressed as a percentage of the overall category width), and 
+     * calls {@link #fireChangeEvent()}.
      *
      * @param margin  the margin (0.0 &lt;= margin &lt; 1.0).
      *
@@ -201,8 +200,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether outlines are drawn for
-     * shapes, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      * <p>In some cases, shapes look better if they do NOT have an outline, but
      * this flag allows you to set your own preference.</p>
      *
@@ -229,8 +227,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether the outline paint is used for shape
-     * outlines, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * outlines, and calls {@link #fireChangeEvent()}.
      *
      * @param use the flag.
      *
@@ -276,8 +273,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series the series index (zero-based).
      * @param filled the flag.
@@ -288,8 +284,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series the series index (zero-based).
      * @param filled the flag.
@@ -309,8 +304,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the base 'shapes filled' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the base 'shapes filled' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag the flag.
      */
@@ -332,8 +326,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether the fill paint is used to fill
-     * shapes, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      *
      * @param flag the flag.
      */

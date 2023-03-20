@@ -39,8 +39,6 @@ package org.jfree.data.gantt;
 import java.util.Date;
 import java.util.Objects;
 
-import org.jfree.chart.axis.SymbolAxis;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
@@ -51,8 +49,8 @@ import org.jfree.data.xy.IntervalXYDataset;
 /**
  * A dataset implementation that wraps a {@link TaskSeriesCollection} and
  * presents it as an {@link IntervalXYDataset}, allowing a set of tasks to
- * be displayed using an {@link XYBarRenderer} (and usually a
- * {@link SymbolAxis}).  This is a very specialised dataset implementation
+ * be displayed using an {@link org.jfree.chart.renderer.xy.XYBarRenderer} (and usually a
+ * {@link org.jfree.chart.axis.SymbolAxis}).  This is a very specialised dataset implementation
  * ---before using it, you should take some time to understand the use-cases
  * that it is designed for.
  */

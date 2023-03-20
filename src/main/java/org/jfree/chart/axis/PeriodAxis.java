@@ -60,7 +60,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
@@ -219,8 +218,8 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the first time period in the axis range and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the first time period in the axis range and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param first  the time period ({@code null} not permitted).
      */
@@ -241,8 +240,8 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the last time period in the axis range and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the last time period in the axis range and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param last  the time period ({@code null} not permitted).
      */
@@ -300,7 +299,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Sets the class used to create the first and last time periods for the
      * axis range when the auto-range flag is set to {@code true} and
-     * sends an {@link AxisChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param c  the class ({@code null} not permitted).
      */
@@ -321,7 +320,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the class that controls the spacing of the major tick marks, and
-     * sends an {@link AxisChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param c  the class (a subclass of {@link RegularTimePeriod} is
      *           expected).
@@ -345,8 +344,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the flag that controls whether or not minor tick marks
-     * are displayed for the axis, and sends a {@link AxisChangeEvent}
-     * to all registered listeners.
+     * are displayed for the axis, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      */
@@ -367,7 +365,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the class that controls the spacing of the minor tick marks, and
-     * sends an {@link AxisChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param c  the class (a subclass of {@link RegularTimePeriod} is
      *           expected).
@@ -390,8 +388,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the stroke used to display minor tick marks, if they are
-     * visible, and sends a {@link AxisChangeEvent} to all registered
-     * listeners.
+     * visible, and calls {@link #fireChangeEvent()}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      */
@@ -413,8 +410,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the paint used to display minor tick marks, if they are
-     * visible, and sends a {@link AxisChangeEvent} to all registered
-     * listeners.
+     * visible, and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      */
@@ -435,8 +431,8 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the inside length of the minor tick marks and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the inside length of the minor tick marks and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param length  the length.
      */
@@ -457,8 +453,8 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the outside length of the minor tick marks and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the outside length of the minor tick marks and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param length  the length.
      */
@@ -478,8 +474,7 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the array of label info records and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the array of label info records and calls {@link #fireChangeEvent()}.
      *
      * @param info  the info.
      */
@@ -489,9 +484,8 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the range for the axis, if requested, sends an
-     * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
-     * the auto-range flag is set to {@code false} (optional).
+     * Sets {@link #first} and {@link #last}, then calls
+     * {@link ValueAxis#setRange(org.jfree.data.Range, boolean, boolean)}.
      *
      * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto

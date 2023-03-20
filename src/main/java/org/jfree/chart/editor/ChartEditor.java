@@ -36,12 +36,10 @@
 
 package org.jfree.chart.editor;
 
-import javax.swing.JComponent;
-
 import org.jfree.chart.JFreeChart;
 
 /**
- * A chart editor is typically a {@link JComponent} containing a user interface
+ * A chart editor is typically a {@link javax.swing.JComponent} containing a user interface
  * for modifying the properties of a chart.
  *
  * @see ChartEditorManager#getChartEditor(JFreeChart)

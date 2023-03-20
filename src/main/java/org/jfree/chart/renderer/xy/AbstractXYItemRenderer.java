@@ -65,14 +65,12 @@ import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.AnnotationChangeListener;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.labels.XYItemLabelGenerator;
@@ -275,8 +273,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the item label generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the item label generator for a series and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
@@ -299,8 +297,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default item label generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default item label generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      */
@@ -346,8 +343,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the tool tip generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the tool tip generator for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
@@ -372,8 +368,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default tool tip generator and sends a 
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default tool tip generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -398,8 +393,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the URL generator for HTML image maps and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the URL generator for HTML image maps and calls {@link #fireChangeEvent()}.
      *
      * @param urlGenerator  the URL generator ({@code null} permitted).
      */
@@ -410,9 +404,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Adds an annotation and sends a {@link RendererChangeEvent} to all
-     * registered listeners.  The annotation is added to the foreground
-     * layer.
+     * Adds an annotation to the foreground layer and calls {@link #fireChangeEvent()}.
      *
      * @param annotation  the annotation ({@code null} not permitted).
      */
@@ -423,8 +415,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Adds an annotation to the specified layer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Adds an annotation to the specified layer and calls {@link #fireChangeEvent()}.
      *
      * @param annotation  the annotation ({@code null} not permitted).
      * @param layer  the layer ({@code null} not permitted).
@@ -448,8 +439,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         }
     }
     /**
-     * Removes the specified annotation and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Removes the specified annotation and calls {@link #fireChangeEvent()}.
      *
      * @param annotation  the annotation to remove ({@code null} not
      *                    permitted).
@@ -467,8 +457,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Removes all annotations and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Removes all annotations and calls {@link #fireChangeEvent()}.
      */
     @Override
     public void removeAnnotations() {
@@ -489,7 +478,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
 
     /**
-     * Receives notification of a change to an {@link Annotation} added to
+     * Receives notification of a change to an {@link org.jfree.chart.annotations.Annotation} added to
      * this renderer.
      *
      * @param event  information about the event (not used here).
@@ -525,8 +514,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item label generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item label generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} not permitted).
      *
@@ -551,8 +539,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item tool tip generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item tool tip generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -576,8 +563,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item URL generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item URL generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *

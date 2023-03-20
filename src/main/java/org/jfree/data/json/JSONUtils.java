@@ -44,8 +44,6 @@ import java.util.List;
 import org.jfree.chart.util.Args;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.KeyedValues2D;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.PieDataset;
 import org.jfree.data.json.impl.JSONValue;
 
 /**
@@ -60,7 +58,7 @@ public class JSONUtils {
      * and second the item value as a number.  For example:
      * {@code [["Key A", 1.0], ["Key B", 2.0]]}
      * <br><br>
-     * Note that this method can be used with instances of {@link PieDataset}.
+     * Note that this method can be used with instances of {@link org.jfree.data.general.PieDataset}.
      * 
      * @param data  the data ({@code null} not permitted).
      * 
@@ -80,7 +78,7 @@ public class JSONUtils {
     /**
      * Writes the data in JSON format to the supplied writer.
      * <br><br>
-     * Note that this method can be used with instances of {@link PieDataset}.
+     * Note that this method can be used with instances of {@link org.jfree.data.general.PieDataset}.
      * 
      * @param data  the data ({@code null} not permitted).
      * @param writer  the writer ({@code null} not permitted).
@@ -114,7 +112,7 @@ public class JSONUtils {
      * Returns a string containing the data in JSON format.  The format is...
      * <br><br>
      * Note that this method can be used with instances of 
-     * {@link CategoryDataset}.
+     * {@link org.jfree.data.category.CategoryDataset}.
      * 
      * @param data  the data ({@code null} not permitted).
      * 
@@ -135,7 +133,7 @@ public class JSONUtils {
      * Writes the data in JSON format to the supplied writer.
      * <br><br>
      * Note that this method can be used with instances of 
-     * {@link CategoryDataset}.
+     * {@link org.jfree.data.category.CategoryDataset}.
      * 
      * @param data  the data ({@code null} not permitted).
      * @param writer  the writer ({@code null} not permitted).

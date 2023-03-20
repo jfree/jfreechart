@@ -38,11 +38,10 @@ package org.jfree.data;
 
 import java.util.Arrays;
 import org.jfree.chart.util.Args;
-import org.jfree.data.general.DatasetUtils;
 
 /**
  * Utility methods for use with some of the data classes (but not the datasets,
- * see {@link DatasetUtils}).
+ * see {@link org.jfree.data.general.DatasetUtils}).
  */
 public abstract class DataUtils {
 

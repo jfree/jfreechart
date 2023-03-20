@@ -54,7 +54,6 @@ import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 
 /**
@@ -582,8 +581,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
+     * Adds a data item to the series by calling
+     * {@link #add(org.jfree.data.time.TimeSeriesDataItem, boolean)}.
      *
      * @param item  the (timeperiod, value) pair ({@code null} not permitted).
      */
@@ -592,8 +591,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
+     * Adds a data item to the series and calls {@link #fireSeriesChanged()}.
      *
      * @param item  the (timeperiod, value) pair ({@code null} not permitted).
      * @param notify  notify listeners?
@@ -666,8 +664,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
-     * to all registered listeners.
+     * Adds a new data item to the series and calls
+     * {@link #add(org.jfree.data.time.RegularTimePeriod, double, boolean)}.
      *
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value.
@@ -678,8 +676,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
-     * to all registered listeners.
+     * Adds a new data item to the series and calls
+     * {@link #add(org.jfree.data.time.TimeSeriesDataItem, boolean)}.
      *
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value.
@@ -705,8 +703,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
-     * to all registered listeners.
+     * Adds a new data item to the series by calling
+     * {@link #add(org.jfree.data.time.TimeSeriesDataItem, boolean)}.
      *
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
@@ -797,8 +795,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds or updates an item in the times series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds or updates an item in the times series by calling
+     * {@link #addOrUpdate(org.jfree.data.time.RegularTimePeriod, double)}.
      *
      * @param period  the time period to add/update ({@code null} not
      *                permitted).
@@ -813,8 +811,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds or updates an item in the times series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds or updates an item in the times series by calling
+     * {@link #addOrUpdate(org.jfree.data.time.TimeSeriesDataItem)}.
      *
      * @param period  the time period to add/update ({@code null} not
      *                permitted).
@@ -829,8 +827,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds or updates an item in the times series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds or updates an item in the times series and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param item  the data item ({@code null} not permitted).
      *
@@ -899,8 +897,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * the oldest record in the series does not exceed maximumItemAge time
      * periods.  Oldest items will be removed if required.
      *
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
-     *                sent to registered listeners IF any items are removed.
+     * @param notify controls whether or not {@link #fireSeriesChanged()} is
+     *               called IF any items are removed.
      */
     public void removeAgedItems(boolean notify) {
         // check if there are any values earlier than specified by the history
@@ -927,10 +925,10 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * time to the oldest record in the series does not exceed history count.
      * oldest items will be removed if required.
      *
-     * @param latest  the time to be compared against when aging data
-     *     (specified in milliseconds).
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
-     *                sent to registered listeners IF any items are removed.
+     * @param latest the time to be compared against when aging data (specified
+     *               in milliseconds).
+     * @param notify controls whether or not {@link #fireSeriesChanged()} is
+     *               called IF any items are removed.
      */
     public void removeAgedItems(long latest, boolean notify) {
         if (this.data.isEmpty()) {
@@ -974,8 +972,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Removes all data items from the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Removes all data items from the series and calls
+     * {@link #fireSeriesChanged()}.
      */
     public void clear() {
         if (this.data.size() > 0) {
@@ -988,9 +986,9 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Deletes the data item for the given time period and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.  If there is no
-     * item with the specified time period, this method does nothing.
+     * Deletes the data item for the given time period and calls
+     * {@link #fireSeriesChanged()}. If there is no item with the specified time
+     * period, this method does nothing.
      *
      * @param period  the period of the item to delete ({@code null} not
      *                permitted).

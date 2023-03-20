@@ -53,7 +53,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
@@ -195,28 +194,28 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'lines visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param series  the series index (zero-based).
-     * @param flag  the flag ({@code null} permitted).
-     *
-     * @see #getSeriesLinesVisible(int)
-     */
+	 * Sets the 'lines visible' flag for a series and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param series the series index (zero-based).
+	 * @param flag   the flag ({@code null} permitted).
+	 *
+	 * @see #getSeriesLinesVisible(int)
+	 */
     public void setSeriesLinesVisible(int series, Boolean flag) {
         this.seriesLinesVisible.setBoolean(series, flag);
         fireChangeEvent();
     }
 
     /**
-     * Sets the 'lines visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param series  the series index (zero-based).
-     * @param visible  the flag.
-     *
-     * @see #getSeriesLinesVisible(int)
-     */
+	 * Sets the 'lines visible' flag for a series and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param series  the series index (zero-based).
+	 * @param visible the flag.
+	 *
+	 * @see #getSeriesLinesVisible(int)
+	 */
     public void setSeriesLinesVisible(int series, boolean visible) {
         setSeriesLinesVisible(series, Boolean.valueOf(visible));
     }
@@ -233,8 +232,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the default 'lines visible' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'lines visible' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -279,27 +277,27 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'shapes visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param series  the series index (zero-based).
-     * @param visible  the flag.
-     *
-     * @see #getSeriesShapesVisible(int)
-     */
+	 * Sets the 'shapes visible' flag for a series and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param series  the series index (zero-based).
+	 * @param visible the flag.
+	 *
+	 * @see #getSeriesShapesVisible(int)
+	 */
     public void setSeriesShapesVisible(int series, boolean visible) {
         setSeriesShapesVisible(series, Boolean.valueOf(visible));
     }
 
     /**
-     * Sets the 'shapes visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param series  the series index (zero-based).
-     * @param flag  the flag.
-     *
-     * @see #getSeriesShapesVisible(int)
-     */
+	 * Sets the 'shapes visible' flag for a series and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param series the series index (zero-based).
+	 * @param flag   the flag.
+	 *
+	 * @see #getSeriesShapesVisible(int)
+	 */
     public void setSeriesShapesVisible(int series, Boolean flag) {
         this.seriesShapesVisible.setBoolean(series, flag);
         fireChangeEvent();
@@ -317,8 +315,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the default 'shapes visible' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'shapes visible' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -343,8 +340,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether outlines are drawn for
-     * shapes, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      * <P>
      * In some cases, shapes look better if they do NOT have an outline, but
      * this flag allows you to set your own preference.
@@ -372,8 +368,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether the outline paint is used for shape
-     * outlines, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * outlines, and calls {@link #fireChangeEvent()}.
      *
      * @param use  the flag.
      *
@@ -418,8 +413,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param filled  the flag.
@@ -432,8 +426,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param filled  the flag.
@@ -457,8 +450,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the default 'shapes filled' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'shapes filled' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -484,8 +476,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether the fill paint is used to fill
-     * shapes, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -511,7 +502,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     /**
      * Sets the flag that controls whether or not the x-position for each
      * data item is offset within its category according to the series, and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      *
@@ -538,15 +529,15 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the item margin, which is the gap between items within a category
-     * (expressed as a percentage of the overall category width), and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param margin  the margin (0.0 &lt;= margin &lt; 1.0).
-     *
-     * @see #getItemMargin()
-     * @see #getUseSeriesOffset()
-     */
+	 * Sets the item margin, which is the gap between items within a category
+	 * (expressed as a percentage of the overall category width), and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param margin the margin (0.0 &lt;= margin &lt; 1.0).
+	 *
+	 * @see #getItemMargin()
+	 * @see #getUseSeriesOffset()
+	 */
     public void setItemMargin(double margin) {
         if (margin < 0.0 || margin >= 1.0) {
             throw new IllegalArgumentException("Requires 0.0 <= margin < 1.0.");

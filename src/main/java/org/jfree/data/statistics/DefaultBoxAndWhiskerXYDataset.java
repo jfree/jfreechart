@@ -44,7 +44,6 @@ import java.util.Objects;
 
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
-import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractXYDataset;
 
 /**
@@ -194,8 +193,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Adds an item to the dataset and sends a {@link DatasetChangeEvent} to
-     * all registered listeners.
+     * Adds an item to the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param date  the date ({@code null} not permitted).
      * @param item  the item ({@code null} not permitted).

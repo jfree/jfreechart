@@ -58,7 +58,6 @@ import java.util.Set;
 
 import org.jfree.chart.entity.CategoryLabelEntity;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -174,8 +173,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the lower margin for the axis and sends an {@link AxisChangeEvent}
-     * to all registered listeners.
+     * Sets the lower margin for the axis and calls {@link #fireChangeEvent()}.
      *
      * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
@@ -200,8 +198,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the upper margin for the axis and sends an {@link AxisChangeEvent}
-     * to all registered listeners.
+     * Sets the upper margin for the axis and calls {@link #fireChangeEvent()}.
      *
      * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
@@ -225,9 +222,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the category margin and sends an {@link AxisChangeEvent} to all
-     * registered listeners.  The overall category margin is distributed over
-     * N-1 gaps, where N is the number of categories on the axis.
+     * Sets the category margin and calls {@link #fireChangeEvent()}. The
+     * overall category margin is distributed over N-1 gaps, where N is the
+     * number of categories on the axis.
      *
      * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
@@ -251,8 +248,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the maximum number of lines to use for each category label and
-     * sends an {@link AxisChangeEvent} to all registered listeners.
+     * Sets the maximum number of lines to use for each category label and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param lines  the maximum number of lines.
      *
@@ -275,8 +272,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the maximum category label width ratio and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the maximum category label width ratio and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param ratio  the ratio.
      *
@@ -326,8 +323,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the category label position specification for the axis and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the category label position specification for the axis and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param positions  the positions ({@code null} not permitted).
      *
@@ -359,8 +356,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the font for the tick label for the specified category and sends
-     * an {@link AxisChangeEvent} to all registered listeners.
+     * Sets the font for the tick label for the specified category and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      * @param font  the font ({@code null} permitted).
@@ -398,8 +395,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the paint for the tick label for the specified category and sends
-     * an {@link AxisChangeEvent} to all registered listeners.
+     * Sets the paint for the tick label for the specified category and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      * @param paint  the paint ({@code null} permitted).
@@ -418,8 +415,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a tooltip to the specified category and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Adds a tooltip to the specified category and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      * @param tooltip  the tooltip text ({@code null} permitted).
@@ -450,8 +447,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /**
      * Removes the tooltip for the specified category and, if there was a value
-     * associated with that category, sends an {@link AxisChangeEvent} to all 
-     * registered listeners.
+     * associated with that category, calls {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      *
@@ -466,8 +462,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Clears the category label tooltips and sends an {@link AxisChangeEvent}
-     * to all registered listeners.
+     * Clears the category label tooltips and calls {@link #fireChangeEvent()}.
      *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #removeCategoryLabelToolTip(Comparable)
@@ -478,8 +473,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a URL (to be used in image maps) to the specified category and 
-     * sends an {@link AxisChangeEvent} to all registered listeners.
+     * Adds a URL (to be used in image maps) to the specified category and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      * @param url  the URL text ({@code null} permitted).
@@ -509,8 +504,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /**
      * Removes the URL for the specified category and, if there was a URL 
-     * associated with that category, sends an {@link AxisChangeEvent} to all 
-     * registered listeners.
+     * associated with that category, calls {@link #fireChangeEvent()}.
      *
      * @param category  the category ({@code null} not permitted).
      *
@@ -525,8 +519,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Clears the category label URLs and sends an {@link AxisChangeEvent}
-     * to all registered listeners.
+     * Clears the category label URLs and calls {@link #fireChangeEvent()}.
      *
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #removeCategoryLabelURL(Comparable)

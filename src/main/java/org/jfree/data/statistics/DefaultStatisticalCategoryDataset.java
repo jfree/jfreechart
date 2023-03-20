@@ -43,7 +43,6 @@ import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
-import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A convenience class that provides a default implementation of the
@@ -412,8 +411,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes an item from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
@@ -446,8 +444,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
 
 
     /**
-     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a row from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowIndex  the row index.
      *
@@ -460,8 +457,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a row from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowKey  the row key ({@code null} not permitted).
      *
@@ -474,8 +470,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a column from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param columnIndex  the column index.
      *
@@ -488,8 +483,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a column from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param columnKey  the column key ({@code null} not permitted).
      *
@@ -502,8 +496,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Clears all data from the dataset and calls {@link #fireDatasetChanged()}.
      */
     public void clear() {
         this.data.clear();

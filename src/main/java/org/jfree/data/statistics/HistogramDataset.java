@@ -48,7 +48,6 @@ import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
-import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 
@@ -89,8 +88,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the histogram type and sends a {@link DatasetChangeEvent} to all
-     * registered listeners.
+     * Sets the histogram type and calls {@link #fireDatasetChanged()}.
      *
      * @param type  the type ({@code null} not permitted).
      */
@@ -102,7 +100,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Adds a series to the dataset, using the specified number of bins,
-     * and sends a {@link DatasetChangeEvent} to all registered listeners.
+     * and calls {@link #fireDatasetChanged()}.
      *
      * @param key  the series key ({@code null} not permitted).
      * @param values the values ({@code null} not permitted).

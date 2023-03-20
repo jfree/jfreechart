@@ -39,12 +39,11 @@ package org.jfree.chart.block;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A block frame is a type of border that can be drawn around the outside of
  * any {@link AbstractBlock}.  Classes that implement this interface should
- * implement {@link PublicCloneable} OR be immutable.
+ * implement {@link org.jfree.chart.util.PublicCloneable} OR be immutable.
  */
 public interface BlockFrame {
 

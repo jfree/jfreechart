@@ -49,7 +49,6 @@ import java.io.Serializable;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -114,8 +113,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
     }
 
     /**
-     * Sets the paint used to show the percentage complete and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint used to show the percentage complete and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -139,8 +137,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
     }
 
     /**
-     * Sets the paint used to show the percentage incomplete and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint used to show the percentage incomplete and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -166,8 +163,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
 
     /**
      * Sets the position of the start of the progress indicator, as a
-     * percentage of the bar width, and sends a {@link RendererChangeEvent} to
-     * all registered listeners.
+     * percentage of the bar width, and calls {@link #fireChangeEvent()}.
      *
      * @param percent  the percent.
      *
@@ -192,8 +188,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
 
     /**
      * Sets the position of the end of the progress indicator, as a percentage
-     * of the bar width, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * of the bar width, and calls {@link #fireChangeEvent()}.
      *
      * @param percent  the percent.
      *

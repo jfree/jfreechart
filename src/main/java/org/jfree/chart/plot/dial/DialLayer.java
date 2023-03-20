@@ -38,7 +38,6 @@ package org.jfree.chart.plot.dial;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.util.EventListener;
 
 /**
@@ -46,7 +45,7 @@ import java.util.EventListener;
  * subset of the reference frame, and defines the area that is actually
  * visible.
  * <br><br>
- * Classes that implement this interface should be {@link Serializable},
+ * Classes that implement this interface should be {@link java.io.Serializable},
  * otherwise chart serialization may fail.
  */
 public interface DialLayer {

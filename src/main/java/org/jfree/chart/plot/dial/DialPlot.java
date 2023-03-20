@@ -47,8 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
@@ -167,8 +165,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Sets the background layer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the background layer and calls {@link #fireChangeEvent()}.
      *
      * @param background  the background layer ({@code null} permitted).
      *
@@ -197,8 +194,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Sets the cap and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * Sets the cap and calls {@link #fireChangeEvent()}.
      *
      * @param cap  the cap ({@code null} permitted).
      *
@@ -227,8 +223,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Sets the dial's frame and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the dial's frame and calls {@link #fireChangeEvent()}.
      *
      * @param frame  the frame ({@code null} not permitted).
      *
@@ -292,7 +287,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
 
     /**
      * Sets the viewing rectangle, relative to the dial's framing rectangle,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param x  the x-coordinate (in the range 0.0 to 1.0).
      * @param y  the y-coordinate (in the range 0.0 to 1.0).
@@ -313,8 +308,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Adds a layer to the plot and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Adds a layer to the plot and calls {@link #fireChangeEvent()}.
      *
      * @param layer  the layer ({@code null} not permitted).
      */
@@ -338,8 +332,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Removes the layer at the specified index and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Removes the layer at the specified index and calls {@link #fireChangeEvent()}.
      *
      * @param index  the index.
      */
@@ -353,8 +346,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Removes the specified layer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Removes the specified layer and calls {@link #fireChangeEvent()}.
      *
      * @param layer  the layer ({@code null} not permitted).
      */
@@ -364,8 +356,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Adds a pointer to the plot and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Adds a pointer to the plot and calls {@link #fireChangeEvent()}.
      *
      * @param pointer  the pointer ({@code null} not permitted).
      */
@@ -389,8 +380,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Removes the pointer at the specified index and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Removes the pointer at the specified index and calls {@link #fireChangeEvent()}.
      *
      * @param index  the index.
      */
@@ -404,8 +394,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Removes the specified pointer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Removes the specified pointer and calls {@link #fireChangeEvent()}.
      *
      * @param pointer  the pointer ({@code null} not permitted).
      */
@@ -460,8 +449,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
 
     /**
      * Sets the dataset for the plot, replacing the existing dataset, if there
-     * is one, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * is one, and calls {@link #fireChangeEvent()}.
      *
      * @param dataset  the dataset ({@code null} permitted).
      */
@@ -502,8 +490,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Draws the plot.  This method is usually called by the {@link JFreeChart}
-     * instance that manages the plot.
+     * Draws the plot. This method is usually called by the
+     * {@link org.jfree.chart.JFreeChart} instance that manages the plot.
      *
      * @param g2  the graphics target.
      * @param area  the area in which the plot should be drawn.
@@ -625,8 +613,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Adds a dial scale to the plot and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Adds a dial scale to the plot and calls {@link #fireChangeEvent()}.
      *
      * @param index  the scale index.
      * @param scale  the scale ({@code null} not permitted).
@@ -705,8 +692,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Receives notification when a layer has changed, and responds by
-     * forwarding a {@link PlotChangeEvent} to all registered listeners.
+     * Called when a layer has changed, and calls {@link #fireChangeEvent()}.
      *
      * @param event  the event.
      */

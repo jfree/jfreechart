@@ -54,7 +54,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.HighLowItemLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
@@ -207,8 +206,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the candle width and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the candle width and calls {@link #fireChangeEvent()}.
      * <P>
      * If you set the width to a negative value, the renderer will calculate
      * the candle width automatically based on the space available on the chart.
@@ -238,8 +236,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the maximum candle width (in milliseconds) and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the maximum candle width (in milliseconds) and calls {@link #fireChangeEvent()}.
      *
      * @param millis  The maximum width.
      *
@@ -267,7 +264,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the method of automatically calculating the candle width and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      * <p>
      * {@code WIDTHMETHOD_AVERAGE}: Divides the entire display (ignoring
      * scale factor) by the number of items, and uses this as the available
@@ -344,8 +341,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the amount of space to leave on the left and right of each candle
-     * when automatically calculating widths and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * when automatically calculating widths and calls {@link #fireChangeEvent()}.
      *
      * @param autoWidthGap The gap.
      *
@@ -376,8 +372,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the paint used to fill candles when the price moves up from open
-     * to close and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * to close and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -402,8 +397,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the paint used to fill candles when the price moves down from open
-     * to close and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * to close and calls {@link #fireChangeEvent()}.
      *
      * @param paint  The paint ({@code null} permitted).
      */
@@ -426,8 +420,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not volume bars are drawn in the
-     * background and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * background and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -453,8 +446,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint used to fill the volume bars, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint used to fill the volume bars, and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -481,9 +473,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer's outline
-     * paint is used to draw the candlestick outline, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether or not the renderer's outline paint
+     * is used to draw the candlestick outline, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param use  the new flag value.
      *

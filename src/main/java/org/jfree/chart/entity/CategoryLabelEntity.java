@@ -40,10 +40,9 @@ import java.awt.Shape;
 import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.axis.CategoryAxis;
 
 /**
- * An entity to represent the labels on a {@link CategoryAxis}.
+ * An entity to represent the labels on a {@link org.jfree.chart.axis.CategoryAxis}.
  */
 public class CategoryLabelEntity extends TickLabelEntity {
 

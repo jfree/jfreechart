@@ -43,7 +43,6 @@ import java.io.Serializable;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -82,11 +81,11 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
     }
 
     /**
-     * Updates the map used to assign each series to a group, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param map  the map ({@code null} not permitted).
-     */
+	 * Updates the map used to assign each series to a group, and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param map the map ({@code null} not permitted).
+	 */
     public void setSeriesToGroupMap(KeyToGroupMap map) {
         Args.nullNotPermitted(map, "map");
         this.seriesToGroupMap = map;

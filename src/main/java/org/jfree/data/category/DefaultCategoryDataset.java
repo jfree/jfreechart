@@ -41,9 +41,7 @@ import java.util.List;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
-import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractDataset;
-import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A default implementation of the {@link CategoryDataset} interface.
@@ -196,7 +194,7 @@ public class DefaultCategoryDataset extends AbstractDataset
      *
      * @return The value (possibly {@code null}).
      *
-     * @throws UnknownKeyException if either key is not defined in the dataset.
+     * @throws org.jfree.data.UnknownKeyException if either key is not defined in the dataset.
      *
      * @see #addValue(Number, Comparable, Comparable)
      */
@@ -236,8 +234,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Adds or updates a value in the table and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Adds or updates a value in the table and calls {@link #fireDatasetChanged()}.
      *
      * @param value  the value ({@code null} permitted).
      * @param rowKey  the row key ({@code null} not permitted).
@@ -252,8 +249,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Adds or updates a value in the table and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Adds or updates a value in the table and calls {@link #fireDatasetChanged()}.
      *
      * @param value  the value.
      * @param rowKey  the row key ({@code null} not permitted).
@@ -274,7 +270,7 @@ public class DefaultCategoryDataset extends AbstractDataset
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @throws UnknownKeyException if either key is not defined in the dataset.
+     * @throws org.jfree.data.UnknownKeyException if either key is not defined in the dataset.
      */
     public void incrementValue(double value,
                                Comparable rowKey,
@@ -288,8 +284,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a value from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a value from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowKey  the row key.
      * @param columnKey  the column key.
@@ -302,8 +297,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a row from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowIndex  the row index.
      *
@@ -315,8 +309,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a row from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param rowKey  the row key.
      *
@@ -328,8 +321,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a column from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param columnIndex  the column index.
      *
@@ -341,14 +333,13 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Removes a column from the dataset and calls {@link #fireDatasetChanged()}.
      *
      * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #removeRow(Comparable)
      *
-     * @throws UnknownKeyException if {@code columnKey} is not defined
+     * @throws org.jfree.data.UnknownKeyException if {@code columnKey} is not defined
      *         in the dataset.
      */
     public void removeColumn(Comparable columnKey) {
@@ -357,8 +348,7 @@ public class DefaultCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Clears all data from the dataset and calls {@link #fireDatasetChanged()}.
      */
     public void clear() {
         this.data.clear();

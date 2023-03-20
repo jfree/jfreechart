@@ -65,7 +65,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -174,13 +173,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the paint used to color the median and average markers and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     *
-     * @see #getArtifactPaint()
-     */
+	 * Sets the paint used to color the median and average markers and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param paint the paint ({@code null} not permitted).
+	 *
+	 * @see #getArtifactPaint()
+	 */
     public void setArtifactPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
@@ -199,13 +198,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the box is filled and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param flag  the flag.
-     *
-     * @see #getFillBox()
-     */
+	 * Sets the flag that controls whether or not the box is filled and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param flag the flag.
+	 *
+	 * @see #getFillBox()
+	 */
     public void setFillBox(boolean flag) {
         this.fillBox = flag;
         fireChangeEvent();
@@ -224,8 +223,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the item margin and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the item margin and calls {@link #fireChangeEvent()}.
      *
      * @param margin  the margin (a percentage).
      *
@@ -250,8 +248,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the maximum bar width, which is specified as a percentage of the
-     * available space for all bars, and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * available space for all bars, and calls {@link #fireChangeEvent()}.
      *
      * @param percent  the maximum bar width (a percentage, where 0.10 is ten
      *     percent).
@@ -277,8 +274,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether or not the mean indicator is drawn
-     * for each item, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * for each item, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new flag value.
      *
@@ -306,8 +302,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether or not the median indicator is drawn
-     * for each item, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * for each item, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new flag value.
      *
@@ -337,8 +332,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether or not the minimum outlier is drawn
-     * for each item, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * for each item, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new flag value.
      *
@@ -370,8 +364,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether or not the maximum outlier is drawn
-     * for each item, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * for each item, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new flag value.
      *
@@ -399,8 +392,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that, if {@code true}, causes the whiskers to
-     * be drawn using the series outline paint, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * be drawn using the series outline paint, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the new flag value.
      */
@@ -424,14 +416,14 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the width of the whiskers as a fraction of the bar width and sends
-     * a {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param width  a value between 0 and 1 indicating how wide the
-     *     whisker is supposed to be compared to the bar.
-     * @see #getWhiskerWidth()
-     * @see CategoryItemRendererState#getBarWidth()
-     */
+	 * Sets the width of the whiskers as a fraction of the bar width and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param width a value between 0 and 1 indicating how wide the whisker is
+	 *              supposed to be compared to the bar.
+	 * @see #getWhiskerWidth()
+	 * @see CategoryItemRendererState#getBarWidth()
+	 */
     public void setWhiskerWidth(double width) {
         if (width < 0 || width > 1) {
             throw new IllegalArgumentException(

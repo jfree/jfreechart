@@ -63,7 +63,6 @@ import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ArrayUtils;
@@ -210,8 +209,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the data array used by the plot and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the data array used by the plot and calls {@link #fireChangeEvent()}.
      *
      * @param data  the data array ({@code null} permitted).
      *
@@ -244,8 +242,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the domain axis and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the domain axis and calls {@link #fireChangeEvent()}.
      *
      * @param axis  the axis ({@code null} not permitted).
      *
@@ -269,8 +266,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the range axis and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the range axis and calls {@link #fireChangeEvent()}.
      *
      * @param axis  the axis ({@code null} not permitted).
      *
@@ -295,8 +291,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the color for the data points and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the color for the data points and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -323,8 +318,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the flag that controls whether or not the domain grid-lines are
-     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
-     * sent to all registered listeners.
+     * visible.  If the flag value is changed, calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new value of the flag.
      *
@@ -351,7 +345,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the stroke for the grid lines plotted against the domain axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
@@ -377,7 +371,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the paint for the grid lines plotted against the domain axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -403,8 +397,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the flag that controls whether or not the range axis grid lines are
-     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
-     * sent to all registered listeners.
+     * visible.  If the flag value is changed, calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new value of the flag.
      *
@@ -431,7 +424,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the stroke for the grid lines plotted against the range axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent() }.
      *
      * @param stroke  the stroke ({@code null} permitted).
      *
@@ -457,7 +450,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the paint for the grid lines plotted against the range axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent() }.
      *
      * @param paint  the paint ({@code null} not permitted).
      *

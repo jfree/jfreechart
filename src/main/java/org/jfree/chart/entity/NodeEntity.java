@@ -37,12 +37,11 @@
 package org.jfree.chart.entity;
 
 import java.awt.Shape;
-import org.jfree.chart.plot.flow.FlowPlot;
 import org.jfree.chart.util.Args;
 import org.jfree.data.flow.NodeKey;
 
 /**
- * A chart entity representing a node in a {@link FlowPlot}.
+ * A chart entity representing a node in a {@link org.jfree.chart.plot.flow.FlowPlot}.
  * 
  * @since 1.5.3
  */

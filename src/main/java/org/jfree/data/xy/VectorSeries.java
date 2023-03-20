@@ -38,7 +38,6 @@ package org.jfree.data.xy;
 
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
-import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x,y, deltaX, deltaY) data items.
@@ -84,9 +83,9 @@ public class VectorSeries extends ComparableObjectSeries {
     }
     
     /**
-     * Adds a data item to the series and, if requested, sends a 
-     * {@link SeriesChangeEvent} to all registered listeners.
-     * 
+     * Adds a data item to the series by calling
+     * {@link ComparableObjectSeries#add(org.jfree.data.ComparableObjectItem, boolean)}.
+       * 
      * @param item  the data item ({@code null} not permitted).
      * @param notify  notify listeners?
      */
@@ -95,8 +94,8 @@ public class VectorSeries extends ComparableObjectSeries {
     }
 
     /**
-     * Removes the item at the specified index and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Removes the item at the specified index and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param index  the index.
      *

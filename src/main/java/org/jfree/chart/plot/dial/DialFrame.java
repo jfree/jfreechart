@@ -38,14 +38,13 @@ package org.jfree.chart.plot.dial;
 
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 
 /**
  * A dial frame is the face plate for a dial plot - it is always drawn last.
  * JFreeChart includes a couple of implementations of this interface
  * ({@link StandardDialFrame} and {@link ArcDialFrame}).
  * <br><br>
- * Classes that implement this interface should be {@link Serializable},
+ * Classes that implement this interface should be {@link java.io.Serializable},
  * otherwise chart serialization may fail.
  */
 public interface DialFrame extends DialLayer {

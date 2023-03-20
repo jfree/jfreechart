@@ -74,7 +74,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.CategoryAnnotation;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.AxisCollection;
@@ -542,7 +541,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the axis offsets (gap between the data area and the axes) and
+     * Sets the axis offsets (gap between the data area and the axes) and 
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param offset  the offset ({@code null} not permitted).
@@ -2072,8 +2071,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Receives notification of a change to an {@link Annotation} added to
-     * this plot.
+     * Receives notification of a change to an annotation on this plot.
      *
      * @param event  information about the event (not used here).
      */

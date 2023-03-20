@@ -68,7 +68,6 @@ import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.BooleanList;
@@ -290,9 +289,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private PaintList legendTextPaint;
 
     /**
-     * The default paint for the legend text items (if this is
-     * {@code null}, the {@link LegendTitle} class will determine the
-     * text paint to use.
+     * The default paint for the legend text items (if this is {@code null}, the
+     * {@link org.jfree.chart.title.LegendTitle} class will determine the text
+     * paint to use.
      */
     private transient Paint defaultLegendTextPaint;
 

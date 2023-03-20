@@ -51,7 +51,6 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -123,8 +122,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Sets the step point and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the step point and calls {@link #fireChangeEvent()}.
      *
      * @param stepPoint  the step point (in the range 0.0 to 1.0)
      *

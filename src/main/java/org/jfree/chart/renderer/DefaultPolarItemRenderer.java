@@ -62,7 +62,6 @@ import org.jfree.chart.axis.NumberTick;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYSeriesLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.DrawingSupplier;
@@ -205,8 +204,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Set the flag that controls whether the outline around a filled
-     * polygon will be drawn or not and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * polygon will be drawn or not and calls {@link #fireChangeEvent()}.
      *
      * @param drawOutlineWhenFilled  the flag.
      */
@@ -225,12 +223,11 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the composite which will be used for filling polygons and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param composite  the composite to use ({@code null} not
-     *         permitted).
-     */
+	 * Sets the composite which will be used for filling polygons and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param composite the composite to use ({@code null} not permitted).
+	 */
     public void setFillComposite(Composite composite) {
         Args.nullNotPermitted(composite, "composite");
         this.fillComposite = composite;
@@ -249,8 +246,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Set the flag that controls whether a shape will be drawn for every
-     * item, or not and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * item, or not and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      */
@@ -271,8 +267,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Set the flag that controls whether the first and last point of a series
-     * will be connected or not and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * will be connected or not and calls {@link #fireChangeEvent()}.
      * 
      * @param connect the flag.
      */
@@ -338,8 +333,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Sets the flag that controls whether the fill paint is used to fill
-     * shapes, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -362,8 +356,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the shape used as a line in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as a line in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param line  the line ({@code null} not permitted).
      *
@@ -722,8 +715,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default tool tip generator and sends a 
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default tool tip generator and calls {@link #fireChangeEvent()}.
      * 
      * @param generator  the generator ({@code null} permitted).
      */
@@ -766,8 +758,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item tool tip generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item tool tip generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -791,8 +782,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item URL generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item URL generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *

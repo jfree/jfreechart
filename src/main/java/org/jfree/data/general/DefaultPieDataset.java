@@ -45,7 +45,6 @@ import org.jfree.chart.util.SortOrder;
 
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
-import org.jfree.data.UnknownKeyException;
 
 /**
  * A default implementation of the {@link PieDataset} interface.
@@ -153,7 +152,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      *
      * @return The value (possibly {@code null}).
      *
-     * @throws UnknownKeyException if the key is not recognised.
+     * @throws org.jfree.data.UnknownKeyException if the key is not recognised.
      */
     @Override
     public Number getValue(K key) {

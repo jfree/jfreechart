@@ -54,7 +54,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYSeriesLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
@@ -135,8 +134,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not outlines of the areas are
-     * drawn, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * drawn, and calls {@link #fireChangeEvent()}.
      *
      * @param show  the flag.
      *
@@ -159,8 +157,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used as an area in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as an area in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param area  the area ({@code null} not permitted).
      *

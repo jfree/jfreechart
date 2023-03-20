@@ -44,7 +44,6 @@ import org.jfree.chart.util.Args;
 
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 
 /**
@@ -145,8 +144,7 @@ public class ComparableObjectSeries extends Series
      * <p>
      * Typically this value is set before the series is populated with data,
      * but if it is applied later, it may cause some items to be removed from
-     * the series (in which case a {@link SeriesChangeEvent} will be sent to
-     * all registered listeners.
+     * the series (in which case {@link #fireSeriesChanged()} will be called.
      *
      * @param maximum  the maximum number of items for the series.
      */
@@ -163,33 +161,32 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Adds new data to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
-     * <P>
-     * Throws an exception if the x-value is a duplicate AND the
-     * allowDuplicateXValues flag is false.
-     *
-     * @param x  the x-value ({@code null} not permitted).
-     * @param y  the y-value ({@code null} permitted).
-     */
+	 * Adds new data to the series by calling
+	 * {@link #add(Comparable, Object, boolean)}.
+	 * <P>
+	 * Throws an exception if the x-value is a duplicate AND the
+	 * allowDuplicateXValues flag is false.
+	 *
+	 * @param x the x-value ({@code null} not permitted).
+	 * @param y the y-value ({@code null} permitted).
+	 */
     protected void add(Comparable x, Object y) {
         // argument checking delegated...
         add(x, y, true);
     }
 
     /**
-     * Adds new data to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     * <P>
-     * Throws an exception if the x-value is a duplicate AND the
-     * allowDuplicateXValues flag is false.
-     *
-     * @param x  the x-value ({@code null} not permitted).
-     * @param y  the y-value ({@code null} permitted).
-     * @param notify  a flag the controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
-     */
+	 * Adds new data to the series by calling
+	 * {@link #add(ComparableObjectItem, boolean)}.
+	 * <P>
+	 * Throws an exception if the x-value is a duplicate AND the
+	 * allowDuplicateXValues flag is false.
+	 *
+	 * @param x      the x-value ({@code null} not permitted).
+	 * @param y      the y-value ({@code null} permitted).
+	 * @param notify a flag that controls whether or not to notify all registered
+	 *               listeners.
+	 */
     protected void add(Comparable x, Object y, boolean notify) {
         // delegate argument checking to XYDataItem...
         ComparableObjectItem item = new ComparableObjectItem(x, y);
@@ -197,14 +194,12 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Adds a data item to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param item  the (x, y) item ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
-     */
+	 * Adds a data item to the series and, if requested, calls {@link #fireSeriesChanged()}.
+	 *
+	 * @param item   the (x, y) item ({@code null} not permitted).
+	 * @param notify a flag that controls whether or not
+	 *               {@link #fireSeriesChanged()} is called.
+	 */
     protected void add(ComparableObjectItem item, boolean notify) {
 
         Args.nullNotPermitted(item, "item");
@@ -301,8 +296,8 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Updates the value of an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Updates the value of an item in the series and calls
+     *  {@link #fireSeriesChanged()}.
      *
      * @param index  the item (zero based index).
      * @param y  the new value ({@code null} permitted).
@@ -325,8 +320,8 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Deletes a range of items from the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Deletes a range of items from the series and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param start  the start index (zero-based).
      * @param end  the end index (zero-based).
@@ -340,8 +335,7 @@ public class ComparableObjectSeries extends Series
 
     /**
      * Removes all data items from the series and, unless the series is
-     * already empty, sends a {@link SeriesChangeEvent} to all registered
-     * listeners.
+     * already empty, calls {@link #fireSeriesChanged()}.
      */
     public void clear() {
         if (this.data.size() > 0) {
@@ -351,8 +345,7 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Removes the item at the specified index and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Removes the item at the specified index and calls {@link #fireSeriesChanged()}.
      *
      * @param index  the index.
      *
@@ -366,8 +359,7 @@ public class ComparableObjectSeries extends Series
     }
 
     /**
-     * Removes the item with the specified x-value and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Removes the item with the specified x-value by calling {@link #remove(int)}.
      *
      * @param x  the x-value.
 

@@ -48,7 +48,6 @@ import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
 import org.jfree.data.xy.AbstractXYDataset;
 import org.jfree.data.xy.OHLCDataset;
-import org.jfree.data.xy.XYDataset;
 
 /**
  * A collection of {@link OHLCSeries} objects.
@@ -72,7 +71,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
 
     /**
      * Returns the position within each time period that is used for the X
-     * value when the collection is used as an {@link XYDataset}.
+     * value when the collection is used as an {@link org.jfree.data.xy.XYDataset}.
      *
      * @return The anchor position (never {@code null}).
      */
@@ -82,7 +81,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
 
     /**
      * Sets the position within each time period that is used for the X values
-     * when the collection is used as an {@link XYDataset}, then sends a
+     * when the collection is used as an {@link org.jfree.data.xy.XYDataset}, then sends a
      * {@link DatasetChangeEvent} is sent to all registered listeners.
      *
      * @param anchor  the anchor position ({@code null} not permitted).

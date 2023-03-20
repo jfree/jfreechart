@@ -80,7 +80,6 @@ import org.jfree.chart.PaintMap;
 import org.jfree.chart.StrokeMap;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
@@ -541,10 +540,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the starting angle and sends a {@link PlotChangeEvent} to all
-     * registered listeners.  The initial default value is 90 degrees, which
-     * corresponds to 12 o'clock.  A value of zero corresponds to 3 o'clock...
-     * this is the encoding used by Java's Arc2D class.
+     * Sets the starting angle and calls {@link #fireChangeEvent()}.
+     * The initial default value is 90 degrees, which corresponds to 12 o'clock.
+     * A value of zero corresponds to 3 o'clock... this is the encoding used by
+     * Java's Arc2D class.
      *
      * @param angle  the angle (in degrees).
      *
@@ -568,8 +567,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the direction in which the pie sections are drawn and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the direction in which the pie sections are drawn and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param direction  the direction ({@code null} not permitted).
      *
@@ -579,7 +578,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         Args.nullNotPermitted(direction, "direction");
         this.direction = direction;
         fireChangeEvent();
-
     }
 
     /**
@@ -595,10 +593,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the interior gap and sends a {@link PlotChangeEvent} to all
-     * registered listeners.  This controls the space between the edges of the
-     * pie plot and the plot area itself (the region where the section labels
-     * appear).
+     * Sets the interior gap and calls {@link #fireChangeEvent()}.
+     * This controls the space between the edges of the pie plot and the plot
+     * area itself (the region where the section labels appear).
      *
      * @param percent  the gap (as a percentage of the available drawing space).
      *
@@ -615,7 +612,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             this.interiorGap = percent;
             fireChangeEvent();
         }
-
     }
 
     /**
@@ -643,8 +639,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the circular attribute and, if requested, sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the circular attribute and, if requested, calls
+     * {@link #fireChangeEvent()}.
      *
      * @param circular  the new value of the flag.
      * @param notify  notify listeners?
@@ -672,9 +668,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets a flag that controls whether {@code null} values are ignored,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.  At
-     * present, this only affects whether or not the key is presented in the
-     * legend.
+     * and calls {@link #fireChangeEvent()}.  At present, this only affects
+     * whether or not the key is presented in the legend.
      *
      * @param flag  the flag.
      *
@@ -700,9 +695,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets a flag that controls whether zero values are ignored,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.  This
-     * only affects whether or not a label appears for the non-visible
-     * pie section.
+     * and calls {@link #fireChangeEvent()}.  This only affects whether or not
+     * a label appears for the non-visible pie section.
      *
      * @param flag  the flag.
      *
@@ -813,8 +807,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the paint associated with the specified key, and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the paint associated with the specified key, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
@@ -831,8 +825,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Clears the section paint settings for this plot and, if requested, sends
-     * a {@link PlotChangeEvent} to all registered listeners.  Be aware that
+     * Clears the section paint settings for this plot and, if requested, 
+     * calls {@link #fireChangeEvent()}.  Be aware that
      * if the {@code autoPopulateSectionPaint} flag is set, the section
      * paints may be repopulated using the same colours as before.
      *
@@ -860,8 +854,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the default section paint and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the default section paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -886,7 +879,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * Sets the flag that controls whether or not the section paint is
      * auto-populated by the {@link #lookupSectionPaint(Comparable)} method,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param auto  auto-populate?
      */
@@ -912,8 +905,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether or not the outline is drawn for
-     * each pie section, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * each pie section, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      *
@@ -1005,8 +997,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the outline paint associated with the specified key, and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the outline paint associated with the specified key, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
@@ -1024,7 +1016,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Clears the section outline paint settings for this plot and, if
-     * requested, sends a {@link PlotChangeEvent} to all registered listeners.
+     * requested, calls {@link #fireChangeEvent()}.
      * Be aware that if the {@code autoPopulateSectionPaint} flag is set,
      * the section paints may be repopulated using the same colours as before.
      *
@@ -1078,7 +1070,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * Sets the flag that controls whether or not the section outline paint is
      * auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
-     * method, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * method, and calls {@link #fireChangeEvent()}.
      *
      * @param auto  auto-populate?
      */
@@ -1170,8 +1162,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the outline stroke associated with the specified key, and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the outline stroke associated with the specified key, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.
@@ -1189,7 +1181,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Clears the section outline stroke settings for this plot and, if
-     * requested, sends a {@link PlotChangeEvent} to all registered listeners.
+     * requested, calls {@link #fireChangeEvent()}.
      * Be aware that if the {@code autoPopulateSectionPaint} flag is set,
      * the section paints may be repopulated using the same colours as before.
      *
@@ -1243,7 +1235,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * Sets the flag that controls whether or not the section outline stroke is
      * auto-populated by the {@link #lookupSectionOutlineStroke(Comparable)}
-     * method, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * method, and calls {@link #fireChangeEvent()}.
      *
      * @param auto  auto-populate?
      */
@@ -1264,8 +1256,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the shadow paint and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the shadow paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -1288,8 +1279,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the x-offset for the shadow effect and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the x-offset for the shadow effect and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset (in Java2D units).
      *
@@ -1312,8 +1302,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the y-offset for the shadow effect and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the y-offset for the shadow effect and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset (in Java2D units).
      *
@@ -1350,8 +1339,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the amount that a pie section should be exploded and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the amount that a pie section should be exploded and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param key  the section key ({@code null} not permitted).
      * @param percent  the explode percentage (0.30 = 30 percent).
@@ -1398,8 +1387,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label generator and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Sets the section label generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -1424,8 +1412,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the gap between the edge of the pie and the labels (expressed as a
-     * percentage of the plot width) and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * percentage of the plot width) and calls {@link #fireChangeEvent()}.
      *
      * @param gap  the gap (a percentage, where 0.05 = five percent).
      *
@@ -1448,8 +1435,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the maximum label width as a percentage of the plot width and sends
-     * a {@link PlotChangeEvent} to all registered listeners.
+     * Sets the maximum label width as a percentage of the plot width and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param width  the width (a percentage, where 0.20 = 20 percent).
      *
@@ -1474,7 +1461,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether or not label linking lines are
-     * visible and sends a {@link PlotChangeEvent} to all registered listeners.
+     * visible and calls {@link #fireChangeEvent()}.
      * Please take care when hiding the linking lines - depending on the data
      * values, the labels can be displayed some distance away from the
      * corresponding pie section.
@@ -1500,8 +1487,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the label link style and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the label link style and calls {@link #fireChangeEvent()}.
      *
      * @param style  the new style ({@code null} not permitted).
      *
@@ -1526,8 +1512,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the link margin and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the link margin and calls {@link #fireChangeEvent()}.
      *
      * @param margin  the margin.
      *
@@ -1552,8 +1537,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the paint used for the lines that connect pie sections to their
-     * corresponding labels, and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * corresponding labels, and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -1577,8 +1561,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the link stroke and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the link stroke and calls {@link #fireChangeEvent()}.
      *
      * @param stroke  the stroke.
      *
@@ -1615,8 +1598,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label font and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the section label font and calls {@link #fireChangeEvent()}.
      *
      * @param font  the font ({@code null} not permitted).
      *
@@ -1640,8 +1622,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label paint and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the section label paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -1665,8 +1646,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label background paint and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the section label background paint and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -1689,8 +1670,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label outline paint and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the section label outline paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -1713,8 +1693,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label outline stroke and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the section label outline stroke and calls {@link #fireChangeEvent()}.
      *
      * @param stroke  the stroke ({@code null} permitted).
      *
@@ -1737,8 +1716,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the section label shadow paint and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the section label shadow paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -1761,8 +1739,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the padding between each label and its outline and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the padding between each label and its outline and 
+     * calls {@link #fireChangeEvent()}.
      *
      * @param padding  the padding ({@code null} not permitted).
      *
@@ -1786,8 +1764,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether simple or extended labels are
-     * displayed on the plot, and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * displayed on the plot, and calls {@link #fireChangeEvent()}.
      *
      * @param simple  the new flag value.
      */
@@ -1808,8 +1785,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the offset for the simple labels and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the offset for the simple labels and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset ({@code null} not permitted).
      *
@@ -1832,8 +1808,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the label distributor and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the label distributor and calls {@link #fireChangeEvent()}.
      *
      * @param distributor  the distributor ({@code null} not permitted).
      */
@@ -1857,9 +1832,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the tool tip generator and sends a {@link PlotChangeEvent} to all
-     * registered listeners.  Set the generator to {@code null} if you
-     * don't want any tool tips.
+     * Sets the tool tip generator and calls {@link #fireChangeEvent()}.  Set
+     * the generator to {@code null} if you don't want any tool tips.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -1882,8 +1856,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the URL generator and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the URL generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -1940,8 +1913,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the shape used for legend items and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the shape used for legend items and calls {@link #fireChangeEvent()}.
      *
      * @param shape  the shape ({@code null} not permitted).
      *
@@ -1965,8 +1937,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the legend label generator and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Sets the legend label generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} not permitted).
      *
@@ -1990,8 +1961,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the legend label tool tip generator and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the legend label tool tip generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -2015,8 +1985,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the legend label URL generator and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the legend label URL generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -2037,8 +2006,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the shadow generator for the plot and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
+     * Sets the shadow generator for the plot and calls 
+     * {@link #fireChangeEvent()}.  Note that this is
      * a bitmap drop-shadow generation facility and is separate from the
      * vector based show option that is controlled via the
      * {@link #setShadowPaint(java.awt.Paint)} method.

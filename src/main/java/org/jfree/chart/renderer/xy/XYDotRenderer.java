@@ -46,7 +46,6 @@ import java.io.ObjectOutputStream;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -105,8 +104,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the dot width and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the dot width and calls {@link #fireChangeEvent()}.
      *
      * @param w  the new width (must be greater than zero).
      *
@@ -134,8 +132,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the dot height and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the dot height and calls {@link #fireChangeEvent()}.
      *
      * @param h  the new height (must be greater than zero).
      *
@@ -163,8 +160,8 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used as a line in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as a line in each legend item and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param shape  the shape ({@code null} not permitted).
      *

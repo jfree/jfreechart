@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
@@ -226,11 +225,8 @@ public class LogAxis extends ValueAxis {
     }
 
     /**
-     * Sets the tick unit for the axis and sends an {@link AxisChangeEvent} to
-     * all registered listeners.  A side effect of calling this method is that
-     * the "auto-select" feature for tick units is switched off (you can
-     * restore it using the {@link ValueAxis#setAutoTickUnitSelection(boolean)}
-     * method).
+     * Sets the tick unit for the axis by calling
+     * {@link #setTickUnit(org.jfree.chart.axis.NumberTickUnit, boolean, boolean)}.
      *
      * @param unit  the new tick unit ({@code null} not permitted).
      *
@@ -242,11 +238,10 @@ public class LogAxis extends ValueAxis {
     }
 
     /**
-     * Sets the tick unit for the axis and, if requested, sends an
-     * {@link AxisChangeEvent} to all registered listeners.  In addition, an
-     * option is provided to turn off the "auto-select" feature for tick units
-     * (you can restore it using the
-     * {@link ValueAxis#setAutoTickUnitSelection(boolean)} method).
+     * Sets the tick unit for the axis and, if requested, calls
+     * {@link #fireChangeEvent()}. In addition, an option is provided to turn
+     * off the "auto-select" feature for tick units (you can restore it using
+     * the {@link ValueAxis#setAutoTickUnitSelection(boolean)} method).
      *
      * @param unit  the new tick unit ({@code null} not permitted).
      * @param notify  notify listeners?
@@ -921,9 +916,8 @@ public class LogAxis extends ValueAxis {
     }
     
     /**
-     * Increases or decreases the axis range by the specified percentage about
-     * the central value and sends an {@link AxisChangeEvent} to all registered
-     * listeners.
+     * Increases or decreases the axis range by calling
+     * {@link #resizeRange(double, double)}.
      * <P>
      * To double the length of the axis range, use 200% (2.0).
      * To halve the length of the axis range, use 50% (0.5).

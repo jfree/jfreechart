@@ -48,7 +48,6 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -107,15 +106,14 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the item margin and sends a {@link RendererChangeEvent} to all
-     * registered listeners.  The value is expressed as a percentage of the
-     * available width for plotting all the bars, with the resulting amount to
-     * be distributed between all the bars evenly.
-     *
-     * @param percent  the new margin.
-     *
-     * @see #getItemMargin()
-     */
+	 * Sets the item margin and calls {@link #fireChangeEvent()}. The value is
+	 * expressed as a percentage of the available width for plotting all the bars,
+	 * with the resulting amount to be distributed between all the bars evenly.
+	 *
+	 * @param percent the new margin.
+	 *
+	 * @see #getItemMargin()
+	 */
     public void setItemMargin(double percent) {
         this.itemMargin = percent;
         fireChangeEvent();
@@ -135,8 +133,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the maximum item width, which is specified as a percentage of the
-     * available space for all items, and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * available space for all items, and calls {@link #fireChangeEvent()}.
      *
      * @param percent  the percent.
      *
