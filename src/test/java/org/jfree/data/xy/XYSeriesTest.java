@@ -649,7 +649,9 @@ public class XYSeriesTest {
     /**
      * A test for a bug reported in the forum:
      * 
-     * @link{lhttp://www.jfree.org/forum/viewtopic.php?f=3&t=116601}
+     * <a href="http://www.jfree.org/forum/viewtopic.php?f=3&t=116601">
+     * XYSeries.getMaxY Bug in version 1.0.15
+     * </a>
      */
     @Test
     public void testGetMaxY2() {
@@ -772,6 +774,9 @@ public class XYSeriesTest {
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
 
+    /**
+     * Test for deprecated method
+     */
     @Test
     public void testSetKey() {
         XYSeries s1 = new XYSeries("S");
