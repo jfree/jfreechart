@@ -44,7 +44,6 @@ import org.jfree.chart.block.Arrangement;
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BlockResult;
 import org.jfree.chart.block.EntityBlockParams;
-import org.jfree.chart.block.EntityBlockResult;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.LegendItemEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -162,7 +161,7 @@ public class LegendItemBlockContainer extends BlockContainer {
      * @param params  passed on to blocks within the container
      *                ({@code null} permitted).
      *
-     * @return An instance of {@link EntityBlockResult}, or {@code null}.
+     * @return An instance of {@link BlockResult}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {

@@ -49,7 +49,6 @@ import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.plot.CrosshairState;
@@ -107,10 +106,9 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the generator for the item labels that appear near the lower
-     * y-value and sends a {@link RendererChangeEvent} to all registered
-     * listeners.  If this is set to {@code null}, no item labels will be
-     * drawn.
+     * Sets the generator for the item labels that appear near the lower y-value
+     * and calls {@link #fireChangeEvent()}. If this is set to {@code null}, no
+     * item labels will be drawn.
      *
      * @param generator  the generator ({@code null} permitted).
      *

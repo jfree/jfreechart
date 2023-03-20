@@ -64,7 +64,6 @@ import java.util.ResourceBundle;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
@@ -321,7 +320,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Sets the dataset for the plot, replacing the existing dataset if there
-     * is one, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * is one, and calls {@link #fireChangeEvent()}.
      *
      * @param dataset  the dataset ({@code null} permitted).
      *
@@ -361,8 +360,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the range axis for the plot and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Sets the range axis for the plot and calls {@link #fireChangeEvent()}.
      *
      * @param axis  the new axis ({@code null} not permitted).
      *
@@ -452,8 +450,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the padding for the thermometer and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the padding for the thermometer and calls {@link #fireChangeEvent()}.
      *
      * @param padding  the padding ({@code null} not permitted).
      *
@@ -478,13 +475,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the stroke used to draw the thermometer outline and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param s  the new stroke ({@code null} ignored).
-     *
-     * @see #getThermometerStroke()
-     */
+	 * Sets the stroke used to draw the thermometer outline and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param s the new stroke ({@code null} ignored).
+	 *
+	 * @see #getThermometerStroke()
+	 */
     public void setThermometerStroke(Stroke s) {
         if (s != null) {
             this.thermometerStroke = s;
@@ -505,13 +502,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the paint used to draw the thermometer outline and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param paint  the new paint ({@code null} ignored).
-     *
-     * @see #getThermometerPaint()
-     */
+	 * Sets the paint used to draw the thermometer outline and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param paint the new paint ({@code null} ignored).
+	 *
+	 * @see #getThermometerPaint()
+	 */
     public void setThermometerPaint(Paint paint) {
         if (paint != null) {
             this.thermometerPaint = paint;
@@ -568,14 +565,14 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the location at which the current value is displayed and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     * <P>
-     * The location can be one of the constants: {@code NONE}, {@code RIGHT},
-     * {@code LEFT} and {@code BULB}.
-     *
-     * @param location  the location.
-     */
+	 * Sets the location at which the current value is displayed and calls
+	 * {@link #fireChangeEvent()}.
+	 * <P>
+	 * The location can be one of the constants: {@code NONE}, {@code RIGHT},
+	 * {@code LEFT} and {@code BULB}.
+	 *
+	 * @param location the location.
+	 */
     public void setValueLocation(int location) {
         if ((location >= 0) && (location < 4)) {
             this.valueLocation = location;
@@ -600,8 +597,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Sets the location at which the axis is displayed relative to the
-     * thermometer, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * thermometer, and calls {@link #fireChangeEvent()}.
      *
      * @param location  the location (one of {@link #NONE}, {@link #LEFT} and
      *         {@link #RIGHT}).
@@ -656,13 +652,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the paint used to display the current value and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param paint  the new paint ({@code null} not permitted).
-     *
-     * @see #getValuePaint()
-     */
+	 * Sets the paint used to display the current value and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param paint the new paint ({@code null} not permitted).
+	 *
+	 * @see #getValuePaint()
+	 */
     public void setValuePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         if (!this.valuePaint.equals(paint)) {
@@ -674,8 +670,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     // FIXME: No getValueFormat() method?
 
     /**
-     * Sets the formatter for the value label and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the formatter for the value label and calls {@link #fireChangeEvent()}.
      *
      * @param formatter  the new formatter ({@code null} not permitted).
      */
@@ -697,8 +692,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the default mercury paint and sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Sets the default mercury paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the new paint ({@code null} not permitted).
      *
@@ -801,8 +795,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the paint to be used for a subrange and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the paint to be used for a subrange and calls {@link #fireChangeEvent()}.
      *
      * @param range  the range (0, 1 or 2).
      * @param paint  the paint to be applied ({@code null} not permitted).
@@ -872,8 +865,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the bulb radius (in Java2D units) and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the bulb radius (in Java2D units) and calls {@link #fireChangeEvent()}.
      *
      * @param r  the new radius (in Java2D units).
      *
@@ -906,8 +898,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the column radius (in Java2D units) and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the column radius (in Java2D units) and calls {@link #fireChangeEvent()}.
      *
      * @param r  the new radius.
      *
@@ -942,8 +933,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Sets the gap (in Java2D units) between the two outlines that represent
-     * the thermometer, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * the thermometer, and calls {@link #fireChangeEvent()}.
      *
      * @param gap  the new gap.
      *

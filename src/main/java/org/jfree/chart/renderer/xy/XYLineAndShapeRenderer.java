@@ -52,7 +52,6 @@ import java.util.Objects;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -179,8 +178,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether each series is drawn as a
-     * single path and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * single path and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -239,8 +237,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'lines visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'lines visible' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag ({@code null} permitted).
@@ -253,8 +250,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'lines visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'lines visible' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param visible  the flag.
@@ -277,8 +273,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the default 'lines visible' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'lines visible' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -301,8 +296,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used as a line in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as a line in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param line  the line ({@code null} not permitted).
      *
@@ -352,8 +346,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes visible' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param visible  the flag.
@@ -365,8 +358,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes visible' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes visible' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag.
@@ -390,8 +382,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the default 'shapes visible' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'shapes visible' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -441,8 +432,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag.
@@ -454,8 +444,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the 'shapes filled' flag for a series and calls {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag.
@@ -479,8 +468,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the default 'shapes filled' flag and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default 'shapes filled' flag and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -505,8 +493,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether outlines are drawn for
-     * shapes, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      * <P>
      * In some cases, shapes look better if they do NOT have an outline, but
      * this flag allows you to set your own preference.
@@ -539,8 +526,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether the fill paint is used to fill
-     * shapes, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * shapes, and calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -567,8 +553,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether the outline paint is used to draw
-     * shape outlines, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * shape outlines, and calls {@link #fireChangeEvent()}.
      * <p>
      * Refer to {@code XYLineAndShapeRendererDemo2.java} to see the
      * effect of this flag.

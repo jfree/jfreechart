@@ -58,7 +58,6 @@ import java.util.Objects;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.XYItemLabelGenerator;
@@ -291,9 +290,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the base value for the bars and sends a {@link RendererChangeEvent}
-     * to all registered listeners.  The base value is not used if the dataset's
-     * y-interval is being used to determine the bar length.
+     * Sets the base value for the bars and calls {@link #fireChangeEvent()}.
+     * The base value is not used if the dataset's y-interval is being used to
+     * determine the bar length.
      *
      * @param base  the new base value.
      *
@@ -319,8 +318,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that determines whether the y-interval from the dataset is
-     * used to calculate the length of each bar, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * used to calculate the length of each bar, and calls {@link #fireChangeEvent()}.
      *
      * @param use  the flag.
      *
@@ -346,8 +344,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the percentage amount by which the bars are trimmed and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the percentage amount by which the bars are trimmed and calls {@link #fireChangeEvent()}.
      *
      * @param margin  the new margin.
      *
@@ -371,7 +368,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not bar outlines are drawn and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param draw  the flag.
      *
@@ -395,8 +392,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the gradient paint transformer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the gradient paint transformer and calls {@link #fireChangeEvent()}.
      *
      * @param transformer  the transformer ({@code null} permitted).
      *
@@ -421,8 +417,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used to represent bars in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used to represent bars in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param bar  the bar shape ({@code null} not permitted).
      *
@@ -448,8 +443,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the fallback position for positive item labels that don't fit
-     * within a bar, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * within a bar, and calls {@link #fireChangeEvent()}.
      *
      * @param position  the position ({@code null} permitted).
      *
@@ -475,8 +469,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the fallback position for negative item labels that don't fit
-     * within a bar, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * within a bar, and calls {@link #fireChangeEvent()}.
      *
      * @param position  the position ({@code null} permitted).
      *
@@ -498,8 +491,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the bar painter and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the bar painter and calls {@link #fireChangeEvent()}.
      *
      * @param painter  the painter ({@code null} not permitted).
      */
@@ -521,8 +513,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not the renderer
-     * draws shadows for the bars, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * draws shadows for the bars, and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the new flag value.
      */
@@ -541,8 +532,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the x-offset for the bar shadow and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the x-offset for the bar shadow and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      */
@@ -561,8 +551,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the y-offset for the bar shadow and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the y-offset for the bar shadow and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      */
@@ -581,9 +570,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the bar alignment factor and sends a {@link RendererChangeEvent}
-     * to all registered listeners.  If the alignment factor is outside the
-     * range 0.0 to 1.0, no alignment will be performed by the renderer.
+     * Sets the bar alignment factor and calls {@link #fireChangeEvent()}. If
+     * the alignment factor is outside the range 0.0 to 1.0, no alignment will
+     * be performed by the renderer.
      *
      * @param factor  the factor.
      */

@@ -56,7 +56,6 @@ import java.util.Objects;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -116,8 +115,7 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * Sets the paint used for the error indicators (if {@code null},
-     * the item outline paint is used instead) and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * the item outline paint is used instead) and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -141,15 +139,14 @@ public class StatisticalBarRenderer extends BarRenderer
     }
 
     /**
-     * Sets the stroke used to draw the error indicators, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to {@code null}, the renderer will use the item outline
-     * stroke.
-     *
-     * @param stroke  the stroke ({@code null} permitted).
-     *
-     * @see #getErrorIndicatorStroke()
-     */
+	 * Sets the stroke used to draw the error indicators, and calls
+	 * {@link #fireChangeEvent()}. If you set this to {@code null}, the renderer
+	 * will use the item outline stroke.
+	 *
+	 * @param stroke the stroke ({@code null} permitted).
+	 *
+	 * @see #getErrorIndicatorStroke()
+	 */
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;
         fireChangeEvent();

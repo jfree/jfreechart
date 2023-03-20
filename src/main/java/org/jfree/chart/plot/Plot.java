@@ -70,7 +70,6 @@ import javax.swing.event.EventListenerList;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
-import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PlotEntity;
@@ -1132,8 +1131,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Receives notification of a change to an {@link Annotation} added to
-     * this plot.
+     * Receives notification of a change to an annotation on the plot.
      *
      * @param event  information about the event (not used here).
      */

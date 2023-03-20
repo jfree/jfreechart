@@ -49,7 +49,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
@@ -98,7 +97,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets a token that controls how the renderer draws the end points, and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param type  the end type ({@code null} not permitted).
      *

@@ -45,7 +45,6 @@ import java.util.Objects;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -102,8 +101,8 @@ public class CategoryTextAnnotation extends TextAnnotation
     }
 
     /**
-     * Sets the category that the annotation attaches to and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the category that the annotation attaches to and calls
+     * {@link #fireAnnotationChanged()}..
      *
      * @param category  the category ({@code null} not permitted).
      *
@@ -127,8 +126,7 @@ public class CategoryTextAnnotation extends TextAnnotation
     }
 
     /**
-     * Sets the category anchor point and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the category anchor point and calls {@link #fireAnnotationChanged()}.
      *
      * @param anchor  the anchor point ({@code null} not permitted).
      *
@@ -152,8 +150,7 @@ public class CategoryTextAnnotation extends TextAnnotation
     }
 
     /**
-     * Sets the value and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the value and calls {@link #fireAnnotationChanged()}.
      *
      * @param value  the value.
      *

@@ -46,7 +46,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -117,8 +116,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
     /**
      * Sets the flag that controls whether or not the x-coordinates (in
-     * Java2D space) are rounded to integer values, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Java2D space) are rounded to integer values, and calls {@link #fireChangeEvent()}.
      *
      * @param round  the new flag value.
      *

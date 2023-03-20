@@ -48,7 +48,6 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
 import org.jfree.chart.block.EntityBlockResult;
 import org.jfree.chart.block.RectangleConstraint;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -185,8 +184,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the maximum width and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the maximum width and calls {@link #fireAnnotationChanged()}.
      *
      * @param max  the maximum width (0.0 or less means no maximum).
      */
@@ -205,8 +203,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the maximum height and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the maximum height and calls {@link #fireAnnotationChanged()}.
      *
      * @param max  the maximum height.
      */

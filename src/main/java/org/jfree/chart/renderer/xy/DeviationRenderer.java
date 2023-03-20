@@ -45,7 +45,6 @@ import java.util.List;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -132,8 +131,8 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the alpha transparency for the background shading, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the alpha transparency for the background shading, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param alpha   the alpha (in the range 0.0f to 1.0f).
      *

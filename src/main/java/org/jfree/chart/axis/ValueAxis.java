@@ -58,7 +58,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
@@ -269,8 +268,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Sets the flag that controls whether the tick labels are displayed
      * vertically (that is, rotated 90 degrees from horizontal).  If the flag
-     * is changed, an {@link AxisChangeEvent} is sent to all registered
-     * listeners.
+     * is changed, it calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -297,8 +295,8 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets a flag that controls whether or not the axis lines has an arrow
-     * drawn that points in the positive direction for the axis, and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * drawn that points in the positive direction for the axis, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      *
@@ -323,8 +321,8 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets a flag that controls whether or not the axis lines has an arrow
-     * drawn that points in the negative direction for the axis, and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * drawn that points in the negative direction for the axis, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      *
@@ -349,8 +347,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the shape that can be displayed as an arrow pointing upwards at
-     * the end of an axis line and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * the end of an axis line and calls {@link #fireChangeEvent()}.
      *
      * @param arrow  the arrow shape ({@code null} not permitted).
      *
@@ -376,8 +373,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the shape that can be displayed as an arrow pointing downwards at
-     * the end of an axis line and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * the end of an axis line and calls {@link #fireChangeEvent()}.
      *
      * @param arrow  the arrow shape ({@code null} not permitted).
      *
@@ -403,8 +399,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the shape that can be displayed as an arrow pointing left at the
-     * end of an axis line and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * end of an axis line and calls {@link #fireChangeEvent()}.
      *
      * @param arrow  the arrow shape ({@code null} not permitted).
      *
@@ -430,8 +425,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the shape that can be displayed as an arrow pointing rightwards at
-     * the end of an axis line and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * the end of an axis line and calls {@link #fireChangeEvent()}.
      *
      * @param arrow  the arrow shape ({@code null} not permitted).
      *
@@ -910,7 +904,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the auto range attribute.  If the {@code notify} flag is set,
-     * an {@link AxisChangeEvent} is sent to registered listeners.
+     * {@link #fireChangeEvent()} is called.
      *
      * @param auto  the flag.
      * @param notify  notify listeners?
@@ -940,8 +934,8 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the auto range minimum size and sends an {@link AxisChangeEvent}
-     * to all registered listeners.
+     * Sets the auto range minimum size by calling
+     * {@link #setAutoRangeMinimumSize(double, boolean)}.
      *
      * @param size  the size.
      *
@@ -955,8 +949,7 @@ public abstract class ValueAxis extends Axis
      * Sets the minimum size allowed for the axis range when it is
      * automatically calculated.
      * <p>
-     * If requested, an {@link AxisChangeEvent} is forwarded to all registered
-     * listeners.
+     * If requested, {@link #fireChangeEvent()} is called.
      *
      * @param size  the new minimum.
      * @param notify  notify listeners?
@@ -990,8 +983,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the default auto range and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * Sets the default auto range and calls {@link #fireChangeEvent()}.
      *
      * @param range  the range ({@code null} not permitted).
      *
@@ -1019,9 +1011,9 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the lower margin for the axis (as a percentage of the axis range)
-     * and sends an {@link AxisChangeEvent} to all registered listeners.  This
-     * margin is added only when the axis range is auto-calculated - if you set
-     * the axis range manually, the margin is ignored.
+     * and calls {@link #fireChangeEvent()}. This margin is added only when the
+     * axis range is auto-calculated - if you set the axis range manually, the
+     * margin is ignored.
      *
      * @param margin  the margin percentage (for example, 0.05 is five percent).
      *
@@ -1052,9 +1044,9 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the upper margin for the axis (as a percentage of the axis range)
-     * and sends an {@link AxisChangeEvent} to all registered listeners.  This
-     * margin is added only when the axis range is auto-calculated - if you set
-     * the axis range manually, the margin is ignored.
+     * and calls {@link #fireChangeEvent()}. This margin is added only when the
+     * axis range is auto-calculated - if you set the axis range manually, the
+     * margin is ignored.
      *
      * @param margin  the margin percentage (for example, 0.05 is five percent).
      *
@@ -1107,8 +1099,14 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the lower bound for the axis range.  An {@link AxisChangeEvent} is
-     * sent to all registered listeners.
+     * Sets the lower bound for the axis range by calling
+     * {@link #setRange(double, double)} with the given minimum value for the
+     * 1st argument.
+     * 
+     * If the existing upper bound is greater than the given minimum value, that
+     * upper bound is used for the 2nd argument for setRange. If not, setRange
+     * is called with an upper bound of <code>min + 1.0</code> for the 2nd 
+     * argument.
      *
      * @param min  the new minimum.
      *
@@ -1135,8 +1133,13 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the upper bound for the axis range, and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the upper bound for the axis range by calling
+     * {@link #setRange(double, double)} with the given maximum value for the 
+     * 2nd argument.
+     * 
+     * If the existing lower bound is less than given maximum value, that lower
+     * bound is used for the 1st argument to setRange.  If not, setRange is 
+     * called with a lower bound of <code>max - 1.0</code> for the 1st argument.
      *
      * @param max  the new maximum.
      *
@@ -1223,9 +1226,8 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the range for the axis (after first adding the current margins to
-     * the specified range) and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * Sets the range for the axis by calling
+     * {@link #setRangeWithMargins(org.jfree.data.Range, boolean, boolean)}.
      *
      * @param range  the range ({@code null} not permitted).
      */
@@ -1234,10 +1236,9 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the range for the axis after first adding the current margins to
-     * the range and, if requested, sends an {@link AxisChangeEvent} to all
-     * registered listeners.  As a side-effect, the auto-range flag is set to
-     * {@code false} (optional).
+     * Sets the range for the axis after first adding the current margins to the
+     * range and, if requested, calls {@link #fireChangeEvent()}. As a
+     * side-effect, the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range (excluding margins, {@code null} not
      *               permitted).
@@ -1255,7 +1256,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the axis range (after first adding the current margins to the
-     * range) and sends an {@link AxisChangeEvent} to all registered listeners.
+     * range) and calls {@link #fireChangeEvent()}.
      * As a side-effect, the auto-range flag is set to {@code false}.
      *
      * @param lower  the lower axis limit.
@@ -1333,11 +1334,10 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the source for obtaining standard tick units for the axis and sends
-     * an {@link AxisChangeEvent} to all registered listeners.  The axis will
-     * try to select the smallest tick unit from the source that does not cause
-     * the tick labels to overlap (see also the
-     * {@link #setAutoTickUnitSelection(boolean)} method.
+     * Sets the source for obtaining standard tick units for the axis and calls
+     * {@link #fireChangeEvent()}. The axis will try to select the smallest tick
+     * unit from the source that does not cause the tick labels to overlap (see
+     * also the {@link #setAutoTickUnitSelection(boolean)} method.
      *
      * @param source  the source for standard tick units ({@code null}
      *                permitted).
@@ -1361,8 +1361,8 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the number of minor tick marks to display, and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the number of minor tick marks to display, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param count  the count.
      *
@@ -1431,9 +1431,9 @@ public abstract class ValueAxis extends Axis
     protected abstract void autoAdjustRange();
 
     /**
-     * Centers the axis range about the specified value and sends an
-     * {@link AxisChangeEvent} to all registered listeners.
-     *
+     * Centers the axis range about the specified value and sends a change event
+     * to all registered listeners.
+       * 
      * @param value  the center value.
      */
     public void centerRange(double value) {
@@ -1445,8 +1445,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Increases or decreases the axis range by the specified percentage about
-     * the central value and sends an {@link AxisChangeEvent} to all registered
-     * listeners.
+     * the central value by calling {@link #resizeRange(double, double)}.
      * <P>
      * To double the length of the axis range, use 200% (2.0).
      * To halve the length of the axis range, use 50% (0.5).
@@ -1461,8 +1460,10 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Increases or decreases the axis range by the specified percentage about
-     * the specified anchor value and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * the specified anchor value by calling
+     * {@link #setRange(org.jfree.data.Range)} with an adjusted range (if
+     * percent is greater than zero) or {@link #setAutoRange(boolean)} with true
+     * (if percent is zero).
      * <P>
      * To double the length of the axis range, use 200% (2.0).
      * To halve the length of the axis range, use 50% (0.5).
@@ -1486,8 +1487,10 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Increases or decreases the axis range by the specified percentage about
-     * the specified anchor value and sends an {@link AxisChangeEvent} to all
-     * registered listeners.
+     * the specified anchor value by calling
+     * {@link #setRange(org.jfree.data.Range)} with an adjusted range (if
+     * percent is greater than zero) or {@link #setAutoRange(boolean)} with true
+     * (if percent is zero).
      * <P>
      * To double the length of the axis range, use 200% (2.0).
      * To halve the length of the axis range, use 50% (0.5).

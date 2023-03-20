@@ -36,20 +36,14 @@
 
 package org.jfree.data.general;
 
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.IntervalXYZDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYZDataset;
-
 /**
  * The interface for a dataset consisting of one or many series of data.
  *
- * @see CategoryDataset
- * @see IntervalXYDataset
- * @see IntervalXYZDataset
- * @see XYDataset
- * @see XYZDataset
+ * @see org.jfree.data.category.CategoryDataset
+ * @see org.jfree.data.xy.IntervalXYDataset
+ * @see org.jfree.data.xy.IntervalXYZDataset
+ * @see org.jfree.data.xy.XYDataset
+ * @see org.jfree.data.xy.XYZDataset
  */
 public interface SeriesDataset extends Dataset {
 

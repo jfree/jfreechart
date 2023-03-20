@@ -53,7 +53,6 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -133,8 +132,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the category for the start of the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the category for the start of the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param category  the category ({@code null} not permitted).
      *
@@ -158,8 +157,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the y-value for the start of the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the y-value for the start of the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param value  the value (must be finite).
      *
@@ -183,8 +182,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the category for the end of the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the category for the end of the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param category  the category ({@code null} not permitted).
      *
@@ -208,8 +207,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the y-value for the end of the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the y-value for the end of the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param value  the value (must be finite).
      *
@@ -233,8 +232,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the paint used to draw the connecting line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the paint used to draw the connecting line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -258,8 +257,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     }
 
     /**
-     * Sets the stroke used to draw the connecting line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the stroke used to draw the connecting line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *

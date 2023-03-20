@@ -57,7 +57,6 @@ import java.util.List;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.BoxAndWhiskerXYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -142,8 +141,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the box width and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the box width and calls {@link #fireChangeEvent()}.
      * <P>
      * If you set the width to a negative value, the renderer will calculate
      * the box width automatically based on the space available on the chart.
@@ -171,8 +169,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint used to fill boxes and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the paint used to fill boxes and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -195,8 +192,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the box is filled and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether or not the box is filled and 
+     * calls {@link #fireChangeEvent()}.
      *
      * @param flag  the flag.
      *
@@ -221,8 +218,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the paint used to paint the various artifacts such as outliers,
-     * farout symbol, median line and the averages ellipse, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * farout symbol, median line and the averages ellipse, and 
+     * calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *

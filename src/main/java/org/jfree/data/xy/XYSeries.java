@@ -49,7 +49,6 @@ import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 
 /**
@@ -317,19 +316,17 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the maximum number of items that will be retained in the series.
-     * If you add a new item to the series such that the number of items will
-     * exceed the maximum item count, then the first element in the series is
-     * automatically removed, ensuring that the maximum item count is not
-     * exceeded.
-     * <p>
-     * Typically this value is set before the series is populated with data,
-     * but if it is applied later, it may cause some items to be removed from
-     * the series (in which case a {@link SeriesChangeEvent} will be sent to
-     * all registered listeners).
-     *
-     * @param maximum  the maximum number of items for the series.
-     */
+	 * Sets the maximum number of items that will be retained in the series. If you
+	 * add a new item to the series such that the number of items will exceed the
+	 * maximum item count, then the first element in the series is automatically
+	 * removed, ensuring that the maximum item count is not exceeded.
+	 * <p>
+	 * Typically this value is set before the series is populated with data, but if
+	 * it is applied later, it may cause some items to be removed from the series
+	 * (in which case notification will be sent to all registered listeners).
+	 *
+	 * @param maximum the maximum number of items for the series.
+	 */
     public void setMaximumItemCount(int maximum) {
         this.maximumItemCount = maximum;
         int remove = this.data.size() - maximum;
@@ -341,72 +338,68 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
-     *
-     * @param item  the (x, y) item ({@code null} not permitted).
-     */
+	 * Adds a data item to the series by calling {@link #add(XYDataItem, boolean)}.
+	 *
+	 * @param item the (x, y) item ({@code null} not permitted).
+	 */
     public void add(XYDataItem item) {
         // argument checking delegated...
         add(item, true);
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
-     *
-     * @param x  the x value.
-     * @param y  the y value.
-     */
+	 * Adds a data item to the series by calling
+	 * {@link #add(double, double, boolean)}.
+	 *
+	 * @param x the x value.
+	 * @param y the y value.
+	 */
     public void add(double x, double y) {
         add(x, y, true);
     }
 
     /**
-     * Adds a data item to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param x  the x value.
-     * @param y  the y value.
-     * @param notify  a flag that controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
-     */
+	 * Adds a data item to the series by calling
+	 * {@link #add(Number, Number, boolean)}.
+	 *
+	 * @param x      the x value.
+	 * @param y      the y value.
+	 * @param notify a flag that controls whether or not notification is sent 
+	 *               to all registered listeners.
+	 */
     public void add(double x, double y, boolean notify) {
         add(Double.valueOf(x), Double.valueOf(y), notify);
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.  The unusual pairing of parameter types is to
-     * make it easier to add {@code null} y-values.
-     *
-     * @param x  the x value.
-     * @param y  the y value ({@code null} permitted).
-     */
+	 * Adds a data item to the series by calling {@link #add(Number, Number)}. 
+	 * The unusual pairing of parameter types is to make it easier to add
+	 * {@code null} y-values.
+	 *
+	 * @param x the x value.
+	 * @param y the y value ({@code null} permitted).
+	 */
     public void add(double x, Number y) {
         add(Double.valueOf(x), y);
     }
 
     /**
-     * Adds a data item to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.  The unusual
-     * pairing of parameter types is to make it easier to add null y-values.
-     *
-     * @param x  the x value.
-     * @param y  the y value ({@code null} permitted).
-     * @param notify  a flag that controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
-     */
+	 * Adds a data item to the series by calling
+	 * {@link #add(Number, Number, boolean)}. The unusual pairing of parameter
+	 * types is to make it easier to add null y-values.
+	 *
+	 * @param x      the x value.
+	 * @param y      the y value ({@code null} permitted).
+	 * @param notify a flag that controls whether or not notification is sent
+	 *               to all registered listeners.
+	 */
     public void add(double x, Number y, boolean notify) {
         add(Double.valueOf(x), y, notify);
     }
 
     /**
-     * Adds a new data item to the series (in the correct position if the
-     * {@code autoSort} flag is set for the series) and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds a new data item to the series by calling
+     * {@link #add(Number, Number, boolean)}.
      * <P>
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
@@ -423,17 +416,15 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds new data to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds new data to the series by calling {@link #add(XYDataItem, boolean)}.
      * <P>
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
-     * @param notify  a flag the controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
+     * @param notify a flag that controls whether or not notification is sent
+	 *               to all registered listeners.
      */
     public void add(Number x, Number y, boolean notify) {
         // delegate argument checking to XYDataItem...
@@ -442,14 +433,13 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a data item to the series and, if requested, sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param item  the (x, y) item ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not a
-     *                {@link SeriesChangeEvent} is sent to all registered
-     *                listeners.
-     */
+	 * Adds a data item to the series and, if requested, calls
+	 * {@link #fireSeriesChanged()}.
+	 *
+	 * @param item   the (x, y) item ({@code null} not permitted).
+	 * @param notify a flag that controls whether or not notification is sent to all
+	 *               registered listeners.
+	 */
     public void add(XYDataItem item, boolean notify) {
         Args.nullNotPermitted(item, "item");
         item = (XYDataItem) item.clone();
@@ -500,8 +490,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Deletes a range of items from the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Deletes a range of items from the series and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param start  the start index (zero-based).
      * @param end  the end index (zero-based).
@@ -513,13 +503,13 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Removes the item at the specified index and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param index  the index.
-     *
-     * @return The item removed.
-     */
+	 * Removes the item at the specified index and calls
+	 * {@link #fireSeriesChanged()}.
+	 *
+	 * @param index the index.
+	 *
+	 * @return The item removed.
+	 */
     public XYDataItem remove(int index) {
         XYDataItem removed = (XYDataItem) this.data.remove(index);
         updateBoundsForRemovedItem(removed);
@@ -528,23 +518,22 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Removes an item with the specified x-value and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.  Note that when
-     * a series permits multiple items with the same x-value, this method
-     * could remove any one of the items with that x-value.
-     *
-     * @param x  the x-value.
-
-     * @return The item removed.
-     */
+	 * Removes an item with the specified x-value by calling {@link #remove(int)}.
+	 * Note that when a series permits multiple items with the same x-value, this
+	 * method could remove any one of the items with that x-value.
+	 *
+	 * @param x the x-value.
+	 * 
+	 * @return The item removed.
+	 */
     public XYDataItem remove(Number x) {
         return remove(indexOf(x));
     }
 
     /**
-     * Removes all data items from the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     */
+	 * Removes all data items from the series and calls
+	 * {@link #fireSeriesChanged()}.
+	 */
     public void clear() {
         if (this.data.size() > 0) {
             this.data.clear();
@@ -640,8 +629,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Updates the value of an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Updates the value of an item in the series and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param index  the item (zero based index).
      * @param y  the new value ({@code null} permitted).
@@ -686,21 +675,21 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds or updates an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param x  the x-value.
-     * @param y  the y-value.
-     *
-     * @return The item that was overwritten, if any.
-     */
+	 * Adds or updates an item in the series by calling
+	 * {@link #addOrUpdate(Number, Number)}.
+	 *
+	 * @param x the x-value.
+	 * @param y the y-value.
+	 *
+	 * @return The item that was overwritten, if any.
+	 */
     public XYDataItem addOrUpdate(double x, double y) {
         return addOrUpdate(Double.valueOf(x), Double.valueOf(y));
     }
 
     /**
-     * Adds or updates an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Adds or updates an item in the series by calling
+     * {@link #addOrUpdate(XYDataItem)}.
      *
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
@@ -714,14 +703,13 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds or updates an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param item  the data item ({@code null} not permitted).
-     *
-     * @return A copy of the overwritten data item, or {@code null} if no
-     *         item was overwritten.
-     */
+	 * Adds or updates an item in the series and calls {@link #fireSeriesChanged()}.
+	 *
+	 * @param item the data item ({@code null} not permitted).
+	 *
+	 * @return A copy of the overwritten data item, or {@code null} if no item was
+	 *         overwritten.
+	 */
     public XYDataItem addOrUpdate(XYDataItem item) {
         Args.nullNotPermitted(item, "item");
         if (this.allowDuplicateXValues) {

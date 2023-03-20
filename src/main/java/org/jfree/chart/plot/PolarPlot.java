@@ -73,7 +73,6 @@ import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.TickUnit;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
@@ -324,8 +323,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the primary axis for the plot and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the primary axis for the plot and calls {@link #fireChangeEvent()}.
      *
      * @param axis  the new primary axis ({@code null} permitted).
      */
@@ -334,8 +332,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets an axis for the plot and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets an axis for the plot and calls {@link #fireChangeEvent()}.
      *
      * @param index  the axis index.
      * @param axis  the axis ({@code null} permitted).
@@ -347,15 +344,15 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets an axis for the plot and, if requested, sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param index  the axis index.
-     * @param axis  the axis ({@code null} permitted).
-     * @param notify  notify listeners?
-     *
-     * @see #getAxis(int)
-     */
+	 * Sets an axis for the plot and, if requested, calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param index  the axis index.
+	 * @param axis   the axis ({@code null} permitted).
+	 * @param notify notify listeners?
+	 *
+	 * @see #getAxis(int)
+	 */
     public void setAxis(int index, ValueAxis axis, boolean notify) {
         ValueAxis existing = getAxis(index);
         if (existing != null) {
@@ -403,8 +400,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the location of the primary axis and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the location of the primary axis and calls {@link #fireChangeEvent()}.
      *
      * @param location  the location ({@code null} not permitted).
      *
@@ -416,22 +412,21 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the location of the primary axis and, if requested, sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param location  the location ({@code null} not permitted).
-     * @param notify  notify listeners?
-     *
-     * @see #getAxisLocation()
-     */
+	 * Sets the location of the primary axis and, if requested, calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param location the location ({@code null} not permitted).
+	 * @param notify   notify listeners?
+	 *
+	 * @see #getAxisLocation()
+	 */
     public void setAxisLocation(PolarAxisLocation location, boolean notify) {
         // delegate...
         setAxisLocation(0, location, notify);
     }
 
     /**
-     * Sets the location for an axis and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Sets the location for an axis and calls {@link #fireChangeEvent()}.
      *
      * @param index  the axis index.
      * @param location  the location ({@code null} not permitted).
@@ -444,13 +439,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the axis location for an axis and, if requested, sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param index  the axis index.
-     * @param location  the location ({@code null} not permitted).
-     * @param notify  notify listeners?
-     */
+	 * Sets the axis location for an axis and, if requested, calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param index    the axis index.
+	 * @param location the location ({@code null} not permitted).
+	 * @param notify   notify listeners?
+	 */
     public void setAxisLocation(int index, PolarAxisLocation location,
             boolean notify) {
         Args.nullNotPermitted(location, "location");
@@ -605,8 +600,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets a renderer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets a renderer and calls {@link #fireChangeEvent()}.
      *
      * @param index  the index.
      * @param renderer  the renderer.
@@ -618,8 +612,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets a renderer and, if requested, sends a {@link PlotChangeEvent} to
-     * all registered listeners.
+     * Sets a renderer and, if requested, calls {@link #fireChangeEvent()}.
      *
      * @param index  the index.
      * @param renderer  the renderer.
@@ -655,7 +648,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Sets the tick unit that controls the spacing of the angular grid
-     * lines, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * lines, and calls {@link #fireChangeEvent()}.
      *
      * @param unit  the tick unit ({@code null} not permitted).
      */
@@ -675,8 +668,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the offset that is used for all angles and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the offset that is used for all angles and calls {@link #fireChangeEvent()}.
      *
      * This is useful to let 0 degrees be at the north, east, south or west
      * side of the chart.
@@ -724,7 +716,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Sets the flag that controls whether or not the angle labels are visible,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param visible  the flag.
      *
@@ -749,13 +741,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the font used to display the angle labels and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param font  the font ({@code null} not permitted).
-     *
-     * @see #getAngleLabelFont()
-     */
+	 * Sets the font used to display the angle labels and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param font the font ({@code null} not permitted).
+	 *
+	 * @see #getAngleLabelFont()
+	 */
     public void setAngleLabelFont(Font font) {
         Args.nullNotPermitted(font, "font");
         this.angleLabelFont = font;
@@ -774,11 +766,11 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the paint used to display the angle labels and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     */
+	 * Sets the paint used to display the angle labels and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param paint the paint ({@code null} not permitted).
+	 */
     public void setAngleLabelPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         this.angleLabelPaint = paint;
@@ -801,8 +793,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * Sets the flag that controls whether or not the angular grid-lines are
      * visible.
      * <p>
-     * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
-     * registered listeners.
+     * If the flag value is changed, {@link #fireChangeEvent()} is called.
      *
      * @param visible  the new value of the flag.
      *
@@ -829,7 +820,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Sets the stroke for the grid lines plotted against the angular axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      * <p>
      * If you set this to {@code null}, no grid lines will be drawn.
      *
@@ -884,8 +875,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * Sets the flag that controls whether or not the radius axis grid lines
      * are visible.
      * <p>
-     * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
-     * registered listeners.
+     * If the flag value is changed, {@link #fireChangeEvent()} is called.
      *
      * @param visible  the new value of the flag.
      *
@@ -912,7 +902,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Sets the stroke for the grid lines plotted against the radius axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      * <p>
      * If you set this to {@code null}, no grid lines will be drawn.
      *
@@ -939,7 +929,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Sets the paint for the grid lines plotted against the radius axis and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      * <p>
      * If you set this to {@code null}, no grid lines will be drawn.
      *
@@ -964,7 +954,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Set the flag that determines if radial minor grid-lines will be drawn,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param flag {@code true} to draw the radial minor grid-lines,
      *             {@code false} to hide them.
@@ -984,8 +974,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Set the margin around the plot area and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Set the margin around the plot area and calls {@link #fireChangeEvent()}.
      *
      * @param margin The new margin in pixels.
      */
@@ -1020,13 +1009,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Add text to be displayed in the lower right hand corner and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param text  the text to display ({@code null} not permitted).
-     *
-     * @see #removeCornerTextItem(String)
-     */
+	 * Add text to be displayed in the lower right hand corner and calls
+	 * {@link #fireChangeEvent()}.
+	 *
+	 * @param text the text to display ({@code null} not permitted).
+	 *
+	 * @see #removeCornerTextItem(String)
+	 */
     public void addCornerTextItem(String text) {
         Args.nullNotPermitted(text, "text");
         this.cornerTextItems.add(text);
@@ -1035,7 +1024,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Remove the given text from the list of corner text items and
-     * sends a {@link PlotChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param text  the text to remove ({@code null} ignored).
      *
@@ -1049,8 +1038,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Clear the list of corner text items and sends a {@link PlotChangeEvent}
-     * to all registered listeners.
+     * Clear the list of corner text items and calls {@link #fireChangeEvent()}.
      *
      * @see #addCornerTextItem(String)
      * @see #removeCornerTextItem(String)

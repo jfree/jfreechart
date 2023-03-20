@@ -59,7 +59,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.needle.ArrowNeedle;
 import org.jfree.chart.needle.LineNeedle;
 import org.jfree.chart.needle.LongNeedle;
@@ -219,8 +218,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the label font and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the label font and calls {@link #fireChangeEvent() }.
      *
      * @param font  the new label font.
      *
@@ -246,7 +244,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the paint used to fill the outer circle of the compass,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent() }.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -272,7 +270,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the paint used to fill the inner background area of the compass,
-     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -298,7 +296,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the paint used to draw the circles, symbols and labels of the
-     * compass, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * compass, and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -457,8 +455,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the needle for a series and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the needle for a series and calls {@link #fireChangeEvent()}.
      *
      * @param index  the series index.
      * @param needle  the needle.

@@ -53,7 +53,6 @@ import java.util.List;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -89,8 +88,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Adds a crosshair against the domain axis (x-axis) and sends an
-     * {@link OverlayChangeEvent} to all registered listeners.
+     * Adds a crosshair against the domain axis (x-axis) and calls {@link #fireOverlayChanged()}.
      *
      * @param crosshair  the crosshair ({@code null} not permitted).
      *
@@ -105,8 +103,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Removes a domain axis crosshair and sends an {@link OverlayChangeEvent}
-     * to all registered listeners.
+     * Removes a domain axis crosshair and calls {@link #fireOverlayChanged()}.
      *
      * @param crosshair  the crosshair ({@code null} not permitted).
      *
@@ -121,9 +118,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Clears all the domain crosshairs from the overlay and sends an
-     * {@link OverlayChangeEvent} to all registered listeners (unless there
-     * were no crosshairs to begin with).
+     * Clears all the domain crosshairs from the overlay and calls {@link #fireOverlayChanged()}.
      */
     public void clearDomainCrosshairs() {
         if (this.xCrosshairs.isEmpty()) {
@@ -146,8 +141,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Adds a crosshair against the range axis and sends an
-     * {@link OverlayChangeEvent} to all registered listeners.
+     * Adds a crosshair against the range axis and calls {@link #fireOverlayChanged()}.
      *
      * @param crosshair  the crosshair ({@code null} not permitted).
      */
@@ -159,8 +153,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Removes a range axis crosshair and sends an {@link OverlayChangeEvent}
-     * to all registered listeners.
+     * Removes a range axis crosshair and calls {@link #fireOverlayChanged()}.
      *
      * @param crosshair  the crosshair ({@code null} not permitted).
      *
@@ -175,9 +168,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Clears all the range crosshairs from the overlay and sends an
-     * {@link OverlayChangeEvent} to all registered listeners (unless there
-     * were no crosshairs to begin with).
+     * Clears all the range crosshairs from the overlay and calls {@link #fireOverlayChanged()}.
      */
     public void clearRangeCrosshairs() {
         if (this.yCrosshairs.isEmpty()) {

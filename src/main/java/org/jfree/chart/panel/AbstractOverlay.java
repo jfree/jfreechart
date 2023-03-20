@@ -37,14 +37,12 @@
 package org.jfree.chart.panel;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.util.Args;
 
 /**
- * A base class for implementing overlays for a {@link ChartPanel}.
+ * A base class for implementing overlays for a {@link org.jfree.chart.ChartPanel}.
  */
 public class AbstractOverlay {
 
@@ -83,7 +81,7 @@ public class AbstractOverlay {
     }
 
     /**
-     * Sends a default {@link ChartChangeEvent} to all registered listeners.
+     * Sends a default {@link OverlayChangeEvent} to all registered listeners.
      * <P>
      * This method is for convenience only.
      */
@@ -93,7 +91,7 @@ public class AbstractOverlay {
     }
 
     /**
-     * Sends a {@link ChartChangeEvent} to all registered listeners.
+     * Sends an {@link OverlayChangeEvent} to all registered listeners.
      *
      * @param event  information about the event that triggered the
      *               notification.

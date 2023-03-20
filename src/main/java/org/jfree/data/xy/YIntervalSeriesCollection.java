@@ -43,8 +43,6 @@ import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
-import org.jfree.data.general.DatasetChangeEvent;
-
 /**
  * A collection of {@link YIntervalSeries} objects.
  *
@@ -64,8 +62,8 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Adds a series to the collection and calls
+	 * {@link #fireDatasetChanged()}
      *
      * @param series  the series ({@code null} not permitted).
      */
@@ -266,8 +264,8 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls
+	 * {@link #fireDatasetChanged()}
      *
      * @param series  the series index (zero-based).
      */
@@ -282,8 +280,8 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls
+	 * {@link #fireDatasetChanged()}
      *
      * @param series  the series ({@code null} not permitted).
      */
@@ -297,9 +295,9 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes all the series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
-     */
+	 * Removes all the series from the collection and calls
+	 * {@link #fireDatasetChanged()}
+	 */
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.

@@ -57,7 +57,6 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
@@ -257,8 +256,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the base value for the bars and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the base value for the bars and calls {@link #fireChangeEvent()}.
      *
      * @param base  the new base value.
      *
@@ -282,8 +280,8 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the item margin and sends a {@link RendererChangeEvent} to all
-     * registered listeners.  The value is expressed as a percentage of the
+     * Sets the item margin and calls {@link #fireChangeEvent()}.
+     * The value is expressed as a percentage of the
      * available width for plotting all the bars, with the resulting amount to
      * be distributed between all the bars evenly.
      *
@@ -309,7 +307,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the flag that controls whether or not bar outlines are drawn and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param draw  the flag.
      *
@@ -334,8 +332,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the maximum bar width, which is specified as a percentage of the
-     * available space for all bars, and sends a {@link RendererChangeEvent} to
-     * all registered listeners.
+     * available space for all bars, and calls {@link #fireChangeEvent()}.
      *
      * @param percent  the percent (where 0.05 is five percent).
      *
@@ -359,8 +356,8 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the minimum bar length and sends a {@link RendererChangeEvent} to
-     * all registered listeners.  The minimum bar length is specified in Java2D
+     * Sets the minimum bar length and calls {@link #fireChangeEvent()}.
+     * The minimum bar length is specified in Java2D
      * units, and can be used to prevent bars that represent very small data
      * values from disappearing when drawn on the screen.  Typically you would
      * set this to (say) 0.5 or 1.0 Java 2D units.  Use this attribute with
@@ -393,8 +390,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the gradient paint transformer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the gradient paint transformer and calls {@link #fireChangeEvent()}.
      *
      * @param transformer  the transformer ({@code null} permitted).
      *
@@ -420,8 +416,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the fallback position for positive item labels that don't fit
-     * within a bar, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * within a bar, and calls {@link #fireChangeEvent()}.
      *
      * @param position  the position ({@code null} permitted).
      *
@@ -447,8 +442,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Sets the fallback position for negative item labels that don't fit
-     * within a bar, and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * within a bar, and calls {@link #fireChangeEvent()}.
      *
      * @param position  the position ({@code null} permitted).
      *
@@ -478,7 +472,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Sets the flag that controls whether or not the base value for the bars
      * is included in the range calculated by
      * {@link #findRangeBounds(CategoryDataset)}.  If the flag is changed,
-     * a {@link RendererChangeEvent} is sent to all registered listeners.
+     * {@link #fireChangeEvent()} is called.
      *
      * @param include  the new value for the flag.
      *
@@ -503,8 +497,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the bar painter for this renderer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the bar painter for this renderer and calls {@link #fireChangeEvent()}.
      *
      * @param painter  the painter ({@code null} not permitted).
      *
@@ -549,8 +542,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the shadow paint and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
+     * Sets the shadow paint and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -572,8 +564,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the x-offset for the bar shadow and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the x-offset for the bar shadow and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      */
@@ -592,8 +583,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the y-offset for the bar shadow and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the y-offset for the bar shadow and calls {@link #fireChangeEvent()}.
      *
      * @param offset  the offset.
      */

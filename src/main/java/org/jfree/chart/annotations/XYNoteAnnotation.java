@@ -51,7 +51,6 @@ import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -157,8 +156,7 @@ public class XYNoteAnnotation extends XYTextAnnotation
     }
 
     /**
-     * Sets the angle of the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the angle of the line and calls {@link #fireAnnotationChanged()}.
      *
      * @param angle  the angle (in radians).
      *
@@ -181,8 +179,7 @@ public class XYNoteAnnotation extends XYTextAnnotation
     }
 
     /**
-     * Sets the tip radius and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the tip radius and calls {@link #fireAnnotationChanged()}.
      *
      * @param radius  the radius (in Java2D units).
      *
@@ -205,8 +202,7 @@ public class XYNoteAnnotation extends XYTextAnnotation
     }
 
     /**
-     * Sets the base radius and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the base radius and calls {@link #fireAnnotationChanged()}.
      *
      * @param radius  the radius (in Java2D units).
      *
@@ -230,8 +226,7 @@ public class XYNoteAnnotation extends XYTextAnnotation
 
     /**
      * Sets the label offset (from the line base, continuing in a straight
-     * line, in Java2D units) and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * line, in Java2D units) and calls {@link #fireAnnotationChanged()}.
      *
      * @param offset  the offset (in Java2D units).
      *
@@ -254,8 +249,8 @@ public class XYNoteAnnotation extends XYTextAnnotation
     }
 
     /**
-     * Sets the stroke used to draw the line line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the stroke used to draw the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
@@ -279,8 +274,8 @@ public class XYNoteAnnotation extends XYTextAnnotation
     }
 
     /**
-     * Sets the paint used for the line and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the paint used for the line and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the line paint ({@code null} not permitted).
      *

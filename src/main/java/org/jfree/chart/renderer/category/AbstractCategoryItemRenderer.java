@@ -63,7 +63,6 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.CategorySeriesLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
@@ -242,8 +241,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the item label generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the item label generator for a series by calling
+     * {@link #setSeriesItemLabelGenerator(int, CategoryItemLabelGenerator, boolean)}
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
@@ -257,8 +256,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the item label generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the item label generator for a series and, if requested, calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
@@ -288,8 +287,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default item label generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default item label generator by calling
+     * {@link #setDefaultItemLabelGenerator(CategoryItemLabelGenerator, boolean)}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -302,8 +301,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the default item label generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default item label generator and, if requested, calls
+     * {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      * @param notify  notify listeners?
@@ -359,8 +358,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the tool tip generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the tool tip generator for a series by calling
+     * {@link #setSeriesToolTipGenerator(int, CategoryToolTipGenerator, boolean)}.
      *
      * @param series  the series index (zero-based).
      * @param generator  the generator ({@code null} permitted).
@@ -374,8 +373,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the tool tip generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the tool tip generator for a series and, if requested, calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero-based).
      * @param generator  the generator ({@code null} permitted).
@@ -405,8 +404,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the default tool tip generator by calling 
+     * {@link #setDefaultToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator, boolean) }.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -418,8 +417,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the default tool tip generator and, if requested, calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      * @param notify  notify listeners?
@@ -427,7 +426,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getDefaultToolTipGenerator()
      */
     @Override
-    public void setDefaultToolTipGenerator(CategoryToolTipGenerator generator, boolean notify) {
+    public void setDefaultToolTipGenerator(CategoryToolTipGenerator generator,
+                                           boolean notify) {
         this.defaultToolTipGenerator = generator;
         if (notify) {
             fireChangeEvent();
@@ -471,8 +471,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the URL generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the URL generator for a series by calling
+     * {@link #setSeriesItemURLGenerator(int, org.jfree.chart.urls.CategoryURLGenerator, boolean)}
      *
      * @param series  the series index (zero based).
      * @param generator  the generator.
@@ -486,8 +486,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the URL generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the URL generator for a series and, if requested, calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param series  the series index (zero based).
      * @param generator  the generator.
@@ -517,8 +517,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default item URL generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default item URL generator by calling
+     * {@link #setDefaultItemURLGenerator(org.jfree.chart.urls.CategoryURLGenerator, boolean)}.
      *
      * @param generator  the item URL generator ({@code null} permitted).
      *
@@ -530,8 +530,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
     
     /**
-     * Sets the default item URL generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the default item URL generator and, if requested, calls 
+     * {@link #fireChangeEvent()}.
      *
      * @param generator  the item URL generator ({@code null} permitted).
      * @param notify  notify listeners?
@@ -1534,8 +1534,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item label generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item label generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} not permitted).
      *
@@ -1560,8 +1559,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item tool tip generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item tool tip generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -1585,8 +1583,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the legend item URL generator and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the legend item URL generator and calls {@link #fireChangeEvent()}.
      *
      * @param generator  the generator ({@code null} permitted).
      *

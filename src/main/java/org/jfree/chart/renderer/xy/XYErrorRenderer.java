@@ -47,7 +47,6 @@ import java.io.ObjectOutputStream;
 import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -119,9 +118,9 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer draws error
-     * bars for the x-values and, if the flag changes, sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether or not the renderer draws error bars
+     * for the x-values and, if the flag changes, calls
+     * {@link #fireChangeEvent()}.
      *
      * @param draw  the flag value.
      *
@@ -147,9 +146,9 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer draws error
-     * bars for the y-values and, if the flag changes, sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether or not the renderer draws error bars
+     * for the y-values and, if the flag changes, calls
+     * {@link #fireChangeEvent()}.
      *
      * @param draw  the flag value.
      *
@@ -175,8 +174,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the length of the cap at the end of the error bars, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the length of the cap at the end of the error bars, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param length  the length (in Java2D units).
      *
@@ -200,8 +199,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the paint used to draw the error bars and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint used to draw the error bars and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -226,8 +225,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the stroke used to draw the error bars and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the stroke used to draw the error bars and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param stroke   the stroke ({@code null} permitted).
      *

@@ -43,15 +43,15 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
 /**
- * An item label generator defined for use with the {@link XYBubbleRenderer}
- * class, or any other class that uses an {@link XYZDataset}.
+ * An item label generator defined for use with the
+ * {@link org.jfree.chart.renderer.xy.XYBubbleRenderer} class, or any other
+ * class that uses an {@link XYZDataset}.
  */
 public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
         implements XYItemLabelGenerator, PublicCloneable, Serializable {

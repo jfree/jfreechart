@@ -47,14 +47,14 @@ import java.sql.Timestamp;
 import java.sql.Types;
 
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
 /**
- * A {@link PieDataset} that reads data from a database via JDBC.
+ * A {@link org.jfree.data.general.PieDataset} that reads data from a database
+ * via JDBC.
  * <P>
  * A query should be supplied that returns data in two columns, the first
- * containing VARCHAR data, and the second containing numerical data.  The
- * data is cached in-memory and can be refreshed at any time.
+ * containing VARCHAR data, and the second containing numerical data. The data
+ * is cached in-memory and can be refreshed at any time.
  */
 public class JDBCPieDataset extends DefaultPieDataset {
 

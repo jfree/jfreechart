@@ -85,7 +85,6 @@ import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYAnnotationBoundsInfo;
 import org.jfree.chart.axis.Axis;
@@ -4190,8 +4189,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Receives notification of a change to an {@link Annotation} added to
-     * this plot.
+     * Receives notification of a change to an annotation on this plot.
      *
      * @param event  information about the event (not used here).
      */

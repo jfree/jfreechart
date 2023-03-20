@@ -57,7 +57,6 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYSeriesLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
@@ -264,7 +263,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not outlines of the areas are drawn
-     * and sends a {@link RendererChangeEvent} to all registered listeners.
+     * and calls {@link #fireChangeEvent()}.
      *
      * @param show  the flag.
      *
@@ -285,8 +284,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the shape used as an area in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the shape used as an area in each legend item and calls {@link #fireChangeEvent()}.
      *
      * @param area  the area ({@code null} not permitted).
      */
@@ -308,8 +306,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not the series fill paint is
-     * used to fill the area under the line and sends a
-     * {@link RendererChangeEvent} to all listeners.
+     * used to fill the area under the line and calls {@link #fireChangeEvent()}.
      *
      * @param use  the new flag value.
      */
@@ -328,8 +325,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the gradient paint transformer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the gradient paint transformer and calls {@link #fireChangeEvent()}.
      *
      * @param transformer  the transformer ({@code null} not permitted).
      */

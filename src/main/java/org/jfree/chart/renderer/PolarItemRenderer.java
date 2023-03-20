@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -156,8 +155,7 @@ public interface PolarItemRenderer {
     XYToolTipGenerator getSeriesToolTipGenerator(int series);
 
     /**
-     * Sets the tool tip generator for a series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the tool tip generator for a series and notifies all registered listeners.
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
@@ -177,8 +175,7 @@ public interface PolarItemRenderer {
     XYToolTipGenerator getBaseToolTipGenerator();
 
     /**
-     * Sets the base tool tip generator and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the base tool tip generator and notifies all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *

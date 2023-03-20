@@ -49,7 +49,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
@@ -175,8 +174,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Set the resolution of splines and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Set the resolution of splines and calls {@link #fireChangeEvent()}.
      *
      * @param p  number of line segments between points (must be &gt; 0).
      *
@@ -202,8 +200,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Set the fill type and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Set the fill type and calls {@link #fireChangeEvent()}.
      *
      * @param fillType   the fill type ({@code null} not permitted).
      *
@@ -224,8 +221,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     }
     
     /**
-     * Sets the gradient paint transformer and sends a 
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the gradient paint transformer and calls {@link #fireChangeEvent()}.
      * 
      * @param gpt  the transformer ({@code null} permitted).
      */

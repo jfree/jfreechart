@@ -48,7 +48,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -125,8 +124,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the text for the annotation and sends an 
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the text for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param text  the text ({@code null} not permitted).
      *
@@ -150,8 +149,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the font for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the font for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param font  the font ({@code null} not permitted).
      *
@@ -175,8 +174,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the paint for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the paint for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -201,8 +200,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
 
     /**
      * Sets the text anchor (the point on the text bounding rectangle that is
-     * aligned to the (x, y) coordinate of the annotation) and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * aligned to the (x, y) coordinate of the annotation) and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param anchor  the anchor point ({@code null} not permitted).
      *
@@ -226,8 +225,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the rotation anchor point and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the rotation anchor point and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param anchor  the anchor ({@code null} not permitted).
      *
@@ -251,8 +250,8 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the rotation angle and sends an {@link AnnotationChangeEvent} to
-     * all registered listeners.  The angle is measured clockwise in radians.
+     * Sets the rotation angle and calls {@link #fireAnnotationChanged()}.
+     * The angle is measured clockwise in radians.
      *
      * @param angle  the angle (in radians).
      *

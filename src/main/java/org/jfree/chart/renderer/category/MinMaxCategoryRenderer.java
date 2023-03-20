@@ -60,7 +60,6 @@ import javax.swing.Icon;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.PaintUtils;
@@ -139,8 +138,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the flag that controls whether or not lines are drawn to connect
-     * the items within a series and sends a {@link RendererChangeEvent} to
-     * all registered listeners.
+     * the items within a series and calls {@link #fireChangeEvent()}.
      *
      * @param draw  the new value of the flag.
      *
@@ -167,8 +165,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the paint used to draw the line between the minimum and maximum
-     * value items in each category and sends a {@link RendererChangeEvent} to
-     * all registered listeners.
+     * value items in each category and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -194,8 +191,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the stroke of the line between the minimum value and the maximum
-     * value and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * value and calls {@link #fireChangeEvent()}.
      *
      * @param stroke the new stroke ({@code null} not permitted).
      */
@@ -217,8 +213,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     }
 
     /**
-     * Sets the icon drawn for each data item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the icon drawn for each data item and calls {@link #fireChangeEvent()}.
      *
      * @param icon  the icon.
      *
@@ -244,8 +239,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the icon displayed for the maximum value data item within each
-     * category and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * category and calls {@link #fireChangeEvent()}.
      *
      * @param icon  the icon ({@code null} not permitted).
      *
@@ -271,8 +265,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the icon displayed for the minimum value data item within each
-     * category and sends a {@link RendererChangeEvent} to all registered
-     * listeners.
+     * category and calls {@link #fireChangeEvent()}.
      *
      * @param icon  the icon ({@code null} not permitted).
      *

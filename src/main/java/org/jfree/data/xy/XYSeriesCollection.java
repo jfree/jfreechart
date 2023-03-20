@@ -40,8 +40,11 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.*;
-import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.DomainInfo;
+import org.jfree.data.DomainOrder;
+import org.jfree.data.Range;
+import org.jfree.data.RangeInfo;
+import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.Series;
 
 import java.beans.PropertyChangeEvent;
@@ -113,8 +116,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
-     * to all registered listeners.
+     * Adds a series to the collection and calls {@link #fireDatasetChanged()}.
      *
      * @param series  the series ({@code null} not permitted).
      * 
@@ -135,8 +137,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls 
+     * {@link #fireDatasetChanged()}.
      *
      * @param series  the series index (zero-based).
      */
@@ -151,8 +153,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes a series from the collection and calls 
+     * {@link #fireDatasetChanged()}.
      *
      * @param series  the series ({@code null} not permitted).
      */
@@ -167,8 +169,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes all the series from the collection and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
+     * Removes all the series from the collection and and calls 
+     * {@link #fireDatasetChanged()}.
      */
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
@@ -549,8 +551,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the interval width and sends a {@link DatasetChangeEvent} to all
-     * registered listeners.
+     * Sets the interval width and calls {@link #fireDatasetChanged()}.
      *
      * @param width  the width (negative values not permitted).
      */

@@ -38,7 +38,6 @@ package org.jfree.data.xy;
 
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
-import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x, x-low, x-high, y) data items.
@@ -74,25 +73,25 @@ public class XIntervalSeries extends ComparableObjectSeries {
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to 
-     * all registered listeners.
-     *
-     * @param x  the x-value.
-     * @param y  the y-value.
-     * @param xLow  the lower bound of the y-interval.
-     * @param xHigh  the upper bound of the y-interval.
-     */
+	 * Adds a data item to the series by calling
+	 * {@link #add(XIntervalDataItem, boolean)}
+	 *
+	 * @param x     the x-value.
+	 * @param y     the y-value.
+	 * @param xLow  the lower bound of the y-interval.
+	 * @param xHigh the upper bound of the y-interval.
+	 */
     public void add(double x, double xLow, double xHigh, double y) {
         add(new XIntervalDataItem(x, xLow, xHigh, y), true);
     }
 
     /**
-     * Adds a data item to the series and, if requested, sends a 
-     * {@link SeriesChangeEvent} to all registered listeners.
-     * 
-     * @param item the data item ({@code null} not permitted).
-     * @param notify  notify listeners?
-     */
+	 * Adds a data item to the series by calling
+	 * {@link #add(ComparableObjectItem, boolean)}
+	 * 
+	 * @param item   the data item ({@code null} not permitted).
+	 * @param notify notify listeners?
+	 */
     public void add(XIntervalDataItem item, boolean notify) {
         super.add(item, notify);
     }

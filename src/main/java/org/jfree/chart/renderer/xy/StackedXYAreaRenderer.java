@@ -57,7 +57,6 @@ import java.util.Stack;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -242,8 +241,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     }
 
     /**
-     * Sets the paint for rendering shapes and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint for rendering shapes and calls {@link #fireChangeEvent()}.
      *
      * @param shapePaint  the paint ({@code null} permitted).
      *
@@ -267,8 +265,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     }
 
     /**
-     * Sets the stroke for rendering shapes and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the stroke for rendering shapes and calls {@link #fireChangeEvent()}.
      *
      * @param shapeStroke  the stroke ({@code null} permitted).
      *

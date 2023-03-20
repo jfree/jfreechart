@@ -40,7 +40,6 @@ package org.jfree.chart.renderer.xy;
 import java.awt.geom.Line2D;
 
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.RendererState;
 import org.jfree.data.xy.XYDataset;
 
@@ -126,7 +125,7 @@ public class XYItemRendererState extends RendererState {
     }
 
     /**
-     * This method is called by the {@link XYPlot} when it starts a pass
+     * This method is called by the {@link org.jfree.chart.plot.XYPlot} when it starts a pass
      * through the (visible) items in a series.  The default implementation
      * records the first and last item indices - override this method to
      * implement additional specialised behaviour.
@@ -147,7 +146,7 @@ public class XYItemRendererState extends RendererState {
     }
 
     /**
-     * This method is called by the {@link XYPlot} when it ends a pass
+     * This method is called by the {@link org.jfree.chart.plot.XYPlot} when it ends a pass
      * through the (visible) items in a series.  The default implementation
      * does nothing, but you can override this method to implement specialised
      * behaviour.

@@ -53,7 +53,6 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
@@ -124,8 +123,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
 
     /**
      * Sets the paint used for the error indicators (if {@code null},
-     * the item paint is used instead) and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * the item paint is used instead) and calls {@link #fireChangeEvent()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -150,8 +148,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
 
     /**
      * Sets the stroke used for the error indicators (if {@code null},
-     * the item outline stroke is used instead) and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * the item outline stroke is used instead) and calls {@link #fireChangeEvent()}.
      *
      * @param stroke  the stroke ({@code null} permitted).
      *

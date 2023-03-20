@@ -649,7 +649,7 @@ public class XYSeriesTest {
     /**
      * A test for a bug reported in the forum:
      * 
-     * http://www.jfree.org/forum/viewtopic.php?f=3&t=116601
+     * @link{lhttp://www.jfree.org/forum/viewtopic.php?f=3&t=116601}
      */
     @Test
     public void testGetMaxY2() {

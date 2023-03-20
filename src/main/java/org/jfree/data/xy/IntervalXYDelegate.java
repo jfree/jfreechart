@@ -43,7 +43,6 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
-import org.jfree.data.RangeInfo;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetUtils;
@@ -56,7 +55,8 @@ import org.jfree.data.general.DatasetUtils;
  * <p>
  * The decorator pattern was not used because of the several possibly
  * implemented interfaces of the decorated instance (e.g.
- * {@link TableXYDataset}, {@link RangeInfo}, {@link DomainInfo} etc.).
+ * {@link org.jfree.data.xy.TableXYDataset}, {@link org.jfree.data.RangeInfo},
+ * {@link org.jfree.data.DomainInfo} etc.).
  * <p>
  * The width can be set manually or calculated automatically. The switch
  * autoWidth allows to determine which behavior is used. The auto width

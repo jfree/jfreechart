@@ -50,7 +50,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -126,8 +125,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether open ticks are drawn, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether open ticks are drawn, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param draw  the flag.
      *
@@ -151,8 +150,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether close ticks are drawn, and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the flag that controls whether close ticks are drawn, and calls
+     * {@link #fireChangeEvent()}.
      *
      * @param draw  the flag.
      *
@@ -176,10 +175,9 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint used to draw the ticks for the open values and sends a
-     * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to {@code null} (the default), the series paint is used
-     * instead.
+     * Sets the paint used to draw the ticks for the open values and calls
+     * {@link #fireChangeEvent()}. If you set this to {@code null} (the
+     * default), the series paint is used instead.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -203,10 +201,9 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint used to draw the ticks for the close values and sends a
-     * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to {@code null} (the default), the series paint is used
-     * instead.
+     * Sets the paint used to draw the ticks for the close values and calls
+     * {@link #fireChangeEvent()}. If you set this to {@code null} (the
+     * default), the series paint is used instead.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -229,8 +226,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the tick length (in Java2D units) and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the tick length (in Java2D units) and calls {@link #fireChangeEvent()}.
      *
      * @param length  the length.
      *

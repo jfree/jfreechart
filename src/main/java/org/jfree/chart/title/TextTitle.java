@@ -56,7 +56,6 @@ import org.jfree.chart.block.EntityBlockParams;
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.entity.ChartEntity;
-import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.entity.TitleEntity;
 import org.jfree.chart.event.TitleChangeEvent;
@@ -614,17 +613,20 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
     }
 
     /**
-     * Draws the block within the specified area.
-     *
-     * @param g2  the graphics device.
-     * @param area  the area.
-     * @param params  if this is an instance of {@link EntityBlockParams} it
-     *                is used to determine whether or not an
-     *                {@link EntityCollection} is returned by this method.
-     *
-     * @return An {@link EntityCollection} containing a chart entity for the
-     *         title, or {@code null}.
-     */
+	 * Draws the block within the specified area.
+	 *
+	 * @param g2     the graphics device.
+	 * @param area   the area.
+	 * @param params if this is an instance of
+	 *               {@link org.jfree.chart.block.EntityBlockParams} it is used to
+	 *               determine whether or not an 
+	 *               {@link org.jfree.chart.entity.EntityCollection} is
+	 *               returned by this method.
+	 *
+	 * @return An {@link org.jfree.chart.entity.EntityCollection} containing a
+	 *         chart entity for the title,
+	 *         or {@code null}.
+	 */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         if (this.content == null) {

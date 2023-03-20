@@ -43,7 +43,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.jfree.chart.plot.MultiplePiePlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.general.PieDataset;
 
@@ -141,7 +140,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * {@code URL} is a {@code String} representing a URL fragment.
      * <br><br>
      * The map is appended to an internal list...you can add multiple maps
-     * if you are working with, say, a {@link MultiplePiePlot}.
+     * if you are working with, say, a {@link org.jfree.chart.plot.MultiplePiePlot}.
      *
      * @param urlMap  the URLs ({@code null} permitted).
      */

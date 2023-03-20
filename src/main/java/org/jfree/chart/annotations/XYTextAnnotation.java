@@ -52,7 +52,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -193,8 +192,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the font for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the font for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param font  the font ({@code null} not permitted).
      *
@@ -218,8 +217,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the paint for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the paint for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -244,8 +243,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the text anchor (the point on the text bounding rectangle that is
-     * aligned to the (x, y) coordinate of the annotation) and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * aligned to the (x, y) coordinate of the annotation) and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param anchor  the anchor point ({@code null} not permitted).
      *
@@ -269,8 +268,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the rotation anchor point and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the rotation anchor point and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param anchor  the anchor ({@code null} not permitted).
      *
@@ -294,8 +293,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the rotation angle and sends an {@link AnnotationChangeEvent} to
-     * all registered listeners.  The angle is measured clockwise in radians.
+     * Sets the rotation angle and calls {@link #fireAnnotationChanged()}.
+     * The angle is measured clockwise in radians.
      *
      * @param angle  the angle (in radians).
      *
@@ -320,8 +319,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the x coordinate for the text anchor point (measured against the
-     * domain axis) and sends an {@link AnnotationChangeEvent} to all
-     * registered listeners.
+     * domain axis) and calls {@link #fireAnnotationChanged()}.
      *
      * @param x  the x coordinate (in data space).
      *
@@ -347,8 +345,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the y coordinate for the text anchor point (measured against the
-     * range axis) and sends an {@link AnnotationChangeEvent} to all registered
-     * listeners.
+     * range axis) and calls {@link #fireAnnotationChanged()}.
      *
      * @param y  the y coordinate.
      *
@@ -372,8 +369,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the background paint for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the background paint for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the paint ({@code null} permitted).
      *
@@ -396,8 +393,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the outline paint for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the outline paint for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
@@ -421,8 +418,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the outline stroke for the annotation and sends an
-     * {@link AnnotationChangeEvent} to all registered listeners.
+     * Sets the outline stroke for the annotation and calls
+     * {@link #fireAnnotationChanged()}.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
@@ -445,7 +442,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the flag that controls whether or not the outline is drawn and
-     * sends an {@link AnnotationChangeEvent} to all registered listeners.
+     * calls {@link #fireAnnotationChanged()}.
      *
      * @param visible  the new flag value.
      */

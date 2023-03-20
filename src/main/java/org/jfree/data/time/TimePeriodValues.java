@@ -43,7 +43,6 @@ import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 
 /**
@@ -222,8 +221,7 @@ public class TimePeriodValues extends Series implements Serializable {
     }
 
     /**
-     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
+     * Adds a data item to the series and calls {@link #fireSeriesChanged()}.
      *
      * @param item  the item ({@code null} not permitted).
      */
@@ -337,8 +335,8 @@ public class TimePeriodValues extends Series implements Serializable {
     }
 
     /**
-     * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
-     * to all registered listeners.
+     * Adds a new data item to the series by calling
+     * {@link #add(org.jfree.data.time.TimePeriodValue)}.
      *
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value.
@@ -351,8 +349,8 @@ public class TimePeriodValues extends Series implements Serializable {
     }
 
     /**
-     * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
-     * to all registered listeners.
+     * Adds a new data item to the series by calling
+     * {@link #add(org.jfree.data.time.TimePeriodValue)}.
      *
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
@@ -363,8 +361,8 @@ public class TimePeriodValues extends Series implements Serializable {
     }
 
     /**
-     * Updates (changes) the value of a data item and sends a 
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Updates (changes) the value of a data item and calls
+     * {@link #fireSeriesChanged()}.
      *
      * @param index  the index of the data item to update.
      * @param value  the new value ({@code null} not permitted).
@@ -376,8 +374,7 @@ public class TimePeriodValues extends Series implements Serializable {
     }
 
     /**
-     * Deletes data from start until end index (end inclusive) and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Deletes data from start until end index (end inclusive) and calls {@link #fireSeriesChanged()}.
      *
      * @param start  the index of the first period to delete.
      * @param end  the index of the last period to delete.

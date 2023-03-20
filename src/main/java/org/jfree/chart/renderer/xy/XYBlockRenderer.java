@@ -44,7 +44,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -118,7 +117,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the width of the blocks used to represent each data item and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param width  the new width, in data/axis units (must be &gt; 0.0).
      *
@@ -147,7 +146,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the height of the blocks used to represent each data item and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param height  the new height, in data/axis units (must be &gt; 0.0).
      *
@@ -177,7 +176,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the anchor point used to align a block at its (x, y) location and
-     * sends a {@link RendererChangeEvent} to all registered listeners.
+     * calls {@link #fireChangeEvent()}.
      *
      * @param anchor  the anchor.
      *
@@ -205,8 +204,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint scale used by the renderer and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets the paint scale used by the renderer and calls {@link #fireChangeEvent()}.
      *
      * @param scale  the scale ({@code null} not permitted).
      *

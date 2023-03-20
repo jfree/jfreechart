@@ -49,11 +49,9 @@ import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.jfree.data.statistics.DefaultMultiValueCategoryDataset;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
-import org.jfree.data.statistics.MultiValueCategoryDataset;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.DefaultXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYIntervalSeries;
@@ -449,7 +447,7 @@ public class DatasetUtilsTest {
 
     /**
      * Some checks for the range bounds of a dataset that implements the
-     * {@link IntervalXYDataset} interface.
+     * {@link org.jfree.data.xy.IntervalXYDataset} interface.
      */
     @Test
     public void testIterateRangeBounds4() {
@@ -1246,7 +1244,7 @@ public class DatasetUtilsTest {
 
     /**
      * Some checks for the iterateToFindRangeBounds(CategoryDataset...) method
-     * with a {@link MultiValueCategoryDataset}.
+     * with a {@link org.jfree.data.statistics.MultiValueCategoryDataset}.
      */
     @Test
     public void testIterateToFindRangeBounds_MultiValueCategoryDataset() {

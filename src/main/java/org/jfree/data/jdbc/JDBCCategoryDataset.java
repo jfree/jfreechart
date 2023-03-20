@@ -46,11 +46,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
-import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- * A {@link CategoryDataset} implementation over a database JDBC result set.
+ * An extension of {@link DefaultCategoryDataset} for a database JDBC result set.
+ * 
  * The dataset is populated via a call to {@link #executeQuery(String)} with
  * the string SQL query.  The SQL query must return at least two columns.  The
  * first column will be the category name and remaining columns values (each
