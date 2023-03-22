@@ -402,7 +402,7 @@ public class OfflineRenderingChartPanel extends ChartPanel {
             PlotRenderingInfo target) {
         target.setDataArea(source.getDataArea());
         target.setPlotArea(source.getPlotArea());
-        for (int i = 0; i < target.getSubplotCount(); i++) {
+        for (int i = 0; i < source.getSubplotCount(); i++) {
             PlotRenderingInfo subSource = source.getSubplotInfo(i);
             PlotRenderingInfo subTarget = new PlotRenderingInfo(
                     target.getOwner());
