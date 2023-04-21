@@ -25,14 +25,11 @@
  * Other names may be trademarks of their respective owners.]
  *
  * ---------------------
- * XYSplineRenderer.java
+ * XYBezierRenderer.java
  * ---------------------
- * (C) Copyright 2007-2021, by Klaus Rheinwald and Contributors.
+ * (C) Copyright, by Javier Robes and Contributors.
  *
- * Original Author:  Klaus Rheinwald;
- * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
- *                       http://www.wam.umd.edu/~petersd/);
- *                   David Gilbert (for Object Refinery Limited);
+ * Original Author:  Javier Robes;
  *
  */
 
@@ -114,7 +111,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
     }
     
     /**
-     * Resolution of splines (number of line segments between points)
+     * Resolution of Bezier curves (number of line segments between points)
      */
     private int precision;
     
@@ -125,7 +122,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
 
     /**
      * A flag that can be set to specify 
-     * to fill the area under the spline.
+     * to fill the area under the Bezier curve.
      */
     private FillType fillType;
 
@@ -134,7 +131,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
     /**
      * Creates a new instance with the precision attribute defaulting to 5,
      * the tension attribute defaulting to 2  
-     * and no fill of the area 'under' the spline.
+     * and no fill of the area 'under' the Bezier curve.
      */
     public XYBezierRenderer() {
         this(5, 25, FillType.NONE);
@@ -142,7 +139,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Creates a new renderer with the specified precision and tension
-     * and no fill of the area 'under' (between '0' and) the spline.
+     * and no fill of the area 'under' (between '0' and) the Bezier curve.
      *
      * @param precision  the number of points between data items.
      * @param tension  value to define how sharply the curve bends
@@ -153,10 +150,10 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Creates a new renderer with the specified precision
-     * and specified fill of the area 'under' (between '0' and) the spline.
+     * and specified fill of the area 'under' (between '0' and) the Bezier curve.
      *
      * @param precision  the number of points between data items.
-     * @param tension  value to define how sharply the curve bends
+     * @param tension  value to define how sharply the Bezier curve bends
      * @param fillType  the type of fill beneath the curve ({@code null} 
      *     not permitted).
      * 
@@ -190,7 +187,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Set the resolution of splines and sends a {@link RendererChangeEvent}
+     * Set the resolution of Bezier curves and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
      * @param p  number of line segments between points (must be &gt; 0).
@@ -494,6 +491,9 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
 			y = Math.pow(r, 3) * segmentPoints[0].getY() + 3 * k * Math.pow(r, 2) * segmentPoints[1].getY()
 					+ 3 * Math.pow(k, 2) * (1 - k) * segmentPoints[2].getY() + Math.pow(k, 3) * segmentPoints[3].getY();
 			s.seriesPath.lineTo(x, y);
+            if (this.fillType != FillType.NONE) {
+                s.fillArea.lineTo(x, y);
+            }
 		}
 	}
 	
