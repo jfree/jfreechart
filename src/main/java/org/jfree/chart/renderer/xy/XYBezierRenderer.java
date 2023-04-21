@@ -56,6 +56,7 @@ import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.Args;
 import org.jfree.data.xy.XYDataset;
 
+
 /**
  * A renderer that connects data points with Bezier cubic curves and/or
  * draws shapes at each data point.  This renderer is designed for use with
