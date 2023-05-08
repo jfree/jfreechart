@@ -1926,7 +1926,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.chart == null) {
             return;
         }
-        this.chart.setNotify(true);
+        this.chart.handleClick(x, y, this.info);
 
         // new entity code...
         Object[] listeners = this.chartMouseListeners.getListeners(
