@@ -725,8 +725,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         TimeSeries<S> overwritten = new TimeSeries<>(getKey());
         for (int i = 0; i < series.getItemCount(); i++) {
             TimeSeriesDataItem item = series.getRawDataItem(i);
-            TimeSeriesDataItem oldItem = addOrUpdate(item.getPeriod(),
-                    item.getValue());
+            TimeSeriesDataItem oldItem = addOrUpdate(item.clone());
             if (oldItem != null) {
                 overwritten.add(oldItem);
             }
