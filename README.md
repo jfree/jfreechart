@@ -57,6 +57,7 @@ at GitHub:
 History
 -------
 ##### Version 1.5.5 (not yet released)
+- Add clearSeriesXXX methods for all series settings in AbstractRenderer ([#364](https://github.com/jfree/jfreechart/issues/364))
 - fix cross hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
 
 ##### Version 1.5.4 (8 January 2023)

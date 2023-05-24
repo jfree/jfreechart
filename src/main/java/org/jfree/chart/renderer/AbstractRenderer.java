@@ -502,6 +502,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the flags that controls whether a series is visible for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesVisible(boolean notify) {
+        this.seriesVisibleList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default visibility for all series.
      *
      * @return The default visibility.
@@ -608,6 +622,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setSeriesVisibleInLegend(int series, Boolean visible,
                                          boolean notify) {
         this.seriesVisibleInLegendList.setBoolean(series, visible);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the series visible in the legend settings for this renderer and,
+     * if requested, sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesVisibleInLegend(boolean notify) {
+        this.seriesVisibleInLegendList.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -902,6 +930,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the series fill paint settings for this renderer and, if
+     * requested, sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesFillPaints(boolean notify) {
+        this.fillPaintList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default fill paint.
      *
      * @return The paint (never {@code null}).
@@ -1049,6 +1091,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setSeriesOutlinePaint(int series, Paint paint, boolean notify) {
         this.outlinePaintList.setPaint(series, paint);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the series outline paint settings for this renderer and, if
+     * requested, sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesOutlinePaints(boolean notify) {
+        this.outlinePaintList.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -1369,6 +1425,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the series outline stroke settings for this renderer and, if
+     * requested, sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesOutlineStrokes(boolean notify) {
+        this.outlineStrokeList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default outline stroke.
      *
      * @return The stroke (never {@code null}).
@@ -1521,6 +1591,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the series shape settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesShapes(boolean notify) {
+        this.shapeList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default shape.
      *
      * @return The shape (never {@code null}).
@@ -1656,6 +1739,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the visibility of item labels for a series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelsVisible(boolean notify) {
+        this.itemLabelsVisibleList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the base setting for item label visibility.  A {@code null}
      * result should be interpreted as equivalent to {@code Boolean.FALSE}.
      *
@@ -1754,6 +1851,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setSeriesItemLabelFont(int series, Font font, boolean notify) {
         this.itemLabelFontMap.put(series, font);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the item label font settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelFonts(boolean notify) {
+        this.itemLabelFontMap.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -1899,6 +2009,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the item label paint settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelPaints(boolean notify) {
+        this.itemLabelPaintList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default item label paint.
      *
      * @return The paint (never {@code null}).
@@ -2002,6 +2125,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setSeriesPositiveItemLabelPosition(int series,
             ItemLabelPosition position, boolean notify) {
         this.positiveItemLabelPositionMap.put(series, position);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the item label position for all positive values for series
+     * settings for this renderer and, if requested, sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesPositiveItemLabelPositions(boolean notify) {
+        this.positiveItemLabelPositionMap.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -2383,6 +2520,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the series legend shapes for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendShapes(boolean notify) {
+        this.legendShapeList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default legend shape, which may be {@code null}.
      *
      * @return The default legend shape.
@@ -2467,6 +2617,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the font used for the legend text for series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendTextFonts(boolean notify) {
+        this.legendTextFontMap.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default legend text font, which may be {@code null}.
      *
      * @return The default legend text font.
@@ -2526,6 +2690,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setLegendTextPaint(int series, Paint paint) {
         this.legendTextPaint.setPaint(series, paint);
         fireChangeEvent();
+    }
+
+    /**
+     * Clears the paint used for the legend text for series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendTextPaints(boolean notify) {
+        this.legendTextPaint.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
