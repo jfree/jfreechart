@@ -1028,18 +1028,17 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
 
         String result = label;
-        while (result != null) {
-            Shape bounds = TextUtils.calculateRotatedStringBounds(result,
+        while (result != null && !result.isEmpty()) {
+        	Rectangle2D labelBounds = TextUtils.calculateRotatedStringBounds(result,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
-                    position.getRotationAnchor());
-            Rectangle2D bounds2D = bounds == null ? null : bounds.getBounds2D();
+                    position.getRotationAnchor()).getBounds2D();
 
-            if (bounds2D != null && labelBar.contains(bounds2D)) {
+            if (labelBar.getHeight() >= labelBounds.getHeight() && labelBar.getWidth() >= labelBounds.getWidth()) {
                 // Label fits
                 return result;
-            } else if (bounds2D != null && labelBar.getHeight() < bounds2D.getHeight()) {
-                // Label will never fit, insufficient height
+            } else if (labelBar.getHeight() < labelBounds.getHeight()) {
+                // Optimization: label will never fit due to insufficient height
                 return null;
             } else {
                 switch (position.getItemLabelClip()) {
