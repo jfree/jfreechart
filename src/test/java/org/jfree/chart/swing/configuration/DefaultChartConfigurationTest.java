@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Properties;
+import java.util.Map;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -54,9 +54,9 @@ import org.junit.jupiter.api.Test;
 public class DefaultChartConfigurationTest {
     private static void verifyRoundTrip(JFreeChart chart, JFreeChart updatedChart) {
         DefaultChartConfiguration saved = new DefaultChartConfiguration(chart);
-        Properties savedProperties = saved.getProperties();
+        Map<String, String> savedProperties = saved.getProperties();
         DefaultChartConfiguration uut = new DefaultChartConfiguration(savedProperties);
-        Properties roundtripProperties = uut.getProperties();
+        Map<String, String> roundtripProperties = uut.getProperties();
         assertEquals(savedProperties, roundtripProperties);
         uut.updateChart(updatedChart);
         assertEquals(chart, updatedChart);

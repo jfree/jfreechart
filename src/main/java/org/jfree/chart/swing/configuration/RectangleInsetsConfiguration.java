@@ -36,7 +36,9 @@
  */
 package org.jfree.chart.swing.configuration;
 
-import java.util.Properties;
+
+
+import java.util.Map;
 
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.api.UnitType;
@@ -51,22 +53,22 @@ class RectangleInsetsConfiguration {
         this.name = name;
     }
 
-    RectangleInsetsConfiguration(Properties properties, String name) {
+    RectangleInsetsConfiguration(Map<String, String> properties, String name) {
         this.name = name;
-        UnitType unitType = UnitType.valueOf(properties.getProperty(name + "." + "unitType"));
-        double top = Double.valueOf(properties.getProperty(name + "." + "top"));
-        double left = Double.valueOf(properties.getProperty(name + "." + "left"));
-        double bottom = Double.valueOf(properties.getProperty(name + "." + "bottom"));
-        double right = Double.valueOf(properties.getProperty(name + "." + "right"));
+        UnitType unitType = UnitType.valueOf(properties.get(name + "." + "unitType"));
+        double top = Double.valueOf(properties.get(name + "." + "top"));
+        double left = Double.valueOf(properties.get(name + "." + "left"));
+        double bottom = Double.valueOf(properties.get(name + "." + "bottom"));
+        double right = Double.valueOf(properties.get(name + "." + "right"));
         this.rectangleInsets = new RectangleInsets(unitType, top, left, bottom, right);
     }
 
-    void fillProperties(Properties properties) {
-        properties.setProperty(name + "." + "unitType", rectangleInsets.getUnitType().toString());
-        properties.setProperty(name + "." + "top", Double.toString(rectangleInsets.getTop()));
-        properties.setProperty(name + "." + "left", Double.toString(rectangleInsets.getLeft()));
-        properties.setProperty(name + "." + "bottom", Double.toString(rectangleInsets.getBottom()));
-        properties.setProperty(name + "." + "right", Double.toString(rectangleInsets.getRight()));
+    void fillProperties(Map<String, String> properties) {
+        properties.put(name + "." + "unitType", rectangleInsets.getUnitType().toString());
+        properties.put(name + "." + "top", Double.toString(rectangleInsets.getTop()));
+        properties.put(name + "." + "left", Double.toString(rectangleInsets.getLeft()));
+        properties.put(name + "." + "bottom", Double.toString(rectangleInsets.getBottom()));
+        properties.put(name + "." + "right", Double.toString(rectangleInsets.getRight()));
     }
     RectangleInsets getRectangleInsets() {
          return rectangleInsets;

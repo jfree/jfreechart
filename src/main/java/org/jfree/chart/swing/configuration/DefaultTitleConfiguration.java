@@ -40,7 +40,7 @@ package org.jfree.chart.swing.configuration;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Properties;
+import java.util.Map;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
@@ -75,21 +75,21 @@ class DefaultTitleConfiguration {
         this.titleColor = (Color) t.getPaint();
     }
 
-    DefaultTitleConfiguration(Properties properties, java.lang.String name) {
+    DefaultTitleConfiguration(Map<String, String> properties, java.lang.String name) {
         this.name = name;
-        this.showTitle = Boolean.valueOf(properties.getProperty(name + "." + "showTitle"));
-        this.titleFont = StringMapper.stringToFont(properties.getProperty(name + "." + "titleFont"));
-        this.titleText = properties.getProperty(name + "." + "titleText");
-        this.titleColor = StringMapper.stringToColor(properties.getProperty(name + "." + "titleColor"));
+        this.showTitle = Boolean.valueOf(properties.get(name + "." + "showTitle"));
+        this.titleFont = StringMapper.stringToFont(properties.get(name + "." + "titleFont"));
+        this.titleText = properties.get(name + "." + "titleText");
+        this.titleColor = StringMapper.stringToColor(properties.get(name + "." + "titleColor"));
 
     }
 
 
-    void fillProperties(Properties properties) {
-        properties.setProperty(name + "." + "showTitle", Boolean.toString(showTitle));
-        properties.setProperty(name + "." + "titleFont", StringMapper.fontToString(titleFont));
-        properties.setProperty(name + "." + "titleText", titleText);
-        properties.setProperty(name + "." + "titleColor", StringMapper.colorToString(titleColor));
+    void fillProperties(Map<String, String> properties) {
+        properties.put(name + "." + "showTitle", Boolean.toString(showTitle));
+        properties.put(name + "." + "titleFont", StringMapper.fontToString(titleFont));
+        properties.put(name + "." + "titleText", titleText);
+        properties.put(name + "." + "titleColor", StringMapper.colorToString(titleColor));
     }
 
     void setTitleProperties(JFreeChart chart) {

@@ -37,7 +37,9 @@
 
 package org.jfree.chart.swing.configuration;
 
-import java.util.Properties;
+
+
+import java.util.Map;
 
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.Plot;
@@ -55,17 +57,17 @@ class DefaultPolarPlotConfiguration extends DefaultPlotConfiguration {
     }
 
 
-   DefaultPolarPlotConfiguration(Properties properties, String name) {
+   DefaultPolarPlotConfiguration(Map<String, String> properties, String name) {
        super(properties, name);
-       this.manualTickUnit = Double.valueOf(properties.getProperty(name + "." + "manualTickUnit"));
-       this.angleOffset = Double.valueOf(properties.getProperty(name + "." + "angleOffset"));
+       this.manualTickUnit = Double.valueOf(properties.get(name + "." + "manualTickUnit"));
+       this.angleOffset = Double.valueOf(properties.get(name + "." + "angleOffset"));
    }
 
    @Override
-   void fillProperties(Properties properties) {
+   void fillProperties(Map<String, String> properties) {
        super.fillProperties(properties);
-       properties.setProperty(name + "." + "manualTickUnit", Double.toString(manualTickUnit));
-       properties.setProperty(name + "." + "angleOffset", Double.toString(angleOffset));
+       properties.put(name + "." + "manualTickUnit", Double.toString(manualTickUnit));
+       properties.put(name + "." + "angleOffset", Double.toString(angleOffset));
    }
 
    @Override

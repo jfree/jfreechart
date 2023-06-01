@@ -38,7 +38,7 @@
 package org.jfree.chart.swing.configuration;
 
 import java.awt.Color;
-import java.util.Properties;
+import java.util.Map;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.ValueAxis;
@@ -48,8 +48,8 @@ import org.jfree.chart.axis.ValueAxis;
  */
 class DefaultValueAxisConfiguration extends DefaultAxisConfiguration {
 
-    public static boolean isContainedIn(Properties properties, String name) {
-        return properties.getProperty(name + "." + "autoRange") != null;
+    public static boolean isContainedIn(Map<String, String> properties, String name) {
+        return properties.get(name + "." + "autoRange") != null;
     }
     /** A flag that indicates whether or not the axis range is determined
      *  automatically.
@@ -100,29 +100,29 @@ class DefaultValueAxisConfiguration extends DefaultAxisConfiguration {
                 this.maximum);
       }
 
-    DefaultValueAxisConfiguration(Properties properties, String name) {
+    DefaultValueAxisConfiguration(Map<String, String> properties, String name) {
         super(properties, name);
-        this.autoRange = Boolean.parseBoolean(properties.getProperty(name + ".autoRange"));
-        this.isAutoTickUnitSelection = Boolean.parseBoolean(properties.getProperty(name + ".autoTickUnitSelection"));
-        this.minimum = Double.parseDouble(properties.getProperty(name + ".minimum"));
-        this.maximum = Double.parseDouble(properties.getProperty(name + ".maximum"));
-        this.minimumRange = properties.getProperty(name + ".minimumRange");
-        this.maximumRange = properties.getProperty(name + ".maximumRange");
-        this.gridColor = StringMapper.stringToColor(properties.getProperty(name + ".gridColor"));
-        this.gridStrokeWidth = Float.parseFloat(properties.getProperty(name + ".gridStrokeWidth"));
+        this.autoRange = Boolean.parseBoolean(properties.get(name + ".autoRange"));
+        this.isAutoTickUnitSelection = Boolean.parseBoolean(properties.get(name + ".autoTickUnitSelection"));
+        this.minimum = Double.parseDouble(properties.get(name + ".minimum"));
+        this.maximum = Double.parseDouble(properties.get(name + ".maximum"));
+        this.minimumRange = properties.get(name + ".minimumRange");
+        this.maximumRange = properties.get(name + ".maximumRange");
+        this.gridColor = StringMapper.stringToColor(properties.get(name + ".gridColor"));
+        this.gridStrokeWidth = Float.parseFloat(properties.get(name + ".gridStrokeWidth"));
     }
 
     @Override
-    void fillProperties(Properties properties) {
+    void fillProperties(Map<String, String> properties) {
         super.fillProperties(properties);
-        properties.setProperty(name + ".autoRange", Boolean.toString(autoRange));
-        properties.setProperty(name + ".autoTickUnitSelection", Boolean.toString(isAutoTickUnitSelection));
-        properties.setProperty(name + ".minimum", Double.toString(minimum));
-        properties.setProperty(name + ".maximum", Double.toString(maximum));
-        properties.setProperty(name + ".minimumRange", minimumRange);
-        properties.setProperty(name + ".maximumRange", maximumRange);
-        properties.setProperty(name + ".gridColor", StringMapper.colorToString(gridColor));
-        properties.setProperty(name + ".gridStrokeWidth", Float.toString(gridStrokeWidth));
+        properties.put(name + ".autoRange", Boolean.toString(autoRange));
+        properties.put(name + ".autoTickUnitSelection", Boolean.toString(isAutoTickUnitSelection));
+        properties.put(name + ".minimum", Double.toString(minimum));
+        properties.put(name + ".maximum", Double.toString(maximum));
+        properties.put(name + ".minimumRange", minimumRange);
+        properties.put(name + ".maximumRange", maximumRange);
+        properties.put(name + ".gridColor", StringMapper.colorToString(gridColor));
+        properties.put(name + ".gridStrokeWidth", Float.toString(gridStrokeWidth));
     }
 
     @Override

@@ -41,7 +41,7 @@ package org.jfree.chart.swing.configuration;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.util.Properties;
+import java.util.Map;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -142,28 +142,28 @@ class DefaultPlotConfiguration {
                 name + "." + "rangeAxis");
     }
 
-    DefaultPlotConfiguration(Properties properties, String name) {
-        this.backgroundColor = StringMapper.stringToColor(properties.getProperty(name + ".backgroundColor"));
-        this.outlineStrokeWidth = Float.parseFloat(properties.getProperty(name + ".outlineStrokeWidth"));
-        this.outlineColor = StringMapper.stringToColor(properties.getProperty(name + ".outlineColor"));
+    DefaultPlotConfiguration(Map<String, String> properties, String name) {
+        this.backgroundColor = StringMapper.stringToColor(properties.get(name + ".backgroundColor"));
+        this.outlineStrokeWidth = Float.parseFloat(properties.get(name + ".outlineStrokeWidth"));
+        this.outlineColor = StringMapper.stringToColor(properties.get(name + ".outlineColor"));
         this.plotInsets = new RectangleInsetsConfiguration(properties, name + ".plotInsets");
-        this.plotOrientation = StringMapper.optionalStringToEnum(properties.getProperty(name + ".plotOrientation"), PlotOrientation.class);
-        this.drawLines = Boolean.parseBoolean(properties.getProperty(name + ".drawLines"));
-        this.drawShapes = Boolean.parseBoolean(properties.getProperty(name + ".drawShapes"));
+        this.plotOrientation = StringMapper.optionalStringToEnum(properties.get(name + ".plotOrientation"), PlotOrientation.class);
+        this.drawLines = Boolean.parseBoolean(properties.get(name + ".drawLines"));
+        this.drawShapes = Boolean.parseBoolean(properties.get(name + ".drawShapes"));
         this.domainAxisPropertyConfiguration = DefaultAxisConfiguration.getInstance(properties, name + ".domainAxis");
         this.rangeAxisPropertyConfiguration = DefaultAxisConfiguration.getInstance(properties, name + ".rangeAxis");
         this.name = name;
     }
 
-    void fillProperties(Properties properties) {
-        properties.setProperty(name + ".backgroundColor", StringMapper.colorToString(backgroundColor));
-        properties.setProperty(name + ".outlineStrokeWidth", Float.toString(outlineStrokeWidth));
-        properties.setProperty(name + ".outlineColor", StringMapper.colorToString(outlineColor));
+    void fillProperties(Map<String, String> properties) {
+        properties.put(name + ".backgroundColor", StringMapper.colorToString(backgroundColor));
+        properties.put(name + ".outlineStrokeWidth", Float.toString(outlineStrokeWidth));
+        properties.put(name + ".outlineColor", StringMapper.colorToString(outlineColor));
         plotInsets.fillProperties(properties);
         if(plotOrientation != null)
-            properties.setProperty(name + ".plotOrientation", plotOrientation.name());
-        properties.setProperty(name + ".drawLines", Boolean.toString(drawLines));
-        properties.setProperty(name + ".drawShapes", Boolean.toString(drawShapes));
+            properties.put(name + ".plotOrientation", plotOrientation.name());
+        properties.put(name + ".drawLines", Boolean.toString(drawLines));
+        properties.put(name + ".drawShapes", Boolean.toString(drawShapes));
         if(domainAxisPropertyConfiguration != null)
             domainAxisPropertyConfiguration.fillProperties(properties);
         if(rangeAxisPropertyConfiguration != null)

@@ -36,7 +36,9 @@
 
 package org.jfree.chart.swing.configuration;
 
-import java.util.Properties;
+
+
+import java.util.Map;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
@@ -49,8 +51,8 @@ class DefaultLogAxisConfiguration extends DefaultValueAxisConfiguration {
 
     private static final String MANUAL_TICK_UNIT = "logAxisManualTickUnit";
 
-    public static boolean isContainedIn(Properties properties, String name) {
-        return properties.getProperty(name + "." + MANUAL_TICK_UNIT) != null;
+    public static boolean isContainedIn(Map<String, String> properties, String name) {
+        return properties.get(name + "." + MANUAL_TICK_UNIT) != null;
     }
 
 
@@ -66,15 +68,15 @@ class DefaultLogAxisConfiguration extends DefaultValueAxisConfiguration {
         this.manualTickUnit = axis.getTickUnit().getSize();
     }
 
-    DefaultLogAxisConfiguration(Properties properties, String name) {
-        super(properties, name); // calling the constructor of the superclass with the Properties and name parameters
-        this.manualTickUnit = Double.valueOf(properties.getProperty(name + "." + MANUAL_TICK_UNIT));
+    DefaultLogAxisConfiguration(Map<String, String> properties, String name) {
+        super(properties, name); // calling the constructor of the superclass with the Map<String, String> and name parameters
+        this.manualTickUnit = Double.valueOf(properties.get(name + "." + MANUAL_TICK_UNIT));
     }
 
     @Override
-    void fillProperties(Properties properties) {
+    void fillProperties(Map<String, String> properties) {
         super.fillProperties(properties); // calling the fillProperties method of the superclass
-        properties.setProperty(name + "." + MANUAL_TICK_UNIT, Double.toString(manualTickUnit));
+        properties.put(name + "." + MANUAL_TICK_UNIT, Double.toString(manualTickUnit));
     }
 
     @Override

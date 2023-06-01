@@ -40,7 +40,7 @@ package org.jfree.chart.swing.configuration;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Properties;
+import java.util.Map;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
@@ -52,8 +52,8 @@ import org.jfree.chart.axis.NumberAxis;
 class DefaultAxisConfiguration {
 
 
-    public static boolean isContainedIn(Properties properties, String name) {
-        return properties.getProperty(name + "." + "areTickLabelsVisible") != null;
+    public static boolean isContainedIn(Map<String, String> properties, String name) {
+        return properties.get(name + "." + "areTickLabelsVisible") != null;
     }
     protected final String name;
 
@@ -107,7 +107,7 @@ class DefaultAxisConfiguration {
 
     }
 
-    public static DefaultAxisConfiguration getInstance(Properties properties, String name) {
+    public static DefaultAxisConfiguration getInstance(Map<String, String> properties, String name) {
         if(DefaultNumberAxisConfiguration.isContainedIn(properties, name))
             return new DefaultNumberAxisConfiguration(properties, name);
         if(DefaultLogAxisConfiguration.isContainedIn(properties, name))
@@ -145,30 +145,30 @@ class DefaultAxisConfiguration {
     }
 
 
-    DefaultAxisConfiguration(Properties properties, String name) {
+    DefaultAxisConfiguration(Map<String, String> properties, String name) {
         this.name = name;
-        this.label = properties.getProperty(name + "." + "label");
-        this.labelFont = StringMapper.stringToFont(properties.getProperty(name + "." + "labelFont"));
-        this.labelColor = StringMapper.stringToColor(properties.getProperty(name + "." + "labelColor"));
-        this.tickLabelFont = StringMapper.stringToFont(properties.getProperty(name + "." + "tickLabelFont"));
-        this.tickLabelColor = StringMapper.stringToColor(properties.getProperty(name + "." + "tickLabelColor"));
+        this.label = properties.get(name + "." + "label");
+        this.labelFont = StringMapper.stringToFont(properties.get(name + "." + "labelFont"));
+        this.labelColor = StringMapper.stringToColor(properties.get(name + "." + "labelColor"));
+        this.tickLabelFont = StringMapper.stringToFont(properties.get(name + "." + "tickLabelFont"));
+        this.tickLabelColor = StringMapper.stringToColor(properties.get(name + "." + "tickLabelColor"));
         this.tickLabelInsets = new RectangleInsetsConfiguration(properties, name + "." + "tickLabelInsets");
         this.labelInsets = new RectangleInsetsConfiguration(properties, name + "." + "labelInsets");
-        this.areTickLabelsVisible = Boolean.valueOf(properties.getProperty(name + "." + "areTickLabelsVisible"));
-        this.areTickMarksVisible = Boolean.valueOf(properties.getProperty(name + "." + "areTickMarksVisible"));
+        this.areTickLabelsVisible = Boolean.valueOf(properties.get(name + "." + "areTickLabelsVisible"));
+        this.areTickMarksVisible = Boolean.valueOf(properties.get(name + "." + "areTickMarksVisible"));
     }
 
-    void fillProperties(Properties properties) {
+    void fillProperties(Map<String, String> properties) {
         if(label != null)
-            properties.setProperty(name + "." + "label", label);
-        properties.setProperty(name + "." + "labelFont", StringMapper.fontToString(labelFont));
-        properties.setProperty(name + "." + "labelColor", StringMapper.colorToString(labelColor));
-        properties.setProperty(name + "." + "tickLabelFont", StringMapper.fontToString(tickLabelFont));
-        properties.setProperty(name + "." + "tickLabelColor", StringMapper.colorToString(tickLabelColor));
+            properties.put(name + "." + "label", label);
+        properties.put(name + "." + "labelFont", StringMapper.fontToString(labelFont));
+        properties.put(name + "." + "labelColor", StringMapper.colorToString(labelColor));
+        properties.put(name + "." + "tickLabelFont", StringMapper.fontToString(tickLabelFont));
+        properties.put(name + "." + "tickLabelColor", StringMapper.colorToString(tickLabelColor));
         tickLabelInsets.fillProperties(properties);
         labelInsets.fillProperties(properties);
-        properties.setProperty(name + "." + "areTickLabelsVisible", Boolean.toString(areTickLabelsVisible));
-        properties.setProperty(name + "." + "areTickMarksVisible", Boolean.toString(areTickMarksVisible));
+        properties.put(name + "." + "areTickLabelsVisible", Boolean.toString(areTickLabelsVisible));
+        properties.put(name + "." + "areTickMarksVisible", Boolean.toString(areTickMarksVisible));
     }
 
     void setAxisProperties(Axis axis) {

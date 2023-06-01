@@ -39,7 +39,8 @@
 package org.jfree.chart.swing.configuration;
 
 import java.awt.Color;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
@@ -75,13 +76,12 @@ public class DefaultChartConfiguration {
         }
     }
 
-
-    DefaultChartConfiguration(Properties properties) {
-        antialias = Boolean.parseBoolean(properties.getProperty("antialias", "true"));
-        String x = properties.getProperty("background");
+    DefaultChartConfiguration(Map<String, String> properties) {
+        antialias = Boolean.parseBoolean(properties.getOrDefault("antialias", "true"));
+        String x = properties.get("background");
         background = StringMapper.stringToColor(x);
         this.titleConfiguration = new DefaultTitleConfiguration(properties, "title");
-        if(Boolean.valueOf(properties.getProperty("polarPlot"))) {
+        if(Boolean.valueOf(properties.get("polarPlot"))) {
                 this.plotConfiguration = new DefaultPolarPlotConfiguration(properties, "plot");
             }
             else {
@@ -89,11 +89,16 @@ public class DefaultChartConfiguration {
             }
     }
 
+    public Map<String, String> getProperties() {
+        Map<String, String> properties = new HashMap<String, String>();
+        fillProperties(properties);
+        return properties;
+    }
 
-    void fillProperties(Properties properties) {
-        properties.setProperty("antialias", Boolean.toString(antialias));
-        properties.setProperty("background", StringMapper.colorToString(background));
-        properties.setProperty("polarPlot", Boolean.toString(plotConfiguration instanceof DefaultPolarPlotConfiguration));
+    public void fillProperties(Map<String, String> properties) {
+        properties.put("antialias", Boolean.toString(antialias));
+        properties.put("background", StringMapper.colorToString(background));
+        properties.put("polarPlot", Boolean.toString(plotConfiguration instanceof DefaultPolarPlotConfiguration));
         titleConfiguration.fillProperties(properties);
         plotConfiguration.fillProperties(properties);
     }
@@ -103,12 +108,6 @@ public class DefaultChartConfiguration {
         this.plotConfiguration.updatePlotProperties(chart.getPlot());
         chart.setAntiAlias(antialias);
         chart.setBackgroundPaint(background);
-    }
-
-    public Properties getProperties() {
-        Properties properties = new Properties();
-        fillProperties(properties);
-        return properties;
     }
 
 }
