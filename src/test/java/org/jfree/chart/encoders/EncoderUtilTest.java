@@ -8,8 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EncoderUtilTest {
     private BufferedImage bufferedImage;
@@ -120,7 +119,10 @@ class EncoderUtilTest {
 
     @Test
     void testWriteBufferedImage() throws IOException {
-        EncoderUtil.writeBufferedImage(bufferedImage, defaultFormat, new ByteArrayOutputStream());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write("ciao".getBytes());
+        EncoderUtil.writeBufferedImage(bufferedImage, defaultFormat, baos);
+        assertTrue(baos.toString().contains("ciao"));
     }
 
 
