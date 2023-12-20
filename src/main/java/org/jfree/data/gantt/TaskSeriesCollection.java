@@ -520,7 +520,9 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
             Task sub = task.getSubtask(subinterval);
             if (sub != null) {
                 TimePeriod duration = sub.getDuration();
-                result = duration.getStart().getTime();
+                if (duration != null) {
+                    result = duration.getStart().getTime();
+                }
             }
         }
         return result;
@@ -561,7 +563,9 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
             Task sub = task.getSubtask(subinterval);
             if (sub != null) {
                 TimePeriod duration = sub.getDuration();
-                result = duration.getEnd().getTime();
+                if (duration != null) {
+                    result = duration.getEnd().getTime();
+                }
             }
         }
         return result;

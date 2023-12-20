@@ -309,7 +309,7 @@ public class VectorSeriesCollection<S extends Comparable<S>>
         if (!(obj instanceof VectorSeriesCollection)) {
             return false;
         }
-        VectorSeriesCollection<S> that = (VectorSeriesCollection) obj;
+        VectorSeriesCollection<S> that = (VectorSeriesCollection<S>) obj;
         return Objects.equals(this.data, that.data);
     }
 
@@ -323,7 +323,7 @@ public class VectorSeriesCollection<S extends Comparable<S>>
     @Override
     public Object clone() throws CloneNotSupportedException {
         VectorSeriesCollection<S> clone
-                = (VectorSeriesCollection) super.clone();
+                = (VectorSeriesCollection<S>) super.clone();
         clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }

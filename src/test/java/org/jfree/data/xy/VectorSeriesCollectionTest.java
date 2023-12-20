@@ -40,6 +40,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
+import org.jfree.data.DatasetChangeConfirmation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -111,6 +112,18 @@ public class VectorSeriesCollectionTest {
         c1.addSeries(s1);
         VectorSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
+
+        // check independence
+        s1.add(2.0, 2.1, 0.2, 0.3);
+        assertNotEquals(c1, c2);
+        c2.getSeries(0).add(2.0, 2.1, 0.2, 0.3);
+        assertEquals(c1, c2);
+
+        // check that c2 gets notified when data series is updated
+        DatasetChangeConfirmation listener = new DatasetChangeConfirmation();
+        c2.addChangeListener(listener);
+        c2.getSeries(0).add(3.0, 2.99, 3.01, 3.4);
+        assertNotNull(listener.event);
     }
 
     /**

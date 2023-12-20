@@ -7,9 +7,9 @@ Version 2.0.0, not yet released.
 
 Overview
 --------
-JFreeChart is a comprehensive free chart library for the Java(tm) platform that 
-can be used on the client-side (JavaFX and Swing) or the server side (with
-export to multiple formats including SVG, PNG and PDF).
+JFreeChart is a comprehensive free chart library for the Java&#8482; platform that 
+can be used on the client-side (JavaFX and Swing) or the server side, with
+export to multiple formats including SVG, PNG and PDF.
 
 ![JFreeChart sample](http://jfree.org/jfreechart/images/coffee_prices.png)
 
@@ -17,17 +17,33 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 11 or later (check the 1.5.x branch for Java 8 support).  
-If JavaFX support is required, you need to also include the JFreeChart-FX extensions:
-
-https://github.com/jfree/jfreechart-fx
+JFreeChart requires JDK 11 or later.  For Java 8 support, check the `v1.5.x` branch.
 
 The library is licensed under the terms of the GNU Lesser General Public 
 License (LGPL) version 2.1 or later.
 
 
-Using JFreeChart
-----------------
+JavaFX
+------
+JFreeChart can be used with JavaFX via the `JFreeChart-FX` extensions:
+
+https://github.com/jfree/jfreechart-fx
+
+Demos
+-----
+A small set of demo applications can be found in the following projects here
+at GitHub:
+
+* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
+* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
+
+A more comprehensive set of demos, plus the JFreeChart Developer Guide, is a reward at most
+tiers of the [JFree sponsorship](https://github.com/sponsors/jfree) program.  Thanks for supporting the JFree projects!
+
+For Developers
+--------------
+
+### Using JFreeChart
 To use JFreeChart in your projects, add the following dependency to your build tool:
 
     <dependency>
@@ -37,8 +53,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     </dependency>
 
 
-Building JFreeChart
--------------------
+### Building JFreeChart
 You can build JFreeChart using Maven by issuing the following command from the root directory of the project:
 
     mvn clean install
@@ -46,8 +61,7 @@ You can build JFreeChart using Maven by issuing the following command from the r
 The build requires JDK 11 or later.
 
 
-Migration from JFreeChart 1.0.x
--------------------------------
+### Migration
 When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the following API changes:
 
 * all the classes from JCommon that are used by JFreeChart have integrated within the JFreeChart jar file within a different package than before (you will need to change your imports);
@@ -58,15 +72,6 @@ When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the
 * the `org.jfree.chart.utils.ParamChecks` class has been renamed `org.jfree.chart.utils.Args`.
 
 Please refer to [Issue 66](https://github.com/jfree/jfreechart/issues/66) for additional info.
-
-
-Demos
------
-A small set of demo applications can be found in the following projects here
-at GitHub:
-
-* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
-* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
 
 
 History
