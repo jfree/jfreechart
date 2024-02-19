@@ -46,7 +46,7 @@ import org.jfree.chart.util.Args;
  * The attributes that control the position of the label for each data item on
  * a chart.  Instances of this class are immutable.
  */
-public class ItemLabelPosition implements Serializable {
+public class ItemLabelPosition implements Serializable, Cloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = 5845390630157034499L;
