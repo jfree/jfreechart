@@ -464,7 +464,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @param needle  the needle.
      */
     public void setSeriesNeedle(int index, MeterNeedle needle) {
-        if ((needle != null) && (index < this.seriesNeedle.length)) {
+        if ((needle != null) && (index >= 0) && (index < this.seriesNeedle.length)) {
             this.seriesNeedle[index] = needle;
         }
         fireChangeEvent();
