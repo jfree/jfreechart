@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the {@link XYBezierRenderer} class.
  */
-public class XYBezierRendererTest {
+class XYBezierRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         XYBezierRenderer r1 = new XYBezierRenderer();
         XYBezierRenderer r2 = new XYBezierRenderer();
         assertEquals(r1, r2);
@@ -53,7 +53,7 @@ public class XYBezierRendererTest {
      * Two objects that are equal are required to return the same hashCode.
      */
     @Test
-    public void testHashcode() {
+    void testHashcode() {
         XYBezierRenderer r1 = new XYBezierRenderer();
         XYBezierRenderer r2 = new XYBezierRenderer();
         assertEquals(r1, r2);
@@ -66,7 +66,7 @@ public class XYBezierRendererTest {
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() throws CloneNotSupportedException {
+    void testCloning() throws CloneNotSupportedException {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         XYBezierRenderer r1 = new XYBezierRenderer();
         r1.setLegendLine(legendShape);
@@ -80,7 +80,7 @@ public class XYBezierRendererTest {
      * Verify that this class implements {@link PublicCloneable}.
      */
     @Test
-    public void testPublicCloneable() {
+    void testPublicCloneable() {
         XYBezierRenderer r1 = new XYBezierRenderer();
         assertTrue(r1 instanceof PublicCloneable);
     }
@@ -89,7 +89,7 @@ public class XYBezierRendererTest {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization() {
+    void testSerialization() {
         XYBezierRenderer r1 = new XYBezierRenderer();
         XYBezierRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
