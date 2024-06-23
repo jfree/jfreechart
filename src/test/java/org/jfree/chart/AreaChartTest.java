@@ -63,7 +63,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for an area chart.
  */
-public class AreaChartTest {
+class AreaChartTest {
 
     /** A chart. */
     private JFreeChart chart;
@@ -81,7 +81,7 @@ public class AreaChartTest {
      * default generator.
      */
     @Test
-    public void testSetSeriesToolTipGenerator() {
+    void testSetSeriesToolTipGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
@@ -96,7 +96,7 @@ public class AreaChartTest {
      * default generator.
      */
     @Test
-    public void testSetSeriesURLGenerator() {
+    void testSetSeriesURLGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
@@ -111,7 +111,7 @@ public class AreaChartTest {
      * are thrown (a problem that was occurring at one point).
      */
     @Test
-    public void testDrawWithNullInfo() {
+    void testDrawWithNullInfo() {
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
@@ -129,7 +129,7 @@ public class AreaChartTest {
      * Replaces the chart's dataset and then checks that the new dataset is OK.
      */
     @Test
-    public void testReplaceDataset() {
+    void testReplaceDataset() {
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
         CategoryDataset newData = DatasetUtils.createCategoryDataset(
