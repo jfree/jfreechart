@@ -57,7 +57,8 @@ at GitHub:
 History
 -------
 ##### Version 1.5.5 (not yet released)
-- fix cross hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
+- fix cross-hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
+- parameter range check for `CompassPlot` ([#397](https://github.com/jfree/jfreechart/pull/397))
 
 ##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
