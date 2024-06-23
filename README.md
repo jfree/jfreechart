@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.5, not yet released.
+Version 1.5.5, 23 June 2024.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.4</version>
+        <version>1.5.5</version>
     </dependency>
 
 
@@ -56,10 +56,22 @@ at GitHub:
 
 History
 -------
-##### Version 1.5.5 (not yet released)
+##### Version 1.5.5 (23 June 2024)
 - added `XYBezierRenderer` by Javier Robes ([#286](https://github.com/jfree/jfreechart/pull/286))
 - fix cross-hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
 - parameter range check for `CompassPlot` ([#397](https://github.com/jfree/jfreechart/pull/397))
+
+Note: some security vulnerabilities have been reported for v1.5.4. :
+
+- [CVE-2023-52070](https://nvd.nist.gov/vuln/detail/CVE-2023-52070) : an `ArrayIndexOutOfBoundsException` in `CompassPlot`\
+  No fix is considered necessary, however ([#397](https://github.com/jfree/jfreechart/pull/397)) has been applied.
+
+- [CVE-2024-22949](https://nvd.nist.gov/vuln/detail/CVE-2024-22949) : a possible `NullPointerException` in `CategoryLineAnnotation`\
+  No fix is considered necessary.
+
+- [CVE-2024-23076](https://nvd.nist.gov/vuln/detail/CVE-2024-23076) : a possible `NullPointerException` in `BubbleXYItemLabelGenerator`\
+  No fix is considered necessary.
+
 
 ##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
@@ -71,7 +83,6 @@ History
 - added `get/setWebFillAlpha()` methods to SpiderWebPlot ([#279](https://github.com/jfree/jfreechart/pull/279))
 - add argument checks for annotations ([#223](https://github.com/jfree/jfreechart/issues/223));
 - removed `JFreeChartResources.java` file ([#239](https://github.com/jfree/jfreechart/issues/239))
-
 
 ##### Version 1.5.3 (21 February 2021)
 - add new `FlowPlot` class for drawing Sankey charts;

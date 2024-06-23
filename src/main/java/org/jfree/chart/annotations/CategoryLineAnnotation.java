@@ -274,11 +274,11 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Draws the annotation.
      *
-     * @param g2  the graphics device.
-     * @param plot  the plot.
-     * @param dataArea  the data area.
-     * @param domainAxis  the domain axis.
-     * @param rangeAxis  the range axis.
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param domainAxis  the domain axis ({@code null} not permitted).
+     * @param rangeAxis  the range axis ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea,
