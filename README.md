@@ -61,7 +61,7 @@ History
 - fix cross-hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
 - parameter range check for `CompassPlot` ([#397](https://github.com/jfree/jfreechart/pull/397))
 
-Note: some security vulnerabilities have been reported for v1.5.4. :
+Note: some (supposed) security vulnerabilities have been reported for v1.5.4:
 
 - [CVE-2023-52070](https://nvd.nist.gov/vuln/detail/CVE-2023-52070) : an `ArrayIndexOutOfBoundsException` in `CompassPlot`\
   No fix is considered necessary, however ([#397](https://github.com/jfree/jfreechart/pull/397)) has been applied.
@@ -71,7 +71,6 @@ Note: some security vulnerabilities have been reported for v1.5.4. :
 
 - [CVE-2024-23076](https://nvd.nist.gov/vuln/detail/CVE-2024-23076) : a possible `NullPointerException` in `BubbleXYItemLabelGenerator`\
   No fix is considered necessary.
-
 
 ##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
