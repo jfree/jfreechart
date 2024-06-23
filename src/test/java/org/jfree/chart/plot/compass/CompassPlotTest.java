@@ -50,13 +50,13 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the {@link CompassPlot} class.
  */
-public class CompassPlotTest {
+class CompassPlotTest {
 
     /**
      * Test the equals() method.
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         CompassPlot plot1 = new CompassPlot();
         CompassPlot plot2 = new CompassPlot();
         assertEquals(plot1, plot2);
@@ -108,7 +108,7 @@ public class CompassPlotTest {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization() {
+    void testSerialization() {
         CompassPlot p1 = new CompassPlot(null);
         p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
@@ -125,12 +125,21 @@ public class CompassPlotTest {
      * @throws java.lang.CloneNotSupportedException
      */
     @Test
-    public void testCloning() throws CloneNotSupportedException {
+    void testCloning() throws CloneNotSupportedException {
         CompassPlot p1 = new CompassPlot(new DefaultValueDataset(15.0));
         CompassPlot p2 = CloneUtils.clone(p1);
         assertNotSame(p1, p2);
         assertSame(p1.getClass(), p2.getClass());
         assertEquals(p1, p2);
+    }
+
+    /**
+     * Test faulty array bounds; CVE-2024-23077.
+     */
+    @Test
+    void testArrayBounds() {
+        CompassPlot p = new CompassPlot(new DefaultValueDataset(0));
+        p.setSeriesNeedle(-1, new PointerNeedle());
     }
 
 }
