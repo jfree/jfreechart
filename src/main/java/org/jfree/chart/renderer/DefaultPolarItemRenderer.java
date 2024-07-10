@@ -432,18 +432,25 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (numPoints == 0) {
             return;
         }
-        GeneralPath poly = null;
+        GeneralPath poly = new GeneralPath();
         ValueAxis axis = plot.getAxisForDataset(plot.indexOf(dataset));
+        boolean startNewSegment = true;
         for (int i = 0; i < numPoints; i++) {
             double theta = dataset.getXValue(seriesIndex, i);
             double radius = dataset.getYValue(seriesIndex, i);
-            Point p = plot.translateToJava2D(theta, radius, axis, dataArea);
-            if (poly == null) {
-                poly = new GeneralPath();
-                poly.moveTo(p.x, p.y);
+
+            // Skip NaN values
+            if (Double.isNaN(theta) || Double.isNaN(radius)) {
+                startNewSegment = true;
+                continue;
             }
-            else {
-                poly.lineTo(p.x, p.y);
+
+            Point p = plot.translateToJava2D(theta, radius, axis, dataArea);
+            if (startNewSegment) {
+                poly.moveTo(p.getX(), p.getY());
+                startNewSegment = false;
+            } else {
+                poly.lineTo(p.getX(), p.getY());
             }
         }
         assert poly != null;
