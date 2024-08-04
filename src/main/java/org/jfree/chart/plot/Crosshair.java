@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
@@ -107,6 +108,11 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * The y-offset in Java2D units.
      */
     private double labelYOffset;
+
+    /**
+     * The label padding.
+     */
+    private RectangleInsets labelPadding;
 
     /**
      * The label font.
@@ -170,6 +176,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelAnchor = RectangleAnchor.BOTTOM_LEFT;
         this.labelXOffset = 5.0;
         this.labelYOffset = 5.0;
+        this.labelPadding = RectangleInsets.ZERO_INSETS;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
         this.labelPaint = Color.BLACK;
         this.labelBackgroundPaint = new Color(0, 0, 255, 63);
@@ -410,6 +417,30 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
+     * Returns the label padding.
+     *
+     * @return The label padding (never {@code null}).
+     * @see #setLabelPadding
+     */
+    public RectangleInsets getLabelPadding() {
+        return labelPadding;
+    }
+
+    /**
+     * Sets the label padding and sends a property change event (with the name
+     * 'labelPadding') to all registered listeners.
+     *
+     * @param padding the padding ({@code null} not permitted).
+     * @see #getLabelPadding()
+     */
+    public void setLabelPadding(RectangleInsets padding) {
+        Args.nullNotPermitted(padding, "padding");
+        RectangleInsets old = this.labelPadding;
+        this.labelPadding = padding;
+        this.pcs.firePropertyChange("labelPadding", old, padding);
+    }
+
+    /**
      * Returns the label font.
      *
      * @return The label font (never {@code null}).
@@ -609,6 +640,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (this.labelYOffset != that.labelYOffset) {
             return false;
         }
+        if (!this.labelPadding.equals(labelPadding)) {
+            return false;
+        }
         if (!this.labelFont.equals(that.labelFont)) {
             return false;
         }
@@ -649,6 +683,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         hash = HashUtils.hashCode(hash, this.labelGenerator);
         hash = HashUtils.hashCode(hash, this.labelXOffset);
         hash = HashUtils.hashCode(hash, this.labelYOffset);
+        hash = HashUtils.hashCode(hash, this.labelPadding);
         hash = HashUtils.hashCode(hash, this.labelFont);
         hash = HashUtils.hashCode(hash, this.labelPaint);
         hash = HashUtils.hashCode(hash, this.labelBackgroundPaint);
