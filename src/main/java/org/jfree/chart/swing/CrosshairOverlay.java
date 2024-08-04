@@ -293,6 +293,16 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                         pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                         xx = (float) pt.getX();
                         yy = (float) pt.getY();
+                        if (anchor == RectangleAnchor.CENTER || alignPt.isHalfAscent()) {
+                            double labelHeight = hotspot.getBounds2D().getHeight();
+                            double minY = dataArea.getY() + (labelHeight + padding.getTop() - padding.getBottom()) / 2.0;
+                            double maxY = dataArea.getY() + dataArea.getHeight() - (labelHeight + padding.getBottom() - padding.getTop()) / 2.0;
+                            if (yy < minY) {
+                                yy = (float) (minY);
+                            } else if (yy > maxY) {
+                                yy = (float) (maxY);
+                            }
+                        }
                         alignPt = textAlignPtForLabelAnchorH(anchor);
                         hotspot = TextUtils.calculateRotatedStringBounds(
                                label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
@@ -355,6 +365,16 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                         pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                         xx = (float) pt.getX();
                         yy = (float) pt.getY();
+                        if (alignPt.isHorizontalCenter()) {
+                            double labelWidth = hotspot.getBounds2D().getWidth();
+                            double minX = dataArea.getX() + (labelWidth + padding.getLeft() - padding.getRight()) / 2.0;
+                            double maxX = dataArea.getX() + dataArea.getWidth() - (labelWidth + padding.getRight() - padding.getLeft()) / 2.0;
+                            if (xx < minX) {
+                                xx = (float) (minX);
+                            } else if (xx > maxX) {
+                                xx = (float) (maxX);
+                            }
+                        }
                         alignPt = textAlignPtForLabelAnchorV(anchor);
                         hotspot = TextUtils.calculateRotatedStringBounds(
                                label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
