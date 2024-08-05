@@ -46,6 +46,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
@@ -69,7 +70,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     /**
      * Receives a chart change event.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void chartChanged(ChartChangeEvent event) {
@@ -132,7 +133,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testNotification() {
         CombinedDomainCategoryPlot plot = createPlot();
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         chart.addChangeListener(this);
         CategoryPlot<String, String> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
@@ -251,7 +252,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
         renderer1.setDefaultToolTipGenerator(
                 new StandardCategoryToolTipGenerator());
-        CategoryPlot<String, String> subplot1 = new CategoryPlot<>(dataset1, null, 
+        CategoryPlot<String, String> subplot1 = new CategoryPlot<>(dataset1, null,
                 rangeAxis1, renderer1);
         subplot1.setDomainGridlinesVisible(true);
 
@@ -261,13 +262,12 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         BarRenderer renderer2 = new BarRenderer();
         renderer2.setDefaultToolTipGenerator(
                 new StandardCategoryToolTipGenerator());
-        CategoryPlot<String, String> subplot2 = new CategoryPlot<>(dataset2, null, 
+        CategoryPlot<String, String> subplot2 = new CategoryPlot<>(dataset2, null,
                 rangeAxis2, renderer2);
         subplot2.setDomainGridlinesVisible(true);
 
         CategoryAxis domainAxis = new CategoryAxis("Category");
-        CombinedDomainCategoryPlot plot
-                = new CombinedDomainCategoryPlot(domainAxis);
+        CombinedDomainCategoryPlot plot = new CombinedDomainCategoryPlot(domainAxis);
         plot.add(subplot1, 2);
         plot.add(subplot2, 1);
         return plot;

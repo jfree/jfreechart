@@ -48,6 +48,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
@@ -71,7 +72,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     /**
      * Receives a chart change event.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void chartChanged(ChartChangeEvent event) {
@@ -135,7 +136,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testNotification() {
         CombinedRangeXYPlot<String> plot = createPlot();
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         chart.addChangeListener(this);
         XYPlot<String> subplot1 = plot.getSubplots().get(0);
         NumberAxis xAxis = (NumberAxis) subplot1.getDomainAxis();
@@ -241,8 +242,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         XYPlot<String> subplot1 = new XYPlot<>(data1, xAxis1, null, renderer1);
         subplot1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 
-        XYTextAnnotation annotation
-                = new XYTextAnnotation("Hello!", 50.0, 10000.0);
+        XYTextAnnotation annotation = new XYTextAnnotation("Hello!", 50.0, 10000.0);
         annotation.setFont(new Font("SansSerif", Font.PLAIN, 9));
         annotation.setRotationAngle(Math.PI / 4.0);
         subplot1.addAnnotation(annotation);

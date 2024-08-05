@@ -44,6 +44,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -139,17 +140,15 @@ public class MinMaxCategoryRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultCategoryDataset<String, String> dataset 
-                    = new DefaultCategoryDataset<>();
+            DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new MinMaxCategoryRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail();
         }
     }

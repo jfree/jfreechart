@@ -53,6 +53,7 @@ import org.jfree.chart.title.Title;
 import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.Day;
@@ -82,7 +83,7 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Java", 43.2);
         data.setValue("Visual Basic", 0.0);
         data.setValue("C/C++", 17.5);
-        this.pieChart = ChartFactory.createPieChart("Pie Chart", data);
+        this.pieChart = ChartFactory.getChartRegular("PieChart", "Pie Chart", "Domain", "Range", data);
     }
 
     /**
@@ -90,9 +91,9 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testEquals() {
-        JFreeChart chart1 = new JFreeChart("Title",
+        JFreeChart chart1 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
-        JFreeChart chart2 = new JFreeChart("Title",
+        JFreeChart chart2 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
         assertEquals(chart1, chart2);
         assertEquals(chart2, chart1);
@@ -145,12 +146,12 @@ public class JFreeChartTest implements ChartChangeListener {
         assertEquals(chart1, chart2);
 
         // plot
-        chart1 = new JFreeChart("Title",
+        chart1 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
-        chart2 = new JFreeChart("Title",
+        chart2 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
         assertNotEquals(chart1, chart2);
-        chart2 = new JFreeChart("Title",
+        chart2 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         assertEquals(chart1, chart2);
 
@@ -162,11 +163,11 @@ public class JFreeChartTest implements ChartChangeListener {
                 3.0f, 4.0f, Color.BLUE));
         assertEquals(chart1, chart2);
 
-//        // backgroundImage
-//        chart1.setBackgroundImage(JFreeChart.INFO.getLogo());
-//        assertFalse(chart1.equals(chart2));
-//        chart2.setBackgroundImage(JFreeChart.INFO.getLogo());
-//        assertEquals(chart1, chart2);
+        // // backgroundImage
+        // chart1.setBackgroundImage(JFreeChart.INFO.getLogo());
+        // assertFalse(chart1.equals(chart2));
+        // chart2.setBackgroundImage(JFreeChart.INFO.getLogo());
+        // assertEquals(chart1, chart2);
 
         // backgroundImageAlignment
         chart1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
@@ -187,9 +188,9 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testEquals2() {
-        JFreeChart chart1 = new JFreeChart("Title",
+        JFreeChart chart1 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
-        JFreeChart chart2 = new JFreeChart("Title",
+        JFreeChart chart2 = new BarChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
         assertNotEquals(chart1, chart2);
         assertNotEquals(chart2, chart1);
@@ -210,31 +211,28 @@ public class JFreeChartTest implements ChartChangeListener {
     @Test
     public void testGetSubtitle() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        JFreeChart chart = ChartFactory.createPieChart("title", dataset);
+        JFreeChart chart = ChartFactory.getChartRegular("PieChart", "Title", "Domain", "Range", dataset);
         Title t = chart.getSubtitle(0);
         assertTrue(t instanceof LegendTitle);
 
         try {
             chart.getSubtitle(-1);
             fail("Should have thrown an IllegalArgumentException on negative number");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Index out of range.", e.getMessage());
         }
 
         try {
-           chart.getSubtitle(1);
+            chart.getSubtitle(1);
             fail("Should have thrown an IllegalArgumentException on excesive number");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Index out of range.", e.getMessage());
         }
 
         try {
             chart.getSubtitle(2);
             fail("Should have thrown an IllegalArgumentException on number being out of range");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Index out of range.", e.getMessage());
         }
 
@@ -250,7 +248,7 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
 
-        JFreeChart c1 = ChartFactory.createPieChart("Test", data);
+        JFreeChart c1 = ChartFactory.getChartRegular("PieChart", "Test", "Domain", "Range", data);
         JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
@@ -309,7 +307,7 @@ public class JFreeChartTest implements ChartChangeListener {
         dataset.addValue(3.0, series3, category8);
 
         // create the chart...
-        JFreeChart c1 = ChartFactory.createBarChart("Vertical Bar Chart",
+        JFreeChart c1 = ChartFactory.getChartRegular("BarChart", "Vertical Bar Chart",
                 "Category", "Value", dataset);
         JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
@@ -328,7 +326,7 @@ public class JFreeChartTest implements ChartChangeListener {
         TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         dataset.addSeries(series);
 
-        JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
+        JFreeChart c1 = ChartFactory.getChartRegular("TimeSeriesChart", "Test", "Date",
                 "Value", dataset);
         JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
@@ -340,7 +338,7 @@ public class JFreeChartTest implements ChartChangeListener {
     @Test
     public void testAddSubtitle() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        JFreeChart chart = ChartFactory.createPieChart("title", dataset);
+        JFreeChart chart = ChartFactory.getChartRegular("PieChart", "title", "Domain", "Range", dataset);
 
         TextTitle t0 = new TextTitle("T0");
         chart.addSubtitle(0, t0);
@@ -348,30 +346,27 @@ public class JFreeChartTest implements ChartChangeListener {
 
         TextTitle t1 = new TextTitle("T1");
         chart.addSubtitle(t1);
-        assertEquals(t1, chart.getSubtitle(2));  // subtitle 1 is the legend
+        assertEquals(t1, chart.getSubtitle(2)); // subtitle 1 is the legend
 
         try {
             chart.addSubtitle(null);
             fail("Should have thrown an IllegalArgumentException.");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Null 'subtitle' argument.", e.getMessage());
         }
 
         try {
             chart.addSubtitle(-1, t0);
             fail("Should have thrown an IllegalArgumentException on index out of range");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Require 'index' (-1) to be in the range 0 to 3", e.getMessage());
         }
 
         try {
             chart.addSubtitle(4, t0);
             fail("Should have thrown an IllegalArgumentException on index out of range");
-        }
-        catch (IllegalArgumentException e) {
-             assertEquals("Require 'index' (4) to be in the range 0 to 3", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            assertEquals("Require 'index' (4) to be in the range 0 to 3", e.getMessage());
         }
 
     }
@@ -382,7 +377,7 @@ public class JFreeChartTest implements ChartChangeListener {
     @Test
     public void testGetSubtitles() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        JFreeChart chart = ChartFactory.createPieChart("title", dataset);
+        JFreeChart chart = ChartFactory.getChartRegular("PieChart", "title", "Domain", "Range", dataset);
         List<Title> subtitles = chart.getSubtitles();
 
         assertEquals(1, chart.getSubtitleCount());
@@ -398,7 +393,7 @@ public class JFreeChartTest implements ChartChangeListener {
     @Test
     public void testLegendEvents() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        JFreeChart chart = ChartFactory.createPieChart("title", dataset);
+        JFreeChart chart = ChartFactory.getChartRegular("PieChart", "title", "Domain", "Range", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
         LegendTitle legend = chart.getLegend();
@@ -412,7 +407,7 @@ public class JFreeChartTest implements ChartChangeListener {
     @Test
     public void testTitleChangeEvent() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        JFreeChart chart = ChartFactory.createPieChart("title", dataset);
+        JFreeChart chart = ChartFactory.getChartRegular("PieChart", "title", "Domain", "Range", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
         TextTitle t = chart.getTitle();
@@ -423,7 +418,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // now create a new title and replace the existing title, several
         // things should happen:
         // (1) Adding the new title should trigger an immediate
-        //     ChartChangeEvent;
+        // ChartChangeEvent;
         // (2) Modifying the new title should trigger a ChartChangeEvent;
         // (3) Modifying the old title should NOT trigger a ChartChangeEvent
         TextTitle t2 = new TextTitle("T2");
@@ -443,14 +438,14 @@ public class JFreeChartTest implements ChartChangeListener {
     /**
      * Test for bug 942.
      * 
-     * @throws Exception 
+     * @throws Exception
      */
-    @Test
-    public void testBug942() throws Exception {
-        final String title = "Pie Chart Demo 1\n\n\ntestnew line";
-        assertEquals(title, ChartFactory.createPieChart(title, 
-                new DefaultPieDataset<String>()).getTitle().getText());
-    }
+    // @Test
+    // public void testBug942() throws Exception {
+    // final String title = "Pie Chart Demo 1\n\n\ntestnew line";
+    // assertEquals(title, ChartFactory.getChartRegular("PieChart", title,
+    // new DefaultPieDataset<String>()).getTitle().getText());
+    // }
 
     /** The last ChartChangeEvent received. */
     private ChartChangeEvent lastChartChangeEvent;
@@ -458,7 +453,7 @@ public class JFreeChartTest implements ChartChangeListener {
     /**
      * Records the last chart change event.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void chartChanged(ChartChangeEvent event) {

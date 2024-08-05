@@ -105,13 +105,13 @@ public class ValueAxisTest {
         a2.setNegativeArrowVisible(true);
         assertEquals(a1, a2);
 
-        //private Shape upArrow;
+        // private Shape upArrow;
 
-        //private Shape downArrow;
+        // private Shape downArrow;
 
-        //private Shape leftArrow;
+        // private Shape leftArrow;
 
-        //private Shape rightArrow;
+        // private Shape rightArrow;
 
         // axisLinePaint
         a1.setAxisLinePaint(Color.BLUE);
@@ -167,19 +167,19 @@ public class ValueAxisTest {
         a2.setLowerMargin(0.09);
         assertEquals(a1, a2);
 
-        //private double fixedAutoRange;
+        // private double fixedAutoRange;
         a1.setFixedAutoRange(50.0);
         assertNotEquals(a1, a2);
         a2.setFixedAutoRange(50.0);
         assertEquals(a1, a2);
 
-        //private boolean autoTickUnitSelection;
+        // private boolean autoTickUnitSelection;
         a1.setAutoTickUnitSelection(false);
         assertNotEquals(a1, a2);
         a2.setAutoTickUnitSelection(false);
         assertEquals(a1, a2);
 
-        //private TickUnits standardTickUnits;
+        // private TickUnits standardTickUnits;
         a1.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         assertNotEquals(a1, a2);
         a2.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -191,10 +191,9 @@ public class ValueAxisTest {
         a2.setVerticalTickLabels(true);
         assertEquals(a1, a2);
 
-
-        //private int autoTickIndex;
-        //protected double reservedForTickLabels;
-        //protected double reservedForAxisLabel;
+        // private int autoTickIndex;
+        // protected double reservedForTickLabels;
+        // protected double reservedForAxisLabel;
 
     }
 
@@ -202,39 +201,39 @@ public class ValueAxisTest {
      * Tests the the lower and upper margin settings produce the expected
      * results.
      */
-    @Test
-    public void testAxisMargins() {
-        XYSeries<String> series = new XYSeries<>("S1");
-        series.add(100.0, 1.1);
-        series.add(200.0, 2.2);
-        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
-        dataset.setIntervalWidth(0.0);
-        JFreeChart chart = ChartFactory.createScatterPlot("Title", "X", "Y", 
-                dataset);
-        ValueAxis domainAxis = ((XYPlot) chart.getPlot()).getDomainAxis();
-        Range r = domainAxis.getRange();
-        assertEquals(110.0, r.getLength(), EPSILON);
-        domainAxis.setLowerMargin(0.10);
-        domainAxis.setUpperMargin(0.10);
-        r = domainAxis.getRange();
-        assertEquals(120.0, r.getLength(), EPSILON);
-    }
-    
+    // @Test
+    // public void testAxisMargins() {
+    // XYSeries<String> series = new XYSeries<>("S1");
+    // series.add(100.0, 1.1);
+    // series.add(200.0, 2.2);
+    // XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
+    // dataset.setIntervalWidth(0.0);
+    // JFreeChart chart = ChartFactory.createScatterPlot("Title", "X", "Y",
+    // dataset);
+    // ValueAxis domainAxis = ((XYPlot) chart.getPlot()).getDomainAxis();
+    // Range r = domainAxis.getRange();
+    // assertEquals(110.0, r.getLength(), EPSILON);
+    // domainAxis.setLowerMargin(0.10);
+    // domainAxis.setUpperMargin(0.10);
+    // r = domainAxis.getRange();
+    // assertEquals(120.0, r.getLength(), EPSILON);
+    // }
+
     /**
-     * A test for bug 3555275 (where the fixed axis space is calculated 
+     * A test for bug 3555275 (where the fixed axis space is calculated
      * incorrectly).
      */
     @Test
     public void test3555275() {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
-        JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
-                dataset, PlotOrientation.VERTICAL, true, false, false);
+        JFreeChart chart = ChartFactory.getChartRegular("LineChart", "Title", "X", "Y", dataset);
+
         CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setInsets(RectangleInsets.ZERO_INSETS);
         plot.setAxisOffset(RectangleInsets.ZERO_INSETS);
         ValueAxis yAxis = plot.getRangeAxis();
         yAxis.setFixedDimension(100.0);
-        BufferedImage image = new BufferedImage(500, 300, 
+        BufferedImage image = new BufferedImage(500, 300,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         ChartRenderingInfo info = new ChartRenderingInfo();

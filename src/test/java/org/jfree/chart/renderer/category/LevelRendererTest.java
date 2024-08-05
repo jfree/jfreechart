@@ -41,6 +41,7 @@ import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
@@ -120,8 +121,8 @@ public class LevelRendererTest {
     /**
      * Checks that the two renderers are equal but independent of one another.
      *
-     * @param r1  renderer 1.
-     * @param r2  renderer 2.
+     * @param r1 renderer 1.
+     * @param r2 renderer 2.
      *
      * @return A boolean.
      */
@@ -158,17 +159,15 @@ public class LevelRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultCategoryDataset<String, String> dataset 
-                    = new DefaultCategoryDataset<>();
+            DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new LevelRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -179,12 +178,10 @@ public class LevelRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultCategoryDataset<String, String> dataset0 
-                = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset0 = new DefaultCategoryDataset<>();
         dataset0.addValue(21.0, "R1", "C1");
         dataset0.addValue(22.0, "R2", "C1");
-        DefaultCategoryDataset<String, String> dataset1 
-                = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> dataset1 = new DefaultCategoryDataset<>();
         dataset1.addValue(23.0, "R3", "C1");
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
@@ -192,7 +189,7 @@ public class LevelRendererTest {
         CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

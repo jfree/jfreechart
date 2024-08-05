@@ -48,6 +48,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
@@ -71,7 +72,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
     /**
      * Receives a chart change event.
      *
-     * @param event  the event.
+     * @param event the event.
      */
     @Override
     public void chartChanged(ChartChangeEvent event) {
@@ -116,6 +117,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
 
     /**
      * Confirm that cloning works.
+     * 
      * @throws java.lang.CloneNotSupportedException
      */
     @Test
@@ -144,7 +146,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
     @Test
     public void testNotification() {
         CombinedDomainXYPlot<String> plot = createPlot();
-        JFreeChart chart = new JFreeChart(plot);
+        JFreeChart chart = new BarChart(plot);
         chart.addChangeListener(this);
         XYPlot<String> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
@@ -265,7 +267,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...
-        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<> (
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<>(
                 new NumberAxis("Domain"));
         plot.setGap(10.0);
 

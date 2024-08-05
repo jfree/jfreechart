@@ -43,6 +43,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.charts.BarChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.internal.CloneUtils;
@@ -133,67 +134,61 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                    = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
 
     /**
      * Draws the chart with a {@code null} mean value to make sure that
-     * no exceptions are thrown (particularly by code in the renderer).  See
+     * no exceptions are thrown (particularly by code in the renderer). See
      * bug report 1779941.
      */
     @Test
     public void testDrawWithNullMeanVertical() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                    = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
 
     /**
      * Draws the chart with a {@code null} mean value to make sure that
-     * no exceptions are thrown (particularly by code in the renderer).  See
+     * no exceptions are thrown (particularly by code in the renderer). See
      * bug report 1779941.
      */
     @Test
     public void testDrawWithNullMeanHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                    = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -206,18 +201,16 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationVertical() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                    = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -230,19 +223,17 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset<String, String> dataset
-                    = new DefaultStatisticalCategoryDataset<>();
+            DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
             CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
-            JFreeChart chart = new JFreeChart(plot);
+            JFreeChart chart = new BarChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("No exception should be thrown.");
         }
     }
@@ -256,8 +247,7 @@ public class StatisticalBarRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultStatisticalCategoryDataset<String, String> dataset
-                = new DefaultStatisticalCategoryDataset<>();
+        DefaultStatisticalCategoryDataset<String, String> dataset = new DefaultStatisticalCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.add(1.0, 0.5, "R1", "C1");
