@@ -123,7 +123,14 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * connected or not.
      */
     private boolean connectFirstAndLastPoint;
-    
+
+    /**
+     * Flag that controls if NaN values should be hidden and a gap in the line
+     * will be drawn. If not active, NaN values will be drawn on top-left of the
+     * plot.
+     */
+    private boolean hideNaNValues;
+
     /**
      * A list of tool tip generators (one per series).
      */
@@ -156,6 +163,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
         this.shapesVisible = true;
         this.connectFirstAndLastPoint = true;
+        this.hideNaNValues = false;
         
         this.toolTipGeneratorMap = new HashMap<>();
         this.urlGenerator = null;
@@ -271,6 +279,29 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     public void setConnectFirstAndLastPoint(boolean connect) {
         this.connectFirstAndLastPoint = connect;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns {@code true} if NaN values should be hidden and a gap in the line
+     * will be drawn. If not active, NaN values will be drawn on top-left of the
+     * plot.
+     * 
+     * @return The current status of the flag.
+     */
+    public boolean getHideNaNValues() {
+        return this.hideNaNValues;
+    }
+
+    /**
+     * Set the flag that controls whether NaN values should be hidden and a gap
+     * in the line will be drawn. If not active, NaN values will be drawn on
+     * top-left of the plot.
+     * 
+     * @param hide the flag.
+     */
+    public void setHideNaNValues(boolean hide) {
+        this.hideNaNValues = hide;
         fireChangeEvent();
     }
 
@@ -440,7 +471,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             double radius = dataset.getYValue(seriesIndex, i);
 
             // Skip NaN values
-            if (Double.isNaN(theta) || Double.isNaN(radius)) {
+            if (getHideNaNValues() && Double.isNaN(theta) || Double.isNaN(radius)) {
                 startNewSegment = true;
                 continue;
             }
@@ -453,9 +484,22 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 poly.lineTo(p.getX(), p.getY());
             }
         }
+
         assert poly != null;
         if (getConnectFirstAndLastPoint()) {
-            poly.closePath();
+            if (getHideNaNValues()) {
+                // If hideNanValues is true, check if last or first point is NaN
+                // If none is NaN, connect first and last point
+                // If one is NaN, don't connect first and last point
+                if (!Double.isNaN(dataset.getXValue(seriesIndex, numPoints - 1))
+                        && !Double.isNaN(dataset.getYValue(seriesIndex, numPoints - 1)) // last point is not NaN
+                        && !Double.isNaN(dataset.getXValue(seriesIndex, 0))
+                        && !Double.isNaN(dataset.getYValue(seriesIndex, 0))) { // first point is not NaN
+                    poly.closePath();
+                }
+            } else {
+                poly.closePath();
+            }
         }
 
         g2.setPaint(lookupSeriesPaint(seriesIndex));
@@ -835,6 +879,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             return false;
         }
         if (this.connectFirstAndLastPoint != that.connectFirstAndLastPoint) {
+            return false;
+        }
+        if (this.hideNaNValues != that.hideNaNValues) {
             return false;
         }
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
