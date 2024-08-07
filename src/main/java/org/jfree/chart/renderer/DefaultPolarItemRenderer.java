@@ -471,7 +471,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             double radius = dataset.getYValue(seriesIndex, i);
 
             // Skip NaN values
-            if (getHideNaNValues() && Double.isNaN(theta) || Double.isNaN(radius)) {
+            if (getHideNaNValues() && (Double.isNaN(theta) || Double.isNaN(radius))) {
                 startNewSegment = true;
                 continue;
             }
@@ -488,14 +488,18 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         assert poly != null;
         if (getConnectFirstAndLastPoint()) {
             if (getHideNaNValues()) {
+                double thetaStart = dataset.getXValue(seriesIndex, 0);
+                double radiusStart = dataset.getYValue(seriesIndex, 0);
                 // If hideNanValues is true, check if last or first point is NaN
                 // If none is NaN, connect first and last point
                 // If one is NaN, don't connect first and last point
                 if (!Double.isNaN(dataset.getXValue(seriesIndex, numPoints - 1))
                         && !Double.isNaN(dataset.getYValue(seriesIndex, numPoints - 1)) // last point is not NaN
-                        && !Double.isNaN(dataset.getXValue(seriesIndex, 0))
-                        && !Double.isNaN(dataset.getYValue(seriesIndex, 0))) { // first point is not NaN
-                    poly.closePath();
+                        && !Double.isNaN(thetaStart)
+                        && !Double.isNaN(radiusStart)) { // first point is not NaN
+                    // line to first point
+                    Point p = plot.translateToJava2D(thetaStart, radiusStart, axis, dataArea);
+                    poly.lineTo(p.getX(), p.getY());
                 }
             } else {
                 poly.closePath();
