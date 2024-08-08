@@ -3986,9 +3986,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      *
      * @return A list of datasets.
      */
-    private List<XYDataset<S>> getDatasetsMappedToDomainAxis(Integer axisIndex) {
+    private List<XYDataset<S>> getDatasetsMappedToDomainAxis(Integer axisIndex, List<XYDataset<S>> result) {
         Args.nullNotPermitted(axisIndex, "axisIndex");
-        List<XYDataset<S>> result = new ArrayList<>();
         for (Entry<Integer, XYDataset<S>> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
             List<Integer> mappedAxes = this.datasetToDomainAxesMap.get(index);
@@ -4013,9 +4012,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      *
      * @return A list of datasets.
      */
-    private List<XYDataset<S>> getDatasetsMappedToRangeAxis(Integer axisIndex) {
+    private List<XYDataset<S>> getDatasetsMappedToRangeAxis(Integer axisIndex, List<XYDataset<S>> result) {
         Args.nullNotPermitted(axisIndex, "axisIndex");
-        List<XYDataset<S>> result = new ArrayList<>();
         for (Entry<Integer, XYDataset<S>> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
             List<Integer> mappedAxes = this.datasetToRangeAxesMap.get(index);
@@ -4115,7 +4113,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         int domainIndex = getDomainAxisIndex(axis);
         if (domainIndex >= 0) {
             isDomainAxis = true;
-            mappedDatasets.addAll(getDatasetsMappedToDomainAxis(domainIndex));
+            getDatasetsMappedToDomainAxis(domainIndex, mappedDatasets);
             if (domainIndex == 0) {
                 // grab the plot's annotations
                 for (XYAnnotation annotation : this.annotations) {
@@ -4130,7 +4128,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         int rangeIndex = getRangeAxisIndex(axis);
         if (rangeIndex >= 0) {
             isDomainAxis = false;
-            mappedDatasets.addAll(getDatasetsMappedToRangeAxis(rangeIndex));
+            getDatasetsMappedToRangeAxis(rangeIndex, mappedDatasets);
             if (rangeIndex == 0) {
                 for (XYAnnotation annotation : this.annotations) {
                     if (annotation instanceof XYAnnotationBoundsInfo) {
