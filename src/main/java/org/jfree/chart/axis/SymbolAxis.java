@@ -126,6 +126,15 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
+     * Returns an array of the symbols for the axis.
+     *
+     * @return The symbols.
+     */
+    public void setSymbols(String[] symbols) {
+        this.symbols = Arrays.asList(symbols);
+    }
+
+    /**
      * Returns the flag that controls whether or not grid bands are drawn for 
      * the axis.  The default value is {@code true}. 
      *
