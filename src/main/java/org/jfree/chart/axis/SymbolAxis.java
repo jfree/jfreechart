@@ -126,12 +126,13 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Returns an array of the symbols for the axis.
+     * Sets the list of symbols to display instead of the numeric values. 
      *
-     * @return The symbols.
+     * @param symbols List of symbols.
      */
     public void setSymbols(String[] symbols) {
         this.symbols = Arrays.asList(symbols);
+        fireChangeEvent();
     }
 
     /**
