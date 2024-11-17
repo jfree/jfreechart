@@ -326,14 +326,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
-
-        // otherwise look up the generator table
-        XYToolTipGenerator generator
-                = (XYToolTipGenerator) this.toolTipGeneratorMap.get(series);
-        if (generator == null) {
-            generator = this.defaultToolTipGenerator;
-        }
-        return generator;
+        return getGenerator(series, toolTipGeneratorMap, defaultToolTipGenerator);
     }
 
     /**
@@ -345,7 +338,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYToolTipGenerator getSeriesToolTipGenerator(int series) {
-        return this.toolTipGeneratorMap.get(series);
+        return toolTipGeneratorMap.get(series);
     }
 
     /**
@@ -356,10 +349,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param generator  the generator ({@code null} permitted).
      */
     @Override
-    public void setSeriesToolTipGenerator(int series,
-            XYToolTipGenerator generator) {
-        this.toolTipGeneratorMap.put(series, generator);
-        fireChangeEvent();
+    public void setSeriesToolTipGenerator(int series, XYToolTipGenerator generator) {
+        setGenerator(series, generator, toolTipGeneratorMap, true);
     }
 
     /**

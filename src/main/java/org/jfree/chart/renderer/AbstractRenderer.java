@@ -3056,4 +3056,40 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
         this.listenerList = new EventListenerList();
     }
 
+    /**
+     * A generic method to get a generator using the three-layer approach.
+     *
+     * @param <T> The type of generator
+     * @param series The series index (zero-based)
+     * @param generatorMap The map containing series-specific generators
+     * @param defaultGenerator The default generator to use if no series-specific generator exists
+     * @return The generator (possibly null)
+     */
+    protected <T> T getGenerator(int series,
+                                 Map<Integer, T> generatorMap,
+                                 T defaultGenerator) {
+        T generator = generatorMap.get(series);
+        if (generator == null) {
+            generator = defaultGenerator;
+        }
+        return generator;
+    }
+
+    /**
+     * Generic method to set a generator for a series.
+     *
+     * @param <T> The type of generator
+     * @param series The series index (zero-based)
+     * @param generator The generator (null permitted)
+     * @param generatorMap The map to store series-specific generators
+     * @param notify Whether to notify listeners of the change
+     */
+    protected <T> void setGenerator(int series, T generator,
+                                    Map<Integer, T> generatorMap,
+                                    boolean notify) {
+        generatorMap.put(series, generator);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
 }
