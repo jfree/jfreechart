@@ -83,48 +83,54 @@ public class DirectionalGradientPaintTransformer implements GradientPaintTransfo
     @Override
     public GradientPaint transform(GradientPaint paint, Shape target) {
         //get the coordinates of the original GradientPaint
-        final double px1 = paint.getPoint1().getX();
-        final double py1 = paint.getPoint1().getY();
-        final double px2 = paint.getPoint2().getX();
-        final double py2 = paint.getPoint2().getY();
+        final double paintStartX = paint.getPoint1().getX();
+        final double paintStartY = paint.getPoint1().getY();
+        final double paintEndX = paint.getPoint2().getX();
+        final double paintEndY = paint.getPoint2().getY();
+
         //get the coordinates of the shape that is to be filled
         final Rectangle2D bounds = target.getBounds();
-        final float bx = (float)bounds.getX();
-        final float by = (float)bounds.getY();
-        final float bw = (float)bounds.getWidth();
-        final float bh = (float)bounds.getHeight();
+        final float targetX = (float)bounds.getX();
+        final float targetY = (float)bounds.getY();
+        final float targetWidth = (float)bounds.getWidth();
+        final float targetHeight = (float)bounds.getHeight();
+
         //reserve variables to store the coordinates of the resulting GradientPaint
-        float rx1, ry1, rx2, ry2;
-        if (px1 == 0 && py1 == 0) {
+        float resultStartX, resultStartY, resultEndX, resultEndY;
+
+        if (paintStartX == 0 && paintStartY == 0) {
             //start point is upper left corner
-            rx1 = bx;
-            ry1 = by;
-            if (px2 != 0.0f && py2 != 0.0f) {
+            resultStartX = targetX;
+            resultStartY = targetY;
+            if (paintEndX != 0.0f && paintEndY != 0.0f) {
                 //end point is lower right corner --> diagonal gradient
-                float offset = (paint.isCyclic()) ? (bw + bh) / 4.0f 
-                        : (bw + bh) / 2.0f ;
-                rx2 = bx + offset;
-                ry2 = by + offset;
+                float offset = (paint.isCyclic()) ? (targetWidth + targetHeight) / 4.0f
+                        : (targetWidth + targetHeight) / 2.0f;
+                resultEndX = targetX + offset;
+                resultEndY = targetY + offset;
             }
             else {
                 //end point is either lower left corner --> vertical gradient
                 //or end point is upper right corner --> horizontal gradient
-                rx2 = (px2 == 0) ? rx1 : (paint.isCyclic() ? (rx1 + bw / 2.0f) 
-                        : (rx1 + bw));
-                ry2 = (py2 == 0) ? ry1 : (paint.isCyclic() ? (ry1 + bh / 2.0f) 
-                        : (ry1 + bh));
+                resultEndX = (paintEndX == 0) ? resultStartX :
+                        (paint.isCyclic() ? (resultStartX + targetWidth / 2.0f)
+                                : (resultStartX + targetWidth));
+                resultEndY = (paintEndY == 0) ? resultStartY :
+                        (paint.isCyclic() ? (resultStartY + targetHeight / 2.0f)
+                                : (resultStartY + targetHeight));
             }
         }
         else {
             //start point is lower left right corner --> diagonal gradient
-            rx1 = bx;
-            ry1 = by + bh;
-            float offset = (paint.isCyclic()) ? (bw + bh) / 4.0f 
-                    : (bw + bh) / 2.0f;
-            rx2 = bx + offset;
-            ry2 = by + bh - offset;
+            resultStartX = targetX;
+            resultStartY = targetY + targetHeight;
+            float offset = (paint.isCyclic()) ? (targetWidth + targetHeight) / 4.0f
+                    : (targetWidth + targetHeight) / 2.0f;
+            resultEndX = targetX + offset;
+            resultEndY = targetY + targetHeight - offset;
         }
-        return new GradientPaint(rx1, ry1, paint.getColor1(), rx2, ry2, 
-                paint.getColor2(), paint.isCyclic());
+
+        return new GradientPaint(resultStartX, resultStartY, paint.getColor1(),
+                resultEndX, resultEndY, paint.getColor2(), paint.isCyclic());
     }
 }

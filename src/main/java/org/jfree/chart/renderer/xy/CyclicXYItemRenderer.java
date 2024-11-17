@@ -129,179 +129,193 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
      * @param pass  the current pass index.
      */
     @Override
-    public void drawItem(Graphics2D g2, XYItemRendererState state, 
-            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
-            int series, int item, CrosshairState crosshairState, int pass) {
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+                         Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+                         ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+                         int series, int item, CrosshairState crosshairState, int pass) {
 
-        if ((!getPlotLines()) || ((!(domainAxis instanceof CyclicNumberAxis))
-                && (!(rangeAxis instanceof CyclicNumberAxis))) || (item <= 0)) {
+        // Check if we should use standard drawing
+        if (shouldUseStandardDrawing(domainAxis, rangeAxis, item)) {
             super.drawItem(g2, state, dataArea, info, plot, domainAxis,
                     rangeAxis, dataset, series, item, crosshairState, pass);
             return;
         }
 
-        // get the previous data point...
-        double xn = dataset.getXValue(series, item - 1);
-        double yn = dataset.getYValue(series, item - 1);
-        // If null, don't draw line => then delegate to parent
-        if (Double.isNaN(yn)) {
+        // Check if previous point is valid
+        if (isPreviousPointInvalid(dataset, series, item)) {
             super.drawItem(g2, state, dataArea, info, plot, domainAxis,
                     rangeAxis, dataset, series, item, crosshairState, pass);
             return;
         }
-        double[] x = new double[2];
-        double[] y = new double[2];
-        x[0] = xn;
-        y[0] = yn;
 
         // get the data point...
-        xn = dataset.getXValue(series, item);
-        yn = dataset.getYValue(series, item);
-        // If null, don't draw line at all
+        double xn = dataset.getXValue(series, item);
+        double yn = dataset.getYValue(series, item);
+
+        // Check if current point is invalid
         if (Double.isNaN(yn)) {
             return;
         }
-        x[1] = xn;
-        y[1] = yn;
 
-        // Now split the segment as needed
+        // Initialize points arrays
+        double[] x = {dataset.getXValue(series, item - 1), xn};
+        double[] y = {dataset.getYValue(series, item - 1), yn};
+
+        // Handle cyclic axes
         double xcycleBound = Double.NaN;
         double ycycleBound = Double.NaN;
         boolean xBoundMapping = false, yBoundMapping = false;
         CyclicNumberAxis cnax = null, cnay = null;
 
+        // Process domain axis
         if (domainAxis instanceof CyclicNumberAxis) {
+            processdomainAxisCycling(domainAxis, x, y);
             cnax = (CyclicNumberAxis) domainAxis;
             xcycleBound = cnax.getCycleBound();
             xBoundMapping = cnax.isBoundMappedToLastCycle();
-            // If the segment must be splitted, insert a new point
-            // Strict test forces to have real segments (not 2 equal points)
-            // and avoids division by 0
-            if ((x[0] != x[1])
-                    && ((xcycleBound >= x[0])
-                    && (xcycleBound <= x[1])
-                    || (xcycleBound >= x[1])
-                    && (xcycleBound <= x[0]))) {
-                double[] nx = new double[3];
-                double[] ny = new double[3];
-                nx[0] = x[0]; nx[2] = x[1]; ny[0] = y[0]; ny[2] = y[1];
-                nx[1] = xcycleBound;
-                ny[1] = (y[1] - y[0]) * (xcycleBound - x[0])
-                        / (x[1] - x[0]) + y[0];
-                x = nx; y = ny;
-            }
         }
 
+        // Process range axis
         if (rangeAxis instanceof CyclicNumberAxis) {
+            processRangeAxisCycling(rangeAxis, x, y);
             cnay = (CyclicNumberAxis) rangeAxis;
             ycycleBound = cnay.getCycleBound();
             yBoundMapping = cnay.isBoundMappedToLastCycle();
-            // The split may occur in either x splitted segments, if any, but
-            // not in both
-            if ((y[0] != y[1]) && ((ycycleBound >= y[0])
-                    && (ycycleBound <= y[1])
-                    || (ycycleBound >= y[1]) && (ycycleBound <= y[0]))) {
-                double[] nx = new double[x.length + 1];
-                double[] ny = new double[y.length + 1];
-                nx[0] = x[0]; nx[2] = x[1]; ny[0] = y[0]; ny[2] = y[1];
-                ny[1] = ycycleBound;
-                nx[1] = (x[1] - x[0]) * (ycycleBound - y[0])
-                        / (y[1] - y[0]) + x[0];
-                if (x.length == 3) {
-                    nx[3] = x[2]; ny[3] = y[2];
-                }
-                x = nx; y = ny;
-            }
-            else if ((x.length == 3) && (y[1] != y[2]) && ((ycycleBound >= y[1])
-                    && (ycycleBound <= y[2])
-                    || (ycycleBound >= y[2]) && (ycycleBound <= y[1]))) {
-                double[] nx = new double[4];
-                double[] ny = new double[4];
-                nx[0] = x[0]; nx[1] = x[1]; nx[3] = x[2];
-                ny[0] = y[0]; ny[1] = y[1]; ny[3] = y[2];
-                ny[2] = ycycleBound;
-                nx[2] = (x[2] - x[1]) * (ycycleBound - y[1])
-                        / (y[2] - y[1]) + x[1];
-                x = nx; y = ny;
-            }
         }
 
-        // If the line is not wrapping, then parent is OK
+        // If no cycling occurred, use standard drawing
         if (x.length == 2) {
             super.drawItem(g2, state, dataArea, info, plot, domainAxis,
                     rangeAxis, dataset, series, item, crosshairState, pass);
             return;
         }
 
+        // Draw the cyclic segments
+        drawCyclicSegments(g2, state, dataArea, info, plot, domainAxis, rangeAxis,
+                dataset, series, item, crosshairState, pass, x, y,
+                cnax, cnay, xcycleBound, ycycleBound, xBoundMapping, yBoundMapping);
+    }
+
+    /**
+     * Checks if standard drawing should be used instead of cyclic drawing.
+     */
+    private boolean shouldUseStandardDrawing(ValueAxis domainAxis, ValueAxis rangeAxis, int item) {
+        return !getPlotLines()
+                || (!(domainAxis instanceof CyclicNumberAxis) && !(rangeAxis instanceof CyclicNumberAxis))
+                || item <= 0;
+    }
+
+    /**
+     * Checks if the previous point is invalid (NaN).
+     */
+    private boolean isPreviousPointInvalid(XYDataset dataset, int series, int item) {
+        return Double.isNaN(dataset.getYValue(series, item - 1));
+    }
+
+    /**
+     * Processes cycling for the domain axis.
+     */
+    private void processdomainAxisCycling(ValueAxis domainAxis, double[] x, double[] y) {
+        CyclicNumberAxis cnax = (CyclicNumberAxis) domainAxis;
+        double xcycleBound = cnax.getCycleBound();
+
+        if (shouldSplitSegment(x[0], x[1], xcycleBound)) {
+            double[] nx = new double[3];
+            double[] ny = new double[3];
+            nx[0] = x[0]; nx[2] = x[1];
+            ny[0] = y[0]; ny[2] = y[1];
+            nx[1] = xcycleBound;
+            ny[1] = interpolateValue(x[0], y[0], x[1], y[1], xcycleBound);
+            x = nx;
+            y = ny;
+        }
+    }
+
+    /**
+     * Processes cycling for the range axis.
+     */
+    private void processRangeAxisCycling(ValueAxis rangeAxis, double[] x, double[] y) {
+        CyclicNumberAxis cnay = (CyclicNumberAxis) rangeAxis;
+        double ycycleBound = cnay.getCycleBound();
+
+        if (shouldSplitSegment(y[0], y[1], ycycleBound)) {
+            double[] nx = new double[3];
+            double[] ny = new double[3];
+            nx[0] = x[0]; nx[2] = x[1];
+            ny[0] = y[0]; ny[2] = y[1];
+            ny[1] = ycycleBound;
+            nx[1] = interpolateValue(y[0], x[0], y[1], x[1], ycycleBound);
+            x = nx;
+            y = ny;
+        }
+    }
+
+    /**
+     * Checks if a segment should be split at the cycle boundary.
+     */
+    private boolean shouldSplitSegment(double start, double end, double cycleBound) {
+        return (start != end)
+                && ((cycleBound >= start && cycleBound <= end)
+                || (cycleBound >= end && cycleBound <= start));
+    }
+
+    /**
+     * Interpolates a value based on the cycle boundary.
+     */
+    private double interpolateValue(double x1, double y1, double x2, double y2, double x) {
+        return (y2 - y1) * (x - x1) / (x2 - x1) + y1;
+    }
+
+    /**
+     * Draws the segments for cyclic data.
+     */
+    private void drawCyclicSegments(Graphics2D g2, XYItemRendererState state,
+                                    Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+                                    ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+                                    int series, int item, CrosshairState crosshairState, int pass,
+                                    double[] x, double[] y, CyclicNumberAxis cnax, CyclicNumberAxis cnay,
+                                    double xcycleBound, double ycycleBound,
+                                    boolean xBoundMapping, boolean yBoundMapping) {
+
         OverwriteDataSet newset = new OverwriteDataSet(x, y, dataset);
 
-        if (cnax != null) {
-            if (xcycleBound == x[0]) {
-                cnax.setBoundMappedToLastCycle(x[1] <= xcycleBound);
-            }
-            if (xcycleBound == x[1]) {
-                cnax.setBoundMappedToLastCycle(x[0] <= xcycleBound);
-            }
-        }
-        if (cnay != null) {
-            if (ycycleBound == y[0]) {
-                cnay.setBoundMappedToLastCycle(y[1] <= ycycleBound);
-            }
-            if (ycycleBound == y[1]) {
-                cnay.setBoundMappedToLastCycle(y[0] <= ycycleBound);
-            }
-        }
-        super.drawItem(
-            g2, state, dataArea, info, plot, domainAxis, rangeAxis,
-            newset, series, 1, crosshairState, pass
-        );
-
-        if (cnax != null) {
-            if (xcycleBound == x[1]) {
-                cnax.setBoundMappedToLastCycle(x[2] <= xcycleBound);
-            }
-            if (xcycleBound == x[2]) {
-                cnax.setBoundMappedToLastCycle(x[1] <= xcycleBound);
-            }
-        }
-        if (cnay != null) {
-            if (ycycleBound == y[1]) {
-                cnay.setBoundMappedToLastCycle(y[2] <= ycycleBound);
-            }
-            if (ycycleBound == y[2]) {
-                cnay.setBoundMappedToLastCycle(y[1] <= ycycleBound);
-            }
-        }
-        super.drawItem(g2, state, dataArea, info, plot, domainAxis, rangeAxis,
-                newset, series, 2, crosshairState, pass);
-
-        if (x.length == 4) {
-            if (cnax != null) {
-                if (xcycleBound == x[2]) {
-                    cnax.setBoundMappedToLastCycle(x[3] <= xcycleBound);
-                }
-                if (xcycleBound == x[3]) {
-                    cnax.setBoundMappedToLastCycle(x[2] <= xcycleBound);
-                }
-            }
-            if (cnay != null) {
-                if (ycycleBound == y[2]) {
-                    cnay.setBoundMappedToLastCycle(y[3] <= ycycleBound);
-                }
-                if (ycycleBound == y[3]) {
-                    cnay.setBoundMappedToLastCycle(y[2] <= ycycleBound);
-                }
-            }
-            super.drawItem(g2, state, dataArea, info, plot, domainAxis,
-                    rangeAxis, newset, series, 3, crosshairState, pass);
+        // Draw segments
+        for (int i = 1; i < x.length; i++) {
+            updateAxisMappings(cnax, cnay, x, y, i, xcycleBound, ycycleBound);
+            super.drawItem(g2, state, dataArea, info, plot, domainAxis, rangeAxis,
+                    newset, series, i, crosshairState, pass);
         }
 
+        // Restore original mappings
         if (cnax != null) {
             cnax.setBoundMappedToLastCycle(xBoundMapping);
         }
         if (cnay != null) {
             cnay.setBoundMappedToLastCycle(yBoundMapping);
+        }
+    }
+
+    /**
+     * Updates the axis mappings for cyclic axes.
+     */
+    private void updateAxisMappings(CyclicNumberAxis cnax, CyclicNumberAxis cnay,
+                                    double[] x, double[] y, int index,
+                                    double xcycleBound, double ycycleBound) {
+        if (cnax != null) {
+            if (xcycleBound == x[index - 1]) {
+                cnax.setBoundMappedToLastCycle(x[index] <= xcycleBound);
+            }
+            if (xcycleBound == x[index]) {
+                cnax.setBoundMappedToLastCycle(x[index - 1] <= xcycleBound);
+            }
+        }
+        if (cnay != null) {
+            if (ycycleBound == y[index - 1]) {
+                cnay.setBoundMappedToLastCycle(y[index] <= ycycleBound);
+            }
+            if (ycycleBound == y[index]) {
+                cnay.setBoundMappedToLastCycle(y[index - 1] <= ycycleBound);
+            }
         }
     }
 

@@ -335,12 +335,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public CategoryToolTipGenerator getToolTipGenerator(int row, int column) {
-
-        CategoryToolTipGenerator result = getSeriesToolTipGenerator(row);
-        if (result == null) {
-            result = this.defaultToolTipGenerator;
-        }
-        return result;
+        return getGenerator(row, toolTipGeneratorMap, defaultToolTipGenerator);
     }
 
     /**
@@ -355,7 +350,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public CategoryToolTipGenerator getSeriesToolTipGenerator(int series) {
-        return this.toolTipGeneratorMap.get(series);
+        return toolTipGeneratorMap.get(series);
     }
 
     /**
@@ -369,8 +364,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public void setSeriesToolTipGenerator(int series,
-            CategoryToolTipGenerator generator) {
-        setSeriesToolTipGenerator(series, generator, true);
+                                          CategoryToolTipGenerator generator) {
+        setGenerator(series, generator, toolTipGeneratorMap, true);
     }
     
     /**

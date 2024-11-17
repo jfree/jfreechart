@@ -201,72 +201,126 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
         int yStop = dstHeight - right;
 
         int shadowRgb = this.shadowColor.getRGB() & 0x00FFFFFF;
-
-        int[] aHistory = new int[this.shadowSize];
-        int historyIdx;
-
-        int aSum;
-
         int[] dataBuffer = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
         int lastPixelOffset = right * dstWidth;
         float sumDivider = this.shadowOpacity / this.shadowSize;
 
-        // horizontal pass
+        // Split into two separate methods
+        applyHorizontalShadow(dstWidth, dstHeight, xStart, xStop, right, shadowRgb,
+                dataBuffer, sumDivider);
+        applyVerticalShadow(dstWidth, dstHeight, yStart, yStop, lastPixelOffset,
+                shadowRgb, dataBuffer, sumDivider);
+    }
 
+    /**
+     * Applies the horizontal pass of the shadow effect.
+     * This method processes the image data row by row, calculating shadow intensity
+     * based on neighboring pixels in the horizontal direction.
+     *
+     * @param dstWidth The width of the destination image
+     * @param dstHeight The height of the destination image
+     * @param xStart The starting x position for shadow calculation
+     * @param xStop The ending x position for shadow calculation
+     * @param right The right offset for pixel calculations
+     * @param shadowRgb The RGB value of the shadow color (without alpha)
+     * @param dataBuffer The image data buffer containing pixel values
+     * @param sumDivider The opacity factor used for shadow intensity calculation
+     */
+    private void applyHorizontalShadow(int dstWidth, int dstHeight, int xStart,
+                                       int xStop, int right, int shadowRgb, int[] dataBuffer, float sumDivider) {
+        // Array to maintain the history of alpha values for the shadow size window
+        int[] aHistory = new int[this.shadowSize];
+        int historyIdx;
+        int aSum;
+
+        // Process each row of the image
         for (int y = 0, bufferOffset = 0; y < dstHeight; y++, bufferOffset = y * dstWidth) {
             aSum = 0;
             historyIdx = 0;
+
+            // Initialize the alpha sum for the first shadow-size pixels in the row
             for (int x = 0; x < this.shadowSize; x++, bufferOffset++) {
-                int a = dataBuffer[bufferOffset] >>> 24;
+                int a = dataBuffer[bufferOffset] >>> 24;  // Extract alpha value
                 aHistory[x] = a;
                 aSum += a;
             }
 
             bufferOffset -= right;
 
+            // Process each pixel in the row, calculating shadow values
             for (int x = xStart; x < xStop; x++, bufferOffset++) {
+                // Calculate shadow intensity based on accumulated alpha values
                 int a = (int) (aSum * sumDivider);
                 dataBuffer[bufferOffset] = a << 24 | shadowRgb;
 
-                // substract the oldest pixel from the sum
+                // Update the running sum by removing oldest value and adding newest
                 aSum -= aHistory[historyIdx];
 
-                // get the lastest pixel
+                // Get the alpha value of the next pixel
                 a = dataBuffer[bufferOffset + right] >>> 24;
                 aHistory[historyIdx] = a;
                 aSum += a;
 
+                // Circular buffer implementation for history array
                 if (++historyIdx >= this.shadowSize) {
                     historyIdx -= this.shadowSize;
                 }
             }
         }
+    }
 
-        // vertical pass
+    /**
+     * Applies the vertical pass of the shadow effect.
+     * This method processes the image data column by column, calculating shadow intensity
+     * based on neighboring pixels in the vertical direction.
+     * It uses the results from the horizontal pass to create the final shadow effect.
+     *
+     * @param dstWidth The width of the destination image
+     * @param dstHeight The height of the destination image
+     * @param yStart The starting y position for shadow calculation
+     * @param yStop The ending y position for shadow calculation
+     * @param lastPixelOffset The offset to the last pixel in the vertical window
+     * @param shadowRgb The RGB value of the shadow color (without alpha)
+     * @param dataBuffer The image data buffer containing pixel values
+     * @param sumDivider The opacity factor used for shadow intensity calculation
+     */
+    private void applyVerticalShadow(int dstWidth, int dstHeight, int yStart,
+                                     int yStop, int lastPixelOffset, int shadowRgb, int[] dataBuffer,
+                                     float sumDivider) {
+        // Array to maintain the history of alpha values for the shadow size window
+        int[] aHistory = new int[this.shadowSize];
+        int historyIdx;
+        int aSum;
+
+        // Process each column of the image
         for (int x = 0, bufferOffset = 0; x < dstWidth; x++, bufferOffset = x) {
             aSum = 0;
             historyIdx = 0;
-            for (int y = 0; y < this.shadowSize; y++,
-                    bufferOffset += dstWidth) {
-                int a = dataBuffer[bufferOffset] >>> 24;
+
+            // Initialize the alpha sum for the first shadow-size pixels in the column
+            for (int y = 0; y < this.shadowSize; y++, bufferOffset += dstWidth) {
+                int a = dataBuffer[bufferOffset] >>> 24;  // Extract alpha value
                 aHistory[y] = a;
                 aSum += a;
             }
 
             bufferOffset -= lastPixelOffset;
 
+            // Process each pixel in the column, calculating shadow values
             for (int y = yStart; y < yStop; y++, bufferOffset += dstWidth) {
+                // Calculate shadow intensity based on accumulated alpha values
                 int a = (int) (aSum * sumDivider);
                 dataBuffer[bufferOffset] = a << 24 | shadowRgb;
 
-                // substract the oldest pixel from the sum
+                // Update the running sum by removing oldest value
                 aSum -= aHistory[historyIdx];
 
-                // get the lastest pixel
+                // Get the alpha value of the next pixel in the column
                 a = dataBuffer[bufferOffset + lastPixelOffset] >>> 24;
                 aHistory[historyIdx] = a;
                 aSum += a;
 
+                // Circular buffer implementation for history array
                 if (++historyIdx >= this.shadowSize) {
                     historyIdx -= this.shadowSize;
                 }
