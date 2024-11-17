@@ -148,12 +148,6 @@ public abstract class Plot implements ChartElement, AxisChangeListener,
     public static final Shape DEFAULT_LEGEND_ITEM_CIRCLE
             = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
 
-    /** 
-     * The chart that the plot is assigned to.  It can be {@code null} if the
-     * plot is not assigned to a chart yet, or if the plot is a subplot of a
-     * another plot.
-     */
-    private JFreeChart chart;
     
     /** The parent plot ({@code null} if this is the root plot). */
     private Plot parent;
@@ -216,7 +210,6 @@ public abstract class Plot implements ChartElement, AxisChangeListener,
      * Creates a new plot.
      */
     protected Plot() {
-        this.chart = null;
         this.parent = null;
         this.insets = DEFAULT_INSETS;
         this.backgroundPaint = DEFAULT_BACKGROUND_PAINT;
@@ -236,42 +229,25 @@ public abstract class Plot implements ChartElement, AxisChangeListener,
         this.notify = true;
         this.listenerList = new EventListenerList();
     }
-    
+
+
     /**
-     * Returns the chart that this plot is assigned to.  This method can
-     * return {@code null} if the plot is not yet assigned to a plot, or if the
-     * plot is a subplot of another plot.
-     * 
-     * @return The chart (possibly {@code null}).
-     */
-    public JFreeChart getChart() {
-        return this.chart;
-    }
-    
-    /**
-     * Sets the chart that the plot is assigned to.  This method is not 
-     * intended for external use.
-     * 
-     * @param chart  the chart ({@code null} permitted).
-     */
-    public void setChart(JFreeChart chart) {
-        this.chart = chart;
-    }
-    
-    /**
-     * Fetches the element hinting flag from the chart that this plot is 
-     * assigned to.  If the plot is not assigned (directly or indirectly) to
-     * a chart instance, this method will return {@code false}.
-     * 
-     * @return A boolean.
+     * Returns whether element hinting is enabled for chart rendering.
+     * This method was modified as part of removing the bidirectional association
+     * with JFreeChart. Instead of getting the flag from JFreeChart, it now:
+     * - For child plots (plots with a parent): delegates to the parent plot to
+     *   maintain consistency in the plot hierarchy
+     * - For root plots (plots without a parent): returns false as a default value
+     *   since there's no longer a direct link to JFreeChart
+     *
+     * @return true if element hinting should be used during chart rendering,
+     *         false otherwise
      */
     public boolean fetchElementHintingFlag() {
         if (this.parent != null) {
             return this.parent.fetchElementHintingFlag();
         }
-        if (this.chart != null) {
-            return this.chart.getElementHinting();
-        }
+        // Default to false for root plots since we no longer have chart reference
         return false;
     }
 

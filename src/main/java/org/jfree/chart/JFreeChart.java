@@ -280,8 +280,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
         Args.nullNotPermitted(plot, "plot");
         this.id = null;
-        plot.setChart(this);
-        
+
         // create storage for listeners...
         this.progressListeners = new EventListenerList();
         this.changeListeners = new EventListenerList();
