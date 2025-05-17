@@ -83,7 +83,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
             = new Color(0, 0, 0, 0);  // transparent
 
     /** The list of symbols to display instead of the numeric values. */
-    private List symbols;
+    private List<String> symbols;
 
     /** Flag that indicates whether or not grid bands are visible. */
     private boolean gridBandsVisible;
@@ -121,13 +121,23 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      */
     public String[] getSymbols() {
         String[] result = new String[this.symbols.size()];
-        result = (String[]) this.symbols.toArray(result);
+        this.symbols.toArray(result);
         return result;
     }
 
     /**
-     * Returns the flag that controls whether or not grid bands are drawn for 
-     * the axis.  The default value is {@code true}. 
+     * Sets the list of symbols to display instead of the numeric values.
+     *
+     * @param symbols List of symbols.
+     */
+    public void setSymbols(String[] symbols) {
+        this.symbols = Arrays.asList(symbols);
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether grid bands are drawn for the axis.
+     * The default value is {@code true}.
      *
      * @return A boolean.
      *
@@ -309,7 +319,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         //gets the outline stroke width of the plot
         double outlineStrokeWidth = 1.0;
         Stroke outlineStroke = getPlot().getOutlineStroke();
-        if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
+        if (outlineStroke instanceof BasicStroke) {
             outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
         }
 
@@ -360,7 +370,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         //gets the outline stroke width of the plot
         double outlineStrokeWidth = 1.0;
         Stroke outlineStroke = getPlot().getOutlineStroke();
-        if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
+        if (outlineStroke instanceof BasicStroke) {
             outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
         }
 
@@ -488,7 +498,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     protected List refreshTicksHorizontal(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
-        List ticks = new java.util.ArrayList();
+        List<Tick> ticks = new java.util.ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -582,7 +592,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     protected List refreshTicksVertical(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
-        List ticks = new java.util.ArrayList();
+        List<Tick> ticks = new java.util.ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -672,7 +682,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public String valueToString(double value) {
         String strToReturn;
         try {
-            strToReturn = (String) this.symbols.get((int) value);
+            strToReturn = this.symbols.get((int) value);
         }
         catch (IndexOutOfBoundsException  ex) {
             strToReturn = "";
