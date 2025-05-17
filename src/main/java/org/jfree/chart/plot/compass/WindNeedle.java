@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * WindNeedle.java
  * ---------------
- * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -44,7 +44,7 @@ import java.io.Serializable;
 
 /**
  * A needle that indicates wind direction, for use with the
- * {@link org.jfree.chart.plot.CompassPlot} class.
+ * {@link org.jfree.chart.plot.compass.CompassPlot} class.
  */
 public class WindNeedle extends ArrowNeedle implements Cloneable, Serializable {
 
@@ -71,20 +71,19 @@ public class WindNeedle extends ArrowNeedle implements Cloneable, Serializable {
             Point2D rotate, double angle) {
 
         super.drawNeedle(g2, plotArea, rotate, angle);
-        if ((rotate != null) && (plotArea != null)) {
+        if (rotate != null) {
 
             int spacing = getSize() * 3;
             Rectangle2D newArea = new Rectangle2D.Double();
 
-            Point2D newRotate = rotate;
             newArea.setRect(plotArea.getMinX() - spacing, plotArea.getMinY(),
                     plotArea.getWidth(), plotArea.getHeight());
-            super.drawNeedle(g2, newArea, newRotate, angle);
+            super.drawNeedle(g2, newArea, rotate, angle);
 
             newArea.setRect(plotArea.getMinX() + spacing,
                     plotArea.getMinY(), plotArea.getWidth(),
                     plotArea.getHeight());
-            super.drawNeedle(g2, newArea, newRotate, angle);
+            super.drawNeedle(g2, newArea, rotate, angle);
 
         }
     }

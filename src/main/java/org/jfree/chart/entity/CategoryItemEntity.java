@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * CategoryItemEntity.java
  * -----------------------
- * (C) Copyright 2002-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
@@ -47,6 +47,10 @@ import org.jfree.data.category.CategoryDataset;
 
 /**
  * A chart entity that represents one item within a category plot.
+ *
+ * @param <R> the row-key type
+ * @param <C> the column-key type
+ *
  */
 public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>> 
         extends ChartEntity implements Cloneable, Serializable {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * PieSectionEntity.java
  * ---------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
@@ -46,6 +46,8 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A chart entity that represents one section within a pie plot.
+ *
+ * @param <K> the section key type
  */
 public class PieSectionEntity<K extends Comparable<K>> extends ChartEntity 
         implements Serializable {
@@ -76,7 +78,7 @@ public class PieSectionEntity<K extends Comparable<K>> extends ChartEntity
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text for HTML image maps.
      */
-    public PieSectionEntity(Shape area, PieDataset dataset, int pieIndex, 
+    public PieSectionEntity(Shape area, PieDataset dataset, int pieIndex,
             int sectionIndex, K sectionKey, String toolTipText, String urlText) {
 
         super(area, toolTipText, urlText);
