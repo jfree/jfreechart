@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,16 @@
  * ---------------------
  * LegendItemSource.java
  * ---------------------
- * (C) Copyright 2005-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.chart.legend;
 
-import org.jfree.chart.legend.LegendItemCollection;
-
 /**
- * A source of legend items.  A {@link org.jfree.chart.title.LegendTitle} will
+ * A source of legend items.  A {@link org.jfree.chart.legend.LegendTitle} will
  * maintain a list of sources (often just one) from which it obtains legend
  * items.
  */

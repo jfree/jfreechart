@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYBezierRenderer.java
  * ---------------------
- * (C) Copyright, by Javier Robes and Contributors.
+ * (C) Copyright 2021-present, by Javier Robes and Contributors.
  *
  * Original Author:  Javier Robes;
  *
@@ -61,9 +61,6 @@ import org.jfree.data.xy.XYDataset;
  * A renderer that connects data points with Bezier cubic curves and/or
  * draws shapes at each data point.  This renderer is designed for use with
  * the {@link XYPlot} class.
- * <br><br>
- * 
- * @since
  */
 public class XYBezierRenderer extends XYLineAndShapeRenderer {
 
@@ -72,7 +69,7 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
      * 
      * @since 1.0.17
      */
-    public static enum FillType {
+    public enum FillType {
        
         /** No fill. */
         NONE,
@@ -350,8 +347,9 @@ public class XYBezierRenderer extends XYLineAndShapeRenderer {
             Point2D p = plot.getOrientation() == PlotOrientation.HORIZONTAL 
                 ? new Point2D.Float((float) transY1, (float) transX1) 
                 : new Point2D.Float((float) transX1, (float) transY1);
-            if (!s.points.contains(p))
+            if (!s.points.contains(p)) {
                 s.points.add(p);
+            }
         }
         
         if (item == dataset.getItemCount(series) - 1) {     // construct path

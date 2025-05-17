@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryCrosshairState.java
  * ---------------------------
- * (C) Copyright 2008-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -46,6 +46,9 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
  * and updated as each data item is rendered.  At the end of the rendering
  * process, this class holds the row key, column key and value for the
  * crosshair location.
+ *
+ * @param <R> the row key type
+ * @param <C> the column key type
  */
 public class CategoryCrosshairState<R extends Comparable<R>, C extends Comparable<C>> 
         extends CrosshairState {
@@ -64,6 +67,7 @@ public class CategoryCrosshairState<R extends Comparable<R>, C extends Comparabl
      * Creates a new instance.
      */
     public CategoryCrosshairState() {
+        super();
         this.rowKey = null;
         this.columnKey = null;
     }

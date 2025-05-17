@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2021, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-present, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert;
@@ -70,6 +70,8 @@ import org.jfree.data.xy.XYDataset;
 /**
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common domain axis.
+ *
+ * @param <S> the subplot key type.
  */
 public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
