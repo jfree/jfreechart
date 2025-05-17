@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jeremy Bowman;
@@ -112,6 +112,9 @@ import org.jfree.data.general.DatasetUtils;
 /**
  * A general plotting class that uses data from a {@link CategoryDataset} and
  * renders each data item using a {@link CategoryItemRenderer}.
+ *
+ * @param <R> the row key type
+ * @param <C> the column key type
  */
 public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> 
         extends Plot implements ValueAxisPlot, Pannable,
@@ -178,7 +181,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private Map<Integer, AxisLocation> domainAxisLocations;
 
     /**
-     * A flag that controls whether or not the shared domain axis is drawn
+     * A flag that controls whether the shared domain axis is drawn
      * (only relevant when the plot is being used as a subplot).
      */
     private boolean drawSharedDomainAxis;
@@ -197,14 +200,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * Typically a dataset is rendered using the scale of a single axis, but
      * a dataset can contribute to the "auto-range" of any number of axes.
      */
-    private TreeMap<Integer, List<Integer>> datasetToDomainAxesMap;
+    private Map<Integer, List<Integer>> datasetToDomainAxesMap;
 
     /** 
      * Storage for keys that map each dataset to one or more range axes. 
      * Typically a dataset is rendered using the scale of a single axis, but
      * a dataset can contribute to the "auto-range" of any number of axes.
      */
-    private TreeMap<Integer, List<Integer>> datasetToRangeAxesMap;
+    private Map<Integer, List<Integer>> datasetToRangeAxesMap;
 
     /** Storage for the renderers. */
     private Map<Integer, CategoryItemRenderer> renderers;
@@ -241,7 +244,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint domainGridlinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the range
+     * A flag that controls whether the zero baseline against the range
      * axis is visible.
      */
     private boolean rangeZeroBaselineVisible;
@@ -269,7 +272,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint rangeGridlinePaint;
 
     /**
-     * A flag that controls whether or not gridlines are shown for the minor
+     * A flag that controls whether gridlines are shown for the minor
      * tick values on the primary range axis.
      */
     private boolean rangeMinorGridlinesVisible;
@@ -318,7 +321,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      */
     private transient Paint domainCrosshairPaint;
 
-    /** A flag that controls whether or not a range crosshair is drawn. */
+    /** A flag that controls whether a range crosshair is drawn. */
     private boolean rangeCrosshairVisible;
 
     /** The range crosshair value. */
@@ -331,7 +334,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint rangeCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean rangeCrosshairLockedOnData = true;
@@ -373,7 +376,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the
+     * A flag that controls whether panning is enabled for the
      * range axis/axes.
      */
     private boolean rangePannable;
@@ -1639,7 +1642,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the domain axis.
      * <p>
      * If the flag value changes, a {@link PlotChangeEvent} is sent to all
@@ -1732,7 +1735,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the range axis.
      *
      * @return A boolean.
@@ -1744,7 +1747,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the range axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -1820,7 +1823,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the range axis.  If the flag changes value, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
@@ -1898,7 +1901,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis minor grid
+     * Sets the flag that controls whether the range axis minor grid
      * lines are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -2319,8 +2322,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param marker  the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(CategoryMarker marker) {
         return removeDomainMarker(marker, Layer.FOREGROUND);
@@ -2333,8 +2335,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(CategoryMarker marker, Layer layer) {
         return removeDomainMarker(0, marker, layer);
@@ -2348,8 +2349,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer) {
         return removeDomainMarker(index, marker, layer, true);
@@ -2364,8 +2364,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer the layer (foreground or background).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer,
             boolean notify) {
