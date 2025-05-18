@@ -304,7 +304,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private PieSectionLabelGenerator legendLabelGenerator;
 
     /** A tool tip generator for the legend. */
-    private PieSectionLabelGenerator legendLabelToolTipGenerator;
+    private PieSectionLabelGenerator<K> legendLabelToolTipGenerator;
 
     /**
      * A URL generator for the legend items (optional).
@@ -1935,7 +1935,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @see #setLegendLabelToolTipGenerator(PieSectionLabelGenerator)
      */
-    public PieSectionLabelGenerator getLegendLabelToolTipGenerator() {
+    public PieSectionLabelGenerator<K> getLegendLabelToolTipGenerator() {
         return this.legendLabelToolTipGenerator;
     }
 

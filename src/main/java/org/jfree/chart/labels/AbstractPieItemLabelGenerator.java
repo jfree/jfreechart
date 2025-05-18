@@ -48,7 +48,7 @@ import org.jfree.data.general.PieDataset;
 /**
  * A base class used for generating pie chart item labels.
  */
-public class AbstractPieItemLabelGenerator implements Serializable {
+public class AbstractPieItemLabelGenerator<K extends Comparable<K>> implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7347703325267846275L;
@@ -125,7 +125,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      *
      * @return The items (never {@code null}).
      */
-    protected Object[] createItemArray(PieDataset dataset, Comparable key) {
+    protected Object[] createItemArray(PieDataset<K> dataset, K key) {
         Object[] result = new Object[4];
         double total = DatasetUtils.calculatePieDatasetTotal(dataset);
         result[0] = key.toString();
@@ -156,7 +156,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      *
      * @return The label (possibly {@code null}).
      */
-    protected String generateSectionLabel(PieDataset dataset, Comparable key) {
+    protected String generateSectionLabel(PieDataset<K> dataset, K key) {
         String result = null;
         if (dataset != null) {
             Object[] items = createItemArray(dataset, key);
@@ -181,8 +181,8 @@ public class AbstractPieItemLabelGenerator implements Serializable {
             return false;
         }
 
-        AbstractPieItemLabelGenerator that
-                = (AbstractPieItemLabelGenerator) obj;
+        AbstractPieItemLabelGenerator<?> that
+                = (AbstractPieItemLabelGenerator<?>) obj;
         if (!this.labelFormat.equals(that.labelFormat)) {
             return false;
         }
@@ -219,8 +219,8 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        AbstractPieItemLabelGenerator clone
-                = (AbstractPieItemLabelGenerator) super.clone();
+        AbstractPieItemLabelGenerator<?> clone
+                = (AbstractPieItemLabelGenerator<?>) super.clone();
         if (this.numberFormat != null) {
             clone.numberFormat = (NumberFormat) this.numberFormat.clone();
         }

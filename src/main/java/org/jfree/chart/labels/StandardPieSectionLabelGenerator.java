@@ -59,9 +59,9 @@ import org.jfree.data.general.PieDataset;
  * section, e.g. {@code "{0} = {1} ({2})"} will display as
  * {@code apple = 120 (5%)}.
  */
-public class StandardPieSectionLabelGenerator
-        extends AbstractPieItemLabelGenerator
-        implements PieSectionLabelGenerator, Cloneable, PublicCloneable,
+public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
+        extends AbstractPieItemLabelGenerator<K>
+        implements PieSectionLabelGenerator<K>, Cloneable, PublicCloneable,
                    Serializable {
 
     /** For serialization. */
@@ -164,7 +164,7 @@ public class StandardPieSectionLabelGenerator
      * @return The label (possibly {@code null}).
      */
     @Override
-    public String generateSectionLabel(PieDataset dataset, Comparable key) {
+    public String generateSectionLabel(PieDataset<K> dataset, K key) {
         return super.generateSectionLabel(dataset, key);
     }
 
