@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -------------------------
  * GanttCategoryDataset.java
  * -------------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
  package org.jfree.data.gantt;
@@ -41,6 +40,9 @@ import org.jfree.data.category.IntervalCategoryDataset;
 /**
  * An extension of the {@link IntervalCategoryDataset} interface that adds
  * support for multiple sub-intervals.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public interface GanttCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
         extends IntervalCategoryDataset<R, C> {

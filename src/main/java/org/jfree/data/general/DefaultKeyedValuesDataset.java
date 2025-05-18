@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ------------------------------
  * DefaultKeyedValuesDataset.java
  * ------------------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.general;
@@ -39,6 +38,8 @@ package org.jfree.data.general;
 /**
  * A default implementation of the {@link KeyedValuesDataset} interface.
  * This is an alias for {@link DefaultPieDataset}.
+ *
+ * @param <K> the key type.
  */
 public class DefaultKeyedValuesDataset<K extends Comparable<K>> 
         extends DefaultPieDataset<K> implements KeyedValuesDataset<K> {
