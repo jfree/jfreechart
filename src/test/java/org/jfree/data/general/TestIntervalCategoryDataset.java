@@ -95,9 +95,6 @@ public class TestIntervalCategoryDataset<R extends Comparable<R>,
      * @param column  the column index (zero-based).
      *
      * @return The value (possibly {@code null}).
-     *
-     * @see #addValue(Number, Comparable, Comparable)
-     * @see #removeValue(Comparable, Comparable)
      */
     @Override
     public Number getValue(int row, int column) {

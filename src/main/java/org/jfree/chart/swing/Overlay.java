@@ -69,7 +69,7 @@ public interface Overlay {
      * 
      * @param listener  the listener ({@code null} not permitted).
      * 
-     * @see #removeChangeListener(org.jfree.chart.event.OverlayChangeListener) 
+     * @see #removeChangeListener(OverlayChangeListener) 
      */
     void addChangeListener(OverlayChangeListener listener);
 
@@ -78,7 +78,7 @@ public interface Overlay {
      * 
      * @param listener  the listener ({@code null} not permitted).
      * 
-     * @see #addChangeListener(org.jfree.chart.event.OverlayChangeListener) 
+     * @see #addChangeListener(OverlayChangeListener) 
      */
     void removeChangeListener(OverlayChangeListener listener);
 

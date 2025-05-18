@@ -101,8 +101,9 @@ public class YIntervalDataItemTest {
     }
 
     /**
-     * Some checks for the clone() met
-     * @throws java.lang.CloneNotSupportedExceptionhod.
+     * Some checks for the clone() method
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
