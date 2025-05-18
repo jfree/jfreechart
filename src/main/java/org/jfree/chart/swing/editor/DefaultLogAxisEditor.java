@@ -52,8 +52,10 @@ import org.jfree.chart.axis.NumberTickUnit;
  */
 public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
 
+    /** The manual tick unit value. */
     private double manualTickUnitValue;
 
+    /** The manual tick unit field. */
     private JTextField manualTickUnit;
 
     /**

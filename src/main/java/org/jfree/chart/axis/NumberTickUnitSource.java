@@ -47,14 +47,17 @@ import java.util.Objects;
  */
 public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
-    private boolean integers;
-    
-    private int power = 0;
-    
-    private int factor = 1;
+    /** Show integers only? */
+    private final boolean integers;
+
+    /** The power exponent. */
+    private int power;
+
+    /** The factor (1, 2 or 5) */
+    private int factor;
     
     /** The number formatter to use (an override, it can be null). */
-    private NumberFormat formatter;
+    private final NumberFormat formatter;
 
     /**
      * Creates a new instance.
@@ -169,13 +172,19 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
     private double getTickSize() {
         return this.factor * Math.pow(10.0, this.power);
     }
-    
-    private DecimalFormat dfNeg4 = new DecimalFormat("0.0000");
-    private DecimalFormat dfNeg3 = new DecimalFormat("0.000");
-    private DecimalFormat dfNeg2 = new DecimalFormat("0.00");
-    private DecimalFormat dfNeg1 = new DecimalFormat("0.0");
-    private DecimalFormat df0 = new DecimalFormat("#,##0");
-    private DecimalFormat df = new DecimalFormat("#.######E0");
+
+    /** Formatter with 4 decimal places. */
+    private final DecimalFormat dfNeg4 = new DecimalFormat("0.0000");
+    /** Formatter with 3 decimal places. */
+    private final DecimalFormat dfNeg3 = new DecimalFormat("0.000");
+    /** Formatter with 2 decimal places. */
+    private final DecimalFormat dfNeg2 = new DecimalFormat("0.00");
+    /** Formatter with 1 decimal place. */
+    private final DecimalFormat dfNeg1 = new DecimalFormat("0.0");
+    /** Formatter for integers. */
+    private final DecimalFormat df0 = new DecimalFormat("#,##0");
+    /** Formatter for general numbers. */
+    private final DecimalFormat df = new DecimalFormat("#.######E0");
     
     private NumberFormat getTickLabelFormat() {
         if (this.formatter != null) {

@@ -64,6 +64,7 @@ public class OHLCSeriesCollection<S extends Comparable<S>> extends AbstractXYDat
     /** Storage for the data series. */
     private List<OHLCSeries<S>> data;
 
+    /** The position for x-values within the time period. */
     private TimePeriodAnchor xPosition = TimePeriodAnchor.MIDDLE;
 
     /**
