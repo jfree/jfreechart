@@ -1,6 +1,6 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *

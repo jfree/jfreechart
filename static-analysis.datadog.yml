@@ -1,0 +1,5 @@
+schema-version: v1
+rulesets:
+  - java-best-practices
+  - java-code-style
+  - java-security
