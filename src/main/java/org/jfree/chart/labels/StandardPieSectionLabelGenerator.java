@@ -74,7 +74,7 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
      * An optional map between item indices (Integer) and attributed labels 
      * (instances of AttributedString).
      */
-    private Map attributedLabels;
+    private Map<Integer, AttributedString> attributedLabels;
 
     /**
      * Creates a new section label generator using
@@ -130,7 +130,7 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
     public StandardPieSectionLabelGenerator(String labelFormat,
             NumberFormat numberFormat, NumberFormat percentFormat) {
         super(labelFormat, numberFormat, percentFormat);
-        this.attributedLabels = new HashMap();
+        this.attributedLabels = new HashMap<>();
     }
 
     /**
@@ -142,7 +142,7 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
      * @return The attributed label.
      */
     public AttributedString getAttributedLabel(int section) {
-        return (AttributedString) this.attributedLabels.get(section);
+        return this.attributedLabels.get(section);
     }
 
     /**
@@ -196,8 +196,8 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
      * @return An attributed label (possibly {@code null}).
      */
     @Override
-    public AttributedString generateAttributedSectionLabel(PieDataset dataset,
-            Comparable key) {
+    public AttributedString generateAttributedSectionLabel(PieDataset<K> dataset,
+            K key) {
         return getAttributedLabel(dataset.getIndex(key));
     }
 
@@ -216,8 +216,8 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
         if (!(obj instanceof StandardPieSectionLabelGenerator)) {
             return false;
         }
-        StandardPieSectionLabelGenerator that
-                = (StandardPieSectionLabelGenerator) obj;
+        StandardPieSectionLabelGenerator<?> that
+                = (StandardPieSectionLabelGenerator<?>) obj;
         if (!this.attributedLabels.equals(that.attributedLabels)) {
             return false;
         }
@@ -240,9 +240,9 @@ public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        StandardPieSectionLabelGenerator clone 
-                = (StandardPieSectionLabelGenerator) super.clone();        
-        clone.attributedLabels = new HashMap();
+        StandardPieSectionLabelGenerator<?> clone
+                = (StandardPieSectionLabelGenerator<?>) super.clone();
+        clone.attributedLabels = new HashMap<>();
         clone.attributedLabels.putAll(this.attributedLabels);
         return clone;
     }
