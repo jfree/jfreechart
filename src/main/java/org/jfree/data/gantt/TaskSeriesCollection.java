@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -------------------------
  * TaskSeriesCollection.java
  * -------------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Thomas Schuster;
- *
  */
 
 package org.jfree.data.gantt;
@@ -52,6 +51,9 @@ import org.jfree.data.time.TimePeriod;
 /**
  * A collection of {@link TaskSeries} objects.  This class provides one
  * implementation of the {@link GanttCategoryDataset} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<C>>  
         extends AbstractSeriesDataset<R>
@@ -74,6 +76,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
      * Default constructor.
      */
     public TaskSeriesCollection() {
+        super();
         this.keys = new ArrayList<>();
         this.data = new ArrayList<>();
     }

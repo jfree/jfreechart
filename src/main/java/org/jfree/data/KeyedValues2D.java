@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * KeyedValues2D.java
  * ------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -41,6 +41,9 @@ import java.util.List;
 /**
  * An extension of the {@link Values2D} interface where a unique key is
  * associated with the row and column indices.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>> 
         extends Values2D {

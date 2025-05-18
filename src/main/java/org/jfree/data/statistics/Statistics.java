@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Statistics.java
  * ---------------
- * (C) Copyright 2000-2021, by Matthew Wright and Contributors.
+ * (C) Copyright 2000-present, by Matthew Wright and Contributors.
  *
  * Original Author:  Matthew Wright;
  * Contributor(s):   David Gilbert;
@@ -46,6 +46,10 @@ import org.jfree.chart.internal.Args;
  * A utility class that provides some common statistical functions.
  */
 public abstract class Statistics {
+
+    private Statistics() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the mean of an array of numbers.  This is equivalent to calling
@@ -93,8 +97,7 @@ public abstract class Statistics {
                 counter++;
             }
         }
-        double result = (sum / counter);
-        return result;
+        return (sum / counter);
     }
 
     /**
@@ -104,7 +107,7 @@ public abstract class Statistics {
      *
      * @return The mean.
      */
-    public static double calculateMean(Collection values) {
+    public static double calculateMean(Collection<? extends Number> values) {
         return calculateMean(values, true);
     }
 
@@ -121,7 +124,7 @@ public abstract class Statistics {
      *
      * @since 1.0.3
      */
-    public static double calculateMean(Collection values,
+    public static double calculateMean(Collection<? extends Number> values,
             boolean includeNullAndNaN) {
 
         Args.nullNotPermitted(values, "values");
@@ -163,7 +166,7 @@ public abstract class Statistics {
      *
      * @return The median.
      */
-    public static double calculateMedian(List values) {
+    public static double calculateMedian(List<? extends Number> values) {
         return calculateMedian(values, true);
     }
 
@@ -178,7 +181,7 @@ public abstract class Statistics {
      *
      * @return The median.
      */
-    public static double calculateMedian(List values, boolean copyAndSort) {
+    public static double calculateMedian(List<? extends Number> values, boolean copyAndSort) {
 
         double result = Double.NaN;
         if (values != null) {
@@ -224,7 +227,7 @@ public abstract class Statistics {
      *
      * @return The median.
      */
-    public static double calculateMedian(List values, int start, int end) {
+    public static double calculateMedian(List<? extends Number> values, int start, int end) {
         return calculateMedian(values, start, end, true);
     }
 
@@ -241,8 +244,8 @@ public abstract class Statistics {
      *
      * @return The median.
      */
-    public static double calculateMedian(List values, int start, int end,
-                                         boolean copyAndSort) {
+    public static double calculateMedian(List<? extends Number> values,
+                                         int start, int end, boolean copyAndSort) {
 
         double result = Double.NaN;
         if (copyAndSort) {

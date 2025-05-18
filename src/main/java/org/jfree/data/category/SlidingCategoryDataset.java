@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------------
  * SlidingCategoryDataset.java
  * ---------------------------
- * (C) Copyright 2008, 2022, by David Gilbert.
+ * (C) Copyright 2008-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-May-2008 : Version 1 (DG);
- * 15-Mar-2009 : Fixed bug in getColumnKeys() method (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -57,7 +51,8 @@ import org.jfree.data.general.DatasetChangeEvent;
  * category can be modified, which provides a means of "sliding" through
  * the categories in the underlying dataset.
  *
- * @since 1.0.10
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class SlidingCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
         extends AbstractDataset implements CategoryDataset<R, C> {

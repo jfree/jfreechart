@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,16 @@
  * ---------------
  * TaskSeries.java
  * ---------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Tracy Hiltbrand;
- *
  */
 
 package org.jfree.data.gantt;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.CloneUtils;
 
@@ -50,6 +47,8 @@ import org.jfree.data.general.Series;
  * <P>
  * This class is used as a building block for the {@link TaskSeriesCollection}
  * class that can be used to construct basic Gantt charts.
+ *
+ * @param <K> the key type.
  */
 public class TaskSeries<K extends Comparable<K>> extends Series<K> {
 
@@ -131,9 +130,7 @@ public class TaskSeries<K extends Comparable<K>> extends Series<K> {
      */
     public Task get(String description) {
         Task result = null;
-        int count = this.tasks.size();
-        for (int i = 0; i < count; i++) {
-            Task t = this.tasks.get(i);
+        for (Task t : this.tasks) {
             if (t.getDescription().equals(description)) {
                 result = t;
                 break;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * --------------
  * JSONUtils.java
  * --------------
- * (C) Copyright 2014-2022, by David Gilbert.
+ * (C) Copyright 2014-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.json;
@@ -55,6 +54,10 @@ import java.util.List;
  */
 public class JSONUtils {
 
+    private JSONUtils() {
+        // no requirement for instantiation
+    }
+
     /**
      * Returns a string containing the data in JSON format.  The format is
      * an array of arrays, where each sub-array represents one data value.
@@ -68,7 +71,7 @@ public class JSONUtils {
      * 
      * @return A string in JSON format. 
      */
-    public static String writeKeyedValues(KeyedValues data) {
+    public static String writeKeyedValues(KeyedValues<?> data) {
         Args.nullNotPermitted(data, "data");
         StringWriter sw = new StringWriter();
         try {
@@ -89,7 +92,7 @@ public class JSONUtils {
      * 
      * @throws IOException if there is an I/O problem.
      */
-    public static void writeKeyedValues(KeyedValues data, Writer writer) 
+    public static void writeKeyedValues(KeyedValues data, Writer writer)
             throws IOException {
         Args.nullNotPermitted(data, "data");
         Args.nullNotPermitted(writer, "writer");

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2021, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-present, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert;
@@ -160,7 +160,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     private boolean counterClockwise;
 
-    /** A flag that controls whether or not the angle labels are visible. */
+    /** A flag that controls whether the angle labels are visible. */
     private boolean angleLabelsVisible = true;
 
     /** The font used to display the angle labels - never null. */
@@ -209,7 +209,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Storage for the mapping between datasets/renderers and range axes.  The
      * keys in the map are Integer objects, corresponding to the dataset
-     * index.  The values in the map are List<Integer> instances (corresponding 
+     * index.  The values in the map are List&lt;Integer&gt; instances (corresponding
      * to the axis indices).  If the map contains no
      * entry for a dataset, it is assumed to map to the primary domain axis
      * (index = 0).
@@ -652,7 +652,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Sets the offset that is used for all angles and sends a
      * {@link PlotChangeEvent} to all registered listeners.
-     *
+     * <p>
      * This is useful to let 0 degrees be at the north, east, south or west
      * side of the chart.
      *
@@ -687,7 +687,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns a flag that controls whether or not the angle labels are visible.
+     * Returns a flag that controls whether the angle labels are visible.
      *
      * @return A boolean.
      *
@@ -698,7 +698,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the angle labels are visible,
+     * Sets the flag that controls whether the angle labels are visible,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -773,7 +773,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the angular grid-lines are
+     * Sets the flag that controls whether the angular grid-lines are
      * visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -856,7 +856,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the radius axis grid lines
+     * Sets the flag that controls whether the radius axis grid lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1588,7 +1588,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     @Override
     public void datasetChanged(DatasetChangeEvent event) {
         for (int i = 0; i < this.axes.size(); i++) {
-            final ValueAxis axis = (ValueAxis) this.axes.get(i);
+            final ValueAxis axis = this.axes.get(i);
             if (axis != null) {
                 axis.configure();
             }
@@ -1736,7 +1736,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         PolarPlot clone = (PolarPlot) super.clone();
         clone.axes = CloneUtils.clone(this.axes);
         for (int i = 0; i < this.axes.size(); i++) {
-            ValueAxis axis = (ValueAxis) this.axes.get(i);
+            ValueAxis axis = this.axes.get(i);
             if (axis != null) {
                 ValueAxis clonedAxis = (ValueAxis) axis.clone();
                 clone.axes.put(i, clonedAxis);
@@ -1756,7 +1756,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         clone.renderers = CloneUtils.clone(this.renderers);
         for (int i = 0; i < this.renderers.size(); i++) {
-            PolarItemRenderer renderer2 = (PolarItemRenderer) this.renderers.get(i);
+            PolarItemRenderer renderer2 = this.renderers.get(i);
             if (renderer2 instanceof PublicCloneable) {
                 PublicCloneable pc = (PublicCloneable) renderer2;
                 PolarItemRenderer rc = (PolarItemRenderer) pc.clone();
@@ -1807,7 +1807,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         int rangeAxisCount = this.axes.size();
         for (int i = 0; i < rangeAxisCount; i++) {
-            Axis axis = (Axis) this.axes.get(i);
+            Axis axis = this.axes.get(i);
             if (axis != null) {
                 axis.setPlot(this);
                 axis.addChangeListener(this);
@@ -1815,14 +1815,14 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         int datasetCount = this.datasets.size();
         for (int i = 0; i < datasetCount; i++) {
-            Dataset dataset = (Dataset) this.datasets.get(i);
+            Dataset dataset = this.datasets.get(i);
             if (dataset != null) {
                 dataset.addChangeListener(this);
             }
         }
         int rendererCount = this.renderers.size();
         for (int i = 0; i < rendererCount; i++) {
-            PolarItemRenderer renderer = (PolarItemRenderer) this.renderers.get(i);
+            PolarItemRenderer renderer = this.renderers.get(i);
             if (renderer != null) {
                 renderer.addChangeListener(this);
             }
@@ -2006,9 +2006,6 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         int ix = Math.round(x);
         int iy = Math.round(y);
 
-        Point p = new Point(ix, iy);
-        return p;
-
+        return new Point(ix, iy);
     }
-
 }
