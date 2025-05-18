@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,11 @@
  * -----------------
  * MatrixSeries.java
  * -----------------
- * (C) Copyright 2003-2020, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-present, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert;
  *                   Zhitao Wang;
- *
  */
 
 package org.jfree.data.xy;
@@ -44,6 +43,8 @@ import org.jfree.data.general.Series;
 /**
  * Represents a dense matrix M[i,j] where each Mij item of the matrix has a
  * value (default is 0).
+ *
+ * @param <K> the series key type.
  */
 public class MatrixSeries<K extends Comparable<K>> extends Series<K> 
         implements Serializable {
@@ -207,7 +208,7 @@ public class MatrixSeries<K extends Comparable<K>> extends Series<K>
         if (!(obj instanceof MatrixSeries)) {
             return false;
         }
-        MatrixSeries that = (MatrixSeries) obj;
+        MatrixSeries<K> that = (MatrixSeries) obj;
         if (!(getRowCount() == that.getRowCount())) {
             return false;
         }

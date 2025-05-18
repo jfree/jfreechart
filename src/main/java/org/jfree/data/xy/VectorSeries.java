@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------------
  * VectorSeries.java
  * -----------------
- * (C) Copyright 2007-2022, by David Gilbert.
+ * (C) Copyright 2007-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -43,7 +42,7 @@ import org.jfree.data.general.SeriesChangeEvent;
 /**
  * A list of (x,y, deltaX, deltaY) data items.
  *
- * @since 1.0.6
+ * @param <S> the series key type.
  *
  * @see VectorSeriesCollection
  */

@@ -46,6 +46,13 @@ public abstract class AbstractIntervalXYDataset<S extends Comparable<S>>
         implements IntervalXYDataset<S> {
 
     /**
+     * Creates a new empty dataset.
+     */
+    public AbstractIntervalXYDataset() {
+        super();
+    }
+
+    /**
      * Returns the start x-value (as a double primitive) for an item within a
      * series.
      *

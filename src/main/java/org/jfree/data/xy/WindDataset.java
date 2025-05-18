@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ----------------
  * WindDataset.java
  * ----------------
- * (C) Copyright 2001-2020, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-present, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.data.xy;
@@ -39,6 +38,8 @@ package org.jfree.data.xy;
 /**
  * Interface for a dataset that supplies wind intensity and direction values
  * observed at various points in time.
+ *
+ * @param <S> the series key type.
  */
 public interface WindDataset<S extends Comparable<S>> extends XYDataset<S> {
 
@@ -58,7 +59,7 @@ public interface WindDataset<S extends Comparable<S>> extends XYDataset<S> {
     /**
      * Returns the wind force on the Beaufort scale (0 to 12).  See:
      * <p>
-     * http://en.wikipedia.org/wiki/Beaufort_scale
+     * <a href="http://en.wikipedia.org/wiki/Beaufort_scale">http://en.wikipedia.org/wiki/Beaufort_scale</a>
      *
      * @param series  the series (in the range {@code 0} to
      *     {@code getSeriesCount() - 1}).

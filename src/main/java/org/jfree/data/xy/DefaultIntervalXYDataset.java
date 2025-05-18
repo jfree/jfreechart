@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------------------------
  * DefaultIntervalXYDataset.java
  * -----------------------------
- * (C) Copyright 2006-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -52,7 +51,7 @@ import org.jfree.data.general.DatasetChangeEvent;
  * An alternative implementation of the {@link IntervalXYDataset} interface
  * is provided by the {@link XYIntervalSeriesCollection} class.
  *
- * @since 1.0.3
+ * @param <S> the series key type.
  */
 public class DefaultIntervalXYDataset<S extends Comparable<S>> 
         extends AbstractIntervalXYDataset<S>
@@ -76,6 +75,7 @@ public class DefaultIntervalXYDataset<S extends Comparable<S>>
      * containing no data.
      */
     public DefaultIntervalXYDataset() {
+        super();
         this.seriesKeys = new ArrayList<>();
         this.seriesList = new ArrayList<>();
     }
@@ -460,8 +460,8 @@ public class DefaultIntervalXYDataset<S extends Comparable<S>>
             return false;
         }
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] d1 = (double[][]) this.seriesList.get(i);
-            double[][] d2 = (double[][]) that.seriesList.get(i);
+            double[][] d1 = this.seriesList.get(i);
+            double[][] d2 = that.seriesList.get(i);
             double[] d1x = d1[0];
             double[] d2x = d2[0];
             if (!Arrays.equals(d1x, d2x)) {
@@ -524,7 +524,7 @@ public class DefaultIntervalXYDataset<S extends Comparable<S>>
         clone.seriesKeys = new ArrayList<>(this.seriesKeys);
         clone.seriesList = new ArrayList<>(this.seriesList.size());
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] data = (double[][]) this.seriesList.get(i);
+            double[][] data = this.seriesList.get(i);
             double[] x = data[0];
             double[] xStart = data[1];
             double[] xEnd = data[2];

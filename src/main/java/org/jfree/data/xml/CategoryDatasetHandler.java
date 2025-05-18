@@ -48,12 +48,13 @@ import org.xml.sax.helpers.DefaultHandler;
 public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
 
     /** The dataset under construction. */
-    private DefaultCategoryDataset dataset;
+    private DefaultCategoryDataset<String, String> dataset;
 
     /**
      * Creates a new handler.
      */
     public CategoryDatasetHandler() {
+        super();
         this.dataset = null;
     }
 
@@ -62,7 +63,7 @@ public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
      *
      * @return The dataset.
      */
-    public CategoryDataset getDataset() {
+    public CategoryDataset<String, String> getDataset() {
         return this.dataset;
     }
 
@@ -73,7 +74,7 @@ public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
      * @param columnKey  the column key.
      * @param value  the value.
      */
-    public void addItem(Comparable rowKey, Comparable columnKey, Number value) {
+    public void addItem(String rowKey, String columnKey, Number value) {
         this.dataset.addValue(value, rowKey, columnKey);
     }
 
@@ -98,7 +99,7 @@ public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
             current.startElement(namespaceURI, localName, qName, atts);
         }
         else if (qName.equals(CATEGORYDATASET_TAG)) {
-            this.dataset = new DefaultCategoryDataset();
+            this.dataset = new DefaultCategoryDataset<>();
         }
         else if (qName.equals(SERIES_TAG)) {
             CategorySeriesHandler subhandler = new CategorySeriesHandler(this);

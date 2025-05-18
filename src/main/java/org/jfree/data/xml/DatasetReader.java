@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ------------------
  * DatasetReader.java
  * ------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xml;
@@ -60,6 +59,10 @@ public class DatasetReader {
 
     /** A factory for creating new parser instances. */
     static SAXParserFactory factory;
+
+    private DatasetReader() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the {@link SAXParserFactory} used to create {@link SAXParser} instances.
@@ -102,7 +105,7 @@ public class DatasetReader {
      *
      * @throws IOException if there is a problem reading the file.
      */
-    public static PieDataset readPieDatasetFromXML(File file)
+    public static PieDataset<String> readPieDatasetFromXML(File file)
             throws IOException {
         InputStream in = new FileInputStream(file);
         return readPieDatasetFromXML(in);
@@ -117,19 +120,17 @@ public class DatasetReader {
      *
      * @throws IOException if there is an I/O error.
      */
-    public static PieDataset readPieDatasetFromXML(InputStream in)
+    public static PieDataset<String> readPieDatasetFromXML(InputStream in)
              throws IOException {
-        PieDataset result = null;
         try {
             SAXParser parser = getSAXParserFactory().newSAXParser();
             PieDatasetHandler handler = new PieDatasetHandler();
             parser.parse(in, handler);
-            result = handler.getDataset();
+            return handler.getDataset();
         }
         catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
-        return result;
     }
 
     /**
@@ -156,19 +157,17 @@ public class DatasetReader {
      *
      * @throws IOException if there is a problem reading the file.
      */
-    public static CategoryDataset readCategoryDatasetFromXML(InputStream in)
+    public static CategoryDataset<String, String> readCategoryDatasetFromXML(InputStream in)
             throws IOException {
-        CategoryDataset result = null;
         try {
             SAXParser parser = getSAXParserFactory().newSAXParser();
             CategoryDatasetHandler handler = new CategoryDatasetHandler();
             parser.parse(in, handler);
-            result = handler.getDataset();
+            return handler.getDataset();
         }
         catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
-        return result;
     }
 
 }

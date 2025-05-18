@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-present, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.data.xy;
@@ -48,6 +47,8 @@ import org.jfree.chart.api.PublicCloneable;
 /**
  * Represents a collection of {@link MatrixSeries} that can be used as a
  * dataset.
+ *
+ * @param <S> the series key type.
  *
  * @see org.jfree.data.xy.MatrixSeries
  */
@@ -75,6 +76,7 @@ public class MatrixSeriesCollection<S extends Comparable<S>>
      * @param series the time series.
      */
     public MatrixSeriesCollection(MatrixSeries<S> series) {
+        super();
         this.seriesList = new ArrayList<>();
 
         if (series != null) {
@@ -105,8 +107,7 @@ public class MatrixSeriesCollection<S extends Comparable<S>>
      */
     public MatrixSeries<S> getSeries(int seriesIndex) {
         Args.requireInRange(seriesIndex, "seriesIndex", 0, this.seriesList.size() - 1);
-        MatrixSeries<S> series = this.seriesList.get(seriesIndex);
-        return series;
+        return this.seriesList.get(seriesIndex);
     }
 
 

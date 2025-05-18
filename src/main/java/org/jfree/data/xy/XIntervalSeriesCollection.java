@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ------------------------------
  * XIntervalSeriesCollection.java
  * ------------------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -53,13 +52,13 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link XIntervalSeries} objects.
  *
- * @since 1.0.3
+ * @param <S> the series key type.
  *
  * @see XIntervalSeries
  */
 public class XIntervalSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, PublicCloneable, Serializable {
+        extends AbstractIntervalXYDataset<S>
+        implements IntervalXYDataset<S>, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List<XIntervalSeries<S>> data;
@@ -68,6 +67,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
      * Creates a new {@code XIntervalSeriesCollection} instance.
      */
     public XIntervalSeriesCollection() {
+        super();
         this.data = new ArrayList<>();
     }
 
@@ -285,7 +285,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
      */
     public void removeSeries(int series) {
         Args.requireInRange(series, "series", 0, this.data.size() - 1);
-        XIntervalSeries ts = this.data.get(series);
+        XIntervalSeries<S> ts = this.data.get(series);
         ts.removeChangeListener(this);
         this.data.remove(series);
         fireDatasetChanged();
@@ -317,7 +317,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (XIntervalSeries series : this.data) {
+        for (XIntervalSeries<S> series : this.data) {
           series.removeChangeListener(this);
         }
         this.data.clear();
@@ -381,8 +381,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        for (XIntervalSeries<S> item : this.data) {
-            XIntervalSeries<S> series = item;
+        for (XIntervalSeries<S> series : this.data) {
             series.addChangeListener(this);
         }
     }

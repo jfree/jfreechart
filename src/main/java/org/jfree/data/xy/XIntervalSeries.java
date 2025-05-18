@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------
  * XIntervalSeries.java
  * --------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 11-Apr-2008 : Added getXLowValue() and getXHighValue() methods (DG);
- * 09-Jan-2014 : Added add(XIntervalDataItem, boolean) method (DG);
- *
  */
 
 package org.jfree.data.xy;
@@ -49,7 +42,7 @@ import org.jfree.data.general.SeriesChangeEvent;
 /**
  * A list of (x, x-low, x-high, y) data items.
  *
- * @since 1.0.3
+ * @param <S> the series key type.
  *
  * @see XIntervalSeriesCollection
  */

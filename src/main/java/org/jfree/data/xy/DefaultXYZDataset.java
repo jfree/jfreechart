@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ----------------------
  * DefaultXYZDataset.java
  * ----------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -49,7 +48,7 @@ import org.jfree.data.general.DatasetChangeEvent;
  * A default implementation of the {@link XYZDataset} interface that stores
  * data values in arrays of double primitives.
  *
- * @since 1.0.2
+ * @param <S> the series key type.
  */
 public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDataset<S>
         implements XYZDataset<S>, PublicCloneable {
@@ -72,6 +71,7 @@ public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDatas
      * containing no data.
      */
     public DefaultXYZDataset() {
+        super();
         this.seriesKeys = new ArrayList<>();
         this.seriesList = new ArrayList<>();
     }
@@ -142,7 +142,7 @@ public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDatas
     @Override
     public int getItemCount(int series) {
         Args.requireInRange(series, "series", 0, this.seriesList.size() - 1);
-        double[][] seriesArray = (double[][]) this.seriesList.get(series);
+        double[][] seriesArray = this.seriesList.get(series);
         return seriesArray[0].length;
     }
 
@@ -210,7 +210,7 @@ public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDatas
      */
     @Override
     public double getYValue(int series, int item) {
-        double[][] seriesData = (double[][]) this.seriesList.get(series);
+        double[][] seriesData = this.seriesList.get(series);
         return seriesData[1][item];
     }
 
@@ -354,13 +354,13 @@ public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDatas
         if (!(obj instanceof DefaultXYZDataset)) {
             return false;
         }
-        DefaultXYZDataset that = (DefaultXYZDataset) obj;
+        DefaultXYZDataset<S> that = (DefaultXYZDataset) obj;
         if (!this.seriesKeys.equals(that.seriesKeys)) {
             return false;
         }
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] d1 = (double[][]) this.seriesList.get(i);
-            double[][] d2 = (double[][]) that.seriesList.get(i);
+            double[][] d1 = this.seriesList.get(i);
+            double[][] d2 = that.seriesList.get(i);
             double[] d1x = d1[0];
             double[] d2x = d2[0];
             if (!Arrays.equals(d1x, d2x)) {
@@ -405,10 +405,10 @@ public class DefaultXYZDataset<S extends Comparable<S>> extends AbstractXYZDatas
     @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultXYZDataset clone = (DefaultXYZDataset) super.clone();
-        clone.seriesKeys = new java.util.ArrayList(this.seriesKeys);
-        clone.seriesList = new ArrayList(this.seriesList.size());
+        clone.seriesKeys = new java.util.ArrayList<>(this.seriesKeys);
+        clone.seriesList = new ArrayList<>(this.seriesList.size());
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] data = (double[][]) this.seriesList.get(i);
+            double[][] data = this.seriesList.get(i);
             double[] x = data[0];
             double[] y = data[1];
             double[] z = data[2];

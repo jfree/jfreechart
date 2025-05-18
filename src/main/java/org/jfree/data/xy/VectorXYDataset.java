@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * --------------------
  * VectorXYDataset.java
  * --------------------
- * (C) Copyright 2007-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -39,6 +38,8 @@ package org.jfree.data.xy;
 /**
  * An extension of the {@link XYDataset} interface that allows a vector to be
  * defined at a specific (x, y) location.
+ *
+ * @param <S> the series key type.
  */
 public interface VectorXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 

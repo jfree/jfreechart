@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------------
  * XYBarDataset.java
  * -----------------
- * (C) Copyright 2004-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -43,6 +42,8 @@ import org.jfree.data.general.DatasetChangeListener;
 /**
  * A dataset wrapper class that converts a standard {@link XYDataset} into an
  * {@link IntervalXYDataset} suitable for use in creating XY bar charts.
+ *
+ * @param <S> the series key type.
  */
 public class XYBarDataset<S extends Comparable<S>> 
         extends AbstractIntervalXYDataset<S>
@@ -62,6 +63,7 @@ public class XYBarDataset<S extends Comparable<S>>
      * @param barWidth  the width of the bars.
      */
     public XYBarDataset(XYDataset<S> underlying, double barWidth) {
+        super();
         this.underlying = underlying;
         this.underlying.addChangeListener(this);
         this.barWidth = barWidth;

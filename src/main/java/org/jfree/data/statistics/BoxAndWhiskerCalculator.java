@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ----------------------------
  * BoxAndWhiskerCalculator.java
  * ----------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.statistics;
@@ -48,6 +47,10 @@ import java.util.List;
  * {@code Number} objects.
  */
 public abstract class BoxAndWhiskerCalculator {
+
+    private BoxAndWhiskerCalculator() {
+        // no requirement to instantiate
+    }
 
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
@@ -88,13 +91,11 @@ public abstract class BoxAndWhiskerCalculator {
         List vlist;
         if (stripNullAndNaNItems) {
             vlist = new ArrayList(values.size());
-            for (Object obj : values) {
-                if (obj instanceof Number) {
-                    Number n = (Number) obj;
-                    double v = n.doubleValue();
-                    if (!Double.isNaN(v)) {
-                        vlist.add(n);
-                    }
+            for (Number obj : values) {
+                Number n = (Number) obj;
+                double v = n.doubleValue();
+                if (!Double.isNaN(v)) {
+                    vlist.add(n);
                 }
             }
         }

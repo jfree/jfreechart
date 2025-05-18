@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Aaron Metzger;
- *
  */
 
 package org.jfree.data.xy;
@@ -56,13 +55,14 @@ import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.Series;
 
 /**
  * Represents a collection of {@link XYSeries} objects that can be used as a
  * dataset.
+ *
+ * @param <S> the series key type.
  */
 public class XYSeriesCollection<S extends Comparable<S>> 
         extends AbstractIntervalXYDataset<S>
@@ -91,6 +91,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
      * @param series  the series ({@code null} ignored).
      */
     public XYSeriesCollection(XYSeries<S> series) {
+        super();
         this.data = new ArrayList<>();
         this.intervalDelegate = new IntervalXYDelegate(this, false);
         addChangeListener(this.intervalDelegate);
@@ -447,7 +448,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -455,7 +456,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     @Override
     public double getDomainLowerBound(boolean includeInterval) {
         if (includeInterval) {
-            return this.intervalDelegate.getDomainLowerBound(includeInterval);
+            return this.intervalDelegate.getDomainLowerBound(true);
         }
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
@@ -477,7 +478,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -485,7 +486,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     @Override
     public double getDomainUpperBound(boolean includeInterval) {
         if (includeInterval) {
-            return this.intervalDelegate.getDomainUpperBound(includeInterval);
+            return this.intervalDelegate.getDomainUpperBound(true);
         }
         else {
             double result = Double.NaN;
@@ -509,7 +510,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no
@@ -518,7 +519,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     @Override
     public Range getDomainBounds(boolean includeInterval) {
         if (includeInterval) {
-            return this.intervalDelegate.getDomainBounds(includeInterval);
+            return this.intervalDelegate.getDomainBounds(true);
         }
         else {
             double lower = Double.POSITIVE_INFINITY;
@@ -644,7 +645,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -671,7 +672,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -748,9 +749,8 @@ public class XYSeriesCollection<S extends Comparable<S>>
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        for (Object item : this.data) {
-            XYSeries<S> series = (XYSeries<S>) item;
-            series.addChangeListener(this);
+        for (XYSeries<S> item : this.data) {
+            item.addChangeListener(this);
         }
     }
 }

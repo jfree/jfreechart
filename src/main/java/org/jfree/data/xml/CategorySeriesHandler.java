@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------------
  * CategorySeriesHandler.java
  * --------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.data.xml;
@@ -52,13 +47,13 @@ public class CategorySeriesHandler extends DefaultHandler
         implements DatasetTags {
 
     /** The root handler. */
-    private RootHandler root;
+    private final RootHandler root;
 
     /** The series key. */
-    private Comparable seriesKey;
+    private String seriesKey;
 
     /** The values. */
-    private DefaultKeyedValues values;
+    private final DefaultKeyedValues<String> values;
 
     /**
      * Creates a new item handler.
@@ -66,8 +61,9 @@ public class CategorySeriesHandler extends DefaultHandler
      * @param root  the root handler.
      */
     public CategorySeriesHandler(RootHandler root) {
+        super();
         this.root = root;
-        this.values = new DefaultKeyedValues();
+        this.values = new DefaultKeyedValues<>();
     }
 
     /**
@@ -75,7 +71,7 @@ public class CategorySeriesHandler extends DefaultHandler
      *
      * @param key  the key.
      */
-    public void setSeriesKey(Comparable key) {
+    public void setSeriesKey(String key) {
         this.seriesKey = key;
     }
 
@@ -85,7 +81,7 @@ public class CategorySeriesHandler extends DefaultHandler
      * @param key  the key.
      * @param value  the value.
      */
-    public void addItem(Comparable key, Number value) {
+    public void addItem(String key, Number value) {
         this.values.addValue(key, value);
     }
 
@@ -138,8 +134,7 @@ public class CategorySeriesHandler extends DefaultHandler
         if (this.root instanceof CategoryDatasetHandler) {
             CategoryDatasetHandler handler = (CategoryDatasetHandler) this.root;
 
-            for (Object o : this.values.getKeys()) {
-                Comparable key = (Comparable) o;
+            for (String key : this.values.getKeys()) {
                 Number value = this.values.getValue(key);
                 handler.addItem(this.seriesKey, key, value);
             }
@@ -148,5 +143,4 @@ public class CategorySeriesHandler extends DefaultHandler
         }
 
     }
-
 }

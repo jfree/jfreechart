@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * PieDatasetHandler.java
  * ----------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.data.xml;
@@ -52,12 +47,13 @@ import org.xml.sax.helpers.DefaultHandler;
 public class PieDatasetHandler extends RootHandler implements DatasetTags {
 
     /** The pie dataset under construction. */
-    private DefaultPieDataset dataset;
+    private DefaultPieDataset<String> dataset;
 
     /**
      * Default constructor.
      */
     public PieDatasetHandler() {
+        super();
         this.dataset = null;
     }
 
@@ -66,7 +62,7 @@ public class PieDatasetHandler extends RootHandler implements DatasetTags {
      *
      * @return The dataset.
      */
-    public PieDataset getDataset() {
+    public PieDataset<String> getDataset() {
         return this.dataset;
     }
 
@@ -76,7 +72,7 @@ public class PieDatasetHandler extends RootHandler implements DatasetTags {
      * @param key  the key.
      * @param value  the value.
      */
-    public void addItem(Comparable key, Number value) {
+    public void addItem(String key, Number value) {
         this.dataset.setValue(key, value);
     }
 
@@ -101,7 +97,7 @@ public class PieDatasetHandler extends RootHandler implements DatasetTags {
             current.startElement(namespaceURI, localName, qName, atts);
         }
         else if (qName.equals(PIEDATASET_TAG)) {
-            this.dataset = new DefaultPieDataset();
+            this.dataset = new DefaultPieDataset<>();
         }
         else if (qName.equals(ITEM_TAG)) {
             ItemHandler subhandler = new ItemHandler(this, this);

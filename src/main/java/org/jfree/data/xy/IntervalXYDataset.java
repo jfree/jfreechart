@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ----------------------
  * IntervalXYDataset.java
  * ----------------------
- * (C) Copyright 2001-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
  * Original Author:  Mark Watson (www.markwatson.com);
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.data.xy;
@@ -42,6 +41,8 @@ package org.jfree.data.xy;
  * by the parent interface are NOT required to fall within these intervals.
  * This interface is used to support (among other things) bar plots against
  * numerical axes.
+ *
+ * @param <S> the series key type.
  */
 public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 

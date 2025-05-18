@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------
  * ItemHandler.java
  * ----------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.data.xml;
@@ -50,13 +45,13 @@ import org.xml.sax.helpers.DefaultHandler;
 public class ItemHandler extends DefaultHandler implements DatasetTags {
 
     /** The root handler. */
-    private RootHandler root;
+    private final RootHandler root;
 
     /** The parent handler (can be the same as root, but not always). */
-    private DefaultHandler parent;
+    private final DefaultHandler parent;
 
     /** The key. */
-    private Comparable key;
+    private String key;
 
     /** The value. */
     private Number value;
@@ -68,6 +63,7 @@ public class ItemHandler extends DefaultHandler implements DatasetTags {
      * @param parent  the parent handler.
      */
     public ItemHandler(RootHandler root, DefaultHandler parent) {
+        super();
         this.root = root;
         this.parent = parent;
         this.key = null;
@@ -79,7 +75,7 @@ public class ItemHandler extends DefaultHandler implements DatasetTags {
      *
      * @return The key.
      */
-    public Comparable getKey() {
+    public String getKey() {
         return this.key;
     }
 
@@ -88,7 +84,7 @@ public class ItemHandler extends DefaultHandler implements DatasetTags {
      *
      * @param key  the key.
      */
-    public void setKey(Comparable key) {
+    public void setKey(String key) {
         this.key = key;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ---------------
  * XYZDataset.java
  * ---------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -39,6 +38,8 @@ package org.jfree.data.xy;
 /**
  * The interface through which JFreeChart obtains data in the form of (x, y, z)
  * items - used for XY and XYZ plots.
+ *
+ * @param <S> the series key type.
  */
 public interface XYZDataset<S extends Comparable<S>> extends XYDataset<S> {
 

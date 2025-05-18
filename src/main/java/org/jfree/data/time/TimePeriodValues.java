@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ---------------------
  * TimePeriodValues.java
  * ---------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.time;
@@ -52,12 +51,14 @@ import java.util.List;
  * <p>
  * This is similar to the {@link TimeSeries} class, except that the time 
  * periods can have irregular lengths.
+ *
+ * @param <S> the series key type.
  */
 public class TimePeriodValues<S extends Comparable<S>> extends Series<S> 
         implements Serializable {
 
     /** For serialization. */
-    static final long serialVersionUID = -2210593619794989709L;
+    private static final long serialVersionUID = -2210593619794989709L;
 
     /** The list of data pairs in the series. */
     private List<TimePeriodValue> data;
@@ -390,13 +391,13 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
      * 
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public TimePeriodValues createCopy(int start, int end) 
+    public TimePeriodValues<S> createCopy(int start, int end)
         throws CloneNotSupportedException {
 
         TimePeriodValues copy = (TimePeriodValues) super.clone();
 
         copy.data = new ArrayList<>();
-        if (this.data.size() > 0) {
+        if (!this.data.isEmpty()) {
             for (int index = start; index <= end; index++) {
                 TimePeriodValue item = this.data.get(index);
                 TimePeriodValue clone = (TimePeriodValue) item.clone();
@@ -409,7 +410,6 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
             }
         }
         return copy;
-
     }
     
     /**

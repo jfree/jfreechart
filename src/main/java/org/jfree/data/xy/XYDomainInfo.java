@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------------
  * XYDomainInfo.java
  * -----------------
- * (C) Copyright 2009-2022, by David Gilbert.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -42,6 +41,8 @@ import org.jfree.data.Range;
 /**
  * An interface that can (optionally) be implemented by a dataset to assist in
  * determining the minimum and maximum x-values in the dataset.
+ *
+ * @param <S> the series key type.
  */
 public interface XYDomainInfo<S extends Comparable<S>> {
 

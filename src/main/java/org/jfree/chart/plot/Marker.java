@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -----------
  * Marker.java
  * -----------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
- *
  */
 
 package org.jfree.chart.plot;
@@ -538,6 +537,7 @@ public abstract class Marker implements Cloneable, Serializable {
     /**
      * Returns an array containing all the listeners of the specified type.
      *
+     * @param <T> the event listener type.
      * @param listenerType  the listener type.
      *
      * @return The array of listeners.
