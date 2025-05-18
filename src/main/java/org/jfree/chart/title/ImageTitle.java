@@ -27,7 +27,7 @@
  * ---------------
  * ImageTitle.java
  * ---------------
- * (C) Copyright 2000-2021, by David Berry and Contributors;
+ * (C) Copyright 2000-present, by David Berry and Contributors;
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert;

@@ -27,7 +27,7 @@
  * -------------------
  * CompositeTitle.java
  * -------------------
- * (C) Copyright 2005-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Eric Penfold (patch 2006826);

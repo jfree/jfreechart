@@ -27,7 +27,7 @@
  * ------------------------------------
  * BoxAndWhiskerXYToolTipGenerator.java
  * ------------------------------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning;
  * Contributor(s):   David Gilbert;
