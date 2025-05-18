@@ -49,7 +49,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.3</version>
+        <version>1.5.5</version>
     </dependency>
 
 

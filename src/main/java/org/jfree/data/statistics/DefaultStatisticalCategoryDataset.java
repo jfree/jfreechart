@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,33 +27,10 @@
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2011, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-present, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert;
- *
- * Changes
- * -------
- * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 05-Feb-2003 : Revised implementation to use KeyedObjects2D (DG);
- * 28-Aug-2003 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
- * 06-Oct-2003 : Removed incorrect Javadoc text (DG);
- * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 01-Feb-2005 : Changed minimumRangeValue and maximumRangeValue from Double
- *               to double (DG);
- * 05-Feb-2005 : Implemented equals() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 08-Aug-2006 : Reworked implementation of RangeInfo methods (DG);
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 28-Sep-2007 : Fixed cloning bug (DG);
- * 02-Oct-2007 : Fixed bug updating cached range values (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 20-Oct-2011 : Fixed getRangeBounds() bug 3072674 (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
- *
  */
 
 package org.jfree.data.statistics;
@@ -72,6 +49,9 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A convenience class that provides a default implementation of the
  * {@link StatisticalCategoryDataset} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class DefaultStatisticalCategoryDataset<R extends Comparable<R>, 
         C extends Comparable<C>>  extends AbstractDataset
@@ -132,6 +112,7 @@ public class DefaultStatisticalCategoryDataset<R extends Comparable<R>,
      * Creates a new dataset.
      */
     public DefaultStatisticalCategoryDataset() {
+        super();
         this.data = new KeyedObjects2D<>();
         this.minimumRangeValue = Double.NaN;
         this.minimumRangeValueRow = -1;
@@ -645,7 +626,7 @@ public class DefaultStatisticalCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -665,7 +646,7 @@ public class DefaultStatisticalCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -685,7 +666,7 @@ public class DefaultStatisticalCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the bounds of the values in this dataset's y-values.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

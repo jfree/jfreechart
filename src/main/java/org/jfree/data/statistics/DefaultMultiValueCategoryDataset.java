@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007-2021, by David Forslund and Contributors.
+ * (C) Copyright 2007-present, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert;
@@ -52,7 +52,8 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A category dataset that defines multiple values for each item.
  *
- * @since 1.0.7
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>
         extends AbstractDataset implements MultiValueCategoryDataset<R, C>, 
@@ -61,7 +62,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
     /**
      * Storage for the data.
      */
-    protected KeyedObjects2D data;
+    protected KeyedObjects2D<R, C> data;
 
     /**
      * The minimum range value.
@@ -82,7 +83,8 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * Creates a new dataset.
      */
     public DefaultMultiValueCategoryDataset() {
-        this.data = new KeyedObjects2D();
+        super();
+        this.data = new KeyedObjects2D<>();
         this.minimumRangeValue = null;
         this.maximumRangeValue = null;
         this.rangeBounds = new Range(0.0, 0.0);
@@ -111,14 +113,12 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
         Collections.sort(vlist);
         this.data.addObject(vlist, rowKey, columnKey);
 
-        if (vlist.size() > 0) {
+        if (!vlist.isEmpty()) {
             double maxval = Double.NEGATIVE_INFINITY;
             double minval = Double.POSITIVE_INFINITY;
-            for (int i = 0; i < vlist.size(); i++) {
-                Number n = (Number) vlist.get(i);
-                double v = n.doubleValue();
-                minval = Math.min(minval, v);
-                maxval = Math.max(maxval, v);
+            for (Double n : vlist) {
+                minval = Math.min(minval, n);
+                maxval = Math.max(maxval, n);
             }
 
             // update the cached range values...
@@ -172,7 +172,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The list of values.
      */
     @Override
-    public List<? extends Number> getValues(Comparable rowKey, Comparable columnKey) {
+    public List<? extends Number> getValues(R rowKey, C columnKey) {
         return Collections.unmodifiableList((List) this.data.getObject(rowKey,
                 columnKey));
     }
@@ -186,11 +186,11 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The average value.
      */
     @Override
-    public Number getValue(Comparable row, Comparable column) {
+    public Number getValue(R row, C column) {
         List l = (List) this.data.getObject(row, column);
         double average = 0.0d;
         int count = 0;
-        if (l != null && l.size() > 0) {
+        if (l != null && !l.isEmpty()) {
             for (int i = 0; i < l.size(); i++) {
                 Number n = (Number) l.get(i);
                 average += n.doubleValue();
@@ -219,7 +219,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
         List l = (List) this.data.getObject(row, column);
         double average = 0.0d;
         int count = 0;
-        if (l != null && l.size() > 0) {
+        if (l != null && !l.isEmpty()) {
             for (int i = 0; i < l.size(); i++) {
                 Number n = (Number) l.get(i);
                 average += n.doubleValue();
@@ -243,7 +243,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The column index.
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         return this.data.getColumnIndex(key);
     }
 
@@ -256,7 +256,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      */
     @Override
     public C getColumnKey(int column) {
-        return (C) this.data.getColumnKey(column);
+        return this.data.getColumnKey(column);
     }
 
     /**
@@ -265,7 +265,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The keys.
      */
     @Override
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         return this.data.getColumnKeys();
     }
 
@@ -277,7 +277,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The row index.
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         return this.data.getRowIndex(key);
     }
 
@@ -290,7 +290,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      */
     @Override
     public R getRowKey(int row) {
-        return (R) this.data.getRowKey(row);
+        return this.data.getRowKey(row);
     }
 
     /**
@@ -299,7 +299,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
      * @return The keys.
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return this.data.getRowKeys();
     }
 
@@ -326,7 +326,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval a flag that determines whether or not the
+     * @param includeInterval a flag that determines whether the
      *                        y-interval is taken into account.
      *
      * @return The minimum value.
@@ -343,7 +343,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval a flag that determines whether or not the
+     * @param includeInterval a flag that determines whether the
      *                        y-interval is taken into account.
      *
      * @return The maximum value.
@@ -360,7 +360,7 @@ public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval a flag that determines whether or not the
+     * @param includeInterval a flag that determines whether the
      *                        y-interval is taken into account.
      * @return The range.
      */

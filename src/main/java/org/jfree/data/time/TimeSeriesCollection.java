@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.time;
@@ -56,10 +55,12 @@ import java.util.*;
  * {@link XYDataset} interface, as well as the extended
  * {@link IntervalXYDataset} interface.  This makes it a convenient dataset for
  * use with the {@link org.jfree.chart.plot.XYPlot} class.
+ *
+ * @param <S> the series key type.
  */
 public class TimeSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements XYDataset, IntervalXYDataset, DomainInfo, XYDomainInfo,
+        extends AbstractIntervalXYDataset<S>
+        implements XYDataset<S>, IntervalXYDataset<S>, DomainInfo, XYDomainInfo<S>,
         XYRangeInfo, VetoableChangeListener, Serializable {
 
     /** For serialization. */
@@ -116,6 +117,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
      *              {@code TimeZone.getDefault()} in that case).
      */
     public TimeSeriesCollection(TimeSeries<S> series, TimeZone zone) {
+        super();
         // FIXME:  need a locale as well as a timezone
         if (zone == null) {
             zone = TimeZone.getDefault();
@@ -234,7 +236,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
      * @return The key for a series.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
+    public S getSeriesKey(int series) {
         // check arguments...delegated
         // fetch the series name...
         return getSeries(series).getKey();
@@ -250,7 +252,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
      * 
      * @since 1.0.17
      */
-    public int getSeriesIndex(Comparable key) {
+    public int getSeriesIndex(S key) {
         Args.nullNotPermitted(key, "key");
         int seriesCount = getSeriesCount();
         for (int i = 0; i < seriesCount; i++) {
@@ -480,7 +482,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -498,7 +500,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -516,7 +518,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range.
@@ -643,12 +645,12 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         // to be defensive, let's check that the source series does in fact
         // belong to this collection
         Series s = (Series) e.getSource();
-        if (getSeriesIndex(s.getKey()) == -1) {
+        if (getSeriesIndex((S) s.getKey()) == -1) {
             throw new IllegalStateException("Receiving events from a series " +
                     "that does not belong to this collection.");
         }
         // check if the new series name already exists for another series
-        Comparable key = (Comparable) e.getNewValue();
+        S key = (S) e.getNewValue();
         if (getSeriesIndex(key) >= 0) {
             throw new PropertyVetoException("Duplicate key2", e);
         }
