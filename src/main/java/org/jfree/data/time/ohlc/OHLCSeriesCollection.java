@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * OHLCSeriesCollection.java
  * -------------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
 package org.jfree.data.time.ohlc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,15 +54,15 @@ import org.jfree.data.xy.XYDataset;
 /**
  * A collection of {@link OHLCSeries} objects.
  *
- * @since 1.0.4
+ * @param <S> the series key type.
  *
  * @see OHLCSeries
  */
-public class OHLCSeriesCollection extends AbstractXYDataset
-                                implements OHLCDataset, Serializable {
+public class OHLCSeriesCollection<S extends Comparable<S>> extends AbstractXYDataset<S>
+                                implements OHLCDataset<S>, Serializable {
 
     /** Storage for the data series. */
-    private List data;
+    private List<OHLCSeries<S>> data;
 
     private TimePeriodAnchor xPosition = TimePeriodAnchor.MIDDLE;
 
@@ -69,7 +70,8 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * Creates a new instance of {@code OHLCSeriesCollection}.
      */
     public OHLCSeriesCollection() {
-        this.data = new java.util.ArrayList();
+        super();
+        this.data = new ArrayList<>();
     }
 
     /**
@@ -105,7 +107,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @param series  the series ({@code null} not permitted).
      */
-    public void addSeries(OHLCSeries series) {
+    public void addSeries(OHLCSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
@@ -132,11 +134,11 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @throws IllegalArgumentException if {@code series} is not in the
      *     range {@code 0} to {@code getSeriesCount() - 1}.
      */
-    public OHLCSeries getSeries(int series) {
+    public OHLCSeries<S> getSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Series index out of bounds");
         }
-        return (OHLCSeries) this.data.get(series);
+        return this.data.get(series);
     }
 
     /**
@@ -151,7 +153,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *     specified range.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
+    public S getSeriesKey(int series) {
         // defer argument checking
         return getSeries(series).getKey();
     }
@@ -203,7 +205,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public double getXValue(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         RegularTimePeriod period = di.getPeriod();
         return getX(period);
@@ -232,7 +234,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getYValue();
     }
@@ -247,7 +249,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public double getOpenValue(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getOpenValue();
     }
@@ -275,7 +277,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public double getCloseValue(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getCloseValue();
     }
@@ -303,7 +305,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public double getHighValue(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getHighValue();
     }
@@ -331,7 +333,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public double getLowValue(int series, int item) {
-        OHLCSeries s = (OHLCSeries) this.data.get(series);
+        OHLCSeries<S> s = this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getLowValue();
     }
@@ -386,7 +388,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @since 1.0.14
      */
     public void removeSeries(int index) {
-        OHLCSeries series = getSeries(index);
+        OHLCSeries<S> series = getSeries(index);
         if (series != null) {
             removeSeries(series);
         }
@@ -403,7 +405,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @since 1.0.14
      */
-    public boolean removeSeries(OHLCSeries series) {
+    public boolean removeSeries(OHLCSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         boolean removed = this.data.remove(series);
         if (removed) {
@@ -427,8 +429,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
 
         // deregister the collection as a change listener to each series in the
         // collection
-        for (int i = 0; i < this.data.size(); i++) {
-            OHLCSeries series = (OHLCSeries) this.data.get(i);
+        for (OHLCSeries<S> series : this.data) {
             series.removeChangeListener(this);
         }
 
@@ -469,8 +470,8 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public int hashCode() {
         int result = 137;
         result = HashUtils.hashCode(result, this.xPosition);
-        for (int i = 0; i < this.data.size(); i++) {
-            result = HashUtils.hashCode(result, this.data.get(i));
+        for (OHLCSeries<S> series : this.data) {
+            result = HashUtils.hashCode(result, series);
         }
         return result;
     }

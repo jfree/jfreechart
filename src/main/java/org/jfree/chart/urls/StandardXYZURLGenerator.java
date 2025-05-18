@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------
  * StandardXYZURLGenerator.java
  * ----------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributors:     -;
- *
- * Changes:
- * --------
- * 03-Feb-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.urls;
@@ -47,6 +42,13 @@ import org.jfree.data.xy.XYZDataset;
  */
 public class StandardXYZURLGenerator extends StandardXYURLGenerator
         implements XYZURLGenerator {
+
+    /**
+     * Creates a new default instance.
+     */
+    public StandardXYZURLGenerator() {
+        super();
+    }
 
     /**
      * Generates a URL for a particular item within a series.

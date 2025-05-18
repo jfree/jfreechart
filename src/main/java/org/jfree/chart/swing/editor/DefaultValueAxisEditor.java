@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultValueAxisEditor.java
  * ---------------------------
- * (C) Copyright 2005-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
  * Original Author:  Martin Hoeller (base on DefaultNumberAxisEditor
  *                                   by David Gilbert);
@@ -193,7 +193,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Getter for the {@link #autoTickUnitSelection} flag.
+     * Getter for the {@code #autoTickUnitSelection} flag.
      * 
      * @return The value of the flag for enabling auto-tickunit-selection.
      */
@@ -202,7 +202,8 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Setter for the {@link #autoTickUnitSelection} flag.
+     * Setter for the {@code #autoTickUnitSelection} flag.
+     *
      * @param autoTickUnitSelection The new value for auto-tickunit-selection.
      */
     protected void setAutoTickUnitSelection(boolean autoTickUnitSelection) {

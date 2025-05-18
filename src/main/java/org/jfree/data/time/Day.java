@@ -105,6 +105,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param year  the year (1900 &lt;= year &lt;= 9999).
      */
     public Day(int day, int month, int year) {
+        super();
         this.serialDate = SerialDate.createInstance(day, month, year);
         peg(getCalendarInstance());
     }
