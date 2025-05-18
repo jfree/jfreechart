@@ -84,7 +84,7 @@ import org.jfree.data.ItemKey;
  * attributes of the renderer will fire a {@link RendererChangeEvent}, which
  * normally means the plot that owns the renderer will receive notification that
  * the renderer has been changed (the plot will, in turn, notify the chart).
- * 
+ * <p>
  * <b>Subclassing</b>
  * If you create your own renderer that is a subclass of this, you should take
  * care to ensure that the renderer implements cloning correctly, to ensure

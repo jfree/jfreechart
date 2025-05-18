@@ -220,12 +220,12 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * registered during the deserialization process, as listeners are not
      * serialized. This method is called by the serialization system after the
      * entire graph is read.
-     *
+     * <p>
      * This object has registered itself to the system with a priority of 10.
      * Other callbacks may register with a higher priority number to be called
      * before this object, or with a lower priority number to be called after
      * the listeners were notified.
-     *
+     * <p>
      * All listeners are supposed to have register by now, either in their
      * readObject or validateObject methods. Notify them that this dataset has
      * changed.

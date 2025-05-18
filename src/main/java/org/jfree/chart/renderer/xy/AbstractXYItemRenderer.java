@@ -103,7 +103,7 @@ import org.jfree.data.xy.XYItemKey;
 /**
  * A base class that can be used to create new {@link XYItemRenderer}
  * implementations.  
- * 
+ * <p>
  * <b>Subclassing</b>
  * If you create your own subclass of this renderer, please refer to the 
  * Javadocs for {@link AbstractRenderer} for important information about
@@ -256,8 +256,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public XYItemLabelGenerator getItemLabelGenerator(int series, int item) {
 
         // otherwise look up the generator table
-        XYItemLabelGenerator generator
-            = (XYItemLabelGenerator) this.itemLabelGeneratorMap.get(series);
+        XYItemLabelGenerator generator = this.itemLabelGeneratorMap.get(series);
         if (generator == null) {
             generator = this.defaultItemLabelGenerator;
         }
@@ -328,8 +327,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
 
         // otherwise look up the generator table
-        XYToolTipGenerator generator
-                = (XYToolTipGenerator) this.toolTipGeneratorMap.get(series);
+        XYToolTipGenerator generator = this.toolTipGeneratorMap.get(series);
         if (generator == null) {
             generator = this.defaultToolTipGenerator;
         }
@@ -459,7 +457,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param annotation  the annotation to remove ({@code null} not
      *                    permitted).
      *
-     * @return A boolean to indicate whether or not the annotation was
+     * @return A boolean to indicate whether the annotation was
      *         successfully removed.
      */
     @Override
