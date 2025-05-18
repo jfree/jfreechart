@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * KeyedValues.java
  * ----------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
@@ -41,6 +41,8 @@ import java.util.List;
 /**
  * An ordered list of (key, value) items where the keys are unique and
  * non-{@code null}.
+ *
+ * @param <K> the key type
  *
  * @see Values
  * @see DefaultKeyedValues

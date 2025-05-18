@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -45,6 +45,9 @@ import org.jfree.chart.internal.Args;
 /**
  * A data structure that stores zero, one or many objects, where each object is
  * associated with two keys (a 'row' key and a 'column' key).
+ *
+ * @param <R> the row key type
+ * @param <C> the column key type
  */
 public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>> 
         implements Cloneable, Serializable {
@@ -104,9 +107,9 @@ public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>>
      */
     public Object getObject(int row, int column) {
         Object result = null;
-        KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
+        KeyedObjects rowData = this.rows.get(row);
         if (rowData != null) {
-            Comparable columnKey = (Comparable) this.columnKeys.get(column);
+            Comparable columnKey = this.columnKeys.get(column);
             if (columnKey != null) {
                 int index = rowData.getIndex(columnKey);
                 if (index >= 0) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PinNeedle.java
  * --------------
- * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -53,6 +53,12 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = -3787089953079863373L;
 
+    /**
+     * Creates a new needle.
+     */
+    public PinNeedle() {
+        super(null, null, null);
+    }
     /**
      * Draws the needle.
      *

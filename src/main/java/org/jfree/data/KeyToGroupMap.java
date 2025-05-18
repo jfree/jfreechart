@@ -46,6 +46,9 @@ import java.util.*;
 
 /**
  * A class that maps keys (instances of {@code Comparable}) to groups.
+ *
+ * @param <K> the key type
+ * @param <G> the group key type
  */
 public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>> 
         implements Cloneable, PublicCloneable, Serializable {

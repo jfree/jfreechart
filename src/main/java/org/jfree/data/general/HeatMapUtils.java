@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * HeatMapUtils.java
  * -----------------
- * (C) Copyright 2009-2022, by David Gilbert.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -52,6 +52,10 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public abstract class HeatMapUtils {
 
+    private HeatMapUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns a dataset containing one series that holds a copy of the (x, z)
      * data from one row (y-index) of the specified dataset.
@@ -69,8 +73,7 @@ public abstract class HeatMapUtils {
         for (int c = 0; c < cols; c++) {
             series.add(dataset.getXValue(c), dataset.getZValue(c, row));
         }
-        XYSeriesCollection result = new XYSeriesCollection(series);
-        return result;
+        return new XYSeriesCollection(series);
     }
 
     /**
@@ -90,8 +93,7 @@ public abstract class HeatMapUtils {
         for (int r = 0; r < rows; r++) {
             series.add(dataset.getYValue(r), dataset.getZValue(column, r));
         }
-        XYSeriesCollection result = new XYSeriesCollection(series);
-        return result;
+        return new XYSeriesCollection(series);
     }
 
     /**

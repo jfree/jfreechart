@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * DefaultKeyedValues2D.java
  * -------------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andreas Schroeder;
@@ -49,6 +49,9 @@ import org.jfree.chart.api.PublicCloneable;
  * A data structure that stores zero, one or many values, where each value
  * is associated with two keys (a 'row' key and a 'column' key).  The keys
  * should be (a) instances of {@link Comparable} and (b) immutable.
+ *
+ * @param <R> the row key type
+ * @param <C> the column key type
  */
 public class DefaultKeyedValues2D<R extends Comparable<R>, C extends Comparable<C>> 
         implements KeyedValues2D<R, C>, PublicCloneable, Cloneable, Serializable {

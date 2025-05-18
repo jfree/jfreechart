@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * -------------
  * FlowPlot.java
  * -------------
- * (C) Copyright 2021-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2021-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.chart.plot.flow;
@@ -794,17 +793,17 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeWidth) ^ (Double.doubleToLongBits(this.nodeWidth) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeMargin) ^ (Double.doubleToLongBits(this.nodeMargin) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.flowMargin) ^ (Double.doubleToLongBits(this.flowMargin) >>> 32));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeWidth));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeMargin));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.flowMargin));
         hash = 83 * hash + Objects.hashCode(this.nodeColorMap);
         hash = 83 * hash + Objects.hashCode(this.nodeColorSwatch);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeColor);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeLabelFont);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeLabelPaint);
         hash = 83 * hash + Objects.hashCode(this.nodeLabelAlignment);
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeLabelOffsetX) ^ (Double.doubleToLongBits(this.nodeLabelOffsetX) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeLabelOffsetY) ^ (Double.doubleToLongBits(this.nodeLabelOffsetY) >>> 32));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeLabelOffsetX));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeLabelOffsetY));
         hash = 83 * hash + Objects.hashCode(this.toolTipGenerator);
         return hash;
     }
@@ -815,7 +814,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
      * 
      * @return A close of this instance.
      * 
-     * @throws CloneNotSupportedException 
+     * @throws CloneNotSupportedException if there is a problem cloning
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -823,6 +822,4 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
         clone.nodeColorMap = new HashMap<>(this.nodeColorMap);
         return clone;
     }
-
 }
-

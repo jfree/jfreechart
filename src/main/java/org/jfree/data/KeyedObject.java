@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * KeyedObject.java
  * ----------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -43,6 +43,8 @@ import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A (key, object) pair.
+ *
+ * @param <K> the key type.
  */
 public class KeyedObject<K extends Comparable<K>> implements Cloneable, 
         PublicCloneable, Serializable {
@@ -51,7 +53,7 @@ public class KeyedObject<K extends Comparable<K>> implements Cloneable,
     private static final long serialVersionUID = 2677930479256885863L;
 
     /** The key. */
-    private K key;
+    private final K key;
 
     /** The object. */
     private Object object;
