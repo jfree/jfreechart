@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------------------
  * DefaultKeyedValues2DDataset.java
  * --------------------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (copied from DefaultCategoryDataset) (DG);
- * 23-Apr-2003 : Moved implementation into the DefaultCategoryDataset
- *               class (DG);
- *
  */
 
 package org.jfree.data.general;
@@ -59,6 +52,10 @@ public class DefaultKeyedValues2DDataset<R extends Comparable<R>, C extends Comp
     /** For serialization. */
     private static final long serialVersionUID = 4288210771905990424L;
 
-    // no new methods
-
+    /**
+     * Creates a new empty dataset.
+     */
+    public DefaultKeyedValues2DDataset() {
+        super();
+    }
 }

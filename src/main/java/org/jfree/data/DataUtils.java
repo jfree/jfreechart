@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * --------------
  * DataUtils.java
  * --------------
- * (C) Copyright 2003-2022, by David Gilbert and contributors.
+ * (C) Copyright 2003-present, by David Gilbert and contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2511330);
- *
  */
 
 package org.jfree.data;
@@ -45,6 +44,10 @@ import org.jfree.data.general.DatasetUtils;
  * see {@link DatasetUtils}).
  */
 public abstract class DataUtils {
+
+    private DataUtils() {
+        // no requirement to instantiate
+    }
 
     /**
      * Tests two arrays for equality.  To be considered equal, the arrays must
@@ -232,6 +235,7 @@ public abstract class DataUtils {
      * <p>
      * The percentages are values between 0.0 and 1.0 (where 1.0 = 100%).
      *
+     * @param <K> the key type.
      * @param data  the data ({@code null} not permitted).
      *
      * @return The cumulative percentages.

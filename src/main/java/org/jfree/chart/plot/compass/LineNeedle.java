@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,11 @@
  * ---------------
  * LineNeedle.java
  * ---------------
- * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                           Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.chart.plot.compass;
@@ -51,6 +50,13 @@ public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6215321387896748945L;
+
+    /**
+     * Creates a new instance.
+     */
+    public LineNeedle() {
+        super();
+    }
 
     /**
      * Draws the needle.

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Regression.java
  * ---------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2795746);
@@ -42,7 +42,11 @@ import org.jfree.data.xy.XYDataset;
 /**
  * A utility class for fitting regression curves to data.
  */
-public abstract class Regression {
+public class Regression {
+
+    private Regression() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the parameters 'a' and 'b' for an equation y = a + bx, fitted to

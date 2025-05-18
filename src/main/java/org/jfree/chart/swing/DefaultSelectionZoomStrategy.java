@@ -31,7 +31,6 @@
  *
  * Original Author:  -;
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.chart.swing;
@@ -89,6 +88,9 @@ public class DefaultSelectionZoomStrategy implements SelectionZoomStrategy {
      */
     private transient Paint zoomFillPaint;
 
+    /**
+     * Creates a new instance.
+     */
     public DefaultSelectionZoomStrategy() {
         zoomTriggerDistance = DEFAULT_ZOOM_TRIGGER_DISTANCE;
         this.zoomOutlinePaint = Color.BLUE;

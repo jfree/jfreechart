@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * ImageMapUtils.java
  * ------------------
- * (C) Copyright 2004-2021, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert;
@@ -51,6 +51,10 @@ import org.jfree.chart.util.StringUtils;
  * Functionality was originally in {@link org.jfree.chart.ChartUtils}.
  */
 public class ImageMapUtils {
+
+    private ImageMapUtils() {
+        // no requirement to instantiate
+    }
 
     /**
      * Writes an image map to an output stream.

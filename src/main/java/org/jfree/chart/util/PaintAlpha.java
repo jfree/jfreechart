@@ -81,6 +81,10 @@ public class PaintAlpha {
 
     private static boolean legacyAlpha = false;
 
+    private PaintAlpha() {
+        // no requirement to instantiate
+    }
+
     /**
      * Per default {@code PaintAlpha} will try to honour alpha-channel
      * information.  In the past this was not the case.
@@ -100,10 +104,10 @@ public class PaintAlpha {
     /**
      * Create a new (if possible, darker) {@code Paint} of the same Type.
      * If the Type is not supported, the original {@code Paint} is returned.
-     * <p>
+     *
      * @param paint a {@code Paint} implementation
      * (e.g. {@link Color}, {@link GradientPaint}, {@link TexturePaint},..)
-     * <p>
+     *
      * @return a (usually new, see above) {@code Paint}
      */
     public static Paint darker(Paint paint) {

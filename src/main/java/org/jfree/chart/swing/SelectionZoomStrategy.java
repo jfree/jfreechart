@@ -46,7 +46,7 @@ import java.io.Serializable;
 
 /**
  * A strategy for zooming plots on the chart panel by selecting a smaller region on the initial screen.
- *
+ * <br><br>
  * See {@link ChartPanel#setSelectionZoomStrategy(SelectionZoomStrategy)}
  */
 public interface SelectionZoomStrategy extends Serializable {
@@ -61,11 +61,18 @@ public interface SelectionZoomStrategy extends Serializable {
 
     /**
      * The zoom rectangle starting point (selected by the user with a mouse
-     * click).  This is a point on the screen, not the chart (which may have
-     * been scaled up or down to fit the panel).
+     * click).  This is a point on the screen, not the chart which may have
+     * been scaled up or down to fit the panel.
+     *
+     * @return The zoom point.
      */
     Point2D getZoomPoint();
 
+    /**
+     * Sets the zoom starting point.
+     *
+     * @param zoomPoint the zoom starting point.
+     */
     void setZoomPoint(Point2D zoomPoint);
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------------
  * DefaultXYItemRenderer.java
  * --------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jul-2003 : Version 1 (DG);
- * 22-Feb-2005 : Now extends XYLineAndShapeRenderer (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -51,8 +45,13 @@ public class DefaultXYItemRenderer extends XYLineAndShapeRenderer
                                    implements Serializable {
 
     /** For serialization. */
-    static final long serialVersionUID = 3450423530996888074L;
+    private static final long serialVersionUID = 3450423530996888074L;
 
-    // no new methods
+    /**
+     * Creates a new default renderer.
+     */
+    public DefaultXYItemRenderer() {
+        super();
+    }
 
 }

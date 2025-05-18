@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------------------
  * DefaultCategoryItemRenderer.java
  * --------------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;
@@ -54,6 +49,11 @@ public class DefaultCategoryItemRenderer extends LineAndShapeRenderer
     /** For serialization. */
     private static final long serialVersionUID = -7793786349384231896L;
 
-    // no new methods
+    /**
+     * Creates a new default renderer.
+     */
+    public DefaultCategoryItemRenderer() {
+        super();
+    }
 
 }

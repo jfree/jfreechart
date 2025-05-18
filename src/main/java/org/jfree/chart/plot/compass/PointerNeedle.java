@@ -54,6 +54,13 @@ public class PointerNeedle extends MeterNeedle implements Cloneable,
     private static final long serialVersionUID = -4744677345334729606L;
 
     /**
+     * Creates a new instance.
+     */
+    public PointerNeedle() {
+        super();
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.
