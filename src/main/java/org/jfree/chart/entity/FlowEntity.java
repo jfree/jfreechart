@@ -45,7 +45,7 @@ import org.jfree.data.flow.FlowKey;
 /**
  * A chart entity representing the flow between two nodes in a {@link FlowPlot}.
  * 
- * @since 1.5.3
+ * @param <K> the data key type.
  */
 public class FlowEntity<K extends Comparable<K>> extends ChartEntity {
 

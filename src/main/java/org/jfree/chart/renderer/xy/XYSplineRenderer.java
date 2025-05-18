@@ -125,6 +125,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      */
     private FillType fillType;
 
+    /** The gradient transformer. */
     private GradientPaintTransformer gradientPaintTransformer;
     
     /**
