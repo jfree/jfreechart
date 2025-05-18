@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,11 @@
  * ---------------------------------
  * BoxAndWhiskerCategoryDataset.java
  * ---------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 27-Aug-2003 : Renamed getAverageValue --> getMeanValue, changed
- *               getAllOutliers to return a List rather than an array (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- *
  */
 
 package org.jfree.data.statistics;
@@ -52,6 +43,9 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A category dataset that defines various medians, outliers and an average
  * value for each item.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public interface BoxAndWhiskerCategoryDataset<R extends Comparable<R>, 
         C extends Comparable<C>> extends CategoryDataset<R, C> {

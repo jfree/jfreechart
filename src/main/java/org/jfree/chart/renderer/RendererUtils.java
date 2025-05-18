@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,10 @@
  * ------------------
  * RendererUtils.java
  * ------------------
- * (C) Copyright 2007-2022, by David Gilbert.
+ * (C) Copyright 2007-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.chart.renderer;
@@ -44,6 +43,10 @@ import org.jfree.data.xy.XYDataset;
  * Utility methods related to the rendering process.
  */
 public class RendererUtils {
+
+    private RendererUtils() {
+        // no requirement to instantiate
+    }
 
     /**
      * Finds the lower index of the range of live items in the specified data

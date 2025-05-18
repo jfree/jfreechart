@@ -54,6 +54,13 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
     private static final long serialVersionUID = 149554868169435612L;
 
     /**
+     * Creates a new needle.
+     */
+    public ShipNeedle() {
+        super(null, null, null);
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.

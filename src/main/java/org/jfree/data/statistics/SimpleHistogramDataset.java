@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SimpleHistogramDataset.java
  * ---------------------------
- * (C) Copyright 2005-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Sergei Ivanov;
@@ -54,23 +54,25 @@ import org.jfree.data.xy.IntervalXYDataset;
 /**
  * A dataset used for creating simple histograms with custom defined bins.
  *
+ * @param <K> the key type.
+ *
  * @see HistogramDataset
  */
 public class SimpleHistogramDataset<K extends Comparable<K>> 
-        extends AbstractIntervalXYDataset implements IntervalXYDataset, 
+        extends AbstractIntervalXYDataset implements IntervalXYDataset,
         Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7997996479768018443L;
 
     /** The series key. */
-    private K key;
+    private final K key;
 
     /** The bins. */
     private List<SimpleHistogramBin> bins;
 
     /**
-     * A flag that controls whether or not the bin count is divided by the
+     * A flag that controls whether the bin count is divided by the
      * bin size.
      */
     private boolean adjustForBinSize;
@@ -82,6 +84,7 @@ public class SimpleHistogramDataset<K extends Comparable<K>>
      * @param key  the series key ({@code null} not permitted).
      */
     public SimpleHistogramDataset(K key) {
+        super();
         Args.nullNotPermitted(key, "key");
         this.key = key;
         this.bins = new ArrayList<>();
@@ -89,7 +92,7 @@ public class SimpleHistogramDataset<K extends Comparable<K>>
     }
 
     /**
-     * Returns a flag that controls whether or not the bin count is divided by
+     * Returns a flag that controls whether the bin count is divided by
      * the bin size in the {@link #getXValue(int, int)} method.
      *
      * @return A boolean.
@@ -101,7 +104,7 @@ public class SimpleHistogramDataset<K extends Comparable<K>>
     }
 
     /**
-     * Sets the flag that controls whether or not the bin count is divided by
+     * Sets the flag that controls whether the bin count is divided by
      * the bin size in the {@link #getYValue(int, int)} method, and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
@@ -225,8 +228,8 @@ public class SimpleHistogramDataset<K extends Comparable<K>>
      * @see #clearObservations()
      */
     public void addObservations(double[] values) {
-        for (int i = 0; i < values.length; i++) {
-            addObservation(values[i], false);
+        for (double value : values) {
+            addObservation(value, false);
         }
         notifyListeners(new DatasetChangeEvent(this, this));
     }

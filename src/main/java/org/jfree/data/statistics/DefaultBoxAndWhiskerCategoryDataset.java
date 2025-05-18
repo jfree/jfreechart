@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DefaultBoxAndWhiskerCategoryDataset.java
  * ----------------------------------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -51,6 +51,9 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A convenience class that provides a default implementation of the
  * {@link BoxAndWhiskerCategoryDataset} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>, 
         C extends Comparable<C>> extends AbstractDataset
@@ -85,6 +88,7 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
      * Creates a new dataset.
      */
     public DefaultBoxAndWhiskerCategoryDataset() {
+        super();
         this.data = new KeyedObjects2D<>();
         this.minimumRangeValue = Double.NaN;
         this.minimumRangeValueRow = -1;
@@ -595,7 +599,7 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -610,7 +614,7 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -625,7 +629,7 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.
@@ -815,13 +819,12 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
      */
     @Override
     public List<? extends Number> getOutliers(int row, int column) {
-        List result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 row, column);
         if (item != null) {
-            result = item.getOutliers();
+            return item.getOutliers();
         }
-        return result;
+        return null;
     }
 
     /**
@@ -836,13 +839,12 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
      */
     @Override
     public List<? extends Number> getOutliers(R rowKey, C columnKey) {
-        List result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
         if (item != null) {
-            result = item.getOutliers();
+            return item.getOutliers();
         }
-        return result;
+        return null;
     }
 
     /**

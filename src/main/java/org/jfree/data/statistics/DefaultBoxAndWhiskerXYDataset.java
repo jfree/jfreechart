@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * DefaultBoxAndWhiskerXYDataset.java
  * ----------------------------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -50,13 +50,15 @@ import org.jfree.data.xy.AbstractXYDataset;
 /**
  * A simple implementation of the {@link BoxAndWhiskerXYDataset} interface.
  * This dataset implementation can hold only one series.
+ *
+ * @param <S> the series key type.
  */
 public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>> 
         extends AbstractXYDataset<S>
         implements BoxAndWhiskerXYDataset<S>, RangeInfo {
 
     /** The series key. */
-    private S seriesKey;
+    private final S seriesKey;
 
     /** Storage for the dates. */
     private List<Date> dates;
@@ -98,8 +100,9 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
      * @param seriesKey  the key for the series.
      */
     public DefaultBoxAndWhiskerXYDataset(S seriesKey) {
+        super();
         this.seriesKey = seriesKey;
-        this.dates = new ArrayList();
+        this.dates = new ArrayList<>();
         this.items = new ArrayList<>();
         this.minimumRangeValue = null;
         this.maximumRangeValue = null;
@@ -265,7 +268,7 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
      */
     @Override
     public Number getX(int series, int item) {
-        return ((Date) this.dates.get(item)).getTime();
+        return (this.dates.get(item)).getTime();
     }
 
     /**
@@ -452,19 +455,18 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
      *         (possibly {@code null}).
      */
     @Override
-    public List getOutliers(int series, int item) {
-        List result = null;
+    public List<? extends Number> getOutliers(int series, int item) {
         BoxAndWhiskerItem stats = this.items.get(item);
         if (stats != null) {
-            result = stats.getOutliers();
+            return stats.getOutliers();
         }
-        return result;
+        return null;
     }
 
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -481,7 +483,7 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -498,7 +500,7 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.
