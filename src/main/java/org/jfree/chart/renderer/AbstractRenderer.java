@@ -124,14 +124,14 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     /** The default value label paint. */
     public static final Paint DEFAULT_VALUE_LABEL_PAINT = Color.BLACK;
 
-    /** A list of flags that controls whether or not each series is visible. */
+    /** A list of flags that controls whether each series is visible. */
     private Map<Integer, Boolean> seriesVisibleMap;
 
     /** The default visibility for all series. */
     private boolean defaultSeriesVisible;
 
     /**
-     * A list of flags that controls whether or not each series is visible in
+     * A list of flags that controls whether each series is visible in
      * the legend.
      */
     private Map<Integer, Boolean> seriesVisibleInLegendMap;
@@ -143,7 +143,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Map<Integer, Paint> seriesPaintMap;
 
     /**
-     * A flag that controls whether or not the paintList is auto-populated
+     * A flag that controls whether the paintList is autopopulated
      * in the {@link #lookupSeriesPaint(int)} method.
      */
     private boolean autoPopulateSeriesPaint;
@@ -155,7 +155,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Map<Integer, Paint> seriesFillPaintMap;
 
     /**
-     * A flag that controls whether or not the fillPaintList is auto-populated
+     * A flag that controls whether the fillPaintList is autopopulated
      * in the {@link #lookupSeriesFillPaint(int)} method.
      */
     private boolean autoPopulateSeriesFillPaint;
@@ -167,8 +167,8 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Map<Integer, Paint> seriesOutlinePaintMap;
 
     /**
-     * A flag that controls whether or not the outlinePaintList is
-     * auto-populated in the {@link #lookupSeriesOutlinePaint(int)} method.
+     * A flag that controls whether the outlinePaintList is
+     * autopopulated in the {@link #lookupSeriesOutlinePaint(int)} method.
      */
     private boolean autoPopulateSeriesOutlinePaint;
 
@@ -179,7 +179,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Map<Integer, Stroke> seriesStrokeMap;
 
     /**
-     * A flag that controls whether or not the strokeList is auto-populated
+     * A flag that controls whether the strokeList is autopopulated
      * in the {@link #lookupSeriesStroke(int)} method.
      */
     private boolean autoPopulateSeriesStroke;
@@ -194,8 +194,8 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Stroke defaultOutlineStroke;
 
     /**
-     * A flag that controls whether or not the outlineStrokeList is
-     * auto-populated in the {@link #lookupSeriesOutlineStroke(int)} method.
+     * A flag that controls whether the outlineStrokeList is
+     * autopopulated in the {@link #lookupSeriesOutlineStroke(int)} method.
      */
     private boolean autoPopulateSeriesOutlineStroke;
 
@@ -203,7 +203,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private Map<Integer, Shape> seriesShapeMap;
 
     /**
-     * A flag that controls whether or not the series shapes are auto-populated
+     * A flag that controls whether the series shapes are autopopulated
      * in the {@link #lookupSeriesShape(int)} method.
      */
     private boolean autoPopulateSeriesShape;
@@ -245,13 +245,13 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private double itemLabelAnchorOffset = 2.0;
 
     /**
-     * Flags that control whether or not entities are generated for each
+     * Flags that control whether entities are generated for each
      * series.  This will be overridden by 'createEntities'.
      */
     private Map<Integer, Boolean> seriesCreateEntitiesMap;
 
     /**
-     * The default flag that controls whether or not entities are generated.
+     * The default flag that controls whether entities are generated.
      * This flag is used when both the above flags return null.
      */
     private boolean defaultCreateEntities;
@@ -283,14 +283,14 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     private transient Map<Integer, Paint> legendTextPaints;
 
     /**
-     * The default paint for the legend text items (if this is
+     * The default paint for the legend text items. If this is
      * {@code null}, the {@link LegendTitle} class will determine the
      * text paint to use.
      */
     private transient Paint defaultLegendTextPaint;
 
     /**
-     * A flag that controls whether or not the renderer will include the
+     * A flag that controls whether the renderer will include the
      * non-visible series when calculating the data bounds.
      */
     private boolean dataBoundsIncludesVisibleSeriesOnly = true;
@@ -422,7 +422,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     // SERIES VISIBLE (not yet respected by all renderers)
 
     /**
-     * Returns a boolean that indicates whether or not the specified item
+     * Returns a boolean that indicates whether the specified item
      * should be drawn.
      *
      * @param series  the series index.
@@ -435,7 +435,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns a boolean that indicates whether or not the specified series
+     * Returns a boolean that indicates whether the specified series
      * should be drawn.  In fact this method should be named 
      * lookupSeriesVisible() to be consistent with the other series
      * attributes and avoid confusion with the getSeriesVisible() method.
@@ -794,7 +794,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series paint list is
+     * Returns the flag that controls whether the series paint list is
      * automatically populated when {@link #lookupSeriesPaint(int)} is called.
      *
      * @return A boolean.
@@ -806,7 +806,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series paint list is
+     * Sets the flag that controls whether the series paint list is
      * automatically populated when {@link #lookupSeriesPaint(int)} is called.
      *
      * @param auto  the new flag value.
@@ -943,7 +943,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series fill paint list
+     * Returns the flag that controls whether the series fill paint list
      * is automatically populated when {@link #lookupSeriesFillPaint(int)} is
      * called.
      *
@@ -956,7 +956,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series fill paint list is
+     * Sets the flag that controls whether the series fill paint list is
      * automatically populated when {@link #lookupSeriesFillPaint(int)} is
      * called.
      *
@@ -1096,7 +1096,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series outline paint
+     * Returns the flag that controls whether the series outline paint
      * list is automatically populated when
      * {@link #lookupSeriesOutlinePaint(int)} is called.
      *
@@ -1109,7 +1109,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series outline paint list
+     * Sets the flag that controls whether the series outline paint list
      * is automatically populated when {@link #lookupSeriesOutlinePaint(int)}
      * is called.
      *
@@ -1260,7 +1260,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series stroke list is
+     * Returns the flag that controls whether the series stroke list is
      * automatically populated when {@link #lookupSeriesStroke(int)} is called.
      *
      * @return A boolean.
@@ -1272,7 +1272,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series stroke list is
+     * Sets the flag that controls whether the series stroke list is
      * automatically populated when {@link #lookupSeriesStroke(int)} is called.
      *
      * @param auto  the new flag value.
@@ -1395,7 +1395,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param stroke  the stroke ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getDefaultOutlineStroke()
@@ -1409,7 +1409,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series outline stroke
+     * Returns the flag that controls whether the series outline stroke
      * list is automatically populated when
      * {@link #lookupSeriesOutlineStroke(int)} is called.
      *
@@ -1422,7 +1422,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series outline stroke list
+     * Sets the flag that controls whether the series outline stroke list
      * is automatically populated when {@link #lookupSeriesOutlineStroke(int)}
      * is called.
      *
@@ -1561,7 +1561,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the series shape list is
+     * Returns the flag that controls whether the series shape list is
      * automatically populated when {@link #lookupSeriesShape(int)} is called.
      *
      * @return A boolean.
@@ -1573,7 +1573,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the series shape list is
+     * Sets the flag that controls whether the series shape list is
      * automatically populated when {@link #lookupSeriesShape(int)} is called.
      *
      * @param auto  the new flag value.
@@ -1643,7 +1643,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      *
      * @param series  the series index (zero-based).
      * @param visible  the visible flag.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      */
     public void setSeriesItemLabelsVisible(int series, Boolean visible, boolean notify) {
@@ -1666,7 +1666,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the base flag that controls whether or not item labels are visible,
+     * Sets the base flag that controls whether item labels are visible,
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -1683,7 +1683,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      *
      * @param visible  the flag ({@code null} is permitted, and viewed
      *     as equivalent to {@code Boolean.FALSE}).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getDefaultItemLabelsVisible() 
@@ -1745,7 +1745,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      *
      * @param series  the series index (zero based).
      * @param font  the font ({@code null} permitted).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getSeriesItemLabelFont(int)
@@ -1787,7 +1787,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param font  the font ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getDefaultItemLabelFont()
@@ -1849,7 +1849,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      *
      * @param series  the series index (zero based).
      * @param paint  the paint ({@code null} permitted).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getSeriesItemLabelPaint(int)
@@ -1890,7 +1890,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      * {@link RendererChangeEvent} to all registered listeners..
      *
      * @param paint  the paint ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getDefaultItemLabelPaint()
@@ -2148,7 +2148,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns a boolean that indicates whether or not the specified item
+     * Returns a boolean that indicates whether the specified item
      * should have a chart entity created for it.
      *
      * @param series  the series index.
@@ -2342,7 +2342,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the legend shape is
+     * Returns the flag that controls whether the legend shape is
      * treated as a line when creating legend items.
      * 
      * @return A boolean.
@@ -2352,7 +2352,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the legend shape is
+     * Sets the flag that controls whether the legend shape is
      * treated as a line when creating legend items.
      *
      * @param treatAsLine  the new flag value.
@@ -2488,7 +2488,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the flag that controls whether or not the data bounds reported
+     * Returns the flag that controls whether the data bounds reported
      * by this renderer will exclude non-visible series.
      *
      * @return A boolean.
@@ -2498,7 +2498,7 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Sets the flag that controls whether or not the data bounds reported
+     * Sets the flag that controls whether the data bounds reported
      * by this renderer will exclude non-visible series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
