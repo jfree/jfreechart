@@ -27,7 +27,7 @@
  * ------------------------------
  * CategoryItemRendererState.java
  * ------------------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2497611);

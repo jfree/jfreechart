@@ -27,7 +27,7 @@
  * -------------------
  * NumberTickUnit.java
  * -------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

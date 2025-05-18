@@ -27,7 +27,7 @@
  * ------------
  * Dataset.java
  * ------------
- * (C) Copyright 2000-2022, by David Gilbert.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

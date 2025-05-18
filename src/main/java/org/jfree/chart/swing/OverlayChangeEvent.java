@@ -27,7 +27,7 @@
  * -----------------------
  * OverlayChangeEvent.java
  * -----------------------
- * (C) Copyright 2020-2022, by David Gilbert.
+ * (C) Copyright 2020-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

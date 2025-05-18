@@ -27,7 +27,7 @@
  * ------------------------------
  * CategoryPointerAnnotation.java
  * ------------------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);

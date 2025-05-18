@@ -27,7 +27,7 @@
  * --------------
  * RangeType.java
  * --------------
- * (C) Copyright 2005-2022, by David Gilbert.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

@@ -27,7 +27,7 @@
  * -------------------------------
  * IntervalXYToolTipGenerator.java
  * -------------------------------
- * (C) Copyright 2015-2022, by David Gilbert.
+ * (C) Copyright 2015-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

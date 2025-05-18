@@ -27,7 +27,7 @@
  * ------------------------
  * CandlestickRenderer.java
  * ------------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Authors:  David Gilbert;
  *                    Sylvain Vieujot;

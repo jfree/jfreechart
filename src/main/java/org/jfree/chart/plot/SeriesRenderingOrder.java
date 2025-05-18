@@ -27,7 +27,7 @@
  * --------------------------
  * SeriesRenderingOrder.java
  * --------------------------
- * (C) Copyright 2005-2022, by David Gilbert.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
  * Original Author:  Eric Thomas (www.isti.com);
  * Contributor(s):   David Gilbert;

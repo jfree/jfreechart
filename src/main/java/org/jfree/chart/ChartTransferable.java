@@ -27,7 +27,7 @@
  * ----------------------
  * ChartTransferable.java
  * ----------------------
- * (C) Copyright 2009-2022, by David Gilbert.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

@@ -27,7 +27,7 @@
  * ------------------------
  * XYShapeRendererTest.java
  * ------------------------
- * (C) Copyright 2010-2022, by David Gilbert.
+ * (C) Copyright 2010-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Martin Hoeller (patch 2952086);

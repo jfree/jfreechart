@@ -27,7 +27,7 @@
  * --------------------
  * MultiplePiePlot.java
  * --------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Brian Cabana (patch 1943021);

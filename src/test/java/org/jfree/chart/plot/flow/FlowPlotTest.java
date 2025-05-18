@@ -27,7 +27,7 @@
  * -----------------
  * FlowPlotTest.java
  * -----------------
- * (C) Copyright 2021-2022, by David Gilbert.
+ * (C) Copyright 2021-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

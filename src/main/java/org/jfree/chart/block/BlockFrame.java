@@ -27,7 +27,7 @@
  * ---------------
  * BlockFrame.java
  * ---------------
- * (C) Copyright 2007-2022, by David Gilbert.
+ * (C) Copyright 2007-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;

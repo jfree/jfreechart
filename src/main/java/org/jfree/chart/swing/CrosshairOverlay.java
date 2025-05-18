@@ -27,7 +27,7 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011-2022, by David Gilbert.
+ * (C) Copyright 2011-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   John Matthews, Michal Wozniak;

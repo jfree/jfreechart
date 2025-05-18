@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultKeyedValue.java
  * ----------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
