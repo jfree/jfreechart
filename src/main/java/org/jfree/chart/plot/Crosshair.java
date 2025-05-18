@@ -339,7 +339,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      *
      * @return the label anchor point (never {@code null}).
      *
-     * @see #setLabelAnchor(org.jfree.chart.ui.RectangleAnchor)
+     * @see #setLabelAnchor(RectangleAnchor)
      */
     public RectangleAnchor getLabelAnchor() {
         return this.labelAnchor;

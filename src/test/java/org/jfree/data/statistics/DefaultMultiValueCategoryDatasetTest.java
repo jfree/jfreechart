@@ -215,8 +215,9 @@ public class DefaultMultiValueCategoryDatasetTest {
     }
 
     /**
-     * Confirm that clon
-     * @throws java.lang.CloneNotSupportedExceptioning works.
+     * Confirm that cloning works.
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

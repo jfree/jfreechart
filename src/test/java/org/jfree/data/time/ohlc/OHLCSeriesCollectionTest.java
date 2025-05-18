@@ -48,7 +48,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for the {@link OHLCSeriesCollectionTests} class.
+ * Tests for the {@link OHLCSeriesCollection} class.
  */
 public class OHLCSeriesCollectionTest implements DatasetChangeListener {
 
@@ -57,8 +57,8 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testEquals() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
-        OHLCSeriesCollection c2 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
+        OHLCSeriesCollection<String> c2 = new OHLCSeriesCollection<>();
         assertEquals(c1, c2);
 
         // add a series
@@ -89,11 +89,11 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s1 = new OHLCSeries<>("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = CloneUtils.clone(c1);
+        OHLCSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertNotSame(c1, c2);
         assertSame(c1.getClass(), c2.getClass());
         assertEquals(c1, c2);
@@ -108,11 +108,11 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testSerialization() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s1 = new OHLCSeries<>("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = TestUtils.serialised(c1);
+        OHLCSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -123,7 +123,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
     @Test
     public void test1170825() {
         OHLCSeries<String> s1 = new OHLCSeries<>("Series1");
-        OHLCSeriesCollection dataset = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> dataset = new OHLCSeriesCollection<>();
         dataset.addSeries(s1);
         try {
             /* XYSeries s = */ dataset.getSeries(1);
@@ -141,11 +141,11 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testHashcode() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s1 = new OHLCSeries<>("S");
         s1.add(new Year(2009), 1.0, 4.0, 0.5, 2.0);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c2 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s2 = new OHLCSeries<>("S");
         s2.add(new Year(2009), 1.0, 4.0, 0.5, 2.0);
         c2.addSeries(s2);
@@ -161,7 +161,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testRemoveSeries_int() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s1 = new OHLCSeries<>("Series 1");
         OHLCSeries<String> s2 = new OHLCSeries<>("Series 2");
         OHLCSeries<String> s3 = new OHLCSeries<>("Series 3");
@@ -183,7 +183,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testRemoveSeries() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         OHLCSeries<String> s1 = new OHLCSeries<>("Series 1");
         OHLCSeries<String> s2 = new OHLCSeries<>("Series 2");
         OHLCSeries<String> s3 = new OHLCSeries<>("Series 3");
@@ -204,7 +204,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      */
     @Test
     public void testRemoveAllSeries() {
-        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeriesCollection<String> c1 = new OHLCSeriesCollection<>();
         c1.addChangeListener(this);
 
         // there should be no change event when clearing an empty series
