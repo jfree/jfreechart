@@ -46,16 +46,16 @@ import java.util.Date;
  * This class is intentionally immutable (that is, once constructed, you cannot
  * alter the start and end attributes).
  */
-public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
+public class SimpleTimePeriod implements TimePeriod, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8684672361131829554L;
 
     /** The start date/time. */
-    private long start;
+    private final long start;
 
     /** The end date/time. */
-    private long end;
+    private final long end;
 
     /**
      * Creates a new time allocation.
@@ -162,13 +162,12 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *                            {@link TimePeriod}.
      */
     @Override
-    public int compareTo(Object obj) {
-        TimePeriod that = (TimePeriod) obj;
+    public int compareTo(TimePeriod obj) {
         long t0 = getStart().getTime();
         long t1 = getEnd().getTime();
         long m0 = t0 + (t1 - t0) / 2L;
-        long t2 = that.getStart().getTime();
-        long t3 = that.getEnd().getTime();
+        long t2 = obj.getStart().getTime();
+        long t3 = obj.getEnd().getTime();
         long m1 = t2 + (t3 - t2) / 2L;
         if (m0 < m1) {
             return -1;
@@ -184,15 +183,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
                 return 1;
             }
             else {
-                if (t1 < t3) {
-                    return -1;
-                }
-                else if (t1 > t3) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
+                return Long.compare(t1, t3);
             }
         }
     }

@@ -53,8 +53,7 @@ import org.jfree.chart.date.MonthConstants;
  * <P>
  * This class is immutable, and all subclasses should be immutable also.
  */
-public abstract class RegularTimePeriod implements TimePeriod, Comparable,
-        MonthConstants {
+public abstract class RegularTimePeriod implements TimePeriod, MonthConstants {
 
     private static final AtomicReference<Calendar> calendarPrototype = new AtomicReference<>();
 
@@ -77,12 +76,12 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @return The time period.
      */
-    public static RegularTimePeriod createInstance(Class c, Date millisecond,
+    public static RegularTimePeriod createInstance(Class<? extends TimePeriod> c, Date millisecond,
             TimeZone zone, Locale locale) {
         RegularTimePeriod result = null;
         try {
-            Constructor constructor = c.getDeclaredConstructor(
-                    new Class[] {Date.class, TimeZone.class, Locale.class});
+            Constructor<? extends TimePeriod> constructor = c.getDeclaredConstructor(
+                    Date.class, TimeZone.class, Locale.class);
             result = (RegularTimePeriod) constructor.newInstance(
                     new Object[] {millisecond, zone, locale});
         }
@@ -100,7 +99,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @return A class.
      */
-    public static Class downsize(Class c) {
+    public static Class<? extends TimePeriod> downsize(Class<? extends TimePeriod> c) {
         if (c.equals(Year.class)) {
             return Quarter.class;
         }

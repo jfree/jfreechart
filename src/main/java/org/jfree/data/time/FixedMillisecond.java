@@ -67,6 +67,7 @@ public class FixedMillisecond extends RegularTimePeriod
      * @param millisecond  the millisecond (same encoding as java.util.Date).
      */
     public FixedMillisecond(long millisecond) {
+        super();
         this.time = millisecond;
     }
 
@@ -170,7 +171,7 @@ public class FixedMillisecond extends RegularTimePeriod
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
 
         int result;
         long difference;

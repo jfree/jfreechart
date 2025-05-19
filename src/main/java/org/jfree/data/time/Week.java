@@ -65,10 +65,10 @@ public class Week extends RegularTimePeriod implements Serializable {
     public static final int LAST_WEEK_IN_YEAR = 53;
 
     /** The year in which the week falls. */
-    private short year;
+    private final short year;
 
     /** The week (1-53). */
-    private byte week;
+    private final byte week;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -95,6 +95,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @param year  the year (1900 to 9999).
      */
     public Week(int week, int year) {
+        super();
         if ((week < FIRST_WEEK_IN_YEAR) || (week > LAST_WEEK_IN_YEAR)) {
             throw new IllegalArgumentException(
                     "The 'week' argument must be in the range 1 - 53.");
@@ -113,6 +114,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @param year  the year (1900 to 9999).
      */
     public Week(int week, Year year) {
+        super();
         if ((week < FIRST_WEEK_IN_YEAR) || (week > LAST_WEEK_IN_YEAR)) {
             throw new IllegalArgumentException(
                     "The 'week' argument must be in the range 1 - 53.");
@@ -151,6 +153,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @since 1.0.7
      */
     public Week(Date time, TimeZone zone, Locale locale) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
@@ -189,6 +192,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Week(Date time, Calendar calendar) {
+        super();
         calendar.setTime(time);
 
         // sometimes the last few days of the year are considered to fall in
@@ -424,8 +428,6 @@ public class Week extends RegularTimePeriod implements Serializable {
     /**
      * Returns a string representing the week (e.g. "Week 9, 2002").
      *
-     * TODO: look at internationalisation.
-     *
      * @return A string representing the week.
      */
     @Override
@@ -491,7 +493,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
 
         int result;
 
@@ -545,7 +547,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             int i = Week.findSeparator(s);
             if (i != -1) {
                 String s1 = s.substring(0, i).trim();
-                String s2 = s.substring(i + 1, s.length()).trim();
+                String s2 = s.substring(i + 1).trim();
 
                 Year y = Week.evaluateAsYear(s1);
                 int w;

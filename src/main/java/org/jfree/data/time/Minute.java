@@ -59,13 +59,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
     public static final int LAST_MINUTE_IN_HOUR = 59;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour in which the minute falls. */
-    private byte hour;
+    private final byte hour;
 
     /** The minute. */
-    private byte minute;
+    private final byte minute;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -91,6 +91,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @param hour  the hour ({@code null} not permitted).
      */
     public Minute(int minute, Hour hour) {
+        super();
         Args.nullNotPermitted(hour, "hour");
         this.minute = (byte) minute;
         this.hour = (byte) hour.getHour();
@@ -122,6 +123,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Minute(Date time, TimeZone zone, Locale locale) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
@@ -143,6 +145,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Minute(Date time, Calendar calendar) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(calendar, "calendar");
         calendar.setTime(time);
@@ -413,7 +416,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Minute object relative
      * to the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  object to compare.
@@ -421,7 +424,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
         int result;
 
         // CASE 1 : Comparing to another Minute object
@@ -468,9 +471,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hmstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
-            );
+            String hmstr = s.substring(Math.min(daystr.length() + 1, s.length()));
             hmstr = hmstr.trim();
 
             String hourstr = hmstr.substring(0, Math.min(2, hmstr.length()));
@@ -478,9 +479,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
             if ((hour >= 0) && (hour <= 23)) {
                 String minstr = hmstr.substring(
-                    Math.min(hourstr.length() + 1, hmstr.length()),
-                    hmstr.length()
-                );
+                    Math.min(hourstr.length() + 1, hmstr.length()));
                 int minute = Integer.parseInt(minstr);
                 if ((minute >= 0) && (minute <= 59)) {
                     result = new Minute(minute, new Hour(hour, day));

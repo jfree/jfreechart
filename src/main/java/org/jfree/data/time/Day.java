@@ -118,6 +118,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param serialDate  the day ({@code null} not permitted).
      */
     public Day(SerialDate serialDate) {
+        super();
         Args.nullNotPermitted(serialDate, "serialDate");
         this.serialDate = serialDate;
         peg(getCalendarInstance());
@@ -145,6 +146,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param locale  the locale ({@code null} not permitted).
      */
     public Day(Date time, TimeZone zone, Locale locale) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
@@ -163,6 +165,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Day(Date time, Calendar calendar) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(calendar, "calendar");
         calendar.setTime(time);
@@ -271,16 +274,14 @@ public class Day extends RegularTimePeriod implements Serializable {
      */
     @Override
     public RegularTimePeriod previous() {
-        Day result;
         int serial = this.serialDate.toSerial();
         if (serial > SerialDate.SERIAL_LOWER_BOUND) {
             SerialDate yesterday = SerialDate.createInstance(serial - 1);
             return new Day(yesterday);
         }
         else {
-            result = null;
+            return null;
         }
-        return result;
     }
 
     /**
@@ -295,16 +296,14 @@ public class Day extends RegularTimePeriod implements Serializable {
      */
     @Override
     public RegularTimePeriod next() {
-        Day result;
         int serial = this.serialDate.toSerial();
         if (serial < SerialDate.SERIAL_UPPER_BOUND) {
             SerialDate tomorrow = SerialDate.createInstance(serial + 1);
             return new Day(tomorrow);
         }
         else {
-            result = null;
+            return null;
         }
-        return result;
     }
 
     /**
@@ -403,7 +402,7 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Day object relative to
      * the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  the object to compare.
@@ -411,7 +410,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
         int result;
 
         // CASE 1 : Comparing to another Day object

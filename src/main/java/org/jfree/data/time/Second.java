@@ -59,16 +59,16 @@ public class Second extends RegularTimePeriod implements Serializable {
     public static final int LAST_SECOND_IN_MINUTE = 59;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour of the day. */
-    private byte hour;
+    private final byte hour;
 
     /** The minute. */
-    private byte minute;
+    private final byte minute;
 
     /** The second. */
-    private byte second;
+    private final byte second;
 
     /**
      * The first millisecond.  We don't store the last millisecond, because it
@@ -94,6 +94,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param minute  the minute ({@code null} not permitted).
      */
     public Second(int second, Minute minute) {
+        super();
         Args.requireInRange(second, "second", 
                 Second.FIRST_SECOND_IN_MINUTE, Second.LAST_SECOND_IN_MINUTE);
         Args.nullNotPermitted(minute, "minute");
@@ -156,6 +157,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Second(Date time, Calendar calendar) {
+        super();
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);
         this.minute = (byte) calendar.get(Calendar.MINUTE);
@@ -381,22 +383,14 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
         int result;
 
         // CASE 1 : Comparing to another Second object
         // -------------------------------------------
         if (o1 instanceof Second) {
             Second s = (Second) o1;
-            if (this.firstMillisecond < s.firstMillisecond) {
-                return -1;
-            }
-            else if (this.firstMillisecond > s.firstMillisecond) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
+            return Long.compare(this.firstMillisecond, s.firstMillisecond);
         }
 
         // CASE 2 : Comparing to another TimePeriod object
@@ -432,7 +426,7 @@ public class Second extends RegularTimePeriod implements Serializable {
         Day day = Day.parseDay(daystr);
         if (day != null) {
             String hmsstr = s.substring(Math.min(daystr.length() + 1,
-                    s.length()), s.length());
+                    s.length()));
             hmsstr = hmsstr.trim();
 
             int l = hmsstr.length();

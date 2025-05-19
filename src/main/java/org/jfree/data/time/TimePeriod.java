@@ -42,7 +42,7 @@ import java.util.Date;
  * A period of time measured to millisecond precision using two instances of
  * {@code java.util.Date}.
  */
-public interface TimePeriod extends Comparable {
+public interface TimePeriod extends Comparable<TimePeriod> {
 
     /**
      * Returns the start date/time.  This will always be on or before the

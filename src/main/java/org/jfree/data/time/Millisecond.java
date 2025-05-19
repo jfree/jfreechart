@@ -51,7 +51,7 @@ import java.util.TimeZone;
 public class Millisecond extends RegularTimePeriod implements Serializable {
 
     /** For serialization. */
-    static final long serialVersionUID = -5316836467277638485L;
+    private static final long serialVersionUID = -5316836467277638485L;
 
     /** A constant for the first millisecond in a second. */
     public static final int FIRST_MILLISECOND_IN_SECOND = 0;
@@ -60,19 +60,19 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     public static final int LAST_MILLISECOND_IN_SECOND = 999;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour in the day. */
-    private byte hour;
+    private final byte hour;
 
     /** The minute. */
-    private byte minute;
+    private final byte minute;
 
     /** The second. */
-    private byte second;
+    private final byte second;
 
     /** The millisecond. */
-    private int millisecond;
+    private final int millisecond;
 
     /**
      * The pegged millisecond.
@@ -97,6 +97,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @param second  the second ({@code null} not permitted).
      */
     public Millisecond(int millisecond, Second second) {
+        super();
         Args.nullNotPermitted(second, "second");
         this.millisecond = millisecond;
         this.second = (byte) second.getSecond();
@@ -149,6 +150,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Millisecond(Date time, TimeZone zone, Locale locale) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
@@ -171,6 +173,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Millisecond(Date time, Calendar calendar) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(calendar, "calendar");
         calendar.setTime(time);
@@ -362,7 +365,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Millisecond object
      * relative to the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param obj  the object to compare
@@ -370,7 +373,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object obj) {
+    public int compareTo(TimePeriod obj) {
         int result;
         long difference;
 
@@ -398,8 +401,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
             RegularTimePeriod rtp = (RegularTimePeriod) obj;
             final long thisVal = this.getFirstMillisecond();
             final long anotherVal = rtp.getFirstMillisecond();
-            result = (thisVal < anotherVal ? -1
-                    : (thisVal == anotherVal ? 0 : 1));
+            result = (Long.compare(thisVal, anotherVal));
         }
 
         // CASE 3 : Comparing to a non-TimePeriod object
