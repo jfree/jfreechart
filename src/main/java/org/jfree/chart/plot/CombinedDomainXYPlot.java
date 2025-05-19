@@ -516,7 +516,7 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor) {
         // delegate 'state' and 'source' argument checks...
-        XYPlot subplot = findSubplot(state, source);
+        XYPlot<S> subplot = findSubplot(state, source);
         if (subplot != null) {
             subplot.zoomRangeAxes(factor, state, source, useAnchor);
         } else {
@@ -591,15 +591,14 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
      *
      * @return A subplot (possibly {@code null}).
      */
-    public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
+    public XYPlot<S> findSubplot(PlotRenderingInfo info, Point2D source) {
         Args.nullNotPermitted(info, "info");
         Args.nullNotPermitted(source, "source");
-        XYPlot result = null;
         int subplotIndex = info.getSubplotIndex(source);
         if (subplotIndex >= 0) {
-            result =  (XYPlot) this.subplots.get(subplotIndex);
+            return this.subplots.get(subplotIndex);
         }
-        return result;
+        return null;
     }
 
     /**
