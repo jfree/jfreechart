@@ -40,6 +40,7 @@
 
 package org.jfree.data.gantt;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.api.PublicCloneable;
@@ -56,11 +57,12 @@ import org.jfree.data.general.DatasetChangeEvent;
  *
  * @since 1.0.10
  */
-public class SlidingGanttCategoryDataset extends AbstractDataset
-        implements GanttCategoryDataset {
+public class SlidingGanttCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>
+        extends AbstractDataset
+        implements GanttCategoryDataset<R, C> {
 
     /** The underlying dataset. */
-    private GanttCategoryDataset underlying;
+    private GanttCategoryDataset<R, C> underlying;
 
     /** The index of the first category to present. */
     private int firstCategoryIndex;
@@ -77,8 +79,9 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *     underlying dataset.
      * @param maxColumns  the maximumColumnCount.
      */
-    public SlidingGanttCategoryDataset(GanttCategoryDataset underlying,
+    public SlidingGanttCategoryDataset(GanttCategoryDataset<R, C> underlying,
             int firstColumn, int maxColumns) {
+        super();
         this.underlying = underlying;
         this.firstCategoryIndex = firstColumn;
         this.maximumCategoryCount = maxColumns;
@@ -89,7 +92,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The underlying dataset (never {@code null}).
      */
-    public GanttCategoryDataset getUnderlyingDataset() {
+    public GanttCategoryDataset<R, C> getUnderlyingDataset() {
         return this.underlying;
     }
 
@@ -169,7 +172,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @return The column index, or -1 if the key is not recognised.
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         int index = this.underlying.getColumnIndex(key);
         if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
             return index - this.firstCategoryIndex;
@@ -187,7 +190,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
-    public Comparable getColumnKey(int column) {
+    public C getColumnKey(int column) {
         return this.underlying.getColumnKey(column + this.firstCategoryIndex);
     }
 
@@ -199,8 +202,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public List getColumnKeys() {
-        List result = new java.util.ArrayList();
+    public List<C> getColumnKeys() {
+        List<C> result = new ArrayList<>();
         int last = lastCategoryIndex();
         for (int i = this.firstCategoryIndex; i < last; i++) {
             result.add(this.underlying.getColumnKey(i));
@@ -216,7 +219,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @return The row index, or {@code -1} if the key is unrecognised.
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         return this.underlying.getRowIndex(key);
     }
 
@@ -230,7 +233,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
-    public Comparable getRowKey(int row) {
+    public R getRowKey(int row) {
         return this.underlying.getRowKey(row);
     }
 
@@ -240,7 +243,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @return The keys.
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return this.underlying.getRowKeys();
     }
 
@@ -255,7 +258,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
     @Override
-    public Number getValue(Comparable rowKey, Comparable columnKey) {
+    public Number getValue(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -317,7 +320,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @return The percent complete.
      */
     @Override
-    public Number getPercentComplete(Comparable rowKey, Comparable columnKey) {
+    public Number getPercentComplete(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -344,7 +347,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getPercentComplete(int, int, int)
      */
     @Override
-    public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
+    public Number getPercentComplete(R rowKey, C columnKey,
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
@@ -372,7 +375,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getStartValue(Comparable, Comparable, int)
      */
     @Override
-    public Number getEndValue(Comparable rowKey, Comparable columnKey,
+    public Number getEndValue(R rowKey, C columnKey,
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
@@ -448,7 +451,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getEndValue(Comparable, Comparable, int)
      */
     @Override
-    public Number getStartValue(Comparable rowKey, Comparable columnKey,
+    public Number getStartValue(R rowKey, C columnKey,
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
@@ -492,7 +495,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getSubIntervalCount(int, int)
      */
     @Override
-    public int getSubIntervalCount(Comparable rowKey, Comparable columnKey) {
+    public int getSubIntervalCount(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -533,7 +536,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getEndValue(Comparable, Comparable)
      */
     @Override
-    public Number getStartValue(Comparable rowKey, Comparable columnKey) {
+    public Number getStartValue(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -574,7 +577,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @see #getStartValue(Comparable, Comparable)
      */
     @Override
-    public Number getEndValue(Comparable rowKey, Comparable columnKey) {
+    public Number getEndValue(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -617,7 +620,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
         if (!(obj instanceof SlidingGanttCategoryDataset)) {
             return false;
         }
-        SlidingGanttCategoryDataset that = (SlidingGanttCategoryDataset) obj;
+        SlidingGanttCategoryDataset<R, C> that = (SlidingGanttCategoryDataset<R, C>) obj;
         if (this.firstCategoryIndex != that.firstCategoryIndex) {
             return false;
         }
@@ -646,11 +649,11 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        SlidingGanttCategoryDataset clone
-                = (SlidingGanttCategoryDataset) super.clone();
+        SlidingGanttCategoryDataset<R, C> clone
+                = (SlidingGanttCategoryDataset<R, C>) super.clone();
         if (this.underlying instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.underlying;
-            clone.underlying = (GanttCategoryDataset) pc.clone();
+            clone.underlying = (GanttCategoryDataset<R, C>) pc.clone();
         }
         return clone;
     }
