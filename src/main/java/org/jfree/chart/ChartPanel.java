@@ -2696,8 +2696,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns {@code true} if OrsonPDF is on the classpath, and 
      * {@code false} otherwise.  The OrsonPDF library can be found at
-     * http://www.object-refinery.com/pdf/
-     * 
+     * <a href="https://github.com/jfree/orsonpdf">GitHub</a>
+     *
      * @return A boolean.
      */
     private boolean isOrsonPDFAvailable() {
