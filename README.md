@@ -56,6 +56,11 @@ at GitHub:
 
 History
 -------
+
+##### Version 1.5.6 (not yet released)
+- updated pom.xml with new Maven publishing flow and latest plugin versions
+- various minor improvements
+
 ##### Version 1.5.5 (23 June 2024)
 - added `XYBezierRenderer` by Javier Robes ([#286](https://github.com/jfree/jfreechart/pull/286))
 - fix cross-hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
