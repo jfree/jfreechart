@@ -79,6 +79,7 @@ History
 
 ##### Version 2.0 (not yet released)
 - add padding for `Crosshair`label ([#414](https://github.com/jfree/jfreechart/pull/414))
+- add tests for `EncoderUtil` ([#378](https://github.com/jfree/jfreechart/pull/378))
 - use `ThreadLocal` for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
 - added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
 - modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
