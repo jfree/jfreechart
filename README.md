@@ -60,7 +60,8 @@ History
 ##### Version 1.5.6 (not yet released)
 - added `setSymbols` method to `SymbolAxis` ([#421](https://github.com/jfree/jfreechart/pull/421))
 - added label padding to `Crosshair` ([#414](https://github.com/jfree/jfreechart/pull/414))
-- updated pom.xml with new Maven publishing flow and latest plugin versions
+- fix calculating if label fits inside bar for `XYBarRenderer` ([#366](https://github.com/jfree/jfreechart/issues/366))
+- updated `pom.xml` with new Maven publishing flow and latest plugin versions
 - various minor improvements
 
 ##### Version 1.5.5 (23 June 2024)
@@ -1369,6 +1370,7 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 - Richard Atkinson
 - David Basten
 - David Berry
+- Yuri Blankenstein
 - Chris Boek
 - Zoheb Borbora
 - Anthony Boulestreau
