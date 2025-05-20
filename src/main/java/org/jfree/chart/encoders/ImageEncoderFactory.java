@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ------------------------
@@ -40,7 +40,7 @@
  *               implementations (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 06-Jul-2008 : Remove encoder only used in JDK 1.3 (DG);
- * 
+ *
  */
 
 package org.jfree.chart.encoders;
@@ -68,6 +68,7 @@ public class ImageEncoderFactory {
     private static void init() {
         encoders = new HashMap<>();
         encoders.put("jpeg", "org.jfree.chart.encoders.SunJPEGEncoderAdapter");
+        encoders.put("jpg", "org.jfree.chart.encoders.SunJPEGEncoderAdapter");
         encoders.put("png", "org.jfree.chart.encoders.SunPNGEncoderAdapter");
     }
 
