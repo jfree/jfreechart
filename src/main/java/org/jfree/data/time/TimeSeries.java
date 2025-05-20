@@ -899,7 +899,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * the oldest record in the series does not exceed maximumItemAge time
      * periods.  Oldest items will be removed if required.
      *
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
+     * @param notify  controls whether a {@link SeriesChangeEvent} is
      *                sent to registered listeners IF any items are removed.
      */
     public void removeAgedItems(boolean notify) {
@@ -929,7 +929,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param latest  the time to be compared against when aging data
      *     (specified in milliseconds).
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
+     * @param notify  controls whether a {@link SeriesChangeEvent} is
      *                sent to registered listeners IF any items are removed.
      */
     public void removeAgedItems(long latest, boolean notify) {

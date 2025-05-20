@@ -183,7 +183,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the crosshair is
+     * Returns the flag that indicates whether the crosshair is
      * currently visible.
      *
      * @return A boolean.
@@ -285,7 +285,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not a label is drawn for
+     * Returns the flag that controls whether a label is drawn for
      * this crosshair.
      *
      * @return A boolean.
@@ -297,7 +297,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not a label is drawn for the
+     * Sets the flag that controls whether a label is drawn for the
      * crosshair and sends a property change event (with the name
      * 'labelVisible') to all registered listeners.
      *

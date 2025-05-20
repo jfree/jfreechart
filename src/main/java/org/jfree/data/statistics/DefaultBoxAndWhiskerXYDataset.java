@@ -463,7 +463,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -480,7 +480,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -497,7 +497,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

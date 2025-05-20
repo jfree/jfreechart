@@ -127,10 +127,10 @@ public class MonthDateFormat extends DateFormat {
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
-     * @param showYearForJan  a flag that controls whether or not the year is
+     * @param showYearForJan  a flag that controls whether the year is
      *                        appended to the symbol for the first month of
      *                        each year.
-     * @param showYearForDec  a flag that controls whether or not the year is
+     * @param showYearForDec  a flag that controls whether the year is
      *                        appended to the symbol for the last month of
      *                        each year.
      */
@@ -151,7 +151,7 @@ public class MonthDateFormat extends DateFormat {
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
-     * @param showYear  an array of flags that control whether or not the
+     * @param showYear  an array of flags that control whether the
      *                  year is displayed for a particular month.
      * @param yearFormatter  the year formatter.
      */

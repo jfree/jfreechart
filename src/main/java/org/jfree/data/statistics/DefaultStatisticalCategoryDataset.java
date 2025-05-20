@@ -607,7 +607,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -627,7 +627,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -647,7 +647,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the bounds of the values in this dataset's y-values.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

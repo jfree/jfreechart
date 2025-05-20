@@ -58,10 +58,10 @@ public class VectorSeries extends ComparableObjectSeries {
 
     /**
      * Constructs a new series that contains no data.  You can specify
-     * whether or not duplicate x-values are allowed for the series.
+     * whether duplicate x-values are allowed for the series.
      *
      * @param key  the series key ({@code null} not permitted).
-     * @param autoSort  a flag that controls whether or not the items in the
+     * @param autoSort  a flag that controls whether the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.

@@ -47,7 +47,7 @@ public interface DomainInfo {
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value or {@code Double.NaN} if there are no 
@@ -58,7 +58,7 @@ public interface DomainInfo {
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value or {@code Double.NaN} if there are no 
@@ -69,7 +69,7 @@ public interface DomainInfo {
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no

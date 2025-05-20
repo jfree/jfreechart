@@ -148,7 +148,7 @@ public class LogarithmicAxis extends NumberAxis {
 
     /**
      * Sets the 'expTickLabelsFlag' flag.  If the 'log10TickLabelsFlag'
-     * is false then this will set whether or not "1e#"-style tick labels
+     * is false then this will set whether "1e#"-style tick labels
      * are used.  The default is to use regular numeric tick labels.
      *
      * @param flgVal true for "1e#"-style tick labels, false for

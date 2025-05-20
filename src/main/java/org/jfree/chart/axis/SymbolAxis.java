@@ -85,7 +85,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     /** The list of symbols to display instead of the numeric values. */
     private List<String> symbols;
 
-    /** Flag that indicates whether or not grid bands are visible. */
+    /** Flag that indicates whether grid bands are visible. */
     private boolean gridBandsVisible;
 
     /** The paint used to color the grid bands (if the bands are visible). */
@@ -148,7 +148,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not grid bands are drawn for this
+     * Sets the flag that controls whether grid bands are drawn for this
      * axis and notifies registered listeners that the axis has been modified.
      * Each band is the area between two adjacent gridlines 
      * running perpendicular to the axis.  When the bands are drawn they are 

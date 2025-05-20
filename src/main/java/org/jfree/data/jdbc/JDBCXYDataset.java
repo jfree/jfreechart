@@ -153,7 +153,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Sets a flag that indicates whether or not the data represents a time
+     * Sets a flag that indicates whether the data represents a time
      * series.
      *
      * @param timeSeries  the new value of the flag.
@@ -487,7 +487,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -500,7 +500,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -513,7 +513,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

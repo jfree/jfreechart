@@ -454,7 +454,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param annotation  the annotation to remove ({@code null} not
      *                    permitted).
      *
-     * @return A boolean to indicate whether or not the annotation was
+     * @return A boolean to indicate whether the annotation was
      *         successfully removed.
      */
     @Override

@@ -43,7 +43,7 @@ package org.jfree.chart.block;
 public class BlockParams implements EntityBlockParams {
 
     /**
-     * A flag that controls whether or not the block should generate and
+     * A flag that controls whether the block should generate and
      * return chart entities for the items it draws.
      */
     private boolean generateEntities;
@@ -72,7 +72,7 @@ public class BlockParams implements EntityBlockParams {
     }
 
     /**
-     * Returns the flag that controls whether or not chart entities are
+     * Returns the flag that controls whether chart entities are
      * generated.
      *
      * @return A boolean.
@@ -83,7 +83,7 @@ public class BlockParams implements EntityBlockParams {
     }
 
     /**
-     * Sets the flag that controls whether or not chart entities are generated.
+     * Sets the flag that controls whether chart entities are generated.
      *
      * @param generate  the flag.
      */

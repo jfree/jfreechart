@@ -130,7 +130,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /** ??. */
     protected boolean boundMappedToLastCycle;
 
-    /** A flag that controls whether or not the advance line is visible. */
+    /** A flag that controls whether the advance line is visible. */
     protected boolean advanceLineVisible;
 
     /** The advance line stroke. */

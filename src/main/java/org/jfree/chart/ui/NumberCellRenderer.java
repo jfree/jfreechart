@@ -53,9 +53,9 @@ public class NumberCellRenderer extends DefaultTableCellRenderer {
      *
      * @param table  the table.
      * @param value  the data to be rendered.
-     * @param isSelected  a boolean that indicates whether or not the cell is 
+     * @param isSelected  a boolean that indicates whether the cell is 
      *                    selected.
-     * @param hasFocus  a boolean that indicates whether or not the cell has 
+     * @param hasFocus  a boolean that indicates whether the cell has 
      *                  the focus.
      * @param row  the (zero-based) row index.
      * @param column  the (zero-based) column index.

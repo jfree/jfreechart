@@ -82,7 +82,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /** For serialization. */
     private static final long serialVersionUID = -7378069681579984133L;
 
-    /** A flag that controls whether or not the outline is shown. */
+    /** A flag that controls whether the outline is shown. */
     private boolean showOutline;
 
     /**
@@ -122,7 +122,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not outlines of the areas are
+     * Returns a flag that controls whether outlines of the areas are
      * drawn.
      *
      * @return The flag.
@@ -134,7 +134,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not outlines of the areas are
+     * Sets a flag that controls whether outlines of the areas are
      * drawn, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

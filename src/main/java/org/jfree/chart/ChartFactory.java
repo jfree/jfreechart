@@ -189,7 +189,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      *
@@ -234,7 +234,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -287,7 +287,7 @@ public abstract class ChartFactory {
      *                               required to reach top scale.
      * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      * @param subTitle displays a subtitle with colour scheme if true
@@ -405,7 +405,7 @@ public abstract class ChartFactory {
      *                               required to reach top scale.
      * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      * @param subTitle displays a subtitle with colour scheme if true
@@ -505,7 +505,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      *
@@ -534,7 +534,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -611,7 +611,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      *
@@ -659,7 +659,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -775,7 +775,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -863,7 +863,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation of the chart (horizontal or
      *                     vertical) ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -935,7 +935,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation ({@code null} not
      *                     permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1010,7 +1010,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1082,7 +1082,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the chart orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1152,7 +1152,7 @@ public abstract class ChartFactory {
      * @param dateAxisLabel  the label for the date axis
      *                       ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1201,7 +1201,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1322,7 +1322,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1399,7 +1399,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1482,7 +1482,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1550,7 +1550,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1618,7 +1618,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1674,7 +1674,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1738,7 +1738,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1817,7 +1817,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1867,7 +1867,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A candlestick chart.
      */
@@ -1895,7 +1895,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A high-low-open-close chart.
      */
@@ -1946,7 +1946,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -2056,7 +2056,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *     permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A box and whisker chart.
      */
@@ -2088,7 +2088,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A box and whisker chart.
      */
@@ -2115,7 +2115,7 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the x-axis ({@code null} permitted).
      * @param yAxisLabel  a label for the y-axis ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag that controls whether or not a legend is created.
+     * @param legend  a flag that controls whether a legend is created.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *

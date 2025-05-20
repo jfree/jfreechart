@@ -157,7 +157,7 @@ public class Outlier implements Comparable {
      *
      * @param other  the other outlier.
      *
-     * @return A {@code boolean} indicating whether or not an overlap has
+     * @return A {@code boolean} indicating whether an overlap has
      *         occurred.
      */
     public boolean overlaps(Outlier other) {

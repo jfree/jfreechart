@@ -48,7 +48,7 @@ public class RendererState {
     private PlotRenderingInfo info;
     
     /** 
-     * A flag that indicates whether or not rendering hints should be added to
+     * A flag that indicates whether rendering hints should be added to
      * identify chart elements.  It is initialised from the corresponding flag
      * in the JFreeChart instance.
      */
@@ -65,7 +65,7 @@ public class RendererState {
     }
     
     /**
-     * Returns the flag that controls whether or not the renderer should 
+     * Returns the flag that controls whether the renderer should 
      * add rendering hints to the output that identify chart elements.
      * 
      * @return A boolean.

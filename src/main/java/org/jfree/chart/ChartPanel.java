@@ -276,10 +276,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** The plot orientation. */
     private PlotOrientation orientation = PlotOrientation.VERTICAL;
 
-    /** A flag that controls whether or not domain zooming is enabled. */
+    /** A flag that controls whether domain zooming is enabled. */
     private boolean domainZoomable = false;
 
-    /** A flag that controls whether or not range zooming is enabled. */
+    /** A flag that controls whether range zooming is enabled. */
     private boolean rangeZoomable = false;
 
     /**
@@ -298,10 +298,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** The minimum distance required to drag the mouse to trigger a zoom. */
     private int zoomTriggerDistance;
 
-    /** A flag that controls whether or not horizontal tracing is enabled. */
+    /** A flag that controls whether horizontal tracing is enabled. */
     private boolean horizontalAxisTrace = false;
 
-    /** A flag that controls whether or not vertical tracing is enabled. */
+    /** A flag that controls whether vertical tracing is enabled. */
     private boolean verticalAxisTrace = false;
 
     /** A vertical trace line. */
@@ -342,7 +342,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     private File defaultDirectoryForSaveAs;
 
-    /** A flag that controls whether or not file extensions are enforced. */
+    /** A flag that controls whether file extensions are enforced. */
     private boolean enforceFileExtensions;
 
     /** A flag that indicates if original tooltip delays are changed. */
@@ -433,7 +433,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Constructs a panel containing a chart.  The {@code useBuffer} flag
-     * controls whether or not an offscreen {@code BufferedImage} is
+     * controls whether an offscreen {@code BufferedImage} is
      * maintained for the chart.  If the buffer is used, more memory is
      * consumed, but panel repaints will be a lot quicker in cases where the
      * chart itself hasn't changed (for example, when another frame is moved
@@ -443,7 +443,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * on JRE6 on Windows.
      *
      * @param chart  the chart.
-     * @param useBuffer  a flag controlling whether or not an off-screen buffer
+     * @param useBuffer  a flag controlling whether an off-screen buffer
      *                   is used (read the warning above before setting this
      *                   to {@code false}).
      */
@@ -465,15 +465,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Constructs a JFreeChart panel.
      *
      * @param chart  the chart.
-     * @param properties  a flag indicating whether or not the chart property
+     * @param properties  a flag indicating whether the chart property
      *                    editor should be available via the popup menu.
-     * @param save  a flag indicating whether or not save options should be
+     * @param save  a flag indicating whether save options should be
      *              available via the popup menu.
-     * @param print  a flag indicating whether or not the print option
+     * @param print  a flag indicating whether the print option
      *               should be available via the popup menu.
-     * @param zoom  a flag indicating whether or not zoom options should
+     * @param zoom  a flag indicating whether zoom options should
      *              be added to the popup menu.
-     * @param tooltips  a flag indicating whether or not tooltips should be
+     * @param tooltips  a flag indicating whether tooltips should be
      *                  enabled for the chart.
      */
     public ChartPanel(JFreeChart chart, boolean properties, boolean save,
@@ -499,15 +499,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param useBuffer  a flag that indicates whether to use the off-screen
      *                   buffer to improve performance (at the expense of
      *                   memory).
-     * @param properties  a flag indicating whether or not the chart property
+     * @param properties  a flag indicating whether the chart property
      *                    editor should be available via the popup menu.
-     * @param save  a flag indicating whether or not save options should be
+     * @param save  a flag indicating whether save options should be
      *              available via the popup menu.
-     * @param print  a flag indicating whether or not the print option
+     * @param print  a flag indicating whether the print option
      *               should be available via the popup menu.
-     * @param zoom  a flag indicating whether or not zoom options should be
+     * @param zoom  a flag indicating whether zoom options should be
      *              added to the popup menu.
-     * @param tooltips  a flag indicating whether or not tooltips should be
+     * @param tooltips  a flag indicating whether tooltips should be
      *                  enabled for the chart.
      */
     public ChartPanel(JFreeChart chart, int width, int height,
@@ -533,17 +533,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param useBuffer  a flag that indicates whether to use the off-screen
      *                   buffer to improve performance (at the expense of
      *                   memory).
-     * @param properties  a flag indicating whether or not the chart property
+     * @param properties  a flag indicating whether the chart property
      *                    editor should be available via the popup menu.
-     * @param copy  a flag indicating whether or not a copy option should be
+     * @param copy  a flag indicating whether a copy option should be
      *              available via the popup menu.
-     * @param save  a flag indicating whether or not save options should be
+     * @param save  a flag indicating whether save options should be
      *              available via the popup menu.
-     * @param print  a flag indicating whether or not the print option
+     * @param print  a flag indicating whether the print option
      *               should be available via the popup menu.
-     * @param zoom  a flag indicating whether or not zoom options should be
+     * @param zoom  a flag indicating whether zoom options should be
      *              added to the popup menu.
-     * @param tooltips  a flag indicating whether or not tooltips should be
+     * @param tooltips  a flag indicating whether tooltips should be
      *                  enabled for the chart.
      */
     public ChartPanel(JFreeChart chart, int width, int height,
@@ -839,7 +839,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that determines whether or not zooming is enabled for
+     * Returns the flag that determines whether zooming is enabled for
      * the domain axis.
      *
      * @return A boolean.
@@ -868,7 +868,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that determines whether or not zooming is enabled for
+     * Returns the flag that determines whether zooming is enabled for
      * the range axis.
      *
      * @return A boolean.
@@ -895,7 +895,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not the zoom rectangle is
+     * Returns the flag that controls whether the zoom rectangle is
      * filled when drawn.
      *
      * @return A boolean.
@@ -935,7 +935,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not a horizontal axis trace
+     * Returns the flag that controls whether a horizontal axis trace
      * line is drawn over the plot area at the current mouse location.
      *
      * @return A boolean.
@@ -973,7 +973,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not a vertical axis trace
+     * Returns the flag that controls whether a vertical axis trace
      * line is drawn over the plot area at the current mouse location.
      *
      * @return A boolean.
@@ -1048,7 +1048,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not file extensions are enforced.
+     * Sets a flag that controls whether file extensions are enforced.
      *
      * @param enforce  the new flag value.
      *
@@ -1059,7 +1059,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not zoom operations are
+     * Returns the flag that controls whether zoom operations are
      * centered around the current anchor point.
      *
      * @return A boolean.
@@ -1071,7 +1071,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not zoom operations are
+     * Sets the flag that controls whether zoom operations are
      * centered around the current anchor point.
      *
      * @param zoomAroundAnchor  the new flag value.
@@ -1311,7 +1311,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not the offscreen buffer
+     * Returns the flag that controls whether the offscreen buffer
      * needs to be refreshed.
      *
      * @return A boolean.
@@ -3032,7 +3032,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             return;
         }
 
-        // go through each zoom menu item and decide whether or not to
+        // go through each zoom menu item and decide whether to
         // enable it...
         boolean isDomainZoomable = false;
         boolean isRangeZoomable = false;

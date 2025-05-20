@@ -97,7 +97,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     /** The label paint. */
     private transient Paint labelPaint;
 
-    /** A flag that controls whether or not dividers are visible. */
+    /** A flag that controls whether dividers are visible. */
     private boolean drawDividers;
 
     /** The stroke used to draw the dividers. */
@@ -202,7 +202,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not dividers are drawn.
+     * Returns a flag that controls whether dividers are drawn.
      *
      * @return A flag.
      */

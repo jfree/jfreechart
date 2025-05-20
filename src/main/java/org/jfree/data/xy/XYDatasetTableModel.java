@@ -170,7 +170,7 @@ public class XYDatasetTableModel extends AbstractTableModel
     }
 
     /**
-     * Returns a flag indicating whether or not the specified cell is editable.
+     * Returns a flag indicating whether the specified cell is editable.
      *
      * @param row  the row number.
      * @param column  the column number.

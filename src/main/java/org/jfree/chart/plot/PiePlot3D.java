@@ -90,7 +90,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     private double depthFactor = 0.12;
 
     /**
-     * A flag that controls whether or not the sides of the pie chart
+     * A flag that controls whether the sides of the pie chart
      * are rendered using a darker colour.
      */
     private boolean darkerSides = false;  // default preserves previous behaviour
@@ -138,7 +138,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not the sides of the pie chart
+     * Returns a flag that controls whether the sides of the pie chart
      * are rendered using a darker colour.
      *
      * @return A boolean.
@@ -150,7 +150,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not the sides of the pie chart
+     * Sets a flag that controls whether the sides of the pie chart
      * are rendered using a darker colour, and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *

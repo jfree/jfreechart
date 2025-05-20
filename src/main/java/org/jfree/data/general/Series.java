@@ -176,7 +176,7 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not change events are sent to
+     * Returns the flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -188,7 +188,7 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not change events are sent to
+     * Sets the flag that controls whether change events are sent to
      * registered listeners.
      *
      * @param notify  the new value of the flag.

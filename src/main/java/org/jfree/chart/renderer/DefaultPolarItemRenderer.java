@@ -314,7 +314,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not a series is filled.
+     * Sets a flag that controls whether a series is filled.
      *
      * @param series  the series index.
      * @param filled  the flag.

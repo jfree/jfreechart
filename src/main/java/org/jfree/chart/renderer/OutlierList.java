@@ -65,7 +65,7 @@ public class OutlierList {
     private Outlier averagedOutlier;
 
     /**
-     * A flag that indicates whether or not there are multiple outliers in the
+     * A flag that indicates whether there are multiple outliers in the
      * list.
      */
     private boolean multiple = false;
@@ -129,7 +129,7 @@ public class OutlierList {
     }
 
     /**
-     * Sets the flag that indicates whether or not this list represents
+     * Sets the flag that indicates whether this list represents
      * multiple outliers.
      *
      * @param multiple  the flag.

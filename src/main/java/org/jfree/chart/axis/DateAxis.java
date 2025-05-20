@@ -448,9 +448,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range ({@code null} not permitted).
-     * @param turnOffAutoRange  a flag that controls whether or not the auto
+     * @param turnOffAutoRange  a flag that controls whether the auto
      *                          range is turned off.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      */
     @Override

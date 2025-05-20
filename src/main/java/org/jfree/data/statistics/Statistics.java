@@ -64,7 +64,7 @@ public abstract class Statistics {
      * Returns the mean of an array of numbers.
      *
      * @param values  the values ({@code null} not permitted).
-     * @param includeNullAndNaN  a flag that controls whether or not
+     * @param includeNullAndNaN  a flag that controls whether
      *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).
@@ -111,7 +111,7 @@ public abstract class Statistics {
      * Returns the mean of a collection of {@code Number} objects.
      *
      * @param values  the values ({@code null} not permitted).
-     * @param includeNullAndNaN  a flag that controls whether or not
+     * @param includeNullAndNaN  a flag that controls whether
      *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).

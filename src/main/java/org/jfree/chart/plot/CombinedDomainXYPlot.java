@@ -159,7 +159,7 @@ public class CombinedDomainXYPlot extends XYPlot
     }
     
     /**
-     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * Sets the flag, on each of the subplots, that controls whether the 
      * range is pannable.
      * 
      * @param pannable  the new flag value. 

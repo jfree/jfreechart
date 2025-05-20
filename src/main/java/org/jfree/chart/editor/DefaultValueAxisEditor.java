@@ -67,7 +67,7 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultValueAxisEditor extends DefaultAxisEditor 
         implements FocusListener {
 
-    /** A flag that indicates whether or not the axis range is determined
+    /** A flag that indicates whether the axis range is determined
      *  automatically.
      */
     private boolean autoRange;
@@ -81,7 +81,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     /** The highest value in the axis range. */
     private double maximumValue;
 
-    /** A checkbox that indicates whether or not the axis range is determined
+    /** A checkbox that indicates whether the axis range is determined
      *  automatically.
      */
     private JCheckBox autoRangeCheckBox;

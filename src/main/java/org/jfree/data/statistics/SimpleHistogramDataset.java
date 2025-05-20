@@ -69,7 +69,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     private List bins;
 
     /**
-     * A flag that controls whether or not the bin count is divided by the
+     * A flag that controls whether the bin count is divided by the
      * bin size.
      */
     private boolean adjustForBinSize;
@@ -88,7 +88,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns a flag that controls whether or not the bin count is divided by
+     * Returns a flag that controls whether the bin count is divided by
      * the bin size in the {@link #getXValue(int, int)} method.
      *
      * @return A boolean.
@@ -100,7 +100,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the flag that controls whether or not the bin count is divided by
+     * Sets the flag that controls whether the bin count is divided by
      * the bin size in the {@link #getYValue(int, int)} method, and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *

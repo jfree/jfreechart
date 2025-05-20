@@ -164,7 +164,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     private boolean counterClockwise;
 
-    /** A flag that controls whether or not the angle labels are visible. */
+    /** A flag that controls whether the angle labels are visible. */
     private boolean angleLabelsVisible = true;
 
     /** The font used to display the angle labels - never null. */
@@ -712,7 +712,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns a flag that controls whether or not the angle labels are visible.
+     * Returns a flag that controls whether the angle labels are visible.
      *
      * @return A boolean.
      *
@@ -723,7 +723,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the angle labels are visible,
+     * Sets the flag that controls whether the angle labels are visible,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -798,7 +798,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the angular grid-lines are
+     * Sets the flag that controls whether the angular grid-lines are
      * visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -881,7 +881,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the radius axis grid lines
+     * Sets the flag that controls whether the radius axis grid lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all

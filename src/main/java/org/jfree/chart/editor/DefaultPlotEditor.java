@@ -121,23 +121,23 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      */
     private JComboBox orientationCombo;
 
-    /** Whether or not to draw lines between each data point (for
+    /** whether to draw lines between each data point (for
      * <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s).
      */
     private Boolean drawLines;
 
     /**
-     * The checkbox for whether or not to draw lines between each data point.
+     * The checkbox for whether to draw lines between each data point.
      */
     private JCheckBox drawLinesCheckBox;
 
-    /** Whether or not to draw shapes at each data point (for
+    /** whether to draw shapes at each data point (for
      * <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s).
      */
     private Boolean drawShapes;
 
     /**
-     * The checkbox for whether or not to draw shapes at each data point.
+     * The checkbox for whether to draw shapes at each data point.
      */
     private JCheckBox drawShapesCheckBox;
 
@@ -522,7 +522,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Allow the user to modify whether or not lines are drawn between data
+     * Allow the user to modify whether lines are drawn between data
      * points by <tt>LineAndShapeRenderer</tt>s and
      * <tt>StandardXYItemRenderer</tt>s.
      */
@@ -531,7 +531,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Allow the user to modify whether or not shapes are drawn at data points
+     * Allow the user to modify whether shapes are drawn at data points
      * by <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawShapesSelection() {

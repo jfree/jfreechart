@@ -182,15 +182,15 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * Constructs a double buffered JFreeChart panel.
      *
      * @param chart      the chart.
-     * @param properties a flag indicating whether or not the chart property
+     * @param properties a flag indicating whether the chart property
      *                   editor should be available via the popup menu.
-     * @param save       a flag indicating whether or not save options should be
+     * @param save       a flag indicating whether save options should be
      *                   available via the popup menu.
-     * @param print      a flag indicating whether or not the print option
+     * @param print      a flag indicating whether the print option
      *                   should be available via the popup menu.
-     * @param zoom       a flag indicating whether or not zoom options should be
+     * @param zoom       a flag indicating whether zoom options should be
      *                   added to the popup menu.
-     * @param tooltips   a flag indicating whether or not tooltips should be
+     * @param tooltips   a flag indicating whether tooltips should be
      *                   enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, boolean properties,
@@ -213,16 +213,16 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * @param minimumDrawHeight the minimum drawing height.
      * @param maximumDrawWidth  the maximum drawing width.
      * @param maximumDrawHeight the maximum drawing height.
-     * @param properties        a flag indicating whether or not the chart
+     * @param properties        a flag indicating whether the chart
      *                          property editor should be available via the
      *                          popup menu.
-     * @param save              a flag indicating whether or not save options
+     * @param save              a flag indicating whether save options
      *                          should be available via the popup menu.
-     * @param print             a flag indicating whether or not the print
+     * @param print             a flag indicating whether the print
      *                          option should be available via the popup menu.
-     * @param zoom              a flag indicating whether or not zoom options
+     * @param zoom              a flag indicating whether zoom options
      *                          should be added to the popup menu.
-     * @param tooltips          a flag indicating whether or not tooltips should
+     * @param tooltips          a flag indicating whether tooltips should
      *                          be enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, int width, int height,
@@ -245,18 +245,18 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * @param minimumDrawHeight the minimum drawing height.
      * @param maximumDrawWidth  the maximum drawing width.
      * @param maximumDrawHeight the maximum drawing height.
-     * @param properties        a flag indicating whether or not the chart
+     * @param properties        a flag indicating whether the chart
      *                          property editor should be available via the
      *                          popup menu.
-     * @param copy              a flag indicating whether or not a copy option
+     * @param copy              a flag indicating whether a copy option
      *                          should be available via the popup menu.
-     * @param save              a flag indicating whether or not save options
+     * @param save              a flag indicating whether save options
      *                          should be available via the popup menu.
-     * @param print             a flag indicating whether or not the print
+     * @param print             a flag indicating whether the print
      *                          option should be available via the popup menu.
-     * @param zoom              a flag indicating whether or not zoom options
+     * @param zoom              a flag indicating whether zoom options
      *                          should be added to the popup menu.
-     * @param tooltips          a flag indicating whether or not tooltips should
+     * @param tooltips          a flag indicating whether tooltips should
      *                          be enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, int width, int height,

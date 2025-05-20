@@ -174,7 +174,7 @@ public abstract class Plot implements AxisChangeListener,
     private RectangleInsets insets;
 
     /**
-     * A flag that controls whether or not the plot outline is drawn.
+     * A flag that controls whether the plot outline is drawn.
      */
     private boolean outlineVisible;
 
@@ -209,7 +209,7 @@ public abstract class Plot implements AxisChangeListener,
     private transient EventListenerList listenerList;
 
     /**
-     * A flag that controls whether or not the plot will notify listeners
+     * A flag that controls whether the plot will notify listeners
      * of changes (defaults to true, but sometimes it is useful to disable
      * this).
      */
@@ -703,7 +703,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not the plot outline is
+     * Returns the flag that controls whether the plot outline is
      * drawn.  The default value is {@code true}.  Note that for
      * historical reasons, the plot's outline paint and stroke can take on
      * {@code null} values, in which case the outline will not be drawn
@@ -718,7 +718,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not the plot's outline is
+     * Sets the flag that controls whether the plot's outline is
      * drawn, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
@@ -845,7 +845,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not change events are sent to
+     * Returns a flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -857,7 +857,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not listeners receive
+     * Sets a flag that controls whether listeners receive
      * {@link PlotChangeEvent} notifications.
      *
      * @param notify  a boolean.
