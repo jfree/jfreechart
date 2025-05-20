@@ -145,7 +145,7 @@ public class EncoderUtil {
      */
     public static void writeBufferedImage(BufferedImage image, String format,
         OutputStream outputStream, float quality) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format,quality);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, quality);
         imageEncoder.encode(image, outputStream);
     }
 
@@ -161,7 +161,7 @@ public class EncoderUtil {
      */
     public static void writeBufferedImage(BufferedImage image, String format,
             OutputStream outputStream, boolean encodeAlpha) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format,encodeAlpha);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
 
@@ -180,7 +180,7 @@ public class EncoderUtil {
     public static void writeBufferedImage(BufferedImage image, String format,
             OutputStream outputStream, float quality, boolean encodeAlpha)
             throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format,quality, encodeAlpha);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, quality, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
 
