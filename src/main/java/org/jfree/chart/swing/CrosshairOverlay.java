@@ -51,6 +51,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
@@ -279,20 +280,33 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                     Font savedFont = g2.getFont();
                     g2.setFont(crosshair.getLabelFont());
                     RectangleAnchor anchor = crosshair.getLabelAnchor();
-                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                    RectangleInsets padding = crosshair.getLabelPadding();
+                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                     float xx = (float) pt.getX();
                     float yy = (float) pt.getY();
                     TextAnchor alignPt = textAlignPtForLabelAnchorH(anchor);
                     Shape hotspot = TextUtils.calculateRotatedStringBounds(
                             label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    hotspot = padding.createOutsetRectangle(hotspot.getBounds2D());
                     if (!dataArea.contains(hotspot.getBounds2D())) {
                         anchor = flipAnchorV(anchor);
-                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                         xx = (float) pt.getX();
                         yy = (float) pt.getY();
+                        if (anchor == RectangleAnchor.CENTER || alignPt.isHalfAscent()) {
+                            double labelHeight = hotspot.getBounds2D().getHeight();
+                            double minY = dataArea.getY() + (labelHeight + padding.getTop() - padding.getBottom()) / 2.0;
+                            double maxY = dataArea.getY() + dataArea.getHeight() - (labelHeight + padding.getBottom() - padding.getTop()) / 2.0;
+                            if (yy < minY) {
+                                yy = (float) (minY);
+                            } else if (yy > maxY) {
+                                yy = (float) (maxY);
+                            }
+                        }
                         alignPt = textAlignPtForLabelAnchorH(anchor);
                         hotspot = TextUtils.calculateRotatedStringBounds(
                                label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                        hotspot = padding.createOutsetRectangle(hotspot.getBounds2D());
                     }
 
                     g2.setPaint(crosshair.getLabelBackgroundPaint());
@@ -338,20 +352,33 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                     Font savedFont = g2.getFont();
                     g2.setFont(crosshair.getLabelFont());
                     RectangleAnchor anchor = crosshair.getLabelAnchor();
-                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                    RectangleInsets padding = crosshair.getLabelPadding();
+                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                     float xx = (float) pt.getX();
                     float yy = (float) pt.getY();
                     TextAnchor alignPt = textAlignPtForLabelAnchorV(anchor);
                     Shape hotspot = TextUtils.calculateRotatedStringBounds(
                             label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    hotspot = padding.createOutsetRectangle(hotspot.getBounds2D());
                     if (!dataArea.contains(hotspot.getBounds2D())) {
                         anchor = flipAnchorH(anchor);
-                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset(), padding);
                         xx = (float) pt.getX();
                         yy = (float) pt.getY();
+                        if (alignPt.isHorizontalCenter()) {
+                            double labelWidth = hotspot.getBounds2D().getWidth();
+                            double minX = dataArea.getX() + (labelWidth + padding.getLeft() - padding.getRight()) / 2.0;
+                            double maxX = dataArea.getX() + dataArea.getWidth() - (labelWidth + padding.getRight() - padding.getLeft()) / 2.0;
+                            if (xx < minX) {
+                                xx = (float) (minX);
+                            } else if (xx > maxX) {
+                                xx = (float) (maxX);
+                            }
+                        }
                         alignPt = textAlignPtForLabelAnchorV(anchor);
                         hotspot = TextUtils.calculateRotatedStringBounds(
                                label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                        hotspot = padding.createOutsetRectangle(hotspot.getBounds2D());
                     }
                     g2.setPaint(crosshair.getLabelBackgroundPaint());
                     g2.fill(hotspot);
@@ -377,11 +404,12 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @param anchor  the anchor point.
      * @param deltaX  the x-offset.
      * @param deltaY  the y-offset.
+     * @param padding the label padding
      *
      * @return The anchor point.
      */
     private Point2D calculateLabelPoint(Line2D line, RectangleAnchor anchor,
-            double deltaX, double deltaY) {
+            double deltaX, double deltaY, RectangleInsets padding) {
         double x, y;
         boolean left = (anchor == RectangleAnchor.BOTTOM_LEFT 
                 || anchor == RectangleAnchor.LEFT 
@@ -402,32 +430,36 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             x = line.getX1();
             y = (line.getY1() + line.getY2()) / 2.0;
             if (left) {
-                x = x - deltaX;
-            }
-            if (right) {
-                x = x + deltaX;
+                x = x - deltaX - padding.getRight();
+            } else if (right) {
+                x = x + deltaX + padding.getLeft();
+            } else {
+                x = x + (padding.getLeft() - padding.getRight()) / 2.0;
             }
             if (top) {
-                y = Math.min(line.getY1(), line.getY2()) + deltaY;
-            }
-            if (bottom) {
-                y = Math.max(line.getY1(), line.getY2()) - deltaY;
+                y = Math.min(line.getY1(), line.getY2()) + deltaY + padding.getTop();
+            } else if (bottom) {
+                y = Math.max(line.getY1(), line.getY2()) - deltaY - padding.getBottom();
+            } else {
+                y = y + (padding.getTop() - padding.getBottom()) / 2.0;
             }
         }
         else {  // horizontal
             x = (line.getX1() + line.getX2()) / 2.0;
             y = line.getY1();
             if (left) {
-                x = Math.min(line.getX1(), line.getX2()) + deltaX;
-            }
-            if (right) {
-                x = Math.max(line.getX1(), line.getX2()) - deltaX;
+                x = Math.min(line.getX1(), line.getX2()) + deltaX + padding.getLeft();
+            } else if (right) {
+                x = Math.max(line.getX1(), line.getX2()) - deltaX - padding.getRight();
+            } else {
+                x = x + (padding.getLeft() - padding.getRight()) / 2.0;
             }
             if (top) {
-                y = y - deltaY;
-            }
-            if (bottom) {
-                y = y + deltaY;
+                y = y - deltaY - padding.getBottom();
+            } else if (bottom) {
+                y = y + deltaY + padding.getTop();
+            } else {
+                y = y + (padding.getTop() - padding.getBottom()) / 2.0;
             }
         }
         return new Point2D.Double(x, y);
