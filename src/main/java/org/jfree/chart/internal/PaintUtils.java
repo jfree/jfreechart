@@ -90,7 +90,7 @@ public class PaintUtils {
                     && gp1.getPoint1().equals(gp2.getPoint1())    
                     && gp1.getPoint2().equals(gp2.getPoint2())
                     && gp1.isCyclic() == gp2.isCyclic()
-                    && gp1.getTransparency() == gp1.getTransparency(); 
+                    && gp1.getTransparency() == gp2.getTransparency();
         } else if (p1 instanceof LinearGradientPaint 
                 && p2 instanceof LinearGradientPaint) {
             LinearGradientPaint lgp1 = (LinearGradientPaint) p1;
@@ -175,12 +175,10 @@ public class PaintUtils {
         // no defined constant color, so this must be a user defined color
         final String color = Integer.toHexString(c.getRGB() & 0x00ffffff);
         final StringBuilder retval = new StringBuilder(7);
-        retval.append("#");
+        retval.append('#');
 
         final int fillUp = 6 - color.length();
-        for (int i = 0; i < fillUp; i++) {
-            retval.append("0");
-        }
+        retval.append("0".repeat(fillUp));
 
         retval.append(color);
         return retval.toString();
