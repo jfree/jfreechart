@@ -275,7 +275,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Fill the pointsInTime with times using TimePeriod.next():
      * Will silently return if the time array was already populated.
-     *
+     * <p>
      * Also computes the data cached for later use by
      * methods implementing the DomainInfo interface:
      *

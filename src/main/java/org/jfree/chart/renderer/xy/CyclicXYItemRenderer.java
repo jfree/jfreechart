@@ -58,7 +58,7 @@ import org.jfree.data.xy.XYDataset;
  * occurs, the cyclic renderer splits the line at each cycle end instead. This
  * is done by interpolating new points at cycle boundary. Thus, correct
  * appearance is restored.
- *
+ * <p>
  * The Cyclic XY item renderer works exactly like a standard XY item renderer
  * with non-cyclic axis.
  */

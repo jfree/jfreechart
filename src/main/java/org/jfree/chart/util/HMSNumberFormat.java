@@ -44,7 +44,7 @@ import java.text.ParsePosition;
 /**
  * A custom number formatter that formats numbers (in seconds) as HH:MM:SS.
  * Created in response to:
- * 
+ * <p>
  * http://stackoverflow.com/questions/19028908/jfreechart-need-to-customize-y-axis-just-for-printing
  */
 public class HMSNumberFormat extends NumberFormat {

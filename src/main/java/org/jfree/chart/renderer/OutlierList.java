@@ -44,15 +44,15 @@ import java.util.List;
 
 /**
  * A collection of outliers for a single entity in a box and whisker plot.
- *
+ * <p>
  * Outliers are grouped in lists for each entity. Lists contain
  * one or more outliers, determined by whether overlaps have
- * occured. Overlapping outliers are grouped in the same list.
- *
+ * occurred. Overlapping outliers are grouped in the same list.
+ * <p>
  * Each list contains an averaged outlier, which is the same as a single
  * outlier if there is only one outlier in the list, but the average of
  * all the outliers in the list if there is more than one.
- *
+ * <p>
  * NB This is simply my scheme for displaying outliers, and might not be
  * acceptable by the wider community.
  */

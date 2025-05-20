@@ -60,7 +60,7 @@ import org.jfree.data.xy.XYDataset;
  * the string sql query.  The sql query must return at least two columns.
  * The first column will be the x-axis and remaining columns y-axis values.
  * executeQuery can be called a number of times.
- *
+ * <p>
  * The database connection is read-only and no write back facility exists.
  */
 public class JDBCXYDataset extends AbstractXYDataset
@@ -166,7 +166,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      * ExecuteQuery will attempt execute the query passed to it against the
      * existing database connection.  If no connection exists then no action
      * is taken.
-     *
+     * <p>
      * The results from the query are extracted and cached locally, thus
      * applying an upper limit on how many rows can be retrieved successfully.
      *
@@ -182,7 +182,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      * ExecuteQuery will attempt execute the query passed to it against the
      * provided database connection.  If connection is null then no action is
      * taken.
-     *
+     * <p>
      * The results from the query are extracted and cached locally, thus
      * applying an upper limit on how many rows can be retrieved successfully.
      *

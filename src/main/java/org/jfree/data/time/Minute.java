@@ -405,7 +405,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Minute object relative
      * to the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  object to compare.

@@ -408,7 +408,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Hour object relative to
      * the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  the object to compare.

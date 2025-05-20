@@ -49,7 +49,7 @@ import javax.servlet.http.HttpSession;
  * Servlet used for streaming charts to the client browser from the temporary
  * directory.  You need to add this servlet and mapping to your deployment
  * descriptor (web.xml) in order to get it to work.  The syntax is as follows:
- * 
+ * <p>
  * &lt;xmp&gt;
  * &lt;servlet&gt;
  *    &lt;servlet-name&gt;DisplayChart&lt;/servlet-name&gt;
