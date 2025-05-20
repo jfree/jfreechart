@@ -43,79 +43,25 @@
 
 package org.jfree.chart;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
-import org.jfree.chart.labels.HighLowItemLabelGenerator;
-import org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.PieToolTipGenerator;
-import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.labels.StandardPieToolTipGenerator;
-import org.jfree.chart.labels.StandardXYToolTipGenerator;
-import org.jfree.chart.labels.StandardXYZToolTipGenerator;
-import org.jfree.chart.labels.XYToolTipGenerator;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.Marker;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.*;
+import org.jfree.chart.plot.*;
 import org.jfree.chart.plot.pie.MultiplePiePlot;
 import org.jfree.chart.plot.pie.PiePlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.PolarPlot;
-import org.jfree.chart.plot.RingPlot;
-import org.jfree.chart.plot.ValueMarker;
-import org.jfree.chart.plot.WaferMapPlot;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
 import org.jfree.chart.renderer.WaferMapRenderer;
-import org.jfree.chart.renderer.category.AreaRenderer;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.GanttRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.LineAndShapeRenderer;
-import org.jfree.chart.renderer.category.StackedAreaRenderer;
-import org.jfree.chart.renderer.category.StackedBarRenderer;
-import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.jfree.chart.renderer.category.WaterfallBarRenderer;
-import org.jfree.chart.renderer.xy.CandlestickRenderer;
-import org.jfree.chart.renderer.xy.GradientXYBarPainter;
-import org.jfree.chart.renderer.xy.HighLowRenderer;
-import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
-import org.jfree.chart.renderer.xy.StandardXYBarPainter;
-import org.jfree.chart.renderer.xy.WindItemRenderer;
-import org.jfree.chart.renderer.xy.XYAreaRenderer;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
-import org.jfree.chart.renderer.xy.XYBubbleRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
-import org.jfree.chart.renderer.xy.XYStepRenderer;
-import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.api.Layer;
-import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.renderer.category.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.text.TextAnchor;
-import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.urls.StandardCategoryURLGenerator;
-import org.jfree.chart.urls.StandardPieURLGenerator;
-import org.jfree.chart.urls.StandardXYURLGenerator;
-import org.jfree.chart.urls.StandardXYZURLGenerator;
-import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.urls.*;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -123,12 +69,14 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.data.general.WaferMapDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.OHLCDataset;
-import org.jfree.data.xy.TableXYDataset;
-import org.jfree.data.xy.WindDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYZDataset;
+import org.jfree.data.xy.*;
+
+import java.awt.*;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A collection of utility methods for creating some standard charts with
@@ -171,15 +119,8 @@ public abstract class ChartFactory {
         // here we do a check to see if the user is installing the "Legacy"
         // theme, and reset the bar painters in that case...
         if (theme instanceof StandardChartTheme) {
-            StandardChartTheme sct = (StandardChartTheme) theme;
-            if (sct.getName().equals("Legacy")) {
-                BarRenderer.setDefaultBarPainter(new StandardBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
-            }
-            else {
-                BarRenderer.setDefaultBarPainter(new GradientBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new GradientXYBarPainter());
-            }
+            BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+            XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
         }
     }
 
