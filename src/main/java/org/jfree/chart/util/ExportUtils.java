@@ -4,7 +4,7 @@
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -60,7 +60,7 @@ public class ExportUtils {
     /**
      * Returns {@code true} if JFreeSVG is on the classpath, and 
      * {@code false} otherwise.  The JFreeSVG library can be found at
-     * http://www.jfree.org/jfreesvg/
+     * https://www.jfree.org/jfreesvg/
      * 
      * @return A boolean.
      */

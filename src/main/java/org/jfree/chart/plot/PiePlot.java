@@ -4,7 +4,7 @@
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -359,7 +359,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * various Java implementations that causes the JVM to crash).  See this
      * link for details:
      *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=2707
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=2707
      *
      * ...and this bug report in the Java Bug Parade:
      *
@@ -1911,8 +1911,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * angle smaller than this are not drawn, to avoid a JDK bug.  See this
      * link for details:
      * <br><br>
-     * <a href="http://www.jfree.org/phpBB2/viewtopic.php?t=2707">
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=2707</a>
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?t=2707">
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=2707</a>
      * <br><br>
      * ...and this bug report in the Java Bug Parade:
      * <br><br>

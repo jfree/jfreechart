@@ -4,7 +4,7 @@
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -164,7 +164,7 @@ public class PaintMapTest  {
     /**
      * This test covers a bug reported in the forum:
      *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=19980
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=19980
      */
     @Test
     public void testKeysOfDifferentClasses() {

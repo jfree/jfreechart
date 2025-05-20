@@ -15,7 +15,7 @@ export to multiple formats including SVG, PNG and PDF).
 
 The home page for the project is:
 
-http://www.jfree.org/jfreechart
+https://www.jfree.org/jfreechart
 
 JFreeChart requires JDK 8 or later.  If JavaFX support is required, you
 need to also include the JFreeChart-FX extensions:
@@ -180,7 +180,7 @@ Note: some (supposed) security vulnerabilities have been reported for v1.5.4:
 - simplified `ChartFactory` methods;
 - added new methods to `DatasetUtilities` to interpolate y-values in `XYDatasets`;
 - added URLs to labels on `CategoryAxis`;
-- seamless integration with JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
+- seamless integration with JFreeSVG (https://www.jfree.org/jfreesvg/) and OrsonPDF 
 (http://www.object-refinery.com/pdf/);
 - improved the consistency of the `SWTGraphics2D` implementation;  
 
