@@ -46,9 +46,9 @@ import org.jfree.data.category.CategoryDataset;
  * A standard tool tip generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
  */
-public class StandardCategoryToolTipGenerator
-        extends AbstractCategoryItemLabelGenerator
-        implements CategoryToolTipGenerator, Serializable {
+public class StandardCategoryToolTipGenerator<R extends Comparable<R>, C extends Comparable<C>>
+        extends AbstractCategoryItemLabelGenerator<R, C>
+        implements CategoryToolTipGenerator<R, C>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6768806592218710764L;
@@ -100,7 +100,7 @@ public class StandardCategoryToolTipGenerator
      * @return The tooltip text (possibly {@code null}).
      */
     @Override
-    public String generateToolTip(CategoryDataset dataset,
+    public String generateToolTip(CategoryDataset<R, C> dataset,
                                   int row, int column) {
         return generateLabelString(dataset, row, column);
     }
@@ -125,8 +125,11 @@ public class StandardCategoryToolTipGenerator
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        return hash;
+        return super.hashCode();
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

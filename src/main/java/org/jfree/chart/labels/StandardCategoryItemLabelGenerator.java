@@ -47,9 +47,9 @@ import org.jfree.data.category.CategoryDataset;
  * A standard label generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
  */
-public class StandardCategoryItemLabelGenerator
-    extends AbstractCategoryItemLabelGenerator
-    implements CategoryItemLabelGenerator, Cloneable, PublicCloneable,
+public class StandardCategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>>
+    extends AbstractCategoryItemLabelGenerator<R, C>
+    implements CategoryItemLabelGenerator<R, C>, Cloneable, PublicCloneable,
                Serializable {
 
     /** For serialization. */
@@ -115,7 +115,7 @@ public class StandardCategoryItemLabelGenerator
      * @return The label (possibly {@code null}).
      */
     @Override
-    public String generateLabel(CategoryDataset dataset, int row, int column) {
+    public String generateLabel(CategoryDataset<R, C> dataset, int row, int column) {
         return generateLabelString(dataset, row, column);
     }
 
@@ -139,8 +139,12 @@ public class StandardCategoryItemLabelGenerator
     }
 
     @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return super.hashCode();
     }
 }

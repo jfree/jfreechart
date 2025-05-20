@@ -47,7 +47,7 @@ import org.jfree.data.category.CategoryDataset;
  * To assist with cloning charts, classes that implement this interface should
  * also implement the {@link org.jfree.chart.api.PublicCloneable} interface.
  */
-public interface CategoryItemLabelGenerator {
+public interface CategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>> {
 
     /**
      * Generates a label for the specified row.
@@ -57,7 +57,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    String generateRowLabel(CategoryDataset dataset, int row);
+    String generateRowLabel(CategoryDataset<R, C> dataset, int row);
 
     /**
      * Generates a label for the specified row.
@@ -67,7 +67,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    String generateColumnLabel(CategoryDataset dataset, int column);
+    String generateColumnLabel(CategoryDataset<R, C> dataset, int column);
 
     /**
      * Generates a label for the specified item. The label is typically a
@@ -79,6 +79,6 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    String generateLabel(CategoryDataset dataset, int row, int column);
+    String generateLabel(CategoryDataset<R, C> dataset, int row, int column);
 
 }
