@@ -64,7 +64,7 @@ import org.jfree.chart.internal.SerialUtils;
  * that shows the crosshair value as text).  Instances of this class are used
  * to store the cross hair value plus the visual characteristics of the line
  * that will be rendered once the instance is added to a 
- * {@link CrosshairOverlay} (or {@code CrosshairOverlaydFX} if you are using 
+ * {@link CrosshairOverlay} (or {@code CrosshairOverlayFX} if you are using
  * the JavaFX extensions for JFreeChart).
  * <br><br>
  * Crosshairs support a property change mechanism which is used by JFreeChart
@@ -86,7 +86,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     private transient Stroke stroke;
 
     /**
-     * A flag that controls whether or not the crosshair has a label
+     * A flag that controls whether the crosshair has a label
      * visible.
      */
     private boolean labelVisible;
@@ -187,8 +187,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the crosshair is
-     * currently visible.
+     * Returns the flag that indicates whether the crosshair is currently visible.
      *
      * @return A boolean.
      *
@@ -289,8 +288,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not a label is drawn for
-     * this crosshair.
+     * Returns the flag that controls whether a label is drawn for this crosshair.
      *
      * @return A boolean.
      *
@@ -301,7 +299,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not a label is drawn for the
+     * Sets the flag that controls whether a label is drawn for the
      * crosshair and sends a property change event (with the name
      * 'labelVisible') to all registered listeners.
      *
@@ -616,7 +614,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (this.value != that.value) {
+        if (Double.compare(this.value, that.value) != 0) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -634,13 +632,13 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (!this.labelAnchor.equals(that.labelAnchor)) {
             return false;
         }
-        if (this.labelXOffset != that.labelXOffset) {
+        if (Double.compare(this.labelXOffset, that.labelXOffset) != 0) {
             return false;
         }
-        if (this.labelYOffset != that.labelYOffset) {
+        if (Double.compare(this.labelYOffset, that.labelYOffset) != 0) {
             return false;
         }
-        if (!this.labelPadding.equals(labelPadding)) {
+        if (!this.labelPadding.equals(that.labelPadding)) {
             return false;
         }
         if (!this.labelFont.equals(that.labelFont)) {
