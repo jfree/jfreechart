@@ -64,7 +64,7 @@ public class ItemLabelPosition implements Serializable {
     private final double angle;
 
     /** The item label clip type. */
-    private ItemLabelClip itemLabelClip;
+    private final ItemLabelClip itemLabelClip;
 
     /**
      * Creates a new position record with default settings.
@@ -244,7 +244,7 @@ public class ItemLabelPosition implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.itemLabelAnchor);
         hash = 97 * hash + Objects.hashCode(this.textAnchor);
         hash = 97 * hash + Objects.hashCode(this.rotationAnchor);
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.angle) ^ (Double.doubleToLongBits(this.angle) >>> 32));
+        hash = 97 * hash + Long.hashCode(Double.doubleToLongBits(this.angle));
         hash = 97 * hash + Objects.hashCode(this.itemLabelClip);
 		return hash;
     }
