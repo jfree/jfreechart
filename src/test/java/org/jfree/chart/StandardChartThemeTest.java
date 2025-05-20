@@ -47,7 +47,9 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.pie.PieLabelLinkStyle;
+import org.jfree.chart.renderer.category.GradientBarPainter;
 import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.chart.renderer.xy.GradientXYBarPainter;
 import org.jfree.chart.renderer.xy.StandardXYBarPainter;
 import org.jfree.chart.api.RectangleInsets;
 import org.junit.jupiter.api.Test;
@@ -211,15 +213,15 @@ public class StandardChartThemeTest {
         assertEquals(t1, t2);
 
         //barPainter;
-        t1.setBarPainter(new StandardBarPainter());
+        t1.setBarPainter(new GradientBarPainter());
         assertNotEquals(t1, t2);
-        t2.setBarPainter(new StandardBarPainter());
+        t2.setBarPainter(new GradientBarPainter());
         assertEquals(t1, t2);
 
         //xyBarPainter;
-        t1.setXYBarPainter(new StandardXYBarPainter());
+        t1.setXYBarPainter(new GradientXYBarPainter());
         assertNotEquals(t1, t2);
-        t2.setXYBarPainter(new StandardXYBarPainter());
+        t2.setXYBarPainter(new GradientXYBarPainter());
         assertEquals(t1, t2);
 
         //thermometerPaint;
