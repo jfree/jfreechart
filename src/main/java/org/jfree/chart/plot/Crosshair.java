@@ -83,8 +83,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     private transient Stroke stroke;
 
     /**
-     * A flag that controls whether or not the crosshair has a label
-     * visible.
+     * A flag that controls whether the crosshair has a label visible.
      */
     private boolean labelVisible;
 
@@ -613,7 +612,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (this.value != that.value) {
+        if (Double.compare(this.value, that.value) != 0) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -631,13 +630,13 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (!this.labelAnchor.equals(that.labelAnchor)) {
             return false;
         }
-        if (this.labelXOffset != that.labelXOffset) {
+        if (Double.compare(this.labelXOffset, that.labelXOffset) != 0) {
             return false;
         }
-        if (this.labelYOffset != that.labelYOffset) {
+        if (Double.compare(this.labelYOffset, that.labelYOffset) != 0) {
             return false;
         }
-        if (!this.labelPadding.equals(labelPadding)) {
+        if (!this.labelPadding.equals(that.labelPadding)) {
             return false;
         }
         if (!this.labelFont.equals(that.labelFont)) {

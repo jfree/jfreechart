@@ -42,6 +42,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.NumberFormat;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
@@ -143,6 +146,14 @@ public class CrosshairTest {
         c2.setLabelOutlinePaint(Color.darkGray);
         assertEquals(c1, c2);
 
+    }
+
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.forClass(Crosshair.class)
+                .suppress(Warning.NULL_FIELDS, Warning.STRICT_INHERITANCE,
+                        Warning.NONFINAL_FIELDS, Warning.TRANSIENT_FIELDS)
+                .verify();
     }
 
     /**
