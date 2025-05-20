@@ -4,7 +4,7 @@
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -53,7 +53,7 @@ public class TextUtils {
      * This allows for underlining, strike-out etc., but it means that
      * TextLayout will be used to render the text:
      * <p>
-     * <a href="http://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459">http://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459"</a>
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459">https://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459"</a>
      */
     private static boolean drawStringsWithFontAttributes = false;
     
@@ -743,7 +743,7 @@ public class TextUtils {
      * Sets the flag that controls whether strings are drawn using the
      * current font attributes.  This is a hack to allow underlining of titles
      * without big changes to the API.  See
-     * <a href="http://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459">this forum post</a>.
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459">this forum post</a>.
      *
      * @param b  the new flag value.
      */
