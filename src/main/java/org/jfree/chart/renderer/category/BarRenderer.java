@@ -102,7 +102,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /**
      * The default bar painter assigned to each new instance of this renderer.
      */
-    private static BarPainter defaultBarPainter = new GradientBarPainter();
+    private static BarPainter defaultBarPainter = new StandardBarPainter();
 
     /**
      * Returns the default bar painter.

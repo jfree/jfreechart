@@ -93,7 +93,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * The default bar painter assigned to each new instance of this renderer.
      */
-    private static XYBarPainter defaultBarPainter = new GradientXYBarPainter();
+    private static XYBarPainter defaultBarPainter = new StandardXYBarPainter();
 
     /**
      * Returns the default bar painter.
