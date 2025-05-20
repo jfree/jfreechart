@@ -67,7 +67,7 @@ public class XYTaskDataset extends AbstractXYDataset
     /** The series interval width (typically 0.0 &lt; w &lt;= 1.0). */
     private double seriesWidth;
 
-    /** A flag that controls whether or not the data values are transposed. */
+    /** A flag that controls whether the data values are transposed. */
     private boolean transposed;
 
     /**
@@ -120,7 +120,7 @@ public class XYTaskDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns a flag that indicates whether or not the dataset is transposed.
+     * Returns a flag that indicates whether the dataset is transposed.
      * The default is {@code false} which means the x-values are integers
      * corresponding to the series indices, and the y-values are millisecond
      * values corresponding to the task date/time intervals.  If the flag
@@ -135,7 +135,7 @@ public class XYTaskDataset extends AbstractXYDataset
     }
 
     /**
-     * Sets the flag that controls whether or not the dataset is transposed
+     * Sets the flag that controls whether the dataset is transposed
      * and sends a {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param transposed  the new flag value.

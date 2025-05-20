@@ -57,7 +57,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     private static final long serialVersionUID = -5334056511213782357L;
 
     /**
-     * A flag controlling whether or not there is an arrow at the top of the
+     * A flag controlling whether there is an arrow at the top of the
      * needle.
      */
     private boolean isArrowAtTop = true;
@@ -65,7 +65,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     /**
      * Constructs a new arrow needle.
      *
-     * @param isArrowAtTop  a flag that controls whether or not there is an
+     * @param isArrowAtTop  a flag that controls whether there is an
      *     arrow at the top of the needle.
      */
     public ArrowNeedle(boolean isArrowAtTop) {

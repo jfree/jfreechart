@@ -368,7 +368,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return A flag indicating whether or not an object is equal to this day.
+     * @return A flag indicating whether an object is equal to this day.
      */
     @Override
     public boolean equals(Object obj) {

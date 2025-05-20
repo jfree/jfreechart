@@ -132,16 +132,16 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      */
     public static final int AREA_AND_SHAPES = 5;
 
-    /** A flag indicating whether or not shapes are drawn at each XY point. */
+    /** A flag indicating whether shapes are drawn at each XY point. */
     private boolean plotShapes;
 
-    /** A flag indicating whether or not lines are drawn between XY points. */
+    /** A flag indicating whether lines are drawn between XY points. */
     private boolean plotLines;
 
-    /** A flag indicating whether or not Area are drawn at each XY point. */
+    /** A flag indicating whether Area are drawn at each XY point. */
     private boolean plotArea;
 
-    /** A flag that controls whether or not the outline is shown. */
+    /** A flag that controls whether the outline is shown. */
     private boolean showOutline;
 
     /**
@@ -252,7 +252,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not outlines of the areas are
+     * Returns a flag that controls whether outlines of the areas are
      * drawn.
      *
      * @return The flag.
@@ -264,7 +264,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not outlines of the areas are drawn
+     * Sets a flag that controls whether outlines of the areas are drawn
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param show  the flag.
@@ -308,7 +308,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the series fill paint is
+     * Sets the flag that controls whether the series fill paint is
      * used to fill the area under the line and sends a
      * {@link RendererChangeEvent} to all listeners.
      *

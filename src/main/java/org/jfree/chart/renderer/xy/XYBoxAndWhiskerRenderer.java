@@ -98,7 +98,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     /** The paint used to fill the box. */
     private transient Paint boxPaint;
 
-    /** A flag that controls whether or not the box is filled. */
+    /** A flag that controls whether the box is filled. */
     private boolean fillBox;
 
     /**
@@ -184,7 +184,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the box is filled.
+     * Returns the flag that controls whether the box is filled.
      *
      * @return A boolean.
      *
@@ -195,7 +195,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the box is filled and sends a
+     * Sets the flag that controls whether the box is filled and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.

@@ -55,12 +55,12 @@ public class RelativeDateFormat extends DateFormat {
     private long baseMillis;
 
     /**
-     * A flag that controls whether or not a zero day count is displayed.
+     * A flag that controls whether a zero day count is displayed.
      */
     private boolean showZeroDays;
 
     /**
-     * A flag that controls whether or not a zero hour count is displayed.
+     * A flag that controls whether a zero hour count is displayed.
      */
     private boolean showZeroHours;
 
@@ -192,7 +192,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Returns the flag that controls whether or not zero day counts are
+     * Returns the flag that controls whether zero day counts are
      * shown in the formatted output.
      *
      * @return The flag.
@@ -204,7 +204,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Sets the flag that controls whether or not zero day counts are shown
+     * Sets the flag that controls whether zero day counts are shown
      * in the formatted output.
      *
      * @param show  the flag.
@@ -216,7 +216,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Returns the flag that controls whether or not zero hour counts are
+     * Returns the flag that controls whether zero hour counts are
      * shown in the formatted output.
      *
      * @return The flag.
@@ -228,7 +228,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Sets the flag that controls whether or not zero hour counts are shown
+     * Sets the flag that controls whether zero hour counts are shown
      * in the formatted output.
      *
      * @param show  the flag.

@@ -390,12 +390,12 @@ public class SpreadsheetDate extends SerialDate {
 
     /**
      * Returns true if this SerialDate is within the specified range (caller
-     * specifies whether or not the end-points are included).  The order of d1
+     * specifies whether the end-points are included).  The order of d1
      * and d2 is not important.
      *
      * @param d1  one boundary date for the range.
      * @param d2  a second boundary date for the range.
-     * @param include  a code that controls whether or not the start and end 
+     * @param include  a code that controls whether the start and end 
      *                 dates are included in the range.
      *
      * @return {@code true} if this SerialDate is within the specified 

@@ -63,7 +63,7 @@ public class OutlierListCollection {
     private boolean highFarOut = false;
 
     /**
-     * A flag that indicates whether or not the collection contains low far
+     * A flag that indicates whether the collection contains low far
      * out values.
      */
     private boolean lowFarOut = false;

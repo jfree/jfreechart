@@ -50,7 +50,7 @@ public interface XYDomainInfo<S extends Comparable<S>> {
      * Returns the range of the values in this dataset's domain.
      *
      * @param visibleSeriesKeys  the keys of the visible series.
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no

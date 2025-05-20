@@ -63,10 +63,10 @@ import org.jfree.chart.title.Title;
  */
 class DefaultTitleEditor extends JPanel implements ActionListener {
 
-    /** Whether or not to display the title on the chart. */
+    /** whether to display the title on the chart. */
     private boolean showTitle;
 
-    /** The checkbox to indicate whether or not to display the title. */
+    /** The checkbox to indicate whether to display the title. */
     private final JCheckBox showTitleCheckBox;
 
     /** A field for displaying/editing the title text. */

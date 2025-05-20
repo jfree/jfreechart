@@ -827,7 +827,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -841,7 +841,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -855,7 +855,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range.
@@ -897,7 +897,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum range value.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum range value.
@@ -914,7 +914,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum range value.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum range value.
@@ -931,7 +931,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the value range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

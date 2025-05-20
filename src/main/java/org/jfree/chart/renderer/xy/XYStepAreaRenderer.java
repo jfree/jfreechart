@@ -83,16 +83,16 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public static final int AREA_AND_SHAPES = 3;
 
-    /** A flag indicating whether or not shapes are drawn at each XY point. */
+    /** A flag indicating whether shapes are drawn at each XY point. */
     private boolean shapesVisible;
 
-    /** A flag that controls whether or not shapes are filled for ALL series. */
+    /** A flag that controls whether shapes are filled for ALL series. */
     private boolean shapesFilled;
 
-    /** A flag indicating whether or not Area are drawn at each XY point. */
+    /** A flag indicating whether Area are drawn at each XY point. */
     private boolean plotArea;
 
-    /** A flag that controls whether or not the outline is shown. */
+    /** A flag that controls whether the outline is shown. */
     private boolean showOutline;
 
     /** Area of the complete series */
@@ -158,7 +158,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not outlines of the areas are
+     * Returns a flag that controls whether outlines of the areas are
      * drawn.
      *
      * @return The flag.
@@ -170,7 +170,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not outlines of the areas are
+     * Sets a flag that controls whether outlines of the areas are
      * drawn, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -195,7 +195,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not shapes are displayed for each
+     * Sets the flag that controls whether shapes are displayed for each
      * data item, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -209,7 +209,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the shapes are filled.
+     * Returns the flag that controls whether the shapes are filled.
      *
      * @return A boolean.
      *
@@ -244,7 +244,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not areas are drawn for each data
+     * Sets a flag that controls whether areas are drawn for each data
      * item and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

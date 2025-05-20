@@ -124,7 +124,7 @@ public class PeriodAxis extends ValueAxis
     private Class majorTickTimePeriodClass;
 
     /**
-     * A flag that indicates whether or not tick marks are visible for the
+     * A flag that indicates whether tick marks are visible for the
      * axis.
      */
     private boolean minorTickMarksVisible;
@@ -335,7 +335,7 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Returns the flag that controls whether or not minor tick marks
+     * Returns the flag that controls whether minor tick marks
      * are displayed for the axis.
      *
      * @return A boolean.
@@ -346,7 +346,7 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Sets the flag that controls whether or not minor tick marks
+     * Sets the flag that controls whether minor tick marks
      * are displayed for the axis, and sends a {@link AxisChangeEvent}
      * to all registered listeners.
      *
@@ -496,9 +496,9 @@ public class PeriodAxis extends ValueAxis
      * the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range ({@code null} not permitted).
-     * @param turnOffAutoRange  a flag that controls whether or not the auto
+     * @param turnOffAutoRange  a flag that controls whether the auto
      *                          range is turned off.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      */
     @Override

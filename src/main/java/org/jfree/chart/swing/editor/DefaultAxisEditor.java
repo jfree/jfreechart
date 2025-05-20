@@ -101,10 +101,10 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      */
     private JPanel slot2;
 
-    /** A flag that indicates whether or not the tick labels are visible. */
+    /** A flag that indicates whether the tick labels are visible. */
     private final JCheckBox showTickLabelsCheckBox;
 
-    /** A flag that indicates whether or not the tick marks are visible. */
+    /** A flag that indicates whether the tick marks are visible. */
     private final JCheckBox showTickMarksCheckBox;
 
 //    /** Insets text field. */
@@ -310,7 +310,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Returns a flag that indicates whether or not the tick labels are visible.
+     * Returns a flag that indicates whether the tick labels are visible.
      *
      * @return {@code true} if tick mark labels are visible.
      */
@@ -337,7 +337,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Returns the current value of the flag that determines whether or not
+     * Returns the current value of the flag that determines whether
      * tick marks are visible.
      *
      * @return {@code true} if tick marks are visible.

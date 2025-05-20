@@ -188,7 +188,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint itemLabelPaint;
 
     /**
-     * A flag that controls whether or not shadows are visible (for example,
+     * A flag that controls whether shadows are visible (for example,
      * in a bar renderer).
      */
     private boolean shadowVisible;

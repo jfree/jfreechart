@@ -850,7 +850,7 @@ adjustments (there should be no breakage of applications coded to the 1.0.0 API)
 
 ###### API adjustments
 - `BarRenderer`: added a new flag (`includeBaseInRange`), plus accessor 
-    methods, that controls whether or not the base value for the bar is 
+    methods, that controls whether the base value for the bar is 
     included in the range calculated by the `findRangeBounds()` method;
 - `BubbleXYItemLabelGenerator`: new class;
 - `Range`: added a new method `expandToInclude(Range, double)`, this is used by 

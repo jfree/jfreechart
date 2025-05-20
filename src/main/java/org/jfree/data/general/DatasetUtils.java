@@ -580,7 +580,7 @@ public final class DatasetUtils {
      * Returns the range of values in the domain (x-values) of a dataset.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  determines whether or not the x-interval is taken
+     * @param includeInterval  determines whether the x-interval is taken
      *                         into account (only applies if the dataset is an
      *                         {@link IntervalXYDataset}).
      *
@@ -738,7 +738,7 @@ public final class DatasetUtils {
      * Returns the range of values in the range for the dataset.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @param <R>  the type for the row keys.
@@ -815,7 +815,7 @@ public final class DatasetUtils {
      * method.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @param <S>  the type for the series keys.
@@ -894,7 +894,7 @@ public final class DatasetUtils {
      * the range bounds.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range (possibly {@code null}).
@@ -969,7 +969,7 @@ public final class DatasetUtils {
      * the range bounds.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      * @param visibleSeriesKeys  the visible series keys.
      *
@@ -1237,7 +1237,7 @@ public final class DatasetUtils {
      * {@link #findDomainBounds(XYDataset, boolean)} methods.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         z-interval is taken into account.
      *
      * @param <S>  the type for the series keys.
@@ -1361,7 +1361,7 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
      * 
@@ -1434,7 +1434,7 @@ public final class DatasetUtils {
      * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
      * @param xRange  the x-range ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
      *
@@ -1558,7 +1558,7 @@ public final class DatasetUtils {
      * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
      * @param xRange  the x-range ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *     z-interval for the dataset is included (this only applies if the
      *     dataset has an interval, which is currently not supported).
      *

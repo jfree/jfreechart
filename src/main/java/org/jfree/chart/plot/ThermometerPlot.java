@@ -249,13 +249,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     };
 
     /**
-     * A flag that controls whether or not the axis range adjusts to the
+     * A flag that controls whether the axis range adjusts to the
      * sub-ranges.
      */
     private boolean followDataInSubranges = false;
 
     /**
-     * A flag that controls whether or not the mercury paint changes with
+     * A flag that controls whether the mercury paint changes with
      * the subranges.
      */
     private boolean useSubrangePaint = true;
@@ -817,7 +817,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns a flag that controls whether or not the thermometer axis zooms
+     * Returns a flag that controls whether the thermometer axis zooms
      * to display the subrange within which the data value falls.
      *
      * @return The flag.
@@ -827,7 +827,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the flag that controls whether or not the thermometer axis zooms
+     * Sets the flag that controls whether the thermometer axis zooms
      * to display the subrange within which the data value falls.
      *
      * @param flag  the flag.
@@ -838,7 +838,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns a flag that controls whether or not the mercury color changes
+     * Returns a flag that controls whether the mercury color changes
      * for each subrange.
      *
      * @return The flag.
@@ -1528,7 +1528,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      */
     @Override
@@ -1556,7 +1556,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      */
     @Override

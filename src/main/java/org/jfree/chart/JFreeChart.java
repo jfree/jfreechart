@@ -171,7 +171,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     /** The chart id (optional, will be used by JFreeSVG export). */
     private String id;
     
-    /** A flag that controls whether or not the chart border is drawn. */
+    /** A flag that controls whether the chart border is drawn. */
     private boolean borderVisible;
 
     /** The stroke used to draw the chart border (if visible). */
@@ -220,7 +220,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     private boolean notify;
 
     /** 
-     * A flag that controls whether or not rendering hints that identify
+     * A flag that controls whether rendering hints that identify
      * chart element should be added during rendering.  This defaults to false
      * and it should only be enabled if the output target will use the hints.
      * JFreeSVG is one output target that supports these hints.
@@ -260,7 +260,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
     /**
      * Creates a new chart with the given title and plot.  The
-     * {@code createLegend} argument specifies whether or not a legend
+     * {@code createLegend} argument specifies whether a legend
      * should be added to the chart.
      * <br><br>
      * Note that the  {@link ChartFactory} class contains a range
@@ -272,7 +272,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *                   ({@code null} permitted).
      * @param plot  controller of the visual representation of the data
      *              ({@code null} not permitted).
-     * @param createLegend  a flag indicating whether or not a legend should
+     * @param createLegend  a flag indicating whether a legend should
      *                      be created for the chart.
      */
     public JFreeChart(String title, Font titleFont, Plot plot,
@@ -352,7 +352,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
     
     /**
-     * Returns the flag that controls whether or not rendering hints 
+     * Returns the flag that controls whether rendering hints 
      * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
      * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
      * added during rendering.  The default value is {@code false}.
@@ -366,7 +366,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
     
     /**
-     * Sets the flag that controls whether or not rendering hints 
+     * Sets the flag that controls whether rendering hints 
      * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
      * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
      * added during rendering.
@@ -406,7 +406,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not a border is drawn around the
+     * Returns a flag that controls whether a border is drawn around the
      * outside of the chart.
      *
      * @return A boolean.
@@ -418,7 +418,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not a border is drawn around the
+     * Sets a flag that controls whether a border is drawn around the
      * outside of the chart.
      *
      * @param visible  the flag.
@@ -748,7 +748,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that indicates whether or not anti-aliasing is used when
+     * Returns a flag that indicates whether anti-aliasing is used when
      * the chart is drawn.
      *
      * @return The flag.
@@ -761,7 +761,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that indicates whether or not anti-aliasing is used when the
+     * Sets a flag that indicates whether anti-aliasing is used when the
      * chart is drawn.
      * <P>
      * Anti-aliasing usually improves the appearance of charts, but is slower.
@@ -945,7 +945,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not change events are sent to
+     * Returns a flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -957,7 +957,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not listeners receive
+     * Sets a flag that controls whether listeners receive
      * {@link ChartChangeEvent} notifications.
      *
      * @param notify  a boolean.
@@ -1184,7 +1184,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @param g2  the graphics device ({@code null} not permitted).
      * @param area  the chart area, excluding any existing titles
      *              ({@code null} not permitted).
-     * @param entities  a flag that controls whether or not an entity
+     * @param entities  a flag that controls whether an entity
      *                  collection is returned for the title.
      *
      * @return An entity collection for the title (possibly {@code null}).

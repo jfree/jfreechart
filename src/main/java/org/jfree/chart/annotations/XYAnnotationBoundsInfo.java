@@ -44,7 +44,7 @@ import org.jfree.data.Range;
 public interface XYAnnotationBoundsInfo {
 
     /**
-     * Returns a flag that determines whether or not the annotation's
+     * Returns a flag that determines whether the annotation's
      * bounds should be taken into account for auto-range calculations on
      * the axes that the annotation is plotted against.
      *

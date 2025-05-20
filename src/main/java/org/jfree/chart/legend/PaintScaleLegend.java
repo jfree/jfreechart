@@ -95,7 +95,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     private double stripWidth;
 
     /**
-     * A flag that controls whether or not an outline is drawn around the
+     * A flag that controls whether an outline is drawn around the
      * paint strip.
      */
     private boolean stripOutlineVisible;
@@ -260,7 +260,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not an outline is drawn
+     * Returns the flag that controls whether an outline is drawn
      * around the paint strip.
      *
      * @return A boolean.
@@ -272,7 +272,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not an outline is drawn around
+     * Sets the flag that controls whether an outline is drawn around
      * the paint strip, and sends a {@link TitleChangeEvent} to all registered
      * listeners.
      *

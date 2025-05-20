@@ -442,7 +442,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Returns the flag that controls whether or not the outline is drawn.
+     * Returns the flag that controls whether the outline is drawn.
      *
      * @return A boolean.
      */
@@ -451,7 +451,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the flag that controls whether or not the outline is drawn and
+     * Sets the flag that controls whether the outline is drawn and
      * sends an {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.

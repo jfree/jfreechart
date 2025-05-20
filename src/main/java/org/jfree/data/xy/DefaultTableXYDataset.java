@@ -72,7 +72,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /** Storage for the x values. */
     private HashSet xPoints = null;
 
-    /** A flag that controls whether or not events are propogated. */
+    /** A flag that controls whether events are propogated. */
     private boolean propagateEvents = true;
 
     /** A flag that controls auto pruning. */
@@ -91,7 +91,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /**
      * Creates a new empty dataset.
      *
-     * @param autoPrune  a flag that controls whether or not x-values are
+     * @param autoPrune  a flag that controls whether x-values are
      *                   removed whenever the corresponding y-values are all
      *                   {@code null}.
      */
@@ -104,7 +104,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     }
 
     /**
-     * Returns the flag that controls whether or not x-values are removed from
+     * Returns the flag that controls whether x-values are removed from
      * the dataset when the corresponding y-values are all {@code null}.
      *
      * @return A boolean.
@@ -527,7 +527,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -540,7 +540,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -553,7 +553,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range.
@@ -613,7 +613,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
     /**
      * Returns whether the interval width is automatically calculated or not.
      *
-     * @return A flag that determines whether or not the interval width is
+     * @return A flag that determines whether the interval width is
      *         automatically calculated.
      */
     public boolean isAutoWidth() {

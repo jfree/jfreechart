@@ -52,7 +52,7 @@ import org.jfree.chart.internal.HashUtils;
  */
 public abstract class AbstractDialLayer implements DialLayer {
 
-    /** A flag that controls whether or not the layer is visible. */
+    /** A flag that controls whether the layer is visible. */
     private boolean visible;
 
     /** Storage for registered listeners. */
@@ -80,7 +80,7 @@ public abstract class AbstractDialLayer implements DialLayer {
     }
 
     /**
-     * Sets the flag that determines whether or not this layer is drawn by
+     * Sets the flag that determines whether this layer is drawn by
      * the plot, and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *

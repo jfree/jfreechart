@@ -110,13 +110,13 @@ public class LegendItem implements Cloneable, Serializable {
     /** The url text. */
     private String urlText;
 
-    /** A flag that controls whether or not the shape is visible. */
+    /** A flag that controls whether the shape is visible. */
     private boolean shapeVisible;
 
     /** The shape. */
     private transient Shape shape;
 
-    /** A flag that controls whether or not the shape is filled. */
+    /** A flag that controls whether the shape is filled. */
     private final boolean shapeFilled;
 
     /** The paint. */
@@ -125,7 +125,7 @@ public class LegendItem implements Cloneable, Serializable {
     /** A gradient paint transformer. */
     private GradientPaintTransformer fillPaintTransformer;
 
-    /** A flag that controls whether or not the shape outline is visible. */
+    /** A flag that controls whether the shape outline is visible. */
     private final boolean shapeOutlineVisible;
 
     /** The outline paint. */
@@ -134,7 +134,7 @@ public class LegendItem implements Cloneable, Serializable {
     /** The outline stroke. */
     private transient Stroke outlineStroke;
 
-    /** A flag that controls whether or not the line is visible. */
+    /** A flag that controls whether the line is visible. */
     private boolean lineVisible;
 
     /** The line. */
@@ -262,18 +262,18 @@ public class LegendItem implements Cloneable, Serializable {
      *        {@code null} permitted).
      * @param toolTipText  the tool tip text ({@code null} permitted).
      * @param urlText  the URL text ({@code null} permitted).
-     * @param shapeVisible  a flag that controls whether or not the shape is
+     * @param shapeVisible  a flag that controls whether the shape is
      *                      displayed.
      * @param shape  the shape ({@code null} permitted).
-     * @param shapeFilled  a flag that controls whether or not the shape is
+     * @param shapeFilled  a flag that controls whether the shape is
      *                     filled.
      * @param fillPaint  the fill paint ({@code null} not permitted).
-     * @param shapeOutlineVisible  a flag that controls whether or not the
+     * @param shapeOutlineVisible  a flag that controls whether the
      *                             shape is outlined.
      * @param outlinePaint  the outline paint ({@code null} not permitted).
      * @param outlineStroke  the outline stroke ({@code null} not
      *                       permitted).
-     * @param lineVisible  a flag that controls whether or not the line is
+     * @param lineVisible  a flag that controls whether the line is
      *                     visible.
      * @param line  the line.
      * @param lineStroke  the stroke ({@code null} not permitted).
@@ -396,18 +396,18 @@ public class LegendItem implements Cloneable, Serializable {
      *        {@code null} permitted).
      * @param toolTipText  the tool tip text ({@code null} permitted).
      * @param urlText  the URL text ({@code null} permitted).
-     * @param shapeVisible  a flag that controls whether or not the shape is
+     * @param shapeVisible  a flag that controls whether the shape is
      *                      displayed.
      * @param shape  the shape ({@code null} permitted).
-     * @param shapeFilled  a flag that controls whether or not the shape is
+     * @param shapeFilled  a flag that controls whether the shape is
      *                     filled.
      * @param fillPaint  the fill paint ({@code null} not permitted).
-     * @param shapeOutlineVisible  a flag that controls whether or not the
+     * @param shapeOutlineVisible  a flag that controls whether the
      *                             shape is outlined.
      * @param outlinePaint  the outline paint ({@code null} not permitted).
      * @param outlineStroke  the outline stroke ({@code null} not
      *                       permitted).
-     * @param lineVisible  a flag that controls whether or not the line is
+     * @param lineVisible  a flag that controls whether the line is
      *                     visible.
      * @param line  the line ({@code null} not permitted).
      * @param lineStroke  the stroke ({@code null} not permitted).
@@ -675,7 +675,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that indicates whether or not the shape is visible.
+     * Returns a flag that indicates whether the shape is visible.
      *
      * @return A boolean.
      *
@@ -686,7 +686,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not the shape is visible.
+     * Sets the flag that controls whether the shape is visible.
      *
      * @param visible  the new flag value.
      *
@@ -722,7 +722,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not the shape is filled.
+     * Returns a flag that controls whether the shape is filled.
      *
      * @return A boolean.
      */
@@ -750,7 +750,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not the shape outline
+     * Returns the flag that controls whether the shape outline
      * is visible.
      *
      * @return A boolean.
@@ -840,7 +840,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that indicates whether or not the line is visible.
+     * Returns a flag that indicates whether the line is visible.
      *
      * @return A boolean.
      *
@@ -851,7 +851,7 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not the line shape is visible for
+     * Sets the flag that controls whether the line shape is visible for
      * this legend item.
      *
      * @param visible  the new flag value.

@@ -301,7 +301,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -319,7 +319,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -338,7 +338,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * Returns the range of the values in the dataset's domain, including
      * or excluding the interval around each x-value as specified.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval should be taken into account.
      *
      * @return The range.

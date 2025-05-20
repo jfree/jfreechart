@@ -166,7 +166,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the automatic axis range
+     * Returns the flag that indicates whether the automatic axis range
      * (if indeed it is determined automatically) is forced to include zero.
      *
      * @return The flag.
@@ -176,7 +176,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that indicates whether or not the axis range, if
+     * Sets the flag that indicates whether the axis range, if
      * automatically calculated, is forced to include zero.
      * <p>
      * If the flag is changed to {@code true}, the axis range is

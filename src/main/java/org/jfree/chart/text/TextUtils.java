@@ -58,7 +58,7 @@ public class TextUtils {
     private static boolean drawStringsWithFontAttributes = false;
     
     /**
-     * A flag that controls whether or not the rotated string workaround is
+     * A flag that controls whether the rotated string workaround is
      * used.
      */
     private static boolean useDrawRotatedStringWorkaround = false;
@@ -710,7 +710,7 @@ public class TextUtils {
     }
 
     /**
-     * Returns the flag that controls whether or not a workaround is used for
+     * Returns the flag that controls whether a workaround is used for
      * drawing rotated strings.
      *
      * @return A boolean.
@@ -720,7 +720,7 @@ public class TextUtils {
     }
  
     /**
-     * Sets the flag that controls whether or not a workaround is used for
+     * Sets the flag that controls whether a workaround is used for
      * drawing rotated strings.  The related bug is on Sun's bug parade
      * (id 4312117) and the workaround involves using a {@code TextLayout}
      * instance to draw the text instead of calling the
@@ -733,7 +733,7 @@ public class TextUtils {
     }
     
     /**
-     * Returns the flag that controls whether or not strings are drawn using
+     * Returns the flag that controls whether strings are drawn using
      * the current font attributes (such as underlining, strikethrough etc).
      * The default value is {@code false}.
      * 
@@ -744,7 +744,7 @@ public class TextUtils {
     }
     
     /**
-     * Sets the flag that controls whether or not strings are drawn using the
+     * Sets the flag that controls whether strings are drawn using the
      * current font attributes.  This is a hack to allow underlining of titles
      * without big changes to the API.  See:
      * http://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459

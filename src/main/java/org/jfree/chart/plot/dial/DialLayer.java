@@ -52,7 +52,7 @@ import java.util.EventListener;
 public interface DialLayer {
 
     /**
-     * Returns a flag that indicates whether or not the layer is visible.
+     * Returns a flag that indicates whether the layer is visible.
      *
      * @return A boolean.
      */

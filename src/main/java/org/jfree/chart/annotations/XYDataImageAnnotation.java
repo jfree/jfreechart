@@ -88,7 +88,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     private double h;
 
     /**
-     * A flag indicating whether or not the annotation should contribute to
+     * A flag indicating whether the annotation should contribute to
      * the data range for a plot/renderer.
      */
     private boolean includeInDataBounds;
@@ -115,7 +115,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate (in data space).
      * @param w  the image display area width.
      * @param h  the image display area height.
-     * @param includeInDataBounds  a flag that controls whether or not the
+     * @param includeInDataBounds  a flag that controls whether the
      *     annotation is included in the data bounds for the axis autoRange.
      */
     public XYDataImageAnnotation(Image image, double x, double y, double w,
@@ -179,7 +179,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Returns the flag that controls whether or not the annotation should
+     * Returns the flag that controls whether the annotation should
      * contribute to the autoRange for the axis it is plotted against.
      *
      * @return A boolean.

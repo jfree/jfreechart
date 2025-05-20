@@ -96,7 +96,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /** The label font. */
     private Font labelFont;
 
-    /** A flag that controls whether or not a border is drawn. */
+    /** A flag that controls whether a border is drawn. */
     private boolean drawBorder = false;
 
     /** The rose highlight paint. */
@@ -303,7 +303,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not a border is drawn.
+     * Returns a flag that controls whether a border is drawn.
      *
      * @return The flag.
      *
@@ -314,7 +314,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not a border is drawn.
+     * Sets a flag that controls whether a border is drawn.
      *
      * @param status  the flag status.
      *

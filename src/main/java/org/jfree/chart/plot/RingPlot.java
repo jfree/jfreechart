@@ -93,7 +93,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     private Color centerTextColor;
     
     /**
-     * A flag that controls whether or not separators are drawn between the
+     * A flag that controls whether separators are drawn between the
      * sections of the chart.
      */
     private boolean separatorsVisible;
@@ -264,7 +264,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     }
     
     /**
-     * Returns a flag that indicates whether or not separators are drawn between
+     * Returns a flag that indicates whether separators are drawn between
      * the sections in the chart.
      *
      * @return A boolean.
@@ -276,7 +276,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not separators are drawn between
+     * Sets the flag that controls whether separators are drawn between
      * the sections in the chart, and sends a change event to all registered 
      * listeners.
      *

@@ -191,7 +191,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /** Percentage margin (to reduce the width of bars). */
     private double margin;
 
-    /** A flag that controls whether or not bar outlines are drawn. */
+    /** A flag that controls whether bar outlines are drawn. */
     private boolean drawBarOutline;
 
     /**
@@ -224,7 +224,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private XYBarPainter barPainter;
 
     /**
-     * The flag that controls whether or not shadows are drawn for the bars.
+     * The flag that controls whether shadows are drawn for the bars.
      */
     private boolean shadowsVisible;
 
@@ -350,7 +350,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not bar outlines are drawn.
+     * Returns a flag that controls whether bar outlines are drawn.
      *
      * @return A boolean.
      *
@@ -361,7 +361,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not bar outlines are drawn and
+     * Sets the flag that controls whether bar outlines are drawn and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
@@ -501,7 +501,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not shadows are drawn for
+     * Returns the flag that controls whether shadows are drawn for
      * the bars.
      *
      * @return A boolean.
@@ -511,7 +511,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer
+     * Sets the flag that controls whether the renderer
      * draws shadows for the bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *

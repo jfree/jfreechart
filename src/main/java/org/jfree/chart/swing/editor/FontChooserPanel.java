@@ -59,7 +59,7 @@ public class FontChooserPanel extends JPanel {
     /** The checkbox that indicates whether the font is bold. */
     private JCheckBox bold;
 
-    /** The checkbox that indicates whether or not the font is italic. */
+    /** The checkbox that indicates whether the font is italic. */
     private JCheckBox italic;
 
     /** The resourceBundle for the localization. */

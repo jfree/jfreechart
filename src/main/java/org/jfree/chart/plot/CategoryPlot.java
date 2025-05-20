@@ -2567,7 +2567,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param marker the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker)
@@ -2583,7 +2583,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker, Layer)
@@ -2600,7 +2600,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer)
@@ -2618,7 +2618,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer  the layer (foreground or background).
      * @param notify  notify listeners.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer, boolean)
@@ -2643,7 +2643,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns the flag that controls whether or not the domain crosshair is
+     * Returns the flag that controls whether the domain crosshair is
      * displayed by the plot.
      *
      * @return A boolean.
@@ -2655,7 +2655,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the domain crosshair is
+     * Sets the flag that controls whether the domain crosshair is
      * displayed by the plot, and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -2821,7 +2821,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag indicating whether or not the range crosshair is visible.
+     * Returns a flag indicating whether the range crosshair is visible.
      *
      * @return The flag.
      *
@@ -2832,7 +2832,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair is visible.
+     * Sets the flag indicating whether the range crosshair is visible.
      *
      * @param flag  the new value of the flag.
      *
@@ -2846,7 +2846,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -2858,7 +2858,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair should
+     * Sets the flag indicating whether the range crosshair should
      * "lock-on" to actual data values, and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -2902,7 +2902,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * crosshair is visible).
      *
      * @param value  the new value.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRangeCrosshairValue()
@@ -3017,7 +3017,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param annotation  the annotation ({@code null} not permitted).
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      *
      * @see #addAnnotation(CategoryAnnotation)
      */
@@ -3032,7 +3032,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      */
     public boolean removeAnnotation(CategoryAnnotation annotation,
             boolean notify) {
@@ -3620,7 +3620,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param crosshairState  a state object for tracking crosshair info
      *        ({@code null} permitted).
      *
-     * @return A boolean that indicates whether or not real data was found.
+     * @return A boolean that indicates whether real data was found.
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
             PlotRenderingInfo info, CategoryCrosshairState<R, C> crosshairState) {
@@ -4199,7 +4199,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns the flag that controls whether or not the shared domain axis is
+     * Returns the flag that controls whether the shared domain axis is
      * drawn for each subplot.
      *
      * @return A boolean.
@@ -4393,7 +4393,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)

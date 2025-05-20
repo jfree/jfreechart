@@ -65,7 +65,7 @@ public class RendererChangeEvent extends ChartChangeEvent {
      * Creates a new event.
      *
      * @param renderer  the renderer that generated the event.
-     * @param seriesVisibilityChanged  a flag that indicates whether or not
+     * @param seriesVisibilityChanged  a flag that indicates whether
      *         the event relates to a change in the series visibility flags.
      */
     public RendererChangeEvent(Object renderer, boolean seriesVisibilityChanged) {
@@ -84,7 +84,7 @@ public class RendererChangeEvent extends ChartChangeEvent {
     }
 
     /**
-     * Returns the flag that indicates whether or not the event relates to
+     * Returns the flag that indicates whether the event relates to
      * a change in series visibility.
      *
      * @return A boolean.

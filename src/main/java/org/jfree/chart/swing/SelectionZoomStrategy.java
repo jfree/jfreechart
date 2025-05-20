@@ -132,7 +132,7 @@ public interface SelectionZoomStrategy extends Serializable {
     void setZoomFillPaint(Paint paint);
 
     /**
-     * Returns the flag that controls whether or not the zoom rectangle is
+     * Returns the flag that controls whether the zoom rectangle is
      * filled when drawn.
      *
      * @return A boolean.

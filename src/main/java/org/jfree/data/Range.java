@@ -330,7 +330,7 @@ public strictfp class Range implements Serializable {
      *
      * @param base  the base range ({@code null} not permitted).
      * @param delta  the shift amount.
-     * @param allowZeroCrossing  a flag that determines whether or not the
+     * @param allowZeroCrossing  a flag that determines whether the
      *                           bounds of the range are allowed to cross
      *                           zero after adjustment.
      *

@@ -44,12 +44,12 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 
 /**
- * A simple class for detecting whether or not a renderer has generated
+ * A simple class for detecting whether a renderer has generated
  * a {@link RendererChangeEvent}.
  */
 public class RendererChangeDetector implements RendererChangeListener {
 
-    /** A flag that records whether or not a change event has been received. */
+    /** A flag that records whether a change event has been received. */
     private boolean notified;
 
     /**
@@ -60,7 +60,7 @@ public class RendererChangeDetector implements RendererChangeListener {
     }
 
     /**
-     * Returns the flag that indicates whether or not a change event has been
+     * Returns the flag that indicates whether a change event has been
      * received.
      *
      * @return The flag.
@@ -70,7 +70,7 @@ public class RendererChangeDetector implements RendererChangeListener {
     }
 
     /**
-     * Sets the flag that indicates whether or not a change event has been
+     * Sets the flag that indicates whether a change event has been
      * received.
      *
      * @param notified  the new value of the flag.

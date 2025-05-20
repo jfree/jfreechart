@@ -99,7 +99,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     public static final int STAGGER_WIDTH = 5; // could make this configurable
 
     /**
-     * A flag that controls whether or not the steps for multiple series are
+     * A flag that controls whether the steps for multiple series are
      * staggered.
      */
     private boolean stagger = false;
@@ -132,7 +132,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the series steps are
+     * Sets the flag that controls whether the series steps are
      * staggered and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

@@ -165,7 +165,7 @@ public abstract class ValueAxis extends Axis
     private double fixedAutoRange;
 
     /**
-     * Flag that indicates whether or not the tick unit is selected
+     * Flag that indicates whether the tick unit is selected
      * automatically.
      */
     private boolean autoTickUnitSelection;
@@ -183,7 +183,7 @@ public abstract class ValueAxis extends Axis
      */
     private int minorTickCount;
 
-    /** A flag indicating whether or not tick labels are rotated to vertical. */
+    /** A flag indicating whether tick labels are rotated to vertical. */
     private boolean verticalTickLabels;
 
     /**
@@ -278,7 +278,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Returns a flag that controls whether or not the axis line has an arrow
+     * Returns a flag that controls whether the axis line has an arrow
      * drawn that points in the positive direction for the axis.
      *
      * @return A boolean.
@@ -290,7 +290,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets a flag that controls whether or not the axis lines has an arrow
+     * Sets a flag that controls whether the axis lines has an arrow
      * drawn that points in the positive direction for the axis, and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
@@ -304,7 +304,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Returns a flag that controls whether or not the axis line has an arrow
+     * Returns a flag that controls whether the axis line has an arrow
      * drawn that points in the negative direction for the axis.
      *
      * @return A boolean.
@@ -316,7 +316,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets a flag that controls whether or not the axis lines has an arrow
+     * Sets a flag that controls whether the axis lines has an arrow
      * drawn that points in the negative direction for the axis, and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
@@ -752,7 +752,7 @@ public abstract class ValueAxis extends Axis
      * @param ticks  the ticks.
      * @param g2  the graphics device.
      * @param drawArea  the area within which the plot and axes should be drawn.
-     * @param vertical  a flag that indicates whether or not the tick labels
+     * @param vertical  a flag that indicates whether the tick labels
      *                  are 'vertical'.
      *
      * @return The height of the tallest tick label.
@@ -801,7 +801,7 @@ public abstract class ValueAxis extends Axis
      * @param ticks  the ticks.
      * @param g2  the graphics device.
      * @param drawArea  the area within which the plot and axes should be drawn.
-     * @param vertical  a flag that indicates whether or not the tick labels
+     * @param vertical  a flag that indicates whether the tick labels
      *                  are 'vertical'.
      *
      * @return The width of the tallest tick label.
@@ -875,7 +875,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Returns the flag that controls whether or not the axis range is
+     * Returns the flag that controls whether the axis range is
      * automatically adjusted to fit the data values.
      *
      * @return The flag.
@@ -887,7 +887,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets a flag that determines whether or not the axis range is
+     * Sets a flag that determines whether the axis range is
      * automatically adjusted to fit the data, and notifies registered
      * listeners that the axis has been modified.
      *
@@ -1175,9 +1175,9 @@ public abstract class ValueAxis extends Axis
      * range to remain in force).
      *
      * @param range  the range ({@code null} not permitted).
-     * @param turnOffAutoRange  a flag that controls whether or not the auto
+     * @param turnOffAutoRange  a flag that controls whether the auto
      *                          range is turned off.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRange()
@@ -1232,9 +1232,9 @@ public abstract class ValueAxis extends Axis
      *
      * @param range  the range (excluding margins, {@code null} not
      *               permitted).
-     * @param turnOffAutoRange  a flag that controls whether or not the auto
+     * @param turnOffAutoRange  a flag that controls whether the auto
      *                          range is turned off.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      */
     public void setRangeWithMargins(Range range, boolean turnOffAutoRange,
@@ -1268,10 +1268,10 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Returns a flag indicating whether or not the tick unit is automatically
+     * Returns a flag indicating whether the tick unit is automatically
      * selected from a range of standard tick units.
      *
-     * @return A flag indicating whether or not the tick unit is automatically
+     * @return A flag indicating whether the tick unit is automatically
      *         selected.
      *
      * @see #setAutoTickUnitSelection(boolean)
@@ -1281,7 +1281,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets a flag indicating whether or not the tick unit is automatically
+     * Sets a flag indicating whether the tick unit is automatically
      * selected from a range of standard tick units.  If the flag is changed,
      * registered listeners are notified that the chart has changed.
      *
@@ -1294,7 +1294,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets a flag indicating whether or not the tick unit is automatically
+     * Sets a flag indicating whether the tick unit is automatically
      * selected from a range of standard tick units.
      *
      * @param flag  the new value of the flag.

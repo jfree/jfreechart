@@ -71,7 +71,7 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
     private final DefaultPlotEditor plotEditor;
 
     /**
-     * A checkbox indicating whether or not the chart is drawn with
+     * A checkbox indicating whether the chart is drawn with
      * anti-aliasing.
      */
     private final JCheckBox antialias;

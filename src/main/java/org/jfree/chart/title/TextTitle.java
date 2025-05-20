@@ -355,7 +355,7 @@ public class TextTitle extends Title implements Serializable, Cloneable,
     }
 
     /**
-     * Returns the flag that controls whether or not the title expands to fit
+     * Returns the flag that controls whether the title expands to fit
      * the available space.
      *
      * @return The flag.
@@ -610,7 +610,7 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param g2  the graphics device.
      * @param area  the area.
      * @param params  if this is an instance of {@link EntityBlockParams} it
-     *                is used to determine whether or not an
+     *                is used to determine whether an
      *                {@link EntityCollection} is returned by this method.
      *
      * @return An {@link EntityCollection} containing a chart entity for the
