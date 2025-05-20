@@ -59,6 +59,7 @@ History
 
 ##### Version 1.5.6 (not yet released)
 - added `setSymbols` method to `SymbolAxis` ([#421](https://github.com/jfree/jfreechart/pull/421))
+- added label padding to `Crosshair` ([#414](https://github.com/jfree/jfreechart/pull/414))
 - updated pom.xml with new Maven publishing flow and latest plugin versions
 - various minor improvements
 
