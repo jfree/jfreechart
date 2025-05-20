@@ -53,6 +53,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -1100,22 +1101,23 @@ public class BarRenderer extends AbstractCategoryItemRenderer
                                               PlotOrientation orientation) {
 
         Point2D result = null;
-        double offset = getItemLabelAnchorOffset();
-        double x0 = bar.getX() - offset;
+        RectangleInsets insets = getItemLabelInsets();
+        //double offset = getItemLabelAnchorOffset();
+        double x0 = bar.getX() - insets.getRight();
         double x1 = bar.getX();
-        double x2 = bar.getX() + offset;
+        double x2 = bar.getX() + insets.getLeft();
         double x3 = bar.getCenterX();
-        double x4 = bar.getMaxX() - offset;
+        double x4 = bar.getMaxX() - insets.getRight();
         double x5 = bar.getMaxX();
-        double x6 = bar.getMaxX() + offset;
+        double x6 = bar.getMaxX() + insets.getLeft();
 
-        double y0 = bar.getMaxY() + offset;
+        double y0 = bar.getMaxY() + insets.getBottom();
         double y1 = bar.getMaxY();
-        double y2 = bar.getMaxY() - offset;
+        double y2 = bar.getMaxY() - insets.getTop();
         double y3 = bar.getCenterY();
-        double y4 = bar.getMinY() + offset;
+        double y4 = bar.getMinY() + insets.getBottom();
         double y5 = bar.getMinY();
-        double y6 = bar.getMinY() - offset;
+        double y6 = bar.getMinY() - insets.getTop();
 
         if (anchor == ItemLabelAnchor.CENTER) {
             result = new Point2D.Double(x3, y3);

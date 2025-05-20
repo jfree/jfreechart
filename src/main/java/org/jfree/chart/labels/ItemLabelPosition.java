@@ -30,7 +30,8 @@
  * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Yuri Blankenstein;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -62,6 +63,9 @@ public class ItemLabelPosition implements Serializable {
     /** The rotation angle. */
     private final double angle;
 
+    /** The item label clip type. */
+    private ItemLabelClip itemLabelClip;
+
     /**
      * Creates a new position record with default settings.
      */
@@ -83,6 +87,27 @@ public class ItemLabelPosition implements Serializable {
     }
 
     /**
+     * Creates a new position record. The item label anchor is a point relative
+     * to the data item (dot, bar or other visual item) on a chart. The item
+     * label is aligned by aligning the text anchor with the item label anchor.
+     *
+     * @param itemLabelAnchor the item label anchor ({@code null} not
+     *                        permitted).
+     * @param textAnchor      the text anchor ({@code null} not permitted).
+     * @param itemLabelClip   The clip type for the label ({@code null} not
+     *                        permitted. Only used when
+     *                        {@link ItemLabelAnchor#isInternal()} returns
+     *                        {@code true}, if {@code false} {@code labelClip}
+     *                        is always considered to be
+     *                        {@link ItemLabelClip#NONE})
+     */
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
+            TextAnchor textAnchor, ItemLabelClip itemLabelClip) {
+        this(itemLabelAnchor, textAnchor, TextAnchor.CENTER, 0.0,
+                itemLabelClip);
+    }
+
+    /**
      * Creates a new position record.  The item label anchor is a point
      * relative to the data item (dot, bar or other visual item) on a chart.
      * The item label is aligned by aligning the text anchor with the
@@ -95,16 +120,43 @@ public class ItemLabelPosition implements Serializable {
      *                        permitted).
      * @param angle  the rotation angle (in radians).
      */
-    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor, 
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
             TextAnchor textAnchor, TextAnchor rotationAnchor, double angle) {
+        this(itemLabelAnchor, textAnchor, rotationAnchor, angle,
+                ItemLabelClip.FIT);
+
+    }
+
+    /**
+     * Creates a new position record. The item label anchor is a point relative
+     * to the data item (dot, bar or other visual item) on a chart. The item
+     * label is aligned by aligning the text anchor with the item label anchor.
+     *
+     * @param itemLabelAnchor the item label anchor ({@code null} not
+     *                        permitted).
+     * @param textAnchor      the text anchor ({@code null} not permitted).
+     * @param rotationAnchor  the rotation anchor ({@code null} not permitted).
+     * @param angle           the rotation angle (in radians).
+     * @param itemLabelClip   The clip type for the label ({@code null} not
+     *                        permitted. Only used when
+     *                        {@link ItemLabelAnchor#isInternal()} returns
+     *                        {@code true}, if {@code false} {@code labelClip}
+     *                        is always considered to be
+     *                        {@link ItemLabelClip#NONE})
+     */
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
+            TextAnchor textAnchor, TextAnchor rotationAnchor, double angle,
+            ItemLabelClip itemLabelClip) {
 
         Args.nullNotPermitted(itemLabelAnchor, "itemLabelAnchor");
         Args.nullNotPermitted(textAnchor, "textAnchor");
         Args.nullNotPermitted(rotationAnchor, "rotationAnchor");
+        Args.nullNotPermitted(itemLabelClip, "labelClip");
         this.itemLabelAnchor = itemLabelAnchor;
         this.textAnchor = textAnchor;
         this.rotationAnchor = rotationAnchor;
         this.angle = angle;
+        this.itemLabelClip = itemLabelClip;
     }
 
     /**
@@ -144,6 +196,15 @@ public class ItemLabelPosition implements Serializable {
     }
 
     /**
+     * Returns the clip type for the label.
+     *
+     * @return The clip type for the label.
+     */
+    public ItemLabelClip getItemLabelClip() {
+		return this.itemLabelClip;
+	}
+
+    /**
      * Tests this object for equality with an arbitrary object.
      *
      * @param obj  the object ({@code null} permitted).
@@ -159,31 +220,32 @@ public class ItemLabelPosition implements Serializable {
             return false;
         }
         ItemLabelPosition that = (ItemLabelPosition) obj;
-        if (!this.itemLabelAnchor.equals(that.itemLabelAnchor)) {
+        if (!Objects.equals(this.itemLabelAnchor, that.itemLabelAnchor)) {
             return false;
         }
-        if (!this.textAnchor.equals(that.textAnchor)) {
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
             return false;
         }
-        if (!this.rotationAnchor.equals(that.rotationAnchor)) {
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-        if (this.angle != that.angle) {
+        if (Double.doubleToLongBits(this.angle) != Double.doubleToLongBits(that.angle)) {
+            return false;
+        }
+        if (!Objects.equals(this.itemLabelClip, that.itemLabelClip)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.itemLabelAnchor);
-        hash = 83 * hash + Objects.hashCode(this.textAnchor);
-        hash = 83 * hash + Objects.hashCode(this.rotationAnchor);
-        hash = 83 * hash +
-                (int) (Double.doubleToLongBits(this.angle) ^
-                (Double.doubleToLongBits(this.angle) >>> 32));
-        return hash;
+        hash = 97 * hash + Objects.hashCode(this.itemLabelAnchor);
+        hash = 97 * hash + Objects.hashCode(this.textAnchor);
+        hash = 97 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.angle) ^ (Double.doubleToLongBits(this.angle) >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.itemLabelClip);
+		return hash;
     }
-
 }

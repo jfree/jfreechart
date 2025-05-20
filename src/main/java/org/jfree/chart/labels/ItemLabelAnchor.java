@@ -115,6 +115,27 @@ public enum ItemLabelAnchor {
     OUTSIDE11,
 
     /** 12 o'clock  anchor point. */
-    OUTSIDE12
+    OUTSIDE12;
 
+    /**
+     * Returns {@code true} if this anchor point is inside an area.
+     *
+     * @return {@code true} if this anchor point is inside an area,
+     *         {@code false} otherwise.
+     */
+    public boolean isInternal() {
+        return this == CENTER
+                || this == INSIDE1
+                || this == INSIDE2
+                || this == INSIDE3
+                || this == INSIDE4
+                || this == INSIDE5
+                || this == INSIDE6
+                || this == INSIDE7
+                || this == INSIDE8
+                || this == INSIDE9
+                || this == INSIDE10
+                || this == INSIDE11
+                || this == INSIDE12;
+    }
 }

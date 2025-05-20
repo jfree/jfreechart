@@ -27,10 +27,11 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-present, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
+ *                   Yuri Blankenstein;
  *
  */
 
@@ -57,12 +58,11 @@ import java.util.Map;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.ChartElement;
-import org.jfree.chart.ChartElementVisitor;
 
-import org.jfree.chart.ChartHints;
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.*;
+
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -123,6 +123,10 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
 
     /** The default value label paint. */
     public static final Paint DEFAULT_VALUE_LABEL_PAINT = Color.BLACK;
+
+    /** The default item label insets. */
+    public static final RectangleInsets DEFAULT_ITEM_LABEL_INSETS = new RectangleInsets(
+            2.0, 2.0, 2.0, 2.0);
 
     /** A list of flags that controls whether each series is visible. */
     private Map<Integer, Boolean> seriesVisibleMap;
@@ -229,6 +233,9 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     /** The base item label paint. */
     private transient Paint defaultItemLabelPaint;
 
+    /** Option to use contrast colors for item labels */
+    private boolean computeItemLabelContrastColor;
+
     /** The positive item label position (per series). */
     private Map<Integer, ItemLabelPosition> positiveItemLabelPositionMap;
 
@@ -241,8 +248,8 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     /** The fallback negative item label position. */
     private ItemLabelPosition defaultNegativeItemLabelPosition;
 
-    /** The item label anchor offset. */
-    private double itemLabelAnchorOffset = 2.0;
+    /** The item label insets. */
+    private RectangleInsets itemLabelInsets;
 
     /**
      * Flags that control whether entities are generated for each
@@ -340,12 +347,14 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
 
         this.seriesItemLabelsVisibleMap = new HashMap<>();
         this.defaultItemLabelsVisible = false;
+        this.itemLabelInsets = DEFAULT_ITEM_LABEL_INSETS;
 
         this.itemLabelFontMap = new HashMap<>();
         this.defaultItemLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
         this.itemLabelPaints = new HashMap<>();
         this.defaultItemLabelPaint = Color.BLACK;
+        this.computeItemLabelContrastColor = false;
 
         this.positiveItemLabelPositionMap = new HashMap<>();
         this.defaultPositiveItemLabelPosition = new ItemLabelPosition(
@@ -1520,6 +1529,19 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
+     * Clears the series shape settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesShapes(boolean notify) {
+        this.seriesShapeMap.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default shape.
      *
      * @return The shape (never {@code null}).
@@ -1654,6 +1676,20 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
+     * Clears the visibility of item labels for a series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelsVisible(boolean notify) {
+        this.seriesItemLabelsVisibleMap.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the base setting for item label visibility.  A {@code null}
      * result should be interpreted as equivalent to {@code Boolean.FALSE}.
      *
@@ -1758,6 +1794,19 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
+     * Clears the item label font settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelFonts(boolean notify) {
+        this.itemLabelFontMap.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default item label font (this is used when no other font
      * setting is available).
      *
@@ -1802,6 +1851,31 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     //// ITEM LABEL PAINT  ////////////////////////////////////////////////////
 
     /**
+     * Returns {@code true} if contrast colors are automatically computed for
+     * item labels.
+     *
+     * @return {@code true} if contrast colors are automatically computed for
+     *         item labels.
+     */
+    public boolean isComputeItemLabelContrastColor() {
+        return computeItemLabelContrastColor;
+    }
+
+    /**
+     * If {@code auto} is set to {@code true} and
+     * {@link #getItemPaint(int, int)} returns an instance of {@link Color}, a
+     * {@link ChartColor#getContrastColor(Color) contrast color} is computed and
+     * used for the item label.
+     *
+     * @param auto {@code true} if contrast colors should be computed for item
+     *             labels.
+     * @see #getItemLabelPaint(int, int)
+     */
+    public void setComputeItemLabelContrastColor(boolean auto) {
+        this.computeItemLabelContrastColor = auto;
+    }
+
+    /**
      * Returns the paint used to draw an item label.
      *
      * @param row  the row index (zero based).
@@ -1810,7 +1884,16 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      * @return The paint (never {@code null}).
      */
     public Paint getItemLabelPaint(int row, int column) {
-        Paint result = getSeriesItemLabelPaint(row);
+        Paint result = null;
+        if (this.computeItemLabelContrastColor) {
+            Paint itemPaint = getItemPaint(row, column);
+            if (itemPaint instanceof Color) {
+                result = ChartColor.getContrastColor((Color) itemPaint);
+            }
+        }
+        if (result == null) {
+            result = getSeriesItemLabelPaint(row);
+        }
         if (result == null) {
             result = this.defaultItemLabelPaint;
         }
@@ -1856,6 +1939,19 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
      */
     public void setSeriesItemLabelPaint(int series, Paint paint, boolean notify) {
         this.itemLabelPaints.put(series, paint);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the item label paint settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesItemLabelPaints(boolean notify) {
+        this.itemLabelPaints.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -1965,6 +2061,20 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     public void setSeriesPositiveItemLabelPosition(int series,
             ItemLabelPosition position, boolean notify) {
         this.positiveItemLabelPositionMap.put(series, position);
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Clears the item label position for all positive values for series
+     * settings for this renderer and, if requested, sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearSeriesPositiveItemLabelPositions(boolean notify) {
+        this.positiveItemLabelPositionMap.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -2125,25 +2235,22 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
-     * Returns the item label anchor offset.
+     * Returns the item label insets.
      *
-     * @return The offset.
-     *
-     * @see #setItemLabelAnchorOffset(double)
+     * @return The item label insets.
      */
-    public double getItemLabelAnchorOffset() {
-        return this.itemLabelAnchorOffset;
+    public RectangleInsets getItemLabelInsets() {
+        return itemLabelInsets;
     }
 
     /**
-     * Sets the item label anchor offset.
+     * Sets the item label insets.
      *
-     * @param offset  the offset.
-     *
-     * @see #getItemLabelAnchorOffset()
+     * @param itemLabelInsets the insets
      */
-    public void setItemLabelAnchorOffset(double offset) {
-        this.itemLabelAnchorOffset = offset;
+    public void setItemLabelInsets(RectangleInsets itemLabelInsets) {
+        Args.nullNotPermitted(itemLabelInsets, "itemLabelInsets");
+        this.itemLabelInsets = itemLabelInsets;
         fireChangeEvent();
     }
 
@@ -2322,6 +2429,19 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
+     * Clears the series legend shapes for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendShapes(boolean notify) {
+        this.seriesLegendShapes.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default legend shape, which may be {@code null}.
      *
      * @return The default legend shape.
@@ -2406,6 +2526,20 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     }
 
     /**
+     * Clears the font used for the legend text for series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendTextFonts(boolean notify) {
+        this.legendTextFontMap.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
+    }
+
+    /**
      * Returns the default legend text font, which may be {@code null}.
      *
      * @return The default legend text font.
@@ -2465,6 +2599,20 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
     public void setLegendTextPaint(int series, Paint paint) {
         this.legendTextPaints.put(series, paint);
         fireChangeEvent();
+    }
+
+    /**
+     * Clears the paint used for the legend text for series settings for this
+     * renderer and, if requested, sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param notify notify listeners?
+     */
+    public void clearLegendTextPaints(boolean notify) {
+        this.legendTextPaints.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -2529,112 +2677,108 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
             double x, double y, PlotOrientation orientation) {
         Args.nullNotPermitted(anchor, "anchor");
         Point2D result = null;
-        switch (anchor) {
-            case CENTER:
-                result = new Point2D.Double(x, y);
-                break;
-            case INSIDE1:
-                result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
-                        y - ADJ * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE2:
-                result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
-                        y - OPP * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE3:
-                result = new Point2D.Double(x + this.itemLabelAnchorOffset, y);
-                break;
-            case INSIDE4:
-                result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
-                        y + OPP * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE5:
-                result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
-                        y + ADJ * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE6:
-                result = new Point2D.Double(x, y + this.itemLabelAnchorOffset);
-                break;
-            case INSIDE7:
-                result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
-                        y + ADJ * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE8:
-                result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
-                        y + OPP * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE9:
-                result = new Point2D.Double(x - this.itemLabelAnchorOffset, y);
-                break;
-            case INSIDE10:
-                result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
-                        y - OPP * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE11:
-                result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
-                        y - ADJ * this.itemLabelAnchorOffset);
-                break;
-            case INSIDE12:
-                result = new Point2D.Double(x, y - this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE1:
-                result = new Point2D.Double(
-                        x + 2.0 * OPP * this.itemLabelAnchorOffset,
-                        y - 2.0 * ADJ * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE2:
-                result = new Point2D.Double(
-                        x + 2.0 * ADJ * this.itemLabelAnchorOffset,
-                        y - 2.0 * OPP * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE3:
-                result = new Point2D.Double(x + 2.0 * this.itemLabelAnchorOffset,
-                        y);
-                break;
-            case OUTSIDE4:
-                result = new Point2D.Double(
-                        x + 2.0 * ADJ * this.itemLabelAnchorOffset,
-                        y + 2.0 * OPP * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE5:
-                result = new Point2D.Double(
-                        x + 2.0 * OPP * this.itemLabelAnchorOffset,
-                        y + 2.0 * ADJ * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE6:
-                result = new Point2D.Double(x,
-                        y + 2.0 * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE7:
-                result = new Point2D.Double(
-                        x - 2.0 * OPP * this.itemLabelAnchorOffset,
-                        y + 2.0 * ADJ * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE8:
-                result = new Point2D.Double(
-                        x - 2.0 * ADJ * this.itemLabelAnchorOffset,
-                        y + 2.0 * OPP * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE9:
-                result = new Point2D.Double(x - 2.0 * this.itemLabelAnchorOffset,
-                        y);
-                break;
-            case OUTSIDE10:
-                result = new Point2D.Double(
-                        x - 2.0 * ADJ * this.itemLabelAnchorOffset,
-                        y - 2.0 * OPP * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE11:
-                result = new Point2D.Double(
-                        x - 2.0 * OPP * this.itemLabelAnchorOffset,
-                        y - 2.0 * ADJ * this.itemLabelAnchorOffset);
-                break;
-            case OUTSIDE12:
-                result = new Point2D.Double(x,
-                        y - 2.0 * this.itemLabelAnchorOffset);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected anchor value.");
+        if (anchor == ItemLabelAnchor.CENTER) {
+            result = new Point2D.Double(x, y);
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE1) {
+            result = new Point2D.Double(x + OPP * this.itemLabelInsets.getLeft(),
+                    y - ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE2) {
+            result = new Point2D.Double(x + ADJ * this.itemLabelInsets.getLeft(),
+                    y - OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE3) {
+            result = new Point2D.Double(x + this.itemLabelInsets.getLeft(), y);
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE4) {
+            result = new Point2D.Double(x + ADJ * this.itemLabelInsets.getLeft(),
+                    y + OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE5) {
+            result = new Point2D.Double(x + OPP * this.itemLabelInsets.getLeft(),
+                    y + ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE6) {
+            result = new Point2D.Double(x, y + this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE7) {
+            result = new Point2D.Double(x - OPP * this.itemLabelInsets.getLeft(),
+                    y + ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE8) {
+            result = new Point2D.Double(x - ADJ * this.itemLabelInsets.getLeft(),
+                    y + OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE9) {
+            result = new Point2D.Double(x - this.itemLabelInsets.getLeft(), y);
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE10) {
+            result = new Point2D.Double(x - ADJ * this.itemLabelInsets.getLeft(),
+                    y - OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE11) {
+            result = new Point2D.Double(x - OPP * this.itemLabelInsets.getLeft(),
+                    y - ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.INSIDE12) {
+            result = new Point2D.Double(x, y - this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE1) {
+            result = new Point2D.Double(
+                    x + 2.0 * OPP * this.itemLabelInsets.getLeft(),
+                    y - 2.0 * ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE2) {
+            result = new Point2D.Double(
+                    x + 2.0 * ADJ * this.itemLabelInsets.getLeft(),
+                    y - 2.0 * OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE3) {
+            result = new Point2D.Double(x + 2.0 * this.itemLabelInsets.getLeft(),
+                    y);
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE4) {
+            result = new Point2D.Double(
+                    x + 2.0 * ADJ * this.itemLabelInsets.getLeft(),
+                    y + 2.0 * OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE5) {
+            result = new Point2D.Double(
+                    x + 2.0 * OPP * this.itemLabelInsets.getLeft(),
+                    y + 2.0 * ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE6) {
+            result = new Point2D.Double(x,
+                    y + 2.0 * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE7) {
+            result = new Point2D.Double(
+                    x - 2.0 * OPP * this.itemLabelInsets.getLeft(),
+                    y + 2.0 * ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE8) {
+            result = new Point2D.Double(
+                    x - 2.0 * ADJ * this.itemLabelInsets.getLeft(),
+                    y + 2.0 * OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE9) {
+            result = new Point2D.Double(x - 2.0 * this.itemLabelInsets.getLeft(),
+                    y);
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE10) {
+            result = new Point2D.Double(
+                    x - 2.0 * ADJ * this.itemLabelInsets.getLeft(),
+                    y - 2.0 * OPP * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE11) {
+            result = new Point2D.Double(
+                x - 2.0 * OPP * this.itemLabelInsets.getLeft(),
+                y - 2.0 * ADJ * this.itemLabelInsets.getTop());
+        }
+        else if (anchor == ItemLabelAnchor.OUTSIDE12) {
+            result = new Point2D.Double(x,
+                    y - 2.0 * this.itemLabelInsets.getTop());
         }
         return result;
     }
@@ -2824,9 +2968,6 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
             return false;
         }
         if (!Objects.equals(this.defaultNegativeItemLabelPosition, that.defaultNegativeItemLabelPosition)) {
-            return false;
-        }
-        if (this.itemLabelAnchorOffset != that.itemLabelAnchorOffset) {
             return false;
         }
         if (!Objects.equals(this.seriesCreateEntitiesMap, that.seriesCreateEntitiesMap)) {

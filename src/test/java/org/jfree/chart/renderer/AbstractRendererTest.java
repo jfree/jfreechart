@@ -298,12 +298,6 @@ public class AbstractRendererTest {
                 ItemLabelAnchor.INSIDE10, TextAnchor.BASELINE_RIGHT));
         assertEquals(r1, r2);
 
-        // itemLabelAnchorOffset
-        r1.setItemLabelAnchorOffset(3.0);
-        assertNotEquals(r1, r2);
-        r2.setItemLabelAnchorOffset(3.0);
-        assertEquals(r1, r2);
-
         // createEntitiesList;
         r1.setSeriesCreateEntities(0, Boolean.TRUE);
         assertNotEquals(r1, r2);
