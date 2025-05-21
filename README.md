@@ -1,9 +1,9 @@
 JFreeChart
 ==========
 
-Version 1.5.5, 23 June 2024.
+Version 1.5.6, 21 May 2025.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
 
 Overview
 --------
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.5</version>
+        <version>1.5.6</version>
     </dependency>
 
 
@@ -57,11 +57,13 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.6 (not yet released)
+##### Version 1.5.6 (21 May 2025)
 - added `setSymbols` method to `SymbolAxis` ([#421](https://github.com/jfree/jfreechart/pull/421))
 - added label padding to `Crosshair` ([#414](https://github.com/jfree/jfreechart/pull/414))
-- Add clearSeriesXXX methods for all series settings in `AbstractRenderer` ([#364](https://github.com/jfree/jfreechart/issues/364))
+- add clearSeriesXXX methods for all series settings in `AbstractRenderer` ([#364](https://github.com/jfree/jfreechart/issues/364))
 - fix calculating if label fits inside bar for `XYBarRenderer` ([#366](https://github.com/jfree/jfreechart/issues/366))
+- set default background paint to `LIGHT_GRAY` ([#324](https://github.com/jfree/jfreechart/issues/324))
+- deprecated all classes in `org.jfree.chart.servlet.*` ([#385](https://github.com/jfree/jfreechart/issues/385))
 - updated `pom.xml` with new Maven publishing flow and latest plugin versions
 - various minor improvements
 
