@@ -61,6 +61,10 @@ public class DatasetReader {
     /** A factory for creating new parser instances. */
     static SAXParserFactory factory;
 
+    private DatasetReader() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns the {@link SAXParserFactory} used to create {@link SAXParser} instances.
      * 

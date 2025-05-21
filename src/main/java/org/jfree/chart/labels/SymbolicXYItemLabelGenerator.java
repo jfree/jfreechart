@@ -56,6 +56,13 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
     private static final long serialVersionUID = 3963400354475494395L;
 
     /**
+     * Creates a new default instance.
+     */
+    public SymbolicXYItemLabelGenerator() {
+        super();
+    }
+
+    /**
      * Generates a tool tip text item for a particular item within a series.
      *
      * @param data  the dataset.

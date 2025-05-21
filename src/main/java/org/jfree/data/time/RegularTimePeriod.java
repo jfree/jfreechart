@@ -61,6 +61,12 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     private static final ThreadLocal<Calendar> threadLocalCalendar = new ThreadLocal<>();
 
     /**
+     * Creates a new default instance.
+     */
+    protected RegularTimePeriod() {
+    }
+
+    /**
      * Creates a time period that includes the specified millisecond, assuming
      * the given time zone.
      *

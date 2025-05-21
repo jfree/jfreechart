@@ -46,6 +46,10 @@ import org.jfree.data.general.DatasetUtils;
  */
 public abstract class DataUtils {
 
+    private DataUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Tests two arrays for equality.  To be considered equal, the arrays must
      * have exactly the same dimensions, and the values in each array must also
