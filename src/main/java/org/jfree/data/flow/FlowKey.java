@@ -60,10 +60,10 @@ public class FlowKey<K extends Comparable<K>> implements PublicCloneable, Serial
     /** The stage. */
     private final int stage;
     
-    /* The source node. */
+    /** The source node. */
     private final K source;
     
-    /* The destination node. */
+    /** The destination node. */
     private final K destination;
     
     /**

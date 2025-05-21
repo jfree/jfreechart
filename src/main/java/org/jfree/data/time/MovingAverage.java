@@ -46,6 +46,10 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class MovingAverage {
 
+    private MovingAverage() {
+        // no requirement to instantiate
+    }
+
     /**
      * Creates a new {@link TimeSeriesCollection} containing a moving average
      * series for each series in the source collection.
@@ -86,7 +90,7 @@ public class MovingAverage {
      * result is an empty series.
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param name  the series key ({@code null} not permitted).
      * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.

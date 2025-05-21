@@ -49,7 +49,8 @@ import org.jfree.data.flow.FlowKey;
  */
 public class FlowEntity extends ChartEntity {
 
-    private FlowKey key;
+    /** The key. */
+    private final FlowKey key;
     
     /**
      * Creates a new instance.

@@ -95,7 +95,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * @param formatter  the number formatter ({@code null} not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
-                                                 NumberFormat formatter) {
+            NumberFormat formatter) {
         this(labelFormat, formatter, NumberFormat.getPercentInstance());
     }
 
@@ -283,6 +283,12 @@ public abstract class AbstractCategoryItemLabelGenerator
         return true;
     }
 
+    /**
+     * Returns whether instances of this class can be considered equal with other.
+     *
+     * @param other the other.
+     * @return A boolean
+     */
     public boolean canEqual(Object other) {
         // fix the "equals not symmetric" problem
         return (other instanceof AbstractCategoryItemLabelGenerator);

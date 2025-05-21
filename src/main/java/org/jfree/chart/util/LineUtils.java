@@ -44,6 +44,10 @@ import java.awt.geom.Rectangle2D;
  */
 public class LineUtils {
 
+    private LineUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Clips the specified line to the given rectangle.  If any of the line
      * coordinates is not finite, then the method returns {@code false} and

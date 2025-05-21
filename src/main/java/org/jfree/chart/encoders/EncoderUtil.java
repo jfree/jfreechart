@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ----------------
@@ -45,6 +45,10 @@ import java.io.OutputStream;
  * byte[] or writing them directly to an OutputStream.
  */
 public class EncoderUtil {
+
+    private EncoderUtil() {
+        // no requirement to instantiate
+    }
 
     /**
      * Encode the image in a specific format.
@@ -73,7 +77,7 @@ public class EncoderUtil {
      */
     public static byte[] encode(BufferedImage image, String format,
             boolean encodeAlpha) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, 
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format,
                 encodeAlpha);
         return imageEncoder.encode(image);
     }
@@ -90,7 +94,7 @@ public class EncoderUtil {
      */
     public static byte[] encode(BufferedImage image, String format,
             float quality) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, 
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format,
                 quality);
         return imageEncoder.encode(image);
     }
@@ -140,8 +144,7 @@ public class EncoderUtil {
      */
     public static void writeBufferedImage(BufferedImage image, String format,
         OutputStream outputStream, float quality) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, 
-                quality);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, quality);
         imageEncoder.encode(image, outputStream);
     }
 
@@ -157,8 +160,7 @@ public class EncoderUtil {
      */
     public static void writeBufferedImage(BufferedImage image, String format,
             OutputStream outputStream, boolean encodeAlpha) throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, 
-                encodeAlpha);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
 
@@ -177,8 +179,7 @@ public class EncoderUtil {
     public static void writeBufferedImage(BufferedImage image, String format,
             OutputStream outputStream, float quality, boolean encodeAlpha)
             throws IOException {
-        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, 
-                quality, encodeAlpha);
+        ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format, quality, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
 

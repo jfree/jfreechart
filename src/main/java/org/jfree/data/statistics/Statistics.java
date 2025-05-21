@@ -48,6 +48,10 @@ import org.jfree.chart.util.Args;
  */
 public abstract class Statistics {
 
+    private Statistics() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns the mean of an array of numbers.  This is equivalent to calling
      * {@code calculateMean(values, true)}.
@@ -92,8 +96,7 @@ public abstract class Statistics {
                 counter++;
             }
         }
-        double result = (sum / counter);
-        return result;
+        return (sum / counter);
     }
 
     /**
@@ -124,9 +127,7 @@ public abstract class Statistics {
         Args.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
-        Iterator iterator = values.iterator();
-        while (iterator.hasNext()) {
-            Object object = iterator.next();
+        for (Object object : values) {
             if (object == null) {
                 if (includeNullAndNaN) {
                     return Double.NaN;

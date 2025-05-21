@@ -61,7 +61,7 @@ public class NodeKey <K extends Comparable<K>> implements PublicCloneable, Seria
     /** The stage. */
     private final int stage;
     
-    /* The source node. */
+    /** The source node. */
     private final K node;
     
     /**

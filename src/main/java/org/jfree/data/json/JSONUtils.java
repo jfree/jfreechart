@@ -53,6 +53,10 @@ import org.jfree.data.json.impl.JSONValue;
  */
 public class JSONUtils {
 
+    private JSONUtils() {
+        // no requirement for instantiation
+    }
+
     /**
      * Returns a string containing the data in JSON format.  The format is
      * an array of arrays, where each sub-array represents one data value.

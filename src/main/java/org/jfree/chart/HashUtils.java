@@ -47,7 +47,11 @@ import org.jfree.chart.util.StrokeList;
  * Some utility methods for calculating hash codes.
  */
 public class HashUtils {
-    
+
+    private HashUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns a hash code for a {@code Paint} instance.  If 
      * {@code p} is {@code null}, this method returns zero.

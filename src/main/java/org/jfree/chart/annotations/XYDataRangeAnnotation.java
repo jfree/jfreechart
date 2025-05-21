@@ -54,7 +54,10 @@ import org.jfree.data.Range;
 public class XYDataRangeAnnotation extends AbstractXYAnnotation implements XYAnnotationBoundsInfo {
 	private static final long serialVersionUID = 2058170262687146829L;
 
+	/** The minimum domain range. */
 	private final Range minimumDomainRange;
+
+	/** The minimum range range. */
 	private final Range minimumRangeRange;
 	
     /**

@@ -52,6 +52,10 @@ import org.jfree.chart.util.StringUtils;
  */
 public class ImageMapUtils {
 
+    private ImageMapUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Writes an image map to an output stream.
      *

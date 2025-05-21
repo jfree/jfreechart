@@ -48,6 +48,7 @@ import org.jfree.data.flow.NodeKey;
  */
 public class NodeEntity extends ChartEntity {
 
+    /** The node key. */
     private NodeKey key;
     
     /**

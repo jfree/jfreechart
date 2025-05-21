@@ -78,13 +78,13 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         /** No fill. */
         NONE,
         
-        /** Fill towards zero. */
+        /** Fill down to zero. */
         TO_ZERO,
 
-        /** Fill to lower bound. */
+        /** Fill to the lower bound. */
         TO_LOWER_BOUND,
         
-        /** Fill to upper bound. */
+        /** Fill to the upper bound. */
         TO_UPPER_BOUND
     }
     
@@ -123,6 +123,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      */
     private FillType fillType;
 
+    /** The gradient transformer. */
     private GradientPaintTransformer gradientPaintTransformer;
     
     /**
@@ -485,8 +486,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (this.fillType != that.fillType) {
             return false;
         }
-        if (!Objects.equals(this.gradientPaintTransformer, 
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         return super.equals(obj);

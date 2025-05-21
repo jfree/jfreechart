@@ -31,7 +31,6 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.chart.plot.flow;
@@ -107,7 +106,8 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
      * is active).
      */
     private Map<NodeKey, Color> nodeColorMap;
-    
+
+    /** Node colors. */
     private List<Color> nodeColorSwatch;
     
     /** A pointer into the color swatch. */
@@ -116,10 +116,13 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     /** The default node color if nothing is defined in the nodeColorMap. */
     private Color defaultNodeColor;
 
+    /** Default node label font. */
     private Font defaultNodeLabelFont;
-    
+
+    /** Default node label paint. */
     private Paint defaultNodeLabelPaint;
-    
+
+    /** Default node label alignment. */
     private VerticalAlignment nodeLabelAlignment;
     
     /** The x-offset for node labels. */
@@ -137,6 +140,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
      * @param dataset  the dataset. 
      */
     public FlowPlot(FlowDataset dataset) {
+        super();
         this.dataset = dataset;
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -794,17 +798,17 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeWidth) ^ (Double.doubleToLongBits(this.nodeWidth) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeMargin) ^ (Double.doubleToLongBits(this.nodeMargin) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.flowMargin) ^ (Double.doubleToLongBits(this.flowMargin) >>> 32));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeWidth));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeMargin));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.flowMargin));
         hash = 83 * hash + Objects.hashCode(this.nodeColorMap);
         hash = 83 * hash + Objects.hashCode(this.nodeColorSwatch);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeColor);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeLabelFont);
         hash = 83 * hash + Objects.hashCode(this.defaultNodeLabelPaint);
         hash = 83 * hash + Objects.hashCode(this.nodeLabelAlignment);
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeLabelOffsetX) ^ (Double.doubleToLongBits(this.nodeLabelOffsetX) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.nodeLabelOffsetY) ^ (Double.doubleToLongBits(this.nodeLabelOffsetY) >>> 32));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeLabelOffsetX));
+        hash = 83 * hash + Long.hashCode(Double.doubleToLongBits(this.nodeLabelOffsetY));
         hash = 83 * hash + Objects.hashCode(this.toolTipGenerator);
         return hash;
     }
@@ -815,7 +819,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
      * 
      * @return A close of this instance.
      * 
-     * @throws CloneNotSupportedException 
+     * @throws CloneNotSupportedException if there is a problem cloning.
      */
     @Override
     public Object clone() throws CloneNotSupportedException {

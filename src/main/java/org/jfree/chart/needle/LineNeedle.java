@@ -53,6 +53,13 @@ public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
     private static final long serialVersionUID = 6215321387896748945L;
 
     /**
+     * Creates a new instance.
+     */
+    public LineNeedle() {
+        super();
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.

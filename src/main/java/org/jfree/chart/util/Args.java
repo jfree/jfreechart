@@ -41,6 +41,10 @@ package org.jfree.chart.util;
  */
 public class Args {
 
+    private Args() {
+        // no requirement to instantiate
+    }
+
     /**
      * Throws an {@code IllegalArgumentException} if the supplied 
      * {@code param} is {@code null}.

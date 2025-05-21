@@ -49,6 +49,7 @@ import java.text.ParsePosition;
  */
 public class HMSNumberFormat extends NumberFormat {
 
+    /** Number formatter. */
     private NumberFormat formatter = new DecimalFormat("00");
     
     /**

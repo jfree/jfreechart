@@ -45,6 +45,10 @@ import org.jfree.data.xy.XYDataset;
  */
 public class RendererUtils {
 
+    private RendererUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Finds the lower index of the range of live items in the specified data
      * series.

@@ -42,7 +42,11 @@ import org.jfree.data.xy.XYDataset;
 /**
  * A utility class for fitting regression curves to data.
  */
-public abstract class Regression {
+public class Regression {
+
+    private Regression() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the parameters 'a' and 'b' for an equation y = a + bx, fitted to

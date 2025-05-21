@@ -57,11 +57,15 @@ import org.jfree.chart.ui.Drawable;
  */
 public class ExportUtils {
 
+    private ExportUtils() {
+        // no need to instantiate
+    }
+
     /**
      * Returns {@code true} if JFreeSVG is on the classpath, and 
      * {@code false} otherwise.  The JFreeSVG library can be found at
      * https://www.jfree.org/jfreesvg/
-     * 
+     *
      * @return A boolean.
      */
     public static boolean isJFreeSVGAvailable() {
