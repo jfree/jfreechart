@@ -60,6 +60,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.swing.event.EventListenerList;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,6 +89,12 @@ class JFreeChartTest implements ChartChangeListener {
                 .withPrefabValues(EventListenerList.class,
                         new EventListenerList(),
                         new EventListenerList())
+                .withPrefabValues(Rectangle2D.class,
+                        TestUtils.createR2D(true),
+                        TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                        TestUtils.createFont(true),
+                        TestUtils.createFont(false))
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
                 .suppress(Warning.TRANSIENT_FIELDS)
@@ -422,7 +429,7 @@ class JFreeChartTest implements ChartChangeListener {
     void testGetSubtitles() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
-        List<TextTitle> subtitles = chart.getSubtitles();
+        List<Title> subtitles = chart.getSubtitles();
 
         assertEquals(1, chart.getSubtitleCount());
 
