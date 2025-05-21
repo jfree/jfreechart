@@ -122,9 +122,9 @@ class JFreeChartTest implements ChartChangeListener {
     @Test
     void testEquals() {
         JFreeChart chart1 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         JFreeChart chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         assertEquals(chart1, chart2);
         assertEquals(chart2, chart1);
 
@@ -179,7 +179,7 @@ class JFreeChartTest implements ChartChangeListener {
         chart1 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), false);
         assertNotEquals(chart1, chart2);
         chart2 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
@@ -219,9 +219,9 @@ class JFreeChartTest implements ChartChangeListener {
     @Test
     void testEquals2() {
         JFreeChart chart1 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         JFreeChart chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), false);
         assertNotEquals(chart1, chart2);
         assertNotEquals(chart2, chart1);
     }
@@ -243,7 +243,7 @@ class JFreeChartTest implements ChartChangeListener {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         Title t = chart.getSubtitle(0);
-        assertTrue(t instanceof LegendTitle);
+        assertInstanceOf(LegendTitle.class, t);
 
         try {
             chart.getSubtitle(-1);
@@ -457,7 +457,7 @@ class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     void testTitleChangeEvent() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;

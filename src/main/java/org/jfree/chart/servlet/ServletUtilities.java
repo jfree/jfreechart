@@ -322,12 +322,10 @@ public class ServletUtilities {
         String mimeType = null;
         String filename = file.getName();
         if (filename.length() > 5) {
-            if (filename.substring(filename.length() - 5,
-                    filename.length()).equals(".jpeg")) {
+            if (filename.endsWith(".jpeg")) {
                 mimeType = "image/jpeg";
             }
-            else if (filename.substring(filename.length() - 4,
-                    filename.length()).equals(".png")) {
+            else if (filename.endsWith(".png")) {
                 mimeType = "image/png";
             }
         }
