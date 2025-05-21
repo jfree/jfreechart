@@ -175,11 +175,11 @@ public class FlowArrangement implements Arrangement, Serializable {
         double x = 0.0;
         double y = 0.0;
         double maxHeight = 0.0;
-        List<Block> itemsInRow = new ArrayList<>();
+        boolean haveItemsInRow = false;
         for (Block block : blocks) {
             Size2D size = block.arrange(g2, RectangleConstraint.NONE);
             if (x + size.width <= width) {
-                itemsInRow.add(block);
+                haveItemsInRow = true;
                 block.setBounds(
                     new Rectangle2D.Double(x, y, size.width, size.height)
                 );
@@ -187,7 +187,7 @@ public class FlowArrangement implements Arrangement, Serializable {
                 maxHeight = Math.max(maxHeight, size.height);
             }
             else {
-                if (itemsInRow.isEmpty()) {
+                if (!haveItemsInRow) {
                     // place in this row (truncated) anyway
                     block.setBounds(
                         new Rectangle2D.Double(
@@ -199,7 +199,6 @@ public class FlowArrangement implements Arrangement, Serializable {
                 }
                 else {
                     // start new row
-                    itemsInRow.clear();
                     x = 0.0;
                     y = y + maxHeight + this.verticalGap;
                     maxHeight = size.height;
@@ -209,7 +208,7 @@ public class FlowArrangement implements Arrangement, Serializable {
                         )
                     );
                     x = size.width + this.horizontalGap;
-                    itemsInRow.add(block);
+                    haveItemsInRow = true;
                 }
             }
         }
