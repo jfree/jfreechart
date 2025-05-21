@@ -47,6 +47,13 @@ public abstract class AbstractXYDataset extends AbstractSeriesDataset
         implements XYDataset {
 
     /**
+     * Creates a new dataset.
+     */
+    protected AbstractXYDataset() {
+        super();
+    }
+
+    /**
      * Returns the order of the domain (X) values.
      *
      * @return The domain order.

@@ -48,6 +48,10 @@ import java.util.Map;
  */
 public class CloneUtils {
 
+    private CloneUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns a clone of the specified object, if it can be cloned, otherwise
      * throws a {@code CloneNotSupportedException}.

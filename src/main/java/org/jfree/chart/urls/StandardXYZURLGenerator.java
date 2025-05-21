@@ -45,6 +45,13 @@ public class StandardXYZURLGenerator extends StandardXYURLGenerator
         implements XYZURLGenerator {
 
     /**
+     * Creates a new instance.
+     */
+    public StandardXYZURLGenerator() {
+        super();
+    }
+
+    /**
      * Generates a URL for a particular item within a series.
      *
      * @param dataset  the dataset.

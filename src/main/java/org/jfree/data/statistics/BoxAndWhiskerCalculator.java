@@ -49,6 +49,10 @@ import org.jfree.chart.util.Args;
  */
 public abstract class BoxAndWhiskerCalculator {
 
+    private BoxAndWhiskerCalculator() {
+        // no requirement to instantiate
+    }
+
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
      * from a list of {@code Number} objects.  Any items in the list

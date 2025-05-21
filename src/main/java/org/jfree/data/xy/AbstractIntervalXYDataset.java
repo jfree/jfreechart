@@ -36,13 +36,19 @@
 
 package org.jfree.data.xy;
 
-
 /**
  * An base class that you can use to create new implementations of the
  * {@link IntervalXYDataset} interface.
  */
 public abstract class AbstractIntervalXYDataset extends AbstractXYDataset
         implements IntervalXYDataset {
+
+    /**
+     * Creates a new empty dataset.
+     */
+    protected AbstractIntervalXYDataset() {
+        super();
+    }
 
     /**
      * Returns the start x-value (as a double primitive) for an item within a

@@ -70,6 +70,8 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * Using enum state pattern to control the 'offline' rendering
      */
     protected enum State {
+
+        /** Idle state. */
         IDLE {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
@@ -88,6 +90,8 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                         "offlineRenderingDone not expected in IDLE state");
             }
         },
+
+        /** Rendering state. */
         RENDERING {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
@@ -101,6 +105,13 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                 return RE_RENDERING_PENDING;
             }
 
+            /**
+             * Called when rendering is done.
+             *
+             * @param panel  the panel.
+             * @param renderer  the renderer.
+             * @return The state
+             */
             @Override
             protected State offlineRenderingDone(
                     OfflineRenderingChartPanel panel,
@@ -142,10 +153,24 @@ public class OfflineRenderingChartPanel extends ChartPanel {
             }
         };
 
+        /**
+         * Render the content offline.
+         *
+         * @param panel  the panel.
+         * @param renderer  the renderer.
+         * @return The state.
+         */
         protected abstract State renderOffline(
                 final OfflineRenderingChartPanel panel,
                 final OfflineChartRenderer renderer);
 
+        /**
+         * Called when rendering is done.
+         *
+         * @param panel  the panel.
+         * @param renderer  the renderer.
+         * @return The state.
+         */
         protected abstract State offlineRenderingDone(
                 final OfflineRenderingChartPanel panel,
                 final OfflineChartRenderer renderer);
@@ -158,6 +183,7 @@ public class OfflineRenderingChartPanel extends ChartPanel {
     /** A pending rendering for the chart. */
     private transient OfflineChartRenderer pendingOfflineRenderer = null;
 
+    /** The state. */
     private State state = State.IDLE;
 
     /**

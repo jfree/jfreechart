@@ -53,6 +53,13 @@ public class PlumNeedle extends MeterNeedle implements Cloneable, Serializable {
     private static final long serialVersionUID = -3082660488660600718L;
 
     /**
+     * Creates a new instance.
+     */
+    public PlumNeedle() {
+        super();
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.

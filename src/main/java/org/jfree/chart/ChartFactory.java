@@ -141,6 +141,10 @@ public abstract class ChartFactory {
     /** The chart theme. */
     private static ChartTheme currentTheme = new StandardChartTheme("JFree");
 
+    private ChartFactory() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns the current chart theme used by the factory.
      *
@@ -169,15 +173,8 @@ public abstract class ChartFactory {
         // here we do a check to see if the user is installing the "Legacy"
         // theme, and reset the bar painters in that case...
         if (theme instanceof StandardChartTheme) {
-            StandardChartTheme sct = (StandardChartTheme) theme;
-            if (sct.getName().equals("Legacy")) {
-                BarRenderer.setDefaultBarPainter(new StandardBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
-            }
-            else {
-                BarRenderer.setDefaultBarPainter(new GradientBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new GradientXYBarPainter());
-            }
+            BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+            XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
         }
     }
 

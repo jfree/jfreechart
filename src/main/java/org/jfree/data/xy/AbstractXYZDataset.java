@@ -44,6 +44,13 @@ public abstract class AbstractXYZDataset extends AbstractXYDataset
         implements XYZDataset {
 
     /**
+     * Creates a new empty dataset.
+     */
+    protected AbstractXYZDataset() {
+        super();
+    }
+
+    /**
      * Returns the z-value (as a double primitive) for an item within a series.
      *
      * @param series  the series (zero-based index).

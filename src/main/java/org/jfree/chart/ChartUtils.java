@@ -68,6 +68,10 @@ import org.jfree.chart.util.Args;
  */
 public abstract class ChartUtils {
 
+    private ChartUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Applies the current theme to the specified chart.  This method is
      * provided for convenience, the theme itself is stored in the

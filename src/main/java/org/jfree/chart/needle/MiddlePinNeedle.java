@@ -55,6 +55,13 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
     private static final long serialVersionUID = 6237073996403125310L;
 
     /**
+     * Creates a new instance.
+     */
+    public MiddlePinNeedle() {
+        super();
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.

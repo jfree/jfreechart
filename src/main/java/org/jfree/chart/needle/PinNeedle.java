@@ -54,6 +54,13 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
     private static final long serialVersionUID = -3787089953079863373L;
 
     /**
+     * Creates a new instance.
+     */
+    public PinNeedle() {
+        super();
+    }
+
+    /**
      * Draws the needle.
      *
      * @param g2  the graphics device.
