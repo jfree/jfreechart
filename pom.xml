@@ -141,6 +141,7 @@
                     <linksource>true</linksource>
                     <source>8</source>
                     <docfilessubdirs>true</docfilessubdirs>
+                    <quiet>true</quiet>
                 </configuration>
             </plugin>
             
