@@ -38,6 +38,7 @@ package org.jfree.chart.servlet;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,11 +48,13 @@ import javax.servlet.http.HttpSessionBindingListener;
 /**
  * Used for deleting charts from the temporary directory when the users session
  * expires.
+ *
+ * @deprecated To be removed in JFreeChart 2.0
  */
 public class ChartDeleter implements HttpSessionBindingListener, Serializable {
 
     /** The chart names. */
-    private final List chartNames = new java.util.ArrayList();
+    private final List<String> chartNames = new ArrayList<>();
 
     /**
      * Blank constructor.
@@ -101,12 +104,8 @@ public class ChartDeleter implements HttpSessionBindingListener, Serializable {
      */
     @Override
     public void valueUnbound(HttpSessionBindingEvent event) {
-        Iterator iter = this.chartNames.listIterator();
-        while (iter.hasNext()) {
-            String filename = (String) iter.next();
-            File file = new File(
-                System.getProperty("java.io.tmpdir"), filename
-            );
+        for (String filename : this.chartNames) {
+            File file = new File(System.getProperty("java.io.tmpdir"), filename);
             if (file.exists()) {
                 file.delete();
             }

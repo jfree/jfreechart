@@ -59,6 +59,8 @@ import org.jfree.chart.util.Args;
 
 /**
  * Utility class used for servlet related JFreeChart operations.
+ *
+ * @deprecated To be removed in JFreeChart 2.0
  */
 public class ServletUtilities {
 

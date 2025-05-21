@@ -60,6 +60,8 @@ import javax.servlet.http.HttpSession;
  *     &lt;url-pattern&gt;/servlet/DisplayChart&lt;/url-pattern&gt;
  * &lt;/servlet-mapping&gt;
  * &lt;/xmp&gt;
+ *
+ * @deprecated To be removed in JFreeChart 2.0
  */
 public class DisplayChart extends HttpServlet {
 
