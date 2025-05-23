@@ -46,8 +46,10 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A URL generator for pie charts.  Instances of this class are immutable.
+ *
+ * @param <K> the dataset key type.
  */
-public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
+public class StandardPieURLGenerator<K extends Comparable<K>> implements PieURLGenerator<K>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1626966402065883419L;
@@ -115,8 +117,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      * @return A string containing the generated URL.
      */
     @Override
-    public String generateURL(PieDataset dataset, Comparable key,
-            int pieIndex) {
+    public String generateURL(PieDataset<K> dataset, K key, int pieIndex) {
         String url = this.prefix;
         try {
             if (url.contains("?")) {
@@ -150,7 +151,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
         if (!(obj instanceof StandardPieURLGenerator)) {
             return false;
         }
-        StandardPieURLGenerator that = (StandardPieURLGenerator) obj;
+        StandardPieURLGenerator<K> that = (StandardPieURLGenerator<K>) obj;
         if (!this.prefix.equals(that.prefix)) {
             return false;
         }

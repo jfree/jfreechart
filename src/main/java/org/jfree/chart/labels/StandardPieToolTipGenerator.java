@@ -52,10 +52,11 @@ import org.jfree.data.general.PieDataset;
  * {1} for the absolute section value and {2} for the percent amount of the pie
  * section, e.g. {@code "{0} = {1} ({2})"} will display as
  * {@code apple = 120 (5%)}.
+ *
+ * @param <K> the dataset key type.
  */
-public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
-        implements PieToolTipGenerator, Cloneable, PublicCloneable,
-            Serializable {
+public class StandardPieToolTipGenerator<K extends Comparable<K>> extends AbstractPieItemLabelGenerator<K>
+        implements PieToolTipGenerator<K>, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2995304200445733779L;
@@ -124,7 +125,7 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      * @return The tool tip text (possibly {@code null}).
      */
     @Override
-    public String generateToolTip(PieDataset dataset, Comparable key) {
+    public String generateToolTip(PieDataset<K> dataset, K key) {
         return generateSectionLabel(dataset, key);
     }
 

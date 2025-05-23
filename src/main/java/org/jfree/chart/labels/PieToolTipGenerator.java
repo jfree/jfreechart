@@ -41,8 +41,10 @@ import org.jfree.data.general.PieDataset;
 /**
  * A tool tip generator that is used by the
  * {@link org.jfree.chart.plot.pie.PiePlot} class.
+ *
+ * @param <K> the dataset key type.
  */
-public interface PieToolTipGenerator {
+public interface PieToolTipGenerator<K extends Comparable<K>> {
 
     /**
      * Generates a tool tip text item for the specified item in the dataset.
@@ -54,6 +56,6 @@ public interface PieToolTipGenerator {
      *
      * @return The tool tip text (possibly {@code null}).
      */
-    String generateToolTip(PieDataset dataset, Comparable key);
+    String generateToolTip(PieDataset<K> dataset, K key);
 
 }

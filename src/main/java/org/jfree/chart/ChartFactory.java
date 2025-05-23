@@ -239,36 +239,34 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title, PieDataset dataset,
-            PieDataset previousDataset, int percentDiffForMaxScale,
+    public static JFreeChart createPieChart(String title, PieDataset<String> dataset,
+            PieDataset<String> previousDataset, int percentDiffForMaxScale,
             boolean greenForIncrease, boolean legend, boolean tooltips,
             Locale locale, boolean subTitle, boolean showDifference) {
 
-        PiePlot plot = new PiePlot(dataset);
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(locale));
+        PiePlot<String> plot = new PiePlot<>(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator<>(locale));
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
 
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator<>(locale));
         }
 
-        List keys = dataset.getKeys();
-        DefaultPieDataset series = null;
+        List<String> keys = dataset.getKeys();
+        DefaultPieDataset<String> series = null;
         if (showDifference) {
-            series = new DefaultPieDataset();
+            series = new DefaultPieDataset<>();
         }
 
         double colorPerPercent = 255.0 / percentDiffForMaxScale;
-        for (Iterator it = keys.iterator(); it.hasNext();) {
-            Comparable key = (Comparable) it.next();
+        for (String key : keys) {
             Number newValue = dataset.getValue(key);
             Number oldValue = previousDataset.getValue(key);
 
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.GREEN);
-                }
-                else {
+                } else {
                     plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
@@ -357,39 +355,37 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title, PieDataset dataset,
-            PieDataset previousDataset, int percentDiffForMaxScale,
+    public static JFreeChart createPieChart(String title, PieDataset<String> dataset,
+            PieDataset<String> previousDataset, int percentDiffForMaxScale,
             boolean greenForIncrease, boolean legend, boolean tooltips, 
             boolean urls, boolean subTitle, boolean showDifference) {
 
-        PiePlot plot = new PiePlot(dataset);
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
+        PiePlot<String> plot = new PiePlot<>(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator<>());
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
 
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator<>());
         }
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
 
-        List keys = dataset.getKeys();
-        DefaultPieDataset series = null;
+        List<String> keys = dataset.getKeys();
+        DefaultPieDataset<String> series = null;
         if (showDifference) {
             series = new DefaultPieDataset();
         }
 
         double colorPerPercent = 255.0 / percentDiffForMaxScale;
-        for (Iterator it = keys.iterator(); it.hasNext();) {
-            Comparable key = (Comparable) it.next();
+        for (String key : keys) {
             Number newValue = dataset.getValue(key);
             Number oldValue = previousDataset.getValue(key);
 
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.GREEN);
-                }
-                else {
+                } else {
                     plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
@@ -425,8 +421,7 @@ public abstract class ChartFactory {
             plot.setDataset(series);
         }
 
-        JFreeChart chart =  new JFreeChart(title,
-                JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
+        JFreeChart chart =  new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
             TextTitle subtitle = new TextTitle("Bright " + (greenForIncrease 
