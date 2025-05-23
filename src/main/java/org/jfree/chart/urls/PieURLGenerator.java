@@ -36,6 +36,7 @@
 
 package org.jfree.chart.urls;
 
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -46,8 +47,7 @@ import org.jfree.data.general.PieDataset;
  *     dataset, as this may be user-specified and could pose a security
  *     risk;</li>
  * <li>should be either (a) immutable, or (b) cloneable via the
- *     {@code PublicCloneable} interface (defined in the JCommon class
- *     library).  This provides a mechanism for the referring plot to clone
+ *     {@link PublicCloneable} interface. This provides a mechanism for the referring plot to clone
  *     the generator if necessary.</li>
  * </ul>
  */
@@ -64,6 +64,6 @@ public interface PieURLGenerator {
      *
      * @return A string containing the URL.
      */
-    String generateURL(PieDataset dataset, Comparable<?> key, int pieIndex);
+    String generateURL(PieDataset<?> dataset, Comparable<?> key, int pieIndex);
 
 }

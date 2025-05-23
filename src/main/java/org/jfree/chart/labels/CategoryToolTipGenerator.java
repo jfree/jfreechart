@@ -36,6 +36,7 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -45,8 +46,7 @@ import org.jfree.data.category.CategoryDataset;
  * items in a {@link org.jfree.chart.plot.CategoryPlot}.
  * <p>
  * To assist with cloning charts, classes that implement this interface should
- * also implement the {@code org.jfree.util.PublicCloneable} interface (in
- * JCommon).
+ * also implement the {@link PublicCloneable} interface.
  */
 public interface CategoryToolTipGenerator<R extends Comparable<R>, C extends Comparable<C>> {
 
