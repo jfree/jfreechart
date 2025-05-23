@@ -50,6 +50,11 @@ public class DefaultCategoryItemRenderer extends LineAndShapeRenderer
     /** For serialization. */
     private static final long serialVersionUID = -7793786349384231896L;
 
-    // no new methods
+    /**
+     * Creates a new default renderer.
+     */
+    public DefaultCategoryItemRenderer() {
+        super();
+    }
 
 }

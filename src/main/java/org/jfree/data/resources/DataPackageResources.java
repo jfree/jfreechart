@@ -40,9 +40,15 @@ import java.util.ListResourceBundle;
 
 /**
  * A resource bundle that stores all the items that might need localisation.
- *
  */
 public class DataPackageResources extends ListResourceBundle {
+
+    /**
+     * Creates a new instance.
+     */
+    public DataPackageResources() {
+        super();
+    }
 
     /**
      * Returns the array of strings in the resource bundle.

@@ -46,8 +46,13 @@ public class DefaultXYItemRenderer extends XYLineAndShapeRenderer
                                    implements Serializable {
 
     /** For serialization. */
-    static final long serialVersionUID = 3450423530996888074L;
+    private static final long serialVersionUID = 3450423530996888074L;
 
-    // no new methods
+    /**
+     * Creates a new default renderer.
+     */
+    public DefaultXYItemRenderer() {
+        super();
+    }
 
 }

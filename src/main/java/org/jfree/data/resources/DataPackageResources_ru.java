@@ -43,6 +43,13 @@ import java.util.ListResourceBundle;
 public class DataPackageResources_ru extends ListResourceBundle {
 
     /**
+     * Creates a new instance.
+     */
+    public DataPackageResources_ru() {
+        super();
+    }
+
+    /**
      * Returns the array of strings in the resource bundle.
      *
      * @return The localised resources.

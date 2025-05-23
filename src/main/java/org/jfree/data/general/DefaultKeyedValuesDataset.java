@@ -46,6 +46,11 @@ public class DefaultKeyedValuesDataset extends DefaultPieDataset
     /** For serialization. */
     private static final long serialVersionUID = 306264413152815781L;
 
-    // no new methods
+    /**
+     * Creates a new empty dataset.
+     */
+    public DefaultKeyedValuesDataset() {
+        super();
+    }
 
 }

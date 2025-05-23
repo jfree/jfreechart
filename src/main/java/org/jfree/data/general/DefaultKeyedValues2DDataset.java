@@ -50,6 +50,10 @@ public class DefaultKeyedValues2DDataset extends DefaultCategoryDataset
     /** For serialization. */
     private static final long serialVersionUID = 4288210771905990424L;
 
-    // no new methods
-
+    /**
+     * Creates a new empty dataset.
+     */
+    public DefaultKeyedValues2DDataset() {
+        super();
+    }
 }
