@@ -27,23 +27,16 @@
  * ------------------------
  * ImageEncoderFactory.java
  * ------------------------
- * (C) Copyright 2004-2012, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert;
  *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 01-Nov-2005 : Now using ImageIO for JPEG encoding, so we no longer have a
- *               dependency on com.sun.* which isn't available on all
- *               implementations (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 06-Jul-2008 : Remove encoder only used in JDK 1.3 (DG);
- *
  */
 
 package org.jfree.chart.encoders;
+
+import org.jfree.chart.internal.Args;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +52,10 @@ public class ImageEncoderFactory {
 
     static {
         init();
+    }
+
+    private ImageEncoderFactory() {
+        // no requirement to instantiate
     }
 
     /**
@@ -80,10 +77,8 @@ public class ImageEncoderFactory {
      */
     public static void setImageEncoder(String format,
                                        String imageEncoderClassName) {
-        if (format == null)
-            throw new IllegalArgumentException("Image format must not be null");
-        if (imageEncoderClassName == null)
-            throw new IllegalArgumentException("Image encoder class name must not be null");
+        Args.nullNotPermitted(format, "format");
+        Args.nullNotPermitted(imageEncoderClassName, "imageEncoderClassName");
         encoders.put(format, imageEncoderClassName);
     }
 

@@ -44,6 +44,13 @@ public class JSONArray extends ArrayList implements List, JSONAware,
     private static final long serialVersionUID = 3957988303675231981L;
 
     /**
+     * Creates a new instance.
+     */
+    public JSONArray() {
+        super();
+    }
+
+    /**
      * Encode a list into JSON text and write it to out. 
      * If this list is also a {@link JSONStreamAware} or a {@link JSONAware}, 
      * {@code JSONStreamAware} and {@code JSONAware} specific 

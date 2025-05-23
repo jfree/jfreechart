@@ -23,7 +23,6 @@
 
 package org.jfree.data.json.impl;
 
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
@@ -43,6 +42,13 @@ public class JSONObject extends HashMap implements Map, JSONAware,
         JSONStreamAware {
     
     private static final long serialVersionUID = -503443796854799292L;
+
+    /**
+     * Creates a new instance.
+     */
+    public JSONObject() {
+        super();
+    }
 
     /**
      * Encode a map into JSON text and write it to out.

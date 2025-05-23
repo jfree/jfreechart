@@ -27,7 +27,7 @@
  * -------------------------
  * SunPNGEncoderAdapter.java
  * -------------------------
- * (C) Copyright 2004-2021, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -50,6 +50,13 @@ import org.jfree.chart.internal.Args;
  * under a JDK 1.4+ and is being run using a JDK 1.4+.
  */
 public class SunPNGEncoderAdapter implements ImageEncoder {
+
+    /**
+     * Creates a new instance.
+     */
+    public SunPNGEncoderAdapter(){
+        super();
+    }
 
     /**
      * Get the quality of the image encoding (always 0.0).
