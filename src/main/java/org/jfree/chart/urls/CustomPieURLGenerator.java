@@ -196,7 +196,7 @@ public class CustomPieURLGenerator<K extends Comparable<K>> implements PieURLGen
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        CustomPieURLGenerator<K> urlGen = new CustomPieURLGenerator<K>();
+        CustomPieURLGenerator<K> urlGen = new CustomPieURLGenerator<>();
         for (Map<K, String> map : this.urlMaps) {
             urlGen.addURLs(new HashMap<>(map));
         }

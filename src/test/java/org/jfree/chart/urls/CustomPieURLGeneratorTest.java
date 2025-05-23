@@ -97,7 +97,7 @@ public class CustomPieURLGeneratorTest {
     @Test
     public void testPublicCloneable() {
         CustomPieURLGenerator<String> g1 = new CustomPieURLGenerator<>();
-        assertTrue(g1 instanceof PublicCloneable);
+        assertInstanceOf(PublicCloneable.class, g1);
     }
 
     /**
