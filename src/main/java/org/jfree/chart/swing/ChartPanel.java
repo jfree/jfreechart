@@ -138,7 +138,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         MouseMotionListener, OverlayChangeListener, Printable, Serializable {
 
     /** For serialization. */
-    protected static final long serialVersionUID = 6046366297214274674L;
+    private static final long serialVersionUID = 6046366297214274674L;
 
     /**
      * Default setting for buffer usage.  The default has been changed to
