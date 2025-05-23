@@ -52,6 +52,13 @@ import org.jfree.chart.util.Args;
 public class SunPNGEncoderAdapter implements ImageEncoder {
 
     /**
+     * Creates a new instance.
+     */
+    public SunPNGEncoderAdapter(){
+        super();
+    }
+
+    /**
      * Get the quality of the image encoding (always 0.0).
      *
      * @return A float representing the quality.

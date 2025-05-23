@@ -38,7 +38,14 @@ import java.util.Map;
  * in your project.
  */
 public class JSONValue {
-    
+
+    /**
+     * Creates a new instance.
+     */
+    public JSONValue() {
+        super();
+    }
+
 //    /**
 //     * Parse JSON text into java object from the input source. 
 //     * Please use parseWithException() if you don't want to ignore the 
