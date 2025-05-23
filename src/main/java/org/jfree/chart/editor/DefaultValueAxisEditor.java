@@ -199,7 +199,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Getter for the {@link #autoTickUnitSelection} flag.
+     * Getter for the {@code #autoTickUnitSelection} flag.
      * 
      * @return The value of the flag for enabling auto-tickunit-selection.
      */
@@ -208,7 +208,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Setter for the {@link #autoTickUnitSelection} flag.
+     * Setter for the {@code #autoTickUnitSelection} flag.
      * @param autoTickUnitSelection The new value for auto-tickunit-selection.
      */
     protected void setAutoTickUnitSelection(boolean autoTickUnitSelection) {

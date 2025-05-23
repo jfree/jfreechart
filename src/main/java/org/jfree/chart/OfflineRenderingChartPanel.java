@@ -125,6 +125,7 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                 return IDLE;
             }
         },
+        /** Rendering state pending. */
         RE_RENDERING_PENDING {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
