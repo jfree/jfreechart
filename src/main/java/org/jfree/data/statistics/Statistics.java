@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.jfree.chart.internal.Args;
 
 /**
@@ -83,12 +85,11 @@ public abstract class Statistics {
         double sum = 0.0;
         double current;
         int counter = 0;
-        for (int i = 0; i < values.length; i++) {
+        for (Number value : values) {
             // treat nulls the same as NaNs
-            if (values[i] != null) {
-                current = values[i].doubleValue();
-            }
-            else {
+            if (value != null) {
+                current = value.doubleValue();
+            } else {
                 current = Double.NaN;
             }
             // calculate the sum and count
@@ -130,25 +131,20 @@ public abstract class Statistics {
         Args.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
-        for (Object object : values) {
-            if (object == null) {
+        for (Number number : values) {
+            if (number == null) {
                 if (includeNullAndNaN) {
                     return Double.NaN;
                 }
-            }
-            else {
-                if (object instanceof Number) {
-                    Number number = (Number) object;
-                    double value = number.doubleValue();
-                    if (Double.isNaN(value)) {
-                        if (includeNullAndNaN) {
-                            return Double.NaN;
-                        }
+            } else {
+                double value = number.doubleValue();
+                if (Double.isNaN(value)) {
+                    if (includeNullAndNaN) {
+                        return Double.NaN;
                     }
-                    else {
-                        total = total + number.doubleValue();
-                        count = count + 1;
-                    }
+                } else {
+                    total = total + number.doubleValue();
+                    count = count + 1;
                 }
             }
         }
@@ -182,15 +178,10 @@ public abstract class Statistics {
      * @return The median.
      */
     public static double calculateMedian(List<? extends Number> values, boolean copyAndSort) {
-
         double result = Double.NaN;
         if (values != null) {
             if (copyAndSort) {
-                int itemCount = values.size();
-                List copy = new ArrayList(itemCount);
-                for (int i = 0; i < itemCount; i++) {
-                    copy.add(i, values.get(i));
-                }
+                List copy = values.stream().sorted().collect(Collectors.toList());
                 Collections.sort(copy);
                 values = copy;
             }
@@ -198,19 +189,16 @@ public abstract class Statistics {
             if (count > 0) {
                 if (count % 2 == 1) {
                     if (count > 1) {
-                        Number value = (Number) values.get((count - 1) / 2);
+                        Number value = values.get((count - 1) / 2);
+                        result = value.doubleValue();
+                    } else {
+                        Number value = values.get(0);
                         result = value.doubleValue();
                     }
-                    else {
-                        Number value = (Number) values.get(0);
-                        result = value.doubleValue();
-                    }
-                }
-                else {
-                    Number value1 = (Number) values.get(count / 2 - 1);
-                    Number value2 = (Number) values.get(count / 2);
-                    result = (value1.doubleValue() + value2.doubleValue())
-                             / 2.0;
+                } else {
+                    Number value1 = values.get(count / 2 - 1);
+                    Number value2 = values.get(count / 2);
+                    result = (value1.doubleValue() + value2.doubleValue()) / 2.0;
                 }
             }
         }
@@ -261,25 +249,20 @@ public abstract class Statistics {
             if (count > 0) {
                 if (count % 2 == 1) {
                     if (count > 1) {
-                        Number value
-                            = (Number) values.get(start + (count - 1) / 2);
+                        Number value = values.get(start + (count - 1) / 2);
+                        result = value.doubleValue();
+                    } else {
+                        Number value = values.get(start);
                         result = value.doubleValue();
                     }
-                    else {
-                        Number value = (Number) values.get(start);
-                        result = value.doubleValue();
-                    }
-                }
-                else {
-                    Number value1 = (Number) values.get(start + count / 2 - 1);
-                    Number value2 = (Number) values.get(start + count / 2);
-                    result
-                        = (value1.doubleValue() + value2.doubleValue()) / 2.0;
+                } else {
+                    Number value1 = values.get(start + count / 2 - 1);
+                    Number value2 = values.get(start + count / 2);
+                    result = (value1.doubleValue() + value2.doubleValue()) / 2.0;
                 }
             }
         }
         return result;
-
     }
 
     /**
@@ -297,9 +280,8 @@ public abstract class Statistics {
         }
         double avg = calculateMean(data);
         double sum = 0.0;
-
-        for (int counter = 0; counter < data.length; counter++) {
-            double diff = data[counter].doubleValue() - avg;
+        for (Number datum : data) {
+            double diff = datum.doubleValue() - avg;
             sum = sum + diff * diff;
         }
         return Math.sqrt(sum / (data.length - 1));
@@ -330,7 +312,6 @@ public abstract class Statistics {
         result[0] = calculateMean(yData) - result[1] * calculateMean(xData);
 
         return result;
-
     }
 
     /**
@@ -373,10 +354,10 @@ public abstract class Statistics {
     /**
      * Calculates the correlation between two datasets.  Both arrays should
      * contain the same number of items.  Null values are treated as zero.
-     * <P>
+     * <p>
      * Information about the correlation calculation was obtained from:
-     *
-     * http://trochim.human.cornell.edu/kb/statcorr.htm
+     * <p>
+     * <a href="http://trochim.human.cornell.edu/kb/statcorr.htm">http://trochim.human.cornell.edu/kb/statcorr.htm</a>
      *
      * @param data1  the first dataset.
      * @param data2  the second dataset.
@@ -387,9 +368,7 @@ public abstract class Statistics {
         Args.nullNotPermitted(data1, "data1");
         Args.nullNotPermitted(data2, "data2");
         if (data1.length != data2.length) {
-            throw new IllegalArgumentException(
-                "'data1' and 'data2' arrays must have same length."
-            );
+            throw new IllegalArgumentException("'data1' and 'data2' arrays must have same length.");
         }
         int n = data1.length;
         double sumX = 0.0;
@@ -428,15 +407,11 @@ public abstract class Statistics {
      */
     public static double[][] getMovingAverage(Number[] xData, Number[] yData,
             int period) {
-
-        // check arguments...
         if (xData.length != yData.length) {
             throw new IllegalArgumentException("Array lengths must be equal.");
         }
-
         if (period > xData.length) {
-            throw new IllegalArgumentException(
-                "Period can't be longer than dataset.");
+            throw new IllegalArgumentException("Period can't be longer than dataset.");
         }
 
         double[][] result = new double[xData.length - period][2];
@@ -451,7 +426,6 @@ public abstract class Statistics {
             result[i][1] = sum;
         }
         return result;
-
     }
 
 }

@@ -115,7 +115,7 @@ public class StatisticsTest {
         // try a null collection
         boolean pass = false;
         try {
-            Statistics.calculateMean((Collection) null);
+            Statistics.calculateMean((Collection<Number>) null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -124,7 +124,7 @@ public class StatisticsTest {
 
         pass = false;
         try {
-            Statistics.calculateMean((Collection) null, false);
+            Statistics.calculateMean((Collection<Number>) null, false);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -353,8 +353,8 @@ public class StatisticsTest {
 
     /**
      * A simple test for the correlation calculation.
-     *
-     * http://trochim.human.cornell.edu/kb/statcorr.htm
+     * <p>
+     * <a href="http://trochim.human.cornell.edu/kb/statcorr.htm">http://trochim.human.cornell.edu/kb/statcorr.htm</a>
      */
     @Test
     public void testCorrelation2() {
