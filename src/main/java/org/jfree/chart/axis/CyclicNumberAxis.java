@@ -764,8 +764,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @return The Java 2D value.
      */
     @Override
-    public double valueToJava2D(double value, Rectangle2D dataArea,
-            RectangleEdge edge) {
+    public double valueToJava2D(double value, Rectangle2D dataArea, RectangleEdge edge) {
         Range range = getRange();
 
         double vmin = range.getLowerBound();
@@ -776,39 +775,40 @@ public class CyclicNumberAxis extends NumberAxis {
             return Double.NaN;
         }
 
-
         double jmin = 0.0;
         double jmax = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
             jmin = dataArea.getMinX();
             jmax = dataArea.getMaxX();
-        }
-        else if (RectangleEdge.isLeftOrRight(edge)) {
+        } else if (RectangleEdge.isLeftOrRight(edge)) {
             jmax = dataArea.getMinY();
             jmin = dataArea.getMaxY();
         }
 
         if (isInverted()) {
-            if (value == vp) {
-                return this.boundMappedToLastCycle ? jmin : jmax;
-            }
-            else if (value > vp) {
-                return jmax - (value - vp) * (jmax - jmin) / this.period;
-            }
-            else {
-                return jmin + (vp - value) * (jmax - jmin) / this.period;
-            }
+            return valueToJava2DInverted(value, vp, jmin, jmax);
+        } else {
+            return valueToJava2DNormal(value, vp, jmin, jmax);
         }
-        else {
-            if (value == vp) {
-                return this.boundMappedToLastCycle ? jmax : jmin;
-            }
-            else if (value >= vp) {
-                return jmin + (value - vp) * (jmax - jmin) / this.period;
-            }
-            else {
-                return jmax - (vp - value) * (jmax - jmin) / this.period;
-            }
+    }
+
+    private double valueToJava2DInverted(double value, double vp, double jmin, double jmax) {
+        if (value == vp) {
+            return this.boundMappedToLastCycle ? jmin : jmax;
+        } else if (value > vp) {
+            return jmax - (value - vp) * (jmax - jmin) / this.period;
+        } else {
+            return jmin + (vp - value) * (jmax - jmin) / this.period;
+        }
+    }
+
+    private double valueToJava2DNormal(double value, double vp, double jmin, double jmax) {
+        if (value == vp) {
+            return this.boundMappedToLastCycle ? jmax : jmin;
+        } else if (value >= vp) {
+            return jmin + (value - vp) * (jmax - jmin) / this.period;
+        } else {
+            return jmax - (vp - value) * (jmax - jmin) / this.period;
         }
     }
 

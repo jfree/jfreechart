@@ -1207,9 +1207,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 size.getHeight());
         Shape rotatedBox = ShapeUtils.rotateShape(box, position.getAngle(),
                 0.0f, 0.0f);
-        double w = rotatedBox.getBounds2D().getWidth() + insets.getLeft()
+        double width = rotatedBox.getBounds2D().getWidth() + insets.getLeft()
                 + insets.getRight();
-        return w;
+        return width;
     }
 
     /**

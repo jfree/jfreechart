@@ -36,6 +36,7 @@
 
 package org.jfree.chart.annotations;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -56,6 +57,8 @@ import org.jfree.chart.event.AnnotationChangeListener;
 public abstract class AbstractAnnotation implements Annotation, Cloneable,
         Serializable {
 
+    /** The default paint. */
+    public static final Paint DEFAULT_PAINT = Color.BLACK;
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
 

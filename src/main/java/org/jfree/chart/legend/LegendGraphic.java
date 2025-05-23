@@ -485,64 +485,26 @@ public class LegendGraphic extends AbstractBlock
         LengthConstraintType w = contentConstraint.getWidthConstraintType();
         LengthConstraintType h = contentConstraint.getHeightConstraintType();
         Size2D contentSize = null;
+        WidthConstraint widthConstraint;
+
         switch (w) {
             case NONE:
-                if (h == LengthConstraintType.NONE) {
-                    contentSize = arrangeNN(g2);
-                }
-                else if (h == LengthConstraintType.RANGE) {
-                    throw new RuntimeException("Not yet implemented.");
-                }
-                else if (h == LengthConstraintType.FIXED) {
-                    throw new RuntimeException("Not yet implemented.");
-                }   break;
+                widthConstraint = new NoneWidthConstraint();
+                break;
             case RANGE:
-                if (h == LengthConstraintType.NONE) {
-                    throw new RuntimeException("Not yet implemented.");
-                }
-                else if (h == LengthConstraintType.RANGE) {
-                    throw new RuntimeException("Not yet implemented.");
-                }
-                else if (h == LengthConstraintType.FIXED) {
-                    throw new RuntimeException("Not yet implemented.");
-                }   break;
+                widthConstraint = new RangeWidthConstraint();
+                break;
             case FIXED:
-                if (h == LengthConstraintType.NONE) {
-                    throw new RuntimeException("Not yet implemented.");
-                }
-                else if (h == LengthConstraintType.RANGE) {
-                    throw new RuntimeException("Not yet implemented.");
-                }
-                else if (h == LengthConstraintType.FIXED) {
-                    contentSize = new Size2D(contentConstraint.getWidth(),
-                            contentConstraint.getHeight());
-                }   break;
+                widthConstraint = new FixedWidthConstraint();
+                break;
             default:
                 throw new IllegalStateException("Unrecognised widthConstraintType.");
         }
+
+        contentSize = widthConstraint.arrange(g2, contentConstraint);
         assert contentSize != null;
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
                 calculateTotalHeight(contentSize.getHeight()));
-    }
-
-    /**
-     * Performs the layout with no constraint, so the content size is
-     * determined by the bounds of the shape and/or line drawn to represent
-     * the series.
-     *
-     * @param g2  the graphics device.
-     *
-     * @return  The content size.
-     */
-    protected Size2D arrangeNN(Graphics2D g2) {
-        Rectangle2D contentSize = new Rectangle2D.Double();
-        if (this.line != null) {
-            contentSize.setRect(this.line.getBounds2D());
-        }
-        if (this.shape != null) {
-            contentSize = contentSize.createUnion(this.shape.getBounds2D());
-        }
-        return new Size2D(contentSize.getWidth(), contentSize.getHeight());
     }
 
     /**
