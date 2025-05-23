@@ -39,7 +39,6 @@ package org.jfree.chart.urls;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,15 +51,17 @@ import org.jfree.data.general.PieDataset;
 /**
  * A custom URL generator for pie charts.  This implementation supports both
  * the standard {@link PiePlot} as well as {@link MultiplePiePlot}.
+ *
+ * @param <K> the dataset key type
  */
-public class CustomPieURLGenerator implements PieURLGenerator,
+public class CustomPieURLGenerator<K extends Comparable<K>> implements PieURLGenerator<K>,
         Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7100607670144900503L;
 
     /** Storage for the URLs - a list to support multi pie plots. */
-    private final List<Map<Comparable<?>, String>> urlMaps;
+    private final List<Map<K, String>> urlMaps;
 
     /**
      * Creates a new {@code CustomPieURLGenerator} instance, initially
@@ -83,8 +84,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * @see #getURL(Comparable, int)
      */
     @Override
-    public String generateURL(PieDataset dataset, Comparable<?> key,
-                              int plotIndex) {
+    public String generateURL(PieDataset<K> dataset, K key, int plotIndex) {
         return getURL(key, plotIndex);
     }
 
@@ -113,7 +113,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      */
     public int getURLCount(int plotIndex) {
         int result = 0;
-        Map<Comparable<?>, String> urlMap = this.urlMaps.get(plotIndex);
+        Map<K, String> urlMap = this.urlMaps.get(plotIndex);
         if (urlMap != null) {
             result = urlMap.size();
         }
@@ -128,10 +128,10 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      *
      * @return The URL.
      */
-    public String getURL(Comparable<?> key, int plotIndex) {
+    public String getURL(K key, int plotIndex) {
         String result = null;
         if (plotIndex < getListCount()) {
-            Map<Comparable<?>, String> urlMap = this.urlMaps.get(plotIndex);
+            Map<K, String> urlMap = this.urlMaps.get(plotIndex);
             if (urlMap != null) {
                 result = (String) urlMap.get(key);
             }
@@ -141,7 +141,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
 
     /**
      * Adds a map containing {@code (key, URL)} mappings where each
-     * {@code key} is an instance of {@code Comparable}
+     * {@code key} is an instance of {@code K}
      * (corresponding to the key for an item in a pie dataset) and each
      * {@code URL} is a {@code String} representing a URL fragment.
      * <br><br>
@@ -150,40 +150,34 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      *
      * @param urlMap  the URLs ({@code null} permitted).
      */
-    public void addURLs(Map urlMap) {
+    public void addURLs(Map<K, String> urlMap) {
         this.urlMaps.add(urlMap);
     }
 
     /**
      * Tests if this object is equal to another.
      *
-     * @param o  the other object.
+     * @param obj  the other object.
      *
      * @return A boolean.
      */
     @Override
-    public boolean equals(Object o) {
-
-        if (o == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-
-        if (o instanceof CustomPieURLGenerator) {
-            CustomPieURLGenerator generator = (CustomPieURLGenerator) o;
+        if (obj instanceof CustomPieURLGenerator) {
+            CustomPieURLGenerator<K> generator = (CustomPieURLGenerator<K>) obj;
             if (getListCount() != generator.getListCount()) {
                 return false;
             }
-            Set keySet;
             for (int pieItem = 0; pieItem < getListCount(); pieItem++) {
                 if (getURLCount(pieItem) != generator.getURLCount(pieItem)) {
                     return false;
                 }
-                keySet = this.urlMaps.get(pieItem).keySet();
-                String key;
-                for (Iterator i = keySet.iterator(); i.hasNext();) {
-                key = (String) i.next();
-                    if (!getURL(key, pieItem).equals(
-                            generator.getURL(key, pieItem))) {
+                Set<K> keySet = this.urlMaps.get(pieItem).keySet();
+                for (K key : keySet) {
+                    if (!getURL(key, pieItem).equals(generator.getURL(key, pieItem))) {
                         return false;
                     }
                 }
@@ -202,23 +196,10 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        CustomPieURLGenerator urlGen = new CustomPieURLGenerator();
-        Map map;
-        Map newMap;
-        String key;
-
-        for (Iterator i = this.urlMaps.iterator(); i.hasNext();) {
-            map = (Map) i.next();
-
-            newMap = new HashMap();
-            for (Iterator j = map.keySet().iterator(); j.hasNext();) {
-                key = (String) j.next();
-                newMap.put(key, map.get(key));
-            }
-
-            urlGen.addURLs(newMap);
+        CustomPieURLGenerator<K> urlGen = new CustomPieURLGenerator<K>();
+        for (Map<K, String> map : this.urlMaps) {
+            urlGen.addURLs(new HashMap<>(map));
         }
-
         return urlGen;
     }
 

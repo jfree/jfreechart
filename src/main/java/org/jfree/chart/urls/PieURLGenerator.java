@@ -50,8 +50,10 @@ import org.jfree.data.general.PieDataset;
  *     {@link PublicCloneable} interface. This provides a mechanism for the referring plot to clone
  *     the generator if necessary.</li>
  * </ul>
+ *
+ * @param <K> the dataset key type
  */
-public interface PieURLGenerator {
+public interface PieURLGenerator<K extends Comparable<K>>  {
 
     /**
      * Generates a URL for one item in a {@link PieDataset}. As a guideline,
@@ -64,6 +66,6 @@ public interface PieURLGenerator {
      *
      * @return A string containing the URL.
      */
-    String generateURL(PieDataset<?> dataset, Comparable<?> key, int pieIndex);
+    String generateURL(PieDataset<K> dataset, K key, int pieIndex);
 
 }
