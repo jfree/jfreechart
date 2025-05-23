@@ -55,6 +55,8 @@ import org.jfree.data.xy.IntervalXYDataset;
  * well as the extended {@link IntervalXYDataset} interface.  This makes it a
  * convenient dataset for use with the {@link org.jfree.chart.plot.XYPlot}
  * class.
+ *
+ * @param <S> the series key type.
  */
 public class TimePeriodValuesCollection<S extends Comparable<S>> extends AbstractIntervalXYDataset<S>
         implements IntervalXYDataset<S>, DomainInfo, Serializable {

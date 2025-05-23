@@ -54,7 +54,7 @@ public class TimePeriodValuesCollectionTest {
      */
     @Test
     public void test1161340() {
-        TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
+        TimePeriodValuesCollection<String> dataset = new TimePeriodValuesCollection<>();
         TimePeriodValues<String> v1 = new TimePeriodValues<>("V1");
         v1.add(new Day(11, 3, 2005), 1.2);
         v1.add(new Day(12, 3, 2005), 3.4);
@@ -76,8 +76,8 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testEquals() {
         
-        TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2 = new TimePeriodValuesCollection();
+        TimePeriodValuesCollection<String> c1 = new TimePeriodValuesCollection<>();
+        TimePeriodValuesCollection<String> c2 = new TimePeriodValuesCollection<>();
         assertEquals(c1, c2);
         
         c1.setXPosition(TimePeriodAnchor.END);
@@ -99,8 +99,8 @@ public class TimePeriodValuesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2 = TestUtils.serialised(c1);
+        TimePeriodValuesCollection<String> c1 = new TimePeriodValuesCollection<>();
+        TimePeriodValuesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -109,7 +109,7 @@ public class TimePeriodValuesCollectionTest {
      */
     @Test
     public void testGetSeries() {
-        TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
+        TimePeriodValuesCollection<String> c1 = new TimePeriodValuesCollection<>();
         TimePeriodValues<String> s1 = new TimePeriodValues<>("Series 1");
         c1.addSeries(s1);
         assertEquals("Series 1", c1.getSeries(0).getKey());
@@ -141,7 +141,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testGetDomainBoundsWithoutInterval() {
         // check empty dataset
-        TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
+        TimePeriodValuesCollection<String> dataset = new TimePeriodValuesCollection<>();
         Range r = dataset.getDomainBounds(false);
         assertNull(r);
         
@@ -168,7 +168,7 @@ public class TimePeriodValuesCollectionTest {
     @Test 
     public void testGetDomainBoundsWithInterval() {
         // check empty dataset
-        TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
+        TimePeriodValuesCollection<String> dataset = new TimePeriodValuesCollection<>();
         Range r = dataset.getDomainBounds(true);
         assertNull(r);
         
