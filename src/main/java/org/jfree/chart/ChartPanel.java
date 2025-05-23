@@ -405,7 +405,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * The mask for mouse events to trigger panning.
      */
-    private int panMask = InputEvent.CTRL_MASK;
+    private int panMask = InputEvent.CTRL_DOWN_MASK;
 
     /**
      * A list of overlays for the panel.
@@ -590,12 +590,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.zoomOutlinePaint = Color.BLUE;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
 
-        this.panMask = InputEvent.CTRL_MASK;
+        this.panMask = InputEvent.CTRL_DOWN_MASK;
         // for MacOSX we can't use the CTRL key for mouse drags, see:
         // http://developer.apple.com/qa/qa2004/qa1362.html
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.startsWith("mac os x")) {
-            this.panMask = InputEvent.ALT_MASK;
+            this.panMask = InputEvent.ALT_DOWN_MASK;
         }
 
         this.overlays = new ArrayList<>();
@@ -1536,65 +1536,65 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             screenY = this.zoomPoint.getY();
         }
 
-        if (command.equals(PROPERTIES_COMMAND)) {
-            doEditChartProperties();
+        switch (command) {
+            case PROPERTIES_COMMAND:
+                doEditChartProperties();
+                break;
+            case COPY_COMMAND:
+                doCopy();
+                break;
+            case SAVE_AS_PNG_COMMAND:
+                try {
+                    doSaveAs();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "I/O error occurred.",
+                            localizationResources.getString("Save_as_PNG"),
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case SAVE_AS_SVG_COMMAND:
+                try {
+                    saveAsSVG(null);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "I/O error occurred.",
+                            localizationResources.getString("Save_as_SVG"),
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case SAVE_AS_PDF_COMMAND:
+                saveAsPDF(null);
+                break;
+            case PRINT_COMMAND:
+                createChartPrintJob();
+                break;
+            case ZOOM_IN_BOTH_COMMAND:
+                zoomInBoth(screenX, screenY);
+                break;
+            case ZOOM_IN_DOMAIN_COMMAND:
+                zoomInDomain(screenX, screenY);
+                break;
+            case ZOOM_IN_RANGE_COMMAND:
+                zoomInRange(screenX, screenY);
+                break;
+            case ZOOM_OUT_BOTH_COMMAND:
+                zoomOutBoth(screenX, screenY);
+                break;
+            case ZOOM_OUT_DOMAIN_COMMAND:
+                zoomOutDomain(screenX, screenY);
+                break;
+            case ZOOM_OUT_RANGE_COMMAND:
+                zoomOutRange(screenX, screenY);
+                break;
+            case ZOOM_RESET_BOTH_COMMAND:
+                restoreAutoBounds();
+                break;
+            case ZOOM_RESET_DOMAIN_COMMAND:
+                restoreAutoDomainBounds();
+                break;
+            case ZOOM_RESET_RANGE_COMMAND:
+                restoreAutoRangeBounds();
+                break;
         }
-        else if (command.equals(COPY_COMMAND)) {
-            doCopy();
-        }
-        else if (command.equals(SAVE_AS_PNG_COMMAND)) {
-            try {
-                doSaveAs();
-            }
-            catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "I/O error occurred.",
-                        localizationResources.getString("Save_as_PNG"),
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        }
-        else if (command.equals(SAVE_AS_SVG_COMMAND)) {
-            try {
-                saveAsSVG(null);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "I/O error occurred.",
-                        localizationResources.getString("Save_as_SVG"),
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        }
-        else if (command.equals(SAVE_AS_PDF_COMMAND)) {
-            saveAsPDF(null);
-        }
-        else if (command.equals(PRINT_COMMAND)) {
-            createChartPrintJob();
-        }
-        else if (command.equals(ZOOM_IN_BOTH_COMMAND)) {
-            zoomInBoth(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_IN_DOMAIN_COMMAND)) {
-            zoomInDomain(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_IN_RANGE_COMMAND)) {
-            zoomInRange(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_BOTH_COMMAND)) {
-            zoomOutBoth(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_DOMAIN_COMMAND)) {
-            zoomOutDomain(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_RANGE_COMMAND)) {
-            zoomOutRange(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_RESET_BOTH_COMMAND)) {
-            restoreAutoBounds();
-        }
-        else if (command.equals(ZOOM_RESET_DOMAIN_COMMAND)) {
-            restoreAutoDomainBounds();
-        }
-        else if (command.equals(ZOOM_RESET_RANGE_COMMAND)) {
-            restoreAutoRangeBounds();
-        }
-
     }
 
     /**
@@ -1655,7 +1655,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             return;
         }
         Plot plot = this.chart.getPlot();
-        int mods = e.getModifiers();
+        int mods = e.getModifiersEx();
         if ((mods & this.panMask) == this.panMask) {
             // can we pan this plot?
             if (plot instanceof Pannable) {
@@ -2589,21 +2589,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (file != null) {
             // use reflection to get the SVG string
             String svg = generateSVG(getWidth(), getHeight());
-            BufferedWriter writer = null;
-            try {
-                writer = new BufferedWriter(new FileWriter(file));
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
                 writer.write(svg + "\n");
                 writer.flush();
-            } finally {
-                try {
-                    if (writer != null) {
-                        writer.close();
-                    }
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            } 
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
         }
     }
@@ -2640,8 +2632,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     private Graphics2D createSVGGraphics2D(int w, int h) {
         try {
-            Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
-            Constructor ctor = svgGraphics2d.getConstructor(int.class, int.class);
+            Class<?> svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            Constructor<?> ctor = svgGraphics2d.getConstructor(int.class, int.class);
             return (Graphics2D) ctor.newInstance(w, h);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -2701,7 +2693,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @return A boolean.
      */
     private boolean isOrsonPDFAvailable() {
-        Class pdfDocumentClass = null;
+        Class<?> pdfDocumentClass = null;
         try {
             pdfDocumentClass = Class.forName("com.orsonpdf.PDFDocument");
         } catch (ClassNotFoundException e) {
@@ -2727,8 +2719,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         Args.nullNotPermitted(file, "file");
         try {
-            Class pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
-            Object pdfDoc = pdfDocClass.newInstance();
+            Class<?> pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
+            Object pdfDoc = pdfDocClass.getDeclaredConstructor().newInstance();
             Method m = pdfDocClass.getMethod("createPage", Rectangle2D.class);
             Rectangle2D rect = new Rectangle(w, h);
             Object page = m.invoke(pdfDoc, rect);
