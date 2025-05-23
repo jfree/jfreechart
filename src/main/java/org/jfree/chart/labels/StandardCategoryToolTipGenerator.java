@@ -45,6 +45,9 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A standard tool tip generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class StandardCategoryToolTipGenerator<R extends Comparable<R>, C extends Comparable<C>>
         extends AbstractCategoryItemLabelGenerator<R, C>

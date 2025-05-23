@@ -47,6 +47,8 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A base class used for generating pie chart item labels.
+ *
+ * @param <K> the dataset key type.
  */
 public class AbstractPieItemLabelGenerator<K extends Comparable<K>> implements Serializable {
 

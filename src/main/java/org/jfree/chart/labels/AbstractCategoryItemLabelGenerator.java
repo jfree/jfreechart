@@ -52,6 +52,9 @@ import org.jfree.data.category.CategoryDataset;
  * A base class that can be used to create a label or tooltip generator that
  * can be assigned to a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public abstract class AbstractCategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>>
         implements PublicCloneable, Cloneable, Serializable {

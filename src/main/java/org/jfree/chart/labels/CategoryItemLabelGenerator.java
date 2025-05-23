@@ -46,6 +46,9 @@ import org.jfree.data.category.CategoryDataset;
  * <p>
  * To assist with cloning charts, classes that implement this interface should
  * also implement the {@link org.jfree.chart.api.PublicCloneable} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public interface CategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>> {
 

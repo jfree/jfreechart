@@ -46,6 +46,9 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A standard label generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public class StandardCategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>>
     extends AbstractCategoryItemLabelGenerator<R, C>

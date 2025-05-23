@@ -58,6 +58,8 @@ import org.jfree.data.general.PieDataset;
  * {1} for the absolute section value and {2} for the percent amount of the pie
  * section, e.g. {@code "{0} = {1} ({2})"} will display as
  * {@code apple = 120 (5%)}.
+ *
+ * @param <K> the dataset key type.
  */
 public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
         extends AbstractPieItemLabelGenerator<K>

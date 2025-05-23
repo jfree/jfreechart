@@ -55,6 +55,8 @@ import org.jfree.data.general.DatasetChangeEvent;
  * category can be modified, which provides a means of "sliding" through
  * the categories in the underlying dataset.
  *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  * @since 1.0.10
  */
 public class SlidingGanttCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>
