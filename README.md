@@ -3,7 +3,7 @@ JFreeChart
 
 Version 1.5.6, 21 May 2025.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)](https://central.sonatype.com/artifact/org.jfree/jfreechart/versions) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
 
 Overview
 --------
