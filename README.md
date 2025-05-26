@@ -3,7 +3,7 @@ JFreeChart
 
 Version 2.0.0, not yet released.
 
-![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)](https://central.sonatype.com/artifact/org.jfree/jfreechart/versions)
 
 Overview
 --------
