@@ -111,7 +111,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     private List<Color> nodeColorSwatch;
     
     /** A pointer into the color swatch. */
-    private int nodeColorSwatchPointer = 0;
+    private int nodeColorSwatchPointer;
 
     /** The default node color if nothing is defined in the nodeColorMap. */
     private Color defaultNodeColor;
@@ -270,14 +270,15 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     }
 
     /**
-     * Sets the color swatch for the plot.
+     * Sets the color swatch for the plot and sends a change
+     * notification to all registered listeners.
      * 
      * @param colors  the list of colors ({@code null} not permitted). 
      */
     public void setNodeColorSwatch(List<Color> colors) {
         Args.nullNotPermitted(colors, "colors");
         this.nodeColorSwatch = colors;
-        
+        fireChangeEvent();
     }
     
     /**
@@ -540,8 +541,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
             // calculate the source node and flow rectangles
             Map<FlowKey, Rectangle2D> sourceFlowRects = new HashMap<>();
             double nodeY = area.getY();
-            for (Object s : this.dataset.getSources(stage)) {
-                Comparable source = (Comparable) s;
+            for (Comparable source : (List<Comparable>) this.dataset.getSources(stage)) {
                 double inflow = FlowDatasetUtils.calculateInflow(dataset, source, stage);
                 double outflow = FlowDatasetUtils.calculateOutflow(dataset, source, stage);
                 double nodeHeight = (Math.max(inflow, outflow) * flow2d);
@@ -551,8 +551,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
                 }
                 nodeRects.put(new NodeKey<>(stage, source), nodeRect);
                 double y = nodeY;
-                for (Object d : this.dataset.getDestinations(stage)) {
-                    Comparable destination = (Comparable) d;
+                for (Comparable destination : (List<Comparable>) this.dataset.getDestinations(stage)) {
                     Number flow = this.dataset.getFlow(stage, source, destination);
                     if (flow != null) {
                         double height = flow.doubleValue() * flow2d;
@@ -567,15 +566,13 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
             // calculate the destination rectangles
             Map<FlowKey, Rectangle2D> destFlowRects = new HashMap<>();
             nodeY = area.getY();
-            for (Object d : this.dataset.getDestinations(stage)) {
-                Comparable destination = (Comparable) d;
+            for (Comparable destination : (List<Comparable>) this.dataset.getDestinations(stage)) {
                 double inflow = FlowDatasetUtils.calculateInflow(dataset, destination, stage + 1);
                 double outflow = FlowDatasetUtils.calculateOutflow(dataset, destination, stage + 1);
                 double nodeHeight = Math.max(inflow, outflow) * flow2d;
                 nodeRects.put(new NodeKey<>(stage + 1, destination), new Rectangle2D.Double(stageRight, nodeY, nodeWidth, nodeHeight));
                 double y = nodeY;
-                for (Object s : this.dataset.getSources(stage)) {
-                    Comparable source = (Comparable) s;
+                for (Comparable source : (List<Comparable>) this.dataset.getSources(stage)) {
                     Number flow = this.dataset.getFlow(stage, source, destination);
                     if (flow != null) {
                         double height = flow.doubleValue() * flow2d;
@@ -587,8 +584,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
                 nodeY = nodeY + nodeHeight + nodeMargin2d;
             }
         
-            for (Object s : this.dataset.getSources(stage)) {
-                Comparable source = (Comparable) s;
+            for (Comparable source : (List<Comparable>) this.dataset.getSources(stage)) {
                 NodeKey nodeKey = new NodeKey<>(stage, source);
                 Rectangle2D nodeRect = nodeRects.get(nodeKey);
                 Color ncol = lookupNodeColor(nodeKey);
@@ -601,8 +597,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
                 g2.setPaint(ncol);
                 g2.fill(nodeRect);
                                 
-                for (Object d : this.dataset.getDestinations(stage)) {
-                    Comparable destination = (Comparable) d;
+                for (Comparable destination : (List<Comparable>) this.dataset.getDestinations(stage)) {
                     FlowKey flowKey = new FlowKey<>(stage, source, destination);
                     Rectangle2D sourceRect = sourceFlowRects.get(flowKey);
                     if (sourceRect == null) { 
@@ -644,8 +639,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
         
         // now draw the destination nodes
         int lastStage = this.dataset.getStageCount() - 1;
-        for (Object d : this.dataset.getDestinations(lastStage)) {
-            Comparable destination = (Comparable) d;
+        for (Comparable destination : (List<Comparable>) this.dataset.getDestinations(lastStage)) {
             NodeKey nodeKey = new NodeKey<>(lastStage + 1, destination);
             Rectangle2D nodeRect = nodeRects.get(nodeKey);
             if (nodeRect != null) {
