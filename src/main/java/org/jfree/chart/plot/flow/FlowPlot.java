@@ -257,7 +257,7 @@ public class FlowPlot<K extends Comparable<K>> extends Plot implements Cloneable
     }
 
     /**
-     * Returns the list of colors that will be used to auto-populate the node
+     * Returns the list of colors that will be used to autopopulate the node
      * colors when they are first rendered.  If the list is empty, no color 
      * will be assigned to the node so, unless it is manually set, the default
      * color will apply.  This method returns a copy of the list, modifying
@@ -270,14 +270,15 @@ public class FlowPlot<K extends Comparable<K>> extends Plot implements Cloneable
     }
 
     /**
-     * Sets the color swatch for the plot.
+     * Sets the color swatch for the plot and sends a change
+     * notification to all registered listeners.
      * 
      * @param colors  the list of colors ({@code null} not permitted). 
      */
     public void setNodeColorSwatch(List<Color> colors) {
         Args.nullNotPermitted(colors, "colors");
         this.nodeColorSwatch = colors;
-        
+        fireChangeEvent();
     }
     
     /**
@@ -743,7 +744,7 @@ public class FlowPlot<K extends Comparable<K>> extends Plot implements Cloneable
         if (!(obj instanceof FlowPlot)) {
             return false;
         }
-        FlowPlot<K> that = (FlowPlot) obj;
+        FlowPlot<K> that = (FlowPlot<K>) obj;
         if (!this.defaultNodeColor.equals(that.defaultNodeColor)) {
             return false;
         }
@@ -816,7 +817,7 @@ public class FlowPlot<K extends Comparable<K>> extends Plot implements Cloneable
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        FlowPlot<K> clone = (FlowPlot) super.clone();
+        FlowPlot<K> clone = (FlowPlot<K>) super.clone();
         clone.nodeColorMap = new HashMap<>(this.nodeColorMap);
         return clone;
     }
