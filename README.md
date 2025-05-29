@@ -72,6 +72,9 @@ Note: some (supposed) security vulnerabilities have been reported for v1.5.4:
 - [CVE-2024-23076](https://nvd.nist.gov/vuln/detail/CVE-2024-23076) : a possible `NullPointerException` in `BubbleXYItemLabelGenerator`\
   No fix is considered necessary.
 
+- [CVE-2024-23077](https://nvd.nist.gov/vuln/detail/CVE-2024-23077) : a possible `ArrayIndexOutOfBoundsException` in `CompassPlot`\
+  No fix is considered necessary.
+
 ##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
 - add option to truncate item labels and compute contrast colors (PR [#225](https://github.com/jfree/jfreechart/pull/225))
