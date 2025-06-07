@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------------
@@ -157,6 +157,7 @@ public class MonthDateFormat extends DateFormat {
      */
     public MonthDateFormat(TimeZone zone, Locale locale, int chars,
                            boolean[] showYear, DateFormat yearFormatter) {
+        super();
         Args.nullNotPermitted(locale, "locale");
         DateFormatSymbols dfs = new DateFormatSymbols(locale);
         String[] monthsFromLocale = dfs.getMonths();
@@ -171,7 +172,7 @@ public class MonthDateFormat extends DateFormat {
             }
         }
         this.calendar = new GregorianCalendar(zone);
-        this.showYear = showYear;
+        this.showYear = showYear.clone();
         this.yearFormatter = yearFormatter;
 
         // the following is never used, but it seems that DateFormat requires
