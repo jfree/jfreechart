@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------
@@ -37,7 +37,7 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
-import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.jfree.data.Range;
@@ -152,9 +152,9 @@ public class DateRange extends Range implements Serializable {
      */
     @Override
     public String toString() {
-        DateFormat df = DateFormat.getDateTimeInstance();
-        return "[" + df.format(getLowerDate()) + " --> "
-                + df.format(getUpperDate()) + "]";
+        DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+        return "[" + df.format(getLowerDate().toInstant()) + " --> "
+                + df.format(getUpperDate().toInstant()) + "]";
     }
 
 }
