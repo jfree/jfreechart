@@ -37,11 +37,13 @@ package org.jfree.chart.date;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.DateTimeException;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Represents a date using an integer, in a similar fashion to the
- * implementation in Microsoft Excel.  The range of dates supported is
- * 1-Jan-1900 to 31-Dec-9999.
+ * implementation in Microsoft Excel.  
  * <P>
  * Be aware that there is a deliberate bug in Excel that recognises the year
  * 1900 as a leap year when in fact it is not a leap year. You can find more
@@ -60,10 +62,10 @@ public class SpreadsheetDate extends SerialDate {
 
     /** For serialization. */
     private static final long serialVersionUID = -2039586705374454461L;
-    
-    /** 
-     * The day number (1-Jan-1900 = 2, 2-Jan-1900 = 3, ..., 31-Dec-9999 = 
-     * 2958465). 
+
+    /**
+     * The day number (1-Jan-1900 = 2, 2-Jan-1900 = 3, ..., 31-Dec-9999 =
+     * 2958465).
      */
     private final int serial;
 
@@ -73,7 +75,7 @@ public class SpreadsheetDate extends SerialDate {
     /** The month of the year (1 to 12). */
     private final int month;
 
-    /** The year (1900 to 9999). */
+    /** The year */
     private final int year;
 
     /**
@@ -81,46 +83,34 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @param day  the day (in the range 1 to 28/29/30/31).
      * @param month  the month (in the range 1 to 12).
-     * @param year  the year (in the range 1900 to 9999).
+     * @param year  the year.
      */
     public SpreadsheetDate(int day, int month, int year) {
-
-        if ((year >= 1900) && (year <= 9999)) {
-            this.year = year;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "The 'year' argument must be in range 1900 to 9999.");
-        }
-
-        if ((month >= MonthConstants.JANUARY) 
-                && (month <= MonthConstants.DECEMBER)) {
-            this.month = month;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "The 'month' argument must be in the range 1 to 12.");
-        }
-
-        if ((day >= 1) && (day <= SerialDate.lastDayOfMonth(month, year))) {
-            this.day = day;
-        } else {
-            throw new IllegalArgumentException("Invalid 'day' argument.");
-        }
-
-        // the serial number needs to be synchronised with the day-month-year...
-        this.serial = calcSerial(day, month, year);
+    	try {
+    		LocalDate.of(year, month, day);
+    		
+    		this.day = day;
+    		this.month = month;
+    		this.year = year;
+    		this.serial = calcSerial(day, month, year);
+    	}
+    	catch (DateTimeException a) {
+    		throw new IllegalArgumentException(
+    			"The date is invalid!", a);
+    	}
+    	
+    	
     }
 
     /**
      * Standard constructor - creates a new date object representing the
-     * specified day number (which should be in the range 2 to 2958465.
+     * specified day number (which should be in the range 2 to 2958465.)
      *
      * @param serial  the serial number for the day (range: 2 to 2958465).
      */
     public SpreadsheetDate(int serial) {
 
-        if ((serial >= SERIAL_LOWER_BOUND) && (serial <= SERIAL_UPPER_BOUND)) {
+        if (serial >= SERIAL_LOWER_BOUND && serial <= SERIAL_UPPER_BOUND) {
             this.serial = serial;
         }
         else {
@@ -169,7 +159,7 @@ public class SpreadsheetDate extends SerialDate {
         this.month = mm - 1;
 
         // what's left is d(+1);
-        this.day = this.serial - ss2 
+        this.day = this.serial - ss2
                  - daysToEndOfPrecedingMonth[this.month] + 1;
 
     }
@@ -259,7 +249,7 @@ public class SpreadsheetDate extends SerialDate {
 
         if (object instanceof SerialDate) {
             SerialDate s = (SerialDate) object;
-            return (s.toSerial() == this.toSerial());
+            return s.toSerial() == this.toSerial();
         } else {
             return false;
         }
@@ -314,7 +304,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOn(SerialDate other) {
-        return (this.serial == other.toSerial());
+        return this.serial == other.toSerial();
     }
 
     /**
@@ -328,7 +318,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isBefore(SerialDate other) {
-        return (this.serial < other.toSerial());
+        return this.serial < other.toSerial();
     }
 
     /**
@@ -342,7 +332,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOnOrBefore(SerialDate other) {
-        return (this.serial <= other.toSerial());
+        return this.serial <= other.toSerial();
     }
 
     /**
@@ -356,7 +346,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isAfter(SerialDate other) {
-        return (this.serial > other.toSerial());
+        return this.serial > other.toSerial();
     }
 
     /**
@@ -370,7 +360,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOnOrAfter(SerialDate other) {
-        return (this.serial >= other.toSerial());
+        return this.serial >= other.toSerial();
     }
 
     /**
@@ -410,16 +400,16 @@ public class SpreadsheetDate extends SerialDate {
         
         int s = toSerial();
         if (include == SerialDate.INCLUDE_BOTH) {
-            return (s >= start && s <= end);
+            return s >= start && s <= end;
         }
         else if (include == SerialDate.INCLUDE_FIRST) {
-            return (s >= start && s < end);            
+            return s >= start && s < end;
         }
         else if (include == SerialDate.INCLUDE_SECOND) {
-            return (s > start && s <= end);            
+            return s > start && s <= end;
         }
         else {
-            return (s > start && s < end);            
+            return s > start && s < end;
         }    
     }
 
@@ -434,16 +424,14 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @return the serial number from the day, month and year.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     private int calcSerial(int d, int m, int y) {
-        int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1);
-        int mm = SerialDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m];
-        if (m > MonthConstants.FEBRUARY) {
-            if (SerialDate.isLeapYear(y)) {
-                mm = mm + 1;
-            }
-        }
-        int dd = d;
-        return yy + mm + dd + 1;
+        LocalDate day = LocalDate.of(y, m, d);
+        LocalDate nineteen = LocalDate.of(1900, 1, 1);
+        long returner;
+        returner =  DAYS.between(nineteen, day);
+
+        return (int) returner+2;
     }
 
 }
