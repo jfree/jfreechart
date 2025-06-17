@@ -121,7 +121,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * A flag that controls whether the mean indicator is drawn.
      */
     private boolean meanVisible;
-    
+
+    /**
+     * A flag that controls whether the outliers are visible or not.
+     */
+    private boolean outlierVisible;
+
     /**
      * A flag that controls whether the maxOutlier is visible.
      */
@@ -154,6 +159,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.maximumBarWidth = 1.0;
         this.medianVisible = true;
         this.meanVisible = true;
+        this.outlierVisible = true;
         this.minOutlierVisible = true;
         this.maxOutlierVisible = true;
         this.useOutlinePaintForWhiskers = false;
@@ -181,10 +187,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getArtifactPaint()
      */
-    public void setArtifactPaint(Paint paint) {
+    public BoxAndWhiskerRenderer setArtifactPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -206,9 +213,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getFillBox()
      */
-    public void setFillBox(boolean flag) {
+    public BoxAndWhiskerRenderer setFillBox(boolean flag) {
         this.fillBox = flag;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -231,9 +239,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getItemMargin()
      */
-    public void setItemMargin(double margin) {
+    public BoxAndWhiskerRenderer setItemMargin(double margin) {
         this.itemMargin = margin;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -258,9 +267,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getMaximumBarWidth()
      */
-    public void setMaximumBarWidth(double percent) {
+    public BoxAndWhiskerRenderer setMaximumBarWidth(double percent) {
         this.maximumBarWidth = percent;
         fireChangeEvent();
+        return this;
     }
 
     /**
@@ -284,12 +294,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #isMeanVisible()
      */
-    public void setMeanVisible(boolean visible) {
-        if (this.meanVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMeanVisible(boolean visible) {
+        if (this.meanVisible != visible) {
+            this.meanVisible = visible;
+            fireChangeEvent();
         }
-        this.meanVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -313,12 +323,46 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @see #isMedianVisible()
      */
-    public void setMedianVisible(boolean visible) {
-        if (this.medianVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMedianVisible(boolean visible) {
+        if (this.medianVisible != visible) {
+            this.medianVisible = visible;
+            fireChangeEvent();
         }
-        this.medianVisible = visible;
-        fireChangeEvent();
+        return this;
+
+    }
+
+    /**
+     * Returns the flag that controls whether the outliers are
+     * draw or not.
+     *
+     * @return A boolean.
+     *
+     * @see #setOutlierVisible(boolean)
+     *
+     * @since 1.5.2
+     */
+    public boolean isOutlierVisible() {
+        return this.outlierVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether the outliers are drawn
+     * or not, and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param visible  the new flag value.
+     *
+     * @see #isOutlierVisible()
+     *
+     * @since 1.5.2
+     */
+    public BoxAndWhiskerRenderer setOutlierVisible(boolean visible) {
+        if (this.outlierVisible != visible) {
+            this.outlierVisible = visible;
+            fireChangeEvent();
+        }
+        return this;
     }
 
     /**
@@ -346,12 +390,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.5.2
      */
-    public void setMinOutlierVisible(boolean visible) {
-        if (this.minOutlierVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMinOutlierVisible(boolean visible) {
+        if (this.minOutlierVisible != visible) {
+            this.minOutlierVisible = visible;
+            fireChangeEvent();
         }
-        this.minOutlierVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -379,12 +423,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.5.2
      */
-    public void setMaxOutlierVisible(boolean visible) {
-        if (this.maxOutlierVisible == visible) {
-            return;
+    public BoxAndWhiskerRenderer setMaxOutlierVisible(boolean visible) {
+        if (this.maxOutlierVisible != visible) {
+            this.maxOutlierVisible = visible;
+            fireChangeEvent();
         }
-        this.maxOutlierVisible = visible;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -404,12 +448,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @param flag  the new flag value.
      */
-    public void setUseOutlinePaintForWhiskers(boolean flag) {
-        if (this.useOutlinePaintForWhiskers == flag) {
-            return;
+    public BoxAndWhiskerRenderer setUseOutlinePaintForWhiskers(boolean flag) {
+        if (this.useOutlinePaintForWhiskers != flag) {
+            this.useOutlinePaintForWhiskers = flag;
+            fireChangeEvent();
         }
-        this.useOutlinePaintForWhiskers = flag;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -432,16 +476,16 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @see #getWhiskerWidth()
      * @see CategoryItemRendererState#getBarWidth()
      */
-    public void setWhiskerWidth(double width) {
+    public BoxAndWhiskerRenderer setWhiskerWidth(double width) {
         if (width < 0 || width > 1) {
             throw new IllegalArgumentException(
                     "Value for whisker width out of range");
         }
-        if (width == this.whiskerWidth) {
-            return;
+        if (width != this.whiskerWidth) {
+            this.whiskerWidth = width;
+            fireChangeEvent();
         }
-        this.whiskerWidth = width;
-        fireChangeEvent();
+        return this;
     }
 
     /**
@@ -892,80 +936,83 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         }
 
         // draw yOutliers...
-        double maxAxisValue = rangeAxis.valueToJava2D(
-                rangeAxis.getUpperBound(), dataArea, location) + aRadius;
-        double minAxisValue = rangeAxis.valueToJava2D(
-                rangeAxis.getLowerBound(), dataArea, location) - aRadius;
+        if(this.outlierVisible){
+            double maxAxisValue = rangeAxis.valueToJava2D(
+                    rangeAxis.getUpperBound(), dataArea, location) + aRadius;
+            double minAxisValue = rangeAxis.valueToJava2D(
+                    rangeAxis.getLowerBound(), dataArea, location) - aRadius;
 
-        g2.setPaint(itemPaint);
+            g2.setPaint(itemPaint);
 
-        // draw outliers
-        double oRadius = state.getBarWidth() / 3;    // outlier radius
-        List outliers = new ArrayList();
-        OutlierListCollection outlierListCollection
-                = new OutlierListCollection();
+            // draw outliers
+            double oRadius = state.getBarWidth() / 3;    // outlier radius
+            List outliers = new ArrayList();
+            OutlierListCollection outlierListCollection
+                    = new OutlierListCollection();
 
-        // From outlier array sort out which are outliers and put these into a
-        // list If there are any farouts, set the flag on the
-        // OutlierListCollection
-        List yOutliers = bawDataset.getOutliers(row, column);
-        if (yOutliers != null) {
-            for (int i = 0; i < yOutliers.size(); i++) {
-                double outlier = ((Number) yOutliers.get(i)).doubleValue();
-                Number minOutlier = bawDataset.getMinOutlier(row, column);
-                Number maxOutlier = bawDataset.getMaxOutlier(row, column);
-                Number minRegular = bawDataset.getMinRegularValue(row, column);
-                Number maxRegular = bawDataset.getMaxRegularValue(row, column);
-                if (outlier > maxOutlier.doubleValue()) {
-                    outlierListCollection.setHighFarOut(true);
-                } else if (outlier < minOutlier.doubleValue()) {
-                    outlierListCollection.setLowFarOut(true);
-                } else if (outlier > maxRegular.doubleValue()) {
-                    yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
-                            location);
-                    outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
-                            yyOutlier, oRadius));
-                } else if (outlier < minRegular.doubleValue()) {
-                    yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
-                            location);
-                    outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
-                            yyOutlier, oRadius));
+            // From outlier array sort out which are outliers and put these into a
+            // list If there are any farouts, set the flag on the
+            // OutlierListCollection
+            List yOutliers = bawDataset.getOutliers(row, column);
+            if (yOutliers != null) {
+                for (int i = 0; i < yOutliers.size(); i++) {
+                    double outlier = ((Number) yOutliers.get(i)).doubleValue();
+                    Number minOutlier = bawDataset.getMinOutlier(row, column);
+                    Number maxOutlier = bawDataset.getMaxOutlier(row, column);
+                    Number minRegular = bawDataset.getMinRegularValue(row, column);
+                    Number maxRegular = bawDataset.getMaxRegularValue(row, column);
+                    if (outlier > maxOutlier.doubleValue()) {
+                        outlierListCollection.setHighFarOut(true);
+                    } else if (outlier < minOutlier.doubleValue()) {
+                        outlierListCollection.setLowFarOut(true);
+                    } else if (outlier > maxRegular.doubleValue()) {
+                        yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
+                                location);
+                        outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
+                                yyOutlier, oRadius));
+                    } else if (outlier < minRegular.doubleValue()) {
+                        yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
+                                location);
+                        outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
+                                yyOutlier, oRadius));
+                    }
+                    Collections.sort(outliers);
                 }
-                Collections.sort(outliers);
-            }
 
-            // Process outliers. Each outlier is either added to the
-            // appropriate outlier list or a new outlier list is made
-            for (Iterator iterator = outliers.iterator(); iterator.hasNext();) {
-                Outlier outlier = (Outlier) iterator.next();
-                outlierListCollection.add(outlier);
-            }
-
-            for (Iterator iterator = outlierListCollection.iterator();
-                     iterator.hasNext();) {
-                OutlierList list = (OutlierList) iterator.next();
-                Outlier outlier = list.getAveragedOutlier();
-                Point2D point = outlier.getPoint();
-
-                if (list.isMultiple()) {
-                    drawMultipleEllipse(point, state.getBarWidth(), oRadius,
-                            g2);
-                } else {
-                    drawEllipse(point, oRadius, g2);
+                // Process outliers. Each outlier is either added to the
+                // appropriate outlier list or a new outlier list is made
+                for (Iterator iterator = outliers.iterator(); iterator.hasNext();) {
+                    Outlier outlier = (Outlier) iterator.next();
+                    outlierListCollection.add(outlier);
                 }
-            }
 
-            // draw farout indicators
-            if (isMaxOutlierVisible() && outlierListCollection.isHighFarOut()) {
-                drawHighFarOut(aRadius / 2.0, g2,
-                        xx + state.getBarWidth() / 2.0, maxAxisValue);
-            }
+                for (Iterator iterator = outlierListCollection.iterator();
+                         iterator.hasNext();) {
+                    OutlierList list = (OutlierList) iterator.next();
+                    Outlier outlier = list.getAveragedOutlier();
+                    Point2D point = outlier.getPoint();
 
-            if (isMinOutlierVisible() && outlierListCollection.isLowFarOut()) {
-                drawLowFarOut(aRadius / 2.0, g2,
-                        xx + state.getBarWidth() / 2.0, minAxisValue);
+                    if (list.isMultiple()) {
+                        drawMultipleEllipse(point, state.getBarWidth(), oRadius,
+                                g2);
+                    } else {
+                        drawEllipse(point, oRadius, g2);
+                    }
+                }
+
+                // draw farout indicators
+                if (isMaxOutlierVisible() && outlierListCollection.isHighFarOut()) {
+                    drawHighFarOut(aRadius / 2.0, g2,
+                            xx + state.getBarWidth() / 2.0, maxAxisValue);
+                }
+
+                if (isMinOutlierVisible() && outlierListCollection.isLowFarOut()) {
+                    drawLowFarOut(aRadius / 2.0, g2,
+                            xx + state.getBarWidth() / 2.0, minAxisValue);
+                }
             }
         }
+
         // collect entity and tool tip information...
         if (state.getInfo() != null && box != null) {
             EntityCollection entities = state.getEntityCollection();
@@ -1069,6 +1116,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         if (this.medianVisible != that.medianVisible) {
+            return false;
+        }
+        if (this.outlierVisible != that.outlierVisible) {
             return false;
         }
         if (this.minOutlierVisible != that.minOutlierVisible) {
