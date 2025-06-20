@@ -94,6 +94,20 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     /** The default value returned by the getLinesVisible() method. */
     private boolean defaultLinesVisible;
 
+    /**
+     * The logic that decides whether to draw lines between points during rendering.  This 
+     * makes it possible to have broken series lines when conditions are not met.
+     * 
+     * For example:  If you're charting an angle in degress from 0 to 360 and when
+     * it goes from 355 degrees to 361 degrees, you translated it back to 1 degrees 
+     * instead of 361 degrees.  This example above will result to a chart that have a sharp
+     * line connecting 355 degrees to 1 degrees.  If you don't wan't this, you can provide a 
+     * drawLinesConditions logic that only draws line when the difference between current 
+     * y-value and previous y-value is less than 180. 
+     */ 
+    protected DrawLinesCondition drawLinesCondition;
+
+
     /** The shape that is used to represent a line in the legend. */
     private transient Shape legendLine;
 
@@ -166,6 +180,18 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                                        // default, not outline paint
 
         this.drawSeriesLineAsPath = false;
+    }
+
+
+    /**
+     * Create a new renderer that has a custom logic for determining whether to 
+     * draw lines between points.
+     * @param drawLinesCondition Custom logic for drawing lines between points
+     * @param shapes true, renders shapes in the chart.
+     */
+    public XYLineAndShapeRenderer(DrawLinesCondition drawLinesCondition, boolean shapes) {
+	this(true, shapes);
+	this.drawLinesCondition = drawLinesCondition;
     }
 
     /**
@@ -290,6 +316,34 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public void setDefaultLinesVisible(boolean flag) {
         this.defaultLinesVisible = flag;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the custom logic for rendering lines between points.
+     *
+     * @see #setDrawLinesCondition(DrawLinesCondition)
+     * 
+     * @return an instance of DrawLinesCondition.
+     */
+    public DrawLinesCondition getDrawLinesCondition() {
+	if (drawLinesCondition == null){
+		return DrawLinesCondition.ALWAYS_DRAW_LINES_CONDITION;
+	}
+	return drawLinesCondition;
+    }
+
+    /**
+     * Sets the custom logic for rendering lines between points.
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param drawLinesCondition   an instance of DrawLinesCondition.
+     *
+     * @see #getBaseLinesVisible()
+     */
+    public void setDrawLinesCondition(DrawLinesCondition drawLinesCondition) {
+	this.drawLinesCondition = drawLinesCondition;
+	this.baseLinesVisible = true;
+	fireChangeEvent();
     }
 
     /**
@@ -798,6 +852,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return;
         }
 
+	if (!getDrawLinesCondition().isDrawLine(y0, x0, y1, x1)) {
+		return;
+	}
+
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
 
@@ -887,7 +945,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                 y = (float) transX1;
             }
             if (s.isLastPointGood()) {
-                s.seriesPath.lineTo(x, y);
+		double x0 = dataset.getXValue(series, item - 1);
+        	double y0 = dataset.getYValue(series, item - 1);
+		if (getDrawLinesCondition().isDrawLine(y0, x0, y1, x1)){
+			s.seriesPath.lineTo(x, y);
+		}else{
+                	s.seriesPath.moveTo(x, y);
+		}
             }
             else {
                 s.seriesPath.moveTo(x, y);
@@ -1180,4 +1244,26 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         SerialUtils.writeShape(this.legendLine, stream);
     }
 
+    /**
+     * An interface for creating custom logic for drawing lines between points for
+     * XYLineAndShapeRenderer.
+     */
+    public static interface DrawLinesCondition {
+	public static DrawLinesCondition ALWAYS_DRAW_LINES_CONDITION = new DrawLinesCondition() {
+		@Override
+		public boolean isDrawLine(double y0, double x0, double y1, double x1) {
+			return true;
+		}
+	};
+
+	/**
+	 * Custom logic for drawing lines between points.
+	 * @param y0 previous y
+	 * @param x0 previous x
+	 * @param y1 current y 
+	 * @param x1 current x
+	 * @return true, if you want to render a line between points.  Otherwise, return false
+	 */
+	public boolean isDrawLine(double y0, double x0, double y1, double x1);
+    }
 }
