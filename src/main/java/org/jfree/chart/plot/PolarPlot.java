@@ -56,6 +56,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -258,7 +259,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.axisLocations.put(6, PolarAxisLocation.WEST_ABOVE);
         this.axisLocations.put(7, PolarAxisLocation.SOUTH_LEFT);
 
-        this.renderers = new HashMap<>();
+        this.renderers = new LinkedHashMap<>();
         this.renderers.put(0, renderer);
         if (renderer != null) {
             renderer.setPlot(this);
