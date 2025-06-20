@@ -511,7 +511,8 @@ public class PiePlotTest {
     }
 
     /**
-     * Some checks for the getLegendItems() method.
+     * Some checks for the getLegendItems() method
+     * that uses only positive values in the dataset.
      */
     @Test
     public void testGetLegendItems() {
@@ -536,10 +537,44 @@ public class PiePlotTest {
         plot.setIgnoreZeroValues(true);
         items = plot.getLegendItems();
         assertEquals(2, items.getItemCount());
+    }
 
-        // check that negative items are always ignored
-        dataset.setValue("Item 5", -1.0);
+    /**
+     * Some checks for the getLegendItems() method
+     * that uses positive and negative values in the dataset.
+     */
+    @Test
+    public void testGetLegendItemsThrowErrorForNegativeValues() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.setValue("Item 1", 1.0);
+        dataset.setValue("Item 2", 2.0);
+        dataset.setValue("Item 3", 0.0);
+        dataset.setValue("Item 4", null);
+
+        PiePlot plot = new PiePlot(dataset);
+        plot.setIgnoreNullValues(false);
+        plot.setIgnoreZeroValues(false);
+        LegendItemCollection items = plot.getLegendItems();
+        assertEquals(4, items.getItemCount());
+
+        // check that null items are ignored if requested
+        plot.setIgnoreNullValues(true);
         items = plot.getLegendItems();
+        assertEquals(3, items.getItemCount());
+
+        // check that zero items are ignored if requested
+        plot.setIgnoreZeroValues(true);
+        items = plot.getLegendItems();
+        assertEquals(2, items.getItemCount());
+
+        dataset.setValue("Item 5", -1.0);
+        try{
+            items = plot.getLegendItems();
+        }
+        catch (IllegalArgumentException exception){
+            assertEquals("Only positive values are allowed in the dataset.", exception.getMessage());
+        }
+        // check that the item count remains the same as a negative value cannot be added to the items.
         assertEquals(2, items.getItemCount());
     }
 
