@@ -302,8 +302,14 @@ public class LogAxis extends ValueAxis {
      * @see #calculateValue(double)
      * @see #getBase()
      */
-    public double calculateLog(double value) {
-        return Math.log(value) / this.baseLog;
+    public double calculateLog(double value)
+    {
+     //  CS427: Issue link: https://github.com/jfree/jfreechart/issues/215
+        double returnVal = smallestValue;
+        if (value > 0.0) {
+            returnVal = Math.log(value) / this.baseLog;
+        }
+        return returnVal;
     }
 
     /**
@@ -527,7 +533,7 @@ public class LogAxis extends ValueAxis {
     @Override
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
-        List result = new java.util.ArrayList();
+        List result = new ArrayList();
         if (RectangleEdge.isTopOrBottom(edge)) {
             result = refreshTicksHorizontal(g2, dataArea, edge);
         }
@@ -571,7 +577,7 @@ public class LogAxis extends ValueAxis {
         double start = index * unit;
         double end = calculateLog(getUpperBound());
         double current = start;
-        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+        boolean hasTicks = this.tickUnit.getSize() > 0.0
                            && !Double.isInfinite(start);
         while (hasTicks && current <= end) {
             double v = calculateValueNoINF(current);
@@ -629,7 +635,7 @@ public class LogAxis extends ValueAxis {
         double start = index * unit;
         double end = calculateLog(getUpperBound());
         double current = start;
-        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+        boolean hasTicks = this.tickUnit.getSize() > 0.0
                            && !Double.isInfinite(start);
         while (hasTicks && current <= end) {
             double v = calculateValueNoINF(current);
