@@ -873,7 +873,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             calendar.set(years, months, days, value, minutes, seconds);
             Date d1 = calendar.getTime();
             if (d1.getTime() >= date.getTime()) {
+                Integer previousOffset = calendar.get(Calendar.DST_OFFSET);
                 calendar.set(Calendar.HOUR_OF_DAY, value - count);
+                Integer currentOffset = calendar.get(Calendar.DST_OFFSET);
+                final boolean prevBool = previousOffset.equals(currentOffset);
+                if(!prevBool && value == 1 && currentOffset == 3_600_000){
+                    calendar.set(Calendar.DST_OFFSET, previousOffset);
+                }
                 d1 = calendar.getTime();
             }
             return d1;
