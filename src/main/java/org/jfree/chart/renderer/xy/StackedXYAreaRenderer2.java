@@ -192,6 +192,10 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
 
+        if (!getItemVisible(series, item)) {
+            return;
+        }
+
         // setup for collecting optional entity info...
         EntityCollection entities = null;
         if (info != null) {
@@ -437,6 +441,10 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                                     int series, int index) {
         double[] result = new double[2];
         for (int i = 0; i < series; i++) {
+            if (!isSeriesVisible(i)) {
+                continue;
+            }
+
             double v = dataset.getYValue(i, index);
             if (!Double.isNaN(v)) {
                 if (v >= 0.0) {
