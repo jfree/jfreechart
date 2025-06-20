@@ -529,6 +529,7 @@ A number of classes have new methods.  Nothing has been removed or deprecated:
 - 1400917 - OverLIBToolTipTagFragmentGenerator not escaping single quote;
 - 1363043 - Escape Image Map Data;
 - 1178601 - AbstractRenderer.hashcode() method returns the same value;
+- cde9443 - related to open issue 215. Solve the scale problme for LogAxis when lower limit is 0.
 
 In addition, a bug in the constructor for the Week class has been fixed.  
 
