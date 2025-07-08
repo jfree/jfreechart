@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ------------------------------
  * MultiValueCategoryDataset.java
  * ------------------------------
- * (C) Copyright 2007-2021, by David Forslund and Contributors.
+ * (C) Copyright 2007-present, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -54,7 +54,7 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(int row, int column);
+    List getValues(int row, int column);
 
     /**
      * Returns a list (possibly empty) of the values for the specified item.
@@ -65,6 +65,6 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(Comparable rowKey, Comparable columnKey);
+    List getValues(Comparable rowKey, Comparable columnKey);
 
 }

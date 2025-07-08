@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,12 @@
  * ---------------------
  * PieSectionEntity.java
  * ---------------------
- * (C) Copyright 2002-2021, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -196,6 +197,11 @@ public class PieSectionEntity extends ChartEntity
             return false;
         }
         PieSectionEntity that = (PieSectionEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
@@ -212,15 +218,26 @@ public class PieSectionEntity extends ChartEntity
     }
 
     /**
-     * Returns a hash code for this instance.
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
      *
-     * @return A hash code.
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
      */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof PieSectionEntity);
+    }
+
     @Override
     public int hashCode() {
         int result = super.hashCode();
+        result = HashUtils.hashCode(result, this.dataset);
         result = HashUtils.hashCode(result, this.pieIndex);
         result = HashUtils.hashCode(result, this.sectionIndex);
+        result = HashUtils.hashCode(result, this.sectionKey);
         return result;
     }
 

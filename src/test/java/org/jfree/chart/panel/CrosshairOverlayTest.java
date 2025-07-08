@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,14 @@
  * -------------------------
  * CrosshairOverlayTest.java
  * -------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Apr-2009 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.panel;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,6 +44,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.plot.Crosshair;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CrosshairOverlay} class.
@@ -77,7 +71,7 @@ public class CrosshairOverlayTest {
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
-        CrosshairOverlay o2 = (CrosshairOverlay) TestUtils.serialised(o1);
+        CrosshairOverlay o2 = TestUtils.serialised(o1);
         assertEquals(o1, o2);
     }
 
@@ -91,13 +85,13 @@ public class CrosshairOverlayTest {
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
         CrosshairOverlay o2 = (CrosshairOverlay) o1.clone();
-        assertTrue(o1 != o2);
-        assertTrue(o1.getClass() == o2.getClass());
-        assertTrue(o1.equals(o2));
+        assertNotSame(o1, o2);
+        assertSame(o1.getClass(), o2.getClass());
+        assertEquals(o1, o2);
 
         o1.addDomainCrosshair(new Crosshair(3.21));
         o1.addRangeCrosshair(new Crosshair(4.32));
-        assertFalse(o1.equals(o2));
+        assertNotEquals(o1, o2);
     }
 
 }

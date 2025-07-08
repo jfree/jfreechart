@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * ---------------------
  * AxisLocationTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
@@ -71,7 +66,7 @@ public class AxisLocationTest {
     public void testHashCode() {
         AxisLocation a1 = AxisLocation.TOP_OR_RIGHT;
         AxisLocation a2 = AxisLocation.TOP_OR_RIGHT;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -83,10 +78,10 @@ public class AxisLocationTest {
     @Test
     public void testSerialization() {
         AxisLocation location1 = AxisLocation.BOTTOM_OR_RIGHT;
-        AxisLocation location2 = (AxisLocation) TestUtils.serialised(location1);
+        AxisLocation location2 = TestUtils.serialised(location1);
         assertEquals(location1, location2);
         boolean same = location1 == location2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

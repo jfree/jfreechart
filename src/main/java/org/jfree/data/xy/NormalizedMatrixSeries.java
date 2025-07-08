@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * ---------------------------
  * NormalizedMatrixSeries.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-present, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

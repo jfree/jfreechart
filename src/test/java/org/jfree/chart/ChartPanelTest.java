@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,15 @@
  * -------------------
  * ChartPanelTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 13-Jul-2004 : Version 1 (DG);
- * 12-Jan-2009 : Added test2502355() (DG);
- * 08-Jun-2009 : Added testSetMouseWheelEnabled() (DG);
  */
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -59,12 +51,14 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link ChartPanel} class.
  */
 public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
-    private List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
+    private final List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
 
     /**
      * Receives a chart change event and stores it in a list for later
@@ -83,7 +77,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @Test
     public void testConstructor1() {
         ChartPanel panel = new ChartPanel(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**
@@ -94,7 +88,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         JFreeChart chart = new JFreeChart(new XYPlot());
         ChartPanel panel = new ChartPanel(chart);
         panel.setChart(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,31 +27,19 @@
  * -----------------------------
  * DefaultKeyedValues2DTest.java
  * -----------------------------
- * (C) Copyright 2003-2016 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
- * 15-Sep-2004 : Updated cloning test (DG);
- * 06-Oct-2005 : Added testEquals() (DG);
- * 18-Jan-2007 : Added testSparsePopulation() (DG);
- * 26-Feb-2007 : Added some basic tests (DG);
- * 30-Mar-2007 : Added a test for bug 1690654 (DG);
- * 21-Nov-2007 : Added testRemoveColumnByKey() method (DG);
  *
  */
 
 package org.jfree.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValues2D} class.
@@ -96,13 +84,13 @@ public class DefaultKeyedValues2DTest {
         v1.setValue(null, "V2", "C1");
         v1.setValue(3, "V3", "C2");
         DefaultKeyedValues2D v2 = (DefaultKeyedValues2D) v1.clone();
-        assertTrue(v1 != v2);
-        assertTrue(v1.getClass() == v2.getClass());
-        assertTrue(v1.equals(v2));
+        assertNotSame(v1, v2);
+        assertSame(v1.getClass(), v2.getClass());
+        assertEquals(v1, v2);
 
         // check that clone is independent of the original
         v2.setValue(2, "V2", "C1");
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
     }
 
     /**
@@ -116,8 +104,7 @@ public class DefaultKeyedValues2DTest {
         kv2D1.addValue(345.9, "Row2", "Col1");
         kv2D1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2D kv2D2 = (DefaultKeyedValues2D) 
-                TestUtils.serialised(kv2D1);
+        DefaultKeyedValues2D kv2D2 = TestUtils.serialised(kv2D1);
         assertEquals(kv2D1, kv2D2);
     }
 
@@ -128,13 +115,13 @@ public class DefaultKeyedValues2DTest {
     public void testEquals() {
         DefaultKeyedValues2D d1 = new DefaultKeyedValues2D();
         DefaultKeyedValues2D d2 = new DefaultKeyedValues2D();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.addValue(1.0, 2.0, "S1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addValue(1.0, 2.0, "S1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

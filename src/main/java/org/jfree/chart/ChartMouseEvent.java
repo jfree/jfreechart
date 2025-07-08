@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------------
  * ChartMouseEvent.java
  * --------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Alex Weber;
  *
  */
@@ -53,13 +53,13 @@ public class ChartMouseEvent extends EventObject implements Serializable {
     private static final long serialVersionUID = -682393837314562149L;
 
     /** The chart that the mouse event relates to. */
-    private JFreeChart chart;
+    private final JFreeChart chart;
 
     /** The Java mouse event that triggered this event. */
-    private MouseEvent trigger;
+    private final MouseEvent trigger;
 
     /** The chart entity (if any). */
-    private ChartEntity entity;
+    private final ChartEntity entity;
 
     /**
      * Constructs a new event.

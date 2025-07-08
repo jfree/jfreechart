@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * --------------------------
  * DeviationRendererTest.java
  * --------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Feb-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DeviationRenderer} class.
@@ -63,13 +56,13 @@ public class DeviationRendererTest {
         // default instances
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = new DeviationRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setAlpha(0.1f);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAlpha(0.1f);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -79,7 +72,7 @@ public class DeviationRendererTest {
     public void testHashcode() {
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = new DeviationRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -92,9 +85,9 @@ public class DeviationRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = (DeviationRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -112,7 +105,7 @@ public class DeviationRendererTest {
     @Test
     public void testSerialization() {
         DeviationRenderer r1 = new DeviationRenderer();
-        DeviationRenderer r2 = (DeviationRenderer) TestUtils.serialised(r1);
+        DeviationRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

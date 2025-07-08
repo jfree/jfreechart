@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * --------------------------
  * CategorySeriesHandler.java
  * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1 (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   -;;
  *
  */
 
@@ -54,13 +50,13 @@ public class CategorySeriesHandler extends DefaultHandler
         implements DatasetTags {
 
     /** The root handler. */
-    private RootHandler root;
+    private final RootHandler root;
 
     /** The series key. */
     private Comparable seriesKey;
 
     /** The values. */
-    private DefaultKeyedValues values;
+    private final DefaultKeyedValues values;
 
     /**
      * Creates a new item handler.

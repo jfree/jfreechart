@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------------------
  * ChartTransferable.java
  * ----------------------
- * (C) Copyright 2009-2021, by Object Refinery Limited.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -58,34 +58,34 @@ public class ChartTransferable implements Transferable {
     private JFreeChart chart;
 
     /** The width of the chart on the clipboard. */
-    private int width;
+    private final int width;
 
     /** The height of the chart on the clipboard. */
-    private int height;
+    private final int height;
 
     /**
      * The smallest width at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested width).
      */
-    private int minDrawWidth;
+    private final int minDrawWidth;
 
     /**
      * The smallest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested height).
      */
-    private int minDrawHeight;
+    private final int minDrawHeight;
 
     /**
      * The largest width at which the chart will be drawn (if necessary, the 
      * chart will then be scaled up to fit the requested width).
      */
-    private int maxDrawWidth;
+    private final int maxDrawWidth;
 
     /**
      * The largest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled up to fit the requested height).
      */
-    private int maxDrawHeight;
+    private final int maxDrawHeight;
 
     /**
      * Creates a new chart selection.

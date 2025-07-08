@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,11 @@
  * -------------------------
  * AbstractXYAnnotation.java
  * -------------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -181,7 +182,27 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
         if (!Objects.equals(this.url, that.url)) {
             return false;
         }
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractXYAnnotation);
     }
 
     /**
@@ -191,13 +212,9 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        if (this.toolTipText != null) {
-            result = 37 * result + this.toolTipText.hashCode();
-        }
-        if (this.url != null) {
-            result = 37 * result + this.url.hashCode();
-        }
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.toolTipText);
+        result = 37 * result + Objects.hashCode(this.url);
         return result;
     }
 

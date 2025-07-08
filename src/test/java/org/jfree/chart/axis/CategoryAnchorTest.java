@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,19 @@
  * -----------------------
  * CategoryAnchorTest.java
  * -----------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryAnchor} class.
@@ -61,8 +54,8 @@ public class CategoryAnchorTest {
         assertEquals(CategoryAnchor.START, CategoryAnchor.START);
         assertEquals(CategoryAnchor.MIDDLE, CategoryAnchor.MIDDLE);
         assertEquals(CategoryAnchor.END, CategoryAnchor.END);
-        assertFalse(CategoryAnchor.START.equals(CategoryAnchor.END));
-        assertFalse(CategoryAnchor.MIDDLE.equals(CategoryAnchor.END));
+        assertNotEquals(CategoryAnchor.START, CategoryAnchor.END);
+        assertNotEquals(CategoryAnchor.MIDDLE, CategoryAnchor.END);
     }
 
     /**
@@ -72,7 +65,7 @@ public class CategoryAnchorTest {
     public void testHashCode() {
         CategoryAnchor a1 = CategoryAnchor.START;
         CategoryAnchor a2 = CategoryAnchor.START;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -84,9 +77,9 @@ public class CategoryAnchorTest {
     @Test
     public void testSerialization() {
         CategoryAnchor a1 = CategoryAnchor.MIDDLE;
-        CategoryAnchor a2 = (CategoryAnchor) TestUtils.serialised(a1);
+        CategoryAnchor a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
-        assertTrue(a1 == a2);
+        assertSame(a1, a2);
     }
 
 }

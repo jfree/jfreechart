@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,11 @@
  * ---------------------
  * XYLineAnnotation.java
  * ---------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (see patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,6 +49,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -64,6 +66,7 @@ import org.jfree.chart.util.ShapeUtils;
 
 /**
  * A simple line annotation that can be placed on an {@link XYPlot}.
+ * Instances of this class are immutable.
  */
 public class XYLineAnnotation extends AbstractXYAnnotation
         implements Cloneable, PublicCloneable, Serializable {
@@ -92,7 +95,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation that draws a line from (x1, y1) to (x2, y2)
      * where the coordinates are measured in data space (that is, against the
-     * plot's axes).
+     * plot's axes).  All the line coordinates are required to be finite values.
      *
      * @param x1  the x-coordinate for the start of the line.
      * @param y1  the y-coordinate for the start of the line.
@@ -108,26 +111,86 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      * where the coordinates are measured in data space (that is, against the
      * plot's axes).
      *
-     * @param x1  the x-coordinate for the start of the line.
-     * @param y1  the y-coordinate for the start of the line.
-     * @param x2  the x-coordinate for the end of the line.
-     * @param y2  the y-coordinate for the end of the line.
+     * @param x1  the x-coordinate for the start of the line (must be finite).
+     * @param y1  the y-coordinate for the start of the line (must be finite).
+     * @param x2  the x-coordinate for the end of the line (must be finite).
+     * @param y2  the y-coordinate for the end of the line (must be finite).
      * @param stroke  the line stroke ({@code null} not permitted).
      * @param paint  the line color ({@code null} not permitted).
      */
     public XYLineAnnotation(double x1, double y1, double x2, double y2,
                             Stroke stroke, Paint paint) {
-
         super();
         Args.nullNotPermitted(stroke, "stroke");
         Args.nullNotPermitted(paint, "paint");
+        Args.requireFinite(x1, "x1");
+        Args.requireFinite(y1, "y1");
+        Args.requireFinite(x2, "x2");
+        Args.requireFinite(y2, "y2");
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.stroke = stroke;
         this.paint = paint;
+    }
 
+    /**
+     * Returns the x-coordinate for the starting point of the line (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the starting point of the line.
+     */
+    public double getX1() {
+        return x1;
+    }
+
+    /**
+     * Returns the y-coordinate for the starting point of the line (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the starting point of the line.
+     */
+    public double getY1() {
+        return y1;
+    }
+
+    /**
+     * Returns the x-coordinate for the ending point of the line (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the ending point of the line.
+     */
+    public double getX2() {
+        return x2;
+    }
+
+    /**
+     * Returns the y-coordinate for the ending point of the line (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the ending point of the line.
+     */
+    public double getY2() {
+        return y2;
+    }
+
+    /**
+     * Returns the stroke used for drawing the line (set in the constructor).
+     * 
+     * @return The stroke (never {@code null}).
+     */
+    public Stroke getStroke() {
+        return stroke;
+    }
+
+    /**
+     * Returns the paint used for drawing the line (set in the constructor).
+     * 
+     * @return The paint (never {@code null}).
+     */
+    public Paint getPaint() {
+        return paint;
     }
 
     /**
@@ -167,8 +230,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
                     domainEdge);
             j2DY2 = (float) rangeAxis.valueToJava2D(this.y2, dataArea,
                     rangeEdge);
-        }
-        else if (orientation == PlotOrientation.HORIZONTAL) {
+        } else if (orientation == PlotOrientation.HORIZONTAL) {
             j2DY1 = (float) domainAxis.valueToJava2D(this.x1, dataArea,
                     domainEdge);
             j2DX1 = (float) rangeAxis.valueToJava2D(this.y1, dataArea,
@@ -208,23 +270,20 @@ public class XYLineAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYLineAnnotation)) {
             return false;
         }
         XYLineAnnotation that = (XYLineAnnotation) obj;
-        if (this.x1 != that.x1) {
+        if (Double.doubleToLongBits(this.x1) != Double.doubleToLongBits(that.x1)) {
             return false;
         }
-        if (this.y1 != that.y1) {
+        if (Double.doubleToLongBits(this.y1) != Double.doubleToLongBits(that.y1)) {
             return false;
         }
-        if (this.x2 != that.x2) {
+        if (Double.doubleToLongBits(this.x2) != Double.doubleToLongBits(that.x2)) {
             return false;
         }
-        if (this.y2 != that.y2) {
+        if (Double.doubleToLongBits(this.y2) != Double.doubleToLongBits(that.y2)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -233,8 +292,26 @@ public class XYLineAnnotation extends AbstractXYAnnotation
         if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
-        // seems to be the same...
-        return true;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYLineAnnotation);
     }
 
     /**
@@ -244,17 +321,18 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x1);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.x2);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y2);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.x1) ^
+                                 (Double.doubleToLongBits(this.x1) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.y1) ^
+                                 (Double.doubleToLongBits(this.y1) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.x2) ^
+                                 (Double.doubleToLongBits(this.x2) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.y2) ^
+                                 (Double.doubleToLongBits(this.y2) >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.stroke);
+        hash = 89 * hash + HashUtils.hashCodeForPaint(this.paint);
+        return hash;
     }
 
     /**

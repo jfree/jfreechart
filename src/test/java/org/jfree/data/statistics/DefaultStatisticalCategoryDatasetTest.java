@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,33 +27,22 @@
  * ------------------------------------------
  * DefaultStatisticalCategoryDatasetTest.java
  * ------------------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2005 : Version 1 (DG);
- * 03-Aug-2006 : Added testGetRangeBounds() method (DG);
- * 28-Sep-2007 : Enhanced testCloning() method (DG);
- * 02-Oct-2007 : Added new bounds tests (DG);
- * 03-Oct-2007 : Added testRemove() method (DG);
  *
  */
 
 package org.jfree.data.statistics;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
@@ -110,8 +99,8 @@ public class DefaultStatisticalCategoryDatasetTest {
                 = new DefaultStatisticalCategoryDataset();
         DefaultStatisticalCategoryDataset d2
                 = new DefaultStatisticalCategoryDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
     }
 
@@ -133,13 +122,13 @@ public class DefaultStatisticalCategoryDatasetTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check independence
         d1.add(1.1, 2.2, "R3", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -153,8 +142,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, 5.5, "R1", "C3");
         d1.add(6.6, null, "R2", "C3");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -166,8 +154,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         DefaultStatisticalCategoryDataset d1
             = new DefaultStatisticalCategoryDataset();
         d1.add(1.2, 3.4, "Row 1", "Column 1");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

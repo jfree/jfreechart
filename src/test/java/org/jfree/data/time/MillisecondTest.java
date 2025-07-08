@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,10 @@
  * --------------------
  * MillisecondTest.java
  * --------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jan-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 21-Oct-2003 : Added hashCode tests (DG);
- * 29-Apr-2004 : Added test for getMiddleMillisecond() method (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 05-Oct-2006 : Added some tests (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -77,7 +67,7 @@ public class MillisecondTest {
     @Test
     public void testEqualsSelf() {
         Millisecond millisecond = new Millisecond();
-        assertTrue(millisecond.equals(millisecond));
+        assertEquals(millisecond, millisecond);
     }
 
     /**
@@ -95,7 +85,7 @@ public class MillisecondTest {
         Minute minute2 = new Minute(15, hour2);
         Second second2 = new Second(34, minute2);
         Millisecond milli2 = new Millisecond(999, second2);
-        assertTrue(milli1.equals(milli2));
+        assertEquals(milli1, milli2);
     }
 
     /**
@@ -234,7 +224,7 @@ public class MillisecondTest {
     @Test
     public void testSerialization() {
         Millisecond m1 = new Millisecond();
-        Millisecond m2 = (Millisecond) TestUtils.serialised(m1);
+        Millisecond m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -245,7 +235,7 @@ public class MillisecondTest {
     public void testHashcode() {
         Millisecond m1 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
         Millisecond m2 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int hash1 = m1.hashCode();
         int hash2 = m2.hashCode();
         assertEquals(hash1, hash2);

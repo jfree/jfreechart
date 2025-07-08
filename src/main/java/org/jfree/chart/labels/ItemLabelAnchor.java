@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------------
  * ItemLabelAnchor.java
  * --------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -158,6 +158,28 @@ public final class ItemLabelAnchor implements Serializable {
      */
     private ItemLabelAnchor(String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns {@code true} if this anchor point is inside an area.
+     *
+     * @return {@code true} if this anchor point is inside an area,
+     *         {@code false} otherwise.
+     */
+    public boolean isInternal() {
+        return this == ItemLabelAnchor.CENTER
+               || this == ItemLabelAnchor.INSIDE1
+               || this == ItemLabelAnchor.INSIDE2
+               || this == ItemLabelAnchor.INSIDE3
+               || this == ItemLabelAnchor.INSIDE4
+               || this == ItemLabelAnchor.INSIDE5
+               || this == ItemLabelAnchor.INSIDE6
+               || this == ItemLabelAnchor.INSIDE7
+               || this == ItemLabelAnchor.INSIDE8
+               || this == ItemLabelAnchor.INSIDE9
+               || this == ItemLabelAnchor.INSIDE10
+               || this == ItemLabelAnchor.INSIDE11
+               || this == ItemLabelAnchor.INSIDE12;
     }
 
     /**

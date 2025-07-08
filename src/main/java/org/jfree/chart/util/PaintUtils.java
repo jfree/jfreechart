@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * PaintUtils.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributors:     -;
  */
 
@@ -89,7 +89,7 @@ public class PaintUtils {
                     && gp1.getPoint1().equals(gp2.getPoint1())    
                     && gp1.getPoint2().equals(gp2.getPoint2())
                     && gp1.isCyclic() == gp2.isCyclic()
-                    && gp1.getTransparency() == gp1.getTransparency(); 
+                    && gp1.getTransparency() == gp2.getTransparency();
         } else if (p1 instanceof LinearGradientPaint 
                 && p2 instanceof LinearGradientPaint) {
             LinearGradientPaint lgp1 = (LinearGradientPaint) p1;
@@ -149,7 +149,7 @@ public class PaintUtils {
 
         // no defined constant color, so this must be a user defined color
         final String color = Integer.toHexString(c.getRGB() & 0x00ffffff);
-        final StringBuffer retval = new StringBuffer(7);
+        final StringBuilder retval = new StringBuilder(7);
         retval.append("#");
 
         final int fillUp = 6 - color.length();

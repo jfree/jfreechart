@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,19 @@
  * -------------
  * OHLCTest.java
  * -------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 23-May-2009 : Added testHashCode() (DG);
  *
  */
 
 package org.jfree.data.time.ohlc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link OHLC} class.
@@ -63,24 +56,24 @@ public class OHLCTest {
         assertEquals(i1, i2);
 
         i1 = new OHLC(2.2, 4.0, 1.0, 3.0);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new OHLC(2.2, 4.0, 1.0, 3.0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new OHLC(2.2, 4.4, 1.0, 3.0);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new OHLC(2.2, 4.4, 1.0, 3.0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new OHLC(2.2, 4.4, 1.1, 3.0);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new OHLC(2.2, 4.4, 1.1, 3.0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new OHLC(2.2, 4.4, 1.1, 3.3);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new OHLC(2.2, 4.4, 1.1, 3.3);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -98,7 +91,7 @@ public class OHLCTest {
     @Test
     public void testSerialization() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
-        OHLC i2 = (OHLC) TestUtils.serialised(i1);
+        OHLC i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -109,7 +102,7 @@ public class OHLCTest {
     public void testHashcode() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
         OHLC i2 = new OHLC(2.0, 4.0, 1.0, 3.0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
         int h1 = i1.hashCode();
         int h2 = i2.hashCode();
         assertEquals(h1, h2);

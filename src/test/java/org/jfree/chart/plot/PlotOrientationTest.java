@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,19 @@
  * ------------------------
  * PlotOrientationTest.java
  * ------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Apr-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PlotOrientation} class.
@@ -59,12 +54,8 @@ public class PlotOrientationTest {
     public void testEquals() {
         assertEquals(PlotOrientation.HORIZONTAL, PlotOrientation.HORIZONTAL);
         assertEquals(PlotOrientation.VERTICAL, PlotOrientation.VERTICAL);
-        assertFalse(
-            PlotOrientation.HORIZONTAL.equals(PlotOrientation.VERTICAL)
-        );
-        assertFalse(
-            PlotOrientation.VERTICAL.equals(PlotOrientation.HORIZONTAL)
-        );
+        assertNotEquals(PlotOrientation.HORIZONTAL, PlotOrientation.VERTICAL);
+        assertNotEquals(PlotOrientation.VERTICAL, PlotOrientation.HORIZONTAL);
     }
 
     /**
@@ -73,11 +64,10 @@ public class PlotOrientationTest {
     @Test
     public void testSerialization() {
         PlotOrientation orientation1 = PlotOrientation.HORIZONTAL;
-        PlotOrientation orientation2 = (PlotOrientation) 
-                TestUtils.serialised(orientation1);
+        PlotOrientation orientation2 = TestUtils.serialised(orientation1);
         assertEquals(orientation1, orientation2);
         boolean same = orientation1 == orientation2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

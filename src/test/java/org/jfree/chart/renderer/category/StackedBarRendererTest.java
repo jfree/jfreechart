@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,14 @@
  * ---------------------------
  * StackedBarRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -52,6 +42,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StackedBarRenderer} class.
@@ -65,13 +57,13 @@ public class StackedBarRendererTest {
     public void testEquals() {
         StackedBarRenderer r1 = new StackedBarRenderer();
         StackedBarRenderer r2 = new StackedBarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setRenderAsPercentages(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRenderAsPercentages(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -81,7 +73,7 @@ public class StackedBarRendererTest {
     public void testHashCode() {
         StackedBarRenderer r1 = new StackedBarRenderer();
         StackedBarRenderer r2 = new StackedBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -94,9 +86,9 @@ public class StackedBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StackedBarRenderer r1 = new StackedBarRenderer();
         StackedBarRenderer r2 = (StackedBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -114,8 +106,7 @@ public class StackedBarRendererTest {
     @Test
     public void testSerialization() {
         StackedBarRenderer r1 = new StackedBarRenderer();
-        StackedBarRenderer r2 = (StackedBarRenderer) 
-                TestUtils.serialised(r1);
+        StackedBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

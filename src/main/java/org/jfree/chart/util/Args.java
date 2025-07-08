@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------
  * Args.java
  * ---------
- * (C) Copyright 2011-2020, by Object Refinery Limited.
+ * (C) Copyright 2011-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -40,6 +40,10 @@ package org.jfree.chart.util;
  * A utility class for checking method arguments.
  */
 public class Args {
+
+    private Args() {
+        // no requirement to instantiate
+    }
 
     /**
      * Throws an {@code IllegalArgumentException} if the supplied 
@@ -99,6 +103,23 @@ public class Args {
             throw new IllegalArgumentException("Require '" + name + "' (" 
                     + value + ") to be in the range " + lowerBound + " to " 
                     + upperBound);
+        }
+    }
+    
+    /**
+     * Checks the supplied value is finite (neither infinite nor NaN) and 
+     * throws an {@code IllegalArgumentException} if the requirement is not
+     * met.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name (for use in the exception message).
+     * 
+     * @since 1.5.4
+     */
+    public static void requireFinite(double value, String name) {
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be finite.");
         }
     }
 }

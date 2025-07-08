@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,10 @@
  * -----------------------
  * DatasetChangeEvent.java
  * -----------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 15-Oct-2001 : Move to new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 11-Jun-2002 : Separated the event source from the dataset to cover the case
- *               where the dataset is changed to null in the Plot class.
- *               Updated Javadocs (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 05-Oct-2004 : Minor Javadoc updates (DG);
  *
  */
 

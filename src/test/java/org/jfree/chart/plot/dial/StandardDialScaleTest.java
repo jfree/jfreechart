@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,14 @@
  * --------------------------
  * StandardDialScaleTest.java
  * --------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 24-Oct-2007 : Updated for API changes (DG);
- * 08-Jan-2012 : Added tests for valueToAngle() and angleToValue();
  *
  */
 
 package org.jfree.chart.plot.dial;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,6 +43,8 @@ import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardDialScale} class.
@@ -66,106 +58,106 @@ public class StandardDialScaleTest {
     public void testEquals() {
         StandardDialScale s1 = new StandardDialScale();
         StandardDialScale s2 = new StandardDialScale();
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // lowerBound
         s1 = new StandardDialScale(10.0, 100.0, 0.0, 270.0, 10.0, 4);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new StandardDialScale(10.0, 100.0, 0.0, 270.0, 10.0, 4);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // upperBound
         s1 = new StandardDialScale(10.0, 200.0, 0.0, 270.0, 10.0, 4);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new StandardDialScale(10.0, 200.0, 0.0, 270.0, 10.0, 4);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // startAngle
         s1 = new StandardDialScale(10.0, 200.0, 20.0, 270.0, 10.0, 4);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new StandardDialScale(10.0, 200.0, 20.0, 270.0, 10.0, 4);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // extent
         s1 = new StandardDialScale(10.0, 200.0, 20.0, 99.0, 10.0, 4);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new StandardDialScale(10.0, 200.0, 20.0, 99.0, 10.0, 4);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // tickRadius
         s1.setTickRadius(0.99);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setTickRadius(0.99);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // majorTickIncrement
         s1.setMajorTickIncrement(11.1);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMajorTickIncrement(11.1);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // majorTickLength
         s1.setMajorTickLength(0.09);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMajorTickLength(0.09);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // majorTickPaint
         s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // majorTickStroke
         s1.setMajorTickStroke(new BasicStroke(1.1f));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMajorTickStroke(new BasicStroke(1.1f));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // minorTickCount
         s1.setMinorTickCount(7);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMinorTickCount(7);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // minorTickLength
         s1.setMinorTickLength(0.09);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setMinorTickLength(0.09);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // tickLabelOffset
         s1.setTickLabelOffset(0.11);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setTickLabelOffset(0.11);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // tickLabelFont
         s1.setTickLabelFont(new Font("Dialog", Font.PLAIN, 15));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setTickLabelFont(new Font("Dialog", Font.PLAIN, 15));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // tickLabelPaint
         s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.GREEN));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.GREEN));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         s1.setTickLabelsVisible(false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setTickLabelsVisible(false);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // check an inherited attribute
         s1.setVisible(false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setVisible(false);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -175,7 +167,7 @@ public class StandardDialScaleTest {
     public void testHashCode() {
         StandardDialScale s1 = new StandardDialScale();
         StandardDialScale s2 = new StandardDialScale();
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         int h1 = s1.hashCode();
         int h2 = s2.hashCode();
         assertEquals(h1, h2);
@@ -189,9 +181,9 @@ public class StandardDialScaleTest {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
         StandardDialScale s2 = (StandardDialScale) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
 
         // try a customised instance
         s1 = new StandardDialScale();
@@ -200,9 +192,9 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
         s2 = (StandardDialScale) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
 
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
@@ -218,7 +210,7 @@ public class StandardDialScaleTest {
     public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) TestUtils.serialised(s1);
+        StandardDialScale s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -228,7 +220,7 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtils.serialised(s1);
+        s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

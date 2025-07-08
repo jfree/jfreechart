@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,17 +27,10 @@
  * --------------------------
  * XYImageAnnotationTest.java
  * --------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-May-2004 : Version 1 (DG);
- * 01-Dec-2006 : Updated testEquals() for new field (DG);
- * 09-Jan-2007 : Comment out failing test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 

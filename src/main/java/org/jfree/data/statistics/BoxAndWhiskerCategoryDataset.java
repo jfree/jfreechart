@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,11 @@
  * ---------------------------------
  * BoxAndWhiskerCategoryDataset.java
  * ---------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 27-Aug-2003 : Renamed getAverageValue --> getMeanValue, changed
- *               getAllOutliers to return a List rather than an array (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 
@@ -63,7 +55,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The mean value.
      */
-    public Number getMeanValue(int row, int column);
+    Number getMeanValue(int row, int column);
 
     /**
      * Returns the average value for an item.
@@ -73,7 +65,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The average value.
      */
-    public Number getMeanValue(Comparable rowKey, Comparable columnKey);
+    Number getMeanValue(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the median value for an item.
@@ -83,7 +75,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The median value.
      */
-    public Number getMedianValue(int row, int column);
+    Number getMedianValue(int row, int column);
 
     /**
      * Returns the median value for an item.
@@ -93,7 +85,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The median value.
      */
-    public Number getMedianValue(Comparable rowKey, Comparable columnKey);
+    Number getMedianValue(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the q1median value for an item.
@@ -103,7 +95,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q1median value.
      */
-    public Number getQ1Value(int row, int column);
+    Number getQ1Value(int row, int column);
 
     /**
      * Returns the q1median value for an item.
@@ -113,7 +105,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q1median value.
      */
-    public Number getQ1Value(Comparable rowKey, Comparable columnKey);
+    Number getQ1Value(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the q3median value for an item.
@@ -123,7 +115,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q3median value.
      */
-    public Number getQ3Value(int row, int column);
+    Number getQ3Value(int row, int column);
 
     /**
      * Returns the q3median value for an item.
@@ -133,7 +125,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q3median value.
      */
-    public Number getQ3Value(Comparable rowKey, Comparable columnKey);
+    Number getQ3Value(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the minimum regular (non-outlier) value for an item.
@@ -143,7 +135,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum regular value.
      */
-    public Number getMinRegularValue(int row, int column);
+    Number getMinRegularValue(int row, int column);
 
     /**
      * Returns the minimum regular (non-outlier) value for an item.
@@ -153,7 +145,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum regular value.
      */
-    public Number getMinRegularValue(Comparable rowKey, Comparable columnKey);
+    Number getMinRegularValue(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the maximum regular (non-outlier) value for an item.
@@ -163,7 +155,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum regular value.
      */
-    public Number getMaxRegularValue(int row, int column);
+    Number getMaxRegularValue(int row, int column);
 
     /**
      * Returns the maximum regular (non-outlier) value for an item.
@@ -173,7 +165,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum regular value.
      */
-    public Number getMaxRegularValue(Comparable rowKey, Comparable columnKey);
+    Number getMaxRegularValue(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the minimum outlier (non-farout) for an item.
@@ -183,7 +175,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum outlier.
      */
-    public Number getMinOutlier(int row, int column);
+    Number getMinOutlier(int row, int column);
 
     /**
      * Returns the minimum outlier (non-farout) for an item.
@@ -193,7 +185,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum outlier.
      */
-    public Number getMinOutlier(Comparable rowKey, Comparable columnKey);
+    Number getMinOutlier(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the maximum outlier (non-farout) for an item.
@@ -203,7 +195,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum outlier.
      */
-    public Number getMaxOutlier(int row, int column);
+    Number getMaxOutlier(int row, int column);
 
     /**
      * Returns the maximum outlier (non-farout) for an item.
@@ -213,7 +205,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum outlier.
      */
-    public Number getMaxOutlier(Comparable rowKey, Comparable columnKey);
+    Number getMaxOutlier(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
@@ -224,7 +216,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return A list of outliers for an item.
      */
-    public List getOutliers(int row, int column);
+    List getOutliers(int row, int column);
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
@@ -235,6 +227,6 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return A list of outlier values for an item.
      */
-    public List getOutliers(Comparable rowKey, Comparable columnKey);
+    List getOutliers(Comparable rowKey, Comparable columnKey);
 
 }

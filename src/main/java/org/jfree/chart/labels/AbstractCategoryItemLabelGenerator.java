@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ---------------------------------------
  * AbstractCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2005-2021, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -64,10 +64,10 @@ public abstract class AbstractCategoryItemLabelGenerator
      * combine the standard items:  {0} = series name, {1} = category,
      * {2} = value, {3} = value as a percentage of the column total.
      */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** The string used to represent a null value. */
-    private String nullValueString;
+    private final String nullValueString;
 
     /**
      * A number formatter used to preformat the value before it is passed to
@@ -85,7 +85,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * A number formatter used to preformat the percentage value before it is
      * passed to the MessageFormat object.
      */
-    private NumberFormat percentFormat;
+    private final NumberFormat percentFormat;
 
     /**
      * Creates a label generator with the specified number formatter.
@@ -95,7 +95,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * @param formatter  the number formatter ({@code null} not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
-                                                 NumberFormat formatter) {
+            NumberFormat formatter) {
         this(labelFormat, formatter, NumberFormat.getPercentInstance());
     }
 
@@ -262,16 +262,36 @@ public abstract class AbstractCategoryItemLabelGenerator
 
         AbstractCategoryItemLabelGenerator that
             = (AbstractCategoryItemLabelGenerator) obj;
-        if (!this.labelFormat.equals(that.labelFormat)) {
+        if (!Objects.equals(this.labelFormat, that.labelFormat)) {
             return false;
         }
         if (!Objects.equals(this.dateFormat, that.dateFormat)) {
             return false;
         }
+        if (!Objects.equals(this.nullValueString, that.nullValueString)) {
+            return false;
+        }
         if (!Objects.equals(this.numberFormat, that.numberFormat)) {
             return false;
         }
+        if (!Objects.equals(this.percentFormat, that.percentFormat)) {
+            return false;
+        }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * Returns whether instances of this class can be considered equal with other.
+     *
+     * @param other the other.
+     * @return A boolean
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractCategoryItemLabelGenerator);
     }
 
     /**

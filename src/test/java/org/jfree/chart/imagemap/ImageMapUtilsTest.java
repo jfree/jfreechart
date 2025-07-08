@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * ----------------------
  * ImageMapUtilsTest.java
  * ----------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2009 : Version 1 (DG);
  *
  */
 
@@ -59,7 +55,7 @@ public class ImageMapUtilsTest {
         assertEquals("&quot;", ImageMapUtils.htmlEscape("\""));
         assertEquals("&lt;", ImageMapUtils.htmlEscape("<"));
         assertEquals("&gt;", ImageMapUtils.htmlEscape(">"));
-        assertEquals("&#39;", ImageMapUtils.htmlEscape("\'"));
+        assertEquals("&#39;", ImageMapUtils.htmlEscape("'"));
         assertEquals("&#092;abc", ImageMapUtils.htmlEscape("\\abc"));
         assertEquals("abc\n", ImageMapUtils.htmlEscape("abc\n"));
     }

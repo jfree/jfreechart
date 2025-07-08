@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,14 @@
  * -------------------
  * CyclicAxisTest.java
  * -------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 19-Nov-2003 : First version (NB);
- * 05-Oct-2004 : Removed extension of NumberAxisTests (DG);
- * 07-Jan-2004 : Added test for hashCode() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- *
  */
 
 package org.jfree.chart.axis;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -54,6 +43,8 @@ import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CyclicNumberAxis} class.
@@ -67,9 +58,9 @@ public class CyclicNumberAxisTest  {
     public void testCloning() throws CloneNotSupportedException {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test");
         CyclicNumberAxis a2 = (CyclicNumberAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -80,46 +71,46 @@ public class CyclicNumberAxisTest  {
 
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test");
         CyclicNumberAxis a2 = new CyclicNumberAxis(10, 0, "Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // period
         a1.setPeriod(5);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setPeriod(5);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // offset
         a1.setOffset(2.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setOffset(2.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // advance line Paint
         a1.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // advance line Stroke
         Stroke stroke = new BasicStroke(0.2f);
         a1.setAdvanceLineStroke(stroke);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAdvanceLineStroke(stroke);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // advance line Visible
         a1.setAdvanceLineVisible(!a1.isAdvanceLineVisible());
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAdvanceLineVisible(a1.isAdvanceLineVisible());
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // cycle bound mapping
         a1.setBoundMappedToLastCycle(!a1.isBoundMappedToLastCycle());
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setBoundMappedToLastCycle(a1.isBoundMappedToLastCycle());
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
     }
 
@@ -130,7 +121,7 @@ public class CyclicNumberAxisTest  {
     public void testHashCode() {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test");
         CyclicNumberAxis a2 = new CyclicNumberAxis(10, 0, "Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -142,7 +133,7 @@ public class CyclicNumberAxisTest  {
     @Test
     public void testSerialization() {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test Axis");
-        CyclicNumberAxis a2 = (CyclicNumberAxis) TestUtils.serialised(a1);
+        CyclicNumberAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

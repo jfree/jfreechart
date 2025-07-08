@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,15 @@
  * -------------------------
  * FixedMillisecondTest.java
  * -------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jan-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 28-May-2008 : Added test for immutability (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -63,7 +55,7 @@ public class FixedMillisecondTest {
     @Test
     public void testSerialization() {
         FixedMillisecond m1 = new FixedMillisecond();
-        FixedMillisecond m2 = (FixedMillisecond) TestUtils.serialised(m1);
+        FixedMillisecond m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -74,7 +66,7 @@ public class FixedMillisecondTest {
     public void testHashcode() {
         FixedMillisecond m1 = new FixedMillisecond(500000L);
         FixedMillisecond m2 = new FixedMillisecond(500000L);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int h1 = m1.hashCode();
         int h2 = m2.hashCode();
         assertEquals(h1, h2);

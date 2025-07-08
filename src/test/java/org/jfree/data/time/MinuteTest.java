@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,30 +27,14 @@
  * ---------------
  * MinuteTest.java
  * ---------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jan-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 05-Oct-2006 : Added new tests (DG);
- * 11-Dec-2006 : Added test1611872() (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
 package org.jfree.data.time;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.ZoneOffset;
 import java.util.Calendar;
@@ -65,6 +49,8 @@ import org.jfree.chart.date.MonthConstants;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link Minute} class.
  */
@@ -78,7 +64,7 @@ public class MinuteTest {
     @Test
     public void testEqualsSelf() {
         Minute minute = new Minute();
-        assertTrue(minute.equals(minute));
+        assertEquals(minute, minute);
     }
 
     /**
@@ -92,7 +78,17 @@ public class MinuteTest {
         Day day2 = new Day(29, MonthConstants.MARCH, 2002);
         Hour hour2 = new Hour(15, day2);
         Minute minute2 = new Minute(15, hour2);
-        assertTrue(minute1.equals(minute2));
+        assertEquals(minute1, minute2);
+    }
+
+    @Test
+    public void comparison() {
+        Minute m1 = new Minute(30, 6, 10, 8, 2021);
+        Minute m2 = new Minute(30, 6, 11, 8, 2021);
+        assertNotEquals(m1, m2);
+        assertEquals(-1, m1.compareTo(m2));
+        assertEquals(1, m2.compareTo(m1));
+        assertEquals(0, m1.compareTo(m1));
     }
 
     /**
@@ -222,7 +218,7 @@ public class MinuteTest {
     @Test
     public void testSerialization() {
         Minute m1 = new Minute();
-        Minute m2 = (Minute) TestUtils.serialised(m1);
+        Minute m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -233,7 +229,7 @@ public class MinuteTest {
     public void testHashcode() {
         Minute m1 = new Minute(45, 5, 1, 2, 2003);
         Minute m2 = new Minute(45, 5, 1, 2, 2003);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int h1 = m1.hashCode();
         int h2 = m2.hashCode();
         assertEquals(h1, h2);

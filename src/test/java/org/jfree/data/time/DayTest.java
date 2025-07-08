@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,10 @@
  * ------------
  * DayTest.java
  * ------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 20-Mar-2002 : Added new tests for Day constructor and getStart() and
- *               getEnd() in different time zones (DG);
- * 26-Jun-2002 : Removed unnecessary imports (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 03-Oct-2006 : Added testGetSerialIndex() (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -83,7 +70,7 @@ public class DayTest {
     @Test
     public void testEqualsSelf() {
         Day day = new Day();
-        assertTrue(day.equals(day));
+        assertEquals(day, day);
     }
 
     /**
@@ -93,7 +80,7 @@ public class DayTest {
     public void testEquals() {
         Day day1 = new Day(29, MonthConstants.MARCH, 2002);
         Day day2 = new Day(29, MonthConstants.MARCH, 2002);
-        assertTrue(day1.equals(day2));
+        assertEquals(day1, day2);
     }
 
     /**
@@ -328,7 +315,7 @@ public class DayTest {
     @Test
     public void testSerialization() {
         Day d1 = new Day(15, 4, 2000);
-        Day d2 = (Day) TestUtils.serialised(d1);
+        Day d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -339,7 +326,7 @@ public class DayTest {
     public void testHashcode() {
         Day d1 = new Day(1, 2, 2003);
         Day d2 = new Day(1, 2, 2003);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
         int h1 = d1.hashCode();
         int h2 = d2.hashCode();
         assertEquals(h1, h2);

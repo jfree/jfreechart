@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,14 @@
  * -----------------------------
  * XYDifferenceRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Oct-2003 : Version 1 (DG);
- * 04-May-2005 : Improved equals() test (DG);
- * 24-Jan-2007 : Added 'roundXCoordinates' to testEquals(), and improved
- *               testClone() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -63,6 +50,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYDifferenceRenderer} class.
@@ -83,38 +72,38 @@ public class XYDifferenceRendererTest {
         // positive paint
         r1.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // negative paint
         r1.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // shapesVisible
         r1 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // legendLine
         r1.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // roundXCoordinates
         r1.setRoundXCoordinates(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRoundXCoordinates(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
-        assertFalse(r1.equals(null));
+        assertNotEquals(null, r1);
     }
 
     /**
@@ -126,7 +115,7 @@ public class XYDifferenceRendererTest {
             = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
         XYDifferenceRenderer r2
             = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -142,16 +131,16 @@ public class XYDifferenceRendererTest {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
         XYDifferenceRenderer r2 = (XYDifferenceRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         Shape s = r1.getLegendLine();
         if (s instanceof Line2D) {
             Line2D l = (Line2D) s;
             l.setLine(1.0, 2.0, 3.0, 4.0);
-            assertFalse(r1.equals(r2));
+            assertNotEquals(r1, r2);
         }
     }
 
@@ -171,8 +160,7 @@ public class XYDifferenceRendererTest {
     public void testSerialization() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
-        XYDifferenceRenderer r2 = (XYDifferenceRenderer) 
-                TestUtils.serialised(r1);
+        XYDifferenceRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

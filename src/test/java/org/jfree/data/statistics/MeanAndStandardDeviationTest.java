@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,19 @@
  * ---------------------------------
  * MeanAndStandardDeviationTest.java
  * ---------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MeanAndStandardDeviation} class.
@@ -59,18 +53,18 @@ public class MeanAndStandardDeviationTest {
     public void testEquals() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
         MeanAndStandardDeviation m2 = new MeanAndStandardDeviation(1.2, 3.4);
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new MeanAndStandardDeviation(1.0, 3.4);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MeanAndStandardDeviation(1.0, 3.4);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1 = new MeanAndStandardDeviation(1.0, 3.0);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MeanAndStandardDeviation(1.0, 3.0);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -88,8 +82,7 @@ public class MeanAndStandardDeviationTest {
     @Test
     public void testSerialization() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
-        MeanAndStandardDeviation m2 = (MeanAndStandardDeviation) 
-                TestUtils.serialised(m1);
+        MeanAndStandardDeviation m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 }

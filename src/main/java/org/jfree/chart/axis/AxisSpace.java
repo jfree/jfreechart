@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * --------------
  * AxisSpace.java
  * --------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals method complies with EqualsVerifier);
  *
  */
 
@@ -322,16 +322,20 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         AxisSpace that = (AxisSpace) obj;
-        if (this.top != that.top) {
+        if (Double.doubleToLongBits(this.top) != 
+            Double.doubleToLongBits(that.top)) {
             return false;
         }
-        if (this.bottom != that.bottom) {
+        if (Double.doubleToLongBits(this.bottom) != 
+            Double.doubleToLongBits(that.bottom)) {
             return false;
         }
-        if (this.left != that.left) {
+        if (Double.doubleToLongBits(this.left) != 
+            Double.doubleToLongBits(that.left)) {
             return false;
         }
-        if (this.right != that.right) {
+        if (Double.doubleToLongBits(this.right) != 
+            Double.doubleToLongBits(that.right)) {
             return false;
         }
         return true;

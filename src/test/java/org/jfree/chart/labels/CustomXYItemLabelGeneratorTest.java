@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,16 @@
  * -----------------------------------
  * CustomXYItemLabelGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added cloning tests (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -52,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CustomXYToolTipGenerator} class.
@@ -67,9 +61,9 @@ public class CustomXYItemLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -99,8 +93,7 @@ public class CustomXYItemLabelGeneratorTest {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         g1.addToolTipSeries(t1);
         g1.addToolTipSeries(t2);
-        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

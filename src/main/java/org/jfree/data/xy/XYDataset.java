@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------
  * XYDataset.java
  * --------------
- * (C) Copyright 2000-2020, by Object Refinery Limited.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -49,7 +49,7 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The order (never {@code null}).
      */
-    public DomainOrder getDomainOrder();
+    DomainOrder getDomainOrder();
 
     /**
      * Returns the number of items in a series.
@@ -63,7 +63,7 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The item count.
      */
-    public int getItemCount(int series);
+    int getItemCount(int series);
 
     /**
      * Returns the x-value for an item within a series.  The x-values may or
@@ -77,7 +77,7 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The x-value (never {@code null}).
      */
-    public Number getX(int series, int item);
+    Number getX(int series, int item);
 
     /**
      * Returns the x-value for an item within a series.
@@ -89,7 +89,7 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The x-value.
      */
-    public double getXValue(int series, int item);
+    double getXValue(int series, int item);
 
     /**
      * Returns the y-value for an item within a series.
@@ -101,7 +101,7 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The y-value (possibly {@code null}).
      */
-    public Number getY(int series, int item);
+    Number getY(int series, int item);
 
     /**
      * Returns the y-value (as a double primitive) for an item within a series.
@@ -113,6 +113,6 @@ public interface XYDataset extends SeriesDataset {
      *
      * @return The y-value.
      */
-    public double getYValue(int series, int item);
+    double getYValue(int series, int item);
 
 }

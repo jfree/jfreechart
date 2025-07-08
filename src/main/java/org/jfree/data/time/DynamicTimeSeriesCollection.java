@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * --------------------------------
  * DynamicTimeSeriesCollection.java
  * --------------------------------
- * (C) Copyright 2002-2020, by I. H. Thomae and Contributors.
+ * (C) Copyright 2002-present, by I. H. Thomae and Contributors.
  *
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Ricardo JL Rufino (patch #310);
  *
  */
@@ -275,7 +275,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Fill the pointsInTime with times using TimePeriod.next():
      * Will silently return if the time array was already populated.
-     *
+     * <p>
      * Also computes the data cached for later use by
      * methods implementing the DomainInfo interface:
      *
@@ -528,9 +528,9 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         RegularTimePeriod nextInstant = this.pointsInTime[this.newestAt].next();
         this.newestAt = this.oldestAt;  // newestAt takes value previously held
                                         // by oldestAT
-        /***
-         * The next 10 lines or so should be expanded if data can be negative
-         ***/
+
+        // The next 10 lines or so should be expanded if data can be negative
+
         // if the oldest data contained a maximum Y-value, invalidate the stored
         //   Y-max and Y-range data:
         boolean extremaChanged = false;
@@ -545,7 +545,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             if (extremaChanged) {
                 break;
             }
-        }  /*** If data can be < 0, add code here to check the minimum    **/
+        }  // If data can be < 0, add code here to check the minimum
         if (extremaChanged) {
             invalidateRangeInfo();
         }
@@ -599,7 +599,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         return max;
     }
 
-    /** End, positive-data-only code  **/
+    // End, positive-data-only code
 
     /**
      * Returns the index of the oldest data item.
@@ -827,7 +827,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -841,7 +841,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -855,7 +855,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range.
@@ -897,7 +897,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum range value.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum range value.
@@ -914,7 +914,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum range value.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum range value.
@@ -931,7 +931,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the value range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

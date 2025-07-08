@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------
  * Block.java
  * ----------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -53,14 +53,14 @@ public interface Block extends Drawable {
      *
      * @return An ID.
      */
-    public String getID();
+    String getID();
 
     /**
      * Sets the ID for the block.
      *
      * @param id  the ID.
      */
-    public void setID(String id);
+    void setID(String id);
 
     /**
      * Arranges the contents of the block, with no constraints, and returns
@@ -70,7 +70,7 @@ public interface Block extends Drawable {
      *
      * @return The size of the block.
      */
-    public Size2D arrange(Graphics2D g2);
+    Size2D arrange(Graphics2D g2);
 
     /**
      * Arranges the contents of the block, within the given constraints, and
@@ -81,21 +81,21 @@ public interface Block extends Drawable {
      *
      * @return The block size (in Java2D units, never {@code null}).
      */
-    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint);
+    Size2D arrange(Graphics2D g2, RectangleConstraint constraint);
 
     /**
      * Returns the current bounds of the block.
      *
      * @return The bounds.
      */
-    public Rectangle2D getBounds();
+    Rectangle2D getBounds();
 
     /**
      * Sets the bounds of the block.
      *
      * @param bounds  the bounds.
      */
-    public void setBounds(Rectangle2D bounds);
+    void setBounds(Rectangle2D bounds);
 
     /**
      * Draws the block within the specified area.  Refer to the documentation
@@ -108,6 +108,6 @@ public interface Block extends Drawable {
      *
      * @return An optional return value (possibly {@code null}).
      */
-    public Object draw(Graphics2D g2, Rectangle2D area, Object params);
+    Object draw(Graphics2D g2, Rectangle2D area, Object params);
 
 }

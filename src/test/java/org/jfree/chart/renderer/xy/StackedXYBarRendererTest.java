@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,14 @@
  * -----------------------------
  * StackedXYBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Sep-2004 : Version 1 (DG);
- * 06-Jan-2005 : Added test for auto range calculation (DG);
- * 06-Dec-2006 : Confirm serialization of GradientPaint (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -61,6 +50,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StackedXYBarRenderer} class.
  */
@@ -73,13 +64,13 @@ public class StackedXYBarRendererTest {
     public void testEquals() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setRenderAsPercentages(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setRenderAsPercentages(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -89,7 +80,7 @@ public class StackedXYBarRendererTest {
     public void testHashcode() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -97,7 +88,7 @@ public class StackedXYBarRendererTest {
         r1.setRenderAsPercentages(true);
         h1 = r1.hashCode();
         h2 = r2.hashCode();
-        assertFalse(h1 == h2);
+        assertNotEquals(h1, h2);
     }
 
     /**
@@ -107,9 +98,9 @@ public class StackedXYBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = (StackedXYBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -129,8 +120,7 @@ public class StackedXYBarRendererTest {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.YELLOW));
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) 
-                TestUtils.serialised(r1);
+        StackedXYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,16 +27,10 @@
  * ----------------
  * XisSymbolic.java
  * ----------------
- * (C) Copyright 2006-2008, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2006-present, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 29-Mar-2002 : First version (AB);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -53,7 +47,7 @@ public interface XisSymbolic {
      *
      * @return An array of symbolic values.
      */
-    public String[] getXSymbolicValues();
+    String[] getXSymbolicValues();
 
     /**
      * Returns the symbolic value of the data set specified by
@@ -64,7 +58,7 @@ public interface XisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getXSymbolicValue(int series, int item);
+    String getXSymbolicValue(int series, int item);
 
     /**
      * Returns the symbolic value linked with the specified {@code Integer}.
@@ -73,6 +67,6 @@ public interface XisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getXSymbolicValue(Integer val);
+    String getXSymbolicValue(Integer val);
 
 }

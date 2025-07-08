@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * -------------------------------
  * CategoryTableXYDatasetTest.java
  * -------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Oct-2005 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryTableXYDataset} class.
@@ -68,14 +61,14 @@ public class CategoryTableXYDatasetTest {
         d2.add(1.0, 1.1, "Series 1");
         d2.add(2.0, 2.2, "Series 1");
 
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.add(3.0, 3.3, "Series 1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
 
         d2.add(3.0, 3.3, "Series 1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -88,19 +81,19 @@ public class CategoryTableXYDatasetTest {
         d1.add(2.0, 2.2, "Series 1");
 
         CategoryTableXYDataset d2 = (CategoryTableXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         d1.add(3.0, 3.3, "Series 1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(3.0, 3.3, "Series 1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setIntervalPositionFactor(0.33);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setIntervalPositionFactor(0.33);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -115,19 +108,19 @@ public class CategoryTableXYDatasetTest {
         d1.setIntervalWidth(1.23);
 
         CategoryTableXYDataset d2 = (CategoryTableXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         d1.add(3.0, 3.3, "Series 1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(3.0, 3.3, "Series 1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setIntervalPositionFactor(0.33);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setIntervalPositionFactor(0.33);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -147,8 +140,7 @@ public class CategoryTableXYDatasetTest {
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-        CategoryTableXYDataset d2 = (CategoryTableXYDataset) 
-                TestUtils.serialised(d1);
+        CategoryTableXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

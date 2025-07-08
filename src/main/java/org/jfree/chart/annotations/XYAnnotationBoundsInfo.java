@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------------------
  * XYAnnotationBoundsInfo.java
  * ---------------------------
- * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -44,13 +44,13 @@ import org.jfree.data.Range;
 public interface XYAnnotationBoundsInfo {
 
     /**
-     * Returns a flag that determines whether or not the annotation's
+     * Returns a flag that determines whether the annotation's
      * bounds should be taken into account for auto-range calculations on
      * the axes that the annotation is plotted against.
      *
      * @return A boolean.
      */
-    public boolean getIncludeInDataBounds();
+    boolean getIncludeInDataBounds();
 
     /**
      * Returns the range of x-values (in data space) that the annotation
@@ -58,7 +58,7 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The x-range.
      */
-    public Range getXRange();
+    Range getXRange();
 
     /**
      * Returns the range of y-values (in data space) that the annotation
@@ -66,6 +66,6 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The y-range.
      */
-    public Range getYRange();
+    Range getYRange();
 
 }

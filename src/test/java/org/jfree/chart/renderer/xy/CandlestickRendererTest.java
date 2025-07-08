@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,29 +27,14 @@
  * ----------------------------
  * CandlestickRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 17-Aug-2006 : Strengthened testEquals() and added testFindRangeBounds()
- *               method (DG);
- * 05-Mar-2007 : Added new field to testEquals() (DG);
- * 08-Oct-2007 : Added tests for new volumePaint field (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -63,6 +48,8 @@ import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CandlestickRenderer} class.
@@ -99,64 +86,64 @@ public class CandlestickRendererTest {
         // upPaint
         r1.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // downPaint
         r1.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.GREEN, 7.0f, 8.0f,
                 Color.YELLOW));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.GREEN, 7.0f, 8.0f,
                 Color.YELLOW));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // drawVolume
         r1.setDrawVolume(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawVolume(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // candleWidth
         r1.setCandleWidth(3.3);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setCandleWidth(3.3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // maxCandleWidthInMilliseconds
         r1.setMaxCandleWidthInMilliseconds(123);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMaxCandleWidthInMilliseconds(123);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // autoWidthMethod
         r1.setAutoWidthMethod(CandlestickRenderer.WIDTHMETHOD_SMALLEST);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAutoWidthMethod(CandlestickRenderer.WIDTHMETHOD_SMALLEST);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // autoWidthFactor
         r1.setAutoWidthFactor(0.22);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAutoWidthFactor(0.22);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // autoWidthGap
         r1.setAutoWidthGap(1.1);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setAutoWidthGap(1.1);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setVolumePaint(Color.BLUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setVolumePaint(Color.BLUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -166,7 +153,7 @@ public class CandlestickRendererTest {
     public void testHashcode() {
         CandlestickRenderer r1 = new CandlestickRenderer();
         CandlestickRenderer r2 = new CandlestickRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -179,9 +166,9 @@ public class CandlestickRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         CandlestickRenderer r1 = new CandlestickRenderer();
         CandlestickRenderer r2 = (CandlestickRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -199,8 +186,7 @@ public class CandlestickRendererTest {
     @Test
     public void testSerialization() {
         CandlestickRenderer r1 = new CandlestickRenderer();
-        CandlestickRenderer r2 = (CandlestickRenderer) 
-                TestUtils.serialised(r1);
+        CandlestickRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

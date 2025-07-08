@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,31 +27,12 @@
  * ---------------------
  * ServletUtilities.java
  * ---------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   J?rgen Hoffman;
- *                   David Gilbert (for Object Refinery Limited);
+ *                   David Gilbert;
  *                   Douglas Clayton;
- *
- * Changes
- * -------
- * 19-Aug-2002 : Version 1;
- * 20-Apr-2003 : Added additional sendTempFile method to allow MIME type
- *               specification and modified original sendTempFile method to
- *               automatically set MIME type for JPEG and PNG files
- * 23-Jun-2003 : Added additional sendTempFile method at the request of
- *               J?rgen Hoffman;
- * 07-Jul-2003 : Added more header information to streamed images;
- * 19-Aug-2003 : Forced images to be stored in the temporary directory defined
- *               by System property java.io.tmpdir, rather than default (RA);
- * 24-Mar-2004 : Added temp filename prefix attribute (DG);
- * 09-Mar-2005 : Added "one time" file option (DG);
- * ------------- JFREECHART 1.0.x RELEASED ------------------------------------
- * 10-Jan-2006 : Updated API docs and reformatted (DG);
- * 13-Sep-2006 : Format date in response header in English, not locale default
- *               (see bug 1557141) (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -78,6 +59,8 @@ import org.jfree.chart.util.Args;
 
 /**
  * Utility class used for servlet related JFreeChart operations.
+ *
+ * @deprecated To be removed in JFreeChart 2.0
  */
 public class ServletUtilities {
 
@@ -94,6 +77,10 @@ public class ServletUtilities {
      */
     public static String getTempFilePrefix() {
         return ServletUtilities.tempFilePrefix;
+    }
+
+    private ServletUtilities() {
+        // no requirement to instantiate
     }
 
     /**
@@ -339,12 +326,10 @@ public class ServletUtilities {
         String mimeType = null;
         String filename = file.getName();
         if (filename.length() > 5) {
-            if (filename.substring(filename.length() - 5,
-                    filename.length()).equals(".jpeg")) {
+            if (filename.endsWith(".jpeg")) {
                 mimeType = "image/jpeg";
             }
-            else if (filename.substring(filename.length() - 4,
-                    filename.length()).equals(".png")) {
+            else if (filename.endsWith(".png")) {
                 mimeType = "image/png";
             }
         }

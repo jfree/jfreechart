@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * --------
  * CSV.java
  * --------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-Nov-2003 : Version 1 (DG);
  *
  */
 
@@ -134,7 +130,7 @@ public class CSV {
                 fieldIndex++;
             }
         }
-        String key = line.substring(start, line.length());
+        String key = line.substring(start);
         keys.add(removeStringDelimiters(key));
         return keys;
     }
@@ -172,7 +168,7 @@ public class CSV {
             }
         }
         Double value = Double.valueOf(
-            removeStringDelimiters(line.substring(start, line.length()))
+            removeStringDelimiters(line.substring(start))
         );
         dataset.addValue(
             value, rowKey, (Comparable) columnKeys.get(fieldIndex - 1)

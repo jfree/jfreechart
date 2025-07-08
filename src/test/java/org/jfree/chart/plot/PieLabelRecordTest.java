@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,21 @@
  * -----------------------
  * PieLabelRecordTest.java
  * -----------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Nov-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBox;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link PieLabelRecord} class.
@@ -62,43 +57,43 @@ public class PieLabelRecordTest {
                 3.0, 4.0, 5.0);
         PieLabelRecord p2 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1 = new PieLabelRecord("B", 1.0, 2.0, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.0, 2.0, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.0, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.0, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("B"), 3.0, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.0, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.0, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.0, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.0, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.4, 5.0);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.4, 5.0);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.4, 5.5);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.4, 5.5);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
     }
 
@@ -119,7 +114,7 @@ public class PieLabelRecordTest {
     public void testSerialization() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
-        PieLabelRecord p2 = (PieLabelRecord) TestUtils.serialised(p1);
+        PieLabelRecord p2 = TestUtils.serialised(p1);
         boolean b = p1.equals(p2);
         assertTrue(b);
     }

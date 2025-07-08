@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -28,10 +28,10 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2021, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-present, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
- * Contributor(s):   David Gilbert (for Object Refinery Limited).
+ * Contributor(s):   David Gilbert.
  *                   Arnaud Lelievre;
  *                   Julien Henry (see patch 1769088) (DG);
  */
@@ -248,13 +248,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     };
 
     /**
-     * A flag that controls whether or not the axis range adjusts to the
+     * A flag that controls whether the axis range adjusts to the
      * sub-ranges.
      */
     private boolean followDataInSubranges = false;
 
     /**
-     * A flag that controls whether or not the mercury paint changes with
+     * A flag that controls whether the mercury paint changes with
      * the subranges.
      */
     private boolean useSubrangePaint = true;
@@ -818,7 +818,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns a flag that controls whether or not the thermometer axis zooms
+     * Returns a flag that controls whether the thermometer axis zooms
      * to display the subrange within which the data value falls.
      *
      * @return The flag.
@@ -828,7 +828,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the flag that controls whether or not the thermometer axis zooms
+     * Sets the flag that controls whether the thermometer axis zooms
      * to display the subrange within which the data value falls.
      *
      * @param flag  the flag.
@@ -839,7 +839,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns a flag that controls whether or not the mercury color changes
+     * Returns a flag that controls whether the mercury color changes
      * for each subrange.
      *
      * @return The flag.
@@ -1139,7 +1139,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                     break;
                 default:
             }
-            /***/
         }
 
         g2.setPaint(this.thermometerPaint);
@@ -1520,7 +1519,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      */
     @Override
@@ -1548,7 +1547,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      */
     @Override

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -----------------------
  * XYAnnotationEntity.java
  * -----------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -93,20 +93,43 @@ public class XYAnnotationEntity extends ChartEntity
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
+        if (this == obj) {
             return true;
-        }
-        if (!super.equals(obj)) {
-            return false;
         }
         if (!(obj instanceof XYAnnotationEntity)) {
             return false;
         }
         XYAnnotationEntity that = (XYAnnotationEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        // compare fields in this class
         if (this.rendererIndex != that.rendererIndex) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof XYAnnotationEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 37 * hash + this.rendererIndex;
+        return hash;
+    }
 }

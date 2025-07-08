@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,19 @@
  * ---------------------
  * HistogramBinTest.java
  * ---------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HistogramBin} class.
@@ -72,9 +67,9 @@ public class HistogramBinTest {
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
         HistogramBin b2 = (HistogramBin) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
     }
 
     /**
@@ -85,7 +80,7 @@ public class HistogramBinTest {
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
-        HistogramBin b2 = (HistogramBin) TestUtils.serialised(b1);
+        HistogramBin b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

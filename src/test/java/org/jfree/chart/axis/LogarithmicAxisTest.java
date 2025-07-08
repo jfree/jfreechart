@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * ------------------------
  * LogarithmicAxisTest.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 02-Mar-2007 : Added tests from bug report 880597 (DG);
  *
  */
 
@@ -105,7 +100,7 @@ public class LogarithmicAxisTest {
     @Test
     public void testSerialization() {
         LogarithmicAxis a1 = new LogarithmicAxis("Test Axis");
-        LogarithmicAxis a2 = (LogarithmicAxis) TestUtils.serialised(a1);
+        LogarithmicAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

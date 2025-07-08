@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Sylvain Vieujot;
  *                   Jeremy Bowman;
  *                   Andreas Schneider;
@@ -38,6 +38,7 @@
  *                   Michal Krause;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Peter Kolb - patches 2603321, 2809117;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
@@ -173,7 +174,7 @@ public abstract class Plot implements AxisChangeListener,
     private RectangleInsets insets;
 
     /**
-     * A flag that controls whether or not the plot outline is drawn.
+     * A flag that controls whether the plot outline is drawn.
      */
     private boolean outlineVisible;
 
@@ -208,7 +209,7 @@ public abstract class Plot implements AxisChangeListener,
     private transient EventListenerList listenerList;
 
     /**
-     * A flag that controls whether or not the plot will notify listeners
+     * A flag that controls whether the plot will notify listeners
      * of changes (defaults to true, but sometimes it is useful to disable
      * this).
      */
@@ -702,7 +703,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns the flag that controls whether or not the plot outline is
+     * Returns the flag that controls whether the plot outline is
      * drawn.  The default value is {@code true}.  Note that for
      * historical reasons, the plot's outline paint and stroke can take on
      * {@code null} values, in which case the outline will not be drawn
@@ -717,7 +718,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not the plot's outline is
+     * Sets the flag that controls whether the plot's outline is
      * drawn, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
@@ -844,7 +845,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not change events are sent to
+     * Returns a flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -856,7 +857,7 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not listeners receive
+     * Sets a flag that controls whether listeners receive
      * {@link PlotChangeEvent} notifications.
      *
      * @param notify  a boolean.
@@ -1241,6 +1242,10 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         Plot that = (Plot) obj;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
         if (!Objects.equals(this.noDataMessage, that.noDataMessage)) {
             return false;
         }
@@ -1256,6 +1261,11 @@ public abstract class Plot implements AxisChangeListener,
         if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
+        // There's a reason chart is not included in equals/hashCode - doing so
+        // causes a StackOverflow error during EqualsVerifier's test!
+//        if (!Objects.equals(this.chart, that.chart)) {
+//            return false;
+//        }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
@@ -1274,24 +1284,64 @@ public abstract class Plot implements AxisChangeListener,
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
             return false;
         }
-        if (this.backgroundImageAlpha != that.backgroundImageAlpha) {
+        if (Float.compare(this.backgroundImageAlpha,
+                          that.backgroundImageAlpha) != 0 ){
             return false;
         }
-        if (this.foregroundAlpha != that.foregroundAlpha) {
+        if (Float.compare(this.foregroundAlpha, that.foregroundAlpha) != 0 ) {
             return false;
         }
-        if (this.backgroundAlpha != that.backgroundAlpha) {
+        if (Float.compare(this.backgroundAlpha, that.backgroundAlpha) != 0 ) {
             return false;
         }
-        if (!this.drawingSupplier.equals(that.drawingSupplier)) {
+        if (!Objects.equals(this.drawingSupplier, that.drawingSupplier)) {
             return false;
         }
         if (this.notify != that.notify) {
             return false;
         }
+        if (!Objects.equals(this.datasetGroup, that.datasetGroup)) {
+            return false;
+        }
         return true;
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof Plot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.noDataMessage);
+        hash = 41 * hash + Objects.hashCode(this.noDataMessageFont);
+        hash = 41 * hash + Objects.hashCode(this.noDataMessagePaint);
+        hash = 41 * hash + Objects.hashCode(this.insets);
+//        hash = 41 * hash + Objects.hashCode(this.chart);
+        hash = 41 * hash + (this.outlineVisible ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 41 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 41 * hash + Objects.hashCode(this.backgroundPaint);
+        hash = 41 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 41 * hash + this.backgroundImageAlignment;
+        hash = 41 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 41 * hash + Float.floatToIntBits(this.foregroundAlpha);
+        hash = 41 * hash + Float.floatToIntBits(this.backgroundAlpha);
+        hash = 41 * hash + Objects.hashCode(this.drawingSupplier);
+        hash = 41 * hash + (this.notify ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.datasetGroup);
+        return hash;
+    }
+    
     /**
      * Creates a clone of the plot.
      *

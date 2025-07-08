@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,10 @@
  * -------------
  * HourTest.java
  * -------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jan-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 05-Oct-2006 : Added new tests (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -77,7 +67,7 @@ public class HourTest {
     @Test
     public void testEqualsSelf() {
         Hour hour = new Hour();
-        assertTrue(hour.equals(hour));
+        assertEquals(hour, hour);
     }
 
     /**
@@ -87,7 +77,7 @@ public class HourTest {
     public void testEquals() {
         Hour hour1 = new Hour(15, new Day(29, MonthConstants.MARCH, 2002));
         Hour hour2 = new Hour(15, new Day(29, MonthConstants.MARCH, 2002));
-        assertTrue(hour1.equals(hour2));
+        assertEquals(hour1, hour2);
     }
 
     /**
@@ -271,7 +261,7 @@ public class HourTest {
     @Test
     public void testSerialization() {
         Hour h1 = new Hour();
-        Hour h2 = (Hour) TestUtils.serialised(h1);
+        Hour h2 = TestUtils.serialised(h1);
         assertEquals(h1, h2);
     }
 
@@ -282,7 +272,7 @@ public class HourTest {
     public void testHashcode() {
         Hour h1 = new Hour(7, 9, 10, 1999);
         Hour h2 = new Hour(7, 9, 10, 1999);
-        assertTrue(h1.equals(h2));
+        assertEquals(h1, h2);
         int hash1 = h1.hashCode();
         int hash2 = h2.hashCode();
         assertEquals(hash1, hash2);

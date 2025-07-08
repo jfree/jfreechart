@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------------
  * AnnotationChangeListener.java
  * -------------------------
- * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
  * Original Author:  Peter Kolb (patch 2809117);
  * Contributor(s):   ;
@@ -51,6 +51,6 @@ public interface AnnotationChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void annotationChanged(AnnotationChangeEvent event);
+    void annotationChanged(AnnotationChangeEvent event);
 
 }

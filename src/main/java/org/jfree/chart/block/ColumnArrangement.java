@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ----------------------
  * ColumnArrangement.java
  * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -41,6 +41,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
@@ -367,20 +368,32 @@ public class ColumnArrangement implements Arrangement, Serializable {
             return false;
         }
         ColumnArrangement that = (ColumnArrangement) obj;
-        if (this.horizontalAlignment != that.horizontalAlignment) {
+        if (!Objects.equals(this.horizontalAlignment, that.horizontalAlignment)) {
             return false;
         }
-        if (this.verticalAlignment != that.verticalAlignment) {
+        if (!Objects.equals(this.verticalAlignment, that.verticalAlignment)) {
             return false;
         }
-        if (this.horizontalGap != that.horizontalGap) {
+        if (Double.doubleToLongBits(this.horizontalGap) !=
+            Double.doubleToLongBits(that.horizontalGap)) {
             return false;
         }
-        if (this.verticalGap != that.verticalGap) {
+        if (Double.doubleToLongBits(this.verticalGap) !=
+            Double.doubleToLongBits(that.verticalGap)) {
             return false;
         }
         return true;
     }
 
-
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.horizontalAlignment);
+        hash = 79 * hash + Objects.hashCode(this.verticalAlignment);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.horizontalGap) ^
+                                 (Double.doubleToLongBits(this.horizontalGap) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.verticalGap) ^
+                                 (Double.doubleToLongBits(this.verticalGap) >>> 32));
+        return hash;
+    }
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,14 @@
  * ---------------------
  * CategoryAxisTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone() test (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
 package org.jfree.chart.axis;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -52,6 +42,8 @@ import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryAxis} class.
@@ -65,75 +57,75 @@ public class CategoryAxisTest {
     public void testEquals() {
         CategoryAxis a1 = new CategoryAxis("Test");
         CategoryAxis a2 = new CategoryAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // lowerMargin
         a1.setLowerMargin(0.15);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setLowerMargin(0.15);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // upperMargin
         a1.setUpperMargin(0.15);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setUpperMargin(0.15);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryMargin
         a1.setCategoryMargin(0.15);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategoryMargin(0.15);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // maxCategoryLabelWidthRatio
         a1.setMaximumCategoryLabelWidthRatio(0.98f);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setMaximumCategoryLabelWidthRatio(0.98f);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryLabelPositionOffset
         a1.setCategoryLabelPositionOffset(11);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategoryLabelPositionOffset(11);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryLabelPositions
         a1.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryLabelToolTips
         a1.addCategoryLabelToolTip("Test", "Check");
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.addCategoryLabelToolTip("Test", "Check");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // categoryLabelURLs
-        a1.addCategoryLabelURL("Test", "http://www.jfree.org/");
-        assertFalse(a1.equals(a2));
-        a2.addCategoryLabelURL("Test", "http://www.jfree.org/");
-        assertTrue(a1.equals(a2));
+        a1.addCategoryLabelURL("Test", "https://www.jfree.org/");
+        assertNotEquals(a1, a2);
+        a2.addCategoryLabelURL("Test", "https://www.jfree.org/");
+        assertEquals(a1, a2);
 
         // tickLabelFont
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 21));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 21));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // tickLabelPaint
         a1.setTickLabelPaint("C1", Color.RED);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickLabelPaint("C1", Color.RED);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // tickLabelPaint2
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
     }
 
@@ -144,7 +136,7 @@ public class CategoryAxisTest {
     public void testHashCode() {
         CategoryAxis a1 = new CategoryAxis("Test");
         CategoryAxis a2 = new CategoryAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -157,9 +149,9 @@ public class CategoryAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         CategoryAxis a1 = new CategoryAxis("Test");
         CategoryAxis a2 = (CategoryAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -173,27 +165,27 @@ public class CategoryAxisTest {
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
         CategoryAxis a2 = (CategoryAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
 
         // check that changing a tick label font in a1 doesn't change a2
         a1.setTickLabelFont("C1", null);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickLabelFont("C1", null);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // check that changing a tick label paint in a1 doesn't change a2
         a1.setTickLabelPaint("C1", Color.YELLOW);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickLabelPaint("C1", Color.YELLOW);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // check that changing a category label tooltip in a1 doesn't change a2
         a1.addCategoryLabelToolTip("C1", "XYZ");
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.addCategoryLabelToolTip("C1", "XYZ");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -204,7 +196,7 @@ public class CategoryAxisTest {
         CategoryAxis a1 = new CategoryAxis("Test Axis");
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
-        CategoryAxis a2 = (CategoryAxis) TestUtils.serialised(a1);
+        CategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

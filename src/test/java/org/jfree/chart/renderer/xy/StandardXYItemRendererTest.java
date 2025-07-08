@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,14 @@
  * -------------------------------
  * StandardXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 08-Oct-2004 : Strengthened test for equals() method (DG);
- * 14-Mar-2007 : Added new checks in testEquals() and testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 08-Jun-2007 : Added testNoDisplayedItem() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
@@ -71,6 +57,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StandardXYItemRenderer} class.
  */
@@ -86,54 +74,54 @@ public class StandardXYItemRendererTest {
         assertEquals(r1, r2);
 
         r1.setBaseShapesVisible(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBaseShapesVisible(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setPlotLines(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPlotLines(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setPlotImages(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPlotImages(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setPlotDiscontinuous(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPlotDiscontinuous(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGapThresholdType(UnitType.ABSOLUTE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGapThresholdType(UnitType.ABSOLUTE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGapThreshold(1.23);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGapThreshold(1.23);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setBaseShapesFilled(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBaseShapesFilled(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawSeriesLineAsPath(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawSeriesLineAsPath(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -143,7 +131,7 @@ public class StandardXYItemRendererTest {
     public void testHashcode() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         StandardXYItemRenderer r2 = new StandardXYItemRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -158,20 +146,20 @@ public class StandardXYItemRendererTest {
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendLine(rect1);
         StandardXYItemRenderer r2 = (StandardXYItemRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         // check independence
         rect1.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendLine(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, Boolean.TRUE);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, Boolean.TRUE);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -189,8 +177,7 @@ public class StandardXYItemRendererTest {
     @Test
     public void testSerialization() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
-        StandardXYItemRenderer r2 = (StandardXYItemRenderer) 
-                TestUtils.serialised(r1);
+        StandardXYItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

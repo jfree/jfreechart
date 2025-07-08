@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  * 
  */
@@ -59,6 +59,12 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     private static final AtomicReference<Calendar> calendarPrototype = new AtomicReference<>();
 
     private static final ThreadLocal<Calendar> threadLocalCalendar = new ThreadLocal<>();
+
+    /**
+     * Creates a new default instance.
+     */
+    protected RegularTimePeriod() {
+    }
 
     /**
      * Creates a time period that includes the specified millisecond, assuming

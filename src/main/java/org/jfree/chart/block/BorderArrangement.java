@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ----------------------
  * BorderArrangement.java
  * ----------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (define hashCode);
  *
  */
 
@@ -522,5 +522,16 @@ public class BorderArrangement implements Arrangement, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.centerBlock);
+        hash = 67 * hash + Objects.hashCode(this.topBlock);
+        hash = 67 * hash + Objects.hashCode(this.bottomBlock);
+        hash = 67 * hash + Objects.hashCode(this.leftBlock);
+        hash = 67 * hash + Objects.hashCode(this.rightBlock);
+        return hash;
     }
 }

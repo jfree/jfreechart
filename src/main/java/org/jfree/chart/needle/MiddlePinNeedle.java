@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,11 @@
  * --------------------
  * MiddlePinNeedle.java
  * --------------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -53,6 +53,13 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
 
     /** For serialization. */
     private static final long serialVersionUID = 6237073996403125310L;
+
+    /**
+     * Creates a new instance.
+     */
+    public MiddlePinNeedle() {
+        super();
+    }
 
     /**
      * Draws the needle.
@@ -87,7 +94,7 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
         pointer.closePath();
 
         lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2.0,
                                                 midY - lenX, lenX, lenX);
 
         shape = new Area(circle);

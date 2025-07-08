@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,10 @@
  * ---------------
  * TaskSeries.java
  * ---------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jun-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Added methods to get TimeAllocation by task index (DG);
- * 10-Jan-2003 : Renamed GanttSeries --> TaskSeries (DG);
- * 30-Jul-2004 : Added equals() method (DG);
- * 09-May-2008 : Fixed cloning bug (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,6 +38,7 @@ package org.jfree.data.gantt;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
@@ -174,14 +165,32 @@ public class TaskSeries extends Series {
         if (!(obj instanceof TaskSeries)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         TaskSeries that = (TaskSeries) obj;
-        if (!this.tasks.equals(that.tasks)) {
+        if (!Objects.equals(this.tasks, that.tasks)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TaskSeries);
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 29 * hash + java.util.Objects.hashCode(this.tasks);
+        return hash;
     }
 
     /**

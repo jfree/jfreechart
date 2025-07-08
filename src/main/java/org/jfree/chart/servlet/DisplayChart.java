@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,10 @@
  * -----------------
  * DisplayChart.java
  * -----------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Aug-2002 : Version 1;
- * 09-Mar-2005 : Added facility to serve up "one time" charts - see
- *               ServletUtilities.java (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 03-Dec-2011 : Fixed path disclosure vulnerability - see bug 2879650 (DG);
+ * Contributor(s):   David Gilbert;
  * 
  */
 
@@ -58,7 +49,7 @@ import javax.servlet.http.HttpSession;
  * Servlet used for streaming charts to the client browser from the temporary
  * directory.  You need to add this servlet and mapping to your deployment
  * descriptor (web.xml) in order to get it to work.  The syntax is as follows:
- * 
+ * <p>
  * &lt;xmp&gt;
  * &lt;servlet&gt;
  *    &lt;servlet-name&gt;DisplayChart&lt;/servlet-name&gt;
@@ -69,6 +60,8 @@ import javax.servlet.http.HttpSession;
  *     &lt;url-pattern&gt;/servlet/DisplayChart&lt;/url-pattern&gt;
  * &lt;/servlet-mapping&gt;
  * &lt;/xmp&gt;
+ *
+ * @deprecated To be removed in JFreeChart 2.0
  */
 public class DisplayChart extends HttpServlet {
 
@@ -133,7 +126,7 @@ public class DisplayChart extends HttpServlet {
 
         boolean isChartPublic = false;
         if (filename.length() >= 6) {
-            if (filename.substring(0, 6).equals("public")) {
+            if (filename.startsWith("public")) {
                 isChartPublic = true;
             }
         }

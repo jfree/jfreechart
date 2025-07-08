@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * ----------------------------
  * TimeTableXYDatasetTests.java
  * ----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Rob Eden;
- *
- * Changes
- * -------
- * 15-Sep-2004 : Version 1 (DG);
- * 25-Jul-2007 : Added test for clear() method, by Rob Eden (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A collection of test cases for the {@link TimeTableXYDataset} class.
@@ -96,23 +89,23 @@ public class TimeTableXYDatasetTest {
     public void testEquals() {
         TimeTableXYDataset d1 = new TimeTableXYDataset();
         TimeTableXYDataset d2 = new TimeTableXYDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.add(new Year(1999), 123.4, "S1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(new Year(1999), 123.4, "S1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setDomainIsPointsInTime(!d1.getDomainIsPointsInTime());
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setDomainIsPointsInTime(!d2.getDomainIsPointsInTime());
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1 = new TimeTableXYDataset(TimeZone.getTimeZone("GMT"));
         d2 = new TimeTableXYDataset(TimeZone.getTimeZone(
                 "America/Los_Angeles"));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -129,13 +122,13 @@ public class TimeTableXYDatasetTest {
             clone = (TimeTableXYDataset) d.clone();
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);
+            fail();
         }
-        assertTrue(clone.equals(d));
+        assertEquals(clone, d);
 
         // now test that the clone is independent of the original
         clone.add(new Year(2004), 1.2, "SS");
-        assertFalse(clone.equals(d));
+        assertNotEquals(clone, d);
     }
 
     /**
@@ -145,9 +138,8 @@ public class TimeTableXYDatasetTest {
     public void testSerialization() {
         TimeTableXYDataset d1 = new TimeTableXYDataset();
         d1.add(new Year(1999), 123.4, "S1");
-        TimeTableXYDataset d2 = (TimeTableXYDataset) 
-                TestUtils.serialised(d1);
-        assertTrue(d1.equals(d2));
+        TimeTableXYDataset d2 = TestUtils.serialised(d1);
+        assertEquals(d1, d2);
     }
 
     /**

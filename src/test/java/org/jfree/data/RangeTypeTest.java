@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,19 @@
  * ------------------
  * RangeTypeTest.java
  * ------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-May-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link RangeType} class.
@@ -60,15 +54,15 @@ public class RangeTypeTest {
         assertEquals(RangeType.FULL, RangeType.FULL);
         assertEquals(RangeType.NEGATIVE, RangeType.NEGATIVE);
         assertEquals(RangeType.POSITIVE, RangeType.POSITIVE);
-        assertFalse(RangeType.FULL.equals(RangeType.NEGATIVE));
-        assertFalse(RangeType.FULL.equals(RangeType.POSITIVE));
-        assertFalse(RangeType.FULL.equals(null));
-        assertFalse(RangeType.NEGATIVE.equals(RangeType.FULL));
-        assertFalse(RangeType.NEGATIVE.equals(RangeType.POSITIVE));
-        assertFalse(RangeType.NEGATIVE.equals(null));
-        assertFalse(RangeType.POSITIVE.equals(RangeType.NEGATIVE));
-        assertFalse(RangeType.POSITIVE.equals(RangeType.FULL));
-        assertFalse(RangeType.POSITIVE.equals(null));
+        assertNotEquals(RangeType.FULL, RangeType.NEGATIVE);
+        assertNotEquals(RangeType.FULL, RangeType.POSITIVE);
+        assertNotEquals(null, RangeType.FULL);
+        assertNotEquals(RangeType.NEGATIVE, RangeType.FULL);
+        assertNotEquals(RangeType.NEGATIVE, RangeType.POSITIVE);
+        assertNotEquals(null, RangeType.NEGATIVE);
+        assertNotEquals(RangeType.POSITIVE, RangeType.NEGATIVE);
+        assertNotEquals(RangeType.POSITIVE, RangeType.FULL);
+        assertNotEquals(null, RangeType.POSITIVE);
     }
 
     /**
@@ -78,7 +72,7 @@ public class RangeTypeTest {
     public void testHashCode() {
         RangeType r1 = RangeType.FULL;
         RangeType r2 = RangeType.FULL;
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -90,7 +84,7 @@ public class RangeTypeTest {
     @Test
     public void testSerialization() {
         RangeType r1 = RangeType.FULL;
-        RangeType r2 = (RangeType) TestUtils.serialised(r1);
+        RangeType r2 = TestUtils.serialised(r1);
         assertSame(r1, r2);
     }
 

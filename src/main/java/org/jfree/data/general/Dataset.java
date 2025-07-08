@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,10 @@
  * ------------
  * Dataset.java
  * ------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 15-Oct-2001 : Moved to a new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Changed name to Dataset.java (DG);
- * 17-Nov-2001 : Added getLegendItemCount() and getLegendItemLabels() methods,
- *               created SeriesDataset interface and transferred series related
- *               methods out (DG);
- * 22-Jan-2002 : Reconsidered (and removed) the getLegendItemCount() and
- *               getLegendItemLabels() methods...leave this to client code (DG);
- * 27-Sep-2002 : Added get/setDatasetGroup() methods (DG);
- * 10-Jan-2003 : Updated Javadocs (DG);
  *
  */
 
@@ -67,27 +54,27 @@ public interface Dataset {
      *
      * @param listener  the object to register.
      */
-    public void addChangeListener(DatasetChangeListener listener);
+    void addChangeListener(DatasetChangeListener listener);
 
     /**
      * Deregisters an object for notification of changes to the dataset.
      *
      * @param listener  the object to deregister.
      */
-    public void removeChangeListener(DatasetChangeListener listener);
+    void removeChangeListener(DatasetChangeListener listener);
 
     /**
      * Returns the dataset group.
      *
      * @return The dataset group.
      */
-    public DatasetGroup getGroup();
+    DatasetGroup getGroup();
 
     /**
      * Sets the dataset group.
      *
      * @param group  the dataset group.
      */
-    public void setGroup(DatasetGroup group);
+    void setGroup(DatasetGroup group);
 
 }

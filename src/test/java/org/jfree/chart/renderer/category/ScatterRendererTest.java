@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,17 @@
  * ------------------------
  * ScatterRendererTest.java
  * ------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1 (DG);
- * 11-Oct-2007 : Renamed ScatterRenderer (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -56,6 +45,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultMultiValueCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ScatterRenderer} class.
@@ -72,34 +63,34 @@ public class ScatterRendererTest {
         assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setBaseShapesFilled(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setBaseShapesFilled(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseFillPaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseFillPaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawOutlines(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawOutlines(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseSeriesOffset(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseSeriesOffset(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -109,7 +100,7 @@ public class ScatterRendererTest {
     public void testHashcode() {
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = new ScatterRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -124,9 +115,9 @@ public class ScatterRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = (ScatterRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         assertTrue(checkIndependence(r1, r2));
     }
@@ -185,7 +176,7 @@ public class ScatterRendererTest {
     @Test
     public void testSerialization() {
         ScatterRenderer r1 = new ScatterRenderer();
-        ScatterRenderer r2 = (ScatterRenderer) TestUtils.serialised(r1);
+        ScatterRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -202,19 +193,19 @@ public class ScatterRendererTest {
                 = new DefaultMultiValueCategoryDataset();
         assertNull(r.findRangeBounds(dataset));
 
-        List<Double> values = Arrays.asList(new Double[] {1.0});
+        List<Double> values = Collections.singletonList(1.0);
         dataset.add(values, "R1", "C1");
         assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {2.0, 2.2});
+        values = Arrays.asList(2.0, 2.2);
         dataset.add(values, "R1", "C2");
         assertEquals(new Range(1.0, 2.2), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {-3.0, -3.2});
+        values = Arrays.asList(-3.0, -3.2);
         dataset.add(values, "R1", "C3");
         assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {6.0});
+        values = Collections.singletonList(6.0);
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(-3.2, 6.0), r.findRangeBounds(dataset));
 

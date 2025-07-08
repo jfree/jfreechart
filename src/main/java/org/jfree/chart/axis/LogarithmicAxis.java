@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * --------------------
  * LogarithmicAxis.java
  * --------------------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Original Author:  Michael Duffy / Eric Thomas;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   David M. O'Donnell;
  *                   Scott Sams;
  *                   Sergei Ivanov;
@@ -148,7 +148,7 @@ public class LogarithmicAxis extends NumberAxis {
 
     /**
      * Sets the 'expTickLabelsFlag' flag.  If the 'log10TickLabelsFlag'
-     * is false then this will set whether or not "1e#"-style tick labels
+     * is false then this will set whether "1e#"-style tick labels
      * are used.  The default is to use regular numeric tick labels.
      *
      * @param flgVal true for "1e#"-style tick labels, false for

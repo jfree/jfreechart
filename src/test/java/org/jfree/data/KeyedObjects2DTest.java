@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,16 +27,10 @@
  * -----------------------
  * KeyedObjects2DTest.java
  * -----------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
- * 28-Sep-2007 : Added testEquals() and enhanced testClone() (DG);
- * 03-Oct-2007 : Added new tests (DG);
  *
  */
 
@@ -44,10 +38,8 @@ package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link KeyedObjects2D} class.
@@ -61,13 +53,13 @@ public class KeyedObjects2DTest {
     public void testEquals() {
         KeyedObjects2D k1 = new KeyedObjects2D();
         KeyedObjects2D k2 = new KeyedObjects2D();
-        assertTrue(k1.equals(k2));
-        assertTrue(k2.equals(k1));
+        assertEquals(k1, k2);
+        assertEquals(k2, k1);
 
         k1.addObject(99, "R1", "C1");
-        assertFalse(k1.equals(k2));
+        assertNotEquals(k1, k2);
         k2.addObject(99, "R1", "C1");
-        assertTrue(k1.equals(k2));
+        assertEquals(k1, k2);
     }
 
     /**
@@ -81,13 +73,13 @@ public class KeyedObjects2DTest {
         o1.setObject(null, "V2", "C1");
         o1.setObject(3, "V3", "C2");
         KeyedObjects2D o2 = (KeyedObjects2D) o1.clone();
-        assertTrue(o1 != o2);
-        assertTrue(o1.getClass() == o2.getClass());
-        assertTrue(o1.equals(o2));
+        assertNotSame(o1, o2);
+        assertSame(o1.getClass(), o2.getClass());
+        assertEquals(o1, o2);
 
         // check independence
         o1.addObject("XX", "R1", "C1");
-        assertFalse(o1.equals(o2));
+        assertNotEquals(o1, o2);
     }
 
     /**
@@ -101,7 +93,7 @@ public class KeyedObjects2DTest {
         ko2D1.addObject(345.9, "Row2", "Col1");
         ko2D1.addObject(452.7, "Row2", "Col2");
 
-        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtils.serialised(ko2D1);
+        KeyedObjects2D ko2D2 = TestUtils.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
     }
 

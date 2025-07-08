@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * -------------------
  * GanttChartTest.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
@@ -60,10 +56,9 @@ import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for a Gantt chart.
@@ -122,7 +117,7 @@ public class GanttChartTest  {
         this.chart.addChangeListener(l);
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(null);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
     }
 
     /**

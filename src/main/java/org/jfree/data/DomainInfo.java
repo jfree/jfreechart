@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * DomainInfo.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -47,34 +47,34 @@ public interface DomainInfo {
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainLowerBound(boolean includeInterval);
+    double getDomainLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainUpperBound(boolean includeInterval);
+    double getDomainUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getDomainBounds(boolean includeInterval);
+    Range getDomainBounds(boolean includeInterval);
 
 }

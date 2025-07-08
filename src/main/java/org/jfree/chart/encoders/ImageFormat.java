@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * ----------------
  * ImageFormat.java
  * ----------------
- * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -47,12 +42,12 @@ package org.jfree.chart.encoders;
 public interface ImageFormat {
 
     /** Portable Network Graphics - lossless */
-    public static String PNG = "png";
+    String PNG = "png";
 
     /** Joint Photographic Experts Group format - lossy */
-    public static String JPEG = "jpeg";
+    String JPEG = "jpeg";
 
     /** Graphics Interchange Format - lossless, but 256 colour restriction */
-    public static String GIF = "gif";
+    String GIF = "gif";
 
 }

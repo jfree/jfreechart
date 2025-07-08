@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * -----------------------------
  * LegendItemCollectionTest.java
  * -----------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Apr-2005 : Version 1 (DG);
- * 23-Apr-2008 : Extended testCloning() (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -45,17 +40,30 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LegendItemCollection} class.
  */
 public class LegendItemCollectionTest  {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LegendItemCollection.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -81,7 +89,7 @@ public class LegendItemCollectionTest  {
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
         c1.add(item1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.add(item2);
         assertEquals(c1, c2);
 
@@ -95,7 +103,7 @@ public class LegendItemCollectionTest  {
         LegendItemCollection c1 = new LegendItemCollection();
         c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED));
-        LegendItemCollection c2 = (LegendItemCollection) TestUtils.serialised(c1);
+        LegendItemCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -116,7 +124,7 @@ public class LegendItemCollectionTest  {
 
         Rectangle2D item1Shape = (Rectangle2D) item1.getShape();
         item1Shape.setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
 }

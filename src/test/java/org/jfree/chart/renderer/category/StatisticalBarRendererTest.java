@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,14 @@
  * -------------------------------
  * StatisticalBarRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 28-Aug-2007 : Added tests for bug 1779941 (DG);
- * 14-Nov-2007 : Updated testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -63,6 +49,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StatisticalBarRenderer} class.
@@ -79,14 +67,14 @@ public class StatisticalBarRendererTest {
         assertEquals(r1, r2);
 
         r1.setErrorIndicatorPaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorIndicatorPaint(Color.RED);
-        assertTrue(r2.equals(r1));
+        assertEquals(r2, r1);
 
         r1.setErrorIndicatorStroke(new BasicStroke(1.5f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorIndicatorStroke(new BasicStroke(1.5f));
-        assertTrue(r2.equals(r1));
+        assertEquals(r2, r1);
     }
 
     /**
@@ -96,7 +84,7 @@ public class StatisticalBarRendererTest {
     public void testHashcode() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = new StatisticalBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -110,9 +98,9 @@ public class StatisticalBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = (StatisticalBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -130,8 +118,7 @@ public class StatisticalBarRendererTest {
     @Test
     public void testSerialization() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
-        StatisticalBarRenderer r2 = (StatisticalBarRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

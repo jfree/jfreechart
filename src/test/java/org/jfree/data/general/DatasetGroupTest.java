@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,17 @@
  * ---------------------
  * DatasetGroupTest.java
  * ---------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Jan-2005 : Version 1 (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.general;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,13 +47,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class DatasetGroupTest {
 
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(DatasetGroup.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
     public void testSerialization() {
         DatasetGroup g1 = new DatasetGroup();
-        DatasetGroup g2 = (DatasetGroup) TestUtils.serialised(g1);
+        DatasetGroup g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

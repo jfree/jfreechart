@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,21 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *                   Bill Kelemen;
  *                   Marc van Glabbeek (bug 1775452);
  *                   Richard West, Advanced Micro Devices, Inc.;
+ *                   Yuri Blankenstein;
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
@@ -68,6 +70,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
@@ -146,7 +149,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * The state class used by this renderer.
      */
-    protected class XYBarRendererState extends XYItemRendererState {
+    protected static class XYBarRendererState extends XYItemRendererState {
 
         /** Base for bars against the range axis, in Java 2D space. */
         private double g2Base;
@@ -191,7 +194,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /** Percentage margin (to reduce the width of bars). */
     private double margin;
 
-    /** A flag that controls whether or not bar outlines are drawn. */
+    /** A flag that controls whether bar outlines are drawn. */
     private boolean drawBarOutline;
 
     /**
@@ -224,7 +227,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private XYBarPainter barPainter;
 
     /**
-     * The flag that controls whether or not shadows are drawn for the bars.
+     * The flag that controls whether shadows are drawn for the bars.
      */
     private boolean shadowsVisible;
 
@@ -243,6 +246,12 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      */
     private double barAlignmentFactor;
 
+    /** The minimum size for the bar to draw a label */
+    private Dimension minimumLabelSize;
+    
+    /** {@code true} if the label should be aligned to the visible part of the bar. */
+    private boolean showLabelInsideVisibleBar;
+        
     /**
      * The default constructor.
      */
@@ -350,7 +359,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not bar outlines are drawn.
+     * Returns a flag that controls whether bar outlines are drawn.
      *
      * @return A boolean.
      *
@@ -361,7 +370,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not bar outlines are drawn and
+     * Sets the flag that controls whether bar outlines are drawn and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
@@ -501,7 +510,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not shadows are drawn for
+     * Returns the flag that controls whether shadows are drawn for
      * the bars.
      *
      * @return A boolean.
@@ -511,7 +520,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer
+     * Sets the flag that controls whether the renderer
      * draws shadows for the bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
@@ -583,6 +592,51 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         fireChangeEvent();
     }
 
+    /**
+     * Returns the minimum size for the bar to draw a label.
+     * 
+     * @return The minimum size to draw a label.
+     */
+    public Dimension getMinimumLabelSize() {
+        return minimumLabelSize;
+    }
+
+    /**
+     * Sets the minimum size for the bar to draw a label.
+     * 
+     * @param minimumLabelSize The size
+     */
+    public void setMinimumLabelSize(Dimension minimumLabelSize) {
+        this.minimumLabelSize = minimumLabelSize;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns {@code true} if the label should be aligned to the visible part
+     * of the bar.
+     * 
+     * @return {@code true} if the label should be aligned to the visible part
+     *         of the bar.
+     * @see #setShowLabelInsideVisibleBar(boolean)
+     */
+    public boolean isShowLabelInsideVisibleBar() {
+        return showLabelInsideVisibleBar;
+    }
+    
+    /**
+     * Sets whether the label should be aligned to the visible part of the
+     * bar.<br>
+     * This setting has no effect when {@link ItemLabelAnchor#isInternal()}
+     * returns {@code false}.
+     * 
+     * @param showLabelInsideVisibleBar {@code true} to align to the visible
+     *                                  part.
+     */
+    public void setShowLabelInsideVisibleBar(boolean showLabelInsideVisibleBar) {
+        this.showLabelInsideVisibleBar = showLabelInsideVisibleBar;
+        fireChangeEvent();
+    }
+    
     /**
      * Initialises the renderer and returns a state object that should be
      * passed to all subsequent calls to the drawItem() method.  Here we
@@ -679,7 +733,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param dataArea  the area within which the plot is being drawn.
      * @param info  collects information about the drawing.
      * @param plot  the plot (can be used to obtain standard color
-     *              information etc).
+     *              information etc.).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
@@ -846,7 +900,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * double, double, boolean)} so that the bar can be used to calculate the
      * label anchor point.
      *
-     * @param g2  the graphics device.
+     * @param g  the graphics device.
      * @param dataset  the dataset.
      * @param series  the series index.
      * @param item  the item index.
@@ -856,7 +910,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param bar  the bar.
      * @param negative  a flag indicating a negative value.
      */
-    protected void drawItemLabel(Graphics2D g2, XYDataset dataset,
+    protected void drawItemLabel(Graphics2D g, XYDataset dataset,
             int series, int item, XYPlot plot, XYItemLabelGenerator generator,
             Rectangle2D bar, boolean negative) {
 
@@ -868,6 +922,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             return;  // nothing to do
         }
 
+        Graphics2D g2 = (Graphics2D) g.create();
         Font labelFont = getItemLabelFont(series, item);
         g2.setFont(labelFont);
         Paint paint = getItemLabelPaint(series, item);
@@ -881,45 +936,164 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             position = getNegativeItemLabelPosition(series, item);
         }
 
-        // work out the label anchor point...
-        Point2D anchorPoint = calculateLabelAnchorPoint(
-                position.getItemLabelAnchor(), bar, plot.getOrientation());
+        Rectangle2D drawBar = bar;
 
-        if (isInternalAnchor(position.getItemLabelAnchor())) {
-            Shape bounds = TextUtils.calculateRotatedStringBounds(label,
-                    g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
-                    position.getTextAnchor(), position.getAngle(),
-                    position.getRotationAnchor());
-
-            if (bounds != null) {
-                if (!bar.contains(bounds.getBounds2D())) {
-                    if (!negative) {
-                        position = getPositiveItemLabelPositionFallback();
-                    }
-                    else {
-                        position = getNegativeItemLabelPositionFallback();
-                    }
-                    if (position != null) {
-                        anchorPoint = calculateLabelAnchorPoint(
-                                position.getItemLabelAnchor(), bar,
-                                plot.getOrientation());
-                    }
-                }
+        if (position.getItemLabelAnchor().isInternal()) {
+            if (showLabelInsideVisibleBar && g2.getClipBounds() != null) {
+                drawBar = drawBar.createIntersection(g2.getClipBounds().getBounds2D());
             }
-
+            
+            Rectangle2D labelBar = getItemLabelInsets().createInsetRectangle(drawBar);
+            if (minimumLabelSize != null && 
+                    (labelBar.getWidth() < minimumLabelSize.getWidth()
+                    || labelBar.getHeight() < minimumLabelSize.getHeight())) {
+                return; // nothing to do
+            }
         }
 
-        if (position != null) {
-            TextUtils.drawRotatedString(label, g2,
+        // work out the label anchor point...
+        Point2D anchorPoint = calculateLabelAnchorPoint(
+                position.getItemLabelAnchor(), drawBar, plot.getOrientation());
+
+        String drawLabel = calculateLabeltoDraw(
+                label, anchorPoint, position, drawBar, g2);
+        
+        if (drawLabel == null) {
+            if (!negative) {
+                position = getPositiveItemLabelPositionFallback();
+            } else {
+                position = getNegativeItemLabelPositionFallback();
+            }
+            if (position != null) {
+                g2 = (Graphics2D) g.create();
+                g2.setFont(labelFont);
+                g2.setPaint(paint);
+
+                if (position.getItemLabelAnchor().isInternal()) {
+                    if (showLabelInsideVisibleBar && g2.getClipBounds() != null) {
+                        drawBar = drawBar.createIntersection(g2.getClipBounds().getBounds2D());
+                    }
+                    
+                    Rectangle2D labelBar = getItemLabelInsets().createInsetRectangle(drawBar);
+                    if (minimumLabelSize != null && 
+                            (labelBar.getWidth() < minimumLabelSize.getWidth()
+                            || labelBar.getHeight() < minimumLabelSize.getHeight())) {
+                        return; // nothing to do
+                    }
+                }
+
+                anchorPoint = calculateLabelAnchorPoint(
+                        position.getItemLabelAnchor(), drawBar, plot.getOrientation());
+                
+                drawLabel = calculateLabeltoDraw(
+                        label, anchorPoint, position, drawBar, g2);
+            }
+        }
+        
+        if (drawLabel != null) {
+            TextUtils.drawRotatedString(drawLabel, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
         }
     }
+    
+    /**
+     * @return The label to draw or {@code null} if label should not be drawn.
+     */
+    private String calculateLabeltoDraw(String label, Point2D anchorPoint,
+            ItemLabelPosition position, Rectangle2D bar, Graphics2D g2) {
+        if (!position.getItemLabelAnchor().isInternal()) {
+            return label;
+        }
+        
+        // Taking the bounds of the bounds will ceil the rectangle to its
+        // smallest enclosing integer instance, this avoids rounding errors when
+        // testing if the label fits
+        Rectangle2D labelBar = getItemLabelInsets().createInsetRectangle(bar).getBounds();
+        
+        switch (position.getItemLabelClip()) {
+            case CLIP :
+                Shape currentClip = g2.getClip();
+                if (currentClip == null) {
+                    g2.setClip(labelBar);
+                } else {
+                    g2.setClip(labelBar
+                            .createIntersection(currentClip.getBounds2D()));
+                }
+                return label;
+            case NONE :
+                return label;
+            default :
+        }
+
+        String result = label;
+        while (result != null && !result.isEmpty()) {
+            Rectangle2D labelBounds = TextUtils.calculateRotatedStringBounds(result,
+                    g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
+                    position.getTextAnchor(), position.getAngle(),
+                    position.getRotationAnchor()).getBounds2D();
+
+            if (labelBar.getHeight() >= labelBounds.getHeight()
+                    && labelBar.getWidth() >= labelBounds.getWidth()) {
+                // Label fits
+                return result;
+            } else if (labelBar.getHeight() < labelBounds.getHeight()) {
+                // Optimization: label will never fit due to insufficient height
+                return null;
+            } else {
+                switch (position.getItemLabelClip()) {
+                    case FIT :
+                        return null;
+                    case TRUNCATE : {
+                        String nextResult = result.replaceFirst(".(\\.{3})?$",
+                                "...");
+                        if ("...".equals(nextResult) || result.equals(nextResult)) {
+                            return null;
+                        } else {
+                            result = nextResult;
+                        }
+                        break;
+                    }
+                    case TRUNCATE_WORD : {
+                        String nextResult = result 
+                                .replaceFirst("\\W+\\w*(\\.{3})?$", "...");
+                        if ("...".equals(nextResult) || result.equals(nextResult)) {
+                            return null;
+                        } else {
+                            result = nextResult;
+                        }
+                        break;
+                    }
+                    default :
+                        throw new IllegalStateException("Should never happen");
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Calculates the item label anchor point.
      *
+     * <pre>
+     * Inside:
+     *  +-----------------+
+     *  | 10/11  12   1/2 |
+     *  |   9     C    3  |
+     *  |  7/8    6   4/5 |
+     *  +-----------------+
+
+     * Outside:
+     * 10/11       12         1/2
+     *     +----------------+
+     *     |                |
+     *   9 |                |  3
+     *     |                |
+     *     +----------------+
+     *  7/8        6          4/5 
+     * </pre>
+     * 
      * @param anchor  the anchor.
      * @param bar  the bar.
      * @param orientation  the plot orientation.
@@ -930,124 +1104,48 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             Rectangle2D bar, PlotOrientation orientation) {
 
         Point2D result = null;
-        double offset = getItemLabelAnchorOffset();
-        double x0 = bar.getX() - offset;
-        double x1 = bar.getX();
-        double x2 = bar.getX() + offset;
-        double x3 = bar.getCenterX();
-        double x4 = bar.getMaxX() - offset;
-        double x5 = bar.getMaxX();
-        double x6 = bar.getMaxX() + offset;
-
-        double y0 = bar.getMaxY() + offset;
-        double y1 = bar.getMaxY();
-        double y2 = bar.getMaxY() - offset;
-        double y3 = bar.getCenterY();
-        double y4 = bar.getMinY() + offset;
-        double y5 = bar.getMinY();
-        double y6 = bar.getMinY() - offset;
+        RectangleInsets labelInsets = getItemLabelInsets();
+        Rectangle2D insideBar = labelInsets.createInsetRectangle(bar);
+        Rectangle2D outsideBar = labelInsets.createOutsetRectangle(bar);
 
         if (anchor == ItemLabelAnchor.CENTER) {
-            result = new Point2D.Double(x3, y3);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE1) {
-            result = new Point2D.Double(x4, y4);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE2) {
-            result = new Point2D.Double(x4, y4);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE3) {
-            result = new Point2D.Double(x4, y3);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE4) {
-            result = new Point2D.Double(x4, y2);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE5) {
-            result = new Point2D.Double(x4, y2);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE6) {
-            result = new Point2D.Double(x3, y2);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE7) {
-            result = new Point2D.Double(x2, y2);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE8) {
-            result = new Point2D.Double(x2, y2);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE9) {
-            result = new Point2D.Double(x2, y3);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE10) {
-            result = new Point2D.Double(x2, y4);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE11) {
-            result = new Point2D.Double(x2, y4);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE12) {
-            result = new Point2D.Double(x3, y4);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE1) {
-            result = new Point2D.Double(x5, y6);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE2) {
-            result = new Point2D.Double(x6, y5);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE3) {
-            result = new Point2D.Double(x6, y3);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE4) {
-            result = new Point2D.Double(x6, y1);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE5) {
-            result = new Point2D.Double(x5, y0);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE6) {
-            result = new Point2D.Double(x3, y0);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE7) {
-            result = new Point2D.Double(x1, y0);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE8) {
-            result = new Point2D.Double(x0, y1);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE9) {
-            result = new Point2D.Double(x0, y3);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE10) {
-            result = new Point2D.Double(x0, y5);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE11) {
-            result = new Point2D.Double(x1, y6);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE12) {
-            result = new Point2D.Double(x3, y6);
+            result = new Point2D.Double(bar.getCenterX(), bar.getCenterY());
+        } else if (anchor == ItemLabelAnchor.INSIDE1 || anchor == ItemLabelAnchor.INSIDE2) {
+            result = new Point2D.Double(insideBar.getMaxX(), insideBar.getMinY());
+        } else if (anchor == ItemLabelAnchor.INSIDE3) {
+            result = new Point2D.Double(insideBar.getMaxX(), bar.getCenterY());
+        } else if (anchor == ItemLabelAnchor.INSIDE4 || anchor == ItemLabelAnchor.INSIDE5) {
+            result = new Point2D.Double(insideBar.getMaxX(), insideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.INSIDE6) {
+            result = new Point2D.Double(bar.getCenterX(), insideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.INSIDE7 || anchor == ItemLabelAnchor.INSIDE8) {
+            result = new Point2D.Double(insideBar.getMinX(), insideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.INSIDE9) {
+            result = new Point2D.Double(insideBar.getMinX(), bar.getCenterY());
+        } else if (anchor == ItemLabelAnchor.INSIDE10 || anchor == ItemLabelAnchor.INSIDE11) {
+            result = new Point2D.Double(insideBar.getMinX(), insideBar.getMinY());
+        } else if (anchor == ItemLabelAnchor.INSIDE12) {
+            result = new Point2D.Double(bar.getCenterX(), insideBar.getMinY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE1 || anchor == ItemLabelAnchor.OUTSIDE2) {
+            result = new Point2D.Double(outsideBar.getMaxX(), outsideBar.getMinY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE3) {
+            result = new Point2D.Double(outsideBar.getMaxX(), bar.getCenterY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE4 || anchor == ItemLabelAnchor.OUTSIDE5) {
+            result = new Point2D.Double(outsideBar.getMaxX(), outsideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE6) {
+            result = new Point2D.Double(bar.getCenterX(), outsideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE7 || anchor == ItemLabelAnchor.OUTSIDE8) {
+            result = new Point2D.Double(outsideBar.getMinX(), outsideBar.getMaxY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE9) {
+            result = new Point2D.Double(outsideBar.getMinX(), bar.getCenterY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE10 || anchor == ItemLabelAnchor.OUTSIDE11) {
+            result = new Point2D.Double(outsideBar.getMinX(), outsideBar.getMinY());
+        } else if (anchor == ItemLabelAnchor.OUTSIDE12) {
+            result = new Point2D.Double(bar.getCenterX(), outsideBar.getMinY());
         }
 
         return result;
 
-    }
-
-    /**
-     * Returns {@code true} if the specified anchor point is inside a bar.
-     *
-     * @param anchor  the anchor point.
-     *
-     * @return A boolean.
-     */
-    private boolean isInternalAnchor(ItemLabelAnchor anchor) {
-        return anchor == ItemLabelAnchor.CENTER
-               || anchor == ItemLabelAnchor.INSIDE1
-               || anchor == ItemLabelAnchor.INSIDE2
-               || anchor == ItemLabelAnchor.INSIDE3
-               || anchor == ItemLabelAnchor.INSIDE4
-               || anchor == ItemLabelAnchor.INSIDE5
-               || anchor == ItemLabelAnchor.INSIDE6
-               || anchor == ItemLabelAnchor.INSIDE7
-               || anchor == ItemLabelAnchor.INSIDE8
-               || anchor == ItemLabelAnchor.INSIDE9
-               || anchor == ItemLabelAnchor.INSIDE10
-               || anchor == ItemLabelAnchor.INSIDE11
-               || anchor == ItemLabelAnchor.INSIDE12;
     }
 
     /**

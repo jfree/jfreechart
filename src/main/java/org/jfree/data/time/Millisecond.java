@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------------
  * Millisecond.java
  * ----------------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -358,7 +358,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Millisecond object
      * relative to the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param obj  the object to compare

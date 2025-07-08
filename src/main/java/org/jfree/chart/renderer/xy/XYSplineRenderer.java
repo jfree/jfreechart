@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,12 +27,12 @@
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007-2021, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007-present, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
  *                       http://www.wam.umd.edu/~petersd/);
- *                   David Gilbert (for Object Refinery Limited);
+ *                   David Gilbert;
  *
  */
 
@@ -73,18 +73,18 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     /**
      * An enumeration of the fill types for the renderer.
      */
-    public static enum FillType {
+    public enum FillType {
        
         /** No fill. */
         NONE,
         
-        /** Fill towards zero. */
+        /** Fill down to zero. */
         TO_ZERO,
 
-        /** Fill to lower bound. */
+        /** Fill to the lower bound. */
         TO_LOWER_BOUND,
         
-        /** Fill to upper bound. */
+        /** Fill to the upper bound. */
         TO_UPPER_BOUND
     }
     
@@ -108,7 +108,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         public XYSplineState(PlotRenderingInfo info) {
             super(info);
             this.fillArea = new GeneralPath();
-            this.points = new ArrayList<Point2D>();
+            this.points = new ArrayList<>();
         }
     }
     
@@ -123,6 +123,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      */
     private FillType fillType;
 
+    /** The gradient transformer. */
     private GradientPaintTransformer gradientPaintTransformer;
     
     /**
@@ -437,7 +438,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                 drawFirstPassShape(g2, pass, series, item, s.seriesPath);
             }
             // reset points vector
-            s.points = new ArrayList<Point2D>();
+            s.points = new ArrayList<>();
         }
     }
     
@@ -485,8 +486,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (this.fillType != that.fillType) {
             return false;
         }
-        if (!Objects.equals(this.gradientPaintTransformer, 
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         return super.equals(obj);

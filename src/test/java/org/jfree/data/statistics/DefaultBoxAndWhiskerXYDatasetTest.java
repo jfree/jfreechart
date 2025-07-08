@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,14 @@
  * --------------------------------------
  * DefaultBoxAndWhiskerXYDatasetTest.java
  * --------------------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 12-Nov-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.statistics;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +43,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultBoxAndWhiskerXYDataset} class.
@@ -66,14 +60,14 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
                 "Series");
         DefaultBoxAndWhiskerXYDataset d2 = new DefaultBoxAndWhiskerXYDataset(
                 "Series");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<Double>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<Double>()));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -92,7 +86,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<Double>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -108,14 +102,14 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
                 6.0, 7.0, 8.0, new ArrayList<Double>()));
         DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
                 d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<Double>()));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     private static final double EPSILON = 0.0000000001;

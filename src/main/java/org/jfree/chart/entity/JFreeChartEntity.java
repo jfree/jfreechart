@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ---------------------
  * JFreeChartEntity.java
  * --------------------
- * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
  * Original Author:  Peter Kolb;
- * Contributor(s):   ;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -43,7 +43,6 @@ import java.io.ObjectOutputStream;
 import java.util.Objects;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -137,32 +136,36 @@ public class JFreeChartEntity extends ChartEntity {
             return false;
         }
         JFreeChartEntity that = (JFreeChartEntity) obj;
-        if (!getArea().equals(that.getArea())) {
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
             return false;
         }
-        if (!Objects.equals(getToolTipText(), that.getToolTipText())) {
+        if (!(Objects.equals(this.chart, that.chart))) {
             return false;
         }
-        if (!Objects.equals(getURLText(), that.getURLText())) {
-            return false;
-        }
-        if (!(this.chart.equals(that.chart))) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     /**
-     * Returns a hash code for this instance.
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
      *
-     * @return A hash code.
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
      */
     @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof JFreeChartEntity);
+    }
+
+    @Override
     public int hashCode() {
-        int result = 39;
-        result = HashUtils.hashCode(result, getToolTipText());
-        result = HashUtils.hashCode(result, getURLText());
-        return result;
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 59 * hash + Objects.hashCode(this.chart);
+        return hash;
     }
 
     /**

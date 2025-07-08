@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * PaintScale.java
  * ---------------
- * (C) Copyright 2006-2021, by Object Refinery Limited.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -58,7 +58,7 @@ public interface PaintScale {
      *
      * @see #getUpperBound()
      */
-    public double getLowerBound();
+    double getLowerBound();
 
     /**
      * Returns the upper bound for the scale.
@@ -67,7 +67,7 @@ public interface PaintScale {
      *
      * @see #getLowerBound()
      */
-    public double getUpperBound();
+    double getUpperBound();
 
     /**
      * Returns a {@code Paint} instance for the specified value.
@@ -76,6 +76,6 @@ public interface PaintScale {
      *
      * @return A {@code Paint} instance (never {@code null}).
      */
-    public Paint getPaint(double value);
+    Paint getPaint(double value);
 
 }

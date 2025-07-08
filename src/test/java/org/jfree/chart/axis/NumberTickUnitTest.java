@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,21 @@
  * -----------------------
  * NumberTickUnitTest.java
  * -----------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 5-Jul-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link NumberTickUnit} class.
@@ -62,18 +56,18 @@ public class NumberTickUnitTest {
     public void testEquals() {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
         NumberTickUnit t2 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.equals(t1));
+        assertEquals(t1, t2);
+        assertEquals(t2, t1);
 
         t1 = new NumberTickUnit(3.21, new DecimalFormat("0.00"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2 = new NumberTickUnit(3.21, new DecimalFormat("0.00"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1 = new NumberTickUnit(3.21, new DecimalFormat("0.000"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2 = new NumberTickUnit(3.21, new DecimalFormat("0.000"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -103,7 +97,7 @@ public class NumberTickUnitTest {
     @Test
     public void testSerialization() {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        NumberTickUnit t2 = (NumberTickUnit) TestUtils.serialised(t1);
+        NumberTickUnit t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

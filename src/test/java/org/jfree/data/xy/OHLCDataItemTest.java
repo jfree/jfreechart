@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,15 @@
  * ---------------------
  * OHLCDataItemTest.java
  * ---------------------
- * (C) Copyright 2005-2016 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -63,8 +58,8 @@ public class OHLCDataItemTest {
                 5.0);
         OHLCDataItem i2 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0, 
                 5.0);
-        assertTrue(i1.equals(i2));
-        assertTrue(i2.equals(i1));
+        assertEquals(i1, i2);
+        assertEquals(i2, i1);
     }
 
     /**
@@ -85,7 +80,7 @@ public class OHLCDataItemTest {
     public void testSerialization() {
         OHLCDataItem i1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0, 
                 5.0);
-        OHLCDataItem i2 = (OHLCDataItem) TestUtils.serialised(i1);
+        OHLCDataItem i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

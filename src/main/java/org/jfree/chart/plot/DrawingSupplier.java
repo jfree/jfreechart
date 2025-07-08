@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------------
  * DrawingSupplier.java
  * --------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -55,21 +55,21 @@ public interface DrawingSupplier {
      *
      * @return The paint.
      */
-    public Paint getNextPaint();
+    Paint getNextPaint();
 
     /**
      * Returns the next outline paint in a sequence maintained by the supplier.
      *
      * @return The paint.
      */
-    public Paint getNextOutlinePaint();
+    Paint getNextOutlinePaint();
 
     /**
      * Returns the next fill paint in a sequence maintained by the supplier.
      *
      * @return The paint.
      */
-    public Paint getNextFillPaint();
+    Paint getNextFillPaint();
 
     /**
      * Returns the next {@code Stroke} object in a sequence maintained by
@@ -77,7 +77,7 @@ public interface DrawingSupplier {
      *
      * @return The stroke.
      */
-    public Stroke getNextStroke();
+    Stroke getNextStroke();
 
     /**
      * Returns the next {@code Stroke} object in a sequence maintained by
@@ -85,7 +85,7 @@ public interface DrawingSupplier {
      *
      * @return The stroke.
      */
-    public Stroke getNextOutlineStroke();
+    Stroke getNextOutlineStroke();
 
     /**
      * Returns the next {@code Shape} object in a sequence maintained by
@@ -93,6 +93,6 @@ public interface DrawingSupplier {
      *
      * @return The shape.
      */
-    public Shape getNextShape();
+    Shape getNextShape();
 
 }

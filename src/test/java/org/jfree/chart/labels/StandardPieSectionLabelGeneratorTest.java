@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,14 @@
  * -----------------------------------------
  * StandardPieSectionLabelGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone tests (DG);
- * 04-Mar-2004 : Added test for equals() method (DG);
- * 23-Nov-2006 : Extended equals() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.AttributedString;
 import java.text.DecimalFormat;
@@ -56,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardPieSectionLabelGenerator} class.
@@ -71,46 +61,46 @@ public class StandardPieSectionLabelGeneratorTest {
                 = new StandardPieSectionLabelGenerator();
         StandardPieSectionLabelGenerator g2
                 = new StandardPieSectionLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardPieSectionLabelGenerator("{0}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieSectionLabelGenerator("{0}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0.00"),
                 NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), NumberFormat.getPercentInstance());
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), NumberFormat.getPercentInstance());
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), new DecimalFormat("0.000%"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardPieSectionLabelGenerator("{0} {1}",
                 new DecimalFormat("#,##0"), new DecimalFormat("0.000%"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         AttributedString as = new AttributedString("XYZ");
         g1.setAttributedLabel(0, as);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.setAttributedLabel(0, as);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -122,8 +112,8 @@ public class StandardPieSectionLabelGeneratorTest {
                 = new StandardPieSectionLabelGenerator();
         StandardPieSectionLabelGenerator g2
                 = new StandardPieSectionLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -135,9 +125,9 @@ public class StandardPieSectionLabelGeneratorTest {
                 = new StandardPieSectionLabelGenerator();
         StandardPieSectionLabelGenerator g2 
                 = (StandardPieSectionLabelGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -157,8 +147,7 @@ public class StandardPieSectionLabelGeneratorTest {
     public void testSerialization() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
-        StandardPieSectionLabelGenerator g2 = (StandardPieSectionLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieSectionLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

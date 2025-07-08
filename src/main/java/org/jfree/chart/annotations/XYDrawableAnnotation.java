@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -82,10 +82,10 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation to be displayed within the given area.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param width  the width of the area.
-     * @param height  the height of the area.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param width  the width of the area (must be finite).
+     * @param height  the height of the area (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double width, double height,
@@ -99,25 +99,73 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * will be drawn at twice the requested display size then scaled down to
      * fit the space.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param displayWidth  the width of the area.
-     * @param displayHeight  the height of the area.
-     * @param drawScaleFactor  the scaling factor for drawing.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param displayWidth  the width of the area (must be finite).
+     * @param displayHeight  the height of the area (must be finite).
+     * @param drawScaleFactor  the scaling factor for drawing (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double displayWidth,
             double displayHeight, double drawScaleFactor, Drawable drawable) {
-
         super();
         Args.nullNotPermitted(drawable, "drawable");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
+        Args.requireFinite(displayWidth, "displayWidth");
+        Args.requireFinite(displayHeight, "displayHeight");
+        Args.requireFinite(drawScaleFactor, "drawScaleFactor");
         this.x = x;
         this.y = y;
         this.displayWidth = displayWidth;
         this.displayHeight = displayHeight;
         this.drawScaleFactor = drawScaleFactor;
         this.drawable = drawable;
+    }
 
+    /**
+     * Returns the x-coordinate (set in the constructor).
+     * 
+     * @return The x-coordinate.
+     */
+    public double getX() {
+        return x;
+    }
+
+    /**
+     * Returns the y-coordinate (set in the constructor).
+     * 
+     * @return The y-coordinate.
+     */
+    public double getY() {
+        return y;
+    }
+
+    /**
+     * Returns the display width (set in the constructor).
+     * 
+     * @return The display width.
+     */
+    public double getDisplayWidth() {
+        return displayWidth;
+    }
+
+    /**
+     * Returns the display height (set in the constructor).
+     * 
+     * @return The display height.
+     */
+    public double getDisplayHeight() {
+        return displayHeight;
+    }
+
+    /**
+     * Returns the scale factor (set in the constructor).
+     * 
+     * @return The scale factor.
+     */
+    public double getDrawScaleFactor() {
+        return drawScaleFactor;
     }
 
     /**
@@ -182,41 +230,57 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj == this) { // simple case
             return true;
-        }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
         }
         if (!(obj instanceof XYDrawableAnnotation)) {
             return false;
         }
         XYDrawableAnnotation that = (XYDrawableAnnotation) obj;
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
-        if (this.displayWidth != that.displayWidth) {
+        if (Double.doubleToLongBits(this.displayWidth) != 
+            Double.doubleToLongBits(that.displayWidth)) {
             return false;
         }
-        if (this.displayHeight != that.displayHeight) {
+        if (Double.doubleToLongBits(this.displayHeight) != 
+            Double.doubleToLongBits(that.displayHeight)) {
             return false;
         }
-        if (this.drawScaleFactor != that.drawScaleFactor) {
+        if (Double.doubleToLongBits(this.drawScaleFactor) != 
+            Double.doubleToLongBits(that.drawScaleFactor)) {
             return false;
         }
         if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
-        // seem to be the same...
-        return true;
 
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYDrawableAnnotation);
+    }
+    
     /**
      * Returns a hash code.
      *
@@ -224,17 +288,19 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayWidth);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.displayHeight);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.drawScaleFactor) ^ 
+                                 (Double.doubleToLongBits(this.drawScaleFactor) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.displayWidth) ^ 
+                                 (Double.doubleToLongBits(this.displayWidth) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.displayHeight) ^ 
+                                 (Double.doubleToLongBits(this.displayHeight) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.drawable);
+        return hash;
     }
 
     /**

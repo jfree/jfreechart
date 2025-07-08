@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,16 @@
  * ---------------------
  * DateTickUnitTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -59,7 +53,7 @@ public class DateTickUnitTest {
     public void testEquals() {
         DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
         DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -69,7 +63,7 @@ public class DateTickUnitTest {
     public void testHashCode() {
         DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
         DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -81,7 +75,7 @@ public class DateTickUnitTest {
     @Test
     public void testSerialization() {
         DateTickUnit a1 = new DateTickUnit(DateTickUnitType.DAY, 7);
-        DateTickUnit a2 = (DateTickUnit) TestUtils.serialised(a1);
+        DateTickUnit a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

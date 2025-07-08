@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,19 @@
  * ---------------------------
  * IntervalXYDelegateTest.java
  * ---------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Feb-2005 : Version 1 (DG);
- * 06-Oct-2005 : Updated for testEquals() for method name change (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some checks for the {@link IntervalXYDelegate} class.
@@ -70,23 +63,23 @@ public class IntervalXYDelegateTest {
        c2.addSeries(s2);
        IntervalXYDelegate d2 = new IntervalXYDelegate(c2);
 
-       assertTrue(d1.equals(d2));
-       assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
        d1.setAutoWidth(false);
-       assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
        d2.setAutoWidth(false);
-       assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
        d1.setIntervalPositionFactor(0.123);
-       assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
        d2.setIntervalPositionFactor(0.123);
-       assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
        d1.setFixedIntervalWidth(1.23);
-       assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
        d2.setFixedIntervalWidth(1.23);
-       assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -100,9 +93,9 @@ public class IntervalXYDelegateTest {
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
         IntervalXYDelegate d2 = (IntervalXYDelegate) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -115,7 +108,7 @@ public class IntervalXYDelegateTest {
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        IntervalXYDelegate d2 = (IntervalXYDelegate) TestUtils.serialised(d1);
+        IntervalXYDelegate d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

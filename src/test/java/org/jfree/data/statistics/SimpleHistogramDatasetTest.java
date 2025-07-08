@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,19 @@
  * -------------------------------
  * SimpleHistogramDatasetTest.java
  * -------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jan-2005 : Version 1 (DG);
- * 21-May-2007 : Added testClearObservations (DG);
  *
  */
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SimpleHistogramDataset} class.
@@ -60,12 +53,12 @@ public class SimpleHistogramDatasetTest {
     public void testEquals() {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("Dataset 1");
         SimpleHistogramDataset d2 = new SimpleHistogramDataset("Dataset 1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.addBin(new SimpleHistogramBin(1.0, 2.0));
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addBin(new SimpleHistogramBin(1.0, 2.0));
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -75,14 +68,14 @@ public class SimpleHistogramDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("Dataset 1");
         SimpleHistogramDataset d2 = (SimpleHistogramDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that clone is independent of the original
         d2.addBin(new SimpleHistogramBin(2.0, 3.0));
         d2.addObservation(2.3);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**
@@ -91,8 +84,7 @@ public class SimpleHistogramDatasetTest {
     @Test
     public void testSerialization() {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("D1");
-        SimpleHistogramDataset d2 = (SimpleHistogramDataset) 
-                TestUtils.serialised(d1);
+        SimpleHistogramDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

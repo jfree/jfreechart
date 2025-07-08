@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -59,13 +59,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
     public static final int LAST_MINUTE_IN_HOUR = 59;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour in which the minute falls. */
-    private byte hour;
+    private final byte hour;
 
     /** The minute. */
-    private byte minute;
+    private final byte minute;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -381,7 +381,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
         if (this.hour != that.hour) {
             return false;
         }
-        return true;
+        return this.day.equals(that.day);
     }
 
     /**
@@ -405,7 +405,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Minute object relative
      * to the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  object to compare.
@@ -420,9 +420,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
         // -------------------------------------------
         if (o1 instanceof Minute) {
             Minute m = (Minute) o1;
-            result = getHour().compareTo(m.getHour());
+            result = this.day.compareTo(m.day);
             if (result == 0) {
-                result = this.minute - m.getMinute();
+                result = this.hour - m.hour;
+                if (result == 0) {
+                    result = this.minute - m.getMinute();
+                }
             }
         }
 
@@ -460,9 +463,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hmstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
-            );
+            String hmstr = s.substring(Math.min(daystr.length() + 1, s.length()));
             hmstr = hmstr.trim();
 
             String hourstr = hmstr.substring(0, Math.min(2, hmstr.length()));
@@ -470,9 +471,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
             if ((hour >= 0) && (hour <= 23)) {
                 String minstr = hmstr.substring(
-                    Math.min(hourstr.length() + 1, hmstr.length()),
-                    hmstr.length()
-                );
+                    Math.min(hourstr.length() + 1, hmstr.length()));
                 int minute = Integer.parseInt(minstr);
                 if ((minute >= 0) && (minute <= 59)) {
                     result = new Minute(minute, new Hour(hour, day));

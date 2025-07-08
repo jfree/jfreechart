@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,21 @@
  * -------------------------
  * TickLabelEntityTest.java
  * -------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TickLabelEntity} class.
@@ -63,22 +57,24 @@ public class TickLabelEntityTest {
                 2.0, 3.0, 4.0), "ToolTip", "URL");
         TickLabelEntity e2 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
+        // Area is transient, not part of equals or hashCode - compare using
+        // get method
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1.getArea(), e2.getArea());
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));
+        assertEquals(e1.getArea(), e2.getArea());
 
         e1.setToolTipText("New ToolTip");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setURLText("New URL");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
     }
 
     /**
@@ -89,9 +85,9 @@ public class TickLabelEntityTest {
         TickLabelEntity e1 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
         TickLabelEntity e2 = (TickLabelEntity) e1.clone();
-        assertTrue(e1 != e2);
-        assertTrue(e1.getClass() == e2.getClass());
-        assertTrue(e1.equals(e2));
+        assertNotSame(e1, e2);
+        assertSame(e1.getClass(), e2.getClass());
+        assertEquals(e1, e2);
     }
 
     /**
@@ -101,7 +97,7 @@ public class TickLabelEntityTest {
     public void testSerialization() {
         TickLabelEntity e1 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
-        TickLabelEntity e2 = (TickLabelEntity) TestUtils.serialised(e1);
+        TickLabelEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

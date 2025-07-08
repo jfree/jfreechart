@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2021, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patches 2497611, 2791407);
  *
@@ -152,7 +152,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /** The margin between items (bars) within a category. */
     private double itemMargin;
 
-    /** A flag that controls whether or not bar outlines are drawn. */
+    /** A flag that controls whether bar outlines are drawn. */
     private boolean drawBarOutline;
 
     /** The maximum bar width as a percentage of the available space. */
@@ -202,7 +202,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     private BarPainter barPainter;
 
     /**
-     * The flag that controls whether or not shadows are drawn for the bars.
+     * The flag that controls whether shadows are drawn for the bars.
      */
     private boolean shadowsVisible;
 
@@ -297,7 +297,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not bar outlines are drawn.
+     * Returns a flag that controls whether bar outlines are drawn.
      *
      * @return A boolean.
      *
@@ -308,7 +308,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not bar outlines are drawn and
+     * Sets the flag that controls whether bar outlines are drawn and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
@@ -461,7 +461,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the base value for the
+     * Returns the flag that controls whether the base value for the
      * bars is included in the range calculated by
      * {@link #findRangeBounds(CategoryDataset)}.
      *
@@ -475,7 +475,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the base value for the bars
+     * Sets the flag that controls whether the base value for the bars
      * is included in the range calculated by
      * {@link #findRangeBounds(CategoryDataset)}.  If the flag is changed,
      * a {@link RendererChangeEvent} is sent to all registered listeners.
@@ -517,7 +517,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not shadows are drawn for
+     * Returns the flag that controls whether shadows are drawn for
      * the bars.
      *
      * @return A boolean.
@@ -527,7 +527,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not shadows are
+     * Sets the flag that controls whether shadows are
      * drawn by the renderer.
      *
      * @param visible  the new flag value.
@@ -780,7 +780,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /**
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.  This takes into account the range
-     * of values in the dataset, plus the flag that determines whether or not
+     * of values in the dataset, plus the flag that determines whether
      * the base value for the bars should be included in the range.
      *
      * @param dataset  the dataset ({@code null} permitted).
@@ -912,7 +912,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         // end of the bar for a horizontal bar chart, and the TOP end of the
         // bar for a vertical bar chart.  Whether this is the BASE of the bar
         // or not depends also on (a) whether the data value is 'negative'
-        // relative to the base value and (b) whether or not the range axis is
+        // relative to the base value and (b) whether the range axis is
         // inverted.  This only matters if/when we apply the minimumBarLength
         // attribute, because we should extend the non-base end of the bar
         boolean positive = (value >= this.base);
@@ -1054,7 +1054,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         Point2D anchorPoint = calculateLabelAnchorPoint(
                 position.getItemLabelAnchor(), bar, plot.getOrientation());
 
-        if (isInternalAnchor(position.getItemLabelAnchor())) {
+        if (position.getItemLabelAnchor().isInternal()) {
             Shape bounds = TextUtils.calculateRotatedStringBounds(label,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
@@ -1195,29 +1195,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
         return result;
 
-    }
-
-    /**
-     * Returns {@code true} if the specified anchor point is inside a bar.
-     *
-     * @param anchor  the anchor point.
-     *
-     * @return A boolean.
-     */
-    private boolean isInternalAnchor(ItemLabelAnchor anchor) {
-        return anchor == ItemLabelAnchor.CENTER
-               || anchor == ItemLabelAnchor.INSIDE1
-               || anchor == ItemLabelAnchor.INSIDE2
-               || anchor == ItemLabelAnchor.INSIDE3
-               || anchor == ItemLabelAnchor.INSIDE4
-               || anchor == ItemLabelAnchor.INSIDE5
-               || anchor == ItemLabelAnchor.INSIDE6
-               || anchor == ItemLabelAnchor.INSIDE7
-               || anchor == ItemLabelAnchor.INSIDE8
-               || anchor == ItemLabelAnchor.INSIDE9
-               || anchor == ItemLabelAnchor.INSIDE10
-               || anchor == ItemLabelAnchor.INSIDE11
-               || anchor == ItemLabelAnchor.INSIDE12;
     }
 
     /**

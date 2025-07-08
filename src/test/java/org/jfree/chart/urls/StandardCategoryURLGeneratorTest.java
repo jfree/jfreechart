@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,30 +27,22 @@
  * -------------------------------------
  * StandardCategoryURLGeneratorTest.java
  * -------------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 13-Dec-2007 : Added testGenerateURL() and testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.urls;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardCategoryURLGenerator} class.
@@ -94,22 +86,22 @@ public class StandardCategoryURLGeneratorTest {
     public void testEquals() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
         StandardCategoryURLGenerator g2 = new StandardCategoryURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryURLGenerator("index2.html?");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryURLGenerator("index2.html?");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryURLGenerator("index2.html?", "A", "B");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryURLGenerator("index2.html?", "A", "B");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardCategoryURLGenerator("index2.html?", "A", "C");
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardCategoryURLGenerator("index2.html?", "A", "C");
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -119,8 +111,7 @@ public class StandardCategoryURLGeneratorTest {
     public void testSerialization() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator(
                 "index.html?");
-        StandardCategoryURLGenerator g2 = (StandardCategoryURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategoryURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

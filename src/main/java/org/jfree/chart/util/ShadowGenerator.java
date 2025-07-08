@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------------
  * ShadowGenerator.java
  * --------------------
- * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -52,7 +52,7 @@ public interface ShadowGenerator {
      *
      * @return A new image containing the shadow.
      */
-    public BufferedImage createDropShadow(BufferedImage source);
+    BufferedImage createDropShadow(BufferedImage source);
 
     /**
      * Calculates the x-offset for drawing the shadow image relative to the
@@ -60,7 +60,7 @@ public interface ShadowGenerator {
      *
      * @return The x-offset.
      */
-    public int calculateOffsetX();
+    int calculateOffsetX();
 
     /**
      * Calculates the y-offset for drawing the shadow image relative to the
@@ -68,6 +68,6 @@ public interface ShadowGenerator {
      *
      * @return The y-offset.
      */
-    public int calculateOffsetY();
+    int calculateOffsetY();
 
 }

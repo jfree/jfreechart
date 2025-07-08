@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,29 +27,21 @@
  * ------------------------
  * XYBoxAnnotationTest.java
  * ------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Jan-2005 : Version 1 (DG);
- * 26-Feb-2008 : Added testDrawWithNullInfo() method (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import java.awt.GradientPaint;
+import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -61,10 +53,52 @@ import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Some tests for the {@link XYBoxAnnotation} class.
  */
 public class XYBoxAnnotationTest {
+
+    @Test
+    public void testConstructorExceptions() {
+        Stroke stroke = new BasicStroke(2.0f);
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(Double.NaN, 20.0, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, Double.NaN, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, Double.NaN, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, 100.0, Double.NaN,
+                stroke, Color.BLUE, Color.RED);
+        });
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYBoxAnnotation.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -75,24 +109,24 @@ public class XYBoxAnnotationTest {
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
         XYBoxAnnotation a2 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
+        assertEquals(a1, a2);
+        assertEquals(a2, a1);
 
         // x0
         a1 = new XYBoxAnnotation(2.0, 2.0, 3.0, 4.0, new BasicStroke(1.2f),
                 Color.RED, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYBoxAnnotation(2.0, 2.0, 3.0, 4.0, new BasicStroke(1.2f),
                 Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // stroke
         a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 Color.RED, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         GradientPaint gp1a = new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED);
@@ -106,18 +140,18 @@ public class XYBoxAnnotationTest {
         // outlinePaint
         a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 gp1a, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 gp1b, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // fillPaint
         a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 gp1a, gp2a);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0, new BasicStroke(2.3f),
                 gp1b, gp2b);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -129,7 +163,7 @@ public class XYBoxAnnotationTest {
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
         XYBoxAnnotation a2 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -137,15 +171,16 @@ public class XYBoxAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException if there is an issue cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
         XYBoxAnnotation a2 = (XYBoxAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -165,7 +200,7 @@ public class XYBoxAnnotationTest {
     public void testSerialization() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYBoxAnnotation a2 = (XYBoxAnnotation) TestUtils.serialised(a1);
+        XYBoxAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * ----------------------------------
  * DefaultKeyedValuesDatasetTest.java
  * ----------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
  *
  */
 
@@ -42,8 +38,8 @@ package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValuesDataset} class.
@@ -61,14 +57,15 @@ public class DefaultKeyedValuesDatasetTest {
         d1.setValue("V2", null);
         d1.setValue("V3", 3);
         DefaultKeyedValuesDataset d2 = (DefaultKeyedValuesDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValuesDataset d1 = new DefaultKeyedValuesDataset();
         d1.setValue("C1", 234.2);
@@ -76,8 +73,7 @@ public class DefaultKeyedValuesDatasetTest {
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        KeyedValuesDataset d2 = (KeyedValuesDataset) 
-                TestUtils.serialised(d1);
+        KeyedValuesDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,17 +27,11 @@
  * ----------------------
  * DefaultAxisEditor.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
  *                   Arnaud Lelievre;
- *
- * Changes
- * -------
- * 24-Nov-2005 : Version 1, based on AxisPropertyEditPanel.java (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 
@@ -112,10 +106,10 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      */
     private JPanel slot2;
 
-    /** A flag that indicates whether or not the tick labels are visible. */
+    /** A flag that indicates whether the tick labels are visible. */
     private JCheckBox showTickLabelsCheckBox;
 
-    /** A flag that indicates whether or not the tick marks are visible. */
+    /** A flag that indicates whether the tick marks are visible. */
     private JCheckBox showTickMarksCheckBox;
 
 //    /** Insets text field. */
@@ -322,7 +316,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Returns a flag that indicates whether or not the tick labels are visible.
+     * Returns a flag that indicates whether the tick labels are visible.
      *
      * @return {@code true} if tick mark labels are visible.
      */
@@ -349,7 +343,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     }
 
     /**
-     * Returns the current value of the flag that determines whether or not
+     * Returns the current value of the flag that determines whether
      * tick marks are visible.
      *
      * @return {@code true} if tick marks are visible.

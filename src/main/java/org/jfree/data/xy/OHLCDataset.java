@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,10 @@
  * ----------------
  * OHLCDataset.java
  * ----------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Sylvain Vieujot;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Updated header info (DG);
- * 16-Oct-2001 : Moved to package com.jrefinery.data.* (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 05-Feb-2002 : Added getVolumeValue() method, as requested by Sylvain
- *               Vieujot (DG);
- * 05-May-2004 : Added methods that return double primitives (DG);
- * 26-Jul-2004 : Switched names of methods that return Number vs
- *               primitives (DG);
- * 06-Sep-2004 : Renamed HighLowDataset --> OHLCDataset (DG);
  *
  */
 
@@ -62,7 +50,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The value.
      */
-    public Number getHigh(int series, int item);
+    Number getHigh(int series, int item);
 
     /**
      * Returns the high-value (as a double primitive) for an item within a
@@ -73,7 +61,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The high-value.
      */
-    public double getHighValue(int series, int item);
+    double getHighValue(int series, int item);
 
     /**
      * Returns the low-value for the specified series and item.
@@ -83,7 +71,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The value.
      */
-    public Number getLow(int series, int item);
+    Number getLow(int series, int item);
 
     /**
      * Returns the low-value (as a double primitive) for an item within a
@@ -94,7 +82,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The low-value.
      */
-    public double getLowValue(int series, int item);
+    double getLowValue(int series, int item);
 
     /**
      * Returns the open-value for the specified series and item.
@@ -104,7 +92,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The value.
      */
-    public Number getOpen(int series, int item);
+    Number getOpen(int series, int item);
 
     /**
      * Returns the open-value (as a double primitive) for an item within a
@@ -115,7 +103,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The open-value.
      */
-    public double getOpenValue(int series, int item);
+    double getOpenValue(int series, int item);
 
     /**
      * Returns the y-value for the specified series and item.
@@ -125,7 +113,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The value.
      */
-    public Number getClose(int series, int item);
+    Number getClose(int series, int item);
 
     /**
      * Returns the close-value (as a double primitive) for an item within a
@@ -136,7 +124,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The close-value.
      */
-    public double getCloseValue(int series, int item);
+    double getCloseValue(int series, int item);
 
     /**
      * Returns the volume for the specified series and item.
@@ -146,7 +134,7 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The value.
      */
-    public Number getVolume(int series, int item);
+    Number getVolume(int series, int item);
 
     /**
      * Returns the volume-value (as a double primitive) for an item within a
@@ -157,6 +145,6 @@ public interface OHLCDataset extends XYDataset {
      *
      * @return The volume-value.
      */
-    public double getVolumeValue(int series, int item);
+    double getVolumeValue(int series, int item);
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ---------------
  * FlowEntity.java
  * ---------------
- * (C) Copyright 2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2021-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -49,7 +49,8 @@ import org.jfree.data.flow.FlowKey;
  */
 public class FlowEntity extends ChartEntity {
 
-    private FlowKey key;
+    /** The key. */
+    private final FlowKey key;
     
     /**
      * Creates a new instance.
@@ -98,15 +99,34 @@ public class FlowEntity extends ChartEntity {
             return false;
         }
         FlowEntity that = (FlowEntity) obj;
-        if (!this.key.equals(that.key)) {
+        if (!java.util.Objects.equals(this.key, that.key)) {
             return false;
         }
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof FlowEntity);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = super.hashCode();
         hash = 79 * hash + Objects.hashCode(this.key);
         return hash;
     }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,17 +27,11 @@
  * -----------------------
  * DefaultTitleEditor.java
  * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Arnaud Lelievre;
  *                   Daniel Gredler;
- *
- * Changes
- * -------
- * 24-Nov-2005 : Version 1, based on TitlePropertyEditPanel.java (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 
@@ -74,10 +68,10 @@ import org.jfree.chart.util.ResourceBundleWrapper;
  */
 class DefaultTitleEditor extends JPanel implements ActionListener {
 
-    /** Whether or not to display the title on the chart. */
+    /** whether to display the title on the chart. */
     private boolean showTitle;
 
-    /** The checkbox to indicate whether or not to display the title. */
+    /** The checkbox to indicate whether to display the title. */
     private JCheckBox showTitleCheckBox;
 
     /** A field for displaying/editing the title text. */
@@ -273,7 +267,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      * If we are not supposed to show the title, the controls are disabled.
      */
     private void enableOrDisableControls() {
-        boolean enabled = (this.showTitle == true);
+        boolean enabled = this.showTitle;
         this.titleField.setEnabled(enabled);
         this.selectFontButton.setEnabled(enabled);
         this.selectPaintButton.setEnabled(enabled);

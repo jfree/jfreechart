@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,19 @@
  * ------------------
  * YIntervalTest.java
  * ------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link YInterval} class.
@@ -62,19 +56,19 @@ public class YIntervalTest {
         assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.5, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.5, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.55, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.55, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.55, 1.55);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.55, 1.55);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**
@@ -92,7 +86,7 @@ public class YIntervalTest {
     @Test
     public void testSerialization() {
         YInterval i1 = new YInterval(1.0, 0.5, 1.5);
-        YInterval i2 = (YInterval) TestUtils.serialised(i1);
+        YInterval i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

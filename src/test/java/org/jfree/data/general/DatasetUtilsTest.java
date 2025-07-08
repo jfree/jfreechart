@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,35 +27,16 @@
  * ---------------------
  * DatasetUtilsTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Sep-2003 : Version 1 (DG);
- * 23-Mar-2004 : Added test for maximumStackedRangeValue() method (DG);
- * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
- * 07-Jan-2005 : Updated for method name changes (DG);
- * 03-Feb-2005 : Added testFindStackedRangeBounds2() method (DG);
- * 26-Sep-2007 : Added testIsEmptyOrNullXYDataset() method (DG);
- * 28-Mar-2008 : Added and renamed various tests (DG);
- * 08-Oct-2008 : New tests to support patch 2131001 and related 
- *               changes (DG);
- * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
- * 16-May-2009 : Added
- *               testIterateToFindRangeBounds_MultiValueCategoryDataset() (DG);
- * 10-Sep-2009 : Added tests for bug 2849731 (DG);
  *
  */
 
 package org.jfree.data.general;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
@@ -661,8 +642,8 @@ public class DatasetUtilsTest {
         data[2] = new double[] {3.1, 3.2};
         CategoryDataset dataset = DatasetUtils.createCategoryDataset(
                 rowKeys, columnKeys, data);
-        assertTrue(dataset.getRowCount() == 3);
-        assertTrue(dataset.getColumnCount() == 2);
+        assertEquals(3, dataset.getRowCount());
+        assertEquals(2, dataset.getColumnCount());
     }
 
     /**
@@ -686,13 +667,13 @@ public class DatasetUtilsTest {
             pass = true;  // got it!
         }
         assertTrue(pass);
-        assertTrue(dataset == null);
+        assertNull(dataset);
     }
 
     /**
      * Test for a bug reported in the forum:
      *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=7903
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=7903
      */
     @Test
     public void testMaximumStackedRangeValue() {
@@ -711,7 +692,7 @@ public class DatasetUtilsTest {
         d.addValue(v5, "Row 1", "Column 1");
         d.addValue(v6, "Row 2", "Column 1");
         Number max = DatasetUtils.findMaximumStackedRangeValue(d);
-        assertTrue(max.equals(answer));
+        assertEquals(max, answer);
     }
 
     /**
@@ -737,7 +718,7 @@ public class DatasetUtilsTest {
     public void testFindStackedRangeBounds_CategoryDataset2() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Range r = DatasetUtils.findStackedRangeBounds(dataset);
-        assertTrue(r == null);
+        assertNull(r);
 
         dataset.addValue(5.0, "R1", "C1");
         r = DatasetUtils.findStackedRangeBounds(dataset, 3.0);
@@ -769,7 +750,7 @@ public class DatasetUtilsTest {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         KeyToGroupMap map = new KeyToGroupMap("Group A");
         Range r = DatasetUtils.findStackedRangeBounds(dataset, map);
-        assertTrue(r == null);
+        assertNull(r);
 
         dataset.addValue(1.0, "R1", "C1");
         dataset.addValue(2.0, "R2", "C1");
@@ -1076,8 +1057,8 @@ public class DatasetUtilsTest {
         double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
                 y1End};
         dataset.addSeries("S1", data1);
-        Range r = DatasetUtils.iterateToFindDomainBounds(dataset, 
-                Arrays.asList("S1"), true);
+        Range r = DatasetUtils.iterateToFindDomainBounds(dataset,
+                Collections.singletonList("S1"), true);
         assertEquals(0.8, r.getLowerBound(), EPSILON);
         assertEquals(3.2, r.getUpperBound(), EPSILON);
     }
@@ -1099,7 +1080,7 @@ public class DatasetUtilsTest {
                 y1End};
         dataset.addSeries("S1", data1);
         Range r = DatasetUtils.iterateToFindRangeBounds(dataset,
-                Arrays.asList("S1"), new Range(0.0, 4.0), true);
+                Collections.singletonList("S1"), new Range(0.0, 4.0), true);
         assertEquals(-5.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
@@ -1233,7 +1214,7 @@ public class DatasetUtilsTest {
                 visibleSeriesKeys, xRange, false));
 
         dataset.add(new Date(50L), new BoxAndWhiskerItem(5.0, 4.9, 2.0, 8.0,
-                1.0, 9.0, 0.0, 10.0, new ArrayList<String>()));
+                1.0, 9.0, 0.0, 10.0, new ArrayList<Number>()));
         assertEquals(new Range(5.0, 5.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false));
@@ -1274,20 +1255,20 @@ public class DatasetUtilsTest {
         List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
-        List<Double> values = Arrays.asList(new Double[] {1.0});
+        List<Double> values = Collections.singletonList(1.0);
         dataset.add(values, "R1", "C1");
         visibleSeriesKeys.add("R1");
         assertEquals(new Range(1.0, 1.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
-        values = Arrays.asList(new Double[] {2.0, 3.0});
+        values = Arrays.asList(2.0, 3.0);
         dataset.add(values, "R1", "C2");
         assertEquals(new Range(1.0, 3.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
-        values = Arrays.asList(new Double[] {-1.0, -2.0});
+        values = Arrays.asList(-1.0, -2.0);
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(1.0, 3.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,

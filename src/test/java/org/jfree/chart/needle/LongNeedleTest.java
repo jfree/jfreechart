@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,19 @@
  * -------------------
  * LongNeedleTest.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jun-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LongNeedle} class.
@@ -57,8 +53,8 @@ public class LongNeedleTest {
     public void testEquals() {
        LongNeedle n1 = new LongNeedle();
        LongNeedle n2 = new LongNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -68,9 +64,9 @@ public class LongNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         LongNeedle n1 = new LongNeedle();
         LongNeedle n2 = (LongNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -79,8 +75,8 @@ public class LongNeedleTest {
     @Test
     public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = (LongNeedle) TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        LongNeedle n2 = TestUtils.serialised(n1);
+        assertEquals(n1, n2);
     }
 
 }

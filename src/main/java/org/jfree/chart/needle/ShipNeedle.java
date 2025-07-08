@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,11 @@
  * ---------------
  * ShipNeedle.java
  * ---------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -52,6 +52,13 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 149554868169435612L;
+
+    /**
+     * Creates a new instance.
+     */
+    public ShipNeedle() {
+        super();
+    }
 
     /**
      * Draws the needle.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------------------
  * ComparableObjectSeries.java
  * ---------------------------
- * (C) Copyright 2006-2021, by Object Refinery Limited.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 import org.jfree.chart.util.Args;
 
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
@@ -61,7 +62,7 @@ public class ComparableObjectSeries extends Series
     /** A flag that controls whether the items are automatically sorted. */
     private boolean autoSort;
 
-    /** A flag that controls whether or not duplicate x-values are allowed. */
+    /** A flag that controls whether duplicate x-values are allowed. */
     private boolean allowDuplicateXValues;
 
     /**
@@ -77,10 +78,10 @@ public class ComparableObjectSeries extends Series
 
     /**
      * Constructs a new series that contains no data.  You can specify
-     * whether or not duplicate x-values are allowed for the series.
+     * whether duplicate x-values are allowed for the series.
      *
      * @param key  the series key ({@code null} not permitted).
-     * @param autoSort  a flag that controls whether or not the items in the
+     * @param autoSort  a flag that controls whether the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
@@ -185,7 +186,7 @@ public class ComparableObjectSeries extends Series
      *
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
-     * @param notify  a flag the controls whether or not a
+     * @param notify  a flag the controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
@@ -200,7 +201,7 @@ public class ComparableObjectSeries extends Series
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param item  the (x, y) item ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not a
+     * @param notify  a flag that controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
@@ -331,8 +332,8 @@ public class ComparableObjectSeries extends Series
      * @param end  the end index (zero-based).
      */
     protected void delete(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            this.data.remove(start);
+        if (end >= start) {
+            this.data.subList(start, end + 1).clear();
         }
         fireSeriesChanged();
     }
@@ -438,6 +439,21 @@ public class ComparableObjectSeries extends Series
         result = 29 * result + (this.autoSort ? 1 : 0);
         result = 29 * result + (this.allowDuplicateXValues ? 1 : 0);
         return result;
+    }
+
+    /**
+     * Returns a clone of the series.
+     *
+     * @return A clone of the series.
+     *
+     * @throws CloneNotSupportedException if there is a cloning problem.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object clone() throws CloneNotSupportedException {
+        ComparableObjectSeries clone = (ComparableObjectSeries) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
+        return clone;
     }
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2021, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Peter Kolb (patch 2497611);
  *
@@ -153,11 +153,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * generators.
      */
     protected AbstractCategoryItemRenderer() {
-        this.itemLabelGeneratorMap 
-                = new HashMap<Integer, CategoryItemLabelGenerator>();
-        this.toolTipGeneratorMap 
-                = new HashMap<Integer, CategoryToolTipGenerator>();
-        this.itemURLGeneratorMap = new HashMap<Integer, CategoryURLGenerator>();
+        this.itemLabelGeneratorMap = new HashMap<>();
+        this.toolTipGeneratorMap = new HashMap<>();
+        this.itemURLGeneratorMap = new HashMap<>();
         this.legendItemLabelGenerator
                 = new StandardCategorySeriesLabelGenerator();
     }
@@ -674,7 +672,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             return null;
         }
         if (getDataBoundsIncludesVisibleSeriesOnly()) {
-            List visibleSeriesKeys = new ArrayList();
+            List<Comparable> visibleSeriesKeys = new ArrayList<>();
             int seriesCount = dataset.getRowCount();
             for (int s = 0; s < seriesCount; s++) {
                 if (isSeriesVisible(s)) {

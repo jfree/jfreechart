@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,14 @@
  * -------------------
  * OHLCSeriesTest.java
  * -------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1, based on XYSeriesTests (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
- * 23-May-2009 : Added testHashCode() (DG);
- * 17-Jun-2009 : Added testRemove_int() (DG);
  *
  */
 
 package org.jfree.data.time.ohlc;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.jfree.chart.TestUtils;
 
@@ -56,6 +43,8 @@ import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link OHLCSeries} class.
@@ -81,31 +70,31 @@ public class OHLCSeriesTest implements SeriesChangeListener {
     public void testEquals() {
         OHLCSeries s1 = new OHLCSeries("s1");
         OHLCSeries s2 = new OHLCSeries("s1");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // seriesKey
         s1 = new OHLCSeries("s2");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new OHLCSeries("s2");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // add a value
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // add another value
         s1.add(new Year(2008), 2.0, 4.0, 1.0, 3.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Year(2008), 2.0, 4.0, 1.0, 3.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // remove a value
         s1.remove(new Year(2008));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.remove(new Year(2008));
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
     }
 
     /**
@@ -117,7 +106,7 @@ public class OHLCSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2009), 1.0, 3.0, 2.0, 1.4);
         OHLCSeries s2 = new OHLCSeries("Test");
         s2.add(new Year(2009), 1.0, 3.0, 2.0, 1.4);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         int h1 = s1.hashCode();
         int h2 = s2.hashCode();
         assertEquals(h1, h2);
@@ -131,9 +120,9 @@ public class OHLCSeriesTest implements SeriesChangeListener {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
         OHLCSeries s2 = (OHLCSeries) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
     }
 
     /**
@@ -143,7 +132,7 @@ public class OHLCSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCSeries s2 = (OHLCSeries) TestUtils.serialised(s1);
+        OHLCSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

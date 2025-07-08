@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,19 @@
  * -----------------------
  * ShortTextTitleTest.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-May-2008 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ShortTextTitle} class.
@@ -62,9 +56,9 @@ public class ShortTextTitleTest {
         assertEquals(t1, t2);
 
         t1.setText("Test 1");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setText("Test 1");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -74,7 +68,7 @@ public class ShortTextTitleTest {
     public void testHashcode() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = new ShortTextTitle("ABC");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -87,9 +81,9 @@ public class ShortTextTitleTest {
     public void testCloning() throws CloneNotSupportedException {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = (ShortTextTitle) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**
@@ -98,7 +92,7 @@ public class ShortTextTitleTest {
     @Test
     public void testSerialization() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
-        ShortTextTitle t2 = (ShortTextTitle) TestUtils.serialised(t1);
+        ShortTextTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

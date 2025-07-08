@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,14 @@
  * -----------------------
  * VectorRendererTest.java
  * -----------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 
@@ -51,6 +42,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link VectorRenderer} class.
@@ -65,14 +58,14 @@ public class VectorRendererTest {
         // default instances
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = new VectorRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // check that super class fields are being looked at...
         r1.setSeriesFillPaint(0, Color.GREEN);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFillPaint(0, Color.GREEN);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -82,7 +75,7 @@ public class VectorRendererTest {
     public void testHashcode() {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = new VectorRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -97,9 +90,9 @@ public class VectorRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = (VectorRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -117,7 +110,7 @@ public class VectorRendererTest {
     @Test
     public void testSerialization() {
         VectorRenderer r1 = new VectorRenderer();
-        VectorRenderer r2 = (VectorRenderer) TestUtils.serialised(r1);
+        VectorRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

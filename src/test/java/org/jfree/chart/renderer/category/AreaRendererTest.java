@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,14 @@
  * ---------------------
  * AreaRendererTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode() test (DG);
- * 11-Oct-2006 : Strengthened the testEquals() method (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -58,6 +46,8 @@ import org.jfree.chart.renderer.AreaRendererEndType;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link AreaRenderer} class.
@@ -74,9 +64,9 @@ public class AreaRendererTest {
         assertEquals(r1, r2);
 
         r1.setEndType(AreaRendererEndType.LEVEL);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setEndType(AreaRendererEndType.LEVEL);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -86,7 +76,7 @@ public class AreaRendererTest {
     public void testHashcode() {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = new AreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -99,9 +89,9 @@ public class AreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = (AreaRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -119,7 +109,7 @@ public class AreaRendererTest {
     @Test
     public void testSerialization() {
         AreaRenderer r1 = new AreaRenderer();
-        AreaRenderer r2 = (AreaRenderer) TestUtils.serialised(r1);
+        AreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2021, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-present, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -607,7 +607,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -627,7 +627,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -647,7 +647,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the bounds of the values in this dataset's y-values.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

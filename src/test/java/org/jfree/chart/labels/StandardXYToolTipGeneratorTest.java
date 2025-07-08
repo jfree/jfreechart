@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,14 @@
  * -----------------------------------
  * StandardXYToolTipGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -54,6 +45,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link StandardXYToolTipGenerator} class.
@@ -79,23 +72,23 @@ public class StandardXYToolTipGeneratorTest {
 
         g1 = new StandardXYToolTipGenerator(f1, xnf1, ynf1);
         g2 = new StandardXYToolTipGenerator(f1, xnf1, ynf1);
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardXYToolTipGenerator(f2, xnf1, ynf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYToolTipGenerator(f2, xnf1, ynf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYToolTipGenerator(f2, xnf2, ynf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYToolTipGenerator(f2, xnf2, ynf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYToolTipGenerator(f2, xnf2, ynf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYToolTipGenerator(f2, xnf2, ynf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         DateFormat xdf1 = new SimpleDateFormat("d-MMM");
         DateFormat xdf2 = new SimpleDateFormat("d-MMM-yyyy");
@@ -104,18 +97,18 @@ public class StandardXYToolTipGeneratorTest {
 
         g1 = new StandardXYToolTipGenerator(f1, xdf1, ydf1);
         g2 = new StandardXYToolTipGenerator(f1, xdf1, ydf1);
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         g1 = new StandardXYToolTipGenerator(f1, xdf2, ydf1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYToolTipGenerator(f1, xdf2, ydf1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         g1 = new StandardXYToolTipGenerator(f1, xdf2, ydf2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new StandardXYToolTipGenerator(f1, xdf2, ydf2);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
     }
 
@@ -128,8 +121,8 @@ public class StandardXYToolTipGeneratorTest {
                 = new StandardXYToolTipGenerator();
         StandardXYToolTipGenerator g2
                 = new StandardXYToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -139,9 +132,9 @@ public class StandardXYToolTipGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
         StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**
@@ -159,8 +152,7 @@ public class StandardXYToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
-        StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

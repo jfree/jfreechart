@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * -------------------
  * PieChart3DTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 21-May-2004 : Version 1 (DG);
  *
  */
 
@@ -49,10 +45,10 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for a pie chart with a 3D effect.
@@ -86,7 +82,7 @@ public class PieChart3DTest  {
         this.pieChart.addChangeListener(l);
         PiePlot plot = (PiePlot) this.pieChart.getPlot();
         plot.setDataset(null);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         assertNull(plot.getDataset());
     }
 

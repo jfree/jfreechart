@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ----------------
  * WindDataset.java
  * ----------------
- * (C) Copyright 2001-2020, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-present, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -53,7 +53,7 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind direction.
      */
-    public Number getWindDirection(int series, int item);
+    Number getWindDirection(int series, int item);
 
     /**
      * Returns the wind force on the Beaufort scale (0 to 12).  See:
@@ -67,6 +67,6 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind force.
      */
-    public Number getWindForce(int series, int item);
+    Number getWindForce(int series, int item);
 
 }

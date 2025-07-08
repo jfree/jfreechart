@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * ------------------------------
  * CategoryToPieDatasetTests.java
  * ------------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Jul-2006 : Version 1 (DG);
- * 01-Aug-2006 : Added testGetIndex() method (DG);
  *
  */
 
@@ -193,7 +188,7 @@ public class CategoryToPieDatasetTest {
                 TableOrder.BY_COLUMN, 1);
         DefaultPieDataset d2 = new DefaultPieDataset();
         d2.setValue("R1", 2.2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -206,8 +201,7 @@ public class CategoryToPieDatasetTest {
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
                 TableOrder.BY_COLUMN, 1);
-        CategoryToPieDataset d2 = (CategoryToPieDataset) 
-                TestUtils.serialised(d1);
+        CategoryToPieDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // regular equality for the datasets doesn't check the fields, just

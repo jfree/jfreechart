@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * -------------
  * Values2D.java
  * -------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  */
 
@@ -45,14 +45,14 @@ public interface Values2D {
      *
      * @return The row count.
      */
-    public int getRowCount();
+    int getRowCount();
 
     /**
      * Returns the number of columns in the table.
      *
      * @return The column count.
      */
-    public int getColumnCount();
+    int getColumnCount();
 
     /**
      * Returns a value from the table.
@@ -65,6 +65,6 @@ public interface Values2D {
      * @throws IndexOutOfBoundsException if the {@code row}
      *         or {@code column} is out of bounds.
      */
-    public Number getValue(int row, int column);
+    Number getValue(int row, int column);
 
 }

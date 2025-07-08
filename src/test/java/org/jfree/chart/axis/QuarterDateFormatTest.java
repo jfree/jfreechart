@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * --------------------------
  * QuarterDateFormatTest.java
  * --------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-May-2005 : Version 1 (DG);
- * 08-Jun-2007 : Added check for new field in testEquals() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link QuarterDateFormat} class.
@@ -64,29 +57,29 @@ public class QuarterDateFormatTest {
                 "GMT"), new String[] {"1", "2", "3", "4"});
         QuarterDateFormat qf2 = new QuarterDateFormat(TimeZone.getTimeZone(
                 "GMT"), new String[] {"1", "2", "3", "4"});
-        assertTrue(qf1.equals(qf2));
-        assertTrue(qf2.equals(qf1));
+        assertEquals(qf1, qf2);
+        assertEquals(qf2, qf1);
 
         qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"1", "2", "3", "4"});
-        assertFalse(qf1.equals(qf2));
+        assertNotEquals(qf1, qf2);
         qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"1", "2", "3", "4"});
-        assertTrue(qf1.equals(qf2));
+        assertEquals(qf1, qf2);
 
         qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"});
-        assertFalse(qf1.equals(qf2));
+        assertNotEquals(qf1, qf2);
         qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"});
-        assertTrue(qf1.equals(qf2));
+        assertEquals(qf1, qf2);
 
         qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"}, true);
-        assertFalse(qf1.equals(qf2));
+        assertNotEquals(qf1, qf2);
         qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"}, true);
-        assertTrue(qf1.equals(qf2));
+        assertEquals(qf1, qf2);
     }
 
     /**
@@ -98,7 +91,7 @@ public class QuarterDateFormatTest {
                 "GMT"), new String[] {"1", "2", "3", "4"});
         QuarterDateFormat qf2 = new QuarterDateFormat(TimeZone.getTimeZone(
                 "GMT"), new String[] {"1", "2", "3", "4"});
-        assertTrue(qf1.equals(qf2));
+        assertEquals(qf1, qf2);
         int h1 = qf1.hashCode();
         int h2 = qf2.hashCode();
         assertEquals(h1, h2);
@@ -113,9 +106,9 @@ public class QuarterDateFormatTest {
                 "GMT"), new String[] {"1", "2", "3", "4"});
         QuarterDateFormat qf2 = null;
         qf2 = (QuarterDateFormat) qf1.clone();
-        assertTrue(qf1 != qf2);
-        assertTrue(qf1.getClass() == qf2.getClass());
-        assertTrue(qf1.equals(qf2));
+        assertNotSame(qf1, qf2);
+        assertSame(qf1.getClass(), qf2.getClass());
+        assertEquals(qf1, qf2);
     }
 
     /**
@@ -125,7 +118,7 @@ public class QuarterDateFormatTest {
     public void testSerialization() {
         QuarterDateFormat qf1 = new QuarterDateFormat(TimeZone.getTimeZone(
                 "GMT"), new String[] {"1", "2", "3", "4"});
-        QuarterDateFormat qf2 = (QuarterDateFormat) TestUtils.serialised(qf1);
+        QuarterDateFormat qf2 = TestUtils.serialised(qf1);
         assertEquals(qf1, qf2);
     }
 

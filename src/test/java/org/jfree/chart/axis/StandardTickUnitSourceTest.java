@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,16 @@
  * -------------------------------
  * StandardTickUnitSourceTest.java
  * -------------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Oct-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -58,7 +53,7 @@ public class StandardTickUnitSourceTest {
     public void testEquals() {
         StandardTickUnitSource t1 = new StandardTickUnitSource();
         StandardTickUnitSource t2 = new StandardTickUnitSource();
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -67,7 +62,7 @@ public class StandardTickUnitSourceTest {
     @Test
     public void testSerialization() {
         StandardTickUnitSource t1 = new StandardTickUnitSource();
-        StandardTickUnitSource t2 = (StandardTickUnitSource) TestUtils.serialised(t1);
+        StandardTickUnitSource t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

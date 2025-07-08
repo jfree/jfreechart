@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,17 @@
  * --------------------------
  * ItemLabelPositionTest.java
  * --------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Oct-2003 : Version 1 (DG);
- * 19-Feb-2004 : Moved to org.jfree.chart.labels.junit (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.labels;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
@@ -50,6 +47,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link ItemLabelPosition} class.
  */
 public class ItemLabelPositionTest {
+
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ItemLabelPosition.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Check that the equals() method distinguishes all fields.
@@ -67,7 +77,7 @@ public class ItemLabelPositionTest {
     @Test
     public void testSerialization() {
         ItemLabelPosition p1 = new ItemLabelPosition();
-        ItemLabelPosition p2 = (ItemLabelPosition) TestUtils.serialised(p1);
+        ItemLabelPosition p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

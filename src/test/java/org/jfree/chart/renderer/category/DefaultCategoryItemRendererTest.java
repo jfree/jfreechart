@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * ------------------------------------
  * DefaultCategoryItemRendererTest.java
  * ------------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultCategoryItemRenderer} class.
@@ -72,7 +65,7 @@ public class DefaultCategoryItemRendererTest {
     public void testHashcode() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = new DefaultCategoryItemRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -86,9 +79,9 @@ public class DefaultCategoryItemRendererTest {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
                 r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -106,8 +99,7 @@ public class DefaultCategoryItemRendererTest {
     @Test
     public void testSerialization() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
-        DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
-                TestUtils.serialised(r1);
+        DefaultCategoryItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

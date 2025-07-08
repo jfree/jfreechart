@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * -----------------------
  * KeyedValuesItemKey.java
  * -----------------------
- * (C) Copyright 2014-2020, by Object Refinery Limited.
+ * (C) Copyright 2014-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Tracy Hiltbrand;
  *
  */
@@ -45,14 +45,14 @@ import org.jfree.chart.util.Args;
 public class KeyedValuesItemKey implements ItemKey, Serializable {
     
     /** The key for the item. */
-    Comparable<? extends Object> key;
+    Comparable<?> key;
     
     /**
      * Creates a new instance.
      * 
      * @param key  the key ({@code null} not permitted).
      */
-    public KeyedValuesItemKey(Comparable<? extends Object> key) {
+    public KeyedValuesItemKey(Comparable<?> key) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
     }

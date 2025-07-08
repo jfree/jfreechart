@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,14 @@
  * -----------------
  * RingPlotTest.java
  * -----------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Nov-2004 : Version 1 (DG);
- * 12-Oct-2006 : Updated testEquals() (DG);
- * 28-Feb-2014 : Add tests for new fields (DG);
  * 
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +46,8 @@ import java.awt.Stroke;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -71,72 +63,72 @@ public class RingPlotTest {
 
         RingPlot plot1 = new RingPlot(null);
         RingPlot plot2 = new RingPlot(null);
-        assertTrue(plot1.equals(plot2));
-        assertTrue(plot2.equals(plot1));
+        assertEquals(plot1, plot2);
+        assertEquals(plot2, plot1);
 
         plot1.setCenterTextMode(CenterTextMode.FIXED);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setCenterTextMode(CenterTextMode.FIXED);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         plot1.setCenterText("ABC");
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setCenterText("ABC");
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
         
         plot1.setCenterTextColor(Color.RED);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setCenterTextColor(Color.RED);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
         
         plot1.setCenterTextFont(new Font(Font.SERIF, Font.PLAIN, 7));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setCenterTextFont(new Font(Font.SERIF, Font.PLAIN, 7));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         plot1.setCenterTextFormatter(new DecimalFormat("0.000"));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setCenterTextFormatter(new DecimalFormat("0.000"));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
         
         // separatorsVisible
         plot1.setSeparatorsVisible(false);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setSeparatorsVisible(false);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // separatorStroke
         Stroke s = new BasicStroke(1.1f);
         plot1.setSeparatorStroke(s);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setSeparatorStroke(s);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // separatorPaint
         plot1.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // innerSeparatorExtension
         plot1.setInnerSeparatorExtension(0.01);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setInnerSeparatorExtension(0.01);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // outerSeparatorExtension
         plot1.setOuterSeparatorExtension(0.02);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setOuterSeparatorExtension(0.02);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // sectionDepth
         plot1.setSectionDepth(0.12);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setSectionDepth(0.12);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -149,9 +141,9 @@ public class RingPlotTest {
                 3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
         RingPlot p2 = (RingPlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
     }
 
     /**
@@ -163,7 +155,7 @@ public class RingPlotTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
-        RingPlot p2 = (RingPlot) TestUtils.serialised(p1);
+        RingPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

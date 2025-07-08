@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,11 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (see patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -54,6 +56,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -121,10 +124,10 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation.
      *
-     * @param x0  the lower x-coordinate of the box (in data space).
-     * @param y0  the lower y-coordinate of the box (in data space).
-     * @param x1  the upper x-coordinate of the box (in data space).
-     * @param y1  the upper y-coordinate of the box (in data space).
+     * @param x0  the lower x-coordinate of the box (in data space, must be finite).
+     * @param y0  the lower y-coordinate of the box (in data space, must be finite).
+     * @param x1  the upper x-coordinate of the box (in data space, must be finite).
+     * @param y1  the upper y-coordinate of the box (in data space, must be finite).
      * @param stroke  the shape stroke ({@code null} permitted).
      * @param outlinePaint  the shape color ({@code null} permitted).
      * @param fillPaint  the paint used to fill the shape ({@code null}
@@ -133,6 +136,10 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     public XYBoxAnnotation(double x0, double y0, double x1, double y1,
                            Stroke stroke, Paint outlinePaint, Paint fillPaint) {
         super();
+        Args.requireFinite(x0, "x0");
+        Args.requireFinite(y0, "y0");
+        Args.requireFinite(x1, "x1");
+        Args.requireFinite(y1, "y1");
         this.x0 = x0;
         this.y0 = y0;
         this.x1 = x1;
@@ -140,6 +147,73 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         this.stroke = stroke;
         this.outlinePaint = outlinePaint;
         this.fillPaint = fillPaint;
+    }
+
+    /**
+     * Returns the x-coordinate for the bottom left corner of the box (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the bottom left corner of the box.
+     */
+    public double getX0() {
+        return x0;
+    }
+
+    /**
+     * Returns the y-coordinate for the bottom left corner of the box (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the bottom left corner of the box.
+     */
+    public double getY0() {
+        return y0;
+    }
+
+    /**
+     * Returns the x-coordinate for the top right corner of the box (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the top right corner of the box.
+     */
+    public double getX1() {
+        return x1;
+    }
+
+    /**
+     * Returns the y-coordinate for the top right corner of the box (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the top right corner of the box.
+     */
+    public double getY1() {
+        return y1;
+    }
+
+    /**
+     * Returns the stroke used for the box outline.
+     * 
+     * @return The stroke (possibly {@code null}). 
+     */
+    public Stroke getStroke() {
+        return stroke;
+    }
+
+    /**
+     * Returns the paint used for the box outline.
+     * 
+     * @return The paint (possibly {@code null}). 
+     */
+    public Paint getOutlinePaint() {
+        return outlinePaint;
+    }
+
+    /**
+     * Returns the paint used for the box fill.
+     * 
+     * @return The paint (possibly {@code null}). 
+     */
+    public Paint getFillPaint() {
+        return fillPaint;
     }
 
     /**
@@ -176,8 +250,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (orientation == PlotOrientation.HORIZONTAL) {
             box = new Rectangle2D.Double(transY0, transX1, transY1 - transY0,
                     transX0 - transX1);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             box = new Rectangle2D.Double(transX0, transY1, transX1 - transX0,
                     transY0 - transY1);
         }
@@ -193,7 +266,6 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
             g2.draw(box);
         }
         addEntity(info, box, rendererIndex, getToolTipText(), getURL());
-
     }
 
     /**
@@ -208,24 +280,24 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYBoxAnnotation)) {
             return false;
         }
         XYBoxAnnotation that = (XYBoxAnnotation) obj;
-        if (!(this.x0 == that.x0)) {
+        if (Double.doubleToLongBits(this.x0) !=
+            Double.doubleToLongBits(that.x0)) {
             return false;
         }
-        if (!(this.y0 == that.y0)) {
+        if (Double.doubleToLongBits(this.y0) != 
+            Double.doubleToLongBits(that.y0)) {
             return false;
         }
-        if (!(this.x1 == that.x1)) {
+        if (Double.doubleToLongBits(this.x1) !=
+            Double.doubleToLongBits(that.x1)) {
             return false;
         }
-        if (!(this.y1 == that.y1)) {
+        if (Double.doubleToLongBits(this.y1) !=
+            Double.doubleToLongBits(that.y1)) {
             return false;
         }
         if (!Objects.equals(this.stroke, that.stroke)) {
@@ -237,10 +309,27 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        // seem to be the same
-        return true;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYBoxAnnotation);
+    }
+    
     /**
      * Returns a hash code.
      *
@@ -248,17 +337,19 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x0);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.x1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y0);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.x0) ^
+                                 (Double.doubleToLongBits(this.x0) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.y0) ^
+                                 (Double.doubleToLongBits(this.y0) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.x1) ^
+                                 (Double.doubleToLongBits(this.x1) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.y1) ^
+                                (Double.doubleToLongBits(this.y1) >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.stroke);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.fillPaint);
+        return hash;
     }
 
     /**

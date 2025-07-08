@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Lesser General Public License as published by 
@@ -27,33 +27,21 @@
  * ------------------------------------
  * TimePeriodValuesCollectionTests.java
  * ------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Mar-2005 : Version 1 (DG);
- * 08-Mar-2007 : Added testGetSeries() (DG);
- * 11-Jun-2007 : Added tests for getDomainBounds() (DG);
- * 10-Jul-2007 : Fixed compile errors (DG);
- * 07-Apr-2008 : Added more checks to 
- *               testGetDomainBoundsWithInterval() (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link TimePeriodValuesCollection} class.
@@ -90,20 +78,20 @@ public class TimePeriodValuesCollectionTest {
         
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
         TimePeriodValuesCollection c2 = new TimePeriodValuesCollection();
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
         
         c1.setXPosition(TimePeriodAnchor.END);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setXPosition(TimePeriodAnchor.END);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
         
         TimePeriodValues v1 = new TimePeriodValues("Test");
         TimePeriodValues v2 = new TimePeriodValues("Test");
         
         c1.addSeries(v1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(v2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -112,8 +100,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testSerialization() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2 = (TimePeriodValuesCollection) 
-                TestUtils.serialised(c1);
+        TimePeriodValuesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

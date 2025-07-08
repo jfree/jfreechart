@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -------------------------------------
  * StandardCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -120,7 +120,31 @@ public class StandardCategoryToolTipGenerator
         if (!(obj instanceof StandardCategoryToolTipGenerator)) {
             return false;
         }
+        StandardCategoryToolTipGenerator that = (StandardCategoryToolTipGenerator) obj;
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof StandardCategoryToolTipGenerator);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        return hash;
     }
 
 }

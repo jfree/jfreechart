@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * -----------------------
  * DefaultFlowDataset.java
  * -----------------------
- * (C) Copyright 2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2022-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -156,11 +156,7 @@ public class DefaultFlowDataset<K extends Comparable<K>> extends AbstractDataset
      * @param value  the property value.
      */
     public void setNodeProperty(NodeKey<K> nodeKey, String propertyKey, Object value) {
-        Map<String, Object> props = this.nodeProperties.get(nodeKey);
-        if (props == null) {
-            props = new HashMap<>();
-            this.nodeProperties.put(nodeKey, props);
-        }
+        Map<String, Object> props = this.nodeProperties.computeIfAbsent(nodeKey, k -> new HashMap<>());
         props.put(propertyKey, value);
         fireDatasetChanged();
     }
@@ -232,13 +228,8 @@ public class DefaultFlowDataset<K extends Comparable<K>> extends AbstractDataset
      * @param propertyKey  the property key ({@code null} not permitted).
      * @param value  the property value.
      */
-
     public void setFlowProperty(FlowKey<K> flowKey, String propertyKey, Object value) {
-        Map<String, Object> props = this.flowProperties.get(flowKey);
-        if (props == null) {
-            props = new HashMap<>();
-            this.flowProperties.put(flowKey, props);
-        }
+        Map<String, Object> props = this.flowProperties.computeIfAbsent(flowKey, k -> new HashMap<>());
         props.put(propertyKey, value);
         fireDatasetChanged();
     }

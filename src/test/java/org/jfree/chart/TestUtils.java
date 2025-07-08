@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,17 @@
  * --------------
  * TestUtils.java
  * --------------
- * (C) Copyright 2007-2020, by Object Refinery Limited.
+ * (C) Copyright 2007-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Jun-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart;
 
+import java.awt.Font;
+import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,13 +45,78 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.text.AttributedString;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.ResourceBundle;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.MeterPlot;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.data.general.DefaultValueDataset;
 
 /**
  * Some utility methods for use by the testing code.
  */
 public class TestUtils {
+
+    public static Rectangle2D createR2D(boolean isRed) {
+        if (isRed) {
+            return new Rectangle2D.Double(0, 0, 1, 1);
+        } else {
+            return new Rectangle2D.Double(1, 1, 2, 2);
+        }
+    }
+    
+    public static ResourceBundle createRB(boolean isRed) {
+        if (isRed) {
+            String baseName = "org.jfree.data.resources.DataPackageResources";
+            return ResourceBundleWrapper.getBundle(baseName);
+        } else {
+            String baseName = "org.jfree.chart.LocalizationBundle";
+            return ResourceBundleWrapper.getBundle(baseName);
+        }
+    }
+    
+    public static AttributedString createAS(boolean isRed) {
+        if (isRed) {
+            AttributedString as = new AttributedString("aaa");
+            return as;
+        } else {
+            AttributedString as = new AttributedString("bbb");
+            return as;
+        }
+    }
+
+    public static Font createFont(boolean isRed) {
+        if (isRed) {
+            return new Font("SansSerif", Font.PLAIN, 12);
+        } else {
+            return new Font("Dialog", Font.BOLD, 10);
+        }
+    }
+
+    public static JFreeChart createJFC(boolean isRed) {
+        if (isRed) {
+            return new JFreeChart("abc", new MeterPlot(new DefaultValueDataset(44)));
+        } else {
+            return new JFreeChart("xyz", new MeterPlot(new DefaultValueDataset(55)));
+        }
+    }
+
+    public static Plot createPlot(boolean isRed) {
+        FakePlot plot = new FakePlot();
+        plot.setNotify(isRed);
+        return plot;
+    }
+
+    public static ValueAxis createValueAxis(boolean isRed) {
+        if (isRed) {
+            return new FakeValueAxis("Fake1", null);
+        } else {
+            return new FakeValueAxis("Fake2", null);
+        }
+    }
 
     /**
      * Returns {@code true} if the collections contains any object that

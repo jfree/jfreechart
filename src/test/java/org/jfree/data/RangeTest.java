@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,34 +27,40 @@
  * --------------
  * RangeTest.java
  * --------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Sergei Ivanov;
- *
- * Changes
- * -------
- * 14-Aug-2003 : Version 1 (DG);
- * 18-Dec-2007 : Additional tests from Sergei Ivanov (DG);
- * 08-Jan-2012 : Added test for combine() method (DG);
- * 23-Feb-2014 : Added isNaNRange() test (DG);
+ *                   Tracy Hiltbrand;
  * 
  */
 
 package org.jfree.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Range} class.
  */
 public class RangeTest {
+
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Range.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the constructor initializes all the required fields.
@@ -86,11 +92,11 @@ public class RangeTest {
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.5, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.0, 2.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         // a Range object cannot be equal to a different object type
         assertFalse(r1.equals(0.0));
@@ -293,7 +299,7 @@ public class RangeTest {
     @Test
     public void testSerialization() {
         Range r1 = new Range(25.0, 133.42);
-        Range r2 = (Range) TestUtils.serialised(r1);
+        Range r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,17 +27,10 @@
  * ---------------------------
  * RelativeDateFormatTest.java
  * ---------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Nov-2006 : Version 1 (DG);
- * 15-Feb-2008 : Added tests for negative dates (DG);
- * 01-Sep-2008 : Added a test for hours and minutes with leading zeroes (DG);
- * 06-Oct-2011 : Fixed bug 3418287 (DG);
  *
  */
 
@@ -49,10 +42,9 @@ import java.util.Date;
 import java.util.Locale;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link RelativeDateFormat} class.
@@ -129,54 +121,54 @@ public class RelativeDateFormatTest {
         assertEquals(df1, df2);
 
         df1.setBaseMillis(123L);
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setBaseMillis(123L);
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setDayFormatter(new DecimalFormat("0%"));
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setDayFormatter(new DecimalFormat("0%"));
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setDaySuffix("D");
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setDaySuffix("D");
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setHourFormatter(new DecimalFormat("0%"));
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setHourFormatter(new DecimalFormat("0%"));
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setHourSuffix("H");
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setHourSuffix("H");
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setMinuteFormatter(new DecimalFormat("0%"));
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setMinuteFormatter(new DecimalFormat("0%"));
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setMinuteSuffix("M");
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setMinuteSuffix("M");
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setSecondSuffix("S");
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setSecondSuffix("S");
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setShowZeroDays(!df1.getShowZeroDays());
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setShowZeroDays(!df2.getShowZeroDays());
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
 
         df1.setSecondFormatter(new DecimalFormat("0.0"));
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
         df2.setSecondFormatter(new DecimalFormat("0.0"));
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
     }
 
     /**
@@ -186,7 +178,7 @@ public class RelativeDateFormatTest {
     public void testHashCode() {
         RelativeDateFormat df1 = new RelativeDateFormat(123L);
         RelativeDateFormat df2 = new RelativeDateFormat(123L);
-        assertTrue(df1.equals(df2));
+        assertEquals(df1, df2);
         int h1 = df1.hashCode();
         int h2 = df2.hashCode();
         assertEquals(h1, h2);
@@ -202,13 +194,13 @@ public class RelativeDateFormatTest {
         df1.setSecondFormatter(nf);
         RelativeDateFormat df2 = null;
         df2 = (RelativeDateFormat) df1.clone();
-        assertTrue(df1 != df2);
-        assertTrue(df1.getClass() == df2.getClass());
-        assertTrue(df1.equals(df2));
+        assertNotSame(df1, df2);
+        assertSame(df1.getClass(), df2.getClass());
+        assertEquals(df1, df2);
 
         // is the clone independent
         nf.setMinimumFractionDigits(2);
-        assertFalse(df1.equals(df2));
+        assertNotEquals(df1, df2);
     }
 
     /**

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,18 +27,10 @@
  * -----------------
  * HistogramBin.java
  * -----------------
- * (C) Copyright 2003-2008, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-present, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 06-Jul-2003 : Version 1, contributed by Jelai Wang (DG);
- * 07-Jul-2003 : Changed package and added Javadocs (DG);
- * 01-Mar-2004 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

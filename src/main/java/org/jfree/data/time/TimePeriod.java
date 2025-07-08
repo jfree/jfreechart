@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * TimePeriod.java
  * ---------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -50,7 +50,7 @@ public interface TimePeriod extends Comparable {
      *
      * @return The start date/time (never {@code null}).
      */
-    public Date getStart();
+    Date getStart();
 
     /**
      * Returns the end date/time.  This will always be on or after the
@@ -58,6 +58,6 @@ public interface TimePeriod extends Comparable {
      *
      * @return The end date/time (never {@code null}).
      */
-    public Date getEnd();
+    Date getEnd();
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * ----------------
  * DatasetTags.java
  * ----------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1 (DG);
  *
  */
 
@@ -46,21 +42,21 @@ package org.jfree.data.xml;
 public interface DatasetTags {
 
     /** The 'PieDataset' element name. */
-    public static final String PIEDATASET_TAG = "PieDataset";
+    String PIEDATASET_TAG = "PieDataset";
 
     /** The 'CategoryDataset' element name. */
-    public static final String CATEGORYDATASET_TAG = "CategoryDataset";
+    String CATEGORYDATASET_TAG = "CategoryDataset";
 
     /** The 'Series' element name. */
-    public static final String SERIES_TAG = "Series";
+    String SERIES_TAG = "Series";
 
     /** The 'Item' element name. */
-    public static final String ITEM_TAG = "Item";
+    String ITEM_TAG = "Item";
 
     /** The 'Key' element name. */
-    public static final String KEY_TAG = "Key";
+    String KEY_TAG = "Key";
 
     /** The 'Value' element name. */
-    public static final String VALUE_TAG = "Value";
+    String VALUE_TAG = "Value";
 
 }

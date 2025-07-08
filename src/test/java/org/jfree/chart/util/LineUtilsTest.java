@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * ------------------
  * LineUtilsTest.java
  * ------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Nov-2008 : Version 1 (DG);
  *
  */
 
@@ -119,4 +115,27 @@ public class LineUtilsTest {
         assertTrue(lineEquals(line, 1.5, 1.5, 2.0, 1.25));
     }
 
+    /**
+     * Tests that a line with Double.NaN coordinates is handled gracefully in 
+     * the clipLine() method (added in response to bug#223).
+     */
+    @Test
+    public void testClipLineWithNaN() {
+        Rectangle2D rect = new Rectangle2D.Double(1.0, 1.0, 1.0, 1.0);
+        Line2D line = new Line2D.Double(Double.NaN, 2, 3, 4);
+        assertFalse(LineUtils.clipLine(line, rect));
+        assertTrue(lineEquals(line, Double.NaN, 2, 3, 4));
+
+        line = new Line2D.Double(1, Double.NaN, 3, 4);
+        assertFalse(LineUtils.clipLine(line, rect));
+        assertTrue(lineEquals(line, 1, Double.NaN, 3, 4));
+
+        line = new Line2D.Double(1, 2, Double.NaN, 4);
+        assertFalse(LineUtils.clipLine(line, rect));
+        assertTrue(lineEquals(line, 1, 2, Double.NaN, 4));
+
+        line = new Line2D.Double(1, 2, 3, Double.NaN);
+        assertFalse(LineUtils.clipLine(line, rect));
+        assertTrue(lineEquals(line, 1, 2, 3, Double.NaN));
+    }
 }

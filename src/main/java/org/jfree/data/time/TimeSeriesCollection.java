@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,39 +27,32 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
 
 package org.jfree.data.time;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
-
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.Series;
-import org.jfree.data.xy.AbstractIntervalXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYDomainInfo;
-import org.jfree.data.xy.XYRangeInfo;
+import org.jfree.data.xy.*;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * A collection of time series objects.  This class implements the
@@ -497,7 +490,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the minimum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The minimum value.
@@ -515,7 +508,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the maximum x-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The maximum value.
@@ -533,7 +526,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the range of the values in this dataset's domain.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         x-interval is taken into account.
      *
      * @return The range.
@@ -723,6 +716,34 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         clone.data = (List) ObjectUtils.deepClone(this.data);
         clone.workingCalendar = (Calendar) this.workingCalendar.clone();
         return clone;
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        for (Object item : this.data) {
+            TimeSeries series = (TimeSeries) item;
+            series.addChangeListener(this);
+        }
     }
 
 }

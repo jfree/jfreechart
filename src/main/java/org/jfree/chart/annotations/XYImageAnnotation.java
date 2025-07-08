@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,12 @@
  * ----------------------
  * XYImageAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Mike Harris;
  *                   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -86,8 +87,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Creates a new annotation to be displayed at the specified (x, y)
      * location.
      *
-     * @param x  the x-coordinate (in data space).
-     * @param y  the y-coordinate (in data space).
+     * @param x  the x-coordinate (in data space, must be finite).
+     * @param y  the y-coordinate (in data space, must be finite).
      * @param image  the image ({@code null} not permitted).
      */
     public XYImageAnnotation(double x, double y, Image image) {
@@ -108,6 +109,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         super();
         Args.nullNotPermitted(image, "image");
         Args.nullNotPermitted(anchor, "anchor");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         this.x = x;
         this.y = y;
         this.image = image;
@@ -186,8 +189,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (orientation == PlotOrientation.HORIZONTAL) {
             xx = j2DY;
             yy = j2DX;
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             xx = j2DX;
             yy = j2DY;
         }
@@ -220,28 +222,43 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYImageAnnotation)) {
             return false;
         }
         XYImageAnnotation that = (XYImageAnnotation) obj;
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
         if (!Objects.equals(this.image, that.image)) {
             return false;
         }
-        if (!this.anchor.equals(that.anchor)) {
+        if (this.anchor != that.anchor) {
             return false;
         }
-        // seems to be the same...
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYImageAnnotation);
     }
 
     /**
@@ -251,7 +268,14 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        return this.image.hashCode();
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.image);
+        hash = 41 * hash + Objects.hashCode(this.anchor);
+        return hash;
     }
 
     /**

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * --------------------------
  * OutlierListCollection.java
  * --------------------------
- * (C) Copyright 2003-2021, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -63,7 +63,7 @@ public class OutlierListCollection {
     private boolean highFarOut = false;
 
     /**
-     * A flag that indicates whether or not the collection contains low far
+     * A flag that indicates whether the collection contains low far
      * out values.
      */
     private boolean lowFarOut = false;

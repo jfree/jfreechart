@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,14 @@
  * -----------------------------------------
  * DefaultMultiValueCategoryDatasetTest.java
  * -----------------------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Sep-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.statistics;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +43,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultMultiValueCategoryDataset} class.
@@ -112,16 +106,16 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testGetRowCount() {
         DefaultMultiValueCategoryDataset d
                 = new DefaultMultiValueCategoryDataset();
-        assertTrue(d.getRowCount() == 0);
+        assertEquals(0, d.getRowCount());
         List<Number> values = new ArrayList<>();
         d.add(values, "R1", "C1");
-        assertTrue(d.getRowCount() == 1);
+        assertEquals(1, d.getRowCount());
 
         d.add(values, "R2", "C1");
-        assertTrue(d.getRowCount() == 2);
+        assertEquals(2, d.getRowCount());
 
         d.add(values, "R2", "C1");
-        assertTrue(d.getRowCount() == 2);
+        assertEquals(2, d.getRowCount());
     }
 
     /**
@@ -131,17 +125,17 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testGetColumnCount() {
         DefaultMultiValueCategoryDataset d
                 = new DefaultMultiValueCategoryDataset();
-        assertTrue(d.getColumnCount() == 0);
+        assertEquals(0, d.getColumnCount());
 
         List<Number> values = new ArrayList<>();
         d.add(values, "R1", "C1");
-        assertTrue(d.getColumnCount() == 1);
+        assertEquals(1, d.getColumnCount());
 
         d.add(values, "R1", "C2");
-        assertTrue(d.getColumnCount() == 2);
+        assertEquals(2, d.getColumnCount());
 
         d.add(values, "R1", "C2");
-        assertTrue(d.getColumnCount() == 2);
+        assertEquals(2, d.getColumnCount());
 
     }
 
@@ -154,26 +148,26 @@ public class DefaultMultiValueCategoryDatasetTest {
                 = new DefaultMultiValueCategoryDataset();
         DefaultMultiValueCategoryDataset d2
                 = new DefaultMultiValueCategoryDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         List<Number> values = new ArrayList<>();
         d1.add(values, "R1", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(values, "R1", "C1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         values.add(99);
         d1.add(values, "R1", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(values, "R1", "C1");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         values.add(99);
         d1.add(values, "R1", "C2");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(values, "R1", "C2");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -183,8 +177,7 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testSerialization() {
         DefaultMultiValueCategoryDataset d1
                 = new DefaultMultiValueCategoryDataset();
-        DefaultMultiValueCategoryDataset d2 = (DefaultMultiValueCategoryDataset)
-                TestUtils.serialised(d1);
+        DefaultMultiValueCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -229,26 +222,26 @@ public class DefaultMultiValueCategoryDatasetTest {
                 = new DefaultMultiValueCategoryDataset();
         DefaultMultiValueCategoryDataset d2 
                 = (DefaultMultiValueCategoryDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         List<Integer> values = new ArrayList<>();
         values.add(99);
         d1.add(values, "R1", "C1");
         d2 = (DefaultMultiValueCategoryDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         List<Integer> values2 = new ArrayList<>();
         values2.add(111);
         d1.add(values2, "R2", "C2");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.add(values2, "R2", "C2");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
 }

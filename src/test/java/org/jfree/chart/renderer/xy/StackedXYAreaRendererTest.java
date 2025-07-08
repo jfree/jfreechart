@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,14 @@
  * ------------------------------
  * StackedXYAreaRendererTest.java
  * ------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 06-Jan-2005 : Renamed StackedAreaXYRendererTests -->
- *               StackedXYAreaRendererTests, improved testEquals() method,
- *               added check for auto range calculation (DG);
- * 10-Nov-2006 : Added testBug1593156() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -68,6 +54,8 @@ import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link StackedXYAreaRenderer} class.
  */
@@ -85,16 +73,16 @@ public class StackedXYAreaRendererTest {
 
         r1.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.GREEN));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.GREEN));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         Stroke s = new BasicStroke(1.23f);
         r1.setShapeStroke(s);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setShapeStroke(s);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -104,7 +92,7 @@ public class StackedXYAreaRendererTest {
     public void testHashcode() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = new StackedXYAreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -117,9 +105,9 @@ public class StackedXYAreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = (StackedXYAreaRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -139,8 +127,7 @@ public class StackedXYAreaRendererTest {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         r1.setShapePaint(Color.RED);
         r1.setShapeStroke(new BasicStroke(1.23f));
-        StackedXYAreaRenderer r2 = (StackedXYAreaRenderer) 
-                TestUtils.serialised(r1);
+        StackedXYAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2021, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Bryan Scott;
  *                   Nick Guenther;
  *
@@ -899,7 +899,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * the oldest record in the series does not exceed maximumItemAge time
      * periods.  Oldest items will be removed if required.
      *
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
+     * @param notify  controls whether a {@link SeriesChangeEvent} is
      *                sent to registered listeners IF any items are removed.
      */
     public void removeAgedItems(boolean notify) {
@@ -929,7 +929,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param latest  the time to be compared against when aging data
      *     (specified in milliseconds).
-     * @param notify  controls whether or not a {@link SeriesChangeEvent} is
+     * @param notify  controls whether a {@link SeriesChangeEvent} is
      *                sent to registered listeners IF any items are removed.
      */
     public void removeAgedItems(long latest, boolean notify) {

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,33 +27,22 @@
  * -------------------------
  * HistogramDatasetTest.java
  * -------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
- * 08-Jun-2005 : Added test for getSeriesKey(int) bug (DG);
- * 03-Aug-2006 : Added testAddSeries() and testBinBoundaries() method (DG);
- * 22-May-2008 : Added testAddSeries2() and enhanced testCloning() (DG);
- * 08-Dec-2009 : Added test2902842() for patch at SourceForge (DG);
  *
  */
 
 package org.jfree.data.statistics;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HistogramDataset} class.
@@ -88,13 +77,13 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         HistogramDataset d2 = new HistogramDataset();
         d2.addSeries("Series 1", values, 5);
 
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -106,15 +95,15 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         HistogramDataset d1 = new HistogramDataset();
         d1.addSeries("Series 1", values, 5);
         HistogramDataset d2 = (HistogramDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // simple check for independence
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -125,14 +114,14 @@ public class HistogramDatasetTest implements DatasetChangeListener {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
         d1.addSeries("Series 1", values, 5);
-        HistogramDataset d2 = (HistogramDataset) TestUtils.serialised(d1);
+        HistogramDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // simple check for independence
         d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

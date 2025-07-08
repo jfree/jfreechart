@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,22 +27,14 @@
  * ----------------------
  * MeterIntervalTest.java
  * ----------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Mar-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -51,6 +43,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MeterInterval} class.
@@ -71,19 +65,19 @@ public class MeterIntervalTest {
             "Label 1", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new MeterInterval(
             "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MeterInterval(
             "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 
@@ -102,7 +96,7 @@ public class MeterIntervalTest {
     @Test
     public void testSerialization() {
         MeterInterval m1 = new MeterInterval("X", new Range(1.0, 2.0));
-        MeterInterval m2 = (MeterInterval) TestUtils.serialised(m1);
+        MeterInterval m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

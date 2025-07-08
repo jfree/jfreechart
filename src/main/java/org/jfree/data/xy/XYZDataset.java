@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * XYZDataset.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -50,7 +50,7 @@ public interface XYZDataset extends XYDataset {
      *
      * @return The z-value (possibly {@code null}).
      */
-    public Number getZ(int series, int item);
+    Number getZ(int series, int item);
 
     /**
      * Returns the z-value (as a double primitive) for an item within a series.
@@ -60,6 +60,6 @@ public interface XYZDataset extends XYDataset {
      *
      * @return The z-value.
      */
-    public double getZValue(int series, int item);
+    double getZValue(int series, int item);
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,19 @@
  * ------------------------------
  * PolynomialFunction2DTests.java
  * ------------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2022, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-May-2009 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.function;
 
-import java.util.Arrays;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PolynomialFunction2D} class.
@@ -59,7 +53,7 @@ public class PolynomialFunction2DTest {
     public void testConstructor() {
         PolynomialFunction2D f = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
-        assertTrue(Arrays.equals(new double[] {1.0, 2.0}, f.getCoefficients()));
+        assertArrayEquals(new double[]{1.0, 2.0}, f.getCoefficients());
 
         boolean pass = false;
         try {
@@ -79,12 +73,12 @@ public class PolynomialFunction2DTest {
         PolynomialFunction2D f = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
         double[] c = f.getCoefficients();
-        assertTrue(Arrays.equals(new double[] {1.0, 2.0}, c));
+        assertArrayEquals(new double[]{1.0, 2.0}, c);
 
         // make sure that modifying the returned array doesn't change the
         // function
         c[0] = 99.9;
-        assertTrue(Arrays.equals(new double[] {1.0, 2.0}, f.getCoefficients()));
+        assertArrayEquals(new double[]{1.0, 2.0}, f.getCoefficients());
     }
 
     /**
@@ -106,11 +100,11 @@ public class PolynomialFunction2DTest {
                 2.0});
         PolynomialFunction2D f2 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
         f1 = new PolynomialFunction2D(new double[] {2.0, 3.0});
-        assertFalse(f1.equals(f2));
+        assertNotEquals(f1, f2);
         f2 = new PolynomialFunction2D(new double[] {2.0, 3.0});
-        assertTrue(f1.equals(f2));
+        assertEquals(f1, f2);
     }
 
     /**
@@ -120,8 +114,7 @@ public class PolynomialFunction2DTest {
     public void testSerialization() {
         PolynomialFunction2D f1 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
-        PolynomialFunction2D f2 = (PolynomialFunction2D) 
-                TestUtils.serialised(f1);
+        PolynomialFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

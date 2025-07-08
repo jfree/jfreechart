@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------
  * BarPainter.java
  * ---------------
- * (C) Copyright 2008-2021, by Object Refinery Limited.
+ * (C) Copyright 2008-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -65,8 +65,8 @@ public interface BarPainter {
      * @param bar  the bounds for the bar.
      * @param base  the base of the bar.
      */
-    public void paintBar(Graphics2D g2, BarRenderer renderer,
-            int row, int column, RectangularShape bar, RectangleEdge base);
+    void paintBar(Graphics2D g2, BarRenderer renderer,
+                  int row, int column, RectangularShape bar, RectangleEdge base);
 
     /**
      * Paints the shadow for a single bar on behalf of a renderer.
@@ -79,8 +79,8 @@ public interface BarPainter {
      * @param base  the base of the bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
-    public void paintBarShadow(Graphics2D g2, BarRenderer renderer,
-            int row, int column, RectangularShape bar, RectangleEdge base,
-            boolean pegShadow);
+    void paintBarShadow(Graphics2D g2, BarRenderer renderer,
+                        int row, int column, RectangularShape bar, RectangleEdge base,
+                        boolean pegShadow);
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * -------------------------------
  * SlidingCategoryDatasetTest.java
  * -------------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-May-2008 : Version 1 (DG);
- * 15-Mar-2009 : Added testGetColumnKeys() (DG);
  *
  */
 
@@ -47,9 +42,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SlidingCategoryDataset} class.
@@ -69,22 +63,22 @@ public class SlidingCategoryDatasetTest {
         u2.addValue(1.0, "R1", "C1");
         u2.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset d2 = new SlidingCategoryDataset(u2, 0, 5);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setFirstCategoryIndex(1);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setFirstCategoryIndex(1);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         d1.setMaximumCategoryCount(99);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setMaximumCategoryCount(99);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
 
         u1.addValue(3.0, "R1", "C3");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         u2.addValue(3.0, "R1", "C3");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -100,17 +94,17 @@ public class SlidingCategoryDatasetTest {
         SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
         SlidingCategoryDataset d2;
         d2 = (SlidingCategoryDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // basic check for independence
         u1.addValue(3.0, "R1", "C3");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         DefaultCategoryDataset u2
                 = (DefaultCategoryDataset) d2.getUnderlyingDataset();
         u2.addValue(3.0, "R1", "C3");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -122,17 +116,16 @@ public class SlidingCategoryDatasetTest {
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
-        SlidingCategoryDataset d2 = (SlidingCategoryDataset) 
-                TestUtils.serialised(d1);
+        SlidingCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence
         u1.addValue(3.0, "R1", "C3");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         DefaultCategoryDataset u2
                 = (DefaultCategoryDataset) d2.getUnderlyingDataset();
         u2.addValue(3.0, "R1", "C3");
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

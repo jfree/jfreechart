@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,19 @@
  * -----------------------
  * KeyToGroupMapTests.java
  * -----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link KeyToGroupMap} class.
@@ -209,13 +204,13 @@ public class KeyToGroupMapTest {
     public void testEquals() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
         KeyToGroupMap m2 = new KeyToGroupMap("Default Group");
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1.mapKeyToGroup("K1", "G1");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.mapKeyToGroup("K1", "G1");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -226,15 +221,15 @@ public class KeyToGroupMapTest {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
         m1.mapKeyToGroup("K1", "G1");
         KeyToGroupMap m2 = (KeyToGroupMap) m1.clone();
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
 
         // a small check for independence
         m1.mapKeyToGroup("K1", "G2");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.mapKeyToGroup("K1", "G2");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -243,7 +238,7 @@ public class KeyToGroupMapTest {
     @Test
     public void testSerialization() {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
-        KeyToGroupMap m2 = (KeyToGroupMap) TestUtils.serialised(m1);
+        KeyToGroupMap m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

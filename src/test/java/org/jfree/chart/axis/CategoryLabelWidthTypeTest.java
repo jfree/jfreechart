@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,24 +27,19 @@
  * -------------------------------
  * CategoryLabelWidthTypeTest.java
  * -------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryLabelWidthType} class.
@@ -69,7 +64,7 @@ public class CategoryLabelWidthTypeTest {
     public void testHashCode() {
         CategoryLabelWidthType a1 = CategoryLabelWidthType.CATEGORY;
         CategoryLabelWidthType a2 = CategoryLabelWidthType.CATEGORY;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -81,9 +76,9 @@ public class CategoryLabelWidthTypeTest {
     @Test
     public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
-        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtils.serialised(w1);
+        CategoryLabelWidthType w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
-        assertTrue(w1 == w2);
+        assertSame(w1, w2);
     }
 
 }

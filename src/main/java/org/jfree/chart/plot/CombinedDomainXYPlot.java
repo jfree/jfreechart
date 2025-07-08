@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2021, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-present, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Anthony Boulestreau;
  *                   David Basten;
  *                   Kevin Frechette (for ISTI);
@@ -105,7 +105,7 @@ public class CombinedDomainXYPlot extends XYPlot
               domainAxis,
               null,        // no range axis
               null);       // no renderer
-        this.subplots = new java.util.ArrayList<XYPlot>();
+        this.subplots = new java.util.ArrayList<>();
     }
 
     /**
@@ -159,7 +159,7 @@ public class CombinedDomainXYPlot extends XYPlot
     }
     
     /**
-     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * Sets the flag, on each of the subplots, that controls whether the 
      * range is pannable.
      * 
      * @param pannable  the new flag value. 
@@ -308,7 +308,7 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<XYPlot> getSubplots() {
         return Collections.unmodifiableList(this.subplots);
     }
 

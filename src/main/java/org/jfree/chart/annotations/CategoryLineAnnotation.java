@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,11 @@
  * ---------------------------
  * CategoryLineAnnotation.java
  * ---------------------------
- * (C) Copyright 2005-2021, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -96,9 +97,9 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * and (category2, value2).
      *
      * @param category1  the category ({@code null} not permitted).
-     * @param value1  the value.
+     * @param value1  the value (must be finite).
      * @param category2  the category ({@code null} not permitted).
-     * @param value2  the value.
+     * @param value2  the value (must be finite).
      * @param paint  the line color ({@code null} not permitted).
      * @param stroke  the line stroke ({@code null} not permitted).
      */
@@ -107,7 +108,9 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                                   Paint paint, Stroke stroke) {
         super();
         Args.nullNotPermitted(category1, "category1");
+        Args.requireFinite(value1, "value1");
         Args.nullNotPermitted(category2, "category2");
+        Args.requireFinite(value2, "value2");
         Args.nullNotPermitted(paint, "paint");
         Args.nullNotPermitted(stroke, "stroke");
         this.category1 = category1;
@@ -158,11 +161,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the y-value for the start of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param value  the value.
+     * @param value  the value (must be finite).
      *
      * @see #getValue1()
      */
     public void setValue1(double value) {
+        Args.requireFinite(value, "value");
         this.value1 = value;
         fireAnnotationChanged();
     }
@@ -207,11 +211,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the y-value for the end of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param value  the value.
+     * @param value  the value (must be finite).
      *
      * @see #getValue2()
      */
     public void setValue2(double value) {
+        Args.requireFinite(value, "value");
         this.value2 = value;
         fireAnnotationChanged();
     }
@@ -269,11 +274,11 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Draws the annotation.
      *
-     * @param g2  the graphics device.
-     * @param plot  the plot.
-     * @param dataArea  the data area.
-     * @param domainAxis  the domain axis.
-     * @param rangeAxis  the range axis.
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param domainAxis  the domain axis ({@code null} not permitted).
+     * @param rangeAxis  the range axis ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea,
@@ -303,8 +308,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                 CategoryAnchor.MIDDLE, catIndex2, catCount, dataArea,
                 domainEdge);
             lineX2 = rangeAxis.valueToJava2D(this.value2, dataArea, rangeEdge);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             lineX1 = domainAxis.getCategoryJava2DCoordinate(
                 CategoryAnchor.MIDDLE, catIndex1, catCount, dataArea,
                 domainEdge);
@@ -335,16 +339,18 @@ public class CategoryLineAnnotation extends AbstractAnnotation
             return false;
         }
         CategoryLineAnnotation that = (CategoryLineAnnotation) obj;
-        if (!this.category1.equals(that.getCategory1())) {
+        if (!Objects.equals(this.category1, that.category1)) {
             return false;
         }
-        if (this.value1 != that.getValue1()) {
+        if (Double.doubleToLongBits(this.value1) !=
+            Double.doubleToLongBits(that.value1)) {
             return false;
         }
-        if (!this.category2.equals(that.getCategory2())) {
+        if (!Objects.equals(this.category2, that.category2)) {
             return false;
         }
-        if (this.value2 != that.getValue2()) {
+        if (Double.doubleToLongBits(this.value2) !=
+            Double.doubleToLongBits(that.value2)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -353,9 +359,28 @@ public class CategoryLineAnnotation extends AbstractAnnotation
         if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
-        return true;
+        // fix the "equals not symmetric" problem
+        if (!that.canEqual(this)) {
+            return false;
+        }
+
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryLineAnnotation);
+    }
+    
     /**
      * Returns a hash code for this instance.
      *
@@ -363,15 +388,15 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + this.category1.hashCode();
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.category1);
         long temp = Double.doubleToLongBits(this.value1);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + this.category2.hashCode();
+        result = 37 * result + Objects.hashCode(this.category2);
         temp = Double.doubleToLongBits(this.value2);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
-        result = 37 * result + this.stroke.hashCode();
+        result = 37 * result + Objects.hashCode(this.stroke);
         return result;
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,21 @@
  * ---------------------------
  * GradientBarPainterTest.java
  * ---------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jun-2008 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link GradientBarPainter} class.
@@ -64,19 +58,19 @@ public class GradientBarPainterTest {
         assertEquals(p1, p2);
 
         p1 = new GradientBarPainter(0.11, 0.2, 0.3);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientBarPainter(0.11, 0.2, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new GradientBarPainter(0.11, 0.22, 0.3);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientBarPainter(0.11, 0.22, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new GradientBarPainter(0.11, 0.22, 0.33);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new GradientBarPainter(0.11, 0.22, 0.33);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -86,7 +80,7 @@ public class GradientBarPainterTest {
     public void testHashcode() {
         GradientBarPainter p1 = new GradientBarPainter(0.1, 0.2, 0.3);
         GradientBarPainter p2 = new GradientBarPainter(0.1, 0.2, 0.3);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
         assertEquals(h1, h2);
@@ -109,7 +103,7 @@ public class GradientBarPainterTest {
     @Test
     public void testSerialization() {
         GradientBarPainter p1 = new GradientBarPainter(0.1, 0.2, 0.3);
-        GradientBarPainter p2 = (GradientBarPainter) TestUtils.serialised(p1);
+        GradientBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

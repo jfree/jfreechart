@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,35 +27,45 @@
  * -------------------
  * ColorBlockTest.java
  * -------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Mar-2007 : Version 1 (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.geom.Rectangle2D;
-
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ColorBlock} class.
  */
 public class ColorBlockTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ColorBlock.class)
+            .withPrefabValues(Rectangle2D.class,
+                              TestUtils.createR2D(true),
+                              TestUtils.createR2D(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -64,23 +74,23 @@ public class ColorBlockTest {
     public void testEquals() {
         ColorBlock b1 = new ColorBlock(Color.RED, 1.0, 2.0);
         ColorBlock b2 = new ColorBlock(Color.RED, 1.0, 2.0);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.0, 2.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.0, 2.0);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.1, 2.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.1, 2.0);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new ColorBlock(Color.BLUE, 1.1, 2.2);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new ColorBlock(Color.BLUE, 1.1, 2.2);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -101,15 +111,15 @@ public class ColorBlockTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
 
         // check independence
         bounds1.setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setBounds(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -120,7 +130,7 @@ public class ColorBlockTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE);
         ColorBlock b1 = new ColorBlock(gp, 1.0, 2.0);
-        ColorBlock b2 = (ColorBlock) TestUtils.serialised(b1);
+        ColorBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

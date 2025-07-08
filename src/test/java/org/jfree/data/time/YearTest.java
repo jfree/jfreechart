@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,30 +27,14 @@
  * -------------
  * YearTest.java
  * -------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2001 : Version 1 (DG);
- * 19-Mar-2002 : Added tests for constructor that uses java.util.Date to ensure
- *               it is consistent with the getStart() and getEnd() methods (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 05-Oct-2006 : Added some new tests (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
 package org.jfree.data.time;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.ZoneOffset;
 import java.util.Calendar;
@@ -62,6 +46,8 @@ import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Year} class.
@@ -76,7 +62,7 @@ public class YearTest {
     @Test
     public void testEqualsSelf() {
         Year year = new Year();
-        assertTrue(year.equals(year));
+        assertEquals(year, year);
     }
 
     /**
@@ -86,12 +72,12 @@ public class YearTest {
     public void testEquals() {
         Year year1 = new Year(2002);
         Year year2 = new Year(2002);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
 
         year1 = new Year(1999);
-        assertFalse(year1.equals(year2));
+        assertNotEquals(year1, year2);
         year2 = new Year(1999);
-        assertTrue(year1.equals(year2));
+        assertEquals(year1, year2);
     }
 
     /**
@@ -297,7 +283,7 @@ public class YearTest {
     @Test
     public void testSerialization() {
         Year y1 = new Year(1999);
-        Year y2 = (Year) TestUtils.serialised(y1);
+        Year y2 = TestUtils.serialised(y1);
         assertEquals(y1, y2);
     }
 
@@ -317,7 +303,7 @@ public class YearTest {
     public void testHashcode() {
         Year y1 = new Year(1988);
         Year y2 = new Year(1988);
-        assertTrue(y1.equals(y2));
+        assertEquals(y1, y2);
         int h1 = y1.hashCode();
         int h2 = y2.hashCode();
         assertEquals(h1, h2);

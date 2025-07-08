@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,46 +27,11 @@
  * ------------------
  * JDBCXYDataset.java
  * ------------------
- * (C) Copyright 2002-2009, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-present, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Eric Alexander;
- *
- *
- * Changes
- * -------
- * 14-Mar-2002 : Version 1 contributed by Bryan Scott (DG);
- * 19-Apr-2002 : Updated executeQuery, to close cursors and to improve support
- *               for types.
- * 26-Apr-2002 : Renamed JdbcXYDataset to better fit in with the existing data
- *               source conventions.
- * 26-Apr-2002 : Changed to extend AbstractDataset.
- * 13-Aug-2002 : Updated Javadoc comments and imports (DG);
- * 18-Sep-2002 : Updated to support BIGINT (BS);
- * 21-Jan-2003 : Renamed JdbcXYDataset --> JDBCXYDataset (DG);
- * 01-Jul-2003 : Added support to query whether a timeseries (BS);
- * 30-Jul-2003 : Added empty contructor and executeQuery(connection,string)
- *               method (BS);
- * 24-Sep-2003 : Added a check to ensure at least two valid columns are
- *               returned by the query in executeQuery as suggest in online
- *               forum by anonymous (BS);
- * 02-Dec-2003 : Throwing exceptions allows to handle errors, removed default
- *               constructor, as without a connection, a query can never be
- *               executed.
- * 16-Mar-2004 : Added check for null values (EA);
- * 05-May-2004 : Now extends AbstractXYDataset (DG);
- * 21-May-2004 : Implemented TableXYDataset, added support for SMALLINT and
- *               fixed bug in code that determines the min and max values (see
- *               bug id 938138) (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 17-Oct-2006 : Deprecated unused methods - see bug 1578293 (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -95,7 +60,7 @@ import org.jfree.data.xy.XYDataset;
  * the string sql query.  The sql query must return at least two columns.
  * The first column will be the x-axis and remaining columns y-axis values.
  * executeQuery can be called a number of times.
- *
+ * <p>
  * The database connection is read-only and no write back facility exists.
  */
 public class JDBCXYDataset extends AbstractXYDataset
@@ -188,7 +153,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Sets a flag that indicates whether or not the data represents a time
+     * Sets a flag that indicates whether the data represents a time
      * series.
      *
      * @param timeSeries  the new value of the flag.
@@ -201,7 +166,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      * ExecuteQuery will attempt execute the query passed to it against the
      * existing database connection.  If no connection exists then no action
      * is taken.
-     *
+     * <p>
      * The results from the query are extracted and cached locally, thus
      * applying an upper limit on how many rows can be retrieved successfully.
      *
@@ -217,7 +182,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      * ExecuteQuery will attempt execute the query passed to it against the
      * provided database connection.  If connection is null then no action is
      * taken.
-     *
+     * <p>
      * The results from the query are extracted and cached locally, thus
      * applying an upper limit on how many rows can be retrieved successfully.
      *
@@ -522,7 +487,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
@@ -535,7 +500,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
@@ -548,7 +513,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range.

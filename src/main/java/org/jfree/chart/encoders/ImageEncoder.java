@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,15 +27,10 @@
  * -----------------
  * ImageEncoder.java
  * -----------------
- * (C) Copyright 2004-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -59,7 +54,7 @@ public interface ImageEncoder {
      *
      * @throws IOException if there is an IO problem.
      */
-    public byte[] encode(BufferedImage bufferedImage) throws IOException;
+    byte[] encode(BufferedImage bufferedImage) throws IOException;
 
     /**
      * Encodes an image in a particular format and writes it to an OutputStream.
@@ -68,7 +63,7 @@ public interface ImageEncoder {
      * @param outputStream  The OutputStream to write the encoded image to.
      * @throws IOException if there is an IO problem.
      */
-    public void encode(BufferedImage bufferedImage, OutputStream outputStream)
+    void encode(BufferedImage bufferedImage, OutputStream outputStream)
         throws IOException;
 
     /**
@@ -76,7 +71,7 @@ public interface ImageEncoder {
      *
      * @return A float representing the quality.
      */
-    public float getQuality();
+    float getQuality();
 
     /**
      * Set the quality of the image encoding (not supported by all
@@ -84,14 +79,14 @@ public interface ImageEncoder {
      *
      * @param quality  A float representing the quality.
      */
-    public void setQuality(float quality);
+    void setQuality(float quality);
 
     /**
      * Get whether the encoder should encode alpha transparency.
      *
      * @return Whether the encoder is encoding alpha transparency.
      */
-    public boolean isEncodingAlpha();
+    boolean isEncodingAlpha();
 
     /**
      * Set whether the encoder should encode alpha transparency (not
@@ -100,6 +95,6 @@ public interface ImageEncoder {
      * @param encodingAlpha  Whether the encoder should encode alpha
      *                       transparency.
      */
-    public void setEncodingAlpha(boolean encodingAlpha);
+    void setEncodingAlpha(boolean encodingAlpha);
 
 }

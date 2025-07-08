@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,14 @@
  * -----------------------
  * WaterfallChartTest.java
  * -----------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -58,6 +51,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for a waterfall chart.
@@ -106,7 +101,7 @@ public class WaterfallChartTest {
                 = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
-        assertTrue(tt2 == tt);
+        assertSame(tt2, tt);
     }
 
     /**
@@ -121,7 +116,7 @@ public class WaterfallChartTest {
                 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
-        assertTrue(url2 == url1);
+        assertSame(url2, url1);
     }
 
     /**

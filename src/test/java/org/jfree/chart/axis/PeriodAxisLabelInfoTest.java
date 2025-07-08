@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,14 @@
  * ----------------------------
  * PeriodAxisLabelInfoTest.java
  * ----------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jun-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
  *
  */
 
 package org.jfree.chart.axis;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -64,6 +55,8 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link PeriodAxisLabelInfo} class.
  */
@@ -78,8 +71,8 @@ public class PeriodAxisLabelInfoTest {
                 new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        assertTrue(info1.equals(info2));
-        assertTrue(info2.equals(info1));
+        assertEquals(info1, info2);
+        assertEquals(info2, info1);
 
         Class c1 = Day.class;
         Class c2 = Month.class;
@@ -100,44 +93,44 @@ public class PeriodAxisLabelInfoTest {
 
         info1 = new PeriodAxisLabelInfo(c2, df1, sp1, lf1, lp1, b1, s1, dp1);
         info2 = new PeriodAxisLabelInfo(c1, df1, sp1, lf1, lp1, b1, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df1, sp1, lf1, lp1, b1, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp1, lf1, lp1, b1, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp1, lf1, lp1, b1, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf1, lp1, b1, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf1, lp1, b1, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp1, b1, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp1, b1, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b1, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b1, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s1, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s1, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s2, dp1);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s2, dp1);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
         info1 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s2, dp2);
-        assertFalse(info1.equals(info2));
+        assertNotEquals(info1, info2);
         info2 = new PeriodAxisLabelInfo(c2, df2, sp2, lf2, lp2, b2, s2, dp2);
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
 
     }
 
@@ -150,7 +143,7 @@ public class PeriodAxisLabelInfoTest {
                 new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        assertTrue(info1.equals(info2));
+        assertEquals(info1, info2);
         int h1 = info1.hashCode();
         int h2 = info2.hashCode();
         assertEquals(h1, h2);
@@ -164,9 +157,9 @@ public class PeriodAxisLabelInfoTest {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) info1.clone();
-        assertTrue(info1 != info2);
-        assertTrue(info1.getClass() == info2.getClass());
-        assertTrue(info1.equals(info2));
+        assertNotSame(info1, info2);
+        assertSame(info1.getClass(), info2.getClass());
+        assertEquals(info1, info2);
     }
 
     /**
@@ -176,7 +169,7 @@ public class PeriodAxisLabelInfoTest {
     public void testSerialization() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtils.serialised(info1);
+        PeriodAxisLabelInfo info2 = TestUtils.serialised(info1);
         assertEquals(info1, info2);
     }
 
@@ -191,7 +184,7 @@ public class PeriodAxisLabelInfoTest {
         Day d = (Day) info.createInstance(new Date(0L), zone, Locale.UK);
         assertEquals(new Day(1, 1, 1970), d);
 
-        info = new PeriodAxisLabelInfo(Year.class, new SimpleDateFormat("YYYY"));
+        info = new PeriodAxisLabelInfo(Year.class, new SimpleDateFormat("yyyy"));
         Year y = (Year) info.createInstance(new Date(0L), zone, Locale.UK);
         assertEquals(new Year(1970), y);
     }

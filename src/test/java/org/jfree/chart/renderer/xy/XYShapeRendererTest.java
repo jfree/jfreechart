@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,26 +27,14 @@
  * ------------------------
  * XYShapeRendererTest.java
  * ------------------------
- * (C) Copyright 2010-2020, by Object Refinery Limited.
+ * (C) Copyright 2010-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Martin Hoeller (patch 2952086);
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 16-Feb-2010 : Added testFindZBounds() (MH);
- * 19-Oct-2011 : Added test3026341() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
@@ -58,6 +46,8 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYShapeRenderer} class.
@@ -71,38 +61,38 @@ public class XYShapeRendererTest {
     public void testEquals() {
         XYShapeRenderer r1 = new XYShapeRenderer();
         XYShapeRenderer r2 = new XYShapeRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.WHITE));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.WHITE));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawOutlines(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawOutlines(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseFillPaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseFillPaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGuideLinesVisible(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGuideLinesVisible(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setGuideLinePaint(Color.RED);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setGuideLinePaint(Color.RED);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -113,9 +103,9 @@ public class XYShapeRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYShapeRenderer r1 = new XYShapeRenderer();
         XYShapeRenderer r2 = (XYShapeRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -124,7 +114,7 @@ public class XYShapeRendererTest {
     @Test
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
+        XYShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -141,14 +131,14 @@ public class XYShapeRendererTest {
         DefaultXYZDataset dataset = new DefaultXYZDataset();
         Range range;
 
-        double data1[][] = { {1,1,1}, {1,1,1}, {1,2,3} };
+        double[][] data1 = { {1,1,1}, {1,1,1}, {1,2,3} };
         dataset.addSeries("series1", data1);
         range = r.findZBounds(dataset);
         assertNotNull(range);
         assertEquals(1d, range.getLowerBound(), EPSILON);
         assertEquals(3d, range.getUpperBound(), EPSILON);
 
-        double data2[][] = { {1,1,1}, {1,1,1}, {-1,-2,-3} };
+        double[][] data2 = { {1,1,1}, {1,1,1}, {-1,-2,-3} };
         dataset.removeSeries("series1");
         dataset.addSeries("series2", data2);
         range = r.findZBounds(dataset);
@@ -156,7 +146,7 @@ public class XYShapeRendererTest {
         assertEquals(-3d, range.getLowerBound(), EPSILON);
         assertEquals(-1d, range.getUpperBound(), EPSILON);
 
-        double data3[][] = { {1,1,1}, {1,1,1}, {-1.2,2.9,3.8} };
+        double[][] data3 = { {1,1,1}, {1,1,1}, {-1.2,2.9,3.8} };
         dataset.removeSeries("series2");
         dataset.addSeries("series3", data3);
         range = r.findZBounds(dataset);

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,19 @@
  * ------------------
  * PinNeedleTest.java
  * ------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jun-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PinNeedle} class.
@@ -57,8 +53,8 @@ public class PinNeedleTest {
     public void testEquals() {
        PinNeedle n1 = new PinNeedle();
        PinNeedle n2 = new PinNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -68,9 +64,9 @@ public class PinNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         PinNeedle n1 = new PinNeedle();
         PinNeedle n2 = (PinNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -79,8 +75,8 @@ public class PinNeedleTest {
     @Test
     public void testSerialization() {
         PinNeedle n1 = new PinNeedle();
-        PinNeedle n2 = (PinNeedle) TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        PinNeedle n2 = TestUtils.serialised(n1);
+        assertEquals(n1, n2);
     }
 
 }

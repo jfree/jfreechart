@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -84,7 +84,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private static final long serialVersionUID = -7435246895986425885L;
 
     /**
-     * A table of flags that control (per series) whether or not lines are
+     * A table of flags that control (per series) whether lines are
      * visible.
      */
     private BooleanList seriesLinesVisible;
@@ -96,7 +96,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private transient Shape legendLine;
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * visible.
      */
     private BooleanList seriesShapesVisible;
@@ -105,7 +105,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private boolean defaultShapesVisible;
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * filled.
      */
     private BooleanList seriesShapesFilled;
@@ -129,7 +129,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private boolean useOutlinePaint;
 
     /**
-     * A flag that controls whether or not each series is drawn as a single
+     * A flag that controls whether each series is drawn as a single
      * path.
      */
     private boolean drawSeriesLineAsPath;
@@ -167,8 +167,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not each series is drawn as a
-     * single path.  The default value is {@code false}.
+     * Returns a flag that controls whether each series is drawn as a single path.  The default value is {@code false}.
      *
      * @return A boolean.
      *
@@ -179,7 +178,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not each series is drawn as a
+     * Sets the flag that controls whether each series is drawn as a
      * single path and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -209,7 +208,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // LINES VISIBLE
 
     /**
-     * Returns the flag used to control whether or not the shape for an item is
+     * Returns the flag used to control whether the shape for an item is
      * visible.
      *
      * @param series  the series index (zero-based).
@@ -226,7 +225,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the lines for a series
+     * Returns the flag used to control whether the lines for a series
      * are visible.
      *
      * @param series  the series index (zero-based).
@@ -318,7 +317,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // SHAPES VISIBLE
 
     /**
-     * Returns the flag used to control whether or not the shape for an item is
+     * Returns the flag used to control whether the shape for an item is
      * visible.
      * <p>
      * The default implementation passes control to the
@@ -339,7 +338,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are visible.
      *
      * @param series  the series index (zero-based).
@@ -406,7 +405,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // SHAPES FILLED
 
     /**
-     * Returns the flag used to control whether or not the shape for an item
+     * Returns the flag used to control whether the shape for an item
      * is filled.
      * <p>
      * The default implementation passes control to the
@@ -428,7 +427,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are filled.
      *
      * @param series  the series index (zero-based).
@@ -943,12 +942,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (getItemShapeVisible(series, item)) {
             Shape shape = getItemShape(series, item);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transY1,
-                        transX1);
+                shape = ShapeUtils.createTranslatedShape(shape, transY1, transX1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transX1,
-                        transY1);
+                shape = ShapeUtils.createTranslatedShape(shape, transX1, transY1);
             }
             entityArea = shape;
             if (shape.intersects(dataArea)) {
@@ -1145,6 +1142,27 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code for this instance.
+     */
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + seriesLinesVisible.hashCode();
+        result = 31 * result + (defaultLinesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesVisible.hashCode();
+        result = 31 * result + (defaultShapesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesFilled.hashCode();
+        result = 31 * result + (defaultShapesFilled ? 1 : 0);
+        result = 31 * result + (drawOutlines ? 1 : 0);
+        result = 31 * result + (useFillPaint ? 1 : 0);
+        result = 31 * result + (useOutlinePaint ? 1 : 0);
+        result = 31 * result + (drawSeriesLineAsPath ? 1 : 0);
+        return result;
     }
 
     /**

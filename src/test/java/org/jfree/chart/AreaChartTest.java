@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,15 @@
  * ------------------
  * AreaChartTest.java
  * ------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -68,7 +63,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for an area chart.
  */
-public class AreaChartTest {
+class AreaChartTest {
 
     /** A chart. */
     private JFreeChart chart;
@@ -86,7 +81,7 @@ public class AreaChartTest {
      * default generator.
      */
     @Test
-    public void testSetSeriesToolTipGenerator() {
+    void testSetSeriesToolTipGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
@@ -101,7 +96,7 @@ public class AreaChartTest {
      * default generator.
      */
     @Test
-    public void testSetSeriesURLGenerator() {
+    void testSetSeriesURLGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
@@ -116,7 +111,7 @@ public class AreaChartTest {
      * are thrown (a problem that was occurring at one point).
      */
     @Test
-    public void testDrawWithNullInfo() {
+    void testDrawWithNullInfo() {
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
@@ -134,7 +129,7 @@ public class AreaChartTest {
      * Replaces the chart's dataset and then checks that the new dataset is OK.
      */
     @Test
-    public void testReplaceDataset() {
+    void testReplaceDataset() {
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
         CategoryDataset newData = DatasetUtils.createCategoryDataset(
@@ -143,7 +138,7 @@ public class AreaChartTest {
         this.chart.addChangeListener(l);
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
         assertTrue(range.getLowerBound() <= -30, 

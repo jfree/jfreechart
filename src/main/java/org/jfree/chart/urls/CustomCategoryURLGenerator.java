@@ -2,9 +2,9 @@
  * JFreeChart : a free Java chart library
  * ======================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -------------------------------
  * CustomCategoryURLGenerator.java
  * -------------------------------
- * (C) Copyright 2008-2020, by Diego Pierangeli and Contributors.
+ * (C) Copyright 2008-present, by Diego Pierangeli and Contributors.
  *
  * Original Author:  Diego Pierangeli;
- * Contributors:     David Gilbert (for Object Refinery Limited);
+ * Contributors:     David Gilbert;
  *
  */
 package org.jfree.chart.urls;

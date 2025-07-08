@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,14 @@
  * ------------------------------
  * CustomPieURLGeneratorTest.java
  * ------------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Apr-2008 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.urls;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +43,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CustomPieURLGenerator} class.
@@ -65,14 +58,14 @@ public class CustomPieURLGeneratorTest {
     public void testEquals() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         CustomPieURLGenerator g2 = new CustomPieURLGenerator();
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2.addURLs(m1);
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -82,18 +75,18 @@ public class CustomPieURLGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
 
         // check independence
         Map<String, String> m2 = new HashMap<>();
         m2.put("B", "XYZ");
         g1.addURLs(m2);
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
     }
 
     /**
@@ -112,10 +105,9 @@ public class CustomPieURLGeneratorTest {
     public void testSerialization() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
-        CustomPieURLGenerator g2 = (CustomPieURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomPieURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

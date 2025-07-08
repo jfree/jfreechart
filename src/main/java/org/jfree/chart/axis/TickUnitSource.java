@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * -------------------
  * TickUnitSource.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Sep-2003 : Version 1 (DG);
  *
  */
 
@@ -54,7 +50,7 @@ public interface TickUnitSource {
      *
      * @return A tick unit that is larger than the supplied unit.
      */
-    public TickUnit getLargerTickUnit(TickUnit unit);
+    TickUnit getLargerTickUnit(TickUnit unit);
 
     /**
      * Returns the tick unit in the collection that is greater than or equal
@@ -64,7 +60,7 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection.
      */
-    public TickUnit getCeilingTickUnit(TickUnit unit);
+    TickUnit getCeilingTickUnit(TickUnit unit);
 
     /**
      * Returns the smallest tick unit available in the source that is greater 
@@ -75,6 +71,6 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection (never {@code null}).
      */
-    public TickUnit getCeilingTickUnit(double size);
+    TickUnit getCeilingTickUnit(double size);
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * -----------------
  * OHLCItemTest.java
  * -----------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 23-May-2009 : Added testHashCode() (DG);
  *
  */
 
 package org.jfree.data.time.ohlc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link OHLCItem} class.
@@ -77,38 +70,38 @@ public class OHLCItemTest {
     public void testEquals() {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
         OHLCItem item2 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
+        assertEquals(item2, item1);
 
         // period
         item1 = new OHLCItem(new Year(2007), 2.0, 4.0, 1.0, 3.0);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new OHLCItem(new Year(2007), 2.0, 4.0, 1.0, 3.0);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // open
         item1 = new OHLCItem(new Year(2007), 2.2, 4.0, 1.0, 3.0);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new OHLCItem(new Year(2007), 2.2, 4.0, 1.0, 3.0);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // high
         item1 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.0, 3.0);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.0, 3.0);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // low
         item1 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.1, 3.0);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.1, 3.0);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // close
         item1 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.1, 3.3);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new OHLCItem(new Year(2007), 2.2, 4.4, 1.1, 3.3);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
     }
 
     /**
@@ -118,9 +111,9 @@ public class OHLCItemTest {
     public void testCloning() throws CloneNotSupportedException {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
         OHLCItem item2 = (OHLCItem) item1.clone();
-        assertTrue(item1 != item2);
-        assertTrue(item1.getClass() == item2.getClass());
-        assertTrue(item1.equals(item2));
+        assertNotSame(item1, item2);
+        assertSame(item1.getClass(), item2.getClass());
+        assertEquals(item1, item2);
     }
 
     /**
@@ -129,7 +122,7 @@ public class OHLCItemTest {
     @Test
     public void testSerialization() {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCItem item2 = (OHLCItem) TestUtils.serialised(item1);
+        OHLCItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -140,7 +133,7 @@ public class OHLCItemTest {
     public void testHashcode() {
         OHLCItem i1 = new OHLCItem(new Year(2009), 2.0, 4.0, 1.0, 3.0);
         OHLCItem i2 = new OHLCItem(new Year(2009), 2.0, 4.0, 1.0, 3.0);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
         int h1 = i1.hashCode();
         int h2 = i2.hashCode();
         assertEquals(h1, h2);

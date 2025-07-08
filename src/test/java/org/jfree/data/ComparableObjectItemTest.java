@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,14 +27,10 @@
  * -----------------------------
  * ComparableObjectItemTest.java
  * -----------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
@@ -93,7 +89,7 @@ public class ComparableObjectItemTest {
     /**
      * Some checks for the clone() method.
      * 
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -110,8 +106,7 @@ public class ComparableObjectItemTest {
     @Test
     public void testSerialization() {
         ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
-        ComparableObjectItem item2 = (ComparableObjectItem) 
-                TestUtils.serialised(item1);
+        ComparableObjectItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -126,7 +121,7 @@ public class ComparableObjectItemTest {
         ComparableObjectItem item4 = new ComparableObjectItem(1, "XYZ");
         assertTrue(item2.compareTo(item1) > 0);
         assertTrue(item3.compareTo(item1) > 0);
-        assertTrue(item4.compareTo(item1) == 0);
+        assertEquals(0, item4.compareTo(item1));
         assertTrue(item1.compareTo(item2) < 0);
     }
 

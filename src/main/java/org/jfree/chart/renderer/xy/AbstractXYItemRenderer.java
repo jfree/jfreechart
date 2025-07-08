@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Focus Computer Services Limited;
  *                   Tim Bardzil;
@@ -159,9 +159,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     protected AbstractXYItemRenderer() {
         super();
-        this.itemLabelGeneratorMap 
-                = new HashMap<Integer, XYItemLabelGenerator>();
-        this.toolTipGeneratorMap = new HashMap<Integer, XYToolTipGenerator>();
+        this.itemLabelGeneratorMap = new HashMap<>();
+        this.toolTipGeneratorMap = new HashMap<>();
         this.urlGenerator = null;
         this.backgroundAnnotations = new java.util.ArrayList();
         this.foregroundAnnotations = new java.util.ArrayList();
@@ -455,7 +454,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param annotation  the annotation to remove ({@code null} not
      *                    permitted).
      *
-     * @return A boolean to indicate whether or not the annotation was
+     * @return A boolean to indicate whether the annotation was
      *         successfully removed.
      */
     @Override
@@ -778,8 +777,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             item.setLine(shape);
             item.setLinePaint(paint);
             item.setShapeVisible(false);
-        }
-        else {
+        } else {
             Paint outlinePaint = lookupSeriesOutlinePaint(series);
             Stroke outlineStroke = lookupSeriesOutlineStroke(series);
             item.setOutlinePaint(outlinePaint);
@@ -1444,6 +1442,22 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + itemLabelGeneratorMap.hashCode();
+        result = 31 * result + (defaultItemLabelGenerator != null ? defaultItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + toolTipGeneratorMap.hashCode();
+        result = 31 * result + (defaultToolTipGenerator != null ? defaultToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (urlGenerator != null ? urlGenerator.hashCode() : 0);
+        result = 31 * result + (backgroundAnnotations != null ? backgroundAnnotations.hashCode() : 0);
+        result = 31 * result + (foregroundAnnotations != null ? foregroundAnnotations.hashCode() : 0);
+        result = 31 * result + (legendItemLabelGenerator != null ? legendItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemToolTipGenerator != null ? legendItemToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemURLGenerator != null ? legendItemURLGenerator.hashCode() : 0);
+        return result;
     }
 
     /**

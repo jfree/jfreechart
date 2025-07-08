@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Benoit Xhenseval;
  *
  */
@@ -45,6 +45,10 @@ import org.jfree.data.xy.XYSeriesCollection;
  * A utility class for calculating moving averages of time series data.
  */
 public class MovingAverage {
+
+    private MovingAverage() {
+        // no requirement to instantiate
+    }
 
     /**
      * Creates a new {@link TimeSeriesCollection} containing a moving average
@@ -86,7 +90,7 @@ public class MovingAverage {
      * result is an empty series.
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param name  the series key ({@code null} not permitted).
      * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.

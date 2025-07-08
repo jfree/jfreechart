@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Lesser General Public License as published by 
@@ -27,24 +27,14 @@
  * -------------------------
  * TimePeriodValuesTest.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2003 : Version 1 (DG);
- * 07-Apr-2008 : Added new tests for min/max-start/middle/end
- *               index updates (DG);
  *
  */
 
 package org.jfree.data.time;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Date;
 
@@ -55,6 +45,8 @@ import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A collection of test cases for the {@link TimePeriodValues} class.
@@ -140,8 +132,8 @@ public class TimePeriodValuesTest {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimePeriodValues s2 = (TimePeriodValues) TestUtils.serialised(s1);
-        assertTrue(s1.equals(s2));
+        TimePeriodValues s2 = TestUtils.serialised(s1);
+        assertEquals(s1, s2);
     }
 
     /**
@@ -160,27 +152,27 @@ public class TimePeriodValuesTest {
 
         // domain description
         s1.setDomainDescription("XYZ");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setDomainDescription("XYZ");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         
         // domain description - null
         s1.setDomainDescription(null);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setDomainDescription(null);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         
         // range description
         s1.setRangeDescription("XYZ");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setRangeDescription("XYZ");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         
         // range description - null
         s1.setRangeDescription(null);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.setRangeDescription(null);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         RegularTimePeriod p1 = new Day();
         RegularTimePeriod p2 = p1.next();

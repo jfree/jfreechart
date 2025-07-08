@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,33 +27,22 @@
  * ---------------------------
  * DefaultKeyedValuesTest.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Mar-2003 : Version 1 (DG);
- * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
- * 31-Jul-2006 : Added test for new clear() method (DG);
- * 01-Aug-2006 : Extended testGetIndex() method (DG);
- * 30-Apr-2007 : Added some new tests (DG);
- * 03-Oct-2007 : Updated testRemoveValue() (DG);
- * 21-Nov-2007 : Added testGetIndex2() method (DG);
  *
  */
 
 package org.jfree.data;
 
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.SortOrder;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValues} class.
@@ -127,14 +116,14 @@ public class DefaultKeyedValuesTest {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         try {
             /* Number n = */ v1.getValue(-1);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
         }
         try {
             /* Number n = */ v1.getValue(0);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
@@ -163,14 +152,14 @@ public class DefaultKeyedValuesTest {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         try {
             /* Comparable k = */ v1.getKey(-1);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
         }
         try {
             /* Comparable k = */ v1.getKey(0);
-            assertTrue(false);
+            fail();
         }
         catch (IndexOutOfBoundsException e) {
             // expected
@@ -283,13 +272,13 @@ public class DefaultKeyedValuesTest {
         v1.addValue("V2", null);
         v1.addValue("V3", 3);
         DefaultKeyedValues v2 = (DefaultKeyedValues) v1.clone();
-        assertTrue(v1 != v2);
-        assertTrue(v1.getClass() == v2.getClass());
-        assertTrue(v1.equals(v2));
+        assertNotSame(v1, v2);
+        assertSame(v1.getClass(), v2.getClass());
+        assertEquals(v1, v2);
 
         // confirm that the clone is independent of the original
         v2.setValue("V1", 44);
-        assertFalse(v1.equals(v2));
+        assertNotEquals(v1, v2);
     }
 
     /**
@@ -314,13 +303,13 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getValue("A"), 1.0);
         assertEquals(data.getValue("B"), 2.0);
         assertEquals(data.getValue("C"), 3.0);
-        assertEquals(data.getValue("D"), null);
+        assertNull(data.getValue("D"));
 
         // check retrieve value by index
         assertEquals(data.getValue(0), 1.0);
         assertEquals(data.getValue(1), 2.0);
         assertEquals(data.getValue(2), 3.0);
-        assertEquals(data.getValue(3), null);
+        assertNull(data.getValue(3));
     }
 
     /**
@@ -369,13 +358,13 @@ public class DefaultKeyedValuesTest {
 
         // check retrieve value by key
         assertEquals(data.getValue("A"), 2.0);
-        assertEquals(data.getValue("B"), null);
+        assertNull(data.getValue("B"));
         assertEquals(data.getValue("C"), 1.0);
         assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
         assertEquals(data.getValue(0), 2.0);
-        assertEquals(data.getValue(1), null);
+        assertNull(data.getValue(1));
         assertEquals(data.getValue(2), 1.0);
         assertEquals(data.getValue(3), 3.0);
 
@@ -403,14 +392,14 @@ public class DefaultKeyedValuesTest {
 
         // check retrieve value by key
         assertEquals(data.getValue("A"), 2.0);
-        assertEquals(data.getValue("B"), null);
+        assertNull(data.getValue("B"));
         assertEquals(data.getValue("C"), 1.0);
         assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
         assertEquals(data.getValue(0), 3.0);
         assertEquals(data.getValue(1), 1.0);
-        assertEquals(data.getValue(2), null);
+        assertNull(data.getValue(2));
         assertEquals(data.getValue(3), 2.0);
 
     }
@@ -437,7 +426,7 @@ public class DefaultKeyedValuesTest {
 
         // check retrieve value by key
         assertEquals(data.getValue("A"), 2.0);
-        assertEquals(data.getValue("B"), null);
+        assertNull(data.getValue("B"));
         assertEquals(data.getValue("C"), 1.0);
         assertEquals(data.getValue("D"), 3.0);
 
@@ -445,7 +434,7 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getValue(0), 1.0);
         assertEquals(data.getValue(1), 2.0);
         assertEquals(data.getValue(2), 3.0);
-        assertEquals(data.getValue(3), null);
+        assertNull(data.getValue(3));
 
     }
 
@@ -471,7 +460,7 @@ public class DefaultKeyedValuesTest {
 
         // check retrieve value by key
         assertEquals(data.getValue("A"), 2.0);
-        assertEquals(data.getValue("B"), null);
+        assertNull(data.getValue("B"));
         assertEquals(data.getValue("C"), 1.0);
         assertEquals(data.getValue("D"), 3.0);
 
@@ -479,7 +468,7 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getValue(0), 3.0);
         assertEquals(data.getValue(1), 2.0);
         assertEquals(data.getValue(2), 1.0);
-        assertEquals(data.getValue(3), null);
+        assertNull(data.getValue(3));
 
     }
 
@@ -493,8 +482,7 @@ public class DefaultKeyedValuesTest {
         v1.addValue("Key 2", null);
         v1.addValue("Key 3", 42);
 
-        DefaultKeyedValues v2 = (DefaultKeyedValues) 
-                TestUtils.serialised(v1);
+        DefaultKeyedValues v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

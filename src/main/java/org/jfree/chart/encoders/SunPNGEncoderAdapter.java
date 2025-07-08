@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,16 +27,10 @@
  * -------------------------
  * SunPNGEncoderAdapter.java
  * -------------------------
- * (C) Copyright 2004-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -56,6 +50,13 @@ import org.jfree.chart.util.Args;
  * under a JDK 1.4+ and is being run using a JDK 1.4+.
  */
 public class SunPNGEncoderAdapter implements ImageEncoder {
+
+    /**
+     * Creates a new instance.
+     */
+    public SunPNGEncoderAdapter(){
+        super();
+    }
 
     /**
      * Get the quality of the image encoding (always 0.0).

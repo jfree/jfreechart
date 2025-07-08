@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,29 +27,14 @@
  * -------------------
  * NumberAxisTest.java
  * -------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 14-Aug-2003 : Added tests for equals() method (DG);
- * 05-Oct-2004 : Added tests to pick up a bug in the auto-range calculation for
- *               a domain axis on an XYPlot using an XYSeriesCollection (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
- * 11-Jan-2006 : Fixed testAutoRange2() and testAutoRange3() following changes
- *               to BarRenderer (DG);
- * 20-Feb-2006 : Added rangeType field to equals() test (DG);
  *
  */
 
 package org.jfree.chart.axis;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
@@ -68,6 +53,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link NumberAxis} class.
  */
@@ -80,9 +67,9 @@ public class NumberAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = (NumberAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -93,36 +80,36 @@ public class NumberAxisTest {
 
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = new NumberAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private boolean autoRangeIncludesZero;
         a1.setAutoRangeIncludesZero(false);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAutoRangeIncludesZero(false);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private boolean autoRangeStickyZero;
         a1.setAutoRangeStickyZero(false);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setAutoRangeStickyZero(false);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private NumberTickUnit tickUnit;
         a1.setTickUnit(new NumberTickUnit(25.0));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickUnit(new NumberTickUnit(25.0));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         //private NumberFormat numberFormatOverride;
         a1.setNumberFormatOverride(new DecimalFormat("0.00"));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setNumberFormatOverride(new DecimalFormat("0.00"));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setRangeType(RangeType.POSITIVE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setRangeType(RangeType.POSITIVE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
     }
 
@@ -133,7 +120,7 @@ public class NumberAxisTest {
     public void testHashCode() {
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = new NumberAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -174,7 +161,7 @@ public class NumberAxisTest {
     @Test
     public void testSerialization() {
         NumberAxis a1 = new NumberAxis("Test Axis");
-        NumberAxis a2 = (NumberAxis) TestUtils.serialised(a1);
+        NumberAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

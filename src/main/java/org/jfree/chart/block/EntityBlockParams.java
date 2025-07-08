@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * ----------------------
  * EntityBlockParams.java
  * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -38,17 +38,17 @@ package org.jfree.chart.block;
 
 /**
  * An interface that is used by the draw() method of some {@link Block}
- * implementations to determine whether or not to generate entities for the
+ * implementations to determine whether to generate entities for the
  * items within the block.
  */
 public interface EntityBlockParams {
 
     /**
-     * Returns a flag that controls whether or not the block should return
+     * Returns a flag that controls whether the block should return
      * entities for the items it draws.
      *
      * @return A boolean.
      */
-    public boolean getGenerateEntities();
+    boolean getGenerateEntities();
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,21 @@
  * -----------------------
  * MarkerAxisBandTest.java
  * -----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added tests for equals() and hashCode() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Font;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MarkerAxisBand} class.
@@ -68,29 +61,29 @@ public class MarkerAxisBandTest {
         assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 1.0, 1.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 1.0, 1.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 1.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 1.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font2);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font2);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -102,7 +95,7 @@ public class MarkerAxisBandTest {
 
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, font1);
         MarkerAxisBand a2 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, font1);
-         assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -114,7 +107,7 @@ public class MarkerAxisBandTest {
     @Test
     public void testSerialization() {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
-        MarkerAxisBand a2 = (MarkerAxisBand) TestUtils.serialised(a1);
+        MarkerAxisBand a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -----------------------------------------
  * StandardCategorySeriesLabelGenerator.java
  * -----------------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -38,8 +38,8 @@ package org.jfree.chart.labels;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
@@ -138,7 +138,7 @@ public class StandardCategorySeriesLabelGenerator implements
         }
         StandardCategorySeriesLabelGenerator that
                 = (StandardCategorySeriesLabelGenerator) obj;
-        if (!this.formatPattern.equals(that.formatPattern)) {
+        if (!Objects.equals(this.formatPattern, that.formatPattern)) {
             return false;
         }
         return true;
@@ -151,9 +151,9 @@ public class StandardCategorySeriesLabelGenerator implements
      */
     @Override
     public int hashCode() {
-        int result = 127;
-        result = HashUtils.hashCode(result, this.formatPattern);
-        return result;
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.formatPattern);
+        return hash;
     }
 
 }

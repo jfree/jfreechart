@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------
  * RangeInfo.java
  * --------------
- * (C) Copyright 2000-2020, by Object Refinery Limited.
+ * (C) Copyright 2000-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -45,32 +45,32 @@ public interface RangeInfo {
     /**
      * Returns the minimum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The minimum value.
      */
-    public double getRangeLowerBound(boolean includeInterval);
+    double getRangeLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum y-value in the dataset.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The maximum value.
      */
-    public double getRangeUpperBound(boolean includeInterval);
+    double getRangeUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's range.
      *
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(boolean includeInterval);
+    Range getRangeBounds(boolean includeInterval);
 
 }

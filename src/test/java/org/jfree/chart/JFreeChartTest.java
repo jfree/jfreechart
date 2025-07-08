@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,21 @@
  * -------------------
  * JFreeChartTest.java
  * -------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.RenderingHints;
-import java.util.List;
-
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
@@ -59,21 +55,51 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
+import javax.swing.event.EventListenerList;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link JFreeChart} class.
  */
-public class JFreeChartTest implements ChartChangeListener {
+class JFreeChartTest implements ChartChangeListener {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    void testEqualsHashCode() {
+        EqualsVerifier.forClass(JFreeChart.class)
+                .withPrefabValues(TextTitle.class,
+                        new TextTitle("tee"),
+                        new TextTitle("vee"))
+                .withPrefabValues(Plot.class,
+                        TestUtils.createPlot(true),
+                        TestUtils.createPlot(false))
+                .withPrefabValues(RenderingHints.class,
+                        new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF),
+                        new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(Rectangle2D.class,
+                        TestUtils.createR2D(true),
+                        TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                        TestUtils.createFont(true),
+                        TestUtils.createFont(false))
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /** A pie chart. */
     private JFreeChart pieChart;
@@ -83,7 +109,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @BeforeEach
     public void setUp() {
-        DefaultPieDataset data = new DefaultPieDataset();
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Java", 43.2);
         data.setValue("Visual Basic", 0.0);
         data.setValue("C/C++", 17.5);
@@ -94,11 +120,11 @@ public class JFreeChartTest implements ChartChangeListener {
      * Check that the equals() method can distinguish all fields.
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         JFreeChart chart1 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         JFreeChart chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         assertEquals(chart1, chart2);
         assertEquals(chart2, chart1);
 
@@ -106,7 +132,7 @@ public class JFreeChartTest implements ChartChangeListener {
         chart1.setRenderingHints(new RenderingHints(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setRenderingHints(new RenderingHints(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
@@ -114,38 +140,38 @@ public class JFreeChartTest implements ChartChangeListener {
 
         // borderVisible
         chart1.setBorderVisible(true);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderVisible(true);
         assertEquals(chart1, chart2);
 
         // borderStroke
         BasicStroke s = new BasicStroke(2.0f);
         chart1.setBorderStroke(s);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderStroke(s);
         assertEquals(chart1, chart2);
 
         // borderPaint
         chart1.setBorderPaint(Color.RED);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBorderPaint(Color.RED);
         assertEquals(chart1, chart2);
 
         // padding
         chart1.setPadding(new RectangleInsets(1, 2, 3, 4));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setPadding(new RectangleInsets(1, 2, 3, 4));
         assertEquals(chart1, chart2);
 
         // title
         chart1.setTitle("XYZ");
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setTitle("XYZ");
         assertEquals(chart1, chart2);
 
         // subtitles
         chart1.addSubtitle(new TextTitle("Subtitle"));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.addSubtitle(new TextTitle("Subtitle"));
         assertEquals(chart1, chart2);
 
@@ -153,8 +179,8 @@ public class JFreeChartTest implements ChartChangeListener {
         chart1 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
-        assertFalse(chart1.equals(chart2));
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), false);
+        assertNotEquals(chart1, chart2);
         chart2 = new JFreeChart("Title",
                 new Font("SansSerif", Font.PLAIN, 12), new RingPlot(), false);
         assertEquals(chart1, chart2);
@@ -162,7 +188,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // backgroundPaint
         chart1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
         assertEquals(chart1, chart2);
@@ -175,13 +201,13 @@ public class JFreeChartTest implements ChartChangeListener {
 
         // backgroundImageAlignment
         chart1.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
         assertEquals(chart1, chart2);
 
         // backgroundImageAlpha
         chart1.setBackgroundImageAlpha(0.1f);
-        assertFalse(chart1.equals(chart2));
+        assertNotEquals(chart1, chart2);
         chart2.setBackgroundImageAlpha(0.1f);
         assertEquals(chart1, chart2);
     }
@@ -191,20 +217,20 @@ public class JFreeChartTest implements ChartChangeListener {
      * equals() testing.
      */
     @Test
-    public void testEquals2() {
+    void testEquals2() {
         JFreeChart chart1 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), true);
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), true);
         JFreeChart chart2 = new JFreeChart("Title",
-                new Font("SansSerif", Font.PLAIN, 12), new PiePlot(), false);
-        assertFalse(chart1.equals(chart2));
-        assertFalse(chart2.equals(chart1));
+                new Font("SansSerif", Font.PLAIN, 12), new PiePlot<String>(), false);
+        assertNotEquals(chart1, chart2);
+        assertNotEquals(chart2, chart1);
     }
 
     /**
      * Checks the subtitle count - should be 1 (the legend).
      */
     @Test
-    public void testSubtitleCount() {
+    void testSubtitleCount() {
         int count = this.pieChart.getSubtitleCount();
         assertEquals(1, count);
     }
@@ -213,11 +239,11 @@ public class JFreeChartTest implements ChartChangeListener {
      * Some checks for the getSubtitle() method.
      */
     @Test
-    public void testGetSubtitle() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    void testGetSubtitle() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         Title t = chart.getSubtitle(0);
-        assertTrue(t instanceof LegendTitle);
+        assertInstanceOf(LegendTitle.class, t);
 
         try {
             chart.getSubtitle(-1);
@@ -249,14 +275,14 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a pie chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization1() {
-        DefaultPieDataset data = new DefaultPieDataset();
+    void testSerialization1() {
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
 
         JFreeChart c1 = ChartFactory.createPieChart("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertSame(lt2.getSources()[0], c2.getPlot());
@@ -266,13 +292,13 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a 3D pie chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization2() {
-        DefaultPieDataset data = new DefaultPieDataset();
+    void testSerialization2() {
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
-        JFreeChart c1 = ChartFactory.createPieChart3D("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c1 = ChartFactory.createPieChart("Test", data);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -280,7 +306,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a bar chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization3() {
+    void testSerialization3() {
 
         // row keys...
         String series1 = "First";
@@ -330,7 +356,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // create the chart...
         JFreeChart c1 = ChartFactory.createBarChart("Vertical Bar Chart",
                 "Category", "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -338,7 +364,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a time seroes chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization4() {
+    void testSerialization4() {
 
         RegularTimePeriod t = new Day();
         TimeSeries series = new TimeSeries("Series 1");
@@ -350,7 +376,7 @@ public class JFreeChartTest implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
                 "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -358,8 +384,8 @@ public class JFreeChartTest implements ChartChangeListener {
      * Some checks for the addSubtitle() methods.
      */
     @Test
-    public void testAddSubtitle() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    void testAddSubtitle() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
 
         TextTitle t0 = new TextTitle("T0");
@@ -400,10 +426,10 @@ public class JFreeChartTest implements ChartChangeListener {
      * Some checks for the getSubtitles() method.
      */
     @Test
-    public void testGetSubtitles() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    void testGetSubtitles() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
-        List<TextTitle> subtitles = chart.getSubtitles();
+        List<Title> subtitles = chart.getSubtitles();
 
         assertEquals(1, chart.getSubtitleCount());
 
@@ -416,8 +442,8 @@ public class JFreeChartTest implements ChartChangeListener {
      * Some checks for the default legend firing change events.
      */
     @Test
-    public void testLegendEvents() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    void testLegendEvents() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
@@ -430,8 +456,8 @@ public class JFreeChartTest implements ChartChangeListener {
      * Some checks for title changes and event notification.
      */
     @Test
-    public void testTitleChangeEvent() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    void testTitleChangeEvent() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
@@ -461,10 +487,10 @@ public class JFreeChartTest implements ChartChangeListener {
     }
 
     @Test
-    public void testBug942() throws Exception {
+    void testBug942() {
         final String title = "Pie Chart Demo 1\n\n\ntestnew line";
         assertEquals(title, ChartFactory.createPieChart(title, 
-                new DefaultPieDataset()).getTitle().getText());
+                new DefaultPieDataset<String>()).getTitle().getText());
     }
 
     /** The last ChartChangeEvent received. */

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,17 @@
  * -----------------
  * DatasetGroup.java
  * -----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Oct-2002 : Version 1 (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 20-Aug-2003 : Implemented Cloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.data.general;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 /**
@@ -113,10 +107,17 @@ public class DatasetGroup implements Cloneable, Serializable {
             return false;
         }
         DatasetGroup that = (DatasetGroup) obj;
-        if (!this.id.equals(that.id)) {
+        if (!Objects.equals(this.id, that.id)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
 }

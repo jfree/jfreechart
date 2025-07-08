@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,16 +27,10 @@
  * ---------------------------------------
  * DefaultIntervalCategoryDatasetTest.java
  * ---------------------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Mar-2007 : Version 1 (DG);
- * 25-Feb-2008 : Added new tests to check behaviour of an empty dataset (DG);
- * 11-Feb-2009 : Fixed locale-sensitive failures (DG);
  *
  */
 
@@ -49,9 +43,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultIntervalCategoryDataset} class.
@@ -150,8 +143,8 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset dB
                 = new DefaultIntervalCategoryDataset(startsB, endsB);
 
-        assertTrue(dA.equals(dB));
-        assertTrue(dB.equals(dA));
+        assertEquals(dA, dB);
+        assertEquals(dB, dA);
 
         // check that two empty datasets are equal
         DefaultIntervalCategoryDataset empty1
@@ -160,7 +153,7 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset empty2
                 = new DefaultIntervalCategoryDataset(new double[0][0],
                         new double[0][0]);
-        assertTrue(empty1.equals(empty2));
+        assertEquals(empty1, empty2);
     }
 
     /**
@@ -176,8 +169,7 @@ public class DefaultIntervalCategoryDatasetTest {
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(starts, ends);
-        DefaultIntervalCategoryDataset d2 = (DefaultIntervalCategoryDataset) 
-                TestUtils.serialised(d1);
+        DefaultIntervalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -200,15 +192,15 @@ public class DefaultIntervalCategoryDatasetTest {
                 DataUtils.createNumberArray2D(ends));
         DefaultIntervalCategoryDataset d2 = 
                 (DefaultIntervalCategoryDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         d1.setStartValue(0, "Category 1", 0.99);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.setStartValue(0, "Category 1", 0.99);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -222,9 +214,9 @@ public class DefaultIntervalCategoryDatasetTest {
                     new double[0][0]);
         DefaultIntervalCategoryDataset d2 = 
                 (DefaultIntervalCategoryDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**

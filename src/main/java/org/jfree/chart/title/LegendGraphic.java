@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * ------------------
  * LegendGraphic.java
  * ------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -56,7 +56,6 @@ import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -73,7 +72,7 @@ public class LegendGraphic extends AbstractBlock
     static final long serialVersionUID = -1338791523854985009L;
 
     /**
-     * A flag that controls whether or not the shape is visible - see also
+     * A flag that controls whether the shape is visible - see also
      * lineVisible.
      */
     private boolean shapeVisible;
@@ -95,7 +94,7 @@ public class LegendGraphic extends AbstractBlock
      */
     private RectangleAnchor shapeAnchor;
 
-    /** A flag that controls whether or not the shape is filled. */
+    /** A flag that controls whether the shape is filled. */
     private boolean shapeFilled;
 
     /** The fill paint for the shape. */
@@ -107,7 +106,7 @@ public class LegendGraphic extends AbstractBlock
      */
     private GradientPaintTransformer fillPaintTransformer;
 
-    /** A flag that controls whether or not the shape outline is visible. */
+    /** A flag that controls whether the shape outline is visible. */
     private boolean shapeOutlineVisible;
 
     /** The outline paint for the shape. */
@@ -117,7 +116,7 @@ public class LegendGraphic extends AbstractBlock
     private transient Stroke outlineStroke;
 
     /**
-     * A flag that controls whether or not the line is visible - see also
+     * A flag that controls whether the line is visible - see also
      * shapeVisible.
      */
     private boolean lineVisible;
@@ -151,7 +150,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns a flag that controls whether or not the shape
+     * Returns a flag that controls whether the shape
      * is visible.
      *
      * @return A boolean.
@@ -163,7 +162,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape is
+     * Sets a flag that controls whether the shape is
      * visible.
      *
      * @param visible  the flag.
@@ -197,7 +196,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns a flag that controls whether or not the shapes
+     * Returns a flag that controls whether the shapes
      * are filled.
      *
      * @return A boolean.
@@ -209,7 +208,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape is
+     * Sets a flag that controls whether the shape is
      * filled.
      *
      * @param filled  the flag.
@@ -279,7 +278,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape outline
+     * Sets a flag that controls whether the shape outline
      * is visible.
      *
      * @param visible  the flag.
@@ -383,7 +382,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns the flag that controls whether or not the line is visible.
+     * Returns the flag that controls whether the line is visible.
      *
      * @return A boolean.
      *
@@ -394,7 +393,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets the flag that controls whether or not the line is visible.
+     * Sets the flag that controls whether the line is visible.
      *
      * @param visible  the flag.
      *
@@ -615,6 +614,9 @@ public class LegendGraphic extends AbstractBlock
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
         if (!(obj instanceof LegendGraphic)) {
             return false;
         }
@@ -625,14 +627,13 @@ public class LegendGraphic extends AbstractBlock
         if (!ShapeUtils.equal(this.shape, that.shape)) {
             return false;
         }
-        if (this.shapeFilled != that.shapeFilled) {
-            return false;
-        }
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!Objects.equals(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (this.shapeFilled != that.shapeFilled) {
+            return false;
+        }
+        if (!Objects.equals(this.fillPaintTransformer, that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
@@ -662,7 +663,24 @@ public class LegendGraphic extends AbstractBlock
         if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
+        if (!that.canEqual(this)) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof LegendGraphic);
     }
 
     /**
@@ -670,12 +688,24 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return A hash code.
      */
-    @Override
+    @Override    
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.fillPaint);
-        // FIXME: use other fields too
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 23 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.shape);
+        hash = 23 * hash + Objects.hashCode(this.shapeLocation);
+        hash = 23 * hash + Objects.hashCode(this.shapeAnchor);
+        hash = 23 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.fillPaint);
+        hash = 23 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 23 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 23 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 23 * hash + (this.lineVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.line);
+        hash = 23 * hash + Objects.hashCode(this.lineStroke);
+        hash = 23 * hash + Objects.hashCode(this.linePaint);
+        return hash;
     }
 
     /**

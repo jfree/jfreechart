@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,27 +27,23 @@
  * -----------------------------------
  * CombinedDomainCategoryPlotTest.java
  * -----------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 03-Jan-2008 : Added testNotification() (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 import java.util.List;
+import java.util.ResourceBundle;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -62,13 +58,17 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link CombinedDomainCategoryPlot} class.
  */
 public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List events = new java.util.ArrayList();
+    private final List<ChartChangeEvent> events = new java.util.ArrayList<>();
 
     /**
      * Receives a chart change event.
@@ -78,6 +78,33 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Override
     public void chartChanged(ChartChangeEvent event) {
         this.events.add(event);
+    }
+    
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CombinedDomainCategoryPlot.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(Plot.class, TestUtils.createPlot(true), TestUtils.createPlot(false))
+                .withPrefabValues(JFreeChart.class,
+                        TestUtils.createJFC(true),
+                        TestUtils.createJFC(false))
+                .withPrefabValues(ResourceBundle.class,
+                        TestUtils.createRB(true),
+                        TestUtils.createRB(false))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .withPrefabValues(String.class, "A", "B")
+                .withPrefabValues(AttributedString.class, TestUtils.createAS(true), TestUtils.createAS(false))
+                .withIgnoredFields("chart", "parent") // superclass
+                .verify();
     }
 
     /**
@@ -93,7 +120,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
         List plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertSame(plots.get(0), plot1);
         assertEquals(1, plots.size());
     }
 
@@ -104,7 +131,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     public void testEquals() {
         CombinedDomainCategoryPlot plot1 = createPlot();
         CombinedDomainCategoryPlot plot2 = createPlot();
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -115,9 +142,9 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         CombinedDomainCategoryPlot plot1 = createPlot();
         CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
                 plot1.clone();
-        assertTrue(plot1 != plot2);
-        assertTrue(plot1.getClass() == plot2.getClass());
-        assertTrue(plot1.equals(plot2));
+        assertNotSame(plot1, plot2);
+        assertSame(plot1.getClass(), plot2.getClass());
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -126,8 +153,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedDomainCategoryPlot plot1 = createPlot();
-        CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
-                TestUtils.serialised(plot1);
+        CombinedDomainCategoryPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

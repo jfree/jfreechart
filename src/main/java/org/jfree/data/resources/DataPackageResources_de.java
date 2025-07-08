@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,16 +27,10 @@
  * ----------------------------
  * DataPackageResources_de.java
  * ----------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-present, by David Gilbert and Contributors.
  *
  * Original Author:  Thomas Meier;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 04-Apr-2002 : Version 1, translation by Thomas Meier (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -48,6 +42,13 @@ import java.util.ListResourceBundle;
  * A resource bundle that stores all the items that might need localisation.
  */
 public class DataPackageResources_de extends ListResourceBundle {
+
+    /**
+     * Creates a new instance.
+     */
+    public DataPackageResources_de() {
+        super();
+    }
 
     /**
      * Returns the array of strings in the resource bundle.

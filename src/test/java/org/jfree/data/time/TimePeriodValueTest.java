@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,20 +27,15 @@
  * ------------------------
  * TimePeriodValueTest.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2003 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
@@ -57,7 +52,7 @@ public class TimePeriodValueTest {
     @Test
     public void testEqualsSelf() {
         TimePeriodValue tpv = new TimePeriodValue(new Day(), 55.75);
-        assertTrue(tpv.equals(tpv));
+        assertEquals(tpv, tpv);
     }
 
     /**
@@ -67,8 +62,8 @@ public class TimePeriodValueTest {
     public void testEquals() {
         TimePeriodValue tpv1 = new TimePeriodValue(new Day(30, 7, 2003), 55.75);
         TimePeriodValue tpv2 = new TimePeriodValue(new Day(30, 7, 2003), 55.75);
-        assertTrue(tpv1.equals(tpv2));
-        assertTrue(tpv2.equals(tpv1));
+        assertEquals(tpv1, tpv2);
+        assertEquals(tpv2, tpv1);
     }
 
     /**
@@ -77,7 +72,7 @@ public class TimePeriodValueTest {
     @Test
     public void testSerialization() {
         TimePeriodValue tpv1 = new TimePeriodValue(new Day(30, 7, 2003), 55.75);
-        TimePeriodValue tpv2 = (TimePeriodValue) TestUtils.serialised(tpv1);
+        TimePeriodValue tpv2 = TestUtils.serialised(tpv1);
         assertEquals(tpv1, tpv2);
     }
 

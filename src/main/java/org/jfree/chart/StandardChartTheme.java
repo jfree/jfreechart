@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,10 +27,10 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,6 +47,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYTextAnnotation;
@@ -77,16 +78,8 @@ import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.chart.plot.ThermometerPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
-import org.jfree.chart.renderer.category.BarPainter;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
-import org.jfree.chart.renderer.category.StatisticalBarRenderer;
-import org.jfree.chart.renderer.xy.GradientXYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.category.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.title.CompositeTitle;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.PaintScaleLegend;
@@ -110,7 +103,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
 
     /** The name of this theme. */
-    private String name;
+    private final String name;
 
     /**
      * The largest font size.  Use for the main chart title.
@@ -168,7 +161,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /** The range grid line paint. */
     private transient Paint rangeGridlinePaint;
 
-    /* The baseline paint (used for domain and range zero baselines). */
+    /** The baseline paint (used for domain and range zero baselines) */
     private transient Paint baselinePaint;
 
     /** The crosshair paint. */
@@ -187,7 +180,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint itemLabelPaint;
 
     /**
-     * A flag that controls whether or not shadows are visible (for example,
+     * A flag that controls whether shadows are visible (for example,
      * in a bar renderer).
      */
     private boolean shadowVisible;
@@ -214,7 +207,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint gridBandAlternatePaint
             = SymbolAxis.DEFAULT_GRID_BAND_ALTERNATE_PAINT;
 
-    /* The shadow generator (can be null). */
+    /** The shadow generator (can be null). */
     private ShadowGenerator shadowGenerator;
 
     /**
@@ -324,8 +317,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.crosshairPaint = Color.BLUE;
         this.axisLabelPaint = Color.DARK_GRAY;
         this.tickLabelPaint = Color.DARK_GRAY;
-        this.barPainter = new GradientBarPainter();
-        this.xyBarPainter = new GradientXYBarPainter();
+        this.barPainter = new StandardBarPainter();
+        this.xyBarPainter = new StandardXYBarPainter();
         this.shadowVisible = false;
         this.shadowPaint = Color.GRAY;
         this.itemLabelPaint = Color.BLACK;
@@ -1136,7 +1129,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a plot.
      *
-     * @param plot  the plot ({@code null}).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPlot(Plot plot) {
         Args.nullNotPermitted(plot, "plot");
@@ -1293,54 +1286,42 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         plot.setShadowGenerator(this.shadowGenerator);
 
         // process all domain axes
-        int domainAxisCount = plot.getDomainAxisCount();
-        for (int i = 0; i < domainAxisCount; i++) {
-            ValueAxis axis = plot.getDomainAxis(i);
-            if (axis != null) {
-                applyToValueAxis(axis);
+        for (ValueAxis xAxis : plot.getDomainAxes().values()) {
+            if (xAxis != null) {
+                applyToValueAxis(xAxis);
             }
         }
 
         // process all range axes
-        int rangeAxisCount = plot.getRangeAxisCount();
-        for (int i = 0; i < rangeAxisCount; i++) {
-            ValueAxis axis = plot.getRangeAxis(i);
-            if (axis != null) {
-                applyToValueAxis(axis);
+        for (ValueAxis yAxis : plot.getRangeAxes().values()) {
+            if (yAxis != null) {
+                applyToValueAxis(yAxis);
             }
         }
 
         // process all renderers
-        int rendererCount = plot.getRendererCount();
-        for (int i = 0; i < rendererCount; i++) {
-            XYItemRenderer r = plot.getRenderer(i);
+        for (XYItemRenderer r : plot.getRenderers().values()) {
             if (r != null) {
                 applyToXYItemRenderer(r);
             }
         }
 
         // process all annotations
-        Iterator iter = plot.getAnnotations().iterator();
-        while (iter.hasNext()) {
-            XYAnnotation a = (XYAnnotation) iter.next();
+        for (XYAnnotation a : plot.getAnnotations()) {
             applyToXYAnnotation(a);
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
             CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
-                }
+                }                
             }
         }
         if (plot instanceof CombinedRangeXYPlot) {
             CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1590,19 +1571,22 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         StandardChartTheme that = (StandardChartTheme) obj;
-        if (!this.name.equals(that.name)) {
+        if (!Objects.equals(this.name, that.name)) {
             return false;
         }
-        if (!this.extraLargeFont.equals(that.extraLargeFont)) {
+        if (!Objects.equals(this.extraLargeFont, that.extraLargeFont)) {
             return false;
         }
-        if (!this.largeFont.equals(that.largeFont)) {
+        if (!Objects.equals(this.largeFont, that.largeFont)) {
             return false;
         }
-        if (!this.regularFont.equals(that.regularFont)) {
+        if (!Objects.equals(this.regularFont, that.regularFont)) {
             return false;
         }
-        if (!this.smallFont.equals(that.smallFont)) {
+        if (!Objects.equals(this.smallFont, that.smallFont)) {
+            return false;
+        }
+        if (!Objects.equals(this.drawingSupplier, that.drawingSupplier)) {
             return false;
         }
         if (!PaintUtils.equal(this.titlePaint, that.titlePaint)) {
@@ -1612,45 +1596,45 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         if (!PaintUtils.equal(this.chartBackgroundPaint,
-                that.chartBackgroundPaint)) {
+                              that.chartBackgroundPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.legendBackgroundPaint,
-                that.legendBackgroundPaint)) {
+                              that.legendBackgroundPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.legendItemPaint, that.legendItemPaint)) {
             return false;
         }
-        if (!this.drawingSupplier.equals(that.drawingSupplier)) {
-            return false;
-        }
         if (!PaintUtils.equal(this.plotBackgroundPaint,
-                that.plotBackgroundPaint)) {
+                              that.plotBackgroundPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.plotOutlinePaint,
-                that.plotOutlinePaint)) {
+                              that.plotOutlinePaint)) {
             return false;
         }
-        if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
+        if (!Objects.equals(this.labelLinkStyle, that.labelLinkStyle)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
-                that.domainGridlinePaint)) {
+                              that.domainGridlinePaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeGridlinePaint,
-                that.rangeGridlinePaint)) {
+                              that.rangeGridlinePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.baselinePaint, that.baselinePaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.crosshairPaint, that.crosshairPaint)) {
             return false;
         }
-        if (!this.axisOffset.equals(that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
         if (!PaintUtils.equal(this.axisLabelPaint, that.axisLabelPaint)) {
@@ -1668,28 +1652,69 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
-        if (!this.barPainter.equals(that.barPainter)) {
+        if (!Objects.equals(this.barPainter, that.barPainter)) {
             return false;
         }
-        if (!this.xyBarPainter.equals(that.xyBarPainter)) {
+        if (!Objects.equals(this.xyBarPainter, that.xyBarPainter)) {
+            return false;
+        }
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         if (!PaintUtils.equal(this.thermometerPaint,
-                that.thermometerPaint)) {
+                              that.thermometerPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.errorIndicatorPaint,
-                that.errorIndicatorPaint)) {
+                              that.errorIndicatorPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.gridBandPaint, that.gridBandPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.gridBandAlternatePaint,
-                that.gridBandAlternatePaint)) {
+                              that.gridBandAlternatePaint)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.extraLargeFont);
+        hash = 83 * hash + Objects.hashCode(this.largeFont);
+        hash = 83 * hash + Objects.hashCode(this.regularFont);
+        hash = 83 * hash + Objects.hashCode(this.smallFont);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.titlePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.subtitlePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.chartBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.legendBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.legendItemPaint);
+        hash = 83 * hash + Objects.hashCode(this.drawingSupplier);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.plotBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.plotOutlinePaint);
+        hash = 83 * hash + Objects.hashCode(this.labelLinkStyle);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.labelLinkPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.domainGridlinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.rangeGridlinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.baselinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.crosshairPaint);
+        hash = 83 * hash + Objects.hashCode(this.axisOffset);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.axisLabelPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.tickLabelPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.itemLabelPaint);
+        hash = 83 * hash + (this.shadowVisible ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.shadowPaint);
+        hash = 83 * hash + Objects.hashCode(this.barPainter);
+        hash = 83 * hash + Objects.hashCode(this.xyBarPainter);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.thermometerPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.errorIndicatorPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.gridBandPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.gridBandAlternatePaint);
+        hash = 83 * hash + Objects.hashCode(this.shadowGenerator);
+        return hash;
     }
 
     /**

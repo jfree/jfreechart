@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,19 +27,10 @@
  * -------------------
  * LegendItemTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Jun-2004 : Version 1 (DG);
- * 10-Dec-2005 : Addded new test to cover bug report 1374328 (DG);
- * 13-Dec-2006 : Extended testEquals() for new fillPaintTransformer
- *               attribute (DG);
- * 23-Apr-2008 : Implemented Cloneable (DG);
- * 17-Jun-2008 : Included new fields in existing tests (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -56,18 +47,33 @@ import java.text.AttributedString;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
  * Tests for the {@link LegendItem} class.
  */
 public class LegendItemTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LegendItem.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(AttributedString.class, TestUtils.createAS(true), TestUtils.createAS(false))
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -95,7 +101,7 @@ public class LegendItemTest {
                 Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description", "ToolTip", "URL",
                 true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -108,7 +114,7 @@ public class LegendItemTest {
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -121,7 +127,7 @@ public class LegendItemTest {
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -134,7 +140,7 @@ public class LegendItemTest {
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -147,7 +153,7 @@ public class LegendItemTest {
                 false, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -160,7 +166,7 @@ public class LegendItemTest {
                 Color.BLACK, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
                 Color.BLACK, true, Color.BLUE, new BasicStroke(1.2f), true,
@@ -173,7 +179,7 @@ public class LegendItemTest {
                 false, Color.BLACK, false, Color.BLUE, new BasicStroke(1.2f),
                 true, new Line2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(2.1f), Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
                 Color.BLACK, false, Color.BLUE, new BasicStroke(1.2f), true,
@@ -186,7 +192,7 @@ public class LegendItemTest {
                 Color.BLACK, false, Color.YELLOW, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
                 Color.BLACK, false, Color.YELLOW, new BasicStroke(1.2f), true,
@@ -199,7 +205,7 @@ public class LegendItemTest {
                 Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
                 Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f), true,
@@ -212,7 +218,7 @@ public class LegendItemTest {
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
                 false, new Line2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(2.1f), Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
@@ -225,7 +231,7 @@ public class LegendItemTest {
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.1f), Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
@@ -238,7 +244,7 @@ public class LegendItemTest {
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(3.3f), Color.GREEN);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
@@ -252,7 +258,7 @@ public class LegendItemTest {
             new Line2D.Double(4.0, 3.0, 2.0, 1.0), new BasicStroke(3.3f),
             Color.WHITE
         );
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
@@ -264,27 +270,27 @@ public class LegendItemTest {
         // fillPaintTransformer
         item1.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
         assertEquals(item1, item2);
 
         // labelFont
         item1.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
         assertEquals(item1, item2);
 
         // labelPaint
         item1.setLabelPaint(Color.RED);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setLabelPaint(Color.RED);
         assertEquals(item1, item2);
 
         // fillPaint
         item1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.BLUE));
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.BLUE));
         assertEquals(item1, item2);
@@ -292,7 +298,7 @@ public class LegendItemTest {
         // outlinePaint
         item1.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.GREEN, 3.3f,
                 4.4f, Color.BLUE));
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.GREEN, 3.3f,
                 4.4f, Color.BLUE));
         assertEquals(item1, item2);
@@ -300,7 +306,7 @@ public class LegendItemTest {
         // linePaint
         item1.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.GREEN, 0.3f,
                 0.4f, Color.BLUE));
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.GREEN, 0.3f,
                 0.4f, Color.BLUE));
         assertEquals(item1, item2);
@@ -322,7 +328,7 @@ public class LegendItemTest {
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.RED));
         LegendItem item2;
-        item2 = (LegendItem) TestUtils.serialised(item1);
+        item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -335,7 +341,7 @@ public class LegendItemTest {
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED);
-        LegendItem item2 = (LegendItem) TestUtils.serialised(item1);
+        LegendItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,32 +27,22 @@
  * -------------------------
  * XYIntervalSeriesTest.java
  * -------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);
- * 13-Feb-2007 : Added testValues() (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
 package org.jfree.data.xy;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYIntervalSeries} class.
@@ -78,43 +68,43 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
     public void testEquals() {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         XYIntervalSeries s2 = new XYIntervalSeries("s1");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // seriesKey
         s1 = new XYIntervalSeries("s2");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XYIntervalSeries("s2");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // autoSort
         s1 = new XYIntervalSeries("s2", false, true);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XYIntervalSeries("s2", false, true);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // allowDuplicateValues
         s1 = new XYIntervalSeries("s2", false, false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new XYIntervalSeries("s2", false, false);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // add a value
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // add another value
         s1.add(2.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(2.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // remove a value
         s1.remove(1.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.remove(1.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
     }
 
     /**
@@ -126,9 +116,9 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.01);
         XYIntervalSeries s2 = (XYIntervalSeries) s1.clone();
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
     }
 
     /**
@@ -138,7 +128,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        XYIntervalSeries s2 = (XYIntervalSeries) TestUtils.serialised(s1);
+        XYIntervalSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

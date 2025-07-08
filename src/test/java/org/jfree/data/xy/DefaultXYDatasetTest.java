@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,29 +27,21 @@
  * --------------------------
  * DefaultXYDatasetTests.java
  * --------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jul-2006 : Version 1 (DG);
- * 02-Nov-2006 : Added testAddSeries() method (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link DefaultXYDataset}.
@@ -64,8 +56,8 @@ public class DefaultXYDatasetTest {
 
         DefaultXYDataset d1 = new DefaultXYDataset();
         DefaultXYDataset d2 = new DefaultXYDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
@@ -74,9 +66,9 @@ public class DefaultXYDatasetTest {
         double[] y2 = new double[] {4.0, 5.0, 6.0};
         double[][] data2 = new double[][] {x2, y2};
         d1.addSeries("S1", data1);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.addSeries("S1", data2);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -86,9 +78,9 @@ public class DefaultXYDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultXYDataset d1 = new DefaultXYDataset();
         DefaultXYDataset d2 = (DefaultXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // try a dataset with some content...
         double[] x1 = new double[] {1.0, 2.0, 3.0};
@@ -96,15 +88,15 @@ public class DefaultXYDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         d2 = (DefaultXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check that the clone doesn't share the same underlying arrays.
         x1[1] = 2.2;
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         x1[1] = 2.0;
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -123,7 +115,7 @@ public class DefaultXYDatasetTest {
     public void testSerialization() {
 
         DefaultXYDataset d1 = new DefaultXYDataset();
-        DefaultXYDataset d2 = (DefaultXYDataset) TestUtils.serialised(d1);
+        DefaultXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
@@ -131,7 +123,7 @@ public class DefaultXYDatasetTest {
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        d2 = (DefaultXYDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,10 @@
  * --------------
  * MonthTest.java
  * --------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2001 : Version 1 (DG);
- * 14-Feb-2002 : Order of parameters in Month(int, int) constructor
- *               changed (DG);
- * 26-Jun-2002 : Removed unnecessary import (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 11-Jan-2005 : Added non-clonability test (DG);
- * 05-Oct-2006 : Added some new tests (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -105,7 +92,7 @@ public class MonthTest {
     @Test
     public void testEqualsSelf() {
         Month month = new Month();
-        assertTrue(month.equals(month));
+        assertEquals(month, month);
     }
 
     /**
@@ -115,7 +102,7 @@ public class MonthTest {
     public void testEquals() {
         Month m1 = new Month(MonthConstants.MAY, 2002);
         Month m2 = new Month(MonthConstants.MAY, 2002);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -359,7 +346,7 @@ public class MonthTest {
     @Test
     public void testSerialization() {
         Month m1 = new Month(12, 1999);
-        Month m2 = (Month) TestUtils.serialised(m1);
+        Month m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -370,7 +357,7 @@ public class MonthTest {
     public void testHashcode() {
         Month m1 = new Month(2, 2003);
         Month m2 = new Month(2, 2003);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int h1 = m1.hashCode();
         int h2 = m2.hashCode();
         assertEquals(h1, h2);

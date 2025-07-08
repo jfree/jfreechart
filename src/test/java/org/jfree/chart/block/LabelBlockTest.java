@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,28 +27,25 @@
  * -------------------
  * LabelBlockTest.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Sep-2005 : Version 1 (DG);
- * 16-Mar-2007 : Check GradientPaint in testSerialization() (DG);
- * 10-Feb-2009 : Added new fields to testEquals() (DG);
+ * Original Author:  David Gilbert;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.jfree.chart.TestUtils.createR2D;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
@@ -62,6 +59,22 @@ import org.junit.jupiter.api.Test;
 public class LabelBlockTest {
 
     /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LabelBlock.class)
+            .withPrefabValues(Rectangle2D.class, createR2D(true), createR2D(false))
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
+    }
+
+    /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
     @Test
@@ -70,62 +83,63 @@ public class LabelBlockTest {
                 Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
                 Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
                 Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.BLUE);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.BLUE);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setToolTipText("Tooltip");
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setToolTipText("Tooltip");
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setURLText("URL");
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setURLText("URL");
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = (LabelBlock) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
     }
 
     /**
@@ -137,7 +151,7 @@ public class LabelBlockTest {
                 Color.BLUE);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = (LabelBlock) TestUtils.serialised(b1);
+        LabelBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

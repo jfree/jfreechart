@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,16 @@
  * ---------------------------
  * StandardBarPainterTest.java
  * ---------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jun-2008 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
@@ -71,7 +66,7 @@ public class StandardBarPainterTest {
     public void testHashcode() {
         StandardBarPainter p1 = new StandardBarPainter();
         StandardBarPainter p2 = new StandardBarPainter();
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
         assertEquals(h1, h2);
@@ -94,8 +89,7 @@ public class StandardBarPainterTest {
     @Test
     public void testSerialization() {
         StandardBarPainter p1 = new StandardBarPainter();
-        StandardBarPainter p2 = (StandardBarPainter) 
-                TestUtils.serialised(p1);
+        StandardBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

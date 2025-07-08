@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,9 @@
  * --------------------
  * VectorXYDataset.java
  * --------------------
- * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -50,7 +50,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The x-component of the vector.
      */
-    public double getVectorXValue(int series, int item);
+    double getVectorXValue(int series, int item);
 
     /**
      * Returns the y-component of the vector for an item in a series.
@@ -60,7 +60,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The y-component of the vector.
      */
-    public double getVectorYValue(int series, int item);
+    double getVectorYValue(int series, int item);
 
     /**
      * Returns the vector for an item in a series.  Depending on the particular
@@ -74,6 +74,6 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The vector (possibly {@code null}).
      */
-    public Vector getVector(int series, int item);
+    Vector getVector(int series, int item);
 
 }

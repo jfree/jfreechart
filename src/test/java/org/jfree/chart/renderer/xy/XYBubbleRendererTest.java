@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,25 +27,14 @@
  * -------------------------
  * XYBubbleRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 24-Jan-2007 : Added more checks to testEquals() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -55,6 +44,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYBubbleRenderer} class.
@@ -71,9 +62,9 @@ public class XYBubbleRendererTest {
         assertEquals(r1, r2);
 
         r1 = new XYBubbleRenderer(XYBubbleRenderer.SCALE_ON_RANGE_AXIS);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYBubbleRenderer(XYBubbleRenderer.SCALE_ON_RANGE_AXIS);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -83,7 +74,7 @@ public class XYBubbleRendererTest {
     public void testHashcode() {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
         XYBubbleRenderer r2 = new XYBubbleRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -96,9 +87,9 @@ public class XYBubbleRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
         XYBubbleRenderer r2 = (XYBubbleRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -116,7 +107,7 @@ public class XYBubbleRendererTest {
     @Test
     public void testSerialization() {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
-        XYBubbleRenderer r2 = (XYBubbleRenderer) TestUtils.serialised(r1);
+        XYBubbleRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
