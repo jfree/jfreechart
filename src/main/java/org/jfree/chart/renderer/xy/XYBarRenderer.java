@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -149,7 +149,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * The state class used by this renderer.
      */
-    protected class XYBarRendererState extends XYItemRendererState {
+    protected static class XYBarRendererState extends XYItemRendererState {
 
         /** Base for bars against the range axis, in Java 2D space. */
         private double g2Base;
@@ -194,7 +194,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /** Percentage margin (to reduce the width of bars). */
     private double margin;
 
-    /** A flag that controls whether or not bar outlines are drawn. */
+    /** A flag that controls whether bar outlines are drawn. */
     private boolean drawBarOutline;
 
     /**
@@ -227,7 +227,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private XYBarPainter barPainter;
 
     /**
-     * The flag that controls whether or not shadows are drawn for the bars.
+     * The flag that controls whether shadows are drawn for the bars.
      */
     private boolean shadowsVisible;
 
@@ -359,7 +359,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not bar outlines are drawn.
+     * Returns a flag that controls whether bar outlines are drawn.
      *
      * @return A boolean.
      *
@@ -370,7 +370,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not bar outlines are drawn and
+     * Sets the flag that controls whether bar outlines are drawn and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
@@ -510,7 +510,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not shadows are drawn for
+     * Returns the flag that controls whether shadows are drawn for
      * the bars.
      *
      * @return A boolean.
@@ -520,7 +520,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer
+     * Sets the flag that controls whether the renderer
      * draws shadows for the bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
@@ -733,7 +733,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param dataArea  the area within which the plot is being drawn.
      * @param info  collects information about the drawing.
      * @param plot  the plot (can be used to obtain standard color
-     *              information etc).
+     *              information etc.).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
@@ -1008,7 +1008,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
         
         // Taking the bounds of the bounds will ceil the rectangle to its
-        // smallest enclosing integer instance, this avoid rounding errors when
+        // smallest enclosing integer instance, this avoids rounding errors when
         // testing if the label fits
         Rectangle2D labelBar = getItemLabelInsets().createInsetRectangle(bar).getBounds();
         
@@ -1028,18 +1028,18 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
 
         String result = label;
-        while (result != null) {
-            Shape bounds = TextUtils.calculateRotatedStringBounds(result,
+        while (result != null && !result.isEmpty()) {
+            Rectangle2D labelBounds = TextUtils.calculateRotatedStringBounds(result,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
-                    position.getRotationAnchor());
-            Rectangle2D bounds2D = bounds == null ? null : bounds.getBounds2D();
+                    position.getRotationAnchor()).getBounds2D();
 
-            if (bounds2D != null && labelBar.contains(bounds2D)) {
+            if (labelBar.getHeight() >= labelBounds.getHeight()
+                    && labelBar.getWidth() >= labelBounds.getWidth()) {
                 // Label fits
                 return result;
-            } else if (bounds2D != null && labelBar.getHeight() < bounds2D.getHeight()) {
-                // Label will never fit, insufficient height
+            } else if (labelBar.getHeight() < labelBounds.getHeight()) {
+                // Optimization: label will never fit due to insufficient height
                 return null;
             } else {
                 switch (position.getItemLabelClip()) {

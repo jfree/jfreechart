@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------
@@ -37,7 +37,7 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
-import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.jfree.data.Range;
@@ -152,9 +152,9 @@ public class DateRange extends Range implements Serializable {
      */
     @Override
     public String toString() {
-        DateFormat df = DateFormat.getDateTimeInstance();
-        return "[" + df.format(getLowerDate()) + " --> "
-                + df.format(getUpperDate()) + "]";
+        DateTimeFormatter df = DateTimeFormatter.ISO_DATE_TIME;
+        return "[" + df.format(getLowerDate().toInstant()) + " --> "
+                + df.format(getUpperDate().toInstant()) + "]";
     }
 
 }

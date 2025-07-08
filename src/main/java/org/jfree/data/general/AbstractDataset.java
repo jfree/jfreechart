@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -165,7 +165,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     }
     
     /**
-     * Sets the notify flag, which controls whether or not the {@link #fireDatasetChanged()}
+     * Sets the notify flag, which controls whether the {@link #fireDatasetChanged()}
      * method notifies listeners.  Setting this flag to {@code true} will
      * trigger a {@code DatasetChangeEvent} because there may be 
      * queued up changes.
@@ -302,12 +302,12 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * registered during the deserialization process, as listeners are not
      * serialized. This method is called by the serialization system after the
      * entire graph is read.
-     *
+     * <p>
      * This object has registered itself to the system with a priority of 10.
      * Other callbacks may register with a higher priority number to be called
      * before this object, or with a lower priority number to be called after
      * the listeners were notified.
-     *
+     * <p>
      * All listeners are supposed to have register by now, either in their
      * readObject or validateObject methods. Notify them that this dataset has
      * changed.

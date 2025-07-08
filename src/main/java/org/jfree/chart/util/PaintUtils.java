@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -89,7 +89,7 @@ public class PaintUtils {
                     && gp1.getPoint1().equals(gp2.getPoint1())    
                     && gp1.getPoint2().equals(gp2.getPoint2())
                     && gp1.isCyclic() == gp2.isCyclic()
-                    && gp1.getTransparency() == gp1.getTransparency(); 
+                    && gp1.getTransparency() == gp2.getTransparency();
         } else if (p1 instanceof LinearGradientPaint 
                 && p2 instanceof LinearGradientPaint) {
             LinearGradientPaint lgp1 = (LinearGradientPaint) p1;

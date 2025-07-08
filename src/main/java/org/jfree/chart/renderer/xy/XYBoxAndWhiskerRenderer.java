@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -98,7 +98,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     /** The paint used to fill the box. */
     private transient Paint boxPaint;
 
-    /** A flag that controls whether or not the box is filled. */
+    /** A flag that controls whether the box is filled. */
     private boolean fillBox;
 
     /**
@@ -184,7 +184,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the box is filled.
+     * Returns the flag that controls whether the box is filled.
      *
      * @return A boolean.
      *
@@ -195,7 +195,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the box is filled and sends a
+     * Sets the flag that controls whether the box is filled and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.

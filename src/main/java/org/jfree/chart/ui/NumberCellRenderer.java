@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -53,9 +53,9 @@ public class NumberCellRenderer extends DefaultTableCellRenderer {
      *
      * @param table  the table.
      * @param value  the data to be rendered.
-     * @param isSelected  a boolean that indicates whether or not the cell is 
+     * @param isSelected  a boolean that indicates whether the cell is 
      *                    selected.
-     * @param hasFocus  a boolean that indicates whether or not the cell has 
+     * @param hasFocus  a boolean that indicates whether the cell has 
      *                  the focus.
      * @param row  the (zero-based) row index.
      * @param column  the (zero-based) column index.

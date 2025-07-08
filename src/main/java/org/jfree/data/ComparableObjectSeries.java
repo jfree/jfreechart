@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -62,7 +62,7 @@ public class ComparableObjectSeries extends Series
     /** A flag that controls whether the items are automatically sorted. */
     private boolean autoSort;
 
-    /** A flag that controls whether or not duplicate x-values are allowed. */
+    /** A flag that controls whether duplicate x-values are allowed. */
     private boolean allowDuplicateXValues;
 
     /**
@@ -78,10 +78,10 @@ public class ComparableObjectSeries extends Series
 
     /**
      * Constructs a new series that contains no data.  You can specify
-     * whether or not duplicate x-values are allowed for the series.
+     * whether duplicate x-values are allowed for the series.
      *
      * @param key  the series key ({@code null} not permitted).
-     * @param autoSort  a flag that controls whether or not the items in the
+     * @param autoSort  a flag that controls whether the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
@@ -186,7 +186,7 @@ public class ComparableObjectSeries extends Series
      *
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
-     * @param notify  a flag the controls whether or not a
+     * @param notify  a flag the controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
@@ -201,7 +201,7 @@ public class ComparableObjectSeries extends Series
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param item  the (x, y) item ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not a
+     * @param notify  a flag that controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */

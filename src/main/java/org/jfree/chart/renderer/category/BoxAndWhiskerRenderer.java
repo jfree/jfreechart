@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -100,7 +100,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /** The color used to paint the median line and average marker. */
     private transient Paint artifactPaint;
 
-    /** A flag that controls whether or not the box is filled. */
+    /** A flag that controls whether the box is filled. */
     private boolean fillBox;
 
     /** The margin between items (boxes) within a category. */
@@ -113,22 +113,22 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     private double maximumBarWidth;
 
     /**
-     * A flag that controls whether or not the median indicator is drawn.
+     * A flag that controls whether the median indicator is drawn.
      */
     private boolean medianVisible;
 
     /**
-     * A flag that controls whether or not the mean indicator is drawn.
+     * A flag that controls whether the mean indicator is drawn.
      */
     private boolean meanVisible;
     
     /**
-     * A flag that controls whether or not the maxOutlier is visible.
+     * A flag that controls whether the maxOutlier is visible.
      */
     private boolean maxOutlierVisible;
 
     /**
-     * A flag that controls whether or not the minOutlier is visible.
+     * A flag that controls whether the minOutlier is visible.
      */
     private boolean minOutlierVisible;
 
@@ -188,7 +188,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the box is filled.
+     * Returns the flag that controls whether the box is filled.
      *
      * @return A boolean.
      *
@@ -199,7 +199,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the box is filled and sends a
+     * Sets the flag that controls whether the box is filled and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
@@ -264,7 +264,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the mean indicator is
+     * Returns the flag that controls whether the mean indicator is
      * draw for each item.
      *
      * @return A boolean.
@@ -276,7 +276,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the mean indicator is drawn
+     * Sets the flag that controls whether the mean indicator is drawn
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -293,7 +293,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the median indicator is
+     * Returns the flag that controls whether the median indicator is
      * draw for each item.
      *
      * @return A boolean.
@@ -305,7 +305,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the median indicator is drawn
+     * Sets the flag that controls whether the median indicator is drawn
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -322,7 +322,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the minimum outlier is
+     * Returns the flag that controls whether the minimum outlier is
      * draw for each item.
      *
      * @return A boolean.
@@ -336,7 +336,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the minimum outlier is drawn
+     * Sets the flag that controls whether the minimum outlier is drawn
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -355,7 +355,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the maximum outlier is
+     * Returns the flag that controls whether the maximum outlier is
      * draw for each item.
      *
      * @return A boolean.
@@ -369,7 +369,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the maximum outlier is drawn
+     * Sets the flag that controls whether the maximum outlier is drawn
      * for each item, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *

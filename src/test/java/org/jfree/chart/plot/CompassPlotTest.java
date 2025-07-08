@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -41,7 +41,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-
+import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.jupiter.api.Test;
 
@@ -130,6 +130,15 @@ public class CompassPlotTest {
         assertNotSame(p1, p2);
         assertSame(p1.getClass(), p2.getClass());
         assertEquals(p1, p2);
+    }
+
+    /**
+     * Test faulty array bounds; CVE-2024-23077.
+     */
+    @Test
+    public void testArrayBounds() {
+        CompassPlot p = new CompassPlot(new DefaultValueDataset(0));
+        p.setSeriesNeedle(-1, new PointerNeedle());
     }
 
 }

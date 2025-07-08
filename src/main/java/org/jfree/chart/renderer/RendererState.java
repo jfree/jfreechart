@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -48,7 +48,7 @@ public class RendererState {
     private PlotRenderingInfo info;
     
     /** 
-     * A flag that indicates whether or not rendering hints should be added to
+     * A flag that indicates whether rendering hints should be added to
      * identify chart elements.  It is initialised from the corresponding flag
      * in the JFreeChart instance.
      */
@@ -65,7 +65,7 @@ public class RendererState {
     }
     
     /**
-     * Returns the flag that controls whether or not the renderer should 
+     * Returns the flag that controls whether the renderer should 
      * add rendering hints to the output that identify chart elements.
      * 
      * @return A boolean.

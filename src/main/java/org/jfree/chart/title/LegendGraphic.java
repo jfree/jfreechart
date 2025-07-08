@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -72,7 +72,7 @@ public class LegendGraphic extends AbstractBlock
     static final long serialVersionUID = -1338791523854985009L;
 
     /**
-     * A flag that controls whether or not the shape is visible - see also
+     * A flag that controls whether the shape is visible - see also
      * lineVisible.
      */
     private boolean shapeVisible;
@@ -94,7 +94,7 @@ public class LegendGraphic extends AbstractBlock
      */
     private RectangleAnchor shapeAnchor;
 
-    /** A flag that controls whether or not the shape is filled. */
+    /** A flag that controls whether the shape is filled. */
     private boolean shapeFilled;
 
     /** The fill paint for the shape. */
@@ -106,7 +106,7 @@ public class LegendGraphic extends AbstractBlock
      */
     private GradientPaintTransformer fillPaintTransformer;
 
-    /** A flag that controls whether or not the shape outline is visible. */
+    /** A flag that controls whether the shape outline is visible. */
     private boolean shapeOutlineVisible;
 
     /** The outline paint for the shape. */
@@ -116,7 +116,7 @@ public class LegendGraphic extends AbstractBlock
     private transient Stroke outlineStroke;
 
     /**
-     * A flag that controls whether or not the line is visible - see also
+     * A flag that controls whether the line is visible - see also
      * shapeVisible.
      */
     private boolean lineVisible;
@@ -150,7 +150,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns a flag that controls whether or not the shape
+     * Returns a flag that controls whether the shape
      * is visible.
      *
      * @return A boolean.
@@ -162,7 +162,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape is
+     * Sets a flag that controls whether the shape is
      * visible.
      *
      * @param visible  the flag.
@@ -196,7 +196,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns a flag that controls whether or not the shapes
+     * Returns a flag that controls whether the shapes
      * are filled.
      *
      * @return A boolean.
@@ -208,7 +208,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape is
+     * Sets a flag that controls whether the shape is
      * filled.
      *
      * @param filled  the flag.
@@ -278,7 +278,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the shape outline
+     * Sets a flag that controls whether the shape outline
      * is visible.
      *
      * @param visible  the flag.
@@ -382,7 +382,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns the flag that controls whether or not the line is visible.
+     * Returns the flag that controls whether the line is visible.
      *
      * @return A boolean.
      *
@@ -393,7 +393,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Sets the flag that controls whether or not the line is visible.
+     * Sets the flag that controls whether the line is visible.
      *
      * @param visible  the flag.
      *

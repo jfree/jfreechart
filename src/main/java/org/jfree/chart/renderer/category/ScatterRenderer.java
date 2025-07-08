@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -76,7 +76,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * filled.
      */
     private BooleanList seriesShapesFilled;
@@ -104,7 +104,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     private boolean useOutlinePaint;
 
     /**
-     * A flag that controls whether or not the x-position for each item is
+     * A flag that controls whether the x-position for each item is
      * offset within the category according to the series.
      */
     private boolean useSeriesOffset;
@@ -129,7 +129,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the x-position for each
+     * Returns the flag that controls whether the x-position for each
      * data item is offset within the category according to the series.
      *
      * @return A boolean.
@@ -141,7 +141,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the x-position for each
+     * Sets the flag that controls whether the x-position for each
      * data item is offset within its category according to the series, and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
@@ -244,7 +244,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     // SHAPES FILLED
 
     /**
-     * Returns the flag used to control whether or not the shape for an item
+     * Returns the flag used to control whether the shape for an item
      * is filled. The default implementation passes control to the
      * {@code getSeriesShapesFilled} method. You can override this method
      * if you require different behaviour.
@@ -258,7 +258,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are filled.
      *
      * @param series the series index (zero-based).

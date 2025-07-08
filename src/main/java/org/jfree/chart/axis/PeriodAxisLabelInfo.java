@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -97,7 +97,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     /** The label paint. */
     private transient Paint labelPaint;
 
-    /** A flag that controls whether or not dividers are visible. */
+    /** A flag that controls whether dividers are visible. */
     private boolean drawDividers;
 
     /** The stroke used to draw the dividers. */
@@ -202,7 +202,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not dividers are drawn.
+     * Returns a flag that controls whether dividers are drawn.
      *
      * @return A flag.
      */

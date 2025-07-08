@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -101,7 +101,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     private transient Shape legendLine;
 
     /**
-     * This flag controls whether or not the x-coordinates (in Java2D space)
+     * This flag controls whether the x-coordinates (in Java2D space)
      * are rounded to integers.  When set to true, this can avoid the vertical
      * striping that anti-aliasing can generate.  However, the rounding may not
      * be appropriate for output in high resolution formats (for example,
@@ -186,7 +186,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not shapes are drawn for each
+     * Returns a flag that controls whether shapes are drawn for each
      * data value.
      *
      * @return A boolean.
@@ -198,7 +198,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not shapes are drawn for each
+     * Sets a flag that controls whether shapes are drawn for each
      * data value, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -237,7 +237,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the x-coordinates (in
+     * Returns the flag that controls whether the x-coordinates (in
      * Java2D space) are rounded to integer values.
      *
      * @return The flag.
@@ -249,7 +249,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the x-coordinates (in
+     * Sets the flag that controls whether the x-coordinates (in
      * Java2D space) are rounded to integer values, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *

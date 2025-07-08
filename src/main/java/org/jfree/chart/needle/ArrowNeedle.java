@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -57,7 +57,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     private static final long serialVersionUID = -5334056511213782357L;
 
     /**
-     * A flag controlling whether or not there is an arrow at the top of the
+     * A flag controlling whether there is an arrow at the top of the
      * needle.
      */
     private boolean isArrowAtTop = true;
@@ -65,7 +65,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     /**
      * Constructs a new arrow needle.
      *
-     * @param isArrowAtTop  a flag that controls whether or not there is an
+     * @param isArrowAtTop  a flag that controls whether there is an
      *     arrow at the top of the needle.
      */
     public ArrowNeedle(boolean isArrowAtTop) {

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * JSON.simple
  * -----------
@@ -22,7 +22,6 @@
  */
 
 package org.jfree.data.json.impl;
-
 
 import java.io.IOException;
 import java.io.Writer;
@@ -43,6 +42,13 @@ public class JSONObject extends HashMap implements Map, JSONAware,
         JSONStreamAware {
     
     private static final long serialVersionUID = -503443796854799292L;
+
+    /**
+     * Creates a new instance.
+     */
+    public JSONObject() {
+        super();
+    }
 
     /**
      * Encode a map into JSON text and write it to out.

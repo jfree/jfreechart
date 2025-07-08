@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -101,7 +101,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     private Color centerTextColor;
     
     /**
-     * A flag that controls whether or not separators are drawn between the
+     * A flag that controls whether separators are drawn between the
      * sections of the chart.
      */
     private boolean separatorsVisible;
@@ -272,7 +272,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     }
     
     /**
-     * Returns a flag that indicates whether or not separators are drawn between
+     * Returns a flag that indicates whether separators are drawn between
      * the sections in the chart.
      *
      * @return A boolean.
@@ -284,7 +284,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not separators are drawn between
+     * Sets the flag that controls whether separators are drawn between
      * the sections in the chart, and sends a change event to all registered 
      * listeners.
      *

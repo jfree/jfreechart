@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -261,7 +261,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private transient Paint rangeMinorGridlinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the domain
+     * A flag that controls whether the zero baseline against the domain
      * axis is visible.
      */
     private boolean domainZeroBaselineVisible;
@@ -277,7 +277,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private transient Paint domainZeroBaselinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the range
+     * A flag that controls whether the zero baseline against the range
      * axis is visible.
      */
     private boolean rangeZeroBaselineVisible;
@@ -288,7 +288,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     /** The paint used for the zero baseline against the range axis. */
     private transient Paint rangeZeroBaselinePaint;
 
-    /** A flag that controls whether or not a domain crosshair is drawn..*/
+    /** A flag that controls whether a domain crosshair is drawn..*/
     private boolean domainCrosshairVisible;
 
     /** The domain crosshair value. */
@@ -301,12 +301,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private transient Paint domainCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean domainCrosshairLockedOnData = true;
 
-    /** A flag that controls whether or not a range crosshair is drawn..*/
+    /** A flag that controls whether a range crosshair is drawn..*/
     private boolean rangeCrosshairVisible;
 
     /** The range crosshair value. */
@@ -319,7 +319,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private transient Paint rangeCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean rangeCrosshairLockedOnData = true;
@@ -382,13 +382,13 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the domain
+     * A flag that controls whether panning is enabled for the domain
      * axis/axes.
      */
     private boolean domainPannable;
 
     /**
-     * A flag that controls whether or not panning is enabled for the range
+     * A flag that controls whether panning is enabled for the range
      * axis/axes.
      */
     private boolean rangePannable;
@@ -1586,7 +1586,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the domain grid-lines are
+     * Sets the flag that controls whether the domain grid-lines are
      * visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1616,7 +1616,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the domain minor grid-lines
+     * Sets the flag that controls whether the domain minor grid-lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1754,7 +1754,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis grid lines
+     * Sets the flag that controls whether the range axis grid lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1836,7 +1836,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis minor grid
+     * Sets the flag that controls whether the range axis minor grid
      * lines are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1906,7 +1906,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the domain axis.
      *
      * @return A boolean.
@@ -1918,7 +1918,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the domain axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -1983,7 +1983,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the range axis.
      *
      * @return A boolean.
@@ -1995,7 +1995,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the range axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -2312,7 +2312,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param marker  the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker) {
@@ -2326,7 +2326,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker, Layer layer) {
@@ -2341,7 +2341,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
@@ -2357,7 +2357,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param layer  the layer (foreground or background).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
@@ -2514,7 +2514,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param marker the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(Marker marker) {
@@ -2528,7 +2528,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(Marker marker, Layer layer) {
@@ -2543,7 +2543,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
@@ -2559,7 +2559,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param layer  the layer (foreground or background) ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
@@ -2617,7 +2617,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param annotation  the annotation ({@code null} not permitted).
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      *
      * @see #addAnnotation(XYAnnotation)
      * @see #getAnnotations()
@@ -2633,7 +2633,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      */
     public boolean removeAnnotation(XYAnnotation annotation, boolean notify) {
         Args.nullNotPermitted(annotation, "annotation");
@@ -4244,7 +4244,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag indicating whether or not the domain crosshair is visible.
+     * Returns a flag indicating whether the domain crosshair is visible.
      *
      * @return The flag.
      *
@@ -4255,7 +4255,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag indicating whether or not the domain crosshair is visible
+     * Sets the flag indicating whether the domain crosshair is visible
      * and, if the flag changes, sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -4271,7 +4271,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -4283,7 +4283,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag indicating whether or not the domain crosshair should
+     * Sets the flag indicating whether the domain crosshair should
      * "lock-on" to actual data values.  If the flag value changes, this
      * method sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -4394,7 +4394,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag indicating whether or not the range crosshair is visible.
+     * Returns a flag indicating whether the range crosshair is visible.
      *
      * @return The flag.
      *
@@ -4406,7 +4406,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair is visible.
+     * Sets the flag indicating whether the range crosshair is visible.
      * If the flag value changes, this method sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -4422,7 +4422,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -4434,7 +4434,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair should
+     * Sets the flag indicating whether the range crosshair should
      * "lock-on" to actual data values.  If the flag value changes, this method
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -4479,7 +4479,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * all registered listeners, but only if the crosshair is visible.
      *
      * @param value  the new value.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRangeCrosshairValue()
@@ -4810,7 +4810,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -89,7 +89,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     private double h;
 
     /**
-     * A flag indicating whether or not the annotation should contribute to
+     * A flag indicating whether the annotation should contribute to
      * the data range for a plot/renderer.
      */
     private boolean includeInDataBounds;
@@ -116,7 +116,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate (in data space).
      * @param w  the image display area width.
      * @param h  the image display area height.
-     * @param includeInDataBounds  a flag that controls whether or not the
+     * @param includeInDataBounds  a flag that controls whether the
      *     annotation is included in the data bounds for the axis autoRange.
      */
     public XYDataImageAnnotation(Image image, double x, double y, double w,
@@ -180,7 +180,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Returns the flag that controls whether or not the annotation should
+     * Returns the flag that controls whether the annotation should
      * contribute to the autoRange for the axis it is plotted against.
      *
      * @return A boolean.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -456,7 +456,7 @@ public abstract class SerialDate implements Comparable, Serializable,
     }
 
     /**
-     * Determines whether or not the specified year is a leap year.
+     * Determines whether the specified year is a leap year.
      *
      * @param yyyy  the year (in the range 1900 to 9999).
      *
@@ -922,12 +922,12 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Returns {@code true} if this {@link SerialDate} is within the 
-     * specified range (caller specifies whether or not the end-points are 
+     * specified range (caller specifies whether the end-points are 
      * included).  The date order of d1 and d2 is not important.
      *
      * @param d1  a boundary date for the range.
      * @param d2  the other boundary date for the range.
-     * @param include  a code that controls whether or not the start and end 
+     * @param include  a code that controls whether the start and end 
      *                 dates are included in the range.
      *
      * @return A boolean.

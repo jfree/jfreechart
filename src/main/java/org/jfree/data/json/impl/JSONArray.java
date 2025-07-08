@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * JSON.simple
  * -----------
@@ -42,6 +42,13 @@ public class JSONArray extends ArrayList implements List, JSONAware,
         JSONStreamAware {
 
     private static final long serialVersionUID = 3957988303675231981L;
+
+    /**
+     * Creates a new instance.
+     */
+    public JSONArray() {
+        super();
+    }
 
     /**
      * Encode a list into JSON text and write it to out. 

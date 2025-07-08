@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -43,6 +43,10 @@ import java.awt.geom.Rectangle2D;
  * Some utility methods for {@link Line2D} objects.
  */
 public class LineUtils {
+
+    private LineUtils() {
+        // no requirement to instantiate
+    }
 
     /**
      * Clips the specified line to the given rectangle.  If any of the line

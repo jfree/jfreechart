@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -68,10 +68,10 @@ import org.jfree.chart.util.ResourceBundleWrapper;
  */
 class DefaultTitleEditor extends JPanel implements ActionListener {
 
-    /** Whether or not to display the title on the chart. */
+    /** whether to display the title on the chart. */
     private boolean showTitle;
 
-    /** The checkbox to indicate whether or not to display the title. */
+    /** The checkbox to indicate whether to display the title. */
     private JCheckBox showTitleCheckBox;
 
     /** A field for displaying/editing the title text. */

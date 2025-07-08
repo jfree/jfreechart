@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -67,7 +67,7 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultValueAxisEditor extends DefaultAxisEditor 
         implements FocusListener {
 
-    /** A flag that indicates whether or not the axis range is determined
+    /** A flag that indicates whether the axis range is determined
      *  automatically.
      */
     private boolean autoRange;
@@ -81,7 +81,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     /** The highest value in the axis range. */
     private double maximumValue;
 
-    /** A checkbox that indicates whether or not the axis range is determined
+    /** A checkbox that indicates whether the axis range is determined
      *  automatically.
      */
     private JCheckBox autoRangeCheckBox;
@@ -199,7 +199,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Getter for the {@link #autoTickUnitSelection} flag.
+     * Getter for the {@code #autoTickUnitSelection} flag.
      * 
      * @return The value of the flag for enabling auto-tickunit-selection.
      */
@@ -208,7 +208,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     }
 
     /**
-     * Setter for the {@link #autoTickUnitSelection} flag.
+     * Setter for the {@code #autoTickUnitSelection} flag.
      * @param autoTickUnitSelection The new value for auto-tickunit-selection.
      */
     protected void setAutoTickUnitSelection(boolean autoTickUnitSelection) {

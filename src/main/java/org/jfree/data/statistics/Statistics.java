@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -39,7 +39,6 @@ package org.jfree.data.statistics;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.Args;
 
@@ -47,6 +46,10 @@ import org.jfree.chart.util.Args;
  * A utility class that provides some common statistical functions.
  */
 public abstract class Statistics {
+
+    private Statistics() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the mean of an array of numbers.  This is equivalent to calling
@@ -64,7 +67,7 @@ public abstract class Statistics {
      * Returns the mean of an array of numbers.
      *
      * @param values  the values ({@code null} not permitted).
-     * @param includeNullAndNaN  a flag that controls whether or not
+     * @param includeNullAndNaN  a flag that controls whether
      *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).
@@ -92,8 +95,7 @@ public abstract class Statistics {
                 counter++;
             }
         }
-        double result = (sum / counter);
-        return result;
+        return (sum / counter);
     }
 
     /**
@@ -111,7 +113,7 @@ public abstract class Statistics {
      * Returns the mean of a collection of {@code Number} objects.
      *
      * @param values  the values ({@code null} not permitted).
-     * @param includeNullAndNaN  a flag that controls whether or not
+     * @param includeNullAndNaN  a flag that controls whether
      *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).
@@ -124,9 +126,7 @@ public abstract class Statistics {
         Args.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
-        Iterator iterator = values.iterator();
-        while (iterator.hasNext()) {
-            Object object = iterator.next();
+        for (Object object : values) {
             if (object == null) {
                 if (includeNullAndNaN) {
                     return Double.NaN;

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -109,16 +109,16 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /** Constant for the type of rendering (discontinuous lines). */
     public static final int DISCONTINUOUS_LINES = LINES | DISCONTINUOUS;
 
-    /** A flag indicating whether or not shapes are drawn at each XY point. */
+    /** A flag indicating whether shapes are drawn at each XY point. */
     private boolean baseShapesVisible;
 
-    /** A flag indicating whether or not lines are drawn between XY points. */
+    /** A flag indicating whether lines are drawn between XY points. */
     private boolean plotLines;
 
-    /** A flag indicating whether or not images are drawn between XY points. */
+    /** A flag indicating whether images are drawn between XY points. */
     private boolean plotImages;
 
-    /** A flag controlling whether or not discontinuous lines are used. */
+    /** A flag controlling whether discontinuous lines are used. */
     private boolean plotDiscontinuous;
 
     /** Specifies how the gap threshold value is interpreted. */
@@ -128,7 +128,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     private double gapThreshold = 1.0;
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * filled.
      */
     private BooleanList seriesShapesFilled;
@@ -137,7 +137,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     private boolean baseShapesFilled;
 
     /**
-     * A flag that controls whether or not each series is drawn as a single
+     * A flag that controls whether each series is drawn as a single
      * path.
      */
     private boolean drawSeriesLineAsPath;
@@ -227,7 +227,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not a shape is plotted at each
+     * Sets the flag that controls whether a shape is plotted at each
      * data point.
      *
      * @param flag  the flag.
@@ -244,7 +244,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     // SHAPES FILLED
 
     /**
-     * Returns the flag used to control whether or not the shape for an item is
+     * Returns the flag used to control whether the shape for an item is
      * filled.
      * <p>
      * The default implementation passes control to the
@@ -271,7 +271,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are filled.
      *
      * @param series  the series index (zero-based).
@@ -331,7 +331,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not a line is plotted between
+     * Sets the flag that controls whether a line is plotted between
      * each data point and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -407,7 +407,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not an image is drawn at each
+     * Sets the flag that controls whether an image is drawn at each
      * data point and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -423,7 +423,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not the renderer shows
+     * Returns a flag that controls whether the renderer shows
      * discontinuous lines.
      *
      * @return {@code true} if lines should be discontinuous.
@@ -433,7 +433,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer shows
+     * Sets the flag that controls whether the renderer shows
      * discontinuous lines, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -447,7 +447,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not each series is drawn as a
+     * Returns a flag that controls whether each series is drawn as a
      * single path.
      *
      * @return A boolean.
@@ -459,7 +459,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not each series is drawn as a
+     * Sets the flag that controls whether each series is drawn as a
      * single path.
      *
      * @param flag  the flag.

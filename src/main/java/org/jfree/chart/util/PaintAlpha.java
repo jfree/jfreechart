@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -79,6 +79,10 @@ public class PaintAlpha {
 
     private static boolean legacyAlpha = false;
 
+    private PaintAlpha() {
+        // no requirement to instantiate
+    }
+
     /**
      * Per default {@code PaintAlpha} will try to honour alpha-channel
      * information.  In the past this was not the case.
@@ -98,10 +102,10 @@ public class PaintAlpha {
     /**
      * Create a new (if possible, darker) {@code Paint} of the same Type.
      * If the Type is not supported, the original {@code Paint} is returned.
-     * <p>
+     *
      * @param paint a {@code Paint} implementation
      * (e.g. {@link Color}, {@link GradientPaint}, {@link TexturePaint},..)
-     * <p>
+     *
      * @return a (usually new, see above) {@code Paint}
      */
     public static Paint darker(Paint paint) {
@@ -220,7 +224,7 @@ public class PaintAlpha {
      * @return a darker version of the {@code TexturePaint}
      */
     private static TexturePaint darkerTexturePaint(TexturePaint paint) {
-        /**
+        /*
          * Color Models with pre-multiplied Alpha tested OK without any
          * special logic
          *
@@ -241,11 +245,11 @@ public class PaintAlpha {
 
         final int   wid = ras.getWidth();
 
-        /**/  int[] pix = new int[wid * img.getSampleModel().getNumBands()];
-        /* (pix-buffer is large enough for all pixels of one row) */
+        int[] pix = new int[wid * img.getSampleModel().getNumBands()];
+        // (pix-buffer is large enough for all pixels of one row) */
 
-        /**
-         * Indexed Color Models (sort of a Palette) CANNOT be simply
+        /*
+         * Indexed Color Models (sort of Palette) CANNOT be simply
          * multiplied (the pixel-value is just an index into the Palette).
          *
          * Fortunately, IndexColorModel.getComponents(..) resolves the colors.
@@ -286,13 +290,13 @@ public class PaintAlpha {
             return new TexturePaint(img, paint.getAnchorRect());
         }
 
-        /**
+        /*
          * For the other 2 Color Models, java.awt.image.ComponentColorModel and
          * java.awt.image.DirectColorModel, the order of subpixels returned by
          * ras.getPixels(..) was observed to correspond to the following...
          */
         if (img.getSampleModel().getNumBands() == 4) {
-            /**
+            /*
              * The following Image Types have an Alpha-channel which we will
              * leave unchanged:
              *
@@ -325,7 +329,7 @@ public class PaintAlpha {
             }
             img.setData(ras);
             return new TexturePaint(img, paint.getAnchorRect());
-            /**
+            /*
              * Above, we multiplied every pixel by our FACTOR because the
              * applicable Image Types consist only of color or grey channels:
              *

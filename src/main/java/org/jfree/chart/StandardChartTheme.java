@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -78,16 +78,8 @@ import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.chart.plot.ThermometerPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
-import org.jfree.chart.renderer.category.BarPainter;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
-import org.jfree.chart.renderer.category.StatisticalBarRenderer;
-import org.jfree.chart.renderer.xy.GradientXYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.category.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.title.CompositeTitle;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.PaintScaleLegend;
@@ -111,7 +103,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
 
     /** The name of this theme. */
-    private String name;
+    private final String name;
 
     /**
      * The largest font size.  Use for the main chart title.
@@ -169,7 +161,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /** The range grid line paint. */
     private transient Paint rangeGridlinePaint;
 
-    /* The baseline paint (used for domain and range zero baselines). */
+    /** The baseline paint (used for domain and range zero baselines) */
     private transient Paint baselinePaint;
 
     /** The crosshair paint. */
@@ -188,7 +180,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint itemLabelPaint;
 
     /**
-     * A flag that controls whether or not shadows are visible (for example,
+     * A flag that controls whether shadows are visible (for example,
      * in a bar renderer).
      */
     private boolean shadowVisible;
@@ -215,7 +207,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint gridBandAlternatePaint
             = SymbolAxis.DEFAULT_GRID_BAND_ALTERNATE_PAINT;
 
-    /* The shadow generator (can be null). */
+    /** The shadow generator (can be null). */
     private ShadowGenerator shadowGenerator;
 
     /**
@@ -325,8 +317,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.crosshairPaint = Color.BLUE;
         this.axisLabelPaint = Color.DARK_GRAY;
         this.tickLabelPaint = Color.DARK_GRAY;
-        this.barPainter = new GradientBarPainter();
-        this.xyBarPainter = new GradientXYBarPainter();
+        this.barPainter = new StandardBarPainter();
+        this.xyBarPainter = new StandardXYBarPainter();
         this.shadowVisible = false;
         this.shadowPaint = Color.GRAY;
         this.itemLabelPaint = Color.BLACK;
@@ -1137,7 +1129,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a plot.
      *
-     * @param plot  the plot ({@code null}).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPlot(Plot plot) {
         Args.nullNotPermitted(plot, "plot");

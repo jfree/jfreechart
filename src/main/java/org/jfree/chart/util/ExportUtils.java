@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -57,11 +57,15 @@ import org.jfree.chart.ui.Drawable;
  */
 public class ExportUtils {
 
+    private ExportUtils() {
+        // no need to instantiate
+    }
+
     /**
      * Returns {@code true} if JFreeSVG is on the classpath, and 
      * {@code false} otherwise.  The JFreeSVG library can be found at
-     * http://www.jfree.org/jfreesvg/
-     * 
+     * https://www.jfree.org/jfreesvg/
+     *
      * @return A boolean.
      */
     public static boolean isJFreeSVGAvailable() {

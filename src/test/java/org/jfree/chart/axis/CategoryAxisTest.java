@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -102,9 +102,9 @@ public class CategoryAxisTest {
         assertEquals(a1, a2);
 
         // categoryLabelURLs
-        a1.addCategoryLabelURL("Test", "http://www.jfree.org/");
+        a1.addCategoryLabelURL("Test", "https://www.jfree.org/");
         assertNotEquals(a1, a2);
-        a2.addCategoryLabelURL("Test", "http://www.jfree.org/");
+        a2.addCategoryLabelURL("Test", "https://www.jfree.org/");
         assertEquals(a1, a2);
 
         // tickLabelFont

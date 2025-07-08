@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -73,7 +73,7 @@ public class JDBCCategoryDataset extends DefaultCategoryDataset {
     private transient Connection connection;
 
     /**
-     * A flag the controls whether or not the table is transposed.  The default
+     * A flag the controls whether the table is transposed.  The default
      * is 'true' because this provides the behaviour described in the
      * documentation.
      */
@@ -130,7 +130,7 @@ public class JDBCCategoryDataset extends DefaultCategoryDataset {
     }
 
     /**
-     * Returns a flag that controls whether or not the table values are
+     * Returns a flag that controls whether the table values are
      * transposed when added to the dataset.
      *
      * @return A boolean.
@@ -140,7 +140,7 @@ public class JDBCCategoryDataset extends DefaultCategoryDataset {
     }
 
     /**
-     * Sets a flag that controls whether or not the table values are transposed
+     * Sets a flag that controls whether the table values are transposed
      * when added to the dataset.
      *
      * @param transpose  the flag.

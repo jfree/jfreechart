@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -68,11 +68,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import javax.swing.UIManager;
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.block.BlockParams;
@@ -140,8 +138,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             = new Font("SansSerif", Font.BOLD, 18);
 
     /** The default background color. */
-    public static final Paint DEFAULT_BACKGROUND_PAINT
-            = UIManager.getColor("Panel.background");
+    public static final Paint DEFAULT_BACKGROUND_PAINT = Color.LIGHT_GRAY;
 
     /** The default background image. */
     public static final Image DEFAULT_BACKGROUND_IMAGE = null;
@@ -174,7 +171,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     /** The chart id (optional, will be used by JFreeSVG export). */
     private String id;
     
-    /** A flag that controls whether or not the chart border is drawn. */
+    /** A flag that controls whether the chart border is drawn. */
     private boolean borderVisible;
 
     /** The stroke used to draw the chart border (if visible). */
@@ -193,7 +190,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * The chart subtitles (zero, one or many).  This field should never be
      * {@code null}.
      */
-    private List subtitles;
+    private List<Title> subtitles;
 
     /** Draws the visual representation of the data. */
     private Plot plot;
@@ -223,7 +220,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     private boolean notify;
 
     /** 
-     * A flag that controls whether or not rendering hints that identify
+     * A flag that controls whether rendering hints that identify
      * chart element should be added during rendering.  This defaults to false
      * and it should only be enabled if the output target will use the hints.
      * JFreeSVG is one output target that supports these hints.
@@ -263,7 +260,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
     /**
      * Creates a new chart with the given title and plot.  The
-     * {@code createLegend} argument specifies whether or not a legend
+     * {@code createLegend} argument specifies whether a legend
      * should be added to the chart.
      * <br><br>
      * Note that the  {@link ChartFactory} class contains a range
@@ -275,7 +272,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *                   ({@code null} permitted).
      * @param plot  controller of the visual representation of the data
      *              ({@code null} not permitted).
-     * @param createLegend  a flag indicating whether or not a legend should
+     * @param createLegend  a flag indicating whether a legend should
      *                      be created for the chart.
      */
     public JFreeChart(String title, Font titleFont, Plot plot,
@@ -308,7 +305,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         this.plot = plot;
         plot.addChangeListener(this);
 
-        this.subtitles = new ArrayList();
+        this.subtitles = new ArrayList<>();
 
         // create a legend, if requested...
         if (createLegend) {
@@ -355,7 +352,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
     
     /**
-     * Returns the flag that controls whether or not rendering hints 
+     * Returns the flag that controls whether rendering hints 
      * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
      * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
      * added during rendering.  The default value is {@code false}.
@@ -369,7 +366,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
     
     /**
-     * Sets the flag that controls whether or not rendering hints 
+     * Sets the flag that controls whether rendering hints 
      * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
      * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
      * added during rendering.
@@ -409,7 +406,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not a border is drawn around the
+     * Returns a flag that controls whether a border is drawn around the
      * outside of the chart.
      *
      * @return A boolean.
@@ -421,7 +418,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not a border is drawn around the
+     * Sets a flag that controls whether a border is drawn around the
      * outside of the chart.
      *
      * @param visible  the flag.
@@ -599,14 +596,11 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      */
     public LegendTitle getLegend(int index) {
         int seen = 0;
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title subtitle = (Title) iterator.next();
+        for (Title subtitle : this.subtitles) {
             if (subtitle instanceof LegendTitle) {
                 if (seen == index) {
                     return (LegendTitle) subtitle;
-                }
-                else {
+                } else {
                     seen++;
                 }
             }
@@ -631,8 +625,8 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @see #setSubtitles(List)
      */
-    public List getSubtitles() {
-        return new ArrayList(this.subtitles);
+    public List<Title> getSubtitles() {
+        return new ArrayList<>(this.subtitles);
     }
 
     /**
@@ -645,15 +639,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @see #getSubtitles()
      */
-    public void setSubtitles(List subtitles) {
+    public void setSubtitles(List<Title> subtitles) {
         if (subtitles == null) {
             throw new NullPointerException("Null 'subtitles' argument.");
         }
         setNotify(false);
         clearSubtitles();
-        Iterator iterator = subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title t = (Title) iterator.next();
+        for (Title t : subtitles) {
             if (t != null) {
                 addSubtitle(t);
             }
@@ -685,7 +677,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if ((index < 0) || (index >= getSubtitleCount())) {
             throw new IllegalArgumentException("Index out of range.");
         }
-        return (Title) this.subtitles.get(index);
+        return this.subtitles.get(index);
     }
 
     /**
@@ -728,9 +720,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #addSubtitle(Title)
      */
     public void clearSubtitles() {
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title t = (Title) iterator.next();
+        for (Title t : this.subtitles) {
             t.removeChangeListener(this);
         }
         this.subtitles.clear();
@@ -790,7 +780,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that indicates whether or not anti-aliasing is used when
+     * Returns a flag that indicates whether antialiasing is used when
      * the chart is drawn.
      *
      * @return The flag.
@@ -803,10 +793,10 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that indicates whether or not anti-aliasing is used when the
+     * Sets a flag that indicates whether antialiasing is used when the
      * chart is drawn.
      * <P>
-     * Anti-aliasing usually improves the appearance of charts, but is slower.
+     * Antialiasing usually improves the appearance of charts, but is slower.
      *
      * @param flag  the new value of the flag.
      *
@@ -994,7 +984,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns a flag that controls whether or not change events are sent to
+     * Returns a flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -1006,7 +996,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Sets a flag that controls whether or not listeners receive
+     * Sets a flag that controls whether listeners receive
      * {@link ChartChangeEvent} notifications.
      *
      * @param notify  a boolean.
@@ -1066,7 +1056,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
                 ChartProgressEvent.DRAWING_STARTED, 0));
         
         if (this.elementHinting) {
-            Map m = new HashMap<String, String>();
+            Map<String, String> m = new HashMap<>();
             if (this.id != null) {
                 m.put("id", this.id);
             }
@@ -1139,9 +1129,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             }
         }
 
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title currentTitle = (Title) iterator.next();
+        for (Title currentTitle : this.subtitles) {
             if (currentTitle.isVisible()) {
                 EntityCollection e = drawTitle(currentTitle, g2, nonTitleArea,
                         (entities != null));
@@ -1215,7 +1203,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @param g2  the graphics device ({@code null} not permitted).
      * @param area  the chart area, excluding any existing titles
      *              ({@code null} not permitted).
-     * @param entities  a flag that controls whether or not an entity
+     * @param entities  a flag that controls whether an entity
      *                  collection is returned for the title.
      *
      * @return An entity collection for the title (possibly {@code null}).
@@ -1617,7 +1605,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         this.renderingHints.put(RenderingHints.KEY_STROKE_CONTROL,
                 RenderingHints.VALUE_STROKE_PURE);
         
-        // register as a listener with sub-components...
+        // register as a listener with subcomponents...
         if (this.title != null) {
             this.title.addChangeListener(this);
         }
