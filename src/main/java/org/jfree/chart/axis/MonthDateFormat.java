@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------------
@@ -127,10 +127,10 @@ public class MonthDateFormat extends DateFormat {
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
-     * @param showYearForJan  a flag that controls whether or not the year is
+     * @param showYearForJan  a flag that controls whether the year is
      *                        appended to the symbol for the first month of
      *                        each year.
-     * @param showYearForDec  a flag that controls whether or not the year is
+     * @param showYearForDec  a flag that controls whether the year is
      *                        appended to the symbol for the last month of
      *                        each year.
      */
@@ -151,12 +151,13 @@ public class MonthDateFormat extends DateFormat {
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
-     * @param showYear  an array of flags that control whether or not the
+     * @param showYear  an array of flags that control whether the
      *                  year is displayed for a particular month.
      * @param yearFormatter  the year formatter.
      */
     public MonthDateFormat(TimeZone zone, Locale locale, int chars,
                            boolean[] showYear, DateFormat yearFormatter) {
+        super();
         Args.nullNotPermitted(locale, "locale");
         DateFormatSymbols dfs = new DateFormatSymbols(locale);
         String[] monthsFromLocale = dfs.getMonths();
@@ -171,7 +172,7 @@ public class MonthDateFormat extends DateFormat {
             }
         }
         this.calendar = new GregorianCalendar(zone);
-        this.showYear = showYear;
+        this.showYear = showYear.clone();
         this.yearFormatter = yearFormatter;
 
         // the following is never used, but it seems that DateFormat requires

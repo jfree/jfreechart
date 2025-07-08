@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -103,7 +103,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /** The label font. */
     private Font labelFont;
 
-    /** A flag that controls whether or not a border is drawn. */
+    /** A flag that controls whether a border is drawn. */
     private boolean drawBorder = false;
 
     /** The rose highlight paint. */
@@ -311,7 +311,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not a border is drawn.
+     * Returns a flag that controls whether a border is drawn.
      *
      * @return The flag.
      *
@@ -322,7 +322,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not a border is drawn.
+     * Sets a flag that controls whether a border is drawn.
      *
      * @param status  the flag status.
      *
@@ -464,7 +464,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @param needle  the needle.
      */
     public void setSeriesNeedle(int index, MeterNeedle needle) {
-        if ((needle != null) && (index < this.seriesNeedle.length)) {
+        if ((needle != null) && (index >= 0) && (index < this.seriesNeedle.length)) {
             this.seriesNeedle[index] = needle;
         }
         fireChangeEvent();

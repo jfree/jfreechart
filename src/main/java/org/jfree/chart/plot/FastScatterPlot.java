@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -127,13 +127,13 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     private transient Paint rangeGridlinePaint;
 
     /**
-     * A flag that controls whether or not panning is enabled for the domain
+     * A flag that controls whether panning is enabled for the domain
      * axis.
      */
     private boolean domainPannable;
 
     /**
-     * A flag that controls whether or not panning is enabled for the range
+     * A flag that controls whether panning is enabled for the range
      * axis.
      */
     private boolean rangePannable;
@@ -322,7 +322,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not the domain grid-lines are
+     * Sets the flag that controls whether the domain grid-lines are
      * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
@@ -402,7 +402,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis grid lines are
+     * Sets the flag that controls whether the range axis grid lines are
      * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *

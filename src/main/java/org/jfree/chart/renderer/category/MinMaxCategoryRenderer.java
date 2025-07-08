@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -84,7 +84,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     /** For serialization. */
     private static final long serialVersionUID = 2935615937671064911L;
 
-    /** A flag indicating whether or not lines are drawn between XY points. */
+    /** A flag indicating whether lines are drawn between XY points. */
     private boolean plotLines = false;
 
     /**
@@ -126,7 +126,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     }
 
     /**
-     * Gets whether or not lines are drawn between category points.
+     * Gets whether lines are drawn between category points.
      *
      * @return boolean true if line will be drawn between sequenced categories,
      *         otherwise false.
@@ -138,7 +138,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     }
 
     /**
-     * Sets the flag that controls whether or not lines are drawn to connect
+     * Sets the flag that controls whether lines are drawn to connect
      * the items within a series and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *

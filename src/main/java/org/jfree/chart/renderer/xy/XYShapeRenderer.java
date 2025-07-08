@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -94,17 +94,17 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     /** The paint scale (never null). */
     private PaintScale paintScale;
 
-    /** A flag that controls whether or not the shape outlines are drawn. */
+    /** A flag that controls whether the shape outlines are drawn. */
     private boolean drawOutlines;
 
     /**
-     * A flag that controls whether or not the outline paint is used (if not,
+     * A flag that controls whether the outline paint is used (if not,
      * the regular paint is used).
      */
     private boolean useOutlinePaint;
 
     /**
-     * A flag that controls whether or not the fill paint is used (if not,
+     * A flag that controls whether the fill paint is used (if not,
      * the fill paint is used).
      */
     private boolean useFillPaint;
@@ -246,7 +246,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not guide lines are drawn for
+     * Returns a flag that controls whether guide lines are drawn for
      * each data item (the lines are horizontal and vertical "crosshairs"
      * linking the data point to the axes).
      *
@@ -259,7 +259,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not guide lines are drawn for
+     * Sets the flag that controls whether guide lines are drawn for
      * each data item and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

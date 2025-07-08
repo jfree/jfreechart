@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -673,7 +673,7 @@ public class DatasetUtilsTest {
     /**
      * Test for a bug reported in the forum:
      *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=7903
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=7903
      */
     @Test
     public void testMaximumStackedRangeValue() {

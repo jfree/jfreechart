@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -65,7 +65,7 @@ public class RendererChangeEvent extends ChartChangeEvent {
      * Creates a new event.
      *
      * @param renderer  the renderer that generated the event.
-     * @param seriesVisibilityChanged  a flag that indicates whether or not
+     * @param seriesVisibilityChanged  a flag that indicates whether
      *         the event relates to a change in the series visibility flags.
      */
     public RendererChangeEvent(Object renderer,
@@ -85,7 +85,7 @@ public class RendererChangeEvent extends ChartChangeEvent {
     }
 
     /**
-     * Returns the flag that indicates whether or not the event relates to
+     * Returns the flag that indicates whether the event relates to
      * a change in series visibility.
      *
      * @return A boolean.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -95,7 +95,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * @param formatter  the number formatter ({@code null} not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
-                                                 NumberFormat formatter) {
+            NumberFormat formatter) {
         this(labelFormat, formatter, NumberFormat.getPercentInstance());
     }
 
@@ -283,6 +283,12 @@ public abstract class AbstractCategoryItemLabelGenerator
         return true;
     }
 
+    /**
+     * Returns whether instances of this class can be considered equal with other.
+     *
+     * @param other the other.
+     * @return A boolean
+     */
     public boolean canEqual(Object other) {
         // fix the "equals not symmetric" problem
         return (other instanceof AbstractCategoryItemLabelGenerator);

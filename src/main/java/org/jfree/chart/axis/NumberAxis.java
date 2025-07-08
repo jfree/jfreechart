@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -167,7 +167,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the automatic axis range
+     * Returns the flag that indicates whether the automatic axis range
      * (if indeed it is determined automatically) is forced to include zero.
      *
      * @return The flag.
@@ -177,7 +177,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that indicates whether or not the axis range, if
+     * Sets the flag that indicates whether the axis range, if
      * automatically calculated, is forced to include zero.
      * <p>
      * If the flag is changed to {@code true}, the axis range is

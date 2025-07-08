@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -383,12 +383,12 @@ public class SpreadsheetDate extends SerialDate {
 
     /**
      * Returns true if this SerialDate is within the specified range (caller
-     * specifies whether or not the end-points are included).  The order of d1
+     * specifies whether the end-points are included).  The order of d1
      * and d2 is not important.
      *
      * @param d1  one boundary date for the range.
      * @param d2  a second boundary date for the range.
-     * @param include  a code that controls whether or not the start and end 
+     * @param include  a code that controls whether the start and end 
      *                 dates are included in the range.
      *
      * @return {@code true} if this SerialDate is within the specified 

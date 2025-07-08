@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -70,6 +70,8 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * Using enum state pattern to control the 'offline' rendering
      */
     protected enum State {
+
+        /** Idle state. */
         IDLE {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
@@ -88,6 +90,8 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                         "offlineRenderingDone not expected in IDLE state");
             }
         },
+
+        /** Rendering state. */
         RENDERING {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
@@ -101,6 +105,13 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                 return RE_RENDERING_PENDING;
             }
 
+            /**
+             * Called when rendering is done.
+             *
+             * @param panel  the panel.
+             * @param renderer  the renderer.
+             * @return The state
+             */
             @Override
             protected State offlineRenderingDone(
                     OfflineRenderingChartPanel panel,
@@ -114,6 +125,7 @@ public class OfflineRenderingChartPanel extends ChartPanel {
                 return IDLE;
             }
         },
+        /** Rendering state pending. */
         RE_RENDERING_PENDING {
             @Override
             protected State renderOffline(OfflineRenderingChartPanel panel,
@@ -142,10 +154,24 @@ public class OfflineRenderingChartPanel extends ChartPanel {
             }
         };
 
+        /**
+         * Render the content offline.
+         *
+         * @param panel  the panel.
+         * @param renderer  the renderer.
+         * @return The state.
+         */
         protected abstract State renderOffline(
                 final OfflineRenderingChartPanel panel,
                 final OfflineChartRenderer renderer);
 
+        /**
+         * Called when rendering is done.
+         *
+         * @param panel  the panel.
+         * @param renderer  the renderer.
+         * @return The state.
+         */
         protected abstract State offlineRenderingDone(
                 final OfflineRenderingChartPanel panel,
                 final OfflineChartRenderer renderer);
@@ -158,6 +184,7 @@ public class OfflineRenderingChartPanel extends ChartPanel {
     /** A pending rendering for the chart. */
     private transient OfflineChartRenderer pendingOfflineRenderer = null;
 
+    /** The state. */
     private State state = State.IDLE;
 
     /**
@@ -182,15 +209,15 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * Constructs a double buffered JFreeChart panel.
      *
      * @param chart      the chart.
-     * @param properties a flag indicating whether or not the chart property
+     * @param properties a flag indicating whether the chart property
      *                   editor should be available via the popup menu.
-     * @param save       a flag indicating whether or not save options should be
+     * @param save       a flag indicating whether save options should be
      *                   available via the popup menu.
-     * @param print      a flag indicating whether or not the print option
+     * @param print      a flag indicating whether the print option
      *                   should be available via the popup menu.
-     * @param zoom       a flag indicating whether or not zoom options should be
+     * @param zoom       a flag indicating whether zoom options should be
      *                   added to the popup menu.
-     * @param tooltips   a flag indicating whether or not tooltips should be
+     * @param tooltips   a flag indicating whether tooltips should be
      *                   enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, boolean properties,
@@ -213,16 +240,16 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * @param minimumDrawHeight the minimum drawing height.
      * @param maximumDrawWidth  the maximum drawing width.
      * @param maximumDrawHeight the maximum drawing height.
-     * @param properties        a flag indicating whether or not the chart
+     * @param properties        a flag indicating whether the chart
      *                          property editor should be available via the
      *                          popup menu.
-     * @param save              a flag indicating whether or not save options
+     * @param save              a flag indicating whether save options
      *                          should be available via the popup menu.
-     * @param print             a flag indicating whether or not the print
+     * @param print             a flag indicating whether the print
      *                          option should be available via the popup menu.
-     * @param zoom              a flag indicating whether or not zoom options
+     * @param zoom              a flag indicating whether zoom options
      *                          should be added to the popup menu.
-     * @param tooltips          a flag indicating whether or not tooltips should
+     * @param tooltips          a flag indicating whether tooltips should
      *                          be enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, int width, int height,
@@ -245,18 +272,18 @@ public class OfflineRenderingChartPanel extends ChartPanel {
      * @param minimumDrawHeight the minimum drawing height.
      * @param maximumDrawWidth  the maximum drawing width.
      * @param maximumDrawHeight the maximum drawing height.
-     * @param properties        a flag indicating whether or not the chart
+     * @param properties        a flag indicating whether the chart
      *                          property editor should be available via the
      *                          popup menu.
-     * @param copy              a flag indicating whether or not a copy option
+     * @param copy              a flag indicating whether a copy option
      *                          should be available via the popup menu.
-     * @param save              a flag indicating whether or not save options
+     * @param save              a flag indicating whether save options
      *                          should be available via the popup menu.
-     * @param print             a flag indicating whether or not the print
+     * @param print             a flag indicating whether the print
      *                          option should be available via the popup menu.
-     * @param zoom              a flag indicating whether or not zoom options
+     * @param zoom              a flag indicating whether zoom options
      *                          should be added to the popup menu.
-     * @param tooltips          a flag indicating whether or not tooltips should
+     * @param tooltips          a flag indicating whether tooltips should
      *                          be enabled for the chart.
      */
     public OfflineRenderingChartPanel(JFreeChart chart, int width, int height,

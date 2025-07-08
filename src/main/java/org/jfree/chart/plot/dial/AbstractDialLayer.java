@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -52,7 +52,7 @@ import org.jfree.chart.HashUtils;
  */
 public abstract class AbstractDialLayer implements DialLayer {
 
-    /** A flag that controls whether or not the layer is visible. */
+    /** A flag that controls whether the layer is visible. */
     private boolean visible;
 
     /** Storage for registered listeners. */
@@ -80,7 +80,7 @@ public abstract class AbstractDialLayer implements DialLayer {
     }
 
     /**
-     * Sets the flag that determines whether or not this layer is drawn by
+     * Sets the flag that determines whether this layer is drawn by
      * the plot, and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *

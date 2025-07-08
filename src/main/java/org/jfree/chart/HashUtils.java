@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Lesser General Public License as published by 
@@ -47,7 +47,11 @@ import org.jfree.chart.util.StrokeList;
  * Some utility methods for calculating hash codes.
  */
 public class HashUtils {
-    
+
+    private HashUtils() {
+        // no requirement to instantiate
+    }
+
     /**
      * Returns a hash code for a {@code Paint} instance.  If 
      * {@code p} is {@code null}, this method returns zero.

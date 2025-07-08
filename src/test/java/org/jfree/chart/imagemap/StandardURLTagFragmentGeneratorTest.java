@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -54,8 +54,8 @@ public class StandardURLTagFragmentGeneratorTest {
         assertEquals(" href=\"abc\"", g.generateURLFragment("abc"));
         assertEquals(" href=\"images/abc.png\"",
                 g.generateURLFragment("images/abc.png"));
-        assertEquals(" href=\"http://www.jfree.org/images/abc.png\"",
-                g.generateURLFragment("http://www.jfree.org/images/abc.png"));
+        assertEquals(" href=\"https://www.jfree.org/images/abc.png\"",
+                g.generateURLFragment("https://www.jfree.org/images/abc.png"));
     }
 
 }

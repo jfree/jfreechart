@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -90,7 +90,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     private double depthFactor = 0.12;
 
     /**
-     * A flag that controls whether or not the sides of the pie chart
+     * A flag that controls whether the sides of the pie chart
      * are rendered using a darker colour.
      */
     private boolean darkerSides = false;  // default preserves previous behaviour
@@ -138,7 +138,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     }
 
     /**
-     * Returns a flag that controls whether or not the sides of the pie chart
+     * Returns a flag that controls whether the sides of the pie chart
      * are rendered using a darker colour.
      *
      * @return A boolean.
@@ -150,7 +150,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not the sides of the pie chart
+     * Sets a flag that controls whether the sides of the pie chart
      * are rendered using a darker colour, and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *

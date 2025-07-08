@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -146,7 +146,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     private Font tickLabelFont;
 
     /**
-     * A flag that controls whether or not the tick labels are
+     * A flag that controls whether the tick labels are
      * displayed.
      */
     private boolean tickLabelsVisible;
@@ -157,7 +157,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     private NumberFormat tickLabelFormatter;
 
     /**
-     * A flag that controls whether or not the first tick label is
+     * A flag that controls whether the first tick label is
      * displayed.
      */
     private boolean firstTickLabelVisible;
@@ -641,7 +641,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Sets the flag that controls whether or not the tick labels are
+     * Sets the flag that controls whether the tick labels are
      * displayed, and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *
@@ -682,7 +682,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Returns a flag that controls whether or not the first tick label is
+     * Returns a flag that controls whether the first tick label is
      * visible.
      *
      * @return A boolean.
@@ -694,7 +694,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Sets a flag that controls whether or not the first tick label is
+     * Sets a flag that controls whether the first tick label is
      * visible, and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *

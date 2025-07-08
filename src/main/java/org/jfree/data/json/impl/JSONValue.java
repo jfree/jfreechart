@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * JSON.simple
  * -----------
@@ -38,7 +38,14 @@ import java.util.Map;
  * in your project.
  */
 public class JSONValue {
-    
+
+    /**
+     * Creates a new instance.
+     */
+    public JSONValue() {
+        super();
+    }
+
 //    /**
 //     * Parse JSON text into java object from the input source. 
 //     * Please use parseWithException() if you don't want to ignore the 

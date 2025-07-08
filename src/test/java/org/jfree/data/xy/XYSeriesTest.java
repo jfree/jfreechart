@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -649,7 +649,7 @@ public class XYSeriesTest {
     /**
      * A test for a bug reported in the forum:
      * 
-     * http://www.jfree.org/forum/viewtopic.php?f=3&t=116601
+     * https://www.jfree.org/forum/viewtopic.php?f=3&t=116601
      */
     @Test
     public void testGetMaxY2() {

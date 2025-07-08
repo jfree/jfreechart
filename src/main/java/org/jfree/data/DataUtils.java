@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -45,6 +45,10 @@ import org.jfree.data.general.DatasetUtils;
  * see {@link DatasetUtils}).
  */
 public abstract class DataUtils {
+
+    private DataUtils() {
+        // no requirement to instantiate
+    }
 
     /**
      * Tests two arrays for equality.  To be considered equal, the arrays must

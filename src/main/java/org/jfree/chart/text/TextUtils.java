@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -50,15 +50,15 @@ public class TextUtils {
     /**
      * When this flag is set to {@code true}, strings will be drawn
      * as attributed strings with the attributes taken from the current font.
-     * This allows for underlining, strike-out etc, but it means that
+     * This allows for underlining, strike-out etc., but it means that
      * TextLayout will be used to render the text:
-     * 
-     * http://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459
+     * <p>
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459">https://www.jfree.org/phpBB2/viewtopic.php?p=45459&highlight=#45459"</a>
      */
     private static boolean drawStringsWithFontAttributes = false;
     
     /**
-     * A flag that controls whether or not the rotated string workaround is
+     * A flag that controls whether the rotated string workaround is
      * used.
      */
     private static boolean useDrawRotatedStringWorkaround = true;
@@ -93,7 +93,7 @@ public class TextUtils {
         }
         TextBlock result = new TextBlock();
         String input = text;
-        boolean moreInputToProcess = (text.length() > 0);
+        boolean moreInputToProcess = !text.isEmpty();
         int start = 0;
         while (moreInputToProcess) {
             int index = input.indexOf("\n");
@@ -440,7 +440,7 @@ public class TextUtils {
             float textX, float textY, 
             double angle, float rotateX, float rotateY) {
 
-        if ((text == null) || (text.equals(""))) {
+        if ((text == null) || (text.isEmpty())) {
             return;
         }
         if (angle == 0.0) {
@@ -489,7 +489,7 @@ public class TextUtils {
             float x, float y, TextAnchor textAnchor, 
             double angle, float rotationX, float rotationY) {
 
-        if (text == null || text.equals("")) {
+        if (text == null || text.isEmpty()) {
             return;
         }
         if (angle == 0.0) {
@@ -518,7 +518,7 @@ public class TextUtils {
             float x, float y, TextAnchor textAnchor, 
             double angle, TextAnchor rotationAnchor) {
 
-        if (text == null || text.equals("")) {
+        if (text == null || text.isEmpty()) {
             return;
         }
         if (angle == 0.0) {
@@ -552,17 +552,15 @@ public class TextUtils {
             float x, float y, TextAnchor textAnchor, 
             double angle, TextAnchor rotationAnchor) {
 
-        if (text == null || text.equals("")) {
+        if (text == null || text.isEmpty()) {
             return null;
         }
         float[] textAdj = deriveTextBoundsAnchorOffsets(g2, text, textAnchor);
         float[] rotateAdj = deriveRotationAnchorOffsets(g2, text, 
                 rotationAnchor);
-        Shape result = calculateRotatedStringBounds(text, g2,
+        return calculateRotatedStringBounds(text, g2,
                 x + textAdj[0], y + textAdj[1], angle,
                 x + textAdj[0] + rotateAdj[0], y + textAdj[1] + rotateAdj[1]);
-        return result;
-        
     }
 
     /**
@@ -698,7 +696,7 @@ public class TextUtils {
             float textX, float textY, double angle, float rotateX, 
             float rotateY) {
 
-        if ((text == null) || (text.equals(""))) {
+        if ((text == null) || (text.isEmpty())) {
             return null;
         }
         FontMetrics fm = g2.getFontMetrics();
@@ -708,9 +706,7 @@ public class TextUtils {
         Shape translatedBounds = translate.createTransformedShape(bounds);
         AffineTransform rotate = AffineTransform.getRotateInstance(
                 angle, rotateX, rotateY);
-        Shape result = rotate.createTransformedShape(translatedBounds);
-        return result;
-
+        return rotate.createTransformedShape(translatedBounds);
     }
 
     /**
@@ -736,7 +732,7 @@ public class TextUtils {
     }
 
     /**
-     * Returns the flag that controls whether or not a workaround is used for
+     * Returns the flag that controls whether a workaround is used for
      * drawing rotated strings.
      *
      * @return A boolean.
@@ -746,7 +742,7 @@ public class TextUtils {
     }
  
     /**
-     * Sets the flag that controls whether or not a workaround is used for
+     * Sets the flag that controls whether a workaround is used for
      * drawing rotated strings.  The related bug is on Sun's bug parade
      * (id 4312117) and the workaround involves using a {@code TextLayout}
      * instance to draw the text instead of calling the
@@ -759,8 +755,8 @@ public class TextUtils {
     }
     
     /**
-     * Returns the flag that controls whether or not strings are drawn using
-     * the current font attributes (such as underlining, strikethrough etc).
+     * Returns the flag that controls whether strings are drawn using
+     * the current font attributes (such as underlining, strikethrough etc.).
      * The default value is {@code false}.
      * 
      * @return A boolean.
@@ -770,11 +766,11 @@ public class TextUtils {
     }
     
     /**
-     * Sets the flag that controls whether or not strings are drawn using the
+     * Sets the flag that controls whether strings are drawn using the
      * current font attributes.  This is a hack to allow underlining of titles
      * without big changes to the API.  See:
-     * http://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459
-     * 
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459">this forum post</a>.
+     *
      * @param b  the new flag value.
      */
     public static void setDrawStringsWithFontAttributes(boolean b) {

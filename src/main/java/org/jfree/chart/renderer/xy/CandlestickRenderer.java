@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -132,7 +132,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      */
     private transient Paint downPaint;
 
-    /** A flag controlling whether or not volume bars are drawn on the chart. */
+    /** A flag controlling whether volume bars are drawn on the chart. */
     private boolean drawVolume;
 
     /**
@@ -145,7 +145,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     private transient double maxVolume;
 
     /**
-     * A flag that controls whether or not the renderer's outline paint is
+     * A flag that controls whether the renderer's outline paint is
      * used to draw the outline of the candlestick.  The default value is
      * {@code false} to avoid a change of behaviour for existing code.
      */
@@ -177,7 +177,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * automatically.
      *
      * @param candleWidth  the candle width.
-     * @param drawVolume  a flag indicating whether or not volume bars should
+     * @param drawVolume  a flag indicating whether volume bars should
      *                    be drawn.
      * @param toolTipGenerator  the tool tip generator. {@code null} is
      *                          none.
@@ -413,7 +413,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag indicating whether or not volume bars are drawn on the
+     * Returns a flag indicating whether volume bars are drawn on the
      * chart.
      *
      * @return A boolean.
@@ -425,7 +425,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not volume bars are drawn in the
+     * Sets a flag that controls whether volume bars are drawn in the
      * background and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -468,7 +468,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag that controls whether or not the renderer's outline
+     * Returns the flag that controls whether the renderer's outline
      * paint is used to draw the candlestick outline.  The default value is
      * {@code false}.
      *
@@ -481,7 +481,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer's outline
+     * Sets the flag that controls whether the renderer's outline
      * paint is used to draw the candlestick outline, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -36,28 +36,37 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Stroke;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.labels.CrosshairLabelGenerator;
+import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+import org.jfree.chart.panel.CrosshairOverlay;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+
+import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.labels.CrosshairLabelGenerator;
-import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
 
 /**
- * A crosshair for display on a plot.
+ * A {@code Crosshair} represents a value on a chart and is usually displayed
+ * as a line perpendicular to the x or y-axis (and sometimes including a label
+ * that shows the crosshair value as text).  Instances of this class are used
+ * to store the cross hair value plus the visual characteristics of the line
+ * that will be rendered once the instance is added to a 
+ * {@link CrosshairOverlay} (or {@code CrosshairOverlaydFX} if you are using 
+ * the JavaFX extensions for JFreeChart).
+ * <br><br>
+ * Crosshairs support a property change mechanism which is used by JFreeChart
+ * to automatically repaint the overlay whenever a crosshair attribute is 
+ * updated.
  */
 public class Crosshair implements Cloneable, PublicCloneable, Serializable {
 
@@ -74,8 +83,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     private transient Stroke stroke;
 
     /**
-     * A flag that controls whether or not the crosshair has a label
-     * visible.
+     * A flag that controls whether the crosshair has a label visible.
      */
     private boolean labelVisible;
 
@@ -96,6 +104,11 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * The y-offset in Java2D units.
      */
     private double labelYOffset;
+
+    /**
+     * The label padding.
+     */
+    private RectangleInsets labelPadding;
 
     /**
      * The label font.
@@ -157,8 +170,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelVisible = false;
         this.labelGenerator = new StandardCrosshairLabelGenerator();
         this.labelAnchor = RectangleAnchor.BOTTOM_LEFT;
-        this.labelXOffset = 3.0;
-        this.labelYOffset = 3.0;
+        this.labelXOffset = 5.0;
+        this.labelYOffset = 5.0;
+        this.labelPadding = RectangleInsets.ZERO_INSETS;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
         this.labelPaint = Color.BLACK;
         this.labelBackgroundPaint = new Color(0, 0, 255, 63);
@@ -169,7 +183,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the crosshair is
+     * Returns the flag that indicates whether the crosshair is
      * currently visible.
      *
      * @return A boolean.
@@ -271,7 +285,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not a label is drawn for
+     * Returns the flag that controls whether a label is drawn for
      * this crosshair.
      *
      * @return A boolean.
@@ -283,7 +297,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not a label is drawn for the
+     * Sets the flag that controls whether a label is drawn for the
      * crosshair and sends a property change event (with the name
      * 'labelVisible') to all registered listeners.
      *
@@ -326,7 +340,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the label anchor point.
      *
-     * @return the label anchor point (never {@code null}.
+     * @return the label anchor point (never {@code null}).
      *
      * @see #setLabelAnchor(org.jfree.chart.ui.RectangleAnchor)
      */
@@ -396,6 +410,30 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         Double old = this.labelYOffset;
         this.labelYOffset = offset;
         this.pcs.firePropertyChange("labelYOffset", old, offset);
+    }
+
+    /**
+     * Returns the label padding.
+     *
+     * @return The label padding (never {@code null}).
+     * @since 1.5.6
+     */
+    public RectangleInsets getLabelPadding() {
+        return labelPadding;
+    }
+
+    /**
+     * Sets the label padding and sends a property change event (with the name
+     * 'labelPadding') to all registered listeners.
+     *
+     * @param padding the padding ({@code null} not permitted).
+     * @since 1.5.6
+     */
+    public void setLabelPadding(RectangleInsets padding) {
+        Args.nullNotPermitted(padding, "padding");
+        RectangleInsets old = this.labelPadding;
+        this.labelPadding = padding;
+        this.pcs.firePropertyChange("labelPadding", old, padding);
     }
 
     /**
@@ -574,7 +612,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (this.value != that.value) {
+        if (Double.compare(this.value, that.value) != 0) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -592,10 +630,13 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (!this.labelAnchor.equals(that.labelAnchor)) {
             return false;
         }
-        if (this.labelXOffset != that.labelXOffset) {
+        if (Double.compare(this.labelXOffset, that.labelXOffset) != 0) {
             return false;
         }
-        if (this.labelYOffset != that.labelYOffset) {
+        if (Double.compare(this.labelYOffset, that.labelYOffset) != 0) {
+            return false;
+        }
+        if (!this.labelPadding.equals(that.labelPadding)) {
             return false;
         }
         if (!this.labelFont.equals(that.labelFont)) {
@@ -638,6 +679,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         hash = HashUtils.hashCode(hash, this.labelGenerator);
         hash = HashUtils.hashCode(hash, this.labelXOffset);
         hash = HashUtils.hashCode(hash, this.labelYOffset);
+        hash = HashUtils.hashCode(hash, this.labelPadding);
         hash = HashUtils.hashCode(hash, this.labelFont);
         hash = HashUtils.hashCode(hash, this.labelPaint);
         hash = HashUtils.hashCode(hash, this.labelBackgroundPaint);

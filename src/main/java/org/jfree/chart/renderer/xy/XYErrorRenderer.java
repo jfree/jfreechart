@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -73,10 +73,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     /** For serialization. */
     static final long serialVersionUID = 5162283570955172424L;
 
-    /** A flag that controls whether or not the x-error bars are drawn. */
+    /** A flag that controls whether the x-error bars are drawn. */
     private boolean drawXError;
 
-    /** A flag that controls whether or not the y-error bars are drawn. */
+    /** A flag that controls whether the y-error bars are drawn. */
     private boolean drawYError;
 
     /** The length of the cap at the end of the error bars. */
@@ -107,7 +107,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns the flag that controls whether or not the renderer draws error
+     * Returns the flag that controls whether the renderer draws error
      * bars for the x-values.
      *
      * @return A boolean.
@@ -119,7 +119,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer draws error
+     * Sets the flag that controls whether the renderer draws error
      * bars for the x-values and, if the flag changes, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
@@ -135,7 +135,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns the flag that controls whether or not the renderer draws error
+     * Returns the flag that controls whether the renderer draws error
      * bars for the y-values.
      *
      * @return A boolean.
@@ -147,7 +147,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the flag that controls whether or not the renderer draws error
+     * Sets the flag that controls whether the renderer draws error
      * bars for the y-values and, if the flag changes, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *

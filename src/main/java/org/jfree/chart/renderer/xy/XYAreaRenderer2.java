@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -82,7 +82,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /** For serialization. */
     private static final long serialVersionUID = -7378069681579984133L;
 
-    /** A flag that controls whether or not the outline is shown. */
+    /** A flag that controls whether the outline is shown. */
     private boolean showOutline;
 
     /**
@@ -122,7 +122,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not outlines of the areas are
+     * Returns a flag that controls whether outlines of the areas are
      * drawn.
      *
      * @return The flag.
@@ -134,7 +134,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets a flag that controls whether or not outlines of the areas are
+     * Sets a flag that controls whether outlines of the areas are
      * drawn, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -448,9 +448,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range ({@code null} not permitted).
-     * @param turnOffAutoRange  a flag that controls whether or not the auto
+     * @param turnOffAutoRange  a flag that controls whether the auto
      *                          range is turned off.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      */
     @Override

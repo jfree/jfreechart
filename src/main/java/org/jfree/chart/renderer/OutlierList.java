@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -44,15 +44,15 @@ import java.util.List;
 
 /**
  * A collection of outliers for a single entity in a box and whisker plot.
- *
+ * <p>
  * Outliers are grouped in lists for each entity. Lists contain
  * one or more outliers, determined by whether overlaps have
- * occured. Overlapping outliers are grouped in the same list.
- *
+ * occurred. Overlapping outliers are grouped in the same list.
+ * <p>
  * Each list contains an averaged outlier, which is the same as a single
  * outlier if there is only one outlier in the list, but the average of
  * all the outliers in the list if there is more than one.
- *
+ * <p>
  * NB This is simply my scheme for displaying outliers, and might not be
  * acceptable by the wider community.
  */
@@ -65,7 +65,7 @@ public class OutlierList {
     private Outlier averagedOutlier;
 
     /**
-     * A flag that indicates whether or not there are multiple outliers in the
+     * A flag that indicates whether there are multiple outliers in the
      * list.
      */
     private boolean multiple = false;
@@ -129,7 +129,7 @@ public class OutlierList {
     }
 
     /**
-     * Sets the flag that indicates whether or not this list represents
+     * Sets the flag that indicates whether this list represents
      * multiple outliers.
      *
      * @param multiple  the flag.

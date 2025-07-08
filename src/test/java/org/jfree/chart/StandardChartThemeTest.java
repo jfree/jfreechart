@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -47,8 +47,8 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.PieLabelLinkStyle;
-import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.jfree.chart.renderer.xy.StandardXYBarPainter;
+import org.jfree.chart.renderer.category.GradientBarPainter;
+import org.jfree.chart.renderer.xy.GradientXYBarPainter;
 import org.jfree.chart.ui.RectangleInsets;
 import org.junit.jupiter.api.Test;
 
@@ -230,15 +230,15 @@ public class StandardChartThemeTest {
         assertEquals(t1, t2);
 
         //barPainter;
-        t1.setBarPainter(new StandardBarPainter());
+        t1.setBarPainter(new GradientBarPainter());
         assertNotEquals(t1, t2);
-        t2.setBarPainter(new StandardBarPainter());
+        t2.setBarPainter(new GradientBarPainter());
         assertEquals(t1, t2);
 
         //xyBarPainter;
-        t1.setXYBarPainter(new StandardXYBarPainter());
+        t1.setXYBarPainter(new GradientXYBarPainter());
         assertNotEquals(t1, t2);
-        t2.setXYBarPainter(new StandardXYBarPainter());
+        t2.setXYBarPainter(new GradientXYBarPainter());
         assertEquals(t1, t2);
 
         //thermometerPaint;

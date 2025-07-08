@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -145,7 +145,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /** A flag that indicates whether the value is visible. */
     private boolean valueVisible = true;
 
-    /** A flag that controls whether or not the border is drawn. */
+    /** A flag that controls whether the border is drawn. */
     private boolean drawBorder;
 
     /** The outline paint. */
@@ -157,7 +157,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /** The paint for the needle. */
     private transient Paint needlePaint;
 
-    /** A flag that controls whether or not the tick labels are visible. */
+    /** A flag that controls whether the tick labels are visible. */
     private boolean tickLabelsVisible;
 
     /** The tick label font. */
@@ -399,7 +399,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the flag that determines whether or not tick labels are visible.
+     * Returns the flag that determines whether tick labels are visible.
      *
      * @return The flag.
      *
@@ -410,7 +410,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the flag that controls whether or not the tick labels are visible
+     * Sets the flag that controls whether the tick labels are visible
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -479,7 +479,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the flag that controls whether or not the value is visible.
+     * Returns the flag that controls whether the value is visible.
      * The default value is {@code true}.
      *
      * @return A flag.
@@ -492,7 +492,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     *  Sets the flag that controls whether or not the value is visible
+     *  Sets the flag that controls whether the value is visible
      *  and sends a change event to all registered listeners.
      *
      * @param valueVisible  the new flag value.
@@ -605,7 +605,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Returns a flag that controls whether or not a rectangular border is
+     * Returns a flag that controls whether a rectangular border is
      * drawn around the plot area.
      *
      * @return A flag.
@@ -617,7 +617,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
-     * Sets the flag that controls whether or not a rectangular border is drawn
+     * Sets the flag that controls whether a rectangular border is drawn
      * around the plot area and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -1051,7 +1051,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param g2  the graphics device.
      * @param meterArea  the meter area.
      * @param value  the tick value.
-     * @param label  a flag that controls whether or not a value label is drawn.
+     * @param label  a flag that controls whether a value label is drawn.
      */
     protected void drawTick(Graphics2D g2, Rectangle2D meterArea,
                             double value, boolean label) {

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -54,12 +54,12 @@ public class RelativeDateFormat extends DateFormat {
     private long baseMillis;
 
     /**
-     * A flag that controls whether or not a zero day count is displayed.
+     * A flag that controls whether a zero day count is displayed.
      */
     private boolean showZeroDays;
 
     /**
-     * A flag that controls whether or not a zero hour count is displayed.
+     * A flag that controls whether a zero hour count is displayed.
      */
     private boolean showZeroHours;
 
@@ -191,7 +191,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Returns the flag that controls whether or not zero day counts are
+     * Returns the flag that controls whether zero day counts are
      * shown in the formatted output.
      *
      * @return The flag.
@@ -203,7 +203,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Sets the flag that controls whether or not zero day counts are shown
+     * Sets the flag that controls whether zero day counts are shown
      * in the formatted output.
      *
      * @param show  the flag.
@@ -215,7 +215,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Returns the flag that controls whether or not zero hour counts are
+     * Returns the flag that controls whether zero hour counts are
      * shown in the formatted output.
      *
      * @return The flag.
@@ -227,7 +227,7 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
-     * Sets the flag that controls whether or not zero hour counts are shown
+     * Sets the flag that controls whether zero hour counts are shown
      * in the formatted output.
      *
      * @param show  the flag.

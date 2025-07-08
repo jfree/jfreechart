@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -360,7 +360,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return A flag indicating whether or not an object is equal to this day.
+     * @return A flag indicating whether an object is equal to this day.
      */
     @Override
     public boolean equals(Object obj) {
@@ -394,7 +394,7 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Day object relative to
      * the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  the object to compare.

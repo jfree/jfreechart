@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -99,7 +99,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     public static final int STAGGER_WIDTH = 5; // could make this configurable
 
     /**
-     * A flag that controls whether or not the steps for multiple series are
+     * A flag that controls whether the steps for multiple series are
      * staggered.
      */
     private boolean stagger = false;
@@ -132,7 +132,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not the series steps are
+     * Sets the flag that controls whether the series steps are
      * staggered and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *

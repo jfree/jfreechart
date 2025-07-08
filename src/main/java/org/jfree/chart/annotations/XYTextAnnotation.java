@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -435,7 +435,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Returns the flag that controls whether or not the outline is drawn.
+     * Returns the flag that controls whether the outline is drawn.
      *
      * @return A boolean.
      */
@@ -444,7 +444,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the flag that controls whether or not the outline is drawn and
+     * Sets the flag that controls whether the outline is drawn and
      * sends an {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.

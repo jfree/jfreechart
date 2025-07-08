@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -61,7 +61,7 @@ public class CustomPieURLGeneratorTest {
         assertEquals(g1, g2);
 
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
         assertNotEquals(g1, g2);
         g2.addURLs(m1);
@@ -75,7 +75,7 @@ public class CustomPieURLGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) g1.clone();
         assertNotSame(g1, g2);
@@ -105,7 +105,7 @@ public class CustomPieURLGeneratorTest {
     public void testSerialization() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map<String, String> m1 = new HashMap<>();
-        m1.put("A", "http://www.jfree.org/");
+        m1.put("A", "https://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);

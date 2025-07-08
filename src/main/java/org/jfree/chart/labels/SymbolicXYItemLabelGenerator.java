@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -54,6 +54,13 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
 
     /** For serialization. */
     private static final long serialVersionUID = 3963400354475494395L;
+
+    /**
+     * Creates a new default instance.
+     */
+    public SymbolicXYItemLabelGenerator() {
+        super();
+    }
 
     /**
      * Generates a tool tip text item for a particular item within a series.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -139,7 +139,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /** The default tick mark outside length ({@code 2.0f}). */
     public static final float DEFAULT_TICK_MARK_OUTSIDE_LENGTH = 2.0f;
 
-    /** A flag indicating whether or not the axis is visible. */
+    /** A flag indicating whether the axis is visible. */
     private boolean visible;
 
     /** The label for the axis. */
@@ -166,7 +166,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /** The axis label location (new in 1.0.16). */
     private AxisLabelLocation labelLocation;
 
-    /** A flag that controls whether or not the axis line is visible. */
+    /** A flag that controls whether the axis line is visible. */
     private boolean axisLineVisible;
 
     /** The stroke used for the axis line. */
@@ -176,7 +176,7 @@ public abstract class Axis implements Cloneable, Serializable {
     private transient Paint axisLinePaint;
 
     /**
-     * A flag that indicates whether or not tick labels are visible for the
+     * A flag that indicates whether tick labels are visible for the
      * axis.
      */
     private boolean tickLabelsVisible;
@@ -191,7 +191,7 @@ public abstract class Axis implements Cloneable, Serializable {
     private RectangleInsets tickLabelInsets;
 
     /**
-     * A flag that indicates whether or not major tick marks are visible for
+     * A flag that indicates whether major tick marks are visible for
      * the axis.
      */
     private boolean tickMarksVisible;
@@ -209,7 +209,7 @@ public abstract class Axis implements Cloneable, Serializable {
     private float tickMarkOutsideLength;
 
     /**
-     * A flag that indicates whether or not minor tick marks are visible for the
+     * A flag that indicates whether minor tick marks are visible for the
      * axis.
      */
     private boolean minorTickMarksVisible;
@@ -295,7 +295,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not the axis is visible and sends
+     * Sets a flag that controls whether the axis is visible and sends
      * an {@link AxisChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
@@ -536,7 +536,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * A flag that controls whether or not the axis line is drawn.
+     * A flag that controls whether the axis line is drawn.
      *
      * @return A boolean.
      *
@@ -549,7 +549,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets a flag that controls whether or not the axis line is visible and
+     * Sets a flag that controls whether the axis line is visible and
      * sends an {@link AxisChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -614,7 +614,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a flag indicating whether or not the tick labels are visible.
+     * Returns a flag indicating whether the tick labels are visible.
      *
      * @return The flag.
      *
@@ -627,7 +627,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that determines whether or not the tick labels are
+     * Sets the flag that determines whether the tick labels are
      * visible and sends an {@link AxisChangeEvent} to all registered
      * listeners.
      *
@@ -647,10 +647,10 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the minor tick marks are
+     * Returns the flag that indicates whether the minor tick marks are
      * showing.
      *
-     * @return The flag that indicates whether or not the minor tick marks are
+     * @return The flag that indicates whether the minor tick marks are
      *         showing.
      *
      * @see #setMinorTickMarksVisible(boolean)
@@ -660,7 +660,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that indicates whether or not the minor tick marks are 
+     * Sets the flag that indicates whether the minor tick marks are 
      * showing and sends an {@link AxisChangeEvent} to all registered
      * listeners.
      *
@@ -755,10 +755,10 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the tick marks are
+     * Returns the flag that indicates whether the tick marks are
      * showing.
      *
-     * @return The flag that indicates whether or not the tick marks are
+     * @return The flag that indicates whether the tick marks are
      *         showing.
      *
      * @see #setTickMarksVisible(boolean)
@@ -768,7 +768,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that indicates whether or not the tick marks are showing
+     * Sets the flag that indicates whether the tick marks are showing
      * and sends an {@link AxisChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -181,7 +181,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private Map<Integer, AxisLocation> domainAxisLocations;
 
     /**
-     * A flag that controls whether or not the shared domain axis is drawn
+     * A flag that controls whether the shared domain axis is drawn
      * (only relevant when the plot is being used as a subplot).
      */
     private boolean drawSharedDomainAxis;
@@ -244,7 +244,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private transient Paint domainGridlinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the range
+     * A flag that controls whether the zero baseline against the range
      * axis is visible.
      */
     private boolean rangeZeroBaselineVisible;
@@ -272,7 +272,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private transient Paint rangeGridlinePaint;
 
     /**
-     * A flag that controls whether or not gridlines are shown for the minor
+     * A flag that controls whether gridlines are shown for the minor
      * tick values on the primary range axis.
      */
     private boolean rangeMinorGridlinesVisible;
@@ -321,7 +321,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     private transient Paint domainCrosshairPaint;
 
-    /** A flag that controls whether or not a range crosshair is drawn. */
+    /** A flag that controls whether a range crosshair is drawn. */
     private boolean rangeCrosshairVisible;
 
     /** The range crosshair value. */
@@ -334,7 +334,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private transient Paint rangeCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean rangeCrosshairLockedOnData = true;
@@ -377,7 +377,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the
+     * A flag that controls whether panning is enabled for the
      * range axis/axes.
      */
     private boolean rangePannable;
@@ -1640,7 +1640,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the domain axis.
      * <p>
      * If the flag value changes, a {@link PlotChangeEvent} is sent to all
@@ -1733,7 +1733,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the range axis.
      *
      * @return A boolean.
@@ -1745,7 +1745,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the range axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -1821,7 +1821,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the range axis.  If the flag changes value, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
@@ -1899,7 +1899,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis minor grid
+     * Sets the flag that controls whether the range axis minor grid
      * lines are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -2326,7 +2326,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param marker  the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker) {
@@ -2340,7 +2340,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker, Layer layer) {
@@ -2355,7 +2355,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
@@ -2371,7 +2371,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param layer the layer (foreground or background).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
@@ -2581,7 +2581,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param marker the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker)
@@ -2597,7 +2597,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker, Layer)
@@ -2614,7 +2614,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer)
@@ -2632,7 +2632,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param layer  the layer (foreground or background).
      * @param notify  notify listeners.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer, boolean)
@@ -2657,7 +2657,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns the flag that controls whether or not the domain crosshair is
+     * Returns the flag that controls whether the domain crosshair is
      * displayed by the plot.
      *
      * @return A boolean.
@@ -2669,7 +2669,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag that controls whether or not the domain crosshair is
+     * Sets the flag that controls whether the domain crosshair is
      * displayed by the plot, and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -2835,7 +2835,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns a flag indicating whether or not the range crosshair is visible.
+     * Returns a flag indicating whether the range crosshair is visible.
      *
      * @return The flag.
      *
@@ -2846,7 +2846,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair is visible.
+     * Sets the flag indicating whether the range crosshair is visible.
      *
      * @param flag  the new value of the flag.
      *
@@ -2860,7 +2860,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -2872,7 +2872,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair should
+     * Sets the flag indicating whether the range crosshair should
      * "lock-on" to actual data values, and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -2916,7 +2916,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * crosshair is visible).
      *
      * @param value  the new value.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRangeCrosshairValue()
@@ -3031,7 +3031,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param annotation  the annotation ({@code null} not permitted).
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      *
      * @see #addAnnotation(CategoryAnnotation)
      */
@@ -3046,7 +3046,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      */
     public boolean removeAnnotation(CategoryAnnotation annotation,
             boolean notify) {
@@ -3614,7 +3614,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param crosshairState  a state object for tracking crosshair info
      *        ({@code null} permitted).
      *
-     * @return A boolean that indicates whether or not real data was found.
+     * @return A boolean that indicates whether real data was found.
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
             PlotRenderingInfo info, CategoryCrosshairState crosshairState) {
@@ -4201,7 +4201,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns the flag that controls whether or not the shared domain axis is
+     * Returns the flag that controls whether the shared domain axis is
      * drawn for each subplot.
      *
      * @return A boolean.
@@ -4395,7 +4395,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)

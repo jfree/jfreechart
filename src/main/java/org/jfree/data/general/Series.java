@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -176,7 +176,7 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether or not change events are sent to
+     * Returns the flag that controls whether change events are sent to
      * registered listeners.
      *
      * @return A boolean.
@@ -188,7 +188,7 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not change events are sent to
+     * Sets the flag that controls whether change events are sent to
      * registered listeners.
      *
      * @param notify  the new value of the flag.

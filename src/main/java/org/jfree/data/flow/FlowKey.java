@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
  * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -60,10 +60,10 @@ public class FlowKey<K extends Comparable<K>> implements PublicCloneable, Serial
     /** The stage. */
     private final int stage;
     
-    /* The source node. */
+    /** The source node. */
     private final K source;
     
-    /* The destination node. */
+    /** The destination node. */
     private final K destination;
     
     /**
