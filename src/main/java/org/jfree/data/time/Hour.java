@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -408,7 +408,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Hour object relative to
      * the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  the object to compare.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2007-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -61,7 +61,7 @@ public class LogFormat extends NumberFormat {
      */
     private String powerLabel;
 
-    /** A flag that controls whether or not the base is shown. */
+    /** A flag that controls whether the base is shown. */
     private boolean showBase;
 
     /** The number formatter for the exponent. */
@@ -79,7 +79,7 @@ public class LogFormat extends NumberFormat {
      *
      * @param base  the base.
      * @param baseLabel  the base label ({@code null} not permitted).
-     * @param showBase  a flag that controls whether or not the base value is
+     * @param showBase  a flag that controls whether the base value is
      *                  shown.
      */
     public LogFormat(double base, String baseLabel, boolean showBase) {
@@ -92,7 +92,7 @@ public class LogFormat extends NumberFormat {
      * @param base  the base.
      * @param baseLabel  the base label ({@code null} not permitted).
      * @param powerLabel  the power label ({@code null} not permitted).
-     * @param showBase  a flag that controls whether or not the base value is
+     * @param showBase  a flag that controls whether the base value is
      *                  shown.
      */
     public LogFormat(double base, String baseLabel, String powerLabel,

@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014-2021, by David Gilbert
+ * Copyright (C) 2014-present, by David Gilbert
  */
 
 var jfc;

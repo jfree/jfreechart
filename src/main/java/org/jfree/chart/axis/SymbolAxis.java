@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * SymbolAxis.java
  * ---------------
- * (C) Copyright 2002-2022, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2002-present, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert;
@@ -84,9 +84,9 @@ public class SymbolAxis extends NumberAxis implements Serializable {
             = new Color(0, 0, 0, 0);  // transparent
 
     /** The list of symbols to display instead of the numeric values. */
-    private List symbols;
+    private List<String> symbols;
 
-    /** Flag that indicates whether or not grid bands are visible. */
+    /** Flag that indicates whether grid bands are visible. */
     private boolean gridBandsVisible;
 
     /** The paint used to color the grid bands (if the bands are visible). */
@@ -122,13 +122,23 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      */
     public String[] getSymbols() {
         String[] result = new String[this.symbols.size()];
-        result = (String[]) this.symbols.toArray(result);
+        this.symbols.toArray(result);
         return result;
     }
 
     /**
-     * Returns the flag that controls whether or not grid bands are drawn for 
-     * the axis.  The default value is {@code true}. 
+     * Sets the list of symbols to display instead of the numeric values.
+     *
+     * @param symbols List of symbols.
+     */
+    public void setSymbols(String[] symbols) {
+        this.symbols = Arrays.asList(symbols);
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether grid bands are drawn for the axis.
+     * The default value is {@code true}.
      *
      * @return A boolean.
      *
@@ -139,7 +149,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Sets the flag that controls whether or not grid bands are drawn for this
+     * Sets the flag that controls whether grid bands are drawn for this
      * axis and notifies registered listeners that the axis has been modified.
      * Each band is the area between two adjacent gridlines 
      * running perpendicular to the axis.  When the bands are drawn they are 
@@ -310,7 +320,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         //gets the outline stroke width of the plot
         double outlineStrokeWidth = 1.0;
         Stroke outlineStroke = getPlot().getOutlineStroke();
-        if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
+        if (outlineStroke instanceof BasicStroke) {
             outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
         }
 
@@ -361,7 +371,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         //gets the outline stroke width of the plot
         double outlineStrokeWidth = 1.0;
         Stroke outlineStroke = getPlot().getOutlineStroke();
-        if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
+        if (outlineStroke instanceof BasicStroke) {
             outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
         }
 
@@ -490,7 +500,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     protected List refreshTicksHorizontal(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
-        List ticks = new java.util.ArrayList();
+        List<Tick> ticks = new java.util.ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -584,7 +594,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     protected List refreshTicksVertical(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
-        List ticks = new java.util.ArrayList();
+        List<Tick> ticks = new java.util.ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -674,7 +684,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public String valueToString(double value) {
         String strToReturn;
         try {
-            strToReturn = (String) this.symbols.get((int) value);
+            strToReturn = this.symbols.get((int) value);
         }
         catch (IndexOutOfBoundsException  ex) {
             strToReturn = "";

@@ -1,9 +1,9 @@
 JFreeChart
 ==========
 
-Version 1.5.3, 21 February 2021.
+Version 1.5.6, 21 May 2025.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)](https://central.sonatype.com/artifact/org.jfree/jfreechart/versions) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
 
 Overview
 --------
@@ -15,7 +15,7 @@ export to multiple formats including SVG, PNG and PDF).
 
 The home page for the project is:
 
-http://www.jfree.org/jfreechart
+https://www.jfree.org/jfreechart
 
 JFreeChart requires JDK 8 or later.  If JavaFX support is required, you
 need to also include the JFreeChart-FX extensions:
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.3</version>
+        <version>1.5.6</version>
     </dependency>
 
 
@@ -57,16 +57,42 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.4 (not-yet-released)
+##### Version 1.5.6 (21 May 2025)
+- added `setSymbols` method to `SymbolAxis` ([#421](https://github.com/jfree/jfreechart/pull/421))
+- added label padding to `Crosshair` ([#414](https://github.com/jfree/jfreechart/pull/414))
+- add clearSeriesXXX methods for all series settings in `AbstractRenderer` ([#364](https://github.com/jfree/jfreechart/issues/364))
+- fix calculating if label fits inside bar for `XYBarRenderer` ([#366](https://github.com/jfree/jfreechart/issues/366))
+- set default background paint to `LIGHT_GRAY` ([#324](https://github.com/jfree/jfreechart/issues/324))
+- deprecated all classes in `org.jfree.chart.servlet.*` ([#385](https://github.com/jfree/jfreechart/issues/385))
+- updated `pom.xml` with new Maven publishing flow and latest plugin versions
+- various minor improvements
+
+##### Version 1.5.5 (23 June 2024)
+- added `XYBezierRenderer` by Javier Robes ([#286](https://github.com/jfree/jfreechart/pull/286))
+- fix cross-hair painting ([#340](https://github.com/jfree/jfreechart/issues/340))
+- parameter range check for `CompassPlot` ([#397](https://github.com/jfree/jfreechart/pull/397))
+
+Note: some (supposed) security vulnerabilities have been reported for v1.5.4:
+
+- [CVE-2023-52070](https://nvd.nist.gov/vuln/detail/CVE-2023-52070) : an `ArrayIndexOutOfBoundsException` in `CompassPlot`\
+  No fix is considered necessary, however ([#397](https://github.com/jfree/jfreechart/pull/397)) has been applied.
+
+- [CVE-2024-22949](https://nvd.nist.gov/vuln/detail/CVE-2024-22949) : a possible `NullPointerException` in `CategoryLineAnnotation`\
+  No fix is considered necessary.
+
+- [CVE-2024-23076](https://nvd.nist.gov/vuln/detail/CVE-2024-23076) : a possible `NullPointerException` in `BubbleXYItemLabelGenerator`\
+  No fix is considered necessary.
+
+##### Version 1.5.4 (8 January 2023)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
 - add option to truncate item labels and compute contrast colors (PR [#225](https://github.com/jfree/jfreechart/pull/225))
 - add new annotations (PR [#226](https://github.com/jfree/jfreechart/pull/226))
 - add new panel for background rendering of charts (PR [#233](https://github.com/jfree/jfreechart/pull/233))
 - fix tick label font for `LogAxis` with number format override ([#98](https://github.com/jfree/jfreechart/issues/98));
 - added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
+- added `get/setWebFillAlpha()` methods to SpiderWebPlot ([#279](https://github.com/jfree/jfreechart/pull/279))
 - add argument checks for annotations ([#223](https://github.com/jfree/jfreechart/issues/223));
 - removed `JFreeChartResources.java` file ([#239](https://github.com/jfree/jfreechart/issues/239))
-
 
 ##### Version 1.5.3 (21 February 2021)
 - add new `FlowPlot` class for drawing Sankey charts;
@@ -156,7 +182,7 @@ History
 - simplified `ChartFactory` methods;
 - added new methods to `DatasetUtilities` to interpolate y-values in `XYDatasets`;
 - added URLs to labels on `CategoryAxis`;
-- seamless integration with JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
+- seamless integration with JFreeSVG (https://www.jfree.org/jfreesvg/) and OrsonPDF 
 (http://www.object-refinery.com/pdf/);
 - improved the consistency of the `SWTGraphics2D` implementation;  
 
@@ -845,7 +871,7 @@ adjustments (there should be no breakage of applications coded to the 1.0.0 API)
 
 ###### API adjustments
 - `BarRenderer`: added a new flag (`includeBaseInRange`), plus accessor 
-    methods, that controls whether or not the base value for the bar is 
+    methods, that controls whether the base value for the bar is 
     included in the range calculated by the `findRangeBounds()` method;
 - `BubbleXYItemLabelGenerator`: new class;
 - `Range`: added a new method `expandToInclude(Range, double)`, this is used by 
@@ -1347,6 +1373,7 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 - Richard Atkinson
 - David Basten
 - David Berry
+- Yuri Blankenstein
 - Chris Boek
 - Zoheb Borbora
 - Anthony Boulestreau
@@ -1448,6 +1475,6 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 
 It is possible that I have missed someone on this list, if that applies to you, please e-mail me.
 
-Dave Gilbert (david.gilbert@object-refinery.com)
+Dave Gilbert (dave@jfree.org)
 
 JFreeChart Project Leader

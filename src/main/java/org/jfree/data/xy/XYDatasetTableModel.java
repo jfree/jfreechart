@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------------------
  * XYDatasetTableModel.java
  * ------------------------
- * (C)opyright 2003-2022, by Bryan Scott and Contributors.
+ * (C)opyright 2003-present, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott;
  * Contributor(s):   David Gilbert;
@@ -170,7 +170,7 @@ public class XYDatasetTableModel extends AbstractTableModel
     }
 
     /**
-     * Returns a flag indicating whether or not the specified cell is editable.
+     * Returns a flag indicating whether the specified cell is editable.
      *
      * @param row  the row number.
      * @param column  the column number.
