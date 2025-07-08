@@ -9,6 +9,7 @@ import org.jfree.chart.axis.TickUnitSource;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.data.Range;
 
 /**
  * Dummy extension of ValueAxis for JUnit testing using the EqualsVerifier
@@ -30,10 +31,11 @@ public class FakeValueAxis extends ValueAxis {
         return 0;
     }
 
-    @Override
-    protected void autoAdjustRange() {
-    }
-
+	@Override
+	public Range calculateAutoRange(boolean adhereToMax) {
+		return null;
+	}
+    
     @Override
     public void configure() {
     }

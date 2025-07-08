@@ -34,6 +34,7 @@
  *                   David M. O'Donnell;
  *                   Scott Sams;
  *                   Sergei Ivanov;
+ *                   Yuri Blankenstein;
  *
  */
 
@@ -216,13 +217,12 @@ public class LogarithmicAxis extends NumberAxis {
     /**
      * Overridden version that calls original and then sets up flag for
      * log axis processing.
-     *
-     * @param range  the new range.
      */
     @Override
-    public void setRange(Range range) {
-        super.setRange(range);      // call parent method
-        setupSmallLogFlag();        // setup flag based on bounds values
+    public void setRange(Range range, boolean turnOffAutoRange,
+            boolean notify) {
+        super.setRange(range, turnOffAutoRange, notify); // call parent method
+        setupSmallLogFlag(); // setup flag based on bounds values
     }
 
     /**
@@ -447,11 +447,11 @@ public class LogarithmicAxis extends NumberAxis {
      * Rescales the axis to ensure that all data is visible.
      */
     @Override
-    public void autoAdjustRange() {
+    public Range calculateAutoRange(boolean adhereToMax) {
 
         Plot plot = getPlot();
         if (plot == null) {
-            return;  // no plot, no data.
+            return null;  // no plot, no data.
         }
 
         if (plot instanceof ValueAxisPlot) {
@@ -549,9 +549,9 @@ public class LogarithmicAxis extends NumberAxis {
                 }
             }
 
-            setRange(new Range(lower, upper), false, false);
-            setupSmallLogFlag();       //setup flag based on bounds values
+            return new Range(lower, upper);
         }
+        return null;
     }
 
     /**
