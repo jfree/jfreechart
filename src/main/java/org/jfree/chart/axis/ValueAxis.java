@@ -1033,7 +1033,7 @@ public abstract class ValueAxis extends Axis
      * <p>
      * If requested, an {@link AxisChangeEvent} is forwarded to all registered
      * listeners.
-     * <p>
+     * </p>
      * 
      * @param range  the range ({@code null} not permitted).
      * @param notify notify listeners?
@@ -1365,7 +1365,9 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * @param rangeMinimumSize the minimum range size for this axis
+     * Sets the minimum range size for this axis.
+     * 
+     * @param rangeMinimumSize the minimum range size for this axis.
      */
     public void setRangeMinimumSize(double rangeMinimumSize) {
         if (Double.isNaN(rangeMinimumSize)
@@ -1386,7 +1388,9 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * @return the minimum range size for this axis
+     * Returns the minimum range size for this axis.
+     * 
+     * @return the minimum range size for this axis.
      */
     public double getRangeMinimumSize() {
         return rangeMinimumSize;
@@ -1552,8 +1556,10 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
+     * Calculates the axis range to fit the range of values in the dataset.
+     * 
      * @return the calculated axis range to fit the range of values in the
-     *         dataset. <tt>null</tt> if range could not be calculated.
+     *         dataset. {@code null} if range could not be calculated.
      * @param adhereToMax specifies whether range should adhere to its maximum
      *                    boundaries (e.g. {@link #getFixedAutoRange()})
      * @see #autoAdjustRange()

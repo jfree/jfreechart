@@ -35,10 +35,13 @@
 package org.jfree.data;
 
 /**
- * Configures how the auto range should be aligned when it differs from the
+ * Configures how the auto-range should be aligned when it differs from the
  * preferred range
  */
 public enum RangeAlign {
+    /**
+     * Aligns the length with the lower-bound of the auto-range.
+     */
     LOWER {
         @Override
         public Range align(Range range, double length) {
@@ -46,6 +49,9 @@ public enum RangeAlign {
                     range.getLowerBound() + length);
         }
     },
+    /**
+     * Aligns the length in the center of the auto-range.
+     */
     CENTER {
         @Override
         public Range align(Range range, double length) {
@@ -54,6 +60,9 @@ public enum RangeAlign {
                     range.getUpperBound() - offset);
         }
     },
+    /**
+     * Aligns the length with the upper-bound of the auto-range.
+     */
     UPPER {
         @Override
         public Range align(Range range, double length) {
@@ -62,5 +71,13 @@ public enum RangeAlign {
         }
     };
 
+	/**
+	 * Returns the aligned range for this configuration, given the calculated
+	 * auto-range and preferred length.
+	 * 
+	 * @param range  The calculated auto-range.
+	 * @param length The preferred length
+	 * @return The aligned range for this configuration.
+	 */
     public abstract Range align(Range range, double length);
 }
