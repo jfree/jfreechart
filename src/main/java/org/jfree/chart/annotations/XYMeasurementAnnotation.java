@@ -452,6 +452,9 @@ public class XYMeasurementAnnotation extends XYTextAnnotation
     }
 
     /**
+     * Returns {@code true} if a chart entity should be created, {@code false}
+     *         otherwise.
+     * 
      * @return {@code true} if a chart entity should be created, {@code false}
      *         otherwise.
      */

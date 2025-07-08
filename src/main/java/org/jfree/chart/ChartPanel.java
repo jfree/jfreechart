@@ -1101,15 +1101,35 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.enforceFileExtensions = enforce;
     }
 
+    /**
+     * Sets the predicate that will start the movement of a chart entity. 
+     * The predicate can evaluate the provided mouse event.
+     *  
+     * @param moveChartEntityPredicate The predicate that will start the movement of a chart entity.
+     */
     public void setMoveChartEntityPredicate(
             Predicate<MouseEvent> moveChartEntityPredicate) {
         this.moveChartEntityPredicate = moveChartEntityPredicate;
     }
 
+    /**
+     * Returns the move chart entity fill paint.
+     * 
+     * @return The move chart entity fill paint.
+     * 
+     * @see #setMoveChartEntityFillPaint(Paint)
+     */
     public Paint getMoveChartEntityFillPaint() {
         return moveChartEntityFillPaint;
     }
     
+    /**
+     * Sets the move chart entity fill paint.
+     * 
+     * @param moveChartEntityFillPaint The move chart entity fill paint.
+     * 
+     * @see #getMoveChartEntityFillPaint()
+     */
     public void setMoveChartEntityFillPaint(Paint moveChartEntityFillPaint) {
         this.moveChartEntityFillPaint = moveChartEntityFillPaint;
     }
