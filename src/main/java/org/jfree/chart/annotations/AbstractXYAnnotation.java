@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
  *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
+ *                   Yuri Blankenstein;
  *
  */
 
@@ -144,6 +145,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * @param rendererIndex  the renderer index.
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
+     * @see #createEntity(Shape, int, String, String)
      */
     protected void addEntity(PlotRenderingInfo info,
                              Shape hotspot, int rendererIndex,
@@ -155,9 +157,25 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
         if (entities == null) {
             return;
         }
-        XYAnnotationEntity entity = new XYAnnotationEntity(hotspot,
-                rendererIndex, toolTipText, urlText);
+        XYAnnotationEntity entity = createEntity(hotspot, rendererIndex,
+                toolTipText, urlText);
         entities.add(entity);
+    }
+    
+    /**
+     * A factory method for creating an {@link XYAnnotationEntity} for this
+     * annotation.
+     * 
+     * @param hotspot       the hotspot area.
+     * @param rendererIndex the renderer index.
+     * @param toolTipText   the tool tip text.
+     * @param urlText       the URL text.
+     * @return the created entity
+     */
+    protected XYAnnotationEntity createEntity(Shape hotspot, int rendererIndex,
+            String toolTipText, String urlText) {
+        return new XYAnnotationEntity(hotspot, this, rendererIndex, toolTipText,
+                urlText);
     }
 
     /**
