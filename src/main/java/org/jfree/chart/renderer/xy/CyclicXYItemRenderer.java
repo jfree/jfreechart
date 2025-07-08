@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------------
  * CyclicXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2022, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-present, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert;
@@ -58,7 +58,7 @@ import org.jfree.data.xy.XYDataset;
  * occurs, the cyclic renderer splits the line at each cycle end instead. This
  * is done by interpolating new points at cycle boundary. Thus, correct
  * appearance is restored.
- *
+ * <p>
  * The Cyclic XY item renderer works exactly like a standard XY item renderer
  * with non-cyclic axis.
  */

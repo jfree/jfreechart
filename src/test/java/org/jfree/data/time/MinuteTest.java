@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * MinuteTest.java
  * ---------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -35,11 +35,6 @@
  */
 
 package org.jfree.data.time;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.ZoneOffset;
 import java.util.Calendar;
@@ -53,6 +48,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Minute} class.
@@ -82,6 +79,16 @@ public class MinuteTest {
         Hour hour2 = new Hour(15, day2);
         Minute minute2 = new Minute(15, hour2);
         assertEquals(minute1, minute2);
+    }
+
+    @Test
+    public void comparison() {
+        Minute m1 = new Minute(30, 6, 10, 8, 2021);
+        Minute m2 = new Minute(30, 6, 11, 8, 2021);
+        assertNotEquals(m1, m2);
+        assertEquals(-1, m1.compareTo(m2));
+        assertEquals(1, m2.compareTo(m1));
+        assertEquals(0, m1.compareTo(m1));
     }
 
     /**

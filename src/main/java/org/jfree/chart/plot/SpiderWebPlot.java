@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------------
  * SpiderWebPlot.java
  * ------------------
- * (C) Copyright 2005-2022, by Heaps of Flavour Pty Ltd and Contributors.
+ * (C) Copyright 2005-present, by Heaps of Flavour Pty Ltd and Contributors.
  *
  * Company Info:  http://www.i4-talent.com
  *
@@ -220,6 +220,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** controls if the web polygons are filled or not */
     private boolean webFilled = true;
 
+    /** The alpha value of the fill portion of a polygon. */
+    private float webFillAlpha = 0.1F;
+
     /** A tooltip generator for the plot ({@code null} permitted). */
     private CategoryToolTipGenerator toolTipGenerator;
 
@@ -357,6 +360,34 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      */
     public void setWebFilled(boolean flag) {
         this.webFilled = flag;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the alpha value for filling a graph (in the range 0.0 to 1.0).
+     *
+     * @return The alpha value for filling a spider plot polygon.
+     *
+     * @see #setWebFillAlpha(float)
+     */
+    public float getWebFillAlpha() {
+        return webFillAlpha;
+    }
+
+    /**
+     * Sets the alpha value for the fill of a plot polygon and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
+     *
+     * @param alpha the new alpha value. If it is outside [0,1] it will be corrected to fit the range.
+     * @see #getWebFillAlpha()
+     */
+    public void setWebFillAlpha(float alpha) {
+        this.webFillAlpha = alpha;
+        if (webFillAlpha < 0f) {
+            webFillAlpha = 0f;
+        } else if (webFillAlpha > 1f) {
+            webFillAlpha = 1f;
+        }
         fireChangeEvent();
     }
 
@@ -616,8 +647,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the paint for ALL series in the plot.  If this is set to 
-     * {@code null}, then a list of paints is used instead (to allow different 
+     * Sets the paint for ALL series in the plot.  If this is set to
+     * {@code null}, then a list of paints is used instead (to allow different
      * colors to be used for each series of the radar group).
      *
      * @param paint the paint ({@code null} permitted).
@@ -1311,7 +1342,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
         if (this.webFilled) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-                    0.1f));
+                    webFillAlpha));
             g2.fill(polygon);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                     getForegroundAlpha()));
@@ -1464,6 +1495,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             return false;
         }
         if (this.webFilled != that.webFilled) {
+            return false;
+        }
+        if (this.webFillAlpha != that.webFillAlpha) {
             return false;
         }
         if (this.axisLabelGap != that.axisLabelGap) {
