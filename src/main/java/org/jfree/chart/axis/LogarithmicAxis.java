@@ -664,6 +664,7 @@ public class LogarithmicAxis extends NumberAxis {
         setRange(adjusted);
     }
 
+
     /**
      * Calculates the positions of the tick labels for the axis, storing the
      * results in the tick label list (ready for drawing).
@@ -714,9 +715,7 @@ public class LogarithmicAxis extends NumberAxis {
                 if (this.smallLogFlag) {
                     //small log values in use; create numeric value for tick
                     currentTickValue = Math.pow(10, i) + (Math.pow(10, i) * j);
-                    if (this.expTickLabelsFlag
-                        || (i < 0 && currentTickValue > 0.0
-                        && currentTickValue < 1.0)) {
+                    if (shouldShowTickLabel(i, currentTickValue)) {
                         //showing "1e#"-style ticks or negative exponent
                         // generating tick value between 0 & 1; show fewer
                         if (j == 0 || (i > -4 && j < 2)
@@ -812,7 +811,10 @@ public class LogarithmicAxis extends NumberAxis {
         return ticks;
 
     }
-
+    public boolean shouldShowTickLabel(int i, double currentTickValue) {
+        return this.expTickLabelsFlag
+                || (i < 0 && currentTickValue > 0.0 && currentTickValue < 1.0);
+    }
     /**
      * Calculates the positions of the tick labels for the axis, storing the
      * results in the tick label list (ready for drawing).

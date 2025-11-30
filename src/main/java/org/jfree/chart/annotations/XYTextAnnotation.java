@@ -78,8 +78,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     public static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN,
             10);
 
-    /** The default paint. */
-    public static final Paint DEFAULT_PAINT = Color.BLACK;
+//    /** The default paint. */
+//    public static final Paint DEFAULT_PAINT = AbstractAnnotation.DEFAULT_PAINT;
 
     /** The default text anchor. */
     public static final TextAnchor DEFAULT_TEXT_ANCHOR = TextAnchor.CENTER;
@@ -150,7 +150,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         Args.requireFinite(y, "y");
         this.text = text;
         this.font = DEFAULT_FONT;
-        this.paint = DEFAULT_PAINT;
+        this.paint = AbstractAnnotation.DEFAULT_PAINT;
         this.x = x;
         this.y = y;
         this.textAnchor = DEFAULT_TEXT_ANCHOR;
