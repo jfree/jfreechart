@@ -3248,66 +3248,98 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param state  collects info as the chart is drawn (possibly
      *               {@code null}).
      */
-    @Override
-    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-            PlotState parentState, PlotRenderingInfo state) {
+    /**
+     * Checks if the drawing area is large enough to render the plot.
+     *
+     * @param area the area to check.
+     *
+     * @return {@code true} if the area is large enough, {@code false} otherwise.
+     */
+    private boolean isAreaLargeEnoughToDraw(Rectangle2D area) {
+        return area.getWidth() > MINIMUM_WIDTH_TO_DRAW &&
+               area.getHeight() > MINIMUM_HEIGHT_TO_DRAW;
+    }
 
-        // if the plot area is too small, just return...
-        boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);
-        boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
-        if (b1 || b2) {
-            return;
-        }
-
-        // record the plot area...
+    /**
+     * Initializes the rendering state, creating a new one if necessary.
+     *
+     * @param state the state ({@code null} permitted).
+     * @param area the plot area.
+     *
+     * @return The rendering state (never {@code null}).
+     */
+    private PlotRenderingInfo initializeRenderingState(PlotRenderingInfo state,
+            Rectangle2D area) {
         if (state == null) {
-            // if the incoming state is null, no information will be passed
-            // back to the caller - but we create a temporary state to record
-            // the plot area, since that is used later by the axes
             state = new PlotRenderingInfo(null);
         }
         state.setPlotArea(area);
+        state.setDataArea(new Rectangle2D.Double(area.getX(), area.getY(),
+                area.getWidth(), area.getHeight()));
+        return state;
+    }
 
-        // adjust the drawing area for the plot insets (if any)...
+    /**
+     * Calculates the data area by accounting for insets, axis space, and offsets.
+     *
+     * @param g2 the graphics device.
+     * @param area the plot area.
+     *
+     * @return The data area.
+     */
+    private Rectangle2D calculateDataArea(Graphics2D g2, Rectangle2D area) {
         RectangleInsets insets = getInsets();
         insets.trim(area);
 
-        // calculate the data area...
         AxisSpace space = calculateAxisSpace(g2, area);
         Rectangle2D dataArea = space.shrink(area, null);
         this.axisOffset.trim(dataArea);
         dataArea = integerise(dataArea);
-        if (dataArea.isEmpty()) {
-            return;
-        }
-        state.setDataArea(dataArea);
-        createAndAddEntity((Rectangle2D) dataArea.clone(), state, null, null);
+        return dataArea;
+    }
 
-        // if there is a renderer, it draws the background, otherwise use the
-        // default background...
+    /**
+     * Draws the background layer of the plot.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     */
+    private void drawBackgroundLayer(Graphics2D g2, Rectangle2D dataArea) {
         if (getRenderer() != null) {
             getRenderer().drawBackground(g2, this, dataArea);
         } else {
             drawBackground(g2, dataArea);
         }
+    }
 
-        Map<Axis, AxisState> axisStateMap = drawAxes(g2, area, dataArea, state);
-
-        // the anchor point is typically the point where the mouse last
-        // clicked - the crosshairs will be driven off this point...
+    /**
+     * Prepares the crosshair state based on anchor point and axes.
+     *
+     * @param anchor the anchor point ({@code null} permitted).
+     * @param dataArea the data area.
+     * @param parentState the parent state ({@code null} permitted).
+     * @param axisStateMap the axis state map.
+     *
+     * @return The crosshair state (never {@code null}).
+     */
+    private CategoryCrosshairState<R, C> prepareCrosshairState(Point2D anchor,
+            Rectangle2D dataArea, PlotState parentState,
+            Map<Axis, AxisState> axisStateMap) {
+        
+        // Adjust anchor if needed
         if (anchor != null && !dataArea.contains(anchor)) {
             anchor = ShapeUtils.getPointInRectangle(anchor.getX(),
                     anchor.getY(), dataArea);
         }
+
+        // Initialize crosshair state
         CategoryCrosshairState<R, C> crosshairState = new CategoryCrosshairState<>();
         crosshairState.setCrosshairDistance(Double.POSITIVE_INFINITY);
         crosshairState.setAnchor(anchor);
-
-        // specify the anchor X and Y coordinates in Java2D space, for the
-        // cases where these are not updated during rendering (i.e. no lock
-        // on data)
         crosshairState.setAnchorX(Double.NaN);
         crosshairState.setAnchorY(Double.NaN);
+
+        // Set anchor Y value
         if (anchor != null) {
             ValueAxis rangeAxis = getRangeAxis();
             if (rangeAxis != null) {
@@ -3315,49 +3347,50 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
                 if (getOrientation() == PlotOrientation.VERTICAL) {
                     y = rangeAxis.java2DToValue(anchor.getY(), dataArea,
                             getRangeAxisEdge());
-                }
-                else {
+                } else {
                     y = rangeAxis.java2DToValue(anchor.getX(), dataArea,
                             getRangeAxisEdge());
                 }
                 crosshairState.setAnchorY(y);
             }
         }
+
+        // Set domain and range crosshair keys
         crosshairState.setRowKey(getDomainCrosshairRowKey());
         crosshairState.setColumnKey(getDomainCrosshairColumnKey());
         crosshairState.setCrosshairY(getRangeCrosshairValue());
 
-        // don't let anyone draw outside the data area
-        Shape savedClip = g2.getClip();
-        g2.clip(dataArea);
+        return crosshairState;
+    }
 
+    /**
+     * Draws gridlines and baseline for the data layer.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     * @param parentState the parent state.
+     * @param axisStateMap the axis state map.
+     * @param info the rendering info.
+     * @param crosshairState the crosshair state.
+     */
+    private void drawDataLayerWithGridlines(Graphics2D g2, Rectangle2D dataArea,
+            PlotState parentState, Map<Axis, AxisState> axisStateMap,
+            PlotRenderingInfo info, CategoryCrosshairState<R, C> crosshairState) {
+        
+        // Draw gridlines
         drawDomainGridlines(g2, dataArea);
 
         AxisState rangeAxisState = axisStateMap.get(getRangeAxis());
-        if (rangeAxisState == null) {
-            if (parentState != null) {
-                rangeAxisState = parentState.getSharedAxisStates()
-                        .get(getRangeAxis());
-            }
+        if (rangeAxisState == null && parentState != null) {
+            rangeAxisState = parentState.getSharedAxisStates()
+                    .get(getRangeAxis());
         }
         if (rangeAxisState != null) {
             drawRangeGridlines(g2, dataArea, rangeAxisState.getTicks());
             drawZeroRangeBaseline(g2, dataArea);
         }
 
-        Graphics2D savedG2 = g2;
-        BufferedImage dataImage = null;
-        boolean suppressShadow = Boolean.TRUE.equals(g2.getRenderingHint(
-                JFreeChart.KEY_SUPPRESS_SHADOW_GENERATION));
-        if (this.shadowGenerator != null && !suppressShadow) {
-            dataImage = new BufferedImage((int) dataArea.getWidth(),
-                    (int)dataArea.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            g2 = dataImage.createGraphics();
-            g2.translate(-dataArea.getX(), -dataArea.getY());
-            g2.setRenderingHints(savedG2.getRenderingHints());
-        }
-
-        // draw the markers...
+        // Draw background markers
         for (CategoryItemRenderer renderer : this.renderers.values()) {
             int i = getIndexOf(renderer);
             drawDomainMarkers(g2, dataArea, i, Layer.BACKGROUND);
@@ -3366,23 +3399,49 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
             int i = getIndexOf(renderer);
             drawRangeMarkers(g2, dataArea, i, Layer.BACKGROUND);
         }
+    }
 
-        // now render data items...
+    /**
+     * Renders all data items for all datasets.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     * @param info the rendering info.
+     * @param crosshairState the crosshair state.
+     *
+     * @return {@code true} if data was found, {@code false} otherwise.
+     */
+    private boolean renderDataItems(Graphics2D g2, Rectangle2D dataArea,
+            PlotRenderingInfo info, CategoryCrosshairState<R, C> crosshairState) {
+        
         boolean foundData = false;
 
-        // set up the alpha-transparency...
+        // Set up alpha transparency
         Composite originalComposite = g2.getComposite();
         g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, getForegroundAlpha()));
 
-        DatasetRenderingOrder order = getDatasetRenderingOrder();
-        List<Integer> datasetIndices = getDatasetIndices(order);
-        for (int i : datasetIndices) {
-            foundData = render(g2, dataArea, i, state, crosshairState)
-                    || foundData;
+        try {
+            DatasetRenderingOrder order = getDatasetRenderingOrder();
+            List<Integer> datasetIndices = getDatasetIndices(order);
+            for (int i : datasetIndices) {
+                foundData = render(g2, dataArea, i, info, crosshairState) || foundData;
+            }
+        } finally {
+            g2.setComposite(originalComposite);
         }
 
-        // draw the foreground markers...
+        return foundData;
+    }
+
+    /**
+     * Draws foreground markers.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     */
+    private void drawForegroundLayers(Graphics2D g2, Rectangle2D dataArea) {
+        DatasetRenderingOrder order = getDatasetRenderingOrder();
         List<Integer> rendererIndices = getRendererIndices(order);
         for (int i : rendererIndices) {
             drawDomainMarkers(g2, dataArea, i, Layer.FOREGROUND);
@@ -3390,32 +3449,22 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         for (int i : rendererIndices) {
             drawRangeMarkers(g2, dataArea, i, Layer.FOREGROUND);
         }
+    }
 
-        // draw the annotations (if any)...
-        drawAnnotations(g2, dataArea);
-
-        if (this.shadowGenerator != null && !suppressShadow) {
-            BufferedImage shadowImage = this.shadowGenerator.createDropShadow(
-                    dataImage);
-            g2 = savedG2;
-            g2.drawImage(shadowImage, (int) dataArea.getX()
-                    + this.shadowGenerator.calculateOffsetX(),
-                    (int) dataArea.getY()
-                    + this.shadowGenerator.calculateOffsetY(), null);
-            g2.drawImage(dataImage, (int) dataArea.getX(),
-                    (int) dataArea.getY(), null);
-        }
-        g2.setClip(savedClip);
-        g2.setComposite(originalComposite);
-
-        if (!foundData) {
-            drawNoDataMessage(g2, dataArea);
-        }
-
+    /**
+     * Draws both domain and range crosshairs.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     * @param crosshairState the crosshair state.
+     */
+    private void drawCrosshairs(Graphics2D g2, Rectangle2D dataArea,
+            CategoryCrosshairState<R, C> crosshairState) {
+        
         int datasetIndex = crosshairState.getDatasetIndex();
         setCrosshairDatasetIndex(datasetIndex, false);
 
-        // draw domain crosshair if required...
+        // Draw domain crosshair if required
         R rowKey = crosshairState.getRowKey();
         C columnKey = crosshairState.getColumnKey();
         setDomainCrosshairRowKey(rowKey, false);
@@ -3427,38 +3476,84 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
                     datasetIndex, rowKey, columnKey, stroke, paint);
         }
 
-        // draw range crosshair if required...
+        // Draw range crosshair if required
         ValueAxis yAxis = getRangeAxisForDataset(datasetIndex);
-        RectangleEdge yAxisEdge = getRangeAxisEdge();
-        if (!this.rangeCrosshairLockedOnData && anchor != null) {
-            double yy;
-            if (getOrientation() == PlotOrientation.VERTICAL) {
-                yy = yAxis.java2DToValue(anchor.getY(), dataArea, yAxisEdge);
-            }
-            else {
-                yy = yAxis.java2DToValue(anchor.getX(), dataArea, yAxisEdge);
-            }
-            crosshairState.setCrosshairY(yy);
-        }
-        setRangeCrosshairValue(crosshairState.getCrosshairY(), false);
-        if (isRangeCrosshairVisible()) {
+        if (yAxis != null) {
+            RectangleEdge yAxisEdge = getRangeAxisEdge();
             double y = getRangeCrosshairValue();
             Paint paint = getRangeCrosshairPaint();
             Stroke stroke = getRangeCrosshairStroke();
             drawRangeCrosshair(g2, dataArea, getOrientation(), y, yAxis,
                     stroke, paint);
         }
+    }
 
-        // draw an outline around the plot area...
+    /**
+     * Draws the outline layer of the plot.
+     *
+     * @param g2 the graphics device.
+     * @param dataArea the data area.
+     */
+    private void drawOutlineLayer(Graphics2D g2, Rectangle2D dataArea) {
         if (isOutlineVisible()) {
             if (getRenderer() != null) {
                 getRenderer().drawOutline(g2, this, dataArea);
-            }
-            else {
+            } else {
                 drawOutline(g2, dataArea);
             }
         }
+    }
 
+    @Override
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo state) {
+
+        // Validate minimum drawing area
+        if (!isAreaLargeEnoughToDraw(area)) {
+            return;
+        }
+
+        // Initialize state and calculate data area
+        state = initializeRenderingState(state, area);
+        Rectangle2D dataArea = calculateDataArea(g2, area);
+        if (dataArea.isEmpty()) {
+            return;
+        }
+
+        // Draw background
+        drawBackgroundLayer(g2, dataArea);
+
+        // Draw axes and prepare rendering context
+        Map<Axis, AxisState> axisStateMap = drawAxes(g2, area, dataArea, state);
+        CategoryCrosshairState<R, C> crosshairState = 
+            prepareCrosshairState(anchor, dataArea, parentState, axisStateMap);
+
+        // Clip to data area and draw data
+        Shape savedClip = g2.getClip();
+        g2.clip(dataArea);
+        try {
+            drawDataLayerWithGridlines(g2, dataArea, parentState, axisStateMap, 
+                state, crosshairState);
+            
+            // Draw data items
+            boolean foundData = renderDataItems(g2, dataArea, state, crosshairState);
+
+            // Draw annotations and markers
+            drawForegroundLayers(g2, dataArea);
+            drawAnnotations(g2, dataArea);
+            
+            if (!foundData) {
+                drawNoDataMessage(g2, dataArea);
+            }
+        } finally {
+            g2.setClip(savedClip);
+        }
+
+        // Draw crosshairs
+        drawCrosshairs(g2, dataArea, crosshairState);
+
+        // Draw outline
+        drawOutlineLayer(g2, dataArea);
     }
 
     /**
@@ -3628,57 +3723,34 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         CategoryAxis domainAxis = getDomainAxisForDataset(index);
         ValueAxis rangeAxis = getRangeAxisForDataset(index);
         boolean hasData = !DatasetUtils.isEmptyOrNull(currentDataset);
+        
         if (hasData && renderer != null) {
-
             foundData = true;
             CategoryItemRendererState state = renderer.initialise(g2, dataArea,
                     this, index, info);
             state.setCrosshairState(crosshairState);
+            
             int columnCount = currentDataset.getColumnCount();
             int rowCount = currentDataset.getRowCount();
             int passCount = renderer.getPassCount();
+            
+            // Use strategy pattern to handle different sort orders
+            ColumnRowIterator iterator = ColumnRowIterator.forOrders(
+                    this.columnRenderingOrder, this.rowRenderingOrder);
+            
             for (int pass = 0; pass < passCount; pass++) {
-                if (this.columnRenderingOrder == SortOrder.ASCENDING) {
-                    for (int column = 0; column < columnCount; column++) {
-                        if (this.rowRenderingOrder == SortOrder.ASCENDING) {
-                            for (int row = 0; row < rowCount; row++) {
-                                renderer.drawItem(g2, state, dataArea, this,
-                                        domainAxis, rangeAxis, currentDataset,
-                                        row, column, pass);
-                            }
-                        }
-                        else {
-                            for (int row = rowCount - 1; row >= 0; row--) {
-                                renderer.drawItem(g2, state, dataArea, this,
-                                        domainAxis, rangeAxis, currentDataset,
-                                        row, column, pass);
-                            }
-                        }
-                    }
-                }
-                else {
-                    for (int column = columnCount - 1; column >= 0; column--) {
-                        if (this.rowRenderingOrder == SortOrder.ASCENDING) {
-                            for (int row = 0; row < rowCount; row++) {
-                                renderer.drawItem(g2, state, dataArea, this,
-                                        domainAxis, rangeAxis, currentDataset,
-                                        row, column, pass);
-                            }
-                        }
-                        else {
-                            for (int row = rowCount - 1; row >= 0; row--) {
-                                renderer.drawItem(g2, state, dataArea, this,
-                                        domainAxis, rangeAxis, currentDataset,
-                                        row, column, pass);
-                            }
-                        }
-                    }
-                }
+                final int currentPass = pass;
+                iterator.iterate(columnCount, rowCount, (row, column) -> {
+                    renderer.drawItem(g2, state, dataArea, this,
+                            domainAxis, rangeAxis, currentDataset,
+                            row, column, currentPass);
+                });
             }
         }
         return foundData;
-
     }
+
+//    }
 
     /**
      * Draws the domain gridlines for the plot, if they are visible.
