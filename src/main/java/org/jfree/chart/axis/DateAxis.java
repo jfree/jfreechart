@@ -1448,223 +1448,129 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     protected List<? extends Tick> refreshTicksHorizontal(Graphics2D g2,
-                Rectangle2D dataArea, RectangleEdge edge) {
-
-        List<DateTick> result = new ArrayList<>();
-
-        Font tickLabelFont = getTickLabelFont();
-        g2.setFont(tickLabelFont);
-
-        if (isAutoTickUnitSelection()) {
-            selectAutoTickUnit(g2, dataArea, edge);
-        }
-
-        DateTickUnit unit = getTickUnit();
-        Date tickDate = calculateLowestVisibleTickValue(unit);
-        Date upperDate = getMaximumDate();
-
-        boolean hasRolled = false;
-        while (tickDate.before(upperDate)) {
-            // could add a flag to make the following correction optional...
-            if (!hasRolled) {
-                tickDate = correctTickDateForPosition(tickDate, unit,
-                     this.tickMarkPosition);
-            }
-
-            long lowestTickTime = tickDate.getTime();
-            long distance = unit.addToDate(tickDate, this.timeZone).getTime()
-                    - lowestTickTime;
-            int minorTickSpaces = getMinorTickCount();
-            if (minorTickSpaces <= 0) {
-                minorTickSpaces = unit.getMinorTickCount();
-            }
-            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
-                long minorTickTime = lowestTickTime - distance
-                        * minorTick / minorTickSpaces;
-                if (minorTickTime > 0 && getRange().contains(minorTickTime)
-                        && (!isHiddenValue(minorTickTime))) {
-                    result.add(new DateTick(TickType.MINOR,
-                            new Date(minorTickTime), "", TextAnchor.TOP_CENTER,
-                            TextAnchor.CENTER, 0.0));
-                }
-            }
-
-            if (!isHiddenValue(tickDate.getTime())) {
-                // work out the value, label and position
-                String tickLabel;
-                DateFormat formatter = getDateFormatOverride();
-                if (formatter != null) {
-                    tickLabel = formatter.format(tickDate);
-                }
-                else {
-                    tickLabel = this.tickUnit.dateToString(tickDate);
-                }
-                TextAnchor anchor, rotationAnchor;
-                double angle = 0.0;
-                if (isVerticalTickLabels()) {
-                    anchor = TextAnchor.CENTER_RIGHT;
-                    rotationAnchor = TextAnchor.CENTER_RIGHT;
-                    if (edge == RectangleEdge.TOP) {
-                        angle = Math.PI / 2.0;
-                    }
-                    else {
-                        angle = -Math.PI / 2.0;
-                    }
-                }
-                else {
-                    if (edge == RectangleEdge.TOP) {
-                        anchor = TextAnchor.BOTTOM_CENTER;
-                        rotationAnchor = TextAnchor.BOTTOM_CENTER;
-                    }
-                    else {
-                        anchor = TextAnchor.TOP_CENTER;
-                        rotationAnchor = TextAnchor.TOP_CENTER;
-                    }
-                }
-
-                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
-                        rotationAnchor, angle);
-                result.add(tick);
-                hasRolled = false;
-
-                long currentTickTime = tickDate.getTime();
-                tickDate = unit.addToDate(tickDate, this.timeZone);
-                long nextTickTime = tickDate.getTime();
-                for (int minorTick = 1; minorTick < minorTickSpaces;
-                        minorTick++) {
-                    long minorTickTime = currentTickTime
-                            + (nextTickTime - currentTickTime)
-                            * minorTick / minorTickSpaces;
-                    if (getRange().contains(minorTickTime)
-                            && (!isHiddenValue(minorTickTime))) {
-                        result.add(new DateTick(TickType.MINOR,
-                                new Date(minorTickTime), "",
-                                TextAnchor.TOP_CENTER, TextAnchor.CENTER,
-                                0.0));
-                    }
-                }
-
-            }
-            else {
-                tickDate = unit.rollDate(tickDate, this.timeZone);
-                hasRolled = true;
-            }
-        }
-        return result;
-
+            Rectangle2D dataArea, RectangleEdge edge) {
+        return refreshTicksForAxis(g2, dataArea, edge, true);
     }
 
-    /**
-     * Recalculates the ticks for the date axis.
-     *
-     * @param g2  the graphics device.
-     * @param dataArea  the area in which the plot should be drawn.
-     * @param edge  the location of the axis.
-     *
-     * @return A list of ticks.
-     */
-    protected List<? extends Tick> refreshTicksVertical(Graphics2D g2,
-            Rectangle2D dataArea, RectangleEdge edge) {
+        protected List<? extends Tick> refreshTicksVertical(Graphics2D g2,
+                Rectangle2D dataArea, RectangleEdge edge) {
+            return refreshTicksForAxis(g2, dataArea, edge, false);
+        }
 
+    private List<DateTick> refreshTicksForAxis(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge, boolean horizontalAxis) {
         List<DateTick> result = new ArrayList<>();
-
-        Font tickLabelFont = getTickLabelFont();
-        g2.setFont(tickLabelFont);
-
+        g2.setFont(getTickLabelFont());
         if (isAutoTickUnitSelection()) {
             selectAutoTickUnit(g2, dataArea, edge);
         }
         DateTickUnit unit = getTickUnit();
+        TickLabelInfo info = tickLabelInfo(edge, horizontalAxis);
+        buildDateTicks(result, unit, info);
+        return result;
+    }
+
+    private void buildDateTicks(List<DateTick> result, DateTickUnit unit,
+            TickLabelInfo info) {
         Date tickDate = calculateLowestVisibleTickValue(unit);
         Date upperDate = getMaximumDate();
-
+        int minorTickSpaces = resolveMinorTickSpaces(unit);
         boolean hasRolled = false;
         while (tickDate.before(upperDate)) {
-
-            // could add a flag to make the following correction optional...
-            if (!hasRolled) {
-                tickDate = correctTickDateForPosition(tickDate, unit,
-                    this.tickMarkPosition);
-            }
-
-            long lowestTickTime = tickDate.getTime();
-            long distance = unit.addToDate(tickDate, this.timeZone).getTime()
-                    - lowestTickTime;
-            int minorTickSpaces = getMinorTickCount();
-            if (minorTickSpaces <= 0) {
-                minorTickSpaces = unit.getMinorTickCount();
-            }
-            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
-                long minorTickTime = lowestTickTime - distance
-                        * minorTick / minorTickSpaces;
-                if (minorTickTime > 0 && getRange().contains(minorTickTime)
-                        && (!isHiddenValue(minorTickTime))) {
-                    result.add(new DateTick(TickType.MINOR,
-                            new Date(minorTickTime), "", TextAnchor.TOP_CENTER,
-                            TextAnchor.CENTER, 0.0));
-                }
-            }
-            if (!isHiddenValue(tickDate.getTime())) {
-                // work out the value, label and position
-                String tickLabel;
-                DateFormat formatter = getDateFormatOverride();
-                if (formatter != null) {
-                    tickLabel = formatter.format(tickDate);
-                }
-                else {
-                    tickLabel = this.tickUnit.dateToString(tickDate);
-                }
-                TextAnchor anchor, rotationAnchor;
-                double angle = 0.0;
-                if (isVerticalTickLabels()) {
-                    anchor = TextAnchor.BOTTOM_CENTER;
-                    rotationAnchor = TextAnchor.BOTTOM_CENTER;
-                    if (edge == RectangleEdge.LEFT) {
-                        angle = -Math.PI / 2.0;
-                    }
-                    else {
-                        angle = Math.PI / 2.0;
-                    }
-                }
-                else {
-                    if (edge == RectangleEdge.LEFT) {
-                        anchor = TextAnchor.CENTER_RIGHT;
-                        rotationAnchor = TextAnchor.CENTER_RIGHT;
-                    }
-                    else {
-                        anchor = TextAnchor.CENTER_LEFT;
-                        rotationAnchor = TextAnchor.CENTER_LEFT;
-                    }
-                }
-
-                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
-                        rotationAnchor, angle);
-                result.add(tick);
-                hasRolled = false;
-
-                long currentTickTime = tickDate.getTime();
-                tickDate = unit.addToDate(tickDate, this.timeZone);
-                long nextTickTime = tickDate.getTime();
-                for (int minorTick = 1; minorTick < minorTickSpaces;
-                        minorTick++) {
-                    long minorTickTime = currentTickTime
-                            + (nextTickTime - currentTickTime)
-                            * minorTick / minorTickSpaces;
-                    if (getRange().contains(minorTickTime)
-                            && (!isHiddenValue(minorTickTime))) {
-                        result.add(new DateTick(TickType.MINOR,
-                                new Date(minorTickTime), "",
-                                TextAnchor.TOP_CENTER, TextAnchor.CENTER,
-                                0.0));
-                    }
-                }
-            }
-            else {
+            tickDate = adjustTickDate(tickDate, unit, hasRolled);
+            addMinorTicksBefore(result, tickDate, unit, minorTickSpaces);
+            if (isHiddenValue(tickDate.getTime())) {
                 tickDate = unit.rollDate(tickDate, this.timeZone);
                 hasRolled = true;
+                continue;
+            }
+            Date next = unit.addToDate(tickDate, this.timeZone);
+            addMajorTick(result, tickDate, unit, info);
+            addMinorTicksAfter(result, tickDate.getTime(), next.getTime(), minorTickSpaces);
+            tickDate = next;
+            hasRolled = false;
+        }
+    }
+
+    private Date adjustTickDate(Date tickDate, DateTickUnit unit, boolean hasRolled) {
+        return hasRolled ? tickDate : correctTickDateForPosition(tickDate, unit, this.tickMarkPosition);
+    }
+
+    private int resolveMinorTickSpaces(DateTickUnit unit) {
+        int m = getMinorTickCount();
+        return (m > 0) ? m : unit.getMinorTickCount();
+    }
+
+    private void addMinorTicksBefore(List<DateTick> result, Date tickDate,
+            DateTickUnit unit, int minorTickSpaces) {
+        long t0 = tickDate.getTime();
+        long distance = unit.addToDate(tickDate, this.timeZone).getTime() - t0;
+        for (int i = 1; i < minorTickSpaces; i++) {
+            long t = t0 - distance * i / minorTickSpaces;
+            if (t > 0 && getRange().contains(t) && !isHiddenValue(t)) {
+                result.add(minorTick(t));
             }
         }
-        return result;
+    }
+
+    private void addMinorTicksAfter(List<DateTick> result, long currentTickTime,
+            long nextTickTime, int minorTickSpaces) {
+        for (int i = 1; i < minorTickSpaces; i++) {
+            long t = currentTickTime + (nextTickTime - currentTickTime) * i / minorTickSpaces;
+            if (getRange().contains(t) && !isHiddenValue(t)) {
+                result.add(minorTick(t));
+            }
+        }
+    }
+
+    private void addMajorTick(List<DateTick> result, Date tickDate, DateTickUnit unit,
+            TickLabelInfo info) {
+        result.add(new DateTick(tickDate, formatTickLabel(tickDate, unit),
+                info.anchor, info.rotationAnchor, info.angle));
+    }
+
+    private String formatTickLabel(Date tickDate, DateTickUnit unit) {
+        DateFormat f = getDateFormatOverride();
+        return (f != null) ? f.format(tickDate) : unit.dateToString(tickDate);
+    }
+
+    private static DateTick minorTick(long millis) {
+        return new DateTick(TickType.MINOR, new Date(millis), "",
+                TextAnchor.TOP_CENTER, TextAnchor.CENTER, 0.0);
+    }
+
+    private TickLabelInfo tickLabelInfo(RectangleEdge edge, boolean horizontalAxis) {
+        TextAnchor a, ra;
+        double ang = 0.0;
+        if (isVerticalTickLabels()) {
+            if (horizontalAxis) {
+                a = ra = TextAnchor.CENTER_RIGHT;
+                ang = (edge == RectangleEdge.TOP) ? Math.PI / 2.0 : -Math.PI / 2.0;
+            } else {
+                a = ra = TextAnchor.BOTTOM_CENTER;
+                ang = (edge == RectangleEdge.LEFT) ? -Math.PI / 2.0 : Math.PI / 2.0;
+            }
+        } else {
+            if (horizontalAxis) {
+                a = ra = (edge == RectangleEdge.TOP)
+                        ? TextAnchor.BOTTOM_CENTER : TextAnchor.TOP_CENTER;
+            } else {
+                a = ra = (edge == RectangleEdge.LEFT)
+                        ? TextAnchor.CENTER_RIGHT : TextAnchor.CENTER_LEFT;
+            }
+        }
+        return new TickLabelInfo(a, ra, ang);
+    }
+
+    private static final class TickLabelInfo {
+        final TextAnchor anchor;
+        final TextAnchor rotationAnchor;
+        final double angle;
+        TickLabelInfo(TextAnchor anchor, TextAnchor rotationAnchor, double angle) {
+            this.anchor = anchor;
+            this.rotationAnchor = rotationAnchor;
+            this.angle = angle;
+        }
     }
 
     /**

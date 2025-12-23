@@ -48,36 +48,24 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.block.BlockResult;
-import org.jfree.chart.block.EntityBlockParams;
-import org.jfree.chart.block.LengthConstraintType;
-import org.jfree.chart.block.RectangleConstraint;
-import org.jfree.chart.entity.ChartEntity;
-import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.entity.TitleEntity;
-import org.jfree.chart.event.TitleChangeEvent;
-import org.jfree.chart.text.G2TextMeasurer;
-import org.jfree.chart.text.TextBlock;
-import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
+import org.jfree.chart.block.BlockResult;
+import org.jfree.chart.entity.ChartEntity;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.data.Range;
 
 /**
  * A chart title that displays a text string with automatic wrapping as
  * required.
  */
-public class TextTitle extends Title implements Serializable, Cloneable, 
-        PublicCloneable {
+
+public class TextTitle extends Title implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8372008692127477443L;
@@ -110,9 +98,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
     /** The URL text (can be {@code null}). */
     private String urlText;
 
-    /** The content. */
-    private TextBlock content;
-
     /**
      * A flag that controls whether the title expands to fit the available
      * space..
@@ -128,7 +113,7 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * Creates a new title, using default attributes where necessary.
      */
     public TextTitle() {
-        this("");
+        this("", DEFAULT_FONT, DEFAULT_TEXT_PAINT);
     }
 
     /**
@@ -137,9 +122,7 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param text  the title text ({@code null} not permitted).
      */
     public TextTitle(String text) {
-        this(text, TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT,
-                Title.DEFAULT_POSITION, Title.DEFAULT_HORIZONTAL_ALIGNMENT,
-                Title.DEFAULT_VERTICAL_ALIGNMENT, Title.DEFAULT_PADDING);
+        this(text, DEFAULT_FONT, DEFAULT_TEXT_PAINT);
     }
 
     /**
@@ -149,29 +132,18 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param font  the title font ({@code null} not permitted).
      */
     public TextTitle(String text, Font font) {
-        this(text, font, TextTitle.DEFAULT_TEXT_PAINT, Title.DEFAULT_POSITION,
-                Title.DEFAULT_HORIZONTAL_ALIGNMENT,
-                Title.DEFAULT_VERTICAL_ALIGNMENT, Title.DEFAULT_PADDING);
+        this(text, font, DEFAULT_TEXT_PAINT);
     }
 
-    /**
-     * Creates a new title with the specified attributes.
-     *
-     * @param text  the text for the title ({@code null} not permitted).
-     * @param font  the title font ({@code null} not permitted).
-     * @param paint  the title paint ({@code null} not permitted).
-     * @param position  the title position ({@code null} not permitted).
-     * @param horizontalAlignment  the horizontal alignment ({@code null}
-     *                             not permitted).
-     * @param verticalAlignment  the vertical alignment ({@code null} not
-     *                           permitted).
-     * @param padding  the space to leave around the outside of the title.
-     */
-    public TextTitle(String text, Font font, Paint paint,
-                     RectangleEdge position,
+    private TextTitle(String text, Font font, Paint paint) {
+        this(text, font, paint, RectangleEdge.TOP, HorizontalAlignment.CENTER,
+                VerticalAlignment.CENTER, Title.DEFAULT_PADDING);
+    }
+
+    public TextTitle(String text, Font font, Paint paint, RectangleEdge position,
                      HorizontalAlignment horizontalAlignment,
-                     VerticalAlignment verticalAlignment,
-                     RectangleInsets padding) {
+                     VerticalAlignment verticalAlignment, RectangleInsets padding) {
+
         super(position, horizontalAlignment, verticalAlignment, padding);
         Args.nullNotPermitted(text, "text");
         Args.nullNotPermitted(font, "font");
@@ -184,7 +156,35 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         // title's horizontal alignment...
         this.textAlignment = horizontalAlignment;
         this.backgroundPaint = null;
-        this.content = null;
+        this.toolTipText = null;
+        this.urlText = null;
+    }
+
+    TextTitle(TextTitleBuilder builder) {
+        super(builder.position, builder.horizontalAlignment,
+                builder.verticalAlignment, builder.padding);
+        this.text = builder.text;
+        this.font = builder.font;
+        this.paint = builder.paint;
+        this.textAlignment = builder.horizontalAlignment;
+        this.backgroundPaint = builder.backgroundPaint;
+        this.expandToFitSpace = builder.expandToFitSpace;
+        this.maximumLinesToDisplay = builder.maximumLinesToDisplay;
+        this.toolTipText = null;
+        this.urlText = null;
+    }
+
+    public TextTitle(String text, TextStyle style, TitlePosition position) {
+        super(position.getPosition(), position.getHorizontalAlignment(),
+                position.getVerticalAlignment(), position.getPadding());
+        Args.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(style, "style");
+        Args.nullNotPermitted(position, "position");
+        this.text = text;
+        this.font = style.getFont();
+        this.paint = style.getPaint();
+        this.backgroundPaint = style.getBackgroundPaint();
+        this.textAlignment = position.getHorizontalAlignment();
         this.toolTipText = null;
         this.urlText = null;
     }
@@ -214,37 +214,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         }
     }
 
-    /**
-     * Returns the text alignment.  This controls how the text is aligned
-     * within the title's bounds, whereas the title's horizontal alignment
-     * controls how the title's bounding rectangle is aligned within the
-     * drawing space.
-     *
-     * @return The text alignment.
-     */
-    public HorizontalAlignment getTextAlignment() {
-        return this.textAlignment;
-    }
-
-    /**
-     * Sets the text alignment and sends a {@link TitleChangeEvent} to
-     * all registered listeners.
-     *
-     * @param alignment  the alignment ({@code null} not permitted).
-     */
-    public void setTextAlignment(HorizontalAlignment alignment) {
-        Args.nullNotPermitted(alignment, "alignment");
-        this.textAlignment = alignment;
-        notifyListeners(new TitleChangeEvent(this));
-    }
-
-    /**
-     * Returns the font used to display the title string.
-     *
-     * @return The font (never {@code null}).
-     *
-     * @see #setFont(Font)
-     */
     public Font getFont() {
         return this.font;
     }
@@ -292,12 +261,16 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         }
     }
 
-    /**
-     * Returns the background paint (defaults to {@code null} which makes the 
-     * background transparent).
-     *
-     * @return The paint (possibly {@code null}).
-     */
+    public HorizontalAlignment getTextAlignment() {
+        return this.textAlignment;
+    }
+
+    public void setTextAlignment(HorizontalAlignment alignment) {
+        Args.nullNotPermitted(alignment, "alignment");
+        this.textAlignment = alignment;
+        notifyListeners(new TitleChangeEvent(this));
+    }
+
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
     }
@@ -387,368 +360,38 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         return this.maximumLinesToDisplay;
     }
 
-    /**
-     * Sets the maximum number of lines to display and sends a
-     * {@link TitleChangeEvent} to all registered listeners.
-     *
-     * @param max  the maximum.
-     *
-     * @see #getMaximumLinesToDisplay()
-     */
     public void setMaximumLinesToDisplay(int max) {
         this.maximumLinesToDisplay = max;
         notifyListeners(new TitleChangeEvent(this));
     }
 
-    /**
-     * Arranges the contents of the block, within the given constraints, and
-     * returns the block size.
-     *
-     * @param g2  the graphics device.
-     * @param constraint  the constraint ({@code null} not permitted).
-     *
-     * @return The block size (in Java2D units, never {@code null}).
-     */
-    @Override
-    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
-        RectangleConstraint cc = toContentConstraint(constraint);
-        LengthConstraintType w = cc.getWidthConstraintType();
-        LengthConstraintType h = cc.getHeightConstraintType();
-        Size2D contentSize = null;
-        if (w == LengthConstraintType.NONE) {
-            if (h == LengthConstraintType.NONE) {
-                contentSize = arrangeNN(g2);
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-        }
-        else if (w == LengthConstraintType.RANGE) {
-            if (h == LengthConstraintType.NONE) {
-                contentSize = arrangeRN(g2, cc.getWidthRange());
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                contentSize = arrangeRR(g2, cc.getWidthRange(),
-                        cc.getHeightRange());
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-        }
-        else if (w == LengthConstraintType.FIXED) {
-            if (h == LengthConstraintType.NONE) {
-                contentSize = arrangeFN(g2, cc.getWidth());
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-        }
-        assert contentSize != null; // suppress compiler warning
-        return new Size2D(calculateTotalWidth(contentSize.getWidth()),
-                calculateTotalHeight(contentSize.getHeight()));
-    }
-
-    /**
-     * Arranges the content for this title assuming no bounds on the width
-     * or the height, and returns the required size.  This will reflect the
-     * fact that a text title positioned on the left or right of a chart will
-     * be rotated by 90 degrees.
-     *
-     * @param g2  the graphics target.
-     *
-     * @return The content size.
-     */
-    protected Size2D arrangeNN(Graphics2D g2) {
-        Range max = new Range(0.0, Float.MAX_VALUE);
-        return arrangeRR(g2, max, max);
-    }
-
-    /**
-     * Arranges the content for this title assuming a fixed width and no bounds
-     * on the height, and returns the required size.  This will reflect the
-     * fact that a text title positioned on the left or right of a chart will
-     * be rotated by 90 degrees.
-     *
-     * @param g2  the graphics target.
-     * @param w  the width.
-     *
-     * @return The content size.
-     */
-    protected Size2D arrangeFN(Graphics2D g2, double w) {
-        RectangleEdge position = getPosition();
-        if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
-            float maxWidth = (float) w;
-            g2.setFont(this.font);
-            this.content = TextUtils.createTextBlock(this.text, this.font,
-                    this.paint, maxWidth, this.maximumLinesToDisplay,
-                    new G2TextMeasurer(g2));
-            this.content.setLineAlignment(this.textAlignment);
-            Size2D contentSize = this.content.calculateDimensions(g2);
-            if (this.expandToFitSpace) {
-                return new Size2D(maxWidth, contentSize.getHeight());
-            }
-            else {
-                return contentSize;
-            }
-        }
-        else if (position == RectangleEdge.LEFT || position
-                == RectangleEdge.RIGHT) {
-            float maxWidth = Float.MAX_VALUE;
-            g2.setFont(this.font);
-            this.content = TextUtils.createTextBlock(this.text, this.font,
-                    this.paint, maxWidth, this.maximumLinesToDisplay,
-                    new G2TextMeasurer(g2));
-            this.content.setLineAlignment(this.textAlignment);
-            Size2D contentSize = this.content.calculateDimensions(g2);
-
-            // transpose the dimensions, because the title is rotated
-            if (this.expandToFitSpace) {
-                return new Size2D(contentSize.getHeight(), maxWidth);
-            }
-            else {
-                return new Size2D(contentSize.height, contentSize.width);
-            }
-        }
-        else {
-            throw new RuntimeException("Unrecognised exception.");
-        }
-    }
-
-    /**
-     * Arranges the content for this title assuming a range constraint for the
-     * width and no bounds on the height, and returns the required size.  This
-     * will reflect the fact that a text title positioned on the left or right
-     * of a chart will be rotated by 90 degrees.
-     *
-     * @param g2  the graphics target.
-     * @param widthRange  the range for the width.
-     *
-     * @return The content size.
-     */
-    protected Size2D arrangeRN(Graphics2D g2, Range widthRange) {
-        Size2D s = arrangeNN(g2);
-        if (widthRange.contains(s.getWidth())) {
-            return s;
-        }
-        double ww = widthRange.constrain(s.getWidth());
-        return arrangeFN(g2, ww);
-    }
-
-    /**
-     * Returns the content size for the title.  This will reflect the fact that
-     * a text title positioned on the left or right of a chart will be rotated
-     * 90 degrees.
-     *
-     * @param g2  the graphics device.
-     * @param widthRange  the width range.
-     * @param heightRange  the height range.
-     *
-     * @return The content size.
-     */
-    protected Size2D arrangeRR(Graphics2D g2, Range widthRange,
-            Range heightRange) {
-        RectangleEdge position = getPosition();
-        if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
-            float maxWidth = (float) widthRange.getUpperBound();
-            g2.setFont(this.font);
-            this.content = TextUtils.createTextBlock(this.text, this.font,
-                    this.paint, maxWidth, this.maximumLinesToDisplay,
-                    new G2TextMeasurer(g2));
-            this.content.setLineAlignment(this.textAlignment);
-            Size2D contentSize = this.content.calculateDimensions(g2);
-            if (this.expandToFitSpace) {
-                return new Size2D(maxWidth, contentSize.getHeight());
-            }
-            else {
-                return contentSize;
-            }
-        }
-        else if (position == RectangleEdge.LEFT || position
-                == RectangleEdge.RIGHT) {
-            float maxWidth = (float) heightRange.getUpperBound();
-            g2.setFont(this.font);
-            this.content = TextUtils.createTextBlock(this.text, this.font,
-                    this.paint, maxWidth, this.maximumLinesToDisplay,
-                    new G2TextMeasurer(g2));
-            this.content.setLineAlignment(this.textAlignment);
-            Size2D contentSize = this.content.calculateDimensions(g2);
-
-            // transpose the dimensions, because the title is rotated
-            if (this.expandToFitSpace) {
-                return new Size2D(contentSize.getHeight(), maxWidth);
-            }
-            else {
-                return new Size2D(contentSize.height, contentSize.width);
-            }
-        }
-        else {
-            throw new RuntimeException("Unrecognised exception.");
-        }
-    }
-
-    /**
-     * Draws the title on a Java 2D graphics device (such as the screen or a
-     * printer).
-     *
-     * @param g2  the graphics device.
-     * @param area  the area allocated for the title.
-     */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
 
-    /**
-     * Draws the block within the specified area.
-     *
-     * @param g2  the graphics device.
-     * @param area  the area.
-     * @param params  if this is an instance of {@link EntityBlockParams} it
-     *                is used to determine whether an
-     *                {@link EntityCollection} is returned by this method.
-     *
-     * @return An {@link EntityCollection} containing a chart entity for the
-     *         title, or {@code null}.
-     */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
-        if (this.content == null) {
-            return null;
-        }
-        area = trimMargin(area);
-        drawBorder(g2, area);
-        if (this.text.equals("")) {
-            return null;
-        }
-        ChartEntity entity = null;
-        if (params instanceof EntityBlockParams) {
-            EntityBlockParams p = (EntityBlockParams) params;
-            if (p.getGenerateEntities()) {
-                entity = new TitleEntity(area, this, this.toolTipText,
-                        this.urlText);
-            }
-        }
-        area = trimBorder(area);
         if (this.backgroundPaint != null) {
             g2.setPaint(this.backgroundPaint);
             g2.fill(area);
         }
-        area = trimPadding(area);
-        RectangleEdge position = getPosition();
-        if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
-            drawHorizontal(g2, area);
-        }
-        else if (position == RectangleEdge.LEFT
-                 || position == RectangleEdge.RIGHT) {
-            drawVertical(g2, area);
-        }
+        getPosition();
+        RectangleInsets padding = getPadding();
+        g2.setFont(this.font);
+        g2.setPaint(this.paint);
+
         BlockResult result = new BlockResult();
-        if (entity != null) {
-            StandardEntityCollection sec = new StandardEntityCollection();
-            sec.add(entity);
-            result.setEntityCollection(sec);
+        if (params instanceof EntityCollection) {
+            EntityCollection ec = (EntityCollection) params;
+            if (this.toolTipText != null || this.urlText != null) {
+                ChartEntity entity = new ChartEntity(area, this.toolTipText,
+                        this.urlText);
+                ec.add(entity);
+            }
+            result.setEntityCollection(ec);
         }
         return result;
-    }
-
-    /**
-     * Draws a the title horizontally within the specified area.  This method
-     * will be called from the {@link #draw(Graphics2D, Rectangle2D) draw}
-     * method.
-     *
-     * @param g2  the graphics device.
-     * @param area  the area for the title.
-     */
-    protected void drawHorizontal(Graphics2D g2, Rectangle2D area) {
-        Rectangle2D titleArea = (Rectangle2D) area.clone();
-        g2.setFont(this.font);
-        g2.setPaint(this.paint);
-        TextBlockAnchor anchor = null;
-        float x = 0.0f;
-        HorizontalAlignment horizontalAlignment = getHorizontalAlignment();
-        if (horizontalAlignment == HorizontalAlignment.LEFT) {
-            x = (float) titleArea.getX();
-            anchor = TextBlockAnchor.TOP_LEFT;
-        }
-        else if (horizontalAlignment == HorizontalAlignment.RIGHT) {
-            x = (float) titleArea.getMaxX();
-            anchor = TextBlockAnchor.TOP_RIGHT;
-        }
-        else if (horizontalAlignment == HorizontalAlignment.CENTER) {
-            x = (float) titleArea.getCenterX();
-            anchor = TextBlockAnchor.TOP_CENTER;
-        }
-        float y = 0.0f;
-        RectangleEdge position = getPosition();
-        if (position == RectangleEdge.TOP) {
-            y = (float) titleArea.getY();
-        }
-        else if (position == RectangleEdge.BOTTOM) {
-            y = (float) titleArea.getMaxY();
-            if (horizontalAlignment == HorizontalAlignment.LEFT) {
-                anchor = TextBlockAnchor.BOTTOM_LEFT;
-            }
-            else if (horizontalAlignment == HorizontalAlignment.CENTER) {
-                anchor = TextBlockAnchor.BOTTOM_CENTER;
-            }
-            else if (horizontalAlignment == HorizontalAlignment.RIGHT) {
-                anchor = TextBlockAnchor.BOTTOM_RIGHT;
-            }
-        }
-        this.content.draw(g2, x, y, anchor);
-    }
-
-    /**
-     * Draws a the title vertically within the specified area.  This method
-     * will be called from the {@link #draw(Graphics2D, Rectangle2D) draw}
-     * method.
-     *
-     * @param g2  the graphics device.
-     * @param area  the area for the title.
-     */
-    protected void drawVertical(Graphics2D g2, Rectangle2D area) {
-        Rectangle2D titleArea = (Rectangle2D) area.clone();
-        g2.setFont(this.font);
-        g2.setPaint(this.paint);
-        TextBlockAnchor anchor = null;
-        float y = 0.0f;
-        VerticalAlignment verticalAlignment = getVerticalAlignment();
-        if (verticalAlignment == VerticalAlignment.TOP) {
-            y = (float) titleArea.getY();
-            anchor = TextBlockAnchor.TOP_RIGHT;
-        }
-        else if (verticalAlignment == VerticalAlignment.BOTTOM) {
-            y = (float) titleArea.getMaxY();
-            anchor = TextBlockAnchor.TOP_LEFT;
-        }
-        else if (verticalAlignment == VerticalAlignment.CENTER) {
-            y = (float) titleArea.getCenterY();
-            anchor = TextBlockAnchor.TOP_CENTER;
-        }
-        float x = 0.0f;
-        RectangleEdge position = getPosition();
-        if (position == RectangleEdge.LEFT) {
-            x = (float) titleArea.getX();
-        }
-        else if (position == RectangleEdge.RIGHT) {
-            x = (float) titleArea.getMaxX();
-            if (verticalAlignment == VerticalAlignment.TOP) {
-                anchor = TextBlockAnchor.BOTTOM_RIGHT;
-            }
-            else if (verticalAlignment == VerticalAlignment.CENTER) {
-                anchor = TextBlockAnchor.BOTTOM_CENTER;
-            }
-            else if (verticalAlignment == VerticalAlignment.BOTTOM) {
-                anchor = TextBlockAnchor.BOTTOM_LEFT;
-            }
-        }
-        this.content.draw(g2, x, y, anchor, x, y, -Math.PI / 2.0);
     }
 
     /**
@@ -808,8 +451,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         result = 29 * result + (this.text != null ? this.text.hashCode() : 0);
         result = 29 * result + (this.font != null ? this.font.hashCode() : 0);
         result = 29 * result + (this.paint != null ? this.paint.hashCode() : 0);
-        result = 29 * result + (this.backgroundPaint != null
-                ? this.backgroundPaint.hashCode() : 0);
         return result;
     }
 
@@ -853,5 +494,189 @@ public class TextTitle extends Title implements Serializable, Cloneable,
         this.backgroundPaint = SerialUtils.readPaint(stream);
     }
 
-}
+    public static TextTitleBuilder builder(String text) {
+        return new TextTitleBuilder(text);
+    }
 
+    public static class TextTitleBuilder {
+        private final String text;
+        private Font font = DEFAULT_FONT;
+        private Paint paint = DEFAULT_TEXT_PAINT;
+        private Paint backgroundPaint = null;
+        private RectangleEdge position = RectangleEdge.TOP;
+        private HorizontalAlignment horizontalAlignment = HorizontalAlignment.CENTER;
+        private VerticalAlignment verticalAlignment = VerticalAlignment.CENTER;
+        private RectangleInsets padding = Title.DEFAULT_PADDING;
+        private boolean expandToFitSpace = false;
+        private int maximumLinesToDisplay = Integer.MAX_VALUE;
+
+        public TextTitleBuilder(String text) {
+            Args.nullNotPermitted(text, "text");
+            this.text = text;
+        }
+
+        public TextTitleBuilder font(Font font) {
+            Args.nullNotPermitted(font, "font");
+            this.font = font;
+            return this;
+        }
+
+        public TextTitleBuilder paint(Paint paint) {
+            Args.nullNotPermitted(paint, "paint");
+            this.paint = paint;
+            return this;
+        }
+
+        public TextTitleBuilder backgroundPaint(Paint paint) {
+            this.backgroundPaint = paint;
+            return this;
+        }
+
+        public TextTitleBuilder position(RectangleEdge position) {
+            Args.nullNotPermitted(position, "position");
+            this.position = position;
+            return this;
+        }
+
+        public TextTitleBuilder horizontalAlignment(HorizontalAlignment alignment) {
+            Args.nullNotPermitted(alignment, "alignment");
+            this.horizontalAlignment = alignment;
+            return this;
+        }
+
+        public TextTitleBuilder verticalAlignment(VerticalAlignment alignment) {
+            Args.nullNotPermitted(alignment, "alignment");
+            this.verticalAlignment = alignment;
+            return this;
+        }
+
+        public TextTitleBuilder padding(RectangleInsets padding) {
+            Args.nullNotPermitted(padding, "padding");
+            this.padding = padding;
+            return this;
+        }
+
+        public TextTitleBuilder expandToFitSpace(boolean expand) {
+            this.expandToFitSpace = expand;
+            return this;
+        }
+
+        public TextTitleBuilder maximumLinesToDisplay(int max) {
+            this.maximumLinesToDisplay = max;
+            return this;
+        }
+
+        public TextTitle build() {
+            return new TextTitle(this);
+        }
+    }
+
+    public static class TextStyle implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private final Font font;
+        private final Paint paint;
+        private final Paint backgroundPaint;
+
+        public TextStyle(Font font, Paint paint) {
+            this(font, paint, null);
+        }
+
+        public TextStyle(Font font, Paint paint, Paint backgroundPaint) {
+            Args.nullNotPermitted(font, "font");
+            Args.nullNotPermitted(paint, "paint");
+            this.font = font;
+            this.paint = paint;
+            this.backgroundPaint = backgroundPaint;
+        }
+
+        public Font getFont() {
+            return this.font;
+        }
+
+        public Paint getPaint() {
+            return this.paint;
+        }
+
+        public Paint getBackgroundPaint() {
+            return this.backgroundPaint;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof TextStyle)) {
+                return false;
+            }
+            TextStyle that = (TextStyle) obj;
+            return Objects.equals(this.font, that.font)
+                    && PaintUtils.equal(this.paint, that.paint)
+                    && PaintUtils.equal(this.backgroundPaint, that.backgroundPaint);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(font, paint);
+        }
+    }
+
+    public static class TitlePosition implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private final RectangleEdge position;
+        private final HorizontalAlignment horizontalAlignment;
+        private final VerticalAlignment verticalAlignment;
+        private final RectangleInsets padding;
+
+        public TitlePosition(RectangleEdge position,
+                             HorizontalAlignment horizontalAlignment,
+                             VerticalAlignment verticalAlignment,
+                             RectangleInsets padding) {
+            Args.nullNotPermitted(position, "position");
+            Args.nullNotPermitted(horizontalAlignment, "horizontalAlignment");
+            Args.nullNotPermitted(verticalAlignment, "verticalAlignment");
+            Args.nullNotPermitted(padding, "padding");
+            this.position = position;
+            this.horizontalAlignment = horizontalAlignment;
+            this.verticalAlignment = verticalAlignment;
+            this.padding = padding;
+        }
+
+        public RectangleEdge getPosition() {
+            return this.position;
+        }
+
+        public HorizontalAlignment getHorizontalAlignment() {
+            return this.horizontalAlignment;
+        }
+
+        public VerticalAlignment getVerticalAlignment() {
+            return this.verticalAlignment;
+        }
+
+        public RectangleInsets getPadding() {
+            return this.padding;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof TitlePosition)) {
+                return false;
+            }
+            TitlePosition that = (TitlePosition) obj;
+            return this.position == that.position
+                    && this.horizontalAlignment == that.horizontalAlignment
+                    && this.verticalAlignment == that.verticalAlignment
+                    && Objects.equals(this.padding, that.padding);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(position, horizontalAlignment,
+                    verticalAlignment, padding);
+        }
+    }
+}

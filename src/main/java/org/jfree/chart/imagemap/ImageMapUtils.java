@@ -165,29 +165,46 @@ public class ImageMapUtils {
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
         StringBuilder sb = new StringBuilder();
+        appendMapHeader(sb, name);
+        appendEntityAreas(sb, info, toolTipTagFragmentGenerator, urlTagFragmentGenerator);
+        appendMapFooter(sb);
+        return sb.toString();
+    }
+
+    private static void appendMapHeader(StringBuilder sb, String name) {
         sb.append("<map id=\"").append(htmlEscape(name));
         sb.append("\" name=\"").append(htmlEscape(name)).append("\">");
         sb.append(StringUtils.getLineSeparator());
+    }
+
+    private static void appendEntityAreas(StringBuilder sb, ChartRenderingInfo info,
+            ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
+            URLTagFragmentGenerator urlTagFragmentGenerator) {
         EntityCollection entities = info.getEntityCollection();
-        if (entities != null) {
-            int count = entities.getEntityCount();
-            for (int i = count - 1; i >= 0; i--) {
-                ChartEntity entity = entities.getEntity(i);
-                if (entity.getToolTipText() != null
-                        || entity.getURLText() != null) {
-                    String area = entity.getImageMapAreaTag(
-                            toolTipTagFragmentGenerator,
-                            urlTagFragmentGenerator);
-                    if (area.length() > 0) {
-                        sb.append(area);
-                        sb.append(StringUtils.getLineSeparator());
-                    }
-                }
+        if (entities == null) {
+            return;
+        }
+        int count = entities.getEntityCount();
+        for (int i = count - 1; i >= 0; i--) {
+            ChartEntity entity = entities.getEntity(i);
+            appendAreaTagIfPresent(sb, entity, toolTipTagFragmentGenerator, urlTagFragmentGenerator);
+        }
+    }
+
+    private static void appendAreaTagIfPresent(StringBuilder sb, ChartEntity entity,
+            ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
+            URLTagFragmentGenerator urlTagFragmentGenerator) {
+        if (entity.getToolTipText() != null || entity.getURLText() != null) {
+            String area = entity.getImageMapAreaTag(toolTipTagFragmentGenerator, urlTagFragmentGenerator);
+            if (area.length() > 0) {
+                sb.append(area);
+                sb.append(StringUtils.getLineSeparator());
             }
         }
-        sb.append("</map>");
-        return sb.toString();
+    }
 
+    private static void appendMapFooter(StringBuilder sb) {
+        sb.append("</map>");
     }
 
     /**
