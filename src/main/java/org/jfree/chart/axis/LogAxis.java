@@ -872,6 +872,19 @@ public class LogAxis extends ValueAxis {
     }
 
     /**
+     * Set range for the log plot
+     * @param range the new range for the plot, adjusted by missing zero values
+     */
+    @Override
+    public void setRange(Range range){
+        super.setRange(range);
+        double lower = range.getLowerBound();
+        if (lower < 0.0){
+            setLowerBound(smallestValue);
+        }
+    }
+
+    /**
      * Zooms in on the current range.
      *
      * @param lowerPercent  the new lower bound.
