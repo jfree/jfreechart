@@ -41,6 +41,11 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
+
+import static java.time.Month.*;
 
 /**
  *  An abstract class that defines our requirements for manipulating dates,
@@ -59,8 +64,8 @@ import java.util.GregorianCalendar;
  *  You can call getInstance() to get a concrete subclass of SerialDate,
  *  without worrying about the exact implementation.
  */
-public abstract class SerialDate implements Comparable, Serializable, 
-        MonthConstants {
+public abstract class SerialDate implements Comparable, Serializable
+        {
 
     /** For serialization. */
     private static final long serialVersionUID = -293716040467423637L;
@@ -74,50 +79,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /** The serial number for 31 December 9999. */
     public static final int SERIAL_UPPER_BOUND = 2958465;
-
-    /** The lowest year value supported by this date format. */
-    public static final int MINIMUM_YEAR_SUPPORTED = 1900;
-
-    /** The highest year value supported by this date format. */
-    public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
-
-    /** Useful constant for Monday. Equivalent to java.util.Calendar.MONDAY. */
-    public static final int MONDAY = Calendar.MONDAY;
-
-    /** 
-     * Useful constant for Tuesday. Equivalent to java.util.Calendar.TUESDAY. 
-     */
-    public static final int TUESDAY = Calendar.TUESDAY;
-
-    /** 
-     * Useful constant for Wednesday. Equivalent to 
-     * java.util.Calendar.WEDNESDAY. 
-     */
-    public static final int WEDNESDAY = Calendar.WEDNESDAY;
-
-    /** 
-     * Useful constant for Thrusday. Equivalent to java.util.Calendar.THURSDAY. 
-     */
-    public static final int THURSDAY = Calendar.THURSDAY;
-
-    /** Useful constant for Friday. Equivalent to java.util.Calendar.FRIDAY. */
-    public static final int FRIDAY = Calendar.FRIDAY;
-
-    /** 
-     * Useful constant for Saturday. Equivalent to java.util.Calendar.SATURDAY.
-     */
-    public static final int SATURDAY = Calendar.SATURDAY;
-
-    /** Useful constant for Sunday. Equivalent to java.util.Calendar.SUNDAY. */
-    public static final int SUNDAY = Calendar.SUNDAY;
-
-    /** The number of days in each month in non leap years. */
-    static final int[] LAST_DAY_OF_MONTH =
-        {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-    /** The number of days in a (non-leap) year up to the end of each month. */
-    static final int[] AGGREGATE_DAYS_TO_END_OF_MONTH =
-        {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
 
     /** The number of days in a year up to the end of the preceding month. */
     static final int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
@@ -197,16 +158,19 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return {@code true} if the supplied integer code represents a 
      *         valid day-of-the-week, and {@code false} otherwise.
      */
-    public static boolean isValidWeekdayCode(int code) {
 
-        switch(code) {
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
+    public static boolean isValidWeekdayCode(int code) {
+    	DayOfWeek code2;
+        code2 = DayOfWeek.of(code);
+        switch(code2) {
             case SUNDAY: 
             case MONDAY: 
             case TUESDAY: 
             case WEDNESDAY: 
             case THURSDAY: 
             case FRIDAY: 
-            case SATURDAY: 
+            case SATURDAY:
                 return true;
             default: 
                 return false;
@@ -224,8 +188,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static int stringToWeekdayCode(String s) {
 
-        final String[] shortWeekdayNames 
-            = DATE_FORMAT_SYMBOLS.getShortWeekdays();
+        final String[] shortWeekdayNames = DATE_FORMAT_SYMBOLS.getShortWeekdays();
         final String[] weekDayNames = DATE_FORMAT_SYMBOLS.getWeekdays();
 
         int result = -1;
@@ -294,9 +257,10 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return {@code true} if the supplied integer code represents a 
      *         valid month.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static boolean isValidMonthCode(int code) {
-
-        switch(code) {
+    	Month code2 = of(code);
+        switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
             case MARCH: 
@@ -323,9 +287,10 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return the quarter that the month belongs to.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int monthCodeToQuarter(int code) {
-
-        switch(code) {
+    	Month code2 = of(code);
+        switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
             case MARCH: return 1;
@@ -349,13 +314,15 @@ public abstract class SerialDate implements Comparable, Serializable,
      * <P>
      * The string returned is the long form of the month name taken from the 
      * default locale.
-     *
      * @param month  the month.
-     *
      * @return a string representing the supplied month.
+     *
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static String monthCodeToString(int month) {
-        return monthCodeToString(month, false);
+
+        String st = Month.of(month).toString();
+        return st;
     }
 
     /**
@@ -363,10 +330,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      * <P>
      * The string returned is the long or short form of the month name taken 
      * from the default locale.
-     *
      * @param month  the month.
      * @param shortened  if {@code true} return the abbreviation of the month.
-     *
      * @return a string representing the supplied month.
      */
     public static String monthCodeToString(int month, boolean shortened) {
@@ -396,36 +361,35 @@ public abstract class SerialDate implements Comparable, Serializable,
      * This method will return one of the constants JANUARY, FEBRUARY, ..., 
      * DECEMBER that corresponds to the string.  If the string is not 
      * recognised, this method returns -1.
-     *
      * @param s  the string to parse.
-     *
      * @return {@code -1} if the string is not parseable, the month of the
      *         year otherwise.
      */
     public static int stringToMonthCode(String s) {
 
-        final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
+        final String[] shortMonthNames =
+                DATE_FORMAT_SYMBOLS.getShortMonths();
         final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
 
         int result = -1;
-        s = s.trim();
+        String st = s.trim();
 
         // first try parsing the string as an integer (1-12)...
         try {
-            result = Integer.parseInt(s);
+            result = Integer.parseInt(st);
         }
         catch (NumberFormatException e) {
-            // suppress
+            System.out.println("Warning: Int parse exception");
         }
 
         // now search through the month names...
         if ((result < 1) || (result > 12)) {
             for (int i = 0; i < monthNames.length; i++) {
-                if (s.equals(shortMonthNames[i])) {
+                if (st.equals(shortMonthNames[i])) {
                     result = i + 1;
                     break;
                 }
-                if (s.equals(monthNames[i])) {
+                if (st.equals(monthNames[i])) {
                     result = i + 1;
                     break;
                 }
@@ -462,21 +426,12 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return {@code true} if the specified year is a leap year.
      */
-    public static boolean isLeapYear(int yyyy) {
-
-        if ((yyyy % 4) != 0) {
-            return false;
-        }
-        else if ((yyyy % 400) == 0) {
-            return true;
-        }
-        else if ((yyyy % 100) == 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
-
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
+     protected static boolean isLeapYear(int yyyy) {
+    	LocalDate date = LocalDate.of(yyyy, 1, 1);
+        boolean x;
+        x = date.isLeapYear();
+        return x;
     }
 
     /**
@@ -484,54 +439,49 @@ public abstract class SerialDate implements Comparable, Serializable,
      * INCLUSIVE.
      * <P>
      * Note that 1900 is not a leap year.
-     *
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return the number of leap years from 1900 to the specified year.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int leapYearCount(int yyyy) {
-        int leap4 = (yyyy - 1896) / 4;
-        int leap100 = (yyyy - 1800) / 100;
-        int leap400 = (yyyy - 1600) / 400;
-        return leap4 - leap100 + leap400;
+        LocalDate date = LocalDate.of(1900, 1, 1);
+        int count = 0;
+
+        for(int i = 1900; i <= yyyy; i++) {
+            if (date.withYear(i).isLeapYear()) {
+                count++;
+            }
+        }
+    	return count;
     }
 
     /**
      * Returns the number of the last day of the month, taking into account 
      * leap years.
-     *
      * @param month  the month.
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return the number of the last day of the month.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int lastDayOfMonth(int month, int yyyy) {
 
-        final int result = LAST_DAY_OF_MONTH[month];
-        if (month != FEBRUARY) {
-            return result;
-        }
-        else if (isLeapYear(yyyy)) {
-            return result + 1;
-        }
-        else {
-            return result;
-        }
+    	LocalDate date = LocalDate.of(yyyy, month, 1);
+    	return date.lengthOfMonth();
 
     }
 
     /**
      * Creates a new date by adding the specified number of days to the base 
      * date.
-     *
      * @param days  the number of days to add (can be negative).
      * @param base  the base date.
-     *
      * @return a new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addDays(int days, SerialDate base) {
-        int serialDayNumber = base.toSerial() + days;
-        return SerialDate.createInstance(serialDayNumber);
+        LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+        date = date.plusDays(days);
+        return SerialDate.createInstance(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
     }
 
     /**
@@ -539,53 +489,40 @@ public abstract class SerialDate implements Comparable, Serializable,
      * date.
      * <P>
      * If the base date is close to the end of the month, the day on the result
-     * may be adjusted slightly:  31 May + 1 month = 30 June.
-     *
+     * may be adjusted slightly:  31 May + 1 month = 30 June
      * @param months  the number of months to add (can be negative).
      * @param base  the base date.
-     *
      * @return a new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addMonths(int months, SerialDate base) {
-        int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) / 12;
-        if (yy < MINIMUM_YEAR_SUPPORTED || yy > MAXIMUM_YEAR_SUPPORTED) {
-            throw new IllegalArgumentException("Call to addMonths resulted in unsupported year");
-        }
-        int mm = (12 * base.getYYYY() + base.getMonth() + months - 1) % 12 + 1;
-        int dd = Math.min(base.getDayOfMonth(), 
-                SerialDate.lastDayOfMonth(mm, yy));
-        return SerialDate.createInstance(dd, mm, yy);
+        LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+        date = date.plusMonths(months);
+        
+        int dd = Math.min(base.getDayOfMonth(), date.lengthOfMonth());
+
+        return SerialDate.createInstance(dd, date.getMonthValue(), date.getYear());
     }
 
     /**
      * Creates a new date by adding the specified number of years to the base 
      * date.
-     *
      * @param years  the number of years to add (can be negative).
      * @param base  the base date.
-     *
      * @return A new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addYears(int years, SerialDate base) {
-        int baseY = base.getYYYY();
-        int baseM = base.getMonth();
-        int baseD = base.getDayOfMonth();
-
-        int targetY = baseY + years;
-        if (targetY < MINIMUM_YEAR_SUPPORTED || targetY > MAXIMUM_YEAR_SUPPORTED) {
-            throw new IllegalArgumentException("Call to addYears resulted in unsupported year");
-        }
-        int targetD = Math.min(baseD, SerialDate.lastDayOfMonth(baseM, targetY));
-        return SerialDate.createInstance(targetD, baseM, targetY);
+    	LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+    	date = date.plusYears(years);
+        return SerialDate.createInstance(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
     }
 
     /**
      * Returns the latest date that falls on the specified day-of-the-week and 
      * is BEFORE the base date.
-     *
      * @param targetWeekday  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the latest date that falls on the specified day-of-the-week and 
      *         is BEFORE the base date.
      */
@@ -613,10 +550,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns the earliest date that falls on the specified day-of-the-week
      * and is AFTER the base date.
-     *
      * @param targetWeekday  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the earliest date that falls on the specified day-of-the-week 
      *         and is AFTER the base date.
      */
@@ -645,10 +580,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns the date that falls on the specified day-of-the-week and is
      * CLOSEST to the base date.
-     *
      * @param targetDOW  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the date that falls on the specified day-of-the-week and is 
      *         CLOSEST to the base date.
      */
@@ -674,9 +607,7 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Rolls the date forward to the last day of the month.
-     *
      * @param base  the base date.
-     *
      * @return a new serial date.
      */
     public SerialDate getEndOfCurrentMonth(SerialDate base) {
@@ -688,9 +619,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns a string corresponding to the week-in-the-month code.
      * <P>
      * Need to find a better approach.
-     *
      * @param count  an integer code representing the week-in-the-month.
-     *
      * @return a string corresponding to the week-in-the-month code.
      */
     public static String weekInMonthToString(int count) {
@@ -711,9 +640,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns a string representing the supplied 'relative'.
      * <P>
      * Need to find a better approach.
-     *
      * @param relative  a constant representing the 'relative'.
-     *
      * @return a string representing the supplied 'relative'.
      */
     public static String relativeToString(int relative) {
@@ -730,11 +657,9 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Factory method that returns an instance of some concrete subclass of 
      * {@link SerialDate}.
-     *
      * @param day  the day (1-31).
      * @param month  the month (1-12).
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return An instance of {@link SerialDate}.
      */
     public static SerialDate createInstance(int day, int month, int yyyy) {
@@ -744,9 +669,7 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Factory method that returns an instance of some concrete subclass of 
      * {@link SerialDate}.
-     *
      * @param serial  the serial number for the day (1 January 1900 = 2).
-     *
      * @return a instance of SerialDate.
      */
     public static SerialDate createInstance(int serial) {
@@ -755,9 +678,7 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Factory method that returns an instance of a subclass of SerialDate.
-     *
      * @param date  A Java date object.
-     *
      * @return a instance of SerialDate.
      */
     public static SerialDate createInstance(java.util.Date date) {
@@ -773,7 +694,6 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns the serial number for the date, where 1 January 1900 = 2 (this
      * corresponds, almost, to the numbering system used in Microsoft Excel for
      * Windows and Lotus 1-2-3).
-     *
      * @return the serial number for the date.
      */
     public abstract int toSerial();
@@ -781,7 +701,6 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns a java.util.Date.  Since java.util.Date has more precision than
      * SerialDate, we need to define a convention for the 'time of day'.
-     *
      * @return this as {@code java.util.Date}.
      */
     public abstract java.util.Date toDate();
@@ -790,7 +709,6 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns the description that is attached to the date.  It is not 
      * required that a date have a description, but for some applications it 
      * is useful.
-     *
      * @return The description (possibly {@code null}).
      */
     public String getDescription() {
@@ -799,7 +717,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Sets the description for the date.
-     *
      * @param description  the description for this date ({@code null}
      *                     permitted).
      */
@@ -809,7 +726,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Converts the date to a string.
-     *
      * @return  a string representation of the date.
      */
     @Override
@@ -820,7 +736,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Returns the year (assume a valid range of 1900 to 9999).
-     *
      * @return the year.
      */
     public abstract int getYYYY();
