@@ -50,6 +50,7 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -190,6 +191,155 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         assertEquals(1, item2.getSeriesIndex());
         assertEquals(dataset, item2.getDataset());
         assertEquals(0, item2.getDatasetIndex());
+    }
+
+    /**
+     * Tests for the {@link MultiplePiePlot#setPieChart(JFreeChart)} method.
+     */
+    @Test
+    public void testSetPieChart() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        PiePlot piePlot = new PiePlot(new DefaultPieDataset());
+        JFreeChart pieChart = new JFreeChart(piePlot);
+        
+        plot.setPieChart(pieChart);
+        
+        assertNotNull(plot.getPieChart(), "Pie chart should not be null after setting");
+        assertSame(pieChart, plot.getPieChart(), "Pie chart should be the same as the one set");
+        assertTrue(plot.getPieChart().getPlot() instanceof PiePlot, "Plot should be an instance of PiePlot");
+    }
+    
+    @Test
+    public void testSetPieChartWithNull() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, 
+                () -> plot.setPieChart(null), 
+                "Should throw IllegalArgumentException when pieChart is null");
+        
+        assertNotNull(exception.getMessage(), "Exception message should not be null");
+        assertTrue(exception.getMessage().contains("pieChart"), "Exception message should contain 'pieChart'");
+        assertTrue(exception.getMessage().contains("Null"), "Exception message should contain 'Null'");
+    }
+    
+    @Test
+    public void testSetPieChartWithNullDoesNotChangeState() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        JFreeChart originalChart = plot.getPieChart();
+        assertNotNull(originalChart, "Original pie chart should not be null");
+        
+        assertThrows(IllegalArgumentException.class, () -> plot.setPieChart(null), 
+                "Should throw IllegalArgumentException when setting null");
+        
+        assertSame(originalChart, plot.getPieChart(), "Pie chart should remain unchanged after failed set");
+    }
+    
+    @Test
+    public void testSetPieChartWithInvalidPlotType() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        dataset.addValue(1.0, "Row1", "Col1");
+        JFreeChart categoryChart = ChartFactory.createBarChart("Test", "Category", "Value", dataset);
+        
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, 
+                () -> plot.setPieChart(categoryChart), 
+                "Should throw IllegalArgumentException when chart is not based on PiePlot");
+        
+        assertNotNull(exception.getMessage(), "Exception message should not be null");
+        assertTrue(exception.getMessage().contains("PiePlot"), "Exception message should contain 'PiePlot'");
+    }
+    
+    @Test
+    public void testSetPieChartUpdatesProperty() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        JFreeChart initialChart = plot.getPieChart();
+        assertNotNull(initialChart, "Initial pie chart should not be null");
+        
+        PiePlot newPiePlot = new PiePlot();
+        newPiePlot.setBackgroundPaint(Color.BLUE);
+        JFreeChart newPieChart = new JFreeChart(newPiePlot);
+        
+        plot.setPieChart(newPieChart);
+        
+        assertNotSame(initialChart, plot.getPieChart(), "Pie chart should be different after update");
+        assertSame(newPieChart, plot.getPieChart(), "Pie chart should be the newly set chart");
+        assertSame(newPiePlot, plot.getPieChart().getPlot(), "Plot should be the newly set PiePlot");
+        assertEquals(Color.BLUE, ((PiePlot) plot.getPieChart().getPlot()).getBackgroundPaint(), 
+                "Background paint should be preserved");
+    }
+    
+    @Test
+    public void testSetPieChartMultipleValidSets() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        PiePlot firstPiePlot = new PiePlot();
+        firstPiePlot.setSectionPaint("A", Color.RED);
+        JFreeChart firstChart = new JFreeChart(firstPiePlot);
+        
+        PiePlot secondPiePlot = new PiePlot();
+        secondPiePlot.setSectionPaint("B", Color.GREEN);
+        JFreeChart secondChart = new JFreeChart(secondPiePlot);
+        
+        plot.setPieChart(firstChart);
+        assertSame(firstChart, plot.getPieChart(), "First chart should be set correctly");
+        assertEquals(Color.RED, ((PiePlot) plot.getPieChart().getPlot()).getSectionPaint("A"), 
+                "First chart's section paint should be preserved");
+        
+        plot.setPieChart(secondChart);
+        assertSame(secondChart, plot.getPieChart(), "Second chart should be set correctly");
+        assertEquals(Color.GREEN, ((PiePlot) plot.getPieChart().getPlot()).getSectionPaint("B"), 
+                "Second chart's section paint should be preserved");
+    }
+    
+    @Test
+    public void testSetPieChartConsecutiveSetsWithErrorChecking() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        PiePlot piePlot = new PiePlot();
+        JFreeChart validChart = new JFreeChart(piePlot);
+        
+        plot.setPieChart(validChart);
+        assertSame(validChart, plot.getPieChart(), "Valid chart should be set correctly");
+        
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
+        JFreeChart invalidChart = ChartFactory.createLineChart("Test", "X", "Y", dataset);
+        
+        assertThrows(IllegalArgumentException.class, () -> plot.setPieChart(invalidChart), 
+                "Invalid chart should throw exception");
+        
+        assertSame(validChart, plot.getPieChart(), "Pie chart should still be the valid chart after failed set");
+    }
+    
+    @Test
+    public void testSetPieChartWithDataset() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        DefaultPieDataset pieDataset = new DefaultPieDataset();
+        pieDataset.setValue("Item1", 10.0);
+        pieDataset.setValue("Item2", 20.0);
+        PiePlot piePlot = new PiePlot(pieDataset);
+        JFreeChart pieChart = new JFreeChart(piePlot);
+        
+        plot.setPieChart(pieChart);
+        
+        assertSame(pieChart, plot.getPieChart(), "Pie chart with dataset should be set successfully");
+        assertSame(pieDataset, ((PiePlot) plot.getPieChart().getPlot()).getDataset(), 
+                "Dataset should be preserved in the plot");
+    }
+    
+    @Test
+    public void testSetPieChartWithNullDataset() {
+        MultiplePiePlot plot = new MultiplePiePlot();
+        
+        PiePlot piePlot = new PiePlot(null);
+        JFreeChart pieChart = new JFreeChart(piePlot);
+        
+        plot.setPieChart(pieChart);
+        
+        assertSame(pieChart, plot.getPieChart(), "Pie chart with null dataset should be set successfully");
+        assertNull(((PiePlot) plot.getPieChart().getPlot()).getDataset(), "Dataset should be null in the plot");
     }
 
 }
