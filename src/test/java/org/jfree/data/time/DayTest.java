@@ -40,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,6 +55,8 @@ import java.util.function.Consumer;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.jfree.chart.date.SerialDate;
 
@@ -558,4 +561,197 @@ public class DayTest {
         Locale.setDefault(saved);
     }
 
+    /**
+     * Tests for {@link Day#equals(Object)} method with comprehensive coverage.
+     */
+    @DisplayName("Tests for Day.equals(Object)")
+    class DayEqualsTest {
+
+        private Day day1Jan2024;
+        private Day day2Jan2024;
+        private Day day1Jan2024Copy;
+
+        @BeforeEach
+        void setUp() {
+            day1Jan2024 = new Day(1, 1, 2024);
+            day2Jan2024 = new Day(2, 1, 2024);
+            day1Jan2024Copy = new Day(1, 1, 2024);
+        }
+
+        @Test
+        @DisplayName("Should return true when comparing object to itself (reflexivity)")
+        void shouldReturnTrueWhenComparingToItself() {
+            boolean result = day1Jan2024.equals(day1Jan2024);
+            assertTrue(result);
+        }
+
+        @Test
+        @DisplayName("Should return true when comparing two Day instances with same date (equality)")
+        void shouldReturnTrueWhenEqual() {
+            boolean result = day1Jan2024.equals(day1Jan2024Copy);
+            assertTrue(result);
+        }
+
+        @Test
+        @DisplayName("Should return false when compared to null")
+        void shouldReturnFalseWhenComparedToNull() {
+            boolean result = day1Jan2024.equals(null);
+            assertFalse(result);
+        }
+
+        @Test
+        @DisplayName("Should return false when compared to non-Day object")
+        void shouldReturnFalseWhenComparedToNonDayObject() {
+            Object nonDayObject = new Object();
+            boolean result = day1Jan2024.equals(nonDayObject);
+            assertFalse(result);
+        }
+
+        @Test
+        @DisplayName("Should return false when compared to String object")
+        void shouldReturnFalseWhenComparedToString() {
+            String stringObject = "2024-01-01";
+            boolean result = day1Jan2024.equals(stringObject);
+            assertFalse(result);
+        }
+
+        @Test
+        @DisplayName("Should return false when compared to Integer object")
+        void shouldReturnFalseWhenComparedToInteger() {
+            Integer integerObject = 123;
+            boolean result = day1Jan2024.equals(integerObject);
+            assertFalse(result);
+        }
+
+        @Test
+        @DisplayName("Should return false when comparing Day instances with different dates")
+        void shouldReturnFalseWhenDatesDiffer() {
+            boolean result = day1Jan2024.equals(day2Jan2024);
+            assertFalse(result);
+        }
+
+        @Test
+        @DisplayName("Should be symmetric: if a.equals(b) then b.equals(a)")
+        void shouldBeSymmetric() {
+            boolean aEqualsB = day1Jan2024.equals(day1Jan2024Copy);
+            boolean bEqualsA = day1Jan2024Copy.equals(day1Jan2024);
+            assertEquals(aEqualsB, bEqualsA);
+            assertTrue(aEqualsB);
+            assertTrue(bEqualsA);
+        }
+
+        @Test
+        @DisplayName("Should verify serialDate comparison logic")
+        void shouldVerifySerialDateComparison() {
+            SerialDate serialDate1 = day1Jan2024.getSerialDate();
+            SerialDate serialDate2 = day1Jan2024Copy.getSerialDate();
+
+            boolean serialDatesEqual = serialDate1.equals(serialDate2);
+            boolean daysEqual = day1Jan2024.equals(day1Jan2024Copy);
+
+            assertEquals(serialDatesEqual, daysEqual);
+            assertTrue(serialDatesEqual);
+        }
+
+        @Test
+        @DisplayName("Should return false when dates differ by one day")
+        void shouldReturnFalseWhenDatesDifferByOneDay() {
+            Day day1Jan2024 = new Day(1, 1, 2024);
+            Day day2Jan2024 = new Day(2, 1, 2024);
+
+            assertFalse(day1Jan2024.equals(day2Jan2024));
+            assertNotEquals(day1Jan2024.getSerialDate(), day2Jan2024.getSerialDate());
+        }
+
+        @Test
+        @DisplayName("Should return false when years differ")
+        void shouldReturnFalseWhenYearsDiffer() {
+            Day day1Jan2024 = new Day(1, 1, 2024);
+            Day day1Jan2025 = new Day(1, 1, 2025);
+
+            assertFalse(day1Jan2024.equals(day1Jan2025));
+            assertNotEquals(2024, day1Jan2025.getYear());
+        }
+
+        @Test
+        @DisplayName("Should return false when months differ")
+        void shouldReturnFalseWhenMonthsDiffer() {
+            Day day1Jan2024 = new Day(1, 1, 2024);
+            Day day1Feb2024 = new Day(1, 2, 2024);
+
+            assertFalse(day1Jan2024.equals(day1Feb2024));
+            assertNotEquals(1, day1Feb2024.getMonth());
+        }
+
+        @Test
+        @DisplayName("Should return false when days of month differ")
+        void shouldReturnFalseWhenDaysOfMonthsDiffer() {
+            Day day1Jan2024 = new Day(1, 1, 2024);
+            Day day15Jan2024 = new Day(15, 1, 2024);
+
+            assertFalse(day1Jan2024.equals(day15Jan2024));
+            assertNotEquals(1, day15Jan2024.getDayOfMonth());
+        }
+
+        @Test
+        @DisplayName("Should verify equality with Day created via Date constructor")
+        void shouldVerifyEqualityWithDateConstructor() {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.set(2024, 0, 1, 0, 0, 0);
+            cal.set(java.util.Calendar.MILLISECOND, 0);
+
+            Day dayFromInts = new Day(1, 1, 2024);
+            Day dayFromDate = new Day(cal.getTime());
+
+            assertTrue(dayFromInts.equals(dayFromDate));
+            assertEquals(dayFromInts.getSerialDate(), dayFromDate.getSerialDate());
+        }
+
+        @Test
+        @DisplayName("Should be consistent: multiple calls return same result")
+        void shouldBeConsistent() {
+            boolean result1 = day1Jan2024.equals(day1Jan2024Copy);
+            boolean result2 = day1Jan2024.equals(day1Jan2024Copy);
+            boolean result3 = day1Jan2024.equals(day1Jan2024Copy);
+
+            assertEquals(result1, result2);
+            assertEquals(result2, result3);
+            assertTrue(result1);
+        }
+
+        @Test
+        @DisplayName("Should return false when serialDates are not equal")
+        void shouldReturnFalseWhenSerialDatesNotEqual() {
+            Day day1Jan2024 = new Day(1, 1, 2024);
+            Day day1Feb2024 = new Day(1, 2, 2024);
+
+            boolean serialDatesEqual = day1Jan2024.getSerialDate().equals(day1Feb2024.getSerialDate());
+            boolean daysEqual = day1Jan2024.equals(day1Feb2024);
+
+            assertFalse(serialDatesEqual);
+            assertFalse(daysEqual);
+        }
+
+        @Test
+        @DisplayName("Should handle Day near lower bound")
+        void shouldHandleDayNearLowerBound() {
+            Day day1Jan1900 = new Day(1, 1, 1900);
+            Day day2Jan1900 = new Day(2, 1, 1900);
+
+            assertTrue(day1Jan1900.equals(day1Jan1900));
+            assertFalse(day1Jan1900.equals(day2Jan1900));
+            assertFalse(day1Jan1900.equals(null));
+        }
+
+        @Test
+        @DisplayName("Should handle Day near upper bound")
+        void shouldHandleDayNearUpperBound() {
+            Day day31Dec9999 = new Day(31, 12, 9999);
+            Day day30Dec9999 = new Day(30, 12, 9999);
+
+            assertTrue(day31Dec9999.equals(day31Dec9999));
+            assertFalse(day31Dec9999.equals(day30Dec9999));
+            assertFalse(day31Dec9999.equals(null));
+        }
+    }
 }
