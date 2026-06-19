@@ -60,24 +60,24 @@ public class QuarterDateFormatTest {
         assertEquals(qf1, qf2);
         assertEquals(qf2, qf1);
 
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"1", "2", "3", "4"});
         assertNotEquals(qf1, qf2);
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"1", "2", "3", "4"});
         assertEquals(qf1, qf2);
 
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"A", "2", "3", "4"});
         assertNotEquals(qf1, qf2);
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"A", "2", "3", "4"});
         assertEquals(qf1, qf2);
 
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"A", "2", "3", "4"}, true);
         assertNotEquals(qf1, qf2);
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("America/Los_Angeles"),
                 new String[] {"A", "2", "3", "4"}, true);
         assertEquals(qf1, qf2);
     }

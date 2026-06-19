@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 2.0.0, not yet released.
+Version 3.0.0, not yet released.
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)](https://central.sonatype.com/artifact/org.jfree/jfreechart/versions) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
 
@@ -17,7 +17,7 @@ The home page for the project is:
 
 https://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 11 or later.  For Java 8 support, check the `v1.5.x` branch.
+JFreeChart requires JDK 25 or later.  For Java 8 support, check the `v1.5.x` branch.
 
 The library is licensed under the terms of the GNU Lesser General Public 
 License (LGPL) version 2.1 or later.
@@ -58,7 +58,7 @@ You can build JFreeChart using Maven by issuing the following command from the r
 
     mvn clean install
 
-The build requires JDK 11 or later.
+The build requires JDK 25 or later.
 
 
 ### Migration
