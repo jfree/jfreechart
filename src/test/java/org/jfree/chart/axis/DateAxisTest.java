@@ -100,14 +100,14 @@ public class DateAxisTest {
         assertNotEquals(null, a1);
         assertNotEquals("Some non-DateAxis object", a1);
 
-        a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
+        a1 = new DateAxis("Test", TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
         assertNotEquals(a1, a2);
-        a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
+        a2 = new DateAxis("Test", TimeZone.getTimeZone("America/Los_Angeles"), Locale.US);
         assertEquals(a1, a2);
         
-        a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
+        a1 = new DateAxis("Test", TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE);
         assertNotEquals(a1, a2);
-        a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
+        a2 = new DateAxis("Test", TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE);
         assertEquals(a1, a2);
 
         // tickUnit

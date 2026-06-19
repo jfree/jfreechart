@@ -66,42 +66,42 @@ public class MonthDateFormatTest {
         showYear1[1] = true;
 
         // time zone
-        mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.US, 1,
+        mf1 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.US, 1,
             showYear1, new SimpleDateFormat("yy"));
         assertNotEquals(mf1, mf2);
-        mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.US, 1,
+        mf2 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.US, 1,
             showYear1, new SimpleDateFormat("yy"));
         assertEquals(mf1, mf2);
 
         // locale
-        mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 1,
+        mf1 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 1,
             showYear1, new SimpleDateFormat("yy"));
         assertNotEquals(mf1, mf2);
-        mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 1,
+        mf2 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 1,
             showYear1, new SimpleDateFormat("yy"));
         assertEquals(mf1, mf2);
 
         // chars
-        mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf1 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear1, new SimpleDateFormat("yy"));
         assertNotEquals(mf1, mf2);
-        mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf2 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear1, new SimpleDateFormat("yy"));
         assertEquals(mf1, mf2);
 
         // showYear[]
-        mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf1 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yy"));
         assertNotEquals(mf1, mf2);
-        mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf2 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yy"));
         assertEquals(mf1, mf2);
 
         // yearFormatter
-        mf1 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf1 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yyyy"));
         assertNotEquals(mf1, mf2);
-        mf2 = new MonthDateFormat(TimeZone.getTimeZone("PST"), Locale.FRANCE, 2,
+        mf2 = new MonthDateFormat(TimeZone.getTimeZone("America/Los_Angeles"), Locale.FRANCE, 2,
             showYear2, new SimpleDateFormat("yyyy"));
         assertEquals(mf1, mf2);
 
