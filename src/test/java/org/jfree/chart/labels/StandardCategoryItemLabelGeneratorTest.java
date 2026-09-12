@@ -109,6 +109,20 @@ public class StandardCategoryItemLabelGeneratorTest {
                 new SimpleDateFormat("d-MMM"));
         assertEquals(g1, g2);
 
+        g1 = new StandardCategoryItemLabelGenerator("{2}",
+                new DecimalFormat("0.000"), new DecimalFormat("0.0%"));
+        assertNotEquals(g1, g2);
+        g2 = new StandardCategoryItemLabelGenerator("{2}",
+                new DecimalFormat("0.000"), new DecimalFormat("0.0%"));
+        assertEquals(g1, g2);
+
+        g1 = new StandardCategoryItemLabelGenerator("{2}",
+                new DecimalFormat("0.000"), new DecimalFormat("0.00%"));
+        assertNotEquals(g1, g2);
+        g2 = new StandardCategoryItemLabelGenerator("{2}",
+                new DecimalFormat("0.000"), new DecimalFormat("0.00%"));
+        assertEquals(g1, g2);
+
     }
 
     /**
