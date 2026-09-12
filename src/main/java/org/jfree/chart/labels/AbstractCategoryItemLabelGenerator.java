@@ -274,6 +274,12 @@ public abstract class AbstractCategoryItemLabelGenerator<R extends Comparable<R>
         if (!Objects.equals(this.numberFormat, that.numberFormat)) {
             return false;
         }
+        if (!Objects.equals(this.percentFormat, that.percentFormat)) {
+            return false;
+        }
+        if (!Objects.equals(this.nullValueString, that.nullValueString)) {
+            return false;
+        }
         return true;
     }
 
