@@ -105,6 +105,9 @@ public class ShapeList extends AbstractObjectList {
         }
         ShapeList that = (ShapeList) obj;
         int listSize = size();
+        if (listSize != that.size()) {
+            return false;
+        }
         for (int i = 0; i < listSize; i++) {
            if (!ShapeUtils.equal((Shape) get(i), (Shape) that.get(i))) {
                return false;
