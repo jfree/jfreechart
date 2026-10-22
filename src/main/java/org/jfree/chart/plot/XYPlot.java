@@ -3320,7 +3320,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             }
         }
 
-        Map<Axis, AxisState> axisStateMap = new HashMap<>();
+        // Equal axes can have different auto-ranges and tick lists.
+        Map<Axis, AxisState> axisStateMap = new IdentityHashMap<>();
 
         // draw the top axes
         double cursor = dataArea.getMinY() - this.axisOffset.calculateTopOutset(

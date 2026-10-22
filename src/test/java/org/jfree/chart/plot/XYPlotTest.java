@@ -42,10 +42,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Stroke;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
@@ -59,6 +61,8 @@ import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.date.MonthConstants;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
@@ -1000,6 +1004,54 @@ public class XYPlotTest {
         }
         catch (Exception e) {
             fail("No exception should be thrown.");
+        }
+    }
+
+    @Test
+    public void testGridlinesUseEachAxisTicksWhenAxesAreEqual() {
+        for (PlotOrientation orientation : PlotOrientation.values()) {
+            List<Double> domainLines = new ArrayList<>();
+            List<Double> rangeLines = new ArrayList<>();
+            XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer() {
+                @Override
+                public void drawDomainLine(Graphics2D g2, XYPlot plot,
+                        ValueAxis axis, Rectangle2D dataArea, double value,
+                        Paint paint, Stroke stroke) {
+                    domainLines.add(value);
+                    super.drawDomainLine(g2, plot, axis, dataArea, value, paint, stroke);
+                }
+
+                @Override
+                public void drawRangeLine(Graphics2D g2, XYPlot plot,
+                        ValueAxis axis, Rectangle2D dataArea, double value,
+                        Paint paint, Stroke stroke) {
+                    rangeLines.add(value);
+                    super.drawRangeLine(g2, plot, axis, dataArea, value, paint, stroke);
+                }
+            };
+            NumberAxis domainAxis = new NumberAxis();
+            domainAxis.setAutoRangeIncludesZero(false);
+            domainAxis.setTickUnit(new NumberTickUnit(1.0));
+            NumberAxis rangeAxis = new NumberAxis();
+            rangeAxis.setAutoRangeIncludesZero(false);
+            rangeAxis.setTickUnit(new NumberTickUnit(1.0));
+            XYSeries<String> series = new XYSeries<>("data");
+            series.add(1.0, 1.0);
+            series.add(11.0, 6.0);
+            XYPlot<String> plot = new XYPlot<>(new XYSeriesCollection<>(series),
+                    domainAxis, rangeAxis, renderer);
+            plot.setOrientation(orientation);
+            plot.setDomainZeroBaselineVisible(false);
+            plot.setRangeZeroBaselineVisible(false);
+            assertEquals(domainAxis, rangeAxis);
+            assertNotEquals(domainAxis.getRange(), rangeAxis.getRange());
+
+            new JFreeChart(plot).createBufferedImage(600, 400);
+
+            assertEquals(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0,
+                    8.0, 9.0, 10.0, 11.0), domainLines, orientation.toString());
+            assertEquals(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0),
+                    rangeLines, orientation.toString());
         }
     }
 
